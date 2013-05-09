@@ -25,6 +25,13 @@ var Master = function(){
         init: function(){
             $('head').html(headContent);
             $('main').append(mainContent);
+        },
+        
+        /* Utilities */
+        hereDoc: function(f) {
+          return f.toString().
+              replace(/^[^\/]+\/\*!?/, '').
+              replace(/\*\/[^\/]+$/, '');
         }
     };
 }();
