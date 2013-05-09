@@ -2,8 +2,9 @@
 
 <script>    
     $(function(){
-    	
-    	var content = hereDoc(function() {/*!
+        $(document.body).load('master.htm', function(){
+		
+		    	var content = Master.hereDoc(function() {/*!
 	      <div class='colL'>
         <h2>Some photos of me:</h2>
 	
@@ -21,10 +22,7 @@
         <a class='twitter-timeline' href='https://twitter.com/jonmann20' data-widget-id='243420536208752640'>Tweets by @jonmann20</a>
     </div>
 	*/}); 
-    	
-    	
-        $(document.body).load('master.htm', function(){
-
+		
             $('body').addClass('home');
 
 
