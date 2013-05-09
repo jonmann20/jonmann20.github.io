@@ -212,7 +212,7 @@ header nav ul #cube {
 .nav4 #floatingSun:hover {
 	text-shadow: #ff6a00 0 0 18px;
 }
-.main {margin-top: 40px; overflow: hidden;}
+main {margin-top: 40px; overflow: hidden;}
 .colL {float: left;  width: 38%;  min-width: 121px;}
 .colR {float: right; width: 59%; padding-bottom: 13px;}
 footer {
@@ -276,11 +276,11 @@ footer .footL .imgLinks i:hover{
 	border-radius: 25px 0;
 	width: 105px;
 }
-.pageFullW .main {
+.pageFullW main {
 	margin: 0 auto inherit auto;
 	padding: 3px 26px 26px 28px;
 }
-.pageFullW .main .titleHeader {
+.pageFullW main .titleHeader {
 	margin-top: 8px;	
 }
 .pageFullW canvas {
@@ -439,7 +439,7 @@ footer .footL .imgLinks i:hover{
 .playground .vid3 {top: 8px; left: 792px;}
 .playground .vid4 {top: 280px; left: 911px;}
 */
-.bDancingCube .main {min-height: 38em;}
+.bDancingCube main {min-height: 38em;}
 .iframeWrap {
 	margin-top: -480px;
 	
