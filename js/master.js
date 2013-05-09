@@ -1,17 +1,17 @@
 var Master = function(){
     
     // private
-    var main = "";
+    var pageContent = "";
     var internal = 1; // access by this.internal
 
     // public
     return {
         main: function(str){
-            this.main = str;
+            this.pageContent = str;
         },
         init: function(){
-            console.log(main);
-            console.log('th: ' + this.main);
+            console.log(pageContent);
+            //console.log('th: ' + this.main);
             $('main').html(main);
         }
     };
