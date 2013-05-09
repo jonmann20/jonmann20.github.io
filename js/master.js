@@ -7,7 +7,7 @@ var Master = function(){
     // public
     return {
         main: function(str){
-            main = str;
+            this.main = str;
         },
         init: function(){
             console.log(main);
