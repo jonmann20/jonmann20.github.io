@@ -1,20 +1,26 @@
 var Master = function(){
-    
     // private
-    var pageContent = "";
-    var internal = 1; // access by this.internal
+    var headContent = "
+        <meta charset='utf-8' />
+        <meta http-equiv='X-UA-Compatible' content='chrome=1' />
+        <meta name='description' content='Jonmann20.github.com : ' />
+        
+        <link rel='stylesheet' type='text/css' media='screen' href='css/style.css'>
+        <title>Jonmann20.github.com</title>
+    ",
+        mainContent = "";
 
     // public
     return {
-        main: function(str){
-            console.log(str);
-            
-            pageContent = str;
+        head: function(str){
+            headContent = str;
+        }
+        main: function(str){    
+            mainContent = str;
         },
         init: function(){
-            console.log(pageContent);
-            //console.log('th: ' + this.main);
-            $('main').html(pageContent);
+            $('head').html(headContent);
+            $('main').html(mainContent);
         }
     };
 }();
