@@ -22,7 +22,7 @@ var Master = function(){
             var d = new Date();
             var n = d.getFullYear();
             
-            $('.curYear').text(n);
+            $('.curYear').html(n);
         },
         
         setHead: function(){
