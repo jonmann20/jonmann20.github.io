@@ -19,7 +19,7 @@ var Master = function(){
             this.setHead();
             $('main').append(mainContent);
             
-            $('.curYear').text(Date().getFullYear());
+            $('.curYear').text((new Date()).getFullYear());
         },
         
         setHead: function(){
