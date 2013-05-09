@@ -3,6 +3,9 @@ var Master = function(){
 
     return {
         init: function(){
+            
+            console.log(main);
+            
             $('main').html(main);
         }
     };
