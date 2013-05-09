@@ -9,7 +9,7 @@ var Master = function(){
         main: function(str){
             console.log(str);
             
-            this.pageContent = str;
+            pageContent = str;
         },
         init: function(){
             console.log(pageContent);
