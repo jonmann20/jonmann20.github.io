@@ -1,55 +1,42 @@
-<section class='page'>
-  <header>
-      <h1>Jonmann20&#700;s Github</h1>
-  </header>
-  <main></main>
-  <footer></footer>
-</section>
-
-<body class='<?= $pageBodyClass; ?>'>
-    <div class='page'>
-	    <div class='inner clr'>
-	    	<? if(!$pageFullWidth){ ?>
-			<header>
-				  <nav>
-          	<a href='<?= $pageRoot; ?>index'>Jon Wiedmann<br />.com</a>
-          </nav>
-          <nav class='hdrNav2'>
-          	<a href='<?= $pageRoot; ?>games/'>Games</a>
-          	<a href='<?= $pageRoot; ?>music/'>Music</a>
-          	<a href='<?= $pageRoot; ?>playground/'>Playground</a>
-          	  <? if(strpos($pageBodyClass, 'playInner') !== false){ 
-                      include($pageRoot . 'playground/playgroundNav.php');
-                  } ?>
-          	<a href='<?= $pageRoot; ?>portfolio/'>Portfolio</a>
-          </nav>
-      </header>
-			<main></main>>
-	    </div><!-- end inner -->
-        <footer>
-            <div>
-            	<span class='footL'>
-            		<a href='<?= $pageRoot; ?>about'>About</a> 
-            		<a href='<?= $pageRoot; ?>contact'>Contact</a>
-            		<a class='imgLinks' href='//facebook.com/jon.wiedmann' target='_blank'>
-            			<i class='spriteIcons facebook'>Facebook</i>
-            		</a>
-            		<a class='imgLinks' href='//youtube.com/user/jonmann19/videos' target='_blank'>
-            			<i class='spriteIcons youtube'>YouTube</i>
-            		</a>
-            		<a class='imgLinks' href='//twitter.com/#!/jonmann20' target='_blank'>
-            			<i class='spriteIcons twitter'>Twitter</i>
-            		</a>
-            		<a class='imgLinks' href='//plus.google.com/u/2/113437309528838781826/posts' target='_blank'>
-            			<i class='spriteIcons googlePlus'>Google Plus</i>
-            		</a>
-            		<a class='imgLinks' href='//github.com/jonmann20' target='_blank'>
-            		    <i class='spriteIcons github'>GitHub</i>
-            		</a>
-            	</span>
-            	<span class='footR'>
-            		<a href='<?= $pageRoot; ?>index'>Jon Wiedmann</a> &mdash; <?= date("Y") ?>
-            	</span>
-            </div>
-        </footer>
-    </div><!-- end page -->
+<div class='page'>
+	<div class='inner clr'>
+		<header>
+			<nav>
+		      	<a href='index.html'>Jon Wiedmann<br />.com</a>
+		    </nav>
+		    <nav class='hdrNav2'>
+		      	<a href='/games/'>Games</a>
+		      	<a href='/music/'>Music</a>
+		      	<a href='/playground/'>Playground</a>
+		      	<a href='/portfolio/'>Portfolio</a>
+			</nav>
+		</header>
+		<main></main>>
+    </div><!-- end inner -->
+    <footer>
+        <div>
+        	<span class='footL'>
+        		<a href='<?= $pageRoot; ?>about'>About</a> 
+        		<a href='<?= $pageRoot; ?>contact'>Contact</a>
+        		<a class='imgLinks' href='//facebook.com/jon.wiedmann' target='_blank'>
+        			<i class='spriteIcons facebook'>Facebook</i>
+        		</a>
+        		<a class='imgLinks' href='//youtube.com/user/jonmann19/videos' target='_blank'>
+        			<i class='spriteIcons youtube'>YouTube</i>
+        		</a>
+        		<a class='imgLinks' href='//twitter.com/#!/jonmann20' target='_blank'>
+        			<i class='spriteIcons twitter'>Twitter</i>
+        		</a>
+        		<a class='imgLinks' href='//plus.google.com/u/2/113437309528838781826/posts' target='_blank'>
+        			<i class='spriteIcons googlePlus'>Google Plus</i>
+        		</a>
+        		<a class='imgLinks' href='//github.com/jonmann20' target='_blank'>
+        		    <i class='spriteIcons github'>GitHub</i>
+        		</a>
+        	</span>
+        	<span class='footR'>
+        		<a href='<?= $pageRoot; ?>index'>Jon Wiedmann</a> &mdash; <?= date("Y") ?>
+        	</span>
+        </div>
+    </footer>
+</div><!-- end page -->
