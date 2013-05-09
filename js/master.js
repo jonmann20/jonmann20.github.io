@@ -7,6 +7,8 @@ var Master = function(){
 
     return {
         init: function(){
+            console.log(main);
+            console.log('th: ' + this.main);
             $('main').html(main);
         }
     };
