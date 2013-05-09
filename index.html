@@ -1,34 +1,26 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset='utf-8' />
-    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <meta name="description" content="Jonmann20.github.com : " />
-
-    <link rel="stylesheet" type="text/css" media="screen" href="css/style.css">
-
-    <title>Jonmann20.github.com</title>
-</head>
-<body>
-<section class='page'>
-
-    <h1>Jonmann20&#700;s Github</h1>
-    
-    
-    <h2>My Repositories</h2>
-    <ul>
-        <li><a href="//github.com/jonmann20/Sandbox" target="_blank">Sandbox</a></li>
-        <li><a href="//github.com/jonmann20/School" target="_blank">School</a></li>
-        <li><a href="//github.com/jonmann20/jonwiedmann.com" target="_blank">jonwiedmann.com</a></li>
-    </ul>
-    
-    <h3>Other</h3>
-    <ul>
-        <li><a href="//jonwiedmann.com" target="_blank">jonwiedmann.com</a></li>
-        <li><a href="page2.html">page2</a></li>
-    </ul>
-
-    
-</section>
-</body>
-</html>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+<script>    
+    $(function(){
+        $(document.body).load('master.htm', function(){
+            Master.main("\
+\            
+<h1>Jonmann20&#700;s Github</h1>\
+\
+\
+<h2>My Repositories</h2>\
+<ul>\
+    <li><a href='//github.com/jonmann20/Sandbox' target='_blank'>Sandbox</a></li>\
+    <li><a href='//github.com/jonmann20/School' target='_blank'>School</a></li>\
+    <li><a href='//github.com/jonmann20/jonwiedmann.com' target='_blank'>jonwiedmann.com</a></li>\
+</ul>\
+\
+<h3>Other</h3>\
+<ul>\
+    <li><a href='//jonwiedmann.com' target='_blank'>jonwiedmann.com</a></li>\
+    <li><a href='page2.html'>page2</a></li>\
+</ul>\
+\            ");
+            Master.init();
+        });
+    });
+</script>
