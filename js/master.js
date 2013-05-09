@@ -7,6 +7,8 @@ var Master = function(){
     // public
     return {
         main: function(str){
+            console.log(str);
+            
             this.pageContent = str;
         },
         init: function(){
