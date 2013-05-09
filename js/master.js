@@ -18,6 +18,8 @@ var Master = function(){
         init: function(){
             this.setHead();
             $('main').append(mainContent);
+            
+            $('.curYear').text(Date().getFullYear());
         },
         
         setHead: function(){
