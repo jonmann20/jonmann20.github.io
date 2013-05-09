@@ -7,7 +7,3 @@ var Master = function(){
         }
     };
 }();
-
-$(function(){
-    Master.init();
-});
