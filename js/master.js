@@ -24,7 +24,7 @@ var Master = function(){
         },
         init: function(){
             $('head').html(headContent);
-            $('main').html(mainContent);
+            $('main').insert(mainContent);
         }
     };
 }();
