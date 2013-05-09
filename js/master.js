@@ -5,6 +5,7 @@ var Master = function(){
         init: function(){
             
             console.log(main);
+            console.log(globalX);
             
             $('main').html(main);
         }
