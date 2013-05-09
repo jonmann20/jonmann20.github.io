@@ -1,4 +1,4 @@
-/* Reset */
+@charset "UTF-8";/* Reset */
 *{margin:0;padding:0;border:0;}
 article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display: block;}
 ul,ol{margin-left:2.125em;}
