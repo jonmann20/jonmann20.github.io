@@ -1,7 +1,10 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 
-<div id='content'>
-    <div class='colL'>
+<script>    
+    $(function(){
+    	
+    	var content = hereDoc(function() {/*!
+	      <div class='colL'>
         <h2>Some photos of me:</h2>
 	
         <div id='slideshow'>
@@ -17,17 +20,15 @@
     
         <a class='twitter-timeline' href='https://twitter.com/jonmann20' data-widget-id='243420536208752640'>Tweets by @jonmann20</a>
     </div>
-</div>         
-
-
-<script>    
-    $(function(){
+	*/}); 
+    	
+    	
         $(document.body).load('master.htm', function(){
 
             $('body').addClass('home');
 
 
-            Master.main($('#content').html());
+            Master.main(content);
             Master.init();
         });
     });
