@@ -10,3 +10,5 @@ var Master = function(){
         }
     };
 }();
+
+var globalX;
