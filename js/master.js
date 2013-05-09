@@ -16,7 +16,7 @@ var Master = function(){
             pageRoot = str;
         },
         init: function(){
-            $('head').html(headContent);
+            this.setHead();
             $('main').append(mainContent);
         },
         
@@ -31,6 +31,8 @@ var Master = function(){
             
             headContent += "<link rel='stylesheet' type='text/css' media='screen' href='" + pageRoot + "css/style.css'>";
             headContent += "<title>Jonmann20.github.com</title>";
+            
+            $('head').html(headContent);
         },
         
         /* Utilities */
