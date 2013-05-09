@@ -4,7 +4,7 @@ var Master = function(){
     return {
         init: function(){
             
-            console.log(main);
+            console.log(this.main);
             console.log(globalX);
             
             $('main').html(main);
