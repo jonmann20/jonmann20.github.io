@@ -2,10 +2,10 @@
 <script>    
     
     $(function(){
-        $(document.body).load('master.htm');
+        $(document.body).load('master.htm', function(){
         
-        Master.main = "<h2>works</h2>";
-        Master.init();
-    
+            Master.main = "<h2>works</h2>";
+            Master.init();
+        });
     });
 </script>
