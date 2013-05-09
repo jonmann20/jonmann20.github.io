@@ -12,7 +12,7 @@ var Master = function(){
         init: function(){
             console.log(pageContent);
             //console.log('th: ' + this.main);
-            $('main').html(main);
+            $('main').html(pageContent);
         }
     };
 }();
