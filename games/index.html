@@ -2,6 +2,8 @@
 <script>    
     $(function(){
         $(document.body).load('../master.htm', function(){
+            Master.root("../");
+            
             Master.main("<h1>Games</h1>");
             Master.init();
         });
