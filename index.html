@@ -1,26 +1,34 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+
+
+<script id='content'>
+    <h1>Jonmann20&#700;s Github</h1>
+    
+    <h2>My Repositories</h2>
+    <ul>
+        <li><a href='//github.com/jonmann20/Sandbox' target='_blank'>Sandbox</a></li>
+        <li><a href='//github.com/jonmann20/School' target='_blank'>School</a></li>
+        <li><a href='//github.com/jonmann20/jonwiedmann.com' target='_blank'>jonwiedmann.com</a></li>
+    </ul>
+    
+    <h3>Other</h3>
+    <ul>
+        <li><a href='//jonwiedmann.com' target='_blank'>jonwiedmann.com</a></li>
+        <li><a href='page2.html'>page2</a></li>
+    </ul>
+</script>         
+
+
+
 <script>    
     $(function(){
         $(document.body).load('master.htm', function(){
-            Master.main("\
-\            
-<h1>Jonmann20&#700;s Github</h1>\
-\
-\
-<h2>My Repositories</h2>\
-<ul>\
-    <li><a href='//github.com/jonmann20/Sandbox' target='_blank'>Sandbox</a></li>\
-    <li><a href='//github.com/jonmann20/School' target='_blank'>School</a></li>\
-    <li><a href='//github.com/jonmann20/jonwiedmann.com' target='_blank'>jonwiedmann.com</a></li>\
-</ul>\
-\
-<h3>Other</h3>\
-<ul>\
-    <li><a href='//jonwiedmann.com' target='_blank'>jonwiedmann.com</a></li>\
-    <li><a href='page2.html'>page2</a></li>\
-</ul>\
-\            ");
+            Master.main($('#content').html());
             Master.init();
         });
     });
 </script>
+
+
+
+
