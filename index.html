@@ -1,7 +1,6 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 
-
-<script id='content'>
+<div id='content'>
     <div class='colL'>
         <h2>Some photos of me:</h2>
 	
@@ -18,17 +17,20 @@
     
         <a class='twitter-timeline' href='https://twitter.com/jonmann20' data-widget-id='243420536208752640'>Tweets by @jonmann20</a>
     </div>
-</script>         
+</div>         
 
 
 <script>    
     $(function(){
         $(document.body).load('master.htm', function(){
+
+            $('body').addClass('home');
+
+
             Master.main($('#content').html());
             Master.init();
         });
     });
-
 </script>
 
 <!-- 	$pageTitle = 'Jon Wiedmann';
@@ -36,7 +38,6 @@
 	  		This site has information regarding my work experience and hobbies.';
     $pageKeywords = 'Web Developer, Jon Wiedmann, PHP, HTML5, CSS, jQuery, Javascript';
 	$pageRoot = '';
-    $pageBodyClass = 'home';
 	 
 	$pageJs = "
 	    <script defer async>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='//platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','twitter-wjs');</script>
