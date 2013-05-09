@@ -1,15 +1,13 @@
 var Master = function(){
-    var main = "";
+    // public
+    main = "";
+
+    // private
+    var internal = 1; // access by this.internal
 
     return {
         init: function(){
-            
-            console.log(this.main);
-            console.log(globalX);
-            
             $('main').html(main);
         }
     };
 }();
-
-var globalX;
