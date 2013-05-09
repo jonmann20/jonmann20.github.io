@@ -3,7 +3,7 @@ var Master = function(){
 
     return {
         init: function(){
-            $(document.body).append(main);
+            $('main').append(main);
         }
     };
 }();
