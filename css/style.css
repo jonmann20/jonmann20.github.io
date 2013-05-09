@@ -54,5 +54,7 @@ body {
   font-family: 'Myriad Pro', Calibri, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
+  padding: 15px 0;
 }
+.page {width: 1100px; margin: 0 auto;}
 
