@@ -1,0 +1,19 @@
+/* ----------------------------------------------------
+   created with http://www.texturepacker.com 
+   ----------------------------------------------------
+   $TexturePacker:SmartUpdate:8f0d5340949e05b22294f425fc79bb2e$
+   ----------------------------------------------------
+
+   usage: <span class="{-spritename-} sprite"></span>
+
+   replace {-spritename-} with the sprite you like to use
+
+*/
+
+.sprite {display:inline-block; overflow:hidden; background-repeat: no-repeat;background-image:url(player.png);}
+
+.playerD {width:28px; height:38px; background-position: -2px -2px}
+.playerL {width:28px; height:38px; background-position: -32px -2px}
+.playerR {width:28px; height:38px; background-position: -2px -42px}
+.playerU {width:28px; height:38px; background-position: -32px -42px}
+.player_picked {width:28px; height:38px; background-position: -2px -82px}

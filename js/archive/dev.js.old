@@ -1,0 +1,132 @@
+$(function(){
+		
+//email	
+$("#submit").click(function(e){
+	e.preventDefault();
+	
+	var name = $("#name").val();
+	var add = $("#email").val();
+	var body = $("#body").val();
+	
+	$("#sent").html("<img src='../img/spinner.gif' alt='spinner' />" );	
+	
+	 $.ajax({
+      url: 'email.php',
+      data: 'action=emailme&name=' + name + '&add=' + add + '&body=' + body,
+      dataType: 'json',
+      type: 'post',
+      success: function (j) {
+					if (!j.ok){
+						$("#sent").removeClass('hide').addClass('show'); 
+					}
+					else 
+						$("#sent").html(j.msg);
+      		}
+    });
+
+    
+});	
+	
+	
+$('.drop').hover(function() {
+	$("#wrap").addClass('tilt');	//tilts screen on click
+	$(".main").addClass('tilt_main');
+	$("#nav").addClass('tilt_nav');
+
+}, function() {
+	$("#wrap").removeClass('tilt');	//un-tilts screen on click
+	$(".main").removeClass('tilt_main');
+	$("#nav").removeClass('tilt_nav');
+});
+
+
+/*******************nav ***********************/
+
+$('#nav li')
+    .removeClass('hl')
+    .find('a')
+    .append('<span class="hover" />').each(function () {
+            var $span = $('> span.hover', this).css('opacity', 0);
+            $(this).hover(function () {
+                // on hover
+                $span.stop().fadeTo(500, 1);
+            }, function () {
+                // off hover
+                $span.stop().fadeTo(500, 0);
+            });
+        });
+
+window.last = 'home';
+window.now = 'home';
+$('.click').click(function(){			
+		last = now; 				// set cerrent to last	
+		now = '';					// resets now
+		now = $(this).attr("id");	// retrieves id from tag clicked
+		now = now.substr(1);		// fixes _ in id
+});
+
+$(".home").click(function() {
+	if (last != 'home'){
+		$('#'+last).animate({width:'toggle'},350);
+		$("#home").animate({width:'toggle'},350);
+	}
+});
+
+$(".services").click(function(){						
+	if (last != 'services'){
+		$('#'+last).animate({width:'toggle'},350);
+		$("#services").animate({width:'toggle'},350);
+	}
+});
+
+$(".portfolio").click(function(){					
+	if (last != 'portfolio'){
+		$('#'+last).animate({width:'toggle'},350);
+		$("#portfolio").animate({width:'toggle'},350);
+	}
+});
+
+$(".about").click(function(){							
+	if (last != 'about'){
+		$('#'+last).animate({width:'toggle'},350);
+		$("#about").animate({width:'toggle'},350);
+	}
+});
+
+$(".contact").click(function(){					
+	if (last != 'contact'){
+		$('#'+last).animate({width:'toggle'},350);
+		$("#contact").animate({width:'toggle'},350);
+	}
+});
+    
+/*******************end nav ***********************/
+
+/*******************bottom bar *****************/	
+
+var menuRoot = $( "#menu-root" );
+var menu = $( "#menu" );
+ 
+// Hook up menu root click event.
+menuRoot.attr("href", "javascript:void(0)").click(function(){
+	menu.toggle();	// Toggle the menu display.
+	menuRoot.blur();// Blur the link to remove focus.
+	return(false);	// Cancel event (and its bubbling).
+});
+ 
+// Hook up a click handler on the document so that
+// we can hide the menu if it is not the target of
+// the mouse click.
+$(document).click(function(e){
+	// Check to see if this came from the menu.
+	if (menu.is( ":visible" ) && !$( e.target ).closest( "#menu" ).size()){	
+		// The click came outside the menu, so
+		// close the menu.
+		menu.hide();	 
+	}
+});
+
+/*******************bottom bar *****************/
+ 
+});//end jquery
+ 

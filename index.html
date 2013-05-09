@@ -2,18 +2,22 @@
 
 
 <script id='content'>
-    <h2>My Repositories</h2>
-    <ul>
-        <li><a href='//github.com/jonmann20/Sandbox' target='_blank'>Sandbox</a></li>
-        <li><a href='//github.com/jonmann20/School' target='_blank'>School</a></li>
-        <li><a href='//github.com/jonmann20/jonwiedmann.com' target='_blank'>jonwiedmann.com</a></li>
-    </ul>
+    <div class='colL'>
+        <h2>Some photos of me:</h2>
+	
+        <div id='slideshow'>
+            <img src='img/jonLightBulb.jpg' alt='Jon' />
+            <img src='img/jon2.jpg' alt='Jon' />
+            <img src='img/jonBlacknWhite.jpg' alt='Jon in black and white' />  
+        </div>
+    </div>
+    <div class='colR'>
+        <h1>Welcome</h1>
+        <p>Thanks for visiting my site.  This site was built with the intention of showcasing some of my technical ability.	This site has information regarding my work experience and hobbies.</p><br />
+        <p>Please feel free to poke around or learn more <a href='about'>about me.</a></p>
     
-    <h3>Other</h3>
-    <ul>
-        <li><a href='//jonwiedmann.com' target='_blank'>jonwiedmann.com</a></li>
-        <li><a href='page2.html'>page2</a></li>
-    </ul>
+        <a class='twitter-timeline' href='https://twitter.com/jonmann20' data-widget-id='243420536208752640'>Tweets by @jonmann20</a>
+    </div>
 </script>         
 
 
@@ -24,7 +28,28 @@
             Master.init();
         });
     });
+
 </script>
+
+<!-- 	$pageTitle = 'Jon Wiedmann';
+	$pageDescription = 'Jon Wiedmann\'s personal website.  This site is set up to showcase some of my technical ability.  
+	  		This site has information regarding my work experience and hobbies.';
+    $pageKeywords = 'Web Developer, Jon Wiedmann, PHP, HTML5, CSS, jQuery, Javascript';
+	$pageRoot = '';
+    $pageBodyClass = 'home';
+	 
+	$pageJs = "
+	    <script defer async>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='//platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','twitter-wjs');</script>
+	    
+		<script src='/js/plugins/jquery.cycle.lite.min.js.gz'></script>
+	    <script>
+		  	$(function(){
+				$('#slideshow').cycle();
+		  	});
+	    </script>
+	";
+	  
+	include_once($pageRoot . 'master.php');-->
 
 
 

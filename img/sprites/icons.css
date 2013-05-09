@@ -1,0 +1,19 @@
+/* ----------------------------------------------------
+   created with http://www.texturepacker.com 
+   ----------------------------------------------------
+   $TexturePacker:SmartUpdate:5e2a30ad651bbde6e7883761719d76eb$
+   ----------------------------------------------------
+
+   usage: <span class="{-spritename-} sprite"></span>
+
+   replace {-spritename-} with the sprite you like to use
+
+*/
+
+.sprite {display:inline-block; overflow:hidden; background-repeat: no-repeat;background-image:url(icons.png);}
+
+.facebook {width:16px; height:16px; background-position: -2px -2px}
+.github {width:16px; height:16px; background-position: -20px -2px}
+.googlePlus {width:16px; height:16px; background-position: -38px -2px}
+.twitter {width:16px; height:16px; background-position: -2px -20px}
+.youtube {width:16px; height:16px; background-position: -20px -20px}

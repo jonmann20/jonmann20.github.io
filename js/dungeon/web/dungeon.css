@@ -1,0 +1,37 @@
+/* reset */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+/* Utils */
+@font-face {
+    font-family: 'PressStart2P';
+    src: url('font/PressStart2P.ttf');  
+}
+
+/* Global */
+body {
+    font-family: 'PressStart2P', sans-serif;
+    background: #000;
+}
+.canvasWrap {
+    margin: 0 auto;
+    /*transition: all 3s ease-in-out;
+    -webkit-transform: scale(0);*/
+}
+.cWrapTransition {
+    /*-webkit-transform: scale(1);*/
+}
+canvas {
+    width: 100%;
+    height: 100%;
+    -webkit-transition: opacity 0.5s;
+    transition: opacity 0.5s;
+}
+.preTransition {
+    opacity: 1;
+}
+.duringTransition {
+    opacity: 0.01;
+}

@@ -1,0 +1,4 @@
+// Git for DreamHost:
+// http://craigjolicoeur.com/blog/hosting-git-repositories-on-dreamhost
+
+// github test
