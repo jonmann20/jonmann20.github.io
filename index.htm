@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿
+
+<!DOCTYPE html>
 <!--[if lte IE 8]>      
 	<html class='ie8 oldIE'> 
 	<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>		
@@ -7,16 +9,17 @@
 <!--[if gte IE 10 | !(IE)]><!--> 	 <html> <!--<![endif]-->  
 <head>
 	<meta charset="UTF-8">
-    <title>About</title>
-    <meta name='description' content='A page about Jon Wiedmann, and jonwiedmann.com.' />
-    <meta name='keywords' content='about' />
+    <title>Jon Wiedmann</title>
+    <meta name='description' content='Jon Wiedmann's personal website.  This site is set up to showcase some of my technical ability.  
+	  		This site has information regarding my work experience and hobbies.' />
+    <meta name='keywords' content='Web Developer, Jon Wiedmann, PHP, HTML5, CSS, jQuery, Javascript' />
     <meta name='viewport' content='width=device-width' />
 
 	<link href='//fonts.googleapis.com/css?family=Open+Sans|Open+Sans+Condensed:300,700' rel='stylesheet' type='text/css'>	
     <link rel='stylesheet' type='text/css' href='css/the.css' />
     <link rel='icon' type='image/ico' href='img/favicon.ico'>
     </head>
-<body class='about'>
+<body class='home'>
     <div class='page'>
 	    <div class='inner clr'>
 	    				<header>
@@ -34,27 +37,22 @@
 			<section class='main'>
 				
 <div class='colL'>
-	<h2 class='noHeaderR'>About Me</h2>
-	<p>
-	    I am a <a href='//www.eecs.umich.edu' target='_blank'>computer science</a> student at the University of Michigan &mdash; College of Engineering.
-		My main interest in computer science is in video game design, development and software engineering.
-	</p><br />
-	<p>
-		My other interests include coaching and playing sports (basketball, soccer, disc golf).
-		I also enjoy teaching, creating, and performing <a href='music/'>music</a>.
-	</p>
+	<h2>Some photos of me:</h2>
 	
-	<h3>About This Site</h3>
-	<p>
-	    This site was built in <a href='//www.php.net' target='_blank'>PHP</a>. 
-	    It is built to use <a href='//www.w3.org/html/logo' target='_blank'>HTML<sub>5</sub></a>, <a href='//www.css3.info' target='_blank'>CSS<sub>3</sub></a>, and Javascript (<a href='//jquery.com' target='_blank'>jQuery</a>) on the front end.  
-	    The CSS	is designed to be responsive (make the pages scale well).
-    </p>
-</div>	
-<div class='colR noHeaderR'>
-	<img src='img/jonHunt.jpg' alt='my sister and I with squirrels' title='My sister and I with squirrels.' />
+	<div id='slideshow'>
+		<img src='img/jonLightBulb.jpg' alt='Jon' />
+		<img src='img/jon2.jpg' alt='Jon' />
+		<img src='img/jonBlacknWhite.jpg' alt='Jon in black and white' />  
+	</div>
 </div>
-
+<div class='colR'>
+    <h1>Welcome</h1>
+    <p>Thanks for visiting my site.  This site was built with the intention of showcasing some of my technical ability.	This site has information regarding my work experience and hobbies.</p><br />
+    <p>Please feel free to poke around or learn more <a href='about'>about me.</a></p>
+    
+    <a class='twitter-timeline' href='https://twitter.com/jonmann20' data-widget-id='243420536208752640'>Tweets by @jonmann20</a>
+</div>
+ 
 			</section>
 	    </div>        
                 <footer>
@@ -79,8 +77,7 @@
             		</a>
             	</span>
             	<span class='footR'>
-            		<a href='index'>Jon Wiedmann</a> &mdash; 2013
-            	</span>
+            		<a href='index'>Jon Wiedmann</a> &mdash; 2013            	</span>
             </div>
         </footer>
             </div>    
@@ -90,5 +87,14 @@
 	<!--[if gte IE 9]><!-->
 	    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 	<!--[endif]-->
-    </body>
+    
+	    <script defer async>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='//platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','twitter-wjs');</script>
+	    
+		<script src='/js/plugins/jquery.cycle.lite.min.js.gz'></script>
+	    <script>
+		  	$(function(){
+				$('#slideshow').cycle();
+		  	});
+	    </script>
+	</body>
 </html>

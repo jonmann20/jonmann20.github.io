@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+
+
+<!DOCTYPE html>
 <!--[if lte IE 8]>      
 	<html class='ie8 oldIE'> 
 	<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>		
@@ -7,16 +9,16 @@
 <!--[if gte IE 10 | !(IE)]><!--> 	 <html> <!--<![endif]-->  
 <head>
 	<meta charset="UTF-8">
-    <title>Contact Me</title>
-    <meta name='description' content='A page enabling contact to Jon Wiedmann.' />
-    <meta name='keywords' content='contact' />
+    <title>About</title>
+    <meta name='description' content='A page about Jon Wiedmann, and jonwiedmann.com.' />
+    <meta name='keywords' content='about' />
     <meta name='viewport' content='width=device-width' />
 
 	<link href='//fonts.googleapis.com/css?family=Open+Sans|Open+Sans+Condensed:300,700' rel='stylesheet' type='text/css'>	
     <link rel='stylesheet' type='text/css' href='css/the.css' />
     <link rel='icon' type='image/ico' href='img/favicon.ico'>
     </head>
-<body class=''>
+<body class='about'>
     <div class='page'>
 	    <div class='inner clr'>
 	    				<header>
@@ -33,67 +35,26 @@
 	        			
 			<section class='main'>
 				
-<div class='colL contact'>
-	<h2>Contact Me</h2>
-
-	<form action='controllers/contactController.php' method='post'>
-		<div>
-			<label for="name">Name:</label>
-			<input
-				type="text" 
-				value=""
-				name="name"
-				class="required"
-				placeholder="John Doe"
-				x-webkit-speech
-				autofocus
-				required
-			/>
-		</div>
-		<div>
-			<label for="email">Email:</label>
-			<input
-				type="email"
-				value=""
-				class="required email"
-				name="email"
-				placeholder="me@example.com"
-				x-webkit-speech
-				required
-			/>
-		</div>
-		<div>
-			<label for="msg">Message:</label>
-			<textarea
-				value=""
-				name="msg"
-				placeholder="I am interested in taking lessons."
-				x-webkit-speech
-				required
-			></textarea>
-		</div>
-		<div>
-			<label class="avail toggle">Availability: <span>(optional)</span></label>
-			
-			<div class='toggleShow'>
-				<input type="checkbox" name="cbM" id="monday" /> <label for="monday">Monday</label><br />
-				<input type="checkbox" name="cbT" id="tuesday" /> <label for="tuesday">Tuesday</label><br />
-				<input type="checkbox" name="cbW" id="wednesday" /> <label for="wednesday">Wednesday</label><br />
-				<input type="checkbox" name="cbR" id="thursday" /> <label for="thursday">Thursday</label><br />
-				<input type="checkbox" name="cbF" id="friday" /> <label for="friday">Friday</label><br />
-				<input type="checkbox" name="cbS" id="saturday" /> <label for="saturday">Saturday</label><br />
-				<input type="checkbox" name="cbU" id="sunday" /> <label for="sunday">Sunday</label><br />
-			</div>
-		</div>
-		<div class="clrB">
-			<label>&nbsp;</label>
-			<input type="submit" name="submit" value="Send" />
-		</div>
-	</form>
-
-</div>
-<div class="colR noHeaderR">
-	<img src="../img/jonPiano.jpg" alt="me playing piano" /> 
+<div class='colL'>
+	<h2 class='noHeaderR'>About Me</h2>
+	<p>
+	    I am a <a href='//www.eecs.umich.edu' target='_blank'>computer science</a> student at the University of Michigan &mdash; College of Engineering.
+		My main interest in computer science is in video game design, development and software engineering.
+	</p><br />
+	<p>
+		My other interests include coaching and playing sports (basketball, soccer, disc golf).
+		I also enjoy teaching, creating, and performing <a href='music/'>music</a>.
+	</p>
+	
+	<h3>About This Site</h3>
+	<p>
+	    This site was built in <a href='//www.php.net' target='_blank'>PHP</a>. 
+	    It is built to use <a href='//www.w3.org/html/logo' target='_blank'>HTML<sub>5</sub></a>, <a href='//www.css3.info' target='_blank'>CSS<sub>3</sub></a>, and Javascript (<a href='//jquery.com' target='_blank'>jQuery</a>) on the front end.  
+	    The CSS	is designed to be responsive (make the pages scale well).
+    </p>
+</div>	
+<div class='colR noHeaderR'>
+	<img src='img/jonHunt.jpg' alt='my sister and I with squirrels' title='My sister and I with squirrels.' />
 </div>
 
 			</section>
@@ -120,8 +81,7 @@
             		</a>
             	</span>
             	<span class='footR'>
-            		<a href='index'>Jon Wiedmann</a> &mdash; 2013
-            	</span>
+            		<a href='index'>Jon Wiedmann</a> &mdash; 2013            	</span>
             </div>
         </footer>
             </div>    
@@ -131,20 +91,5 @@
 	<!--[if gte IE 9]><!-->
 	    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 	<!--[endif]-->
-    
-		  <script>
-			$(function(){
-			  	$('input[type=submit]').hover(function(){
-			  		$(this).css('-webkit-transition', 'all .45s ease-out');
-			  		$(this).css('-webkit-filter', 'blur(3px)');
-			  	},function(){
-			  		$(this).css('-webkit-filter', 'blur(0)');
-			  	});
-			  	
-				$('.toggle').click(function(){
-					$('.toggleShow').slideToggle();
-				});
-			});
-		  </script>
-	  </body>
+    </body>
 </html>
