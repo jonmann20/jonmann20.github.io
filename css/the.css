@@ -1,4 +1,4 @@
-@charset "UTF-8";/* Reset */
+/* Reset */
 *{margin:0;padding:0;border:0;}
 article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display: block;}
 ul,ol{margin-left:2.125em;}
@@ -14,25 +14,51 @@ button {
 }
 input[type=submit]:hover,
 input[type=color]:hover,
-button:hover{cursor: pointer;}
+button:hover{
+	cursor: pointer;
+}
 
 /*********** utils ***********/
-@font-face {font-family: myFont; src: url('../font/VAG-HandWritten.otf') format('opentype')}
-@font-face {font-family: 'PressStart2P'; src: url('../font/PressStart2P.ttf');}
-img {max-width: 100%; border-radius: 4px; box-shadow: 4px 3px 18px rgba(0, 0, 0, 0.4);}
-sub {font-size: .9em; vertical-align: -3px;}
-.noHeaderR {margin-top: .55em;}
-.clr:before,.clr:after {content: " "; display: table;}
-.clr:after,.clrB  {clear: both;}
-br.clr {display: none;}
+@font-face {
+	font-family: myFont; 
+	src: url('../font/VAG-HandWritten.otf') format('opentype');
+}
+@font-face {
+	font-family: 'PressStart2P'; 
+	src: url('../font/PressStart2P.ttf');
+}
+img {
+	max-width: 100%;
+	border-radius: 4px;
+	box-shadow: 4px 3px 18px rgba(0, 0, 0, 0.4);
+}
+sub {
+	font-size: .9em;
+	vertical-align: -3px;
+}
+.noHeaderR {
+	margin-top: .55em;
+}
+.clr:before, .clr:after {
+	content: " "; 
+	display: table;
+}
+.clr:after, .clrB {
+	clear: both;
+}
+br.clr {
+	display: none;
+}
 .lh {
 	list-style-type: none;
 	font-weight: 700;
 	margin: 12px 0 8px 0;
 	padding-left: 0;
 }
-.opaque {opacity: 1;}
-.noselect{
+.opaque {
+	opacity: 1;
+}
+.noselect {
 	-webkit-touch-callout: none;
 	-webkit-user-select: none;
 	-khtml-user-select: none;
@@ -46,9 +72,15 @@ br.clr {display: none;}
 	width: 44%;
 	max-width: 838px;
 }
-.absHover .colR #divDefault {display: block;}
-#slideshow img {display: none; max-height: 460px;}
+.absHover .colR #divDefault {
+	display: block;
+}
+#slideshow img {
+	display: none;
+	max-height: 460px;
+}
 
+/*********** Sprites ***********/
 .spriteIcons {display:inline-block; overflow:hidden; background-repeat: no-repeat;background-image:url(../img/sprites/icons.png);text-indent:-999em}
 
 .facebook {width:16px; height:16px; background-position: -2px -2px}
@@ -71,8 +103,8 @@ h1,h2,h3,h4,h5,h6 {
 	margin: .5em 0 .3em 0;
 }
 a {
-    -webkit-transition: all .35s ease-out;
-	transition:         all .35s ease-out;
+    -webkit-transition: all .33s ease-out;
+	transition:         all .33s ease-out;
 	opacity: .8; 
 	color: #61b0d7;
 	text-decoration: none;
@@ -81,8 +113,6 @@ a {
 a:hover {
 	opacity: 1;
 	text-shadow: #61b0d7 0 0 6px;
-	-webkit-transition: all 0.2s;
-	transition:         all 0.2s;
 }
 a:visited, a:active {color: #5dafd7;}
 
