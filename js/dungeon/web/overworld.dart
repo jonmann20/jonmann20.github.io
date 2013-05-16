@@ -147,7 +147,7 @@ class Overworld{
     ctx.fillStyle = Color.BG.name;
     ctx.fillRect(0, 0, FULLW, FULLH);
     
-    ctx.font = "18px PressStart2P";
+    ctx.font = "18px Press Start 2P";
     final String worldName = 'TOWN OF DUNGEON';
     ctx.fillStyle = '#000';
     ctx.fillText(worldName, HALFW - ctx.measureText(worldName).width/2 + 2, 32);
@@ -157,7 +157,7 @@ class Overworld{
     for(int i=0; i < NUM_LVLS; i++){
       // level name
       ctx.fillStyle = "#e1e1e1";
-      ctx.font = "9px PressStart2P";
+      ctx.font = "9px Press Start 2P";
       
       String lvlName;
       if(lvlArr[i].unlocked || i == 0)

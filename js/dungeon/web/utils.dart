@@ -52,7 +52,7 @@ class Utils{
     alpha += fadeOut ? -dt : dt;
     
     // press enter
-    ctx.font = "$fontSize\px PressStart2P";
+    ctx.font = "$fontSize\px Press Start 2P";
     tmpW = ctx.measureText(str).width;
     ctx.fillStyle = 'rgba(233, 233, 233, $alpha)';
     ctx.fillText(str, x - tmpW/2, y);
@@ -68,7 +68,7 @@ class Utils{
     num tmpY = (textPos < FULLH/2) ? FULLH/2 : textPos;
     
     // press enter
-    ctx.font = "$fontSize\px PressStart2P";
+    ctx.font = "$fontSize\px Press Start 2P";
     TextMetrics strDimensions = ctx.measureText(str);
     
     ctx.fillStyle = 'rgba(12, 12, 12, .5)';

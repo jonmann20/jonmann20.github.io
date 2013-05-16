@@ -91,7 +91,7 @@ class Level_1{
   }
   
   void drawInstruction(String str){
-    ctx.font = "8px PressStart2P";
+    ctx.font = "8px Press Start 2P";
     ctx.fillStyle = '#ccc';
     ctx.fillText(str, 10, FULLH - 10);
   }
@@ -155,7 +155,7 @@ class Level_1{
     wise.draw();
     
     // display text
-    ctx.font = "11px PressStart2P";
+    ctx.font = "11px Press Start 2P";
     dialog.dialogW = ctx.measureText(dialog.dialog[dialog.dialogLine]).width;
     
     ctx.fillStyle = '#000';                                                   // dialog box
