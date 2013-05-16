@@ -2,7 +2,7 @@
 
 <div class="colL">
     <h2 class="musicHeader">Music - Bass</h2>
-    <p>I have been playing bass for the past 444<?= (date("Y") - 2009) ?> years.</p>
+    <p>I have been playing bass for the past <?= (date("Y") - 2009) ?> years.</p>
 
     <? include_once('musicNav.php'); ?>
     

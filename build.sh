@@ -3,7 +3,7 @@
 #---color aliases
 RED=${txtbld}$(tput setaf 1)
 GREEN=$(tput setaf 2)
-
+RESET=$(tput sgr0)
 
 #---globals
 phpExe="/opt/lampp/bin/php"
@@ -26,9 +26,9 @@ function deleteHTML {
 	
 		if [[ ("$fname" == "js/computerGraphics/web/computergraphics") || "$fname" == "js/dungeon/web/dungeon" || "$fname" == "js/dart/dungeon/web/dungeon" ]]
 		then
-			echo -e "\t $RED  -skipped $fname $(tput sgr0)"	
+			echo -e "\t $RED  -skipped $fname $RESET"	
 		else
-			echo -e "\t $GREEN deleting $fname $(tput sgr0)"
+			echo -e "\t $GREEN deleting $fname $RESET"
 			rm $f
 		fi
 		
@@ -45,9 +45,9 @@ function compilePHP {
 		
 		if [[ ("$fname" == "master") || ("$fname" == "controllers/contactController") || ("$fname" == "games/gamesMaster") || ("$fname" == "games/gamesNav") || ("$fname" == "music/musicNav") || ("$fname" == "playground/playgroundNav") ]]
 		then
-			echo -e "\t $RED -skipped $fname $(tput sgr0)"
+			echo -e "\t $RED -skipped $fname $RESET"
 		else
-			echo -e "\t $GREEN compiling $fname $(tput sgr0)"
+			echo -e "\t $GREEN compiling $fname $RESET"
 			$phpExe $f > ${path}${fname}.html
 		fi
 		
@@ -77,9 +77,16 @@ function compressCSS {
 
 
 #----- Run Program -----
-#deleteHTML
 
-compilePHP
-compressCSS
+if [[ "$1" == "dev" ]]
+then
+	deleteHTML
+elif [[ "$1" == "prd" ]]
+then
+	compilePHP
+	compressCSS
+else
+	echo -e "\t $RED must append 'dev | prd' $RESET"
+fi
 
 
