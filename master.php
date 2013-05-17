@@ -69,7 +69,7 @@ $pageDescription = isset($pageDescription) ? $pageDescription : '';
             <div>
             	<span class='footL'>
             		<a href='<?= $pageRoot; ?>about'>About</a> 
-            		<a href='<?= $pageRoot; ?>contact'>Contact</a>
+            		<a class='footContact' href='<?= $pageRoot; ?>contact'>Contact</a>
             		<a class='imgLinks' href='//facebook.com/jon.wiedmann' target='_blank'>
             			<i class='spriteIcons facebook'>Facebook</i>
             		</a>

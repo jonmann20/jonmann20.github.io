@@ -87,7 +87,28 @@ br.clr {
 .twitter {width:16px; height:16px; background-position: -2px -20px}
 .youtube {width:16px; height:16px; background-position: -20px -20px}
 
-/*********** Type ***********/
+/*********** Global ***********/
+/* Scrollbar */
+::-webkit-scrollbar{width: 12px;}
+::-webkit-scrollbar-track-piece {background-color: #222;}
+::-webkit-scrollbar-thumb:vertical {
+	height: 50px;
+	background: -webkit-gradient(linear, left top, right top, color-stop(0%, #4d4d4d), color-stop(100%, #333));
+	border: 1px solid #0d0d0d;
+	border-top: 1px solid #666;
+	border-left: 1px solid #666; 
+	border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:vertical:hover {
+	background: -webkit-gradient(linear, left top, right top, color-stop(0%, #7d7d7d), color-stop(100%, #666));
+}
+::-webkit-scrollbar-thumb:vertical:window-inactive {
+	border-top: 1px solid #555;
+	border-left: 1px solid #555; 
+	background: -webkit-gradient(linear, left top, right top, color-stop(0%, #3d3d3d), color-stop(100%, #222));
+}
+
+/* Type */
 h1,h2,h3,h4,h5,h6 {
 	font-size: 1.62em; 
 	letter-spacing: -0.03em;
@@ -114,28 +135,7 @@ a:hover {
 }
 a:visited, a:active {color: #5dafd7;}
 
-/*************** layout ***************/
-/* Scrollbar */
-::-webkit-scrollbar{width: 12px;}
-::-webkit-scrollbar-track-piece {background-color: #222;}
-::-webkit-scrollbar-thumb:vertical {
-	height: 50px;
-	background: -webkit-gradient(linear, left top, right top, color-stop(0%, #4d4d4d), color-stop(100%, #333));
-	border: 1px solid #0d0d0d;
-	border-top: 1px solid #666;
-	border-left: 1px solid #666; 
-	border-radius: 5px;
-}
-::-webkit-scrollbar-thumb:vertical:hover {
-	background: -webkit-gradient(linear, left top, right top, color-stop(0%, #7d7d7d), color-stop(100%, #666));
-}
-::-webkit-scrollbar-thumb:vertical:window-inactive {
-	border-top: 1px solid #555;
-	border-left: 1px solid #555; 
-	background: -webkit-gradient(linear, left top, right top, color-stop(0%, #3d3d3d), color-stop(100%, #222));
-}
-
-/* global */
+/* Layout */
 html {min-height: 100%;}
 body {
 	line-height: 1.25; 
@@ -156,6 +156,8 @@ body {
 	width: 88%;
 	min-height: 40em;
 }
+
+/* Header */
 header {
 	float: left;
 	margin-right: 60px;
@@ -240,9 +242,22 @@ header nav ul #cube {
 .nav4 #floatingSun:hover {
 	text-shadow: #ff6a00 0 0 18px;
 }
-.main {margin-top: 40px; overflow: hidden;}
-.colL {float: left;  width: 38%;  min-width: 121px;}
-.colR {float: right; width: 59%; padding-bottom: 13px;}
+.main {
+	margin-top: 40px;
+	overflow: hidden;
+}
+.colL {
+	float: left;
+	width: 38%;
+	min-width: 121px;
+}
+.colR {
+	float: right;
+	width: 59%;
+	padding-bottom: 13px;
+}
+
+/* Footer */
 footer {
 	background-color: rgba(50, 50, 50, 0.64);
 	border-radius: 14px;
@@ -252,9 +267,13 @@ footer {
 	margin: 2.5% auto 2% auto;
 	font-family:  'Open Sans';
 	font-style: italic;
-	font-size: 120%;
+	font-size: 90%;
 }
-footer div {margin: 0 auto; width: 90%; min-width: 500px;}
+footer div {
+	margin: 0 auto;
+	width: 90%;
+	min-width: 500px;
+}
 footer a {
 	-webkit-text-stroke: 1px #61b0d7;
 	text-stroke: 1px #61b0d7;
@@ -266,15 +285,21 @@ footer a {
     	 1px  1px 0 #000;
     font-weight: 700;
 }
-footer .footL {float: left;}
-footer .footL a {margin: 0 .3em;}
-footer .footR {float: right;}
+footer .footL {
+	float: left;
+}
+footer .footL a {
+	margin: 0 0.4em;
+}
 footer .footL .imgLinks {  
 	opacity: .95;
 	display: inline-block; 
 	width: 16px; 
 	height: 16px;
-	vertical-align: middle;
+	vertical-align: bottom;
+}
+footer .footContact {
+	margin-right: 1.3em !important;
 }
 footer .footL .imgLinks i {
 	position: absolute;
@@ -290,6 +315,11 @@ footer .footL .imgLinks i:hover{
 	-webkit-transform: scale(1.33);
 	transform: scale(1.33);
 }
+footer .footR {
+	float: right;
+}
+
+/* Common */
 .absHover .colR div > p {
 	margin-bottom: 12px;
 	width: 80%;
