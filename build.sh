@@ -83,7 +83,9 @@ function pushToGithub {
 	echo -e "\t$d"
 	git commit -am 'from build.sh $d'
 	git push
-	echo jonmann20
+	expect "Username" 
+	send "jonmann20"
+	expect eof
 }
 
 
