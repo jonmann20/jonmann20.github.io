@@ -15,7 +15,7 @@ sudo /opt/lampp/lampp
 
 note="hi"
 
-echo $note			#dereferences note
+$note			#dereferences note
 note+=" world"
 
 
