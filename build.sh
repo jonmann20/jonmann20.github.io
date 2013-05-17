@@ -83,6 +83,7 @@ function pushToGithub {
 	echo -e "\t$d"
 	git commit -am 'from build.sh $d'
 	git push
+	jonmann20
 }
 
 
