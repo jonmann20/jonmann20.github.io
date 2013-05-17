@@ -89,7 +89,7 @@ br.clr {
 
 /*********** Type ***********/
 h1,h2,h3,h4,h5,h6 {
-	font-size: 1.8em; 
+	font-size: 1.62em; 
 	letter-spacing: -0.03em;
 	margin: .4em 0 .6em 0; 
 	color: #ff6a00; 
@@ -250,7 +250,8 @@ footer {
 	height: 27px;
 	padding: 13px 0 5px 0;
 	margin: 2.5% auto 2% auto;
-	font-family:  'Open Sans Condensed';
+	font-family:  'Open Sans';
+	font-style: italic;
 	font-size: 120%;
 }
 footer div {margin: 0 auto; width: 90%; min-width: 500px;}
@@ -283,9 +284,11 @@ footer .footL .imgLinks i {
 	transition:         all .2s ease-in-out;
 }
 footer .footL .imgLinks i:hover{
-	box-shadow: 0px 0px 11px 2px #58aad2;
-	-webkit-transition: all 0s;
-	transition:         all 0s;
+	box-shadow: 0px 1px 11px -1px #58aad2;
+	-webkit-transition: all .1s;
+	transition:         all .1s;
+	-webkit-transform: scale(1.33);
+	transform: scale(1.33);
 }
 .absHover .colR div > p {
 	margin-bottom: 12px;

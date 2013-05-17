@@ -36,17 +36,17 @@ class StartScreen{
                  cRite = '© 2013 JON WIEDMANN';
     
     // controls
-    ctx.font = "7px Press Start 2P";
+    ctx.font = "7px 'Press Start 2P'";
     ctx.fillStyle = 'rgb(213, 213, 213)';
     ctx.fillText(strControls, HALFW - ctx.measureText(strControls).width/2, FULLH - 62);
     
     // copyright
-    ctx.font = "13px Press Start 2P";
+    ctx.font = "13px 'Press Start 2P'";
     ctx.fillStyle = 'rgb(233, 233, 233)';
     ctx.fillText(cRite, HALFW - ctx.measureText(cRite).width/2, FULLH - 24);
     
     // dungeon
-    ctx.font = "43px Press Start 2P";
+    ctx.font = "43px 'Press Start 2P'";
     num tmpW = ctx.measureText(title).width;
     num titleW = HALFW - tmpW/2;
     

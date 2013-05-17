@@ -24,7 +24,7 @@ $pageDescription = isset($pageDescription) ? $pageDescription : '';
     <meta name='keywords' content='<?= $pageKeywords; ?>' />
     <meta name='viewport' content='width=device-width' />
 
-	<link href='http://fonts.googleapis.com/css?family=Open+Sans|Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300|Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
     <link rel='stylesheet' type='text/css' href='<?= $pageRoot; ?>css/the.css' />
     <link rel='icon' type='image/ico' href='<?= $pageRoot; ?>img/favicon.ico'>
     <?= $pageHeader; ?>

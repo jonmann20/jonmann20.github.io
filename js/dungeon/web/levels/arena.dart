@@ -76,11 +76,11 @@ class Arena{
     ctx.fillStyle = '#ccc';
     ctx.fillRect(HALFW-50, FULLH- 90, 155, 65);
     
-    ctx.font = "9px Press Start 2P";
+    ctx.font = "9px 'Press Start 2P'";
     ctx.fillStyle = '#000';
     ctx.fillText('SELECT ANIMAL', HALFW-30, FULLH-74);
     
-    ctx.font = "8px Press Start 2P";
+    ctx.font = "8px 'Press Start 2P'";
     ctx.fillStyle = '#333';
     int len = p.animal.length;
     for(int i=0; i < len; i++){
@@ -94,7 +94,7 @@ class Arena{
     ctx.fillRect(0, 0, FULLW, FULLH);
     
     // stages
-    ctx.font = "9px Press Start 2P";
+    ctx.font = "9px 'Press Start 2P'";
     for(int i=1; i <= numStages; i++){
       ctx.fillStyle = (stage[i-1].unlocked) ? Color.TAN.name : Color.BROWN.name;
       ctx.fillRect(HALFW-60 + (i-1)*90, HALFH-60, 40, 40);

@@ -82,7 +82,7 @@ class Level{
     
     litLvlName = 'LEVEL $curLvl';
     
-    ctx.font = "18px Press Start 2P";
+    ctx.font = "18px 'Press Start 2P'";
     ctx.fillStyle = '#000';
     ctx.fillText(litLvlName, HALFW - ctx.measureText(litLvlName).width/2 + 2, 34);
     ctx.fillStyle = '#e1e1e1';
