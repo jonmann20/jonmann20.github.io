@@ -77,7 +77,7 @@ function compressCSS {
 
 function pushToGithub {
 	echo -e "----- Pushing to GitHub -----"
-	git commit -am 'from build.sh $date +"%m-%d-%Y"'
+	git commit -am 'from build.sh $(date +"%m/%d/%Y %r)"'
 }
 
 
