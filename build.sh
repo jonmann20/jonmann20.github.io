@@ -83,9 +83,6 @@ function pushToGithub {
 	echo -e "\t$d"
 	git commit -am 'from build.sh $d'
 	git push
-	expect "Username" 
-	send "jonmann20"
-	expect eof
 }
 
 
@@ -100,7 +97,8 @@ then
 	compressCSS
 elif [[ "$1" == "test" ]]
 then
-	pushToGithub
+	echo "in test"
+	#pushToGithub
 else
 	echo -e "\t $RED must append 'dev | prd' $RESET"
 fi
