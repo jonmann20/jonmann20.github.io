@@ -75,6 +75,11 @@ function compressCSS {
 	rm ${path}css/combined.css
 }
 
+function pushToGithub {
+	echo -e "----- Pushing to GitHub -----"
+	git commit -am 'from build.sh $date +"%m-%d-%Y"'
+}
+
 
 #----- Run Program -----
 
@@ -85,6 +90,9 @@ elif [[ "$1" == "prd" ]]
 then
 	compilePHP
 	compressCSS
+elif [[ "$1" == "test" ]]
+then
+	pushToGithub
 else
 	echo -e "\t $RED must append 'dev | prd' $RESET"
 fi
