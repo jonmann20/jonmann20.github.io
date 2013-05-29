@@ -2,6 +2,7 @@ library dungeon;
 
 import 'dart:html';
 import 'dart:math';
+import 'package:js/js.dart' as js;
 
 part 'game.dart';
 part 'input.dart';
@@ -15,6 +16,7 @@ part 'overworld.dart';
 part 'levels/level.dart';
 part 'levels/level1/level1.dart';
 part 'levels/arena.dart';
+
 
 // globals
 var cWrap, canvasListener, canvas, ctx;
@@ -41,6 +43,18 @@ GameObj stairs = new GameObj(0, 0, 40, 40, 'stairsR.png');
 
 void main(){
   window.onLoad.listen((e){
+    
+//    var j = js.context;
+//    
+//    js.scoped((){
+//      j.audioJS();
+//    });
+//    
+//    // works in latest non Dartium
+//    var a = query('audio');
+//    a.play();
+    
+    
     game = new Game();
   });
 }
