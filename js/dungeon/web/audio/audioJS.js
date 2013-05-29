@@ -1,4 +1,4 @@
-function audioJS() {
+/*function audioJS() {
 
 	
 	console.log('hit');
@@ -13,4 +13,4 @@ function audioJS() {
 	
 	console.log('here');
 	
-}
+}*/
