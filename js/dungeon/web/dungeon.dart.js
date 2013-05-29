@@ -7875,8 +7875,8 @@ Isolate.makeConstantList = function(list) {
 };
 $.List_empty = Isolate.makeConstantList([]);
 $.EventStreamProvider_keydown = new $.EventStreamProvider("keydown");
-$.EventStreamProvider_load = new $.EventStreamProvider("load");
 $._CustomEventStreamProvider__determineTransitionEventType = new $._CustomEventStreamProvider($.Element__determineTransitionEventType$closure);
+$.EventStreamProvider_load = new $.EventStreamProvider("load");
 $.Window_methods = $.Window.prototype;
 $.Color_axY = new $.Color("#333");
 $.EventStreamProvider_deviceorientation = new $.EventStreamProvider("deviceorientation");

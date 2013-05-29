@@ -21,7 +21,6 @@ file:///C:/Program Files/darteditor-win32-64/dart/dart-sdk/lib/_internal/compile
 file:///C:/Program Files/darteditor-win32-64/dart/dart-sdk/lib/_internal/compiler/implementation/lib/js_string.dart
 file:///C:/Program Files/darteditor-win32-64/dart/dart-sdk/lib/_internal/compiler/implementation/lib/json_patch.dart
 file:///C:/Program Files/darteditor-win32-64/dart/dart-sdk/lib/_internal/compiler/implementation/lib/math_patch.dart
-file:///C:/Program Files/darteditor-win32-64/dart/dart-sdk/lib/_internal/compiler/implementation/lib/mirrors_patch.dart
 file:///C:/Program Files/darteditor-win32-64/dart/dart-sdk/lib/_internal/compiler/implementation/lib/native_helper.dart
 file:///C:/Program Files/darteditor-win32-64/dart/dart-sdk/lib/_internal/compiler/implementation/lib/regexp_helper.dart
 file:///C:/Program Files/darteditor-win32-64/dart/dart-sdk/lib/_internal/compiler/implementation/lib/string_helper.dart
@@ -93,17 +92,8 @@ file:///C:/Program Files/darteditor-win32-64/dart/dart-sdk/lib/json/json.dart
 file:///C:/Program Files/darteditor-win32-64/dart/dart-sdk/lib/math/math.dart
 file:///C:/Program Files/darteditor-win32-64/dart/dart-sdk/lib/math/random.dart
 file:///C:/Program Files/darteditor-win32-64/dart/dart-sdk/lib/mdv_observe_impl/mdv_observe_impl.dart
-file:///C:/Program Files/darteditor-win32-64/dart/dart-sdk/lib/mirrors/mirrors.dart
 file:///C:/Program Files/darteditor-win32-64/dart/dart-sdk/lib/svg/dart2js/svg_dart2js.dart
 file:///C:/Program Files/darteditor-win32-64/dart/dart-sdk/lib/typed_data/dart2js/typed_data_dart2js.dart
-file:///C:/Program Files/darteditor-win32-64/dart/dart-sdk/lib/uri/encode_decode.dart
-file:///C:/Program Files/darteditor-win32-64/dart/dart-sdk/lib/uri/helpers.dart
-file:///C:/Program Files/darteditor-win32-64/dart/dart-sdk/lib/uri/uri.dart
-file:///C:/Program Files/darteditor-win32-64/dart/dart-sdk/lib/utf/utf.dart
-file:///C:/Program Files/darteditor-win32-64/dart/dart-sdk/lib/utf/utf16.dart
-file:///C:/Program Files/darteditor-win32-64/dart/dart-sdk/lib/utf/utf32.dart
-file:///C:/Program Files/darteditor-win32-64/dart/dart-sdk/lib/utf/utf8.dart
-file:///C:/Program Files/darteditor-win32-64/dart/dart-sdk/lib/utf/utf_stream.dart
 file:///C:/Program Files/darteditor-win32-64/dart/dart-sdk/lib/web_audio/dart2js/web_audio_dart2js.dart
 file:///C:/Program Files/darteditor-win32-64/dart/dart-sdk/lib/web_gl/dart2js/web_gl_dart2js.dart
 file:///C:/Program Files/darteditor-win32-64/dart/dart-sdk/lib/web_sql/dart2js/web_sql_dart2js.dart
@@ -116,7 +106,6 @@ file:///C:/Users/jwiedmann/git/jonmann20.github.com/js/dungeon/web/levels/arena.
 file:///C:/Users/jwiedmann/git/jonmann20.github.com/js/dungeon/web/levels/level.dart
 file:///C:/Users/jwiedmann/git/jonmann20.github.com/js/dungeon/web/levels/level1/level1.dart
 file:///C:/Users/jwiedmann/git/jonmann20.github.com/js/dungeon/web/overworld.dart
-file:///C:/Users/jwiedmann/git/jonmann20.github.com/js/dungeon/web/packages/js/js.dart
 file:///C:/Users/jwiedmann/git/jonmann20.github.com/js/dungeon/web/player.dart
 file:///C:/Users/jwiedmann/git/jonmann20.github.com/js/dungeon/web/player_items.dart
 file:///C:/Users/jwiedmann/git/jonmann20.github.com/js/dungeon/web/start_screen.dart

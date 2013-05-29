@@ -2,7 +2,7 @@ library dungeon;
 
 import 'dart:html';
 import 'dart:math';
-import 'package:js/js.dart' as js;
+//import 'package:js/js.dart' as js;
 
 part 'game.dart';
 part 'input.dart';
