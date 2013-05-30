@@ -64,7 +64,6 @@ class Game{
     //}
     
     invRatio = 1 / ratio; 
-    print(invRatio);
       
     cWrap.style.width = '$w\px';
     cWrap.style.height = '$h\px';

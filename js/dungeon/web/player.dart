@@ -218,6 +218,7 @@ class Player extends GameObj{
         break;
       case Direction.HIT:
         
+        // TODO: don't allow changing dir until hit sequence is over
         if(invincibleTimer % 6 == 0)
           ctx.fillStyle = 'white';
         else
