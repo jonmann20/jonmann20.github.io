@@ -2,7 +2,7 @@ part of dungeon;
 
 class Player extends GameObj{
   num vX, vY, maxVx, maxVy, maxV, health, invincibleTimer, atkDownTime, atkUpTime;
-  int dir;
+  int prevDir, dir;
   bool movLocked, invincible, invisible;
   GameObj heart;
   Item device, sword;
@@ -17,11 +17,11 @@ class Player extends GameObj{
   
   Player(num ix, num iy, num w, num h, [String str=null]) : super(ix, iy, w, h, str){
     vX = vY = atkDownTime = 0;
-    atkDownTime = invincibleTimer = 45;
+    atkDownTime = invincibleTimer = 50;
     maxVx = maxVy = 5.5;
     maxV = 8.5;
     health = 3;
-    dir = Direction.DOWN;
+    prevDir = dir = Direction.DOWN;
     
     invisible = invincible = movLocked = false;
     
@@ -61,7 +61,8 @@ class Player extends GameObj{
     if(invincible){
       if(--invincibleTimer < 0){
         invincible = false;
-        invincibleTimer = 45;
+        invincibleTimer = 50;
+        dir = prevDir;
       }
     }
     
@@ -179,6 +180,9 @@ class Player extends GameObj{
     invincible = true;
     vX = -vX*1.3;
     vY = -vY*1.3;
+    
+    prevDir = dir;
+    dir = Direction.HIT;
   }
   
   /**************** Render ****************/
@@ -211,6 +215,15 @@ class Player extends GameObj{
         break;
       case Direction.PICKED:
         draw(imgPicked);
+        break;
+      case Direction.HIT:
+        
+        if(invincibleTimer % 4 == 0)
+          ctx.fillStyle = 'white';
+        else
+          ctx.fillStyle = 'red';
+        
+        ctx.fillRect(x, y, w, h);
         break;
     }
 

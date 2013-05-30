@@ -2,14 +2,18 @@ part of dungeon;
 
 class Enemy extends GameObj{
   num initHealth, health, invincibleTimer;
-  bool invincible, captured, imgCardReady;
+  bool invincible, captured, imgCardReady, animate;
   String cardSrc, name;
   ImageElement imgCard;
+  int hdir, vdir;
   
   Enemy(this.initHealth, this.cardSrc, this.name, num ix, num iy, num w, num h, [String src=null]) : super(ix, iy, w, h, src){
     health = initHealth;
-    imgCardReady = captured = invincible = false;
+    animate = imgCardReady = captured = invincible = false;
     invincibleTimer = 30;
+    
+    hdir = Direction.RIGHT;
+    vdir = Direction.DOWN;
     
     if(cardSrc != null){
       imgCard = new ImageElement();
@@ -30,6 +34,42 @@ class Enemy extends GameObj{
         invincibleTimer = 30;
       }
     }
+    
+    if(animate){
+      
+      if(x < 0){
+        x = 0;
+        hdir = Direction.RIGHT;
+      }
+      else if(x > FULLW - w){
+        x = FULLW - w;
+        hdir = Direction.LEFT;
+      }
+      else{
+        if(hdir == Direction.RIGHT)
+          ++x;
+        else
+          --x;
+      }
+      
+      
+      if(y < 0){
+        y = 0;
+        vdir = Direction.DOWN;
+      }
+      else if(y > FULLH - h){
+        y = FULLH - h;
+        vdir = Direction.UP;
+      }
+      else{
+        if(vdir == Direction.DOWN)
+          ++y;
+        else
+          --y;
+      }
+      
+    }
+    
     
     if(p.sword.inUse && util.checkCollision(p.sword, this)){
       if(!invincible){

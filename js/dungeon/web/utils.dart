@@ -104,7 +104,8 @@ class Direction{
                DOWN = KeyCode.DOWN,
                LEFT = KeyCode.LEFT,
                RIGHT = KeyCode.RIGHT,
-               PICKED = KeyCode.BACKSPACE;
+               PICKED = KeyCode.BACKSPACE,
+               HIT = KeyCode.P;
   final KeyCode toInt;
   const Direction(this.toInt);
 }

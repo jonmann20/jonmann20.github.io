@@ -101,13 +101,16 @@ class Level_1{
       fish.draw();
       fish.drawHealth();
       
-      if(fish.health > 0)
+      if(fish.health > 0){
         drawInstruction('USE SPACEBAR');
-      else
+        fish.animate = true;
+      }
+      else{
         drawInstruction('USE SHIFT');
+        fish.animate = false;
+      }
     }
     else if(fish.health <= 0){
-      //util.blinkText(10, FULLW-100, 140, 'USE DEVICE (SHIFT)');
       
       if(fish.captured)
         fish.drawCard();

@@ -5936,14 +5936,47 @@ main_closure: {"": "Closure;",
   }
 },
 
-Enemy: {"": "GameObj;initHealth,health,invincibleTimer,invincible,captured,imgCardReady?,cardSrc,name*,imgCard,ix,iy,w,h,x,y,ready,img,src",
+Enemy: {"": "GameObj;initHealth,health,invincibleTimer,invincible,captured,imgCardReady?,animate,cardSrc,name*,imgCard,hdir,vdir,ix,iy,w,h,x,y,ready,img,src",
   update$0: function() {
+    var t1, t2, t3;
     if (this.invincible) {
-      var t1 = this.invincibleTimer - 1;
+      t1 = this.invincibleTimer - 1;
       this.invincibleTimer = t1;
       if (t1 < 0) {
         this.invincible = false;
         this.invincibleTimer = 30;
+      }
+    }
+    if (this.animate) {
+      t1 = this.x;
+      t2 = $.getInterceptor$n(t1);
+      if (t2.$lt(t1, 0)) {
+        this.x = 0;
+        this.hdir = 39;
+      } else {
+        t3 = $.FULLW - this.w;
+        if (t2.$gt(t1, t3)) {
+          this.x = t3;
+          this.hdir = 37;
+        } else if (this.hdir === 39)
+          this.x = $.$add$ns(t1, 1);
+        else
+          this.x = t2.$sub(t1, 1);
+      }
+      t1 = this.y;
+      t2 = $.getInterceptor$n(t1);
+      if (t2.$lt(t1, 0)) {
+        this.y = 0;
+        this.vdir = 40;
+      } else {
+        t3 = $.FULLH - this.h;
+        if (t2.$gt(t1, t3)) {
+          this.y = t3;
+          this.vdir = 38;
+        } else if (this.vdir === 40)
+          this.y = $.$add$ns(t1, 1);
+        else
+          this.y = t2.$sub(t1, 1);
       }
     }
     t1 = $.p.sword;
@@ -5995,7 +6028,10 @@ Enemy: {"": "GameObj;initHealth,health,invincibleTimer,invincible,captured,imgCa
     this.invincible = false;
     this.captured = false;
     this.imgCardReady = false;
+    this.animate = false;
     this.invincibleTimer = 30;
+    this.hdir = 39;
+    this.vdir = 40;
     this.imgCard = $.ImageElement_ImageElement(null, null, null);
     $.set$src$x(this.imgCard, "../js/dungeon/img/" + this.cardSrc);
     $.set$width$x(this.imgCard, 100);
@@ -6594,13 +6630,8 @@ Level_1: {"": "Object;wise,fish,dialog,underground,transitionOver?",
             t2 = $.util;
             t3 = $.p;
             if (t2.checkCollision$2(t3, t1))
-              if (!t3.invincible) {
-                t3.hit$0;
-                t3.health = t3.health - 1;
-                t3.invincible = true;
-                t3.vX = -t3.vX * 1.3;
-                t3.vY = -t3.vY * 1.3;
-              }
+              if (!t3.invincible)
+                t3.hit$0();
           } else {
             t1 = $.key;
             if (t1.lastKeyUp === 16) {
@@ -6619,22 +6650,22 @@ Level_1: {"": "Object;wise,fish,dialog,underground,transitionOver?",
   },
   updateCutscene$0: function() {
     var t1, t2, t3;
-    t1 = $.key;
-    if (t1.lastKeyDown === 13) {
-      t2 = this.dialog;
-      t3 = t2.dialogLine;
-      if (t3 < t2.dialog.length - 1)
-        t2.dialogLine = t3 + 1;
+    if ($.key.lastKeyDown === 13) {
+      t1 = this.dialog;
+      t2 = t1.dialogLine;
+      if (t2 < t1.dialog.length - 1)
+        t1.dialogLine = t2 + 1;
       else
         $.p.movLocked = false;
-      t2 = $.p;
-      if (t2.dir === 8) {
-        t2.vY = 0;
-        t2.vX = 0;
+      if ($.$eq($.p.dir, 8)) {
+        t1 = $.p;
+        t1.vY = 0;
+        t1.vX = 0;
         $.level.isCutscene = false;
-        t2.movLocked = false;
-        t2.dir = 38;
+        t1.movLocked = false;
+        t1.dir = 38;
       }
+      t1 = $.key;
       t1.resetKeys$0;
       t1.lastDirUp = 8;
       t1.lastDirDown = 8;
@@ -6679,10 +6710,12 @@ Level_1: {"": "Object;wise,fish,dialog,underground,transitionOver?",
         t3.font = "8px 'Press Start 2P'";
         t3.fillStyle = "#ccc";
         t3.fillText("USE SPACEBAR", 10, t2 - 10);
+        this.fish.animate = true;
       } else {
         t3.font = "8px 'Press Start 2P'";
         t3.fillStyle = "#ccc";
         t3.fillText("USE SHIFT", 10, t2 - 10);
+        this.fish.animate = false;
       }
     } else if (t1.health <= 0)
       if (t2)
@@ -7245,7 +7278,7 @@ Overworld_update_closure: {"": "Closure;this_0",
   }
 },
 
-Player: {"": "GameObj;vX,vY,maxVx,maxVy,maxV,health,invincibleTimer,atkDownTime,atkUpTime,dir*,movLocked,invincible,invisible,heart,device,sword,animal,imgD,imgL,imgR,imgU,imgPicked,ix,iy,w,h,x,y,ready,img,src",
+Player: {"": "GameObj;vX,vY,maxVx,maxVy,maxV,health,invincibleTimer,atkDownTime,atkUpTime,prevDir,dir*,movLocked,invincible,invisible,heart,device,sword,animal,imgD,imgL,imgR,imgU,imgPicked,ix,iy,w,h,x,y,ready,img,src",
   update$0: function() {
     var t1, t2;
     if (this.health <= 0) {
@@ -7262,7 +7295,8 @@ Player: {"": "GameObj;vX,vY,maxVx,maxVy,maxV,health,invincibleTimer,atkDownTime,
       this.invincibleTimer = t1;
       if (t1 < 0) {
         this.invincible = false;
-        this.invincibleTimer = 45;
+        this.invincibleTimer = 50;
+        this.dir = this.prevDir;
       }
     }
     if (!this.movLocked) {
@@ -7428,7 +7462,16 @@ Player: {"": "GameObj;vX,vY,maxVx,maxVy,maxV,health,invincibleTimer,atkDownTime,
       }
     }
   },
+  hit$0: function() {
+    this.health = this.health - 1;
+    this.invincible = true;
+    this.vX = -this.vX * 1.3;
+    this.vY = -this.vY * 1.3;
+    this.prevDir = this.dir;
+    this.dir = 80;
+  },
   drawPlayer$0: function() {
+    var t1, t2;
     switch (this.dir) {
       case 38:
         this.draw$1(this.imgU);
@@ -7444,6 +7487,15 @@ Player: {"": "GameObj;vX,vY,maxVx,maxVy,maxV,health,invincibleTimer,atkDownTime,
         break;
       case 8:
         this.draw$1(this.imgPicked);
+        break;
+      case 80:
+        t1 = $.JSNumber_methods.$mod(this.invincibleTimer, 4);
+        t2 = $.ctx;
+        if (t1 === 0)
+          t2.fillStyle = "white";
+        else
+          t2.fillStyle = "red";
+        $.ctx.fillRect(this.x, this.y, this.w, this.h);
         break;
     }
   },
@@ -7494,13 +7546,14 @@ Player: {"": "GameObj;vX,vY,maxVx,maxVy,maxV,health,invincibleTimer,atkDownTime,
     this.atkDownTime = 0;
     this.vY = 0;
     this.vX = 0;
-    this.invincibleTimer = 45;
-    this.atkDownTime = 45;
+    this.invincibleTimer = 50;
+    this.atkDownTime = 50;
     this.maxVy = 5.5;
     this.maxVx = 5.5;
     this.maxV = 8.5;
     this.health = 3;
     this.dir = 40;
+    this.prevDir = 40;
     this.movLocked = false;
     this.invincible = false;
     this.invisible = false;
@@ -7716,7 +7769,7 @@ main: function() {
 },
 
 Enemy$: function(initHealth, cardSrc, $name, ix, iy, w, h, src) {
-  var t1 = new $.Enemy(initHealth, null, null, null, null, null, cardSrc, $name, null, ix, iy, w, h, null, null, null, null, null);
+  var t1 = new $.Enemy(initHealth, null, null, null, null, null, null, cardSrc, $name, null, null, null, ix, iy, w, h, null, null, null, null, null);
   t1.GameObj$5(ix, iy, w, h, src);
   t1.Enemy$8(initHealth, cardSrc, $name, ix, iy, w, h, src);
   return t1;
@@ -7773,7 +7826,7 @@ Overworld$: function() {
 },
 
 Player$: function(ix, iy, w, h, str) {
-  var t1 = new $.Player(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, $.List_List($), new $.SpritePos(2, 2), new $.SpritePos(32, 2), new $.SpritePos(2, 42), new $.SpritePos(32, 42), new $.SpritePos(2, 82), ix, iy, w, h, null, null, null, null, null);
+  var t1 = new $.Player(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, $.List_List($), new $.SpritePos(2, 2), new $.SpritePos(32, 2), new $.SpritePos(2, 42), new $.SpritePos(32, 42), new $.SpritePos(2, 82), ix, iy, w, h, null, null, null, null, null);
   t1.GameObj$5(ix, iy, w, h, str);
   t1.Player$5(ix, iy, w, h, str);
   return t1;
