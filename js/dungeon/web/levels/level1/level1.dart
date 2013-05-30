@@ -23,7 +23,7 @@ class Level_1{
     
     }
     else if(!underground){
-      if(util.checkCollision(p, stairs, 15)){
+      if(util.checkCollision(p, stairs, 12)){
         underground = true;
         canvasTransition();
       }
@@ -112,8 +112,11 @@ class Level_1{
     }
     else if(fish.health <= 0){
       
-      if(fish.captured)
+      if(fish.captured){
         fish.drawCard();
+        
+        p.health = p.maxHealth;
+      }
     }
   }
   

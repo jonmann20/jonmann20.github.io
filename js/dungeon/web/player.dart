@@ -1,7 +1,7 @@
 part of dungeon;
 
 class Player extends GameObj{
-  num vX, vY, maxVx, maxVy, maxV, health, invincibleTimer, atkDownTime, atkUpTime;
+  num vX, vY, maxVx, maxVy, maxV, health, maxHealth, invincibleTimer, atkDownTime, atkUpTime;
   int prevDir, dir;
   bool movLocked, invincible, invisible;
   GameObj heart;
@@ -20,7 +20,7 @@ class Player extends GameObj{
     atkDownTime = invincibleTimer = 50;
     maxVx = maxVy = 5.5;
     maxV = 8.5;
-    health = 3;
+    health = maxHealth = 4;
     prevDir = dir = Direction.DOWN;
     
     invisible = invincible = movLocked = false;
@@ -218,7 +218,7 @@ class Player extends GameObj{
         break;
       case Direction.HIT:
         
-        if(invincibleTimer % 4 == 0)
+        if(invincibleTimer % 6 == 0)
           ctx.fillStyle = 'white';
         else
           ctx.fillStyle = 'red';

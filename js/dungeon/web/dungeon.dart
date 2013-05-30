@@ -29,10 +29,10 @@ Overworld overworld;
 //AudioContext bgMusic;
 bool lvlSelected, 
      DEBUG_LVL = false,
-     DEBUG_OVERWORLD = false;    // skip start screen
+     DEBUG_OVERWORLD = false;   // skip start screen
 num curLvl, optimalRatio, dt;
-num FULLW = 640,                // 16:9
-    FULLH = 360,
+num FULLW = 854,                // 480p; 16:9 ==> 53.375*16 x 53.375*9
+    FULLH = 480,
     HALFW = FULLW/2,
     HALFH = FULLH/2,
     NUM_LVLS = 3,               // includes 0 ==> startpad/overworld

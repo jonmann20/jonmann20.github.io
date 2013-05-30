@@ -35,26 +35,34 @@ class Game{
     new StartScreen();
   }
   
+  /*
+
+  EFFECTS: allow scaling up to 540p
+
+  */
   void resizeGame(){
-    num gW = window.innerWidth;
-    num gH = window.innerHeight;
-    num ogH = gH;
+    num maxScaleFactor = 60; // 540p
+    num scaledW = maxScaleFactor*16,
+        scaledH = maxScaleFactor*9;
+    
+    num gW = (window.innerWidth > scaledW) ? scaledW : window.innerWidth;
+    num gH = (window.innerHeight > scaledH) ? scaledH : window.innerHeight;
     num scaleX = gW / FULLW;
     num scaleY = gH / FULLH;
     num ratio = gW / gH;
     optimalRatio = (scaleX < scaleY) ? scaleX : scaleY;
     
-    if(ratio >= 1.77 && ratio <= 1.79){    //1080p
-      optimalRatio = ratio;
-    }
-    else {
+//    if(ratio >= 1.77 && ratio <= 1.79){    //1080p
+//      optimalRatio = ratio;
+//    }
+//    else {
       gW = FULLW * optimalRatio;
       gH = FULLH * optimalRatio;
-    }
+    //}
     
     cWrap.style.width = '$gW\px';
     cWrap.style.height = '$gH\px';
-    cWrap.style.marginTop = '${(ogH - gH)/2}\px';
+    cWrap.style.marginTop = '${(window.innerHeight - gH)/2}\px';
   }
   
   void gameLoop(num time){
