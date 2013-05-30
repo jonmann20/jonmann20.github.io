@@ -6213,7 +6213,7 @@ Game: {"": "Object;fpsHolder,oldTime,fps",
     if ($.DEBUG_LVL)
       $.overworld.initLevel$0();
     t1 = window;
-    t2 = new $.StartScreen().get$preGame();
+    t2 = new $.StartScreen(false, "PRESS ESC TO RETURN", 1, 2).get$startScreenLoop();
     $.Window_methods._ensureRequestAnimationFrame$0(t1);
     $.Window_methods._requestAnimationFrame$1(t1, t2);
   }
@@ -7577,37 +7577,51 @@ Item: {"": "GameObj;usable,inUse,imgD,imgL,imgR,imgU,ix,iy,w,h,x,y,ready,img,src
   }
 },
 
-StartScreen: {"": "Object;",
-  preGame$1: function(time) {
+StartScreen: {"": "Object;isOptions,ret,OPEN_GAME,OPEN_START",
+  drawTitle$0: function() {
+    var t1, tmpW, titleW;
+    t1 = $.ctx;
+    t1.font = "43px 'Press Start 2P'";
+    tmpW = t1.measureText("DUNGEON").width;
+    titleW = $.get$HALFW() - $.$div$n(tmpW, 2);
+    t1 = $.ctx;
+    t1.fillStyle = "rgb(21, 21, 21)";
+    t1.fillText("DUNGEON", titleW + 3, 84);
+    t1 = $.ctx;
+    t1.fillStyle = "rgb(192, 0, 0)";
+    t1.fillText("DUNGEON", titleW, 80);
+  },
+  startScreenLoop$1: function(time) {
     var t1, t2;
     t1 = $.game;
     t1.displayFps$2(time, t1.oldTime);
-    if (this.startGame$0()) {
+    if (this.startScreen$0()) {
       t1 = window;
-      t2 = $.game.get$gameLoop();
+      t2 = this.get$homeScreenLoop();
       $.Window_methods._ensureRequestAnimationFrame$0(t1);
       $.Window_methods._requestAnimationFrame$1(t1, t2);
     } else {
       t1 = window;
-      t2 = this.get$preGame();
+      t2 = this.get$startScreenLoop();
       $.Window_methods._ensureRequestAnimationFrame$0(t1);
       $.Window_methods._requestAnimationFrame$1(t1, t2);
     }
   },
-  get$preGame: function() {
-    return new $.BoundClosure$1(this, "preGame$1");
+  get$startScreenLoop: function() {
+    return new $.BoundClosure$1(this, "startScreenLoop$1");
   },
-  startGame$0: function() {
+  startScreen$0: function() {
     var t1 = $.key;
     t1.isPressed$1;
-    if (t1._liblib1$_keys.containsKey$1(13) || $.DEBUG_OVERWORLD || $.DEBUG_LVL)
+    if (t1._liblib1$_keys.containsKey$1(13) || $.DEBUG_OVERWORLD || $.DEBUG_LVL) {
+      $.key.lastKeyDown = 8;
       return true;
-    this.render$0();
+    }
+    this.drawStartScreen$0();
     return false;
   },
-  render$0: function() {
-    var t1, tmpW, titleW;
-    t1 = $.ctx;
+  drawStartScreen$0: function() {
+    var t1 = $.ctx;
     t1.fillStyle = "#000";
     t1.fillRect(0, 0, $.FULLW, $.FULLH);
     $.ctx.fillRect($.get$HALFW() - 108, $.get$HALFH() - 25, 228, 40);
@@ -7621,21 +7635,99 @@ StartScreen: {"": "Object;",
     t1.font = "13px 'Press Start 2P'";
     t1.fillStyle = "rgb(233, 233, 233)";
     t1.fillText("\u00a9 2013 JON WIEDMANN", $.get$HALFW() - $.$div$n($.ctx.measureText("\u00a9 2013 JON WIEDMANN").width, 2), $.FULLH - 24);
+    this.drawTitle$0();
+  },
+  homeScreenLoop$1: function(time) {
+    var t1, t2;
+    t1 = $.game;
+    t1.displayFps$2(time, t1.oldTime);
+    if (this.homeScreen$0() === this.OPEN_GAME) {
+      t1 = window;
+      t2 = $.game.get$gameLoop();
+      $.Window_methods._ensureRequestAnimationFrame$0(t1);
+      $.Window_methods._requestAnimationFrame$1(t1, t2);
+    } else if (this.homeScreen$0() === this.OPEN_START) {
+      t1 = window;
+      t2 = this.get$startScreenLoop();
+      $.Window_methods._ensureRequestAnimationFrame$0(t1);
+      $.Window_methods._requestAnimationFrame$1(t1, t2);
+    } else {
+      t1 = window;
+      t2 = this.get$homeScreenLoop();
+      $.Window_methods._ensureRequestAnimationFrame$0(t1);
+      $.Window_methods._requestAnimationFrame$1(t1, t2);
+    }
+  },
+  get$homeScreenLoop: function() {
+    return new $.BoundClosure$1(this, "homeScreenLoop$1");
+  },
+  homeScreen$0: function() {
+    var t1, t2;
+    if (this.isOptions) {
+      t1 = $.key;
+      if (t1.lastKeyDown === 27) {
+        this.isOptions = false;
+        t1.lastKeyDown = 8;
+      }
+      this.drawOptions$0();
+    } else {
+      t1 = $.key;
+      t2 = t1.lastKeyDown;
+      if (t2 === 13 || $.DEBUG_OVERWORLD || $.DEBUG_LVL) {
+        t1.lastDirDown = 8;
+        return this.OPEN_GAME;
+      } else if (t2 === 79)
+        this.isOptions = true;
+      else if (t2 === 27)
+        return this.OPEN_START;
+      else
+        this.drawHomeScreen$0();
+    }
+    return 0;
+  },
+  drawHomeScreen$0: function() {
+    var t1 = $.ctx;
+    t1.fillStyle = $.Color_Yf3.name;
+    t1.fillRect(0, 0, $.FULLW, $.FULLH);
+    this.drawTitle$0();
     t1 = $.ctx;
-    t1.font = "43px 'Press Start 2P'";
-    tmpW = t1.measureText("DUNGEON").width;
-    titleW = $.get$HALFW() - $.$div$n(tmpW, 2);
+    t1.font = "15px 'Press Start 2P'";
+    t1.fillStyle = "rgb(213, 213, 213)";
+    t1.fillText("NEW GAME            PRESS ENTER", $.get$HALFW() - $.$div$n($.ctx.measureText("NEW GAME            PRESS ENTER").width, 2), 202);
     t1 = $.ctx;
-    t1.fillStyle = "rgb(21, 21, 21)";
-    t1.fillText("DUNGEON", titleW + 3, 84);
+    t1.font = "15px 'Press Start 2P'";
+    t1.fillStyle = "rgb(163, 163, 163)";
+    t1.fillText("LOAD GAME                      ", $.get$HALFW() - $.$div$n($.ctx.measureText("LOAD GAME                      ").width, 2), 232);
     t1 = $.ctx;
-    t1.fillStyle = "rgb(192, 0, 0)";
-    t1.fillText("DUNGEON", titleW, 80);
+    t1.font = "13px 'Press Start 2P'";
+    t1.fillStyle = "rgb(213, 213, 213)";
+    t1.fillText("PRESS 'o' FOR OPTIONS", $.get$HALFW() - $.$div$n($.ctx.measureText("PRESS 'o' FOR OPTIONS").width, 2), 407);
+    t1 = this.ret;
+    $.ctx.fillText(t1, $.get$HALFW() - $.$div$n($.ctx.measureText(t1).width, 2), 442);
+  },
+  drawOptions$0: function() {
+    var t1, t2;
+    t1 = $.ctx;
+    t1.fillStyle = $.Color_Yf3.name;
+    t1.fillRect(0, 0, $.FULLW, $.FULLH);
+    this.drawTitle$0();
+    t1 = $.ctx;
+    t1.font = "19px 'Press Start 2P'";
+    t1.fillStyle = "rgb(213, 213, 213)";
+    t1.fillText("OPTIONS", $.get$HALFW() - $.$div$n($.ctx.measureText("OPTIONS").width, 2), 122);
+    t1 = $.ctx;
+    t1.font = "14px 'Press Start 2P'";
+    t1.fillText("AUDIO ....................... OFF", 40, 222);
+    $.ctx.fillText("RESOLUTION .................. 540p", 40, 262);
+    t1 = $.ctx;
+    t1.font = "13px 'Press Start 2P'";
+    t2 = this.ret;
+    t1.fillText(t2, $.get$HALFW() - $.$div$n($.ctx.measureText(t2).width, 2), 442);
   },
   StartScreen$0: function() {
     var t1, t2;
     t1 = window;
-    t2 = this.get$preGame();
+    t2 = this.get$startScreenLoop();
     $.Window_methods._ensureRequestAnimationFrame$0(t1);
     $.Window_methods._requestAnimationFrame$1(t1, t2);
   }
