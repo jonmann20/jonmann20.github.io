@@ -6052,38 +6052,31 @@ Enemy_closure: {"": "Closure;this_0",
 
 Game: {"": "Object;fpsHolder,oldTime,fps",
   resizeGame$0: function() {
-    var gW, gH, t1, scaleX, t2, scaleY, ratio, gH0, t3;
-    gW = window.innerWidth;
-    gH = window.innerHeight;
+    var gW, gH, t1, scaleX, scaleY, t2, t3;
+    gW = $.$gt$n(window.innerWidth, 960) ? 960 : window.innerWidth;
+    gH = $.$gt$n(window.innerHeight, 540) ? 540 : window.innerHeight;
     t1 = $.getInterceptor$n(gW);
     scaleX = t1.$div(gW, $.FULLW);
-    t2 = $.getInterceptor$n(gH);
-    scaleY = t2.$div(gH, $.FULLH);
-    ratio = t1.$div(gW, gH);
+    scaleY = $.$div$n(gH, $.FULLH);
+    t1.$div(gW, gH);
     $.optimalRatio = scaleX < scaleY ? scaleX : scaleY;
-    if (ratio >= 1.77 && ratio <= 1.79) {
-      $.optimalRatio = ratio;
-      gH0 = gH;
-    } else {
-      t1 = $.FULLW;
-      t3 = $.optimalRatio;
-      if (typeof t3 !== "number")
-        throw $.iae(t3);
-      gW = t1 * t3;
-      gH0 = $.FULLH * t3;
-    }
-    t1 = $.cWrap.style;
-    t3 = $.S(gW) + "px";
-    t1.set$width;
-    $.setProperty$3$x(t1, "width", t3, "");
+    t1 = $.FULLW;
+    t2 = $.optimalRatio;
+    if (typeof t2 !== "number")
+      throw $.iae(t2);
+    gH = $.FULLH * t2;
     t3 = $.cWrap.style;
-    t1 = $.S(gH0) + "px";
-    t3.set$height;
-    $.setProperty$3$x(t3, "height", t1, "");
-    t1 = $.cWrap.style;
-    t2 = $.S(t2.$sub(gH, gH0) / 2) + "px";
-    t1.set$marginTop;
-    $.setProperty$3$x(t1, "margin-top", t2, "");
+    t2 = $.S(t1 * t2) + "px";
+    t3.set$width;
+    $.setProperty$3$x(t3, "width", t2, "");
+    t2 = $.cWrap.style;
+    t3 = $.S(gH) + "px";
+    t2.set$height;
+    $.setProperty$3$x(t2, "height", t3, "");
+    t3 = $.cWrap.style;
+    t2 = $.S($.$sub$n(window.innerHeight, gH) / 2) + "px";
+    t3.set$marginTop;
+    $.setProperty$3$x(t3, "margin-top", t2, "");
   },
   gameLoop$1: function(time) {
     var t1, t2;
@@ -6621,7 +6614,7 @@ Level_1: {"": "Object;wise,fish,dialog,underground,transitionOver?",
       else {
         t2 = this.underground;
         if (!t2) {
-          if ($.util.checkCollision$3($.p, $.get$stairs(), 15)) {
+          if ($.util.checkCollision$3($.p, $.get$stairs(), 12)) {
             this.underground = true;
             this.canvasTransition$0();
           }
@@ -6718,8 +6711,11 @@ Level_1: {"": "Object;wise,fish,dialog,underground,transitionOver?",
         this.fish.animate = false;
       }
     } else if (t1.health <= 0)
-      if (t2)
+      if (t2) {
         t1.drawCard$0();
+        t1 = $.p;
+        t1.health = t1.maxHealth;
+      }
   },
   canvasTransition$0: function() {
     var t1, t2;
@@ -7278,7 +7274,7 @@ Overworld_update_closure: {"": "Closure;this_0",
   }
 },
 
-Player: {"": "GameObj;vX,vY,maxVx,maxVy,maxV,health,invincibleTimer,atkDownTime,atkUpTime,prevDir,dir*,movLocked,invincible,invisible,heart,device,sword,animal,imgD,imgL,imgR,imgU,imgPicked,ix,iy,w,h,x,y,ready,img,src",
+Player: {"": "GameObj;vX,vY,maxVx,maxVy,maxV,health,maxHealth,invincibleTimer,atkDownTime,atkUpTime,prevDir,dir*,movLocked,invincible,invisible,heart,device,sword,animal,imgD,imgL,imgR,imgU,imgPicked,ix,iy,w,h,x,y,ready,img,src",
   update$0: function() {
     var t1, t2;
     if (this.health <= 0) {
@@ -7489,7 +7485,7 @@ Player: {"": "GameObj;vX,vY,maxVx,maxVy,maxV,health,invincibleTimer,atkDownTime,
         this.draw$1(this.imgPicked);
         break;
       case 80:
-        t1 = $.JSNumber_methods.$mod(this.invincibleTimer, 4);
+        t1 = $.JSNumber_methods.$mod(this.invincibleTimer, 6);
         t2 = $.ctx;
         if (t1 === 0)
           t2.fillStyle = "white";
@@ -7551,7 +7547,8 @@ Player: {"": "GameObj;vX,vY,maxVx,maxVy,maxV,health,invincibleTimer,atkDownTime,
     this.maxVy = 5.5;
     this.maxVx = 5.5;
     this.maxV = 8.5;
-    this.health = 3;
+    this.maxHealth = 4;
+    this.health = 4;
     this.dir = 40;
     this.prevDir = 40;
     this.movLocked = false;
@@ -7826,7 +7823,7 @@ Overworld$: function() {
 },
 
 Player$: function(ix, iy, w, h, str) {
-  var t1 = new $.Player(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, $.List_List($), new $.SpritePos(2, 2), new $.SpritePos(32, 2), new $.SpritePos(2, 42), new $.SpritePos(32, 42), new $.SpritePos(2, 82), ix, iy, w, h, null, null, null, null, null);
+  var t1 = new $.Player(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, $.List_List($), new $.SpritePos(2, 2), new $.SpritePos(32, 2), new $.SpritePos(2, 42), new $.SpritePos(32, 42), new $.SpritePos(2, 82), ix, iy, w, h, null, null, null, null, null);
   t1.GameObj$5(ix, iy, w, h, str);
   t1.Player$5(ix, iy, w, h, str);
   return t1;
@@ -7969,8 +7966,8 @@ $.DEBUG_OVERWORLD = false;
 $.curLvl = null;
 $.optimalRatio = null;
 $.dt = null;
-$.FULLW = 640;
-$.FULLH = 360;
+$.FULLW = 854;
+$.FULLH = 480;
 $.NUM_LVLS = 3;
 $.DEBUG_LVL_NUM = 1;
 $.Device__isOpera = null;
