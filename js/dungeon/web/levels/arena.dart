@@ -58,7 +58,7 @@ class Arena{
     
     // platform
     ctx.fillStyle = Color.BROWN.name;
-    ctx.fillRect(200, 70, 240, 240);
+    ctx.fillRect(HALFW - 100, 70, HALFW, HALFH);
     
     if(animalSelected != -1){
       p.animal[animalSelected].drawD(HALFW - p.animal[animalSelected].w/2, FULLH - 120);

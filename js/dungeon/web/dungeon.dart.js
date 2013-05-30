@@ -459,7 +459,14 @@ $$.TrackEvent = {"": "Event;"};
 
 $$.TransitionEvent = {"": "Event;"};
 
-$$.UIEvent = {"": "Event;"};
+$$.UIEvent = {"": "Event;",
+  get$layerX: function(receiver) {
+    return new $.Point(receiver.layerX, receiver.layerY).x;
+  },
+  get$layerY: function(receiver) {
+    return new $.Point(receiver.layerX, receiver.layerY).y;
+  }
+};
 
 $$.UListElement = {"": "Element;"};
 
@@ -1173,11 +1180,11 @@ JSNumber: {"": "num/Interceptor;",
     return receiver - other;
   },
   $div: function(receiver, other) {
-    if (typeof other !== "number")
-      throw $.wrapException(new $.ArgumentError(other));
     return receiver / other;
   },
   $mul: function(receiver, other) {
+    if (typeof other !== "number")
+      throw $.wrapException(new $.ArgumentError(other));
     return receiver * other;
   },
   $mod: function(receiver, other) {
@@ -3951,15 +3958,13 @@ Stream_isEmpty_closure0: {"": "Closure;future_2",
 
 Stream_elementAt_closure: {"": "Closure;box_0,future_1",
   call$1: function(value) {
-    var t1, t2;
-    t1 = this.box_0;
-    t2 = t1.index_0;
-    if ($.$eq(t2, 0)) {
+    var t1 = this.box_0;
+    if ($.$eq(t1.index_0, 0)) {
       t1.subscription_1.cancel$0();
       this.future_1._setValue$1(value);
       return;
     }
-    t1.index_0 = $.$sub$n(t2, 1);
+    t1.index_0 = $.$sub$n(t1.index_0, 1);
   }
 },
 
@@ -4172,14 +4177,13 @@ _FutureImpl__FutureImpl$wait: function(futures) {
     t1.remaining_2 = $.$add$ns(pos, 1);
     future.catchError$1(t2).then$1(new $._FutureImpl__FutureImpl$wait_closure(t1, pos));
   }
-  t2 = t1.remaining_2;
-  if ($.$eq(t2, 0)) {
+  if ($.$eq(t1.remaining_2, 0)) {
     t1 = new $._FutureImpl(0, null);
     t1._state = 1;
     t1._resultOrListeners = $.List_empty;
     return t1;
   }
-  t1.values_1 = $.List_List(t2);
+  t1.values_1 = $.List_List(t1.remaining_2);
   t1.completer_0 = $._AsyncCompleter$();
   return t1.completer_0.future;
 },
@@ -5002,15 +5006,15 @@ ListMixin: {"": "Object;",
         this._rangeCheck$2(receiver, start, end);
         $length = $.$sub$n(end, start);
       case 2:
-        var result, t1, t2, i, t3;
+        var result, t1, i, t2;
         state0 = 0;
         result = $.List_List($);
         $.JSArray_methods.set$length(result, $length);
-        for (t1 = $.getInterceptor$ns(start), t2 = result.length, i = 0; $.JSNumber_methods.$lt(i, $length); ++i) {
-          t3 = this.$index(receiver, t1.$add(start, i));
-          if (i >= t2)
+        for (t1 = $.getInterceptor$ns(start), i = 0; $.JSNumber_methods.$lt(i, $length); ++i) {
+          t2 = this.$index(receiver, t1.$add(start, i));
+          if (i >= result.length)
             throw $.ioore(i);
-          result[i] = t3;
+          result[i] = t2;
         }
         return result;
     }
@@ -5093,14 +5097,13 @@ ListQueue: {"": "IterableBase;_table,_head,_tail,_modificationCount",
     return t1[t2];
   },
   _add$1: function(element) {
-    var t1, t2, t3;
+    var t1, t2;
     t1 = this._table;
     t2 = this._tail;
-    t3 = t1.length;
-    if (t2 >>> 0 !== t2 || t2 >= t3)
+    if (t2 >>> 0 !== t2 || t2 >= t1.length)
       throw $.ioore(t2);
     t1[t2] = element;
-    this._tail = $.$and$n(t2 + 1, t3 - 1);
+    this._tail = $.$and$n(t2 + 1, this._table.length - 1);
     if (this._head === this._tail)
       this._grow$0();
     this._modificationCount = this._modificationCount + 1;
@@ -5232,6 +5235,11 @@ Duration: {"": "Object;_duration<",
   },
   $sub: function(_, other) {
     return $.Duration$(0, 0, this._duration - other.get$_duration(), 0, 0, 0);
+  },
+  $mul: function(_, factor) {
+    if (typeof factor !== "number")
+      throw $.iae(factor);
+    return $.Duration$(0, 0, this._duration * factor, 0, 0, 0);
   },
   $lt: function(_, other) {
     return this._duration < other.get$_duration();
@@ -5767,6 +5775,104 @@ ImmutableListMixin: {"": "Object;",
   $asIterable: null
 },
 
+Point: {"": "Object;x>,y>",
+  toString$0: function(_) {
+    return "(" + $.S(this.x) + ", " + $.S(this.y) + ")";
+  },
+  $eq: function(_, other) {
+    if (other == null)
+      return false;
+    if (typeof other !== "object" || other === null || !$.getInterceptor(other).$isPoint)
+      return false;
+    else
+      other;
+    return $.$eq(this.x, other.x) && $.$eq(this.y, other.y);
+  },
+  $add: function(_, other) {
+    var t1, t2, t3;
+    t1 = this.x;
+    if (typeof t1 !== "number")
+      return this.$$add$bailout(1, other, t1);
+    t2 = $.getInterceptor$x(other);
+    t3 = t2.get$x(other);
+    if (typeof t3 !== "number")
+      return this.$$add$bailout(2, other, t1, t2, t3);
+    t3 = t1 + t3;
+    t1 = this.y;
+    if (typeof t1 !== "number")
+      return this.$$add$bailout(3, other, t1, t2, t3);
+    t2 = t2.get$y(other);
+    if (typeof t2 !== "number")
+      return this.$$add$bailout(4, 0, t1, t2, t3);
+    return new $.Point(t3, t1 + t2);
+  },
+  $$add$bailout: function(state0, other, t1, t2, t3) {
+    switch (state0) {
+      case 0:
+        t1 = this.x;
+      case 1:
+        state0 = 0;
+        t2 = $.getInterceptor$x(other);
+        t3 = t2.get$x(other);
+      case 2:
+        state0 = 0;
+        t3 = $.$add$ns(t1, t3);
+        t1 = this.y;
+      case 3:
+        state0 = 0;
+        t2 = t2.get$y(other);
+      case 4:
+        state0 = 0;
+        return new $.Point(t3, $.$add$ns(t1, t2));
+    }
+  },
+  $sub: function(_, other) {
+    var t1, t2, t3;
+    t1 = this.x;
+    if (typeof t1 !== "number")
+      return this.$$sub$bailout(1, other, t1);
+    t2 = $.getInterceptor$x(other);
+    t3 = t2.get$x(other);
+    if (typeof t3 !== "number")
+      return this.$$sub$bailout(2, other, t1, t2, t3);
+    t3 = t1 - t3;
+    t1 = this.y;
+    if (typeof t1 !== "number")
+      return this.$$sub$bailout(3, other, t1, t2, t3);
+    t2 = t2.get$y(other);
+    if (typeof t2 !== "number")
+      return this.$$sub$bailout(4, 0, t1, t2, t3);
+    return new $.Point(t3, t1 - t2);
+  },
+  $$sub$bailout: function(state0, other, t1, t2, t3) {
+    switch (state0) {
+      case 0:
+        t1 = this.x;
+      case 1:
+        state0 = 0;
+        t2 = $.getInterceptor$x(other);
+        t3 = t2.get$x(other);
+      case 2:
+        state0 = 0;
+        t3 = $.$sub$n(t1, t3);
+        t1 = this.y;
+      case 3:
+        state0 = 0;
+        t2 = t2.get$y(other);
+      case 4:
+        state0 = 0;
+        return new $.Point(t3, $.$sub$n(t1, t2));
+    }
+  },
+  $mul: function(_, factor) {
+    return new $.Point($.$mul$n(this.x, factor), $.$mul$n(this.y, factor));
+  },
+  toInt$0: function(_) {
+    return new $.Point($.toInt$0$n(this.x), $.toInt$0$n(this.y));
+  },
+  $isPoint: true
+},
+
 _LocationWrapper: {"": "Object;_ptr",
   get$href: function(_) {
     return this._ptr.href;
@@ -6009,18 +6115,17 @@ Enemy: {"": "GameObj;initHealth,health,invincibleTimer,invincible,captured,imgCa
     }
   },
   drawHealth$0: function() {
-    var t1, t2, t3, i;
+    var t1, t2, i;
     t1 = $.ctx;
     t1.fillStyle = "#000";
-    t2 = this.w / 2;
-    t3 = this.initHealth * 5;
-    t1.fillRect($.$sub$n($.$add$ns(this.x, t2), 1), $.$sub$n(this.y, 15), t3 + 2, 8.2);
+    t2 = this.initHealth * 5;
+    t1.fillRect($.$sub$n($.$add$ns(this.x, this.w / 2), 1), $.$sub$n(this.y, 15), t2 + 2, 8.2);
     t1 = $.ctx;
     t1.fillStyle = "#777";
-    t1.fillRect($.$add$ns(this.x, t2), $.$sub$n(this.y, 14), t3, 6);
+    t1.fillRect($.$add$ns(this.x, this.w / 2), $.$sub$n(this.y, 14), t2, 6);
     $.ctx.fillStyle = "red";
     for (i = 0; i < this.health; ++i)
-      $.ctx.fillRect($.$add$ns($.$add$ns(this.x, t2), 5 * i), $.$sub$n(this.y, 14), 5, 6);
+      $.ctx.fillRect($.$add$ns($.$add$ns(this.x, this.w / 2), 5 * i), $.$sub$n(this.y, 14), 5, 6);
   },
   Enemy$8: function(initHealth, cardSrc, $name, ix, iy, w, h, src) {
     var t1, t2;
@@ -6050,33 +6155,35 @@ Enemy_closure: {"": "Closure;this_0",
   }
 },
 
-Game: {"": "Object;fpsHolder,oldTime,fps",
+Game: {"": "Object;fpsHolder,oldTime,fps,w<,h,invRatio",
   resizeGame$0: function() {
-    var gW, gH, t1, scaleX, scaleY, t2, t3;
-    gW = $.$gt$n(window.innerWidth, 960) ? 960 : window.innerWidth;
-    gH = $.$gt$n(window.innerHeight, 540) ? 540 : window.innerHeight;
-    t1 = $.getInterceptor$n(gW);
-    scaleX = t1.$div(gW, $.FULLW);
-    scaleY = $.$div$n(gH, $.FULLH);
-    t1.$div(gW, gH);
-    $.optimalRatio = scaleX < scaleY ? scaleX : scaleY;
-    t1 = $.FULLW;
-    t2 = $.optimalRatio;
-    if (typeof t2 !== "number")
-      throw $.iae(t2);
-    gH = $.FULLH * t2;
-    t3 = $.cWrap.style;
-    t2 = $.S(t1 * t2) + "px";
-    t3.set$width;
-    $.setProperty$3$x(t3, "width", t2, "");
+    var t1, t2, scaleX, t3, scaleY, ratio;
+    this.w = $.$gt$n(window.innerWidth, 1120) ? 1120 : window.innerWidth;
+    this.h = $.$gt$n(window.innerHeight, 630) ? 630 : window.innerHeight;
+    t1 = this.w;
+    t2 = $.FULLW;
+    scaleX = $.$div$n(t1, t2);
+    t1 = this.h;
+    t3 = $.FULLH;
+    scaleY = $.$div$n(t1, t3);
+    ratio = scaleX < scaleY ? scaleX : scaleY;
+    this.w = t2 * ratio;
+    this.h = t3 * ratio;
+    this.invRatio = 1 / ratio;
+    $.Primitives_printString($.toString$0(this.invRatio));
+    t1 = $.cWrap.style;
+    t2 = $.S(this.w) + "px";
+    t1.set$width;
+    $.setProperty$3$x(t1, "width", t2, "");
     t2 = $.cWrap.style;
-    t3 = $.S(gH) + "px";
+    t1 = $.S(this.h) + "px";
     t2.set$height;
-    $.setProperty$3$x(t2, "height", t3, "");
-    t3 = $.cWrap.style;
-    t2 = $.S($.$sub$n(window.innerHeight, gH) / 2) + "px";
-    t3.set$marginTop;
-    $.setProperty$3$x(t3, "margin-top", t2, "");
+    $.setProperty$3$x(t2, "height", t1, "");
+    t1 = $.$sub$n(window.innerHeight, this.h);
+    t2 = $.cWrap.style;
+    t1 = $.S(t1 / 2) + "px";
+    t2.set$marginTop;
+    $.setProperty$3$x(t2, "margin-top", t1, "");
   },
   gameLoop$1: function(time) {
     var t1, t2;
@@ -6109,7 +6216,7 @@ Game: {"": "Object;fpsHolder,oldTime,fps",
     var t1, truncated;
     t1 = $.getInterceptor$n(t);
     $.dt = $.$div$n(t1.$sub(t, old), 1000);
-    if ($.JSNumber_methods.$mod(t1.toInt$0(t), 12) === 0) {
+    if ($.$mod$n(t1.toInt$0(t), 12) === 0) {
       t1 = $.dt;
       if (typeof t1 !== "number")
         throw $.iae(t1);
@@ -6201,19 +6308,21 @@ Game: {"": "Object;fpsHolder,oldTime,fps",
     t2 = $.overworld;
     t3 = t2.lvlArr;
     t4 = t2.ovrCurLvl;
-    if (t4 < 0 || t4 >= t3.length)
+    if (t4 >>> 0 !== t4 || t4 >= t3.length)
       throw $.ioore(t4);
     t1.x = $.$add$ns($.get$x$x(t3[t4]), t2.fixX);
-    t4 = t2.lvlArr;
-    t3 = t2.ovrCurLvl;
-    if (t3 < 0 || t3 >= t4.length)
-      throw $.ioore(t3);
-    t1.y = $.$add$ns($.get$y$x(t4[t3]), t2.fixY);
+    t2 = $.p;
+    t4 = $.overworld;
+    t3 = t4.lvlArr;
+    t1 = t4.ovrCurLvl;
+    if (t1 >>> 0 !== t1 || t1 >= t3.length)
+      throw $.ioore(t1);
+    t2.y = $.$add$ns($.get$y$x(t3[t1]), t4.fixY);
     $.lvlSelected = $.DEBUG_LVL;
     if ($.DEBUG_LVL)
       $.overworld.initLevel$0();
     t1 = window;
-    t2 = new $.StartScreen(false, "PRESS ESC TO RETURN", 1, 2).get$startScreenLoop();
+    t2 = new $.StartScreen(false, false, "PRESS ESC TO RETURN", "NEW GAME", 1, 2, new $.Rect(-1, -1, 8, 8), null, "rgb(213, 213, 213)", null, null).get$startScreenLoop();
     $.Window_methods._ensureRequestAnimationFrame$0(t1);
     $.Window_methods._requestAnimationFrame$1(t1, t2);
   }
@@ -6231,7 +6340,7 @@ Game_closure0: {"": "Closure;this_1",
   }
 },
 
-GameObj: {"": "Object;ix,iy,w<,h,x*,y*,ready?,img,src",
+GameObj: {"": "Object;ix,iy,w<,h<,x*,y*,ready?,img,src",
   draw$1: function(sp) {
     var t1, t2, t3, t4, t5, t6;
     if (this.ready) {
@@ -6267,16 +6376,14 @@ GameObj: {"": "Object;ix,iy,w<,h,x*,y*,ready?,img,src",
   },
   GameObj$5: function(ix, iy, w, h, str) {
     var t1, t2;
-    t1 = this.w;
-    this.x = this.ix - t1 / 2;
-    t2 = this.h;
-    this.y = this.iy - t2 / 2;
+    this.x = this.ix - this.w / 2;
+    this.y = this.iy - this.h / 2;
     this.src = str;
     this.ready = false;
     this.img = $.ImageElement_ImageElement(null, null, null);
     $.set$src$x(this.img, "../js/dungeon/img/" + this.src);
-    $.set$width$x(this.img, t1);
-    $.set$height$x(this.img, t2);
+    $.set$width$x(this.img, this.w);
+    $.set$height$x(this.img, this.h);
     t1 = $.get$onLoad$x(this.img);
     t1 = new $._EventStreamSubscription(0, t1._target, t1._eventType, new $.GameObj_closure(this), t1._useCapture);
     t2 = t1._onData;
@@ -6410,7 +6517,7 @@ Arena: {"": "Object;curStage,numStages,animalSelected,stage,stageSelected",
     t1.fillRect(0, 0, $.FULLW, $.FULLH);
     t1 = $.ctx;
     t1.fillStyle = $.Color_Yf3.name;
-    t1.fillRect(200, 70, 240, 240);
+    t1.fillRect($.get$HALFW() - 100, 70, $.get$HALFW(), $.get$HALFH());
     t1 = this.animalSelected;
     if (t1 !== -1) {
       t2 = $.p.animal;
@@ -6422,7 +6529,7 @@ Arena: {"": "Object;curStage,numStages,animalSelected,stage,stageSelected",
       t4 = this.animalSelected;
       if (t4 >>> 0 !== t4 || t4 >= t3.length)
         throw $.ioore(t4);
-      t1.drawD$2(t2 - t3[t4].get$w() / 2, $.FULLH - 120);
+      t1.drawD$2(t2 - $.$div$n(t3[t4].get$w(), 2), $.FULLH - 120);
     } else
       this.drawAnimalSelector$0();
     t1 = $.ctx;
@@ -6572,7 +6679,7 @@ Level: {"": "Object;startPositions,level1,arena,litLvlName,bgColor,isCutscene",
     t3 = $.overworld;
     t1 = t3.lvlArr;
     t4 = t3.ovrCurLvl;
-    if (t4 < 0 || t4 >= t1.length)
+    if (t4 >>> 0 !== t4 || t4 >= t1.length)
       throw $.ioore(t4);
     $.set$y$x(t2, $.$sub$n($.$add$ns($.get$y$x(t1[t4]), t3.boxH / 2), $.p.h));
     t3 = this.startPositions;
@@ -6604,7 +6711,7 @@ Level: {"": "Object;startPositions,level1,arena,litLvlName,bgColor,isCutscene",
 
 Level_1: {"": "Object;wise,fish,dialog,underground,transitionOver?",
   update$0: function() {
-    var t1, t2, t3;
+    var t1, t2;
     if ($.level.isCutscene)
       this.updateCutscene$0();
     else {
@@ -6620,11 +6727,11 @@ Level_1: {"": "Object;wise,fish,dialog,underground,transitionOver?",
           }
         } else if (t2) {
           if (t1.health > 0) {
-            t2 = $.util;
-            t3 = $.p;
-            if (t2.checkCollision$2(t3, t1))
-              if (!t3.invincible)
-                t3.hit$0();
+            if ($.util.checkCollision$3($.p, t1, 3)) {
+              t1 = $.p;
+              if (!t1.invincible)
+                t1.hit$0();
+            }
           } else {
             t1 = $.key;
             if (t1.lastKeyUp === 16) {
@@ -6668,6 +6775,8 @@ Level_1: {"": "Object;wise,fish,dialog,underground,transitionOver?",
     t1 = $.p;
     t2 = t1.device;
     if (!t2.usable && !t1.movLocked && $.util.checkCollision$2(t1, t2)) {
+      t1 = $.p;
+      t2 = t1.device;
       t3 = t1.sword;
       t1.movLocked = true;
       t3.usable = true;
@@ -6737,25 +6846,23 @@ Level_1: {"": "Object;wise,fish,dialog,underground,transitionOver?",
     $.canvasListener = t1;
   },
   drawCutscene$0: function() {
-    var t1, t2, t3;
+    var t1, t2, t3, t4;
     if (!$.p.device.usable)
       this.drawWiseMan$0();
     t1 = $.p;
     if (t1.movLocked) {
       t2 = t1.device;
-      if (!t2.usable) {
-        t1 = $.util;
-        t2 = this.wise;
-        t1.blinkText$3(10, $.$add$ns(t2.x, 160), $.$add$ns(t2.y, 25));
-      } else {
-        t3 = $.$sub$n($.$add$ns(t1.x, t1.w / 2), t2.w / 2);
-        t1 = $.$sub$n($.$sub$n(t1.y, t2.h), 4);
-        t2.x = t3;
-        t2.y = t1;
-        t2.draw$1(t2.imgU);
-        t1 = $.util;
-        t2 = $.p;
-        t1.blinkText$3(10, $.$add$ns(t2.x, 160), $.$add$ns(t2.y, 25));
+      if (!t2.usable)
+        $.util.blinkText$3(10, $.$add$ns(this.wise.x, 160), $.$add$ns(this.wise.y, 25));
+      else {
+        t1 = $.$sub$n($.$add$ns(t1.x, t1.w / 2), $.p.device.w / 2);
+        t3 = $.p;
+        t3 = $.$sub$n($.$sub$n(t3.y, t3.device.h), 4);
+        t4 = $.p.device;
+        t2.x = t1;
+        t2.y = t3;
+        t2.draw$1(t4.imgU);
+        $.util.blinkText$3(10, $.$add$ns($.p.x, 160), $.$add$ns($.p.y, 25));
       }
     } else {
       t1 = t1.device;
@@ -6776,12 +6883,10 @@ Level_1: {"": "Object;wise,fish,dialog,underground,transitionOver?",
     t2.dialogW = t1.measureText(t3[t4]).width;
     t4 = $.ctx;
     t4.fillStyle = "#000";
-    t3 = this.wise;
-    t4.fillRect($.$add$ns(t3.x, 24), $.$sub$n(t3.y, 48), $.$add$ns(this.dialog.dialogW, 7), 42);
-    t3 = $.ctx;
-    t3.fillStyle = "#e1e1e1";
-    t4 = this.wise;
-    t3.fillRect($.$add$ns(t4.x, 20), $.$sub$n(t4.y, 53.5), $.$add$ns(this.dialog.dialogW, 7), 42);
+    t4.fillRect($.$add$ns(this.wise.x, 24), $.$sub$n(this.wise.y, 48), $.$add$ns(this.dialog.dialogW, 7), 42);
+    t4 = $.ctx;
+    t4.fillStyle = "#e1e1e1";
+    t4.fillRect($.$add$ns(this.wise.x, 20), $.$sub$n(this.wise.y, 53.5), $.$add$ns(this.dialog.dialogW, 7), 42);
     t4 = $.ctx;
     t4.fillStyle = "#000";
     t3 = this.dialog;
@@ -6789,9 +6894,7 @@ Level_1: {"": "Object;wise,fish,dialog,underground,transitionOver?",
     t3 = t3.dialogLine;
     if (t3 >>> 0 !== t3 || t3 >= t1.length)
       throw $.ioore(t3);
-    t3 = t1[t3];
-    t1 = this.wise;
-    t4.fillText(t3, $.$add$ns(t1.x, 24), $.$sub$n(t1.y, 25));
+    t4.fillText(t1[t3], $.$add$ns(this.wise.x, 24), $.$sub$n(this.wise.y, 25));
   },
   Level_1$0: function() {
     this.dialog = $.Dialog$();
@@ -6854,7 +6957,7 @@ Overworld: {"": "Object;lvlArr,ovrCurLvl,fixX,fixY,boxW,boxH,boxPadBot",
     if (t1.lastKeyDown === 13) {
       t2 = this.lvlArr;
       t3 = this.ovrCurLvl;
-      if (t3 < 0 || t3 >= t2.length)
+      if (t3 >>> 0 !== t3 || t3 >= t2.length)
         throw $.ioore(t3);
       t2 = t2[t3].get$unlocked() && !t2[t3].get$beaten();
     } else
@@ -6903,80 +7006,83 @@ Overworld: {"": "Object;lvlArr,ovrCurLvl,fixX,fixY,boxW,boxH,boxPadBot",
   },
   transition$1: function(_, dir) {
     var t1, t2, t3;
-    t1 = this.ovrCurLvl;
-    if (t1 === 0)
+    if ($.$eq(this.ovrCurLvl, 0))
       if (dir === 39) {
-        t2 = this.lvlArr;
-        if (1 >= t2.length)
-          throw $.ioore(1);
-        t2 = t2[1].get$unlocked();
-      } else
-        t2 = false;
-    else
-      t2 = false;
-    if (t2) {
-      t2 = $.p;
-      t3 = this.lvlArr;
-      ++t1;
-      this.ovrCurLvl = t1;
-      if (t1 < 0 || t1 >= t3.length)
-        throw $.ioore(t1);
-      t2.x = $.$add$ns($.get$x$x(t3[t1]), this.fixX);
-      t1 = this.lvlArr;
-      t3 = this.ovrCurLvl;
-      if (t3 < 0 || t3 >= t1.length)
-        throw $.ioore(t3);
-      t2.y = $.$add$ns($.get$y$x(t1[t3]), this.fixY);
-    } else if (t1 === 1)
-      if (dir === 37) {
-        t2 = $.p;
-        t3 = this.lvlArr;
-        --t1;
-        this.ovrCurLvl = t1;
-        if (t1 < 0 || t1 >= t3.length)
-          throw $.ioore(t1);
-        t2.x = $.$add$ns($.get$x$x(t3[t1]), this.fixX);
         t1 = this.lvlArr;
-        t3 = this.ovrCurLvl;
-        if (t3 < 0 || t3 >= t1.length)
+        if (1 >= t1.length)
+          throw $.ioore(1);
+        t1 = t1[1].get$unlocked();
+      } else
+        t1 = false;
+    else
+      t1 = false;
+    if (t1) {
+      t1 = $.p;
+      t2 = this.lvlArr;
+      t3 = $.$add$ns(this.ovrCurLvl, 1);
+      this.ovrCurLvl = t3;
+      if (t3 >>> 0 !== t3 || t3 >= t2.length)
+        throw $.ioore(t3);
+      t1.x = $.$add$ns($.get$x$x(t2[t3]), this.fixX);
+      t3 = $.p;
+      t2 = this.lvlArr;
+      t1 = this.ovrCurLvl;
+      if (t1 >>> 0 !== t1 || t1 >= t2.length)
+        throw $.ioore(t1);
+      t3.y = $.$add$ns($.get$y$x(t2[t1]), this.fixY);
+    } else if ($.$eq(this.ovrCurLvl, 1))
+      if (dir === 37) {
+        t1 = $.p;
+        t2 = this.lvlArr;
+        t3 = $.$sub$n(this.ovrCurLvl, 1);
+        this.ovrCurLvl = t3;
+        if (t3 >>> 0 !== t3 || t3 >= t2.length)
           throw $.ioore(t3);
-        t2.y = $.$add$ns($.get$y$x(t1[t3]), this.fixY);
+        t1.x = $.$add$ns($.get$x$x(t2[t3]), this.fixX);
+        t3 = $.p;
+        t2 = this.lvlArr;
+        t1 = this.ovrCurLvl;
+        if (t1 >>> 0 !== t1 || t1 >= t2.length)
+          throw $.ioore(t1);
+        t3.y = $.$add$ns($.get$y$x(t2[t1]), this.fixY);
       } else {
         if (dir === 39) {
-          t2 = this.lvlArr;
-          if (2 >= t2.length)
-            throw $.ioore(2);
-          t2 = t2[2].get$unlocked();
-        } else
-          t2 = false;
-        if (t2) {
-          t2 = $.p;
-          t3 = this.lvlArr;
-          ++t1;
-          this.ovrCurLvl = t1;
-          if (t1 < 0 || t1 >= t3.length)
-            throw $.ioore(t1);
-          t2.x = $.$add$ns($.get$x$x(t3[t1]), this.fixX);
           t1 = this.lvlArr;
-          t3 = this.ovrCurLvl;
-          if (t3 < 0 || t3 >= t1.length)
+          if (2 >= t1.length)
+            throw $.ioore(2);
+          t1 = t1[2].get$unlocked();
+        } else
+          t1 = false;
+        if (t1) {
+          t1 = $.p;
+          t2 = this.lvlArr;
+          t3 = $.$add$ns(this.ovrCurLvl, 1);
+          this.ovrCurLvl = t3;
+          if (t3 >>> 0 !== t3 || t3 >= t2.length)
             throw $.ioore(t3);
-          t2.y = $.$add$ns($.get$y$x(t1[t3]), this.fixY);
+          t1.x = $.$add$ns($.get$x$x(t2[t3]), this.fixX);
+          t3 = $.p;
+          t2 = this.lvlArr;
+          t1 = this.ovrCurLvl;
+          if (t1 >>> 0 !== t1 || t1 >= t2.length)
+            throw $.ioore(t1);
+          t3.y = $.$add$ns($.get$y$x(t2[t1]), this.fixY);
         }
       }
-    else if (t1 === 2 && dir === 37) {
-      t2 = $.p;
-      t3 = this.lvlArr;
-      --t1;
-      this.ovrCurLvl = t1;
-      if (t1 < 0 || t1 >= t3.length)
-        throw $.ioore(t1);
-      t2.x = $.$add$ns($.get$x$x(t3[t1]), this.fixX);
-      t1 = this.lvlArr;
-      t3 = this.ovrCurLvl;
-      if (t3 < 0 || t3 >= t1.length)
+    else if ($.$eq(this.ovrCurLvl, 2) && dir === 37) {
+      t1 = $.p;
+      t2 = this.lvlArr;
+      t3 = $.$sub$n(this.ovrCurLvl, 1);
+      this.ovrCurLvl = t3;
+      if (t3 >>> 0 !== t3 || t3 >= t2.length)
         throw $.ioore(t3);
-      t2.y = $.$add$ns($.get$y$x(t1[t3]), this.fixY);
+      t1.x = $.$add$ns($.get$x$x(t2[t3]), this.fixX);
+      t3 = $.p;
+      t2 = this.lvlArr;
+      t1 = this.ovrCurLvl;
+      if (t1 >>> 0 !== t1 || t1 >= t2.length)
+        throw $.ioore(t1);
+      t3.y = $.$add$ns($.get$y$x(t2[t1]), this.fixY);
     }
     t1 = $.key;
     t1.resetKeys$0;
@@ -7012,18 +7118,21 @@ Overworld: {"": "Object;lvlArr,ovrCurLvl,fixX,fixY,boxW,boxH,boxPadBot",
       if (t3 >>> 0 !== t3 || t3 >= t2.length)
         throw $.ioore(t3);
       t1.x = $.$add$ns($.get$x$x(t2[t3]), this.fixX);
+      t3 = $.p;
       t2 = this.lvlArr;
-      if (t3 >= t2.length)
-        throw $.ioore(t3);
-      t1.y = $.$add$ns($.get$y$x(t2[t3]), this.fixY);
-      this.ovrCurLvl = t3;
+      t1 = $.curLvl;
+      if (t1 >>> 0 !== t1 || t1 >= t2.length)
+        throw $.ioore(t1);
+      t3.y = $.$add$ns($.get$y$x(t2[t1]), this.fixY);
+      this.ovrCurLvl = $.curLvl;
+      t1 = $.p;
       t1.dir = 40;
       t1.invisible = false;
       $.lvlSelected = false;
     }
   },
   render$0: function() {
-    var t1, i, lvlName, t2, t3, t4, t5, t6;
+    var t1, i, lvlName, t2, t3, t4;
     t1 = $.ctx;
     t1.fillStyle = $.Color_axY.name;
     t1.fillRect(0, 0, $.FULLW, $.FULLH);
@@ -7075,9 +7184,11 @@ Overworld: {"": "Object;lvlArr,ovrCurLvl,fixX,fixY,boxW,boxH,boxPadBot",
         t2 = this.lvlArr;
         if (i >= t2.length)
           throw $.ioore(i);
-        t2 = t2[i];
-        t3 = $.getInterceptor$x(t2);
-        t1.moveTo($.$add$ns(t3.get$x(t2), this.boxW), $.$add$ns(t3.get$y(t2), this.boxH / 2));
+        t2 = $.$add$ns($.get$x$x(t2[i]), this.boxW);
+        t3 = this.lvlArr;
+        if (i >= t3.length)
+          throw $.ioore(i);
+        t1.moveTo(t2, $.$add$ns($.get$y$x(t3[i]), this.boxH / 2));
         t1 = this.lvlArr;
         t2 = t1.length;
         if (i >= t2)
@@ -7089,37 +7200,38 @@ Overworld: {"": "Object;lvlArr,ovrCurLvl,fixX,fixY,boxW,boxH,boxPadBot",
         t1 = $.$eq(t3, $.get$y$x(t1[t4]));
         t3 = $.ctx;
         t2 = this.lvlArr;
-        t5 = this.boxH;
         if (t1) {
           if (t4 >= t2.length)
             throw $.ioore(t4);
           t1 = t2[t4];
           t2 = $.getInterceptor$x(t1);
-          t3.lineTo(t2.get$x(t1), $.$add$ns(t2.get$y(t1), t5 / 2));
+          t3.lineTo(t2.get$x(t1), $.$add$ns(t2.get$y(t1), this.boxH / 2));
         } else {
-          t1 = t2.length;
-          if (t4 >= t1)
+          if (t4 >= t2.length)
             throw $.ioore(t4);
-          t6 = $.$add$ns($.get$x$x(t2[t4]), this.boxW / 2);
-          if (i >= t1)
-            throw $.ioore(i);
-          t3.lineTo(t6, $.$add$ns($.get$y$x(t2[i]), t5 / 2));
-          t5 = $.ctx;
+          t1 = $.$add$ns($.get$x$x(t2[t4]), this.boxW / 2);
           t2 = this.lvlArr;
-          t6 = t2.length;
-          if (t4 >= t6)
-            throw $.ioore(t4);
-          t3 = $.$add$ns($.get$x$x(t2[t4]), this.boxW / 2);
-          if (i >= t6)
+          if (i >= t2.length)
             throw $.ioore(i);
-          t5.moveTo(t3, $.$add$ns($.get$y$x(t2[i]), this.boxH / 2));
+          t3.lineTo(t1, $.$add$ns($.get$y$x(t2[i]), this.boxH / 2));
           t2 = $.ctx;
-          t3 = this.lvlArr;
-          if (t4 >= t3.length)
+          t1 = this.lvlArr;
+          if (t4 >= t1.length)
             throw $.ioore(t4);
-          t4 = t3[t4];
-          t3 = $.getInterceptor$x(t4);
-          t2.lineTo($.$add$ns(t3.get$x(t4), this.boxW / 2), $.$add$ns(t3.get$y(t4), this.boxH / 2));
+          t1 = $.$add$ns($.get$x$x(t1[t4]), this.boxW / 2);
+          t3 = this.lvlArr;
+          if (i >= t3.length)
+            throw $.ioore(i);
+          t2.moveTo(t1, $.$add$ns($.get$y$x(t3[i]), this.boxH / 2));
+          t3 = $.ctx;
+          t1 = this.lvlArr;
+          if (t4 >= t1.length)
+            throw $.ioore(t4);
+          t1 = $.$add$ns($.get$x$x(t1[t4]), this.boxW / 2);
+          t2 = this.lvlArr;
+          if (t4 >= t2.length)
+            throw $.ioore(t4);
+          t3.lineTo(t1, $.$add$ns($.get$y$x(t2[t4]), this.boxH / 2));
         }
         $.ctx.stroke();
         $.ctx.closePath();
@@ -7161,30 +7273,38 @@ Overworld: {"": "Object;lvlArr,ovrCurLvl,fixX,fixY,boxW,boxH,boxPadBot",
         t2 = this.lvlArr;
         if (i >= t2.length)
           throw $.ioore(i);
-        t2 = t2[i];
-        t3 = $.getInterceptor$x(t2);
-        t1.moveTo($.$add$ns(t3.get$x(t2), 1), $.$add$ns(t3.get$y(t2), 1));
-        t2 = $.ctx;
+        t2 = $.$add$ns($.get$x$x(t2[i]), 1);
         t3 = this.lvlArr;
         if (i >= t3.length)
           throw $.ioore(i);
-        t3 = t3[i];
-        t1 = $.getInterceptor$x(t3);
-        t2.lineTo($.$sub$n($.$add$ns(t1.get$x(t3), this.boxW), 1), $.$sub$n($.$add$ns(t1.get$y(t3), this.boxH), 1));
+        t1.moveTo(t2, $.$add$ns($.get$y$x(t3[i]), 1));
         t3 = $.ctx;
+        t2 = this.lvlArr;
+        if (i >= t2.length)
+          throw $.ioore(i);
+        t2 = $.$sub$n($.$add$ns($.get$x$x(t2[i]), this.boxW), 1);
         t1 = this.lvlArr;
         if (i >= t1.length)
           throw $.ioore(i);
-        t1 = t1[i];
-        t2 = $.getInterceptor$x(t1);
-        t3.moveTo($.$add$ns(t2.get$x(t1), 1), $.$sub$n($.$add$ns(t2.get$y(t1), this.boxH), 1));
+        t3.lineTo(t2, $.$sub$n($.$add$ns($.get$y$x(t1[i]), this.boxH), 1));
         t1 = $.ctx;
         t2 = this.lvlArr;
         if (i >= t2.length)
           throw $.ioore(i);
-        t2 = t2[i];
-        t3 = $.getInterceptor$x(t2);
-        t1.lineTo($.$sub$n($.$add$ns(t3.get$x(t2), this.boxW), 1), $.$add$ns(t3.get$y(t2), 1));
+        t2 = $.$add$ns($.get$x$x(t2[i]), 1);
+        t3 = this.lvlArr;
+        if (i >= t3.length)
+          throw $.ioore(i);
+        t1.moveTo(t2, $.$sub$n($.$add$ns($.get$y$x(t3[i]), this.boxH), 1));
+        t3 = $.ctx;
+        t2 = this.lvlArr;
+        if (i >= t2.length)
+          throw $.ioore(i);
+        t2 = $.$sub$n($.$add$ns($.get$x$x(t2[i]), this.boxW), 1);
+        t1 = this.lvlArr;
+        if (i >= t1.length)
+          throw $.ioore(i);
+        t3.lineTo(t2, $.$add$ns($.get$y$x(t1[i]), 1));
         $.ctx.stroke();
         $.ctx.closePath();
       }
@@ -7577,7 +7697,7 @@ Item: {"": "GameObj;usable,inUse,imgD,imgL,imgR,imgU,ix,iy,w,h,x,y,ready,img,src
   }
 },
 
-StartScreen: {"": "Object;isOptions,ret,OPEN_GAME,OPEN_START",
+StartScreen: {"": "Object;isOptions,linkClicked?,ret,ent,OPEN_GAME,OPEN_START,mouse<,newGame<,linkColor?,mouseMoveE,mouseClickE",
   drawTitle$0: function() {
     var t1, tmpW, titleW;
     t1 = $.ctx;
@@ -7615,6 +7735,7 @@ StartScreen: {"": "Object;isOptions,ret,OPEN_GAME,OPEN_START",
     t1.isPressed$1;
     if (t1._liblib1$_keys.containsKey$1(13) || $.DEBUG_OVERWORLD || $.DEBUG_LVL) {
       $.key.lastKeyDown = 8;
+      this.mouseEvents$0();
       return true;
     }
     this.drawStartScreen$0();
@@ -7662,48 +7783,67 @@ StartScreen: {"": "Object;isOptions,ret,OPEN_GAME,OPEN_START",
     return new $.BoundClosure$1(this, "homeScreenLoop$1");
   },
   homeScreen$0: function() {
-    var t1, t2;
     if (this.isOptions) {
-      t1 = $.key;
+      var t1 = $.key;
       if (t1.lastKeyDown === 27) {
         this.isOptions = false;
         t1.lastKeyDown = 8;
+        this.mouseEvents$0();
       }
       this.drawOptions$0();
+    } else if (this.linkClicked || $.DEBUG_OVERWORLD || $.DEBUG_LVL) {
+      $.key.lastDirDown = 8;
+      this.mouseMoveE.cancel$0();
+      this.mouseClickE.cancel$0();
+      t1 = $.canvas.style;
+      t1.set$cursor;
+      $.setProperty$3$x(t1, "cursor", "auto", "");
+      this.linkColor = "rgb(213, 213, 213)";
+      return this.OPEN_GAME;
     } else {
-      t1 = $.key;
-      t2 = t1.lastKeyDown;
-      if (t2 === 13 || $.DEBUG_OVERWORLD || $.DEBUG_LVL) {
-        t1.lastDirDown = 8;
-        return this.OPEN_GAME;
-      } else if (t2 === 79)
+      t1 = $.key.lastKeyDown;
+      if (t1 === 79) {
         this.isOptions = true;
-      else if (t2 === 27)
+        this.mouseMoveE.cancel$0();
+        this.mouseClickE.cancel$0();
+        t1 = $.canvas.style;
+        t1.set$cursor;
+        $.setProperty$3$x(t1, "cursor", "auto", "");
+        this.linkColor = "rgb(213, 213, 213)";
+      } else if (t1 === 27) {
+        this.mouseMoveE.cancel$0();
+        this.mouseClickE.cancel$0();
+        t1 = $.canvas.style;
+        t1.set$cursor;
+        $.setProperty$3$x(t1, "cursor", "auto", "");
+        this.linkColor = "rgb(213, 213, 213)";
         return this.OPEN_START;
-      else
+      } else
         this.drawHomeScreen$0();
     }
     return 0;
   },
   drawHomeScreen$0: function() {
-    var t1 = $.ctx;
+    var t1, t2;
+    t1 = $.ctx;
     t1.fillStyle = $.Color_Yf3.name;
     t1.fillRect(0, 0, $.FULLW, $.FULLH);
     this.drawTitle$0();
     t1 = $.ctx;
     t1.font = "15px 'Press Start 2P'";
-    t1.fillStyle = "rgb(213, 213, 213)";
-    t1.fillText("NEW GAME            PRESS ENTER", $.get$HALFW() - $.$div$n($.ctx.measureText("NEW GAME            PRESS ENTER").width, 2), 202);
-    t1 = $.ctx;
-    t1.font = "15px 'Press Start 2P'";
-    t1.fillStyle = "rgb(163, 163, 163)";
-    t1.fillText("LOAD GAME                      ", $.get$HALFW() - $.$div$n($.ctx.measureText("LOAD GAME                      ").width, 2), 232);
-    t1 = $.ctx;
-    t1.font = "13px 'Press Start 2P'";
-    t1.fillStyle = "rgb(213, 213, 213)";
-    t1.fillText("PRESS 'o' FOR OPTIONS", $.get$HALFW() - $.$div$n($.ctx.measureText("PRESS 'o' FOR OPTIONS").width, 2), 407);
-    t1 = this.ret;
-    $.ctx.fillText(t1, $.get$HALFW() - $.$div$n($.ctx.measureText(t1).width, 2), 442);
+    t1.fillStyle = this.linkColor;
+    t2 = this.newGame;
+    t1.fillText(this.ent, t2.x, $.$add$ns(t2.y, t2.h));
+    t2 = $.ctx;
+    t2.font = "15px 'Press Start 2P'";
+    t2.fillStyle = "rgb(163, 163, 163)";
+    t2.fillText("LOAD GAME", $.get$HALFW() - $.$div$n($.ctx.measureText("LOAD GAME").width, 2), 232);
+    t2 = $.ctx;
+    t2.font = "13px 'Press Start 2P'";
+    t2.fillStyle = "rgb(213, 213, 213)";
+    t2.fillText("PRESS 'o' FOR OPTIONS", $.get$HALFW() - $.$div$n($.ctx.measureText("PRESS 'o' FOR OPTIONS").width, 2), 407);
+    t2 = this.ret;
+    $.ctx.fillText(t2, $.get$HALFW() - $.$div$n($.ctx.measureText(t2).width, 2), 442);
   },
   drawOptions$0: function() {
     var t1, t2;
@@ -7724,6 +7864,26 @@ StartScreen: {"": "Object;isOptions,ret,OPEN_GAME,OPEN_START",
     t2 = this.ret;
     t1.fillText(t2, $.get$HALFW() - $.$div$n($.ctx.measureText(t2).width, 2), 442);
   },
+  mouseEvents$0: function() {
+    var t1, t2;
+    this.newGame = new $.Rect($.get$HALFW() - 57, 192, 120, 13);
+    t1 = $.canvas;
+    t1.get$onMouseMove;
+    t1 = $.EventStreamProvider_mousemove.forTarget$1(t1);
+    t1 = new $._EventStreamSubscription(0, t1._target, t1._eventType, new $.StartScreen_mouseEvents_closure(this), t1._useCapture);
+    t2 = t1._onData;
+    if (t2 != null && !t1.get$isPaused())
+      $.$$dom_addEventListener$3$x(t1._target, t1._eventType, t2, t1._useCapture);
+    this.mouseMoveE = t1;
+    t1 = $.canvas;
+    t1.get$onClick;
+    t1 = $.EventStreamProvider_click.forTarget$1(t1);
+    t1 = new $._EventStreamSubscription(0, t1._target, t1._eventType, new $.StartScreen_mouseEvents_closure0(this), t1._useCapture);
+    t2 = t1._onData;
+    if (t2 != null && !t1.get$isPaused())
+      $.$$dom_addEventListener$3$x(t1._target, t1._eventType, t2, t1._useCapture);
+    this.mouseClickE = t1;
+  },
   StartScreen$0: function() {
     var t1, t2;
     t1 = window;
@@ -7733,27 +7893,40 @@ StartScreen: {"": "Object;isOptions,ret,OPEN_GAME,OPEN_START",
   }
 },
 
+StartScreen_mouseEvents_closure: {"": "Closure;this_0",
+  call$1: function(e) {
+    var t1, t2, t3;
+    t1 = this.this_0;
+    t2 = $.getInterceptor$x(e);
+    t1.get$mouse().x = $.$mul$n(t2.get$layerX(e), $.game.invRatio);
+    t1.get$mouse().y = $.$mul$n(t2.get$layerY(e), $.game.invRatio);
+    t2 = $.util.checkCollision$2(t1.get$mouse(), t1.get$newGame());
+    t3 = $.canvas;
+    if (t2) {
+      t2 = t3.style;
+      t2.set$cursor;
+      $.setProperty$3$x(t2, "cursor", "pointer", "");
+      t1.set$linkColor("blue");
+    } else {
+      t2 = t3.style;
+      t2.set$cursor;
+      $.setProperty$3$x(t2, "cursor", "auto", "");
+      t1.set$linkColor("rgb(213, 213, 213)");
+    }
+  }
+},
+
+StartScreen_mouseEvents_closure0: {"": "Closure;this_1",
+  call$1: function(e) {
+    var t1 = this.this_1;
+    if ($.util.checkCollision$2(t1.get$mouse(), t1.get$newGame()))
+      t1.set$linkClicked(true);
+  }
+},
+
 Utils: {"": "Object;alpha,tmpW,textPos,fadeOut,slideOut,flashTxtDone",
   checkCollision$3: function(a, b, moe) {
-    var t1, t2, t3, t4, t5;
-    t1 = a.x;
-    t2 = $.getInterceptor$ns(t1);
-    t3 = t2.$add(t1, moe);
-    t4 = b.x;
-    t5 = $.getInterceptor$ns(t4);
-    if ($.$le$n(t3, t5.$add(t4, b.w)))
-      if ($.$le$n(t5.$add(t4, moe), t2.$add(t1, a.w))) {
-        t1 = a.y;
-        t2 = $.getInterceptor$ns(t1);
-        t3 = t2.$add(t1, moe);
-        t4 = b.y;
-        t5 = $.getInterceptor$ns(t4);
-        t1 = $.$le$n(t3, t5.$add(t4, b.h)) && $.$le$n(t5.$add(t4, moe), t2.$add(t1, a.h));
-      } else
-        t1 = false;
-    else
-      t1 = false;
-    if (t1)
+    if ($.$le$n($.$add$ns(a.get$x(a), moe), $.$add$ns(b.get$x(b), b.get$w())) && $.$le$n($.$add$ns(b.get$x(b), moe), $.$add$ns(a.get$x(a), a.get$w())) && $.$le$n($.$add$ns(a.get$y(a), moe), $.$add$ns(b.get$y(b), b.get$h())) && $.$le$n($.$add$ns(b.get$y(b), moe), $.$add$ns(a.get$y(a), a.get$h())))
       return true;
     return false;
   },
@@ -7820,6 +7993,8 @@ Utils: {"": "Object;alpha,tmpW,textPos,fadeOut,slideOut,flashTxtDone",
 
 Color: {"": "Object;name>"},
 
+Rect: {"": "Object;x*,y*,w<,h<"},
+
 SpritePos: {"": "Object;sx,sy"},
 
 Dialog: {"": "Object;dialogW,dialogLine,dialog",
@@ -7865,7 +8040,7 @@ Enemy$: function(initHealth, cardSrc, $name, ix, iy, w, h, src) {
 },
 
 Game$: function() {
-  var t1 = new $.Game(null, null, null);
+  var t1 = new $.Game(null, null, null, null, null, null);
   t1.Game$0();
   return t1;
 },
@@ -8010,16 +8185,17 @@ $.Element__determineTransitionEventType$closure = new $.Closure$_determineTransi
 $.main$closure = new $.Closure$main($.main, "main$closure");
 $.C_NullThrownError = new $.NullThrownError();
 $.JSInt_methods = $.JSInt.prototype;
+$.EventStreamProvider_keydown = new $.EventStreamProvider("keydown");
 Isolate.makeConstantList = function(list) {
   list.immutable$list = true;
   list.fixed$length = true;
   return list;
 };
 $.List_empty = Isolate.makeConstantList([]);
-$.EventStreamProvider_keydown = new $.EventStreamProvider("keydown");
+$.EventStreamProvider_click = new $.EventStreamProvider("click");
+$.Window_methods = $.Window.prototype;
 $._CustomEventStreamProvider__determineTransitionEventType = new $._CustomEventStreamProvider($.Element__determineTransitionEventType$closure);
 $.EventStreamProvider_load = new $.EventStreamProvider("load");
-$.Window_methods = $.Window.prototype;
 $.Color_axY = new $.Color("#333");
 $.EventStreamProvider_deviceorientation = new $.EventStreamProvider("deviceorientation");
 $.EventStreamProvider_keyup = new $.EventStreamProvider("keyup");
@@ -8028,6 +8204,7 @@ $.Color_Yf3 = new $.Color("#ae7446");
 $.JSNumber_methods = $.JSNumber.prototype;
 $.JSString_methods = $.JSString.prototype;
 $.JSArray_methods = $.JSArray.prototype;
+$.EventStreamProvider_mousemove = new $.EventStreamProvider("mousemove");
 $.C_JSUnknown = new $.JSUnknown();
 $.Duration_0 = new $.Duration(0);
 $.Color_AeS = new $.Color("#efce9b");
@@ -8056,7 +8233,6 @@ $.lvlSelected = null;
 $.DEBUG_LVL = false;
 $.DEBUG_OVERWORLD = false;
 $.curLvl = null;
-$.optimalRatio = null;
 $.dt = null;
 $.FULLW = 854;
 $.FULLH = 480;
@@ -8122,6 +8298,9 @@ $.$lt$n = function(receiver, a0) {
   if (typeof receiver == "number" && typeof a0 == "number")
     return receiver < a0;
   return $.getInterceptor$n(receiver).$lt(receiver, a0);
+};
+$.$mod$n = function(receiver, a0) {
+  return $.getInterceptor$n(receiver).$mod(receiver, a0);
 };
 $.$mul$n = function(receiver, a0) {
   if (typeof receiver == "number" && typeof a0 == "number")
@@ -8242,6 +8421,9 @@ $.split$1$s = function(receiver, a0) {
 };
 $.sublist$1$ax = function(receiver, a0) {
   return $.getInterceptor$ax(receiver).sublist$1(receiver, a0);
+};
+$.toInt$0$n = function(receiver) {
+  return $.getInterceptor$n(receiver).toInt$0(receiver);
 };
 $.toList$0$ax = function(receiver) {
   return $.getInterceptor$ax(receiver).toList$0(receiver);

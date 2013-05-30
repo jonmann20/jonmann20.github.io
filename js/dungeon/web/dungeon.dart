@@ -30,7 +30,7 @@ Overworld overworld;
 bool lvlSelected, 
      DEBUG_LVL = false,
      DEBUG_OVERWORLD = false;   // skip start screen
-num curLvl, optimalRatio, dt;
+num curLvl, dt;
 num FULLW = 854,                // 480p; 16:9 ==> 53.375*16 x 53.375*9
     FULLH = 480,
     HALFW = FULLW/2,

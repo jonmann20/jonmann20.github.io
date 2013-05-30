@@ -11,7 +11,7 @@ class Utils{
     slideOut = true;
   }
   
-  bool checkCollision(GameObj a, GameObj b, [num moe=0]){
+  bool checkCollision(a, b, [num moe=0]){
     if((a.x + moe <= (b.x + b.w)) &&    // player is to the left of the right side of the obj
        (b.x + moe <= (a.x + a.w)) &&    // player is to the right of the left side of the obj
        (a.y + moe <= (b.y + b.h)) &&    // player is higher than the bot of obj
@@ -97,6 +97,11 @@ class Pair{
   var first = 0, second = 0;
    
   Pair(this.first, this.second);
+}
+
+class Rect{
+  num x,y,w,h;
+  Rect(this.x, this.y, this.w, this.h);
 }
 
 class Direction{

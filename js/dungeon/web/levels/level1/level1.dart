@@ -30,7 +30,7 @@ class Level_1{
     }
     else if(underground){
       if(fish.health > 0){
-        if(util.checkCollision(p, fish)){
+        if(util.checkCollision(p, fish, 3)){
           if(!p.invincible){
             p.hit();
           }

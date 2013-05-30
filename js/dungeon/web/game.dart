@@ -2,7 +2,10 @@ part of dungeon;
 
 class Game{
   var fpsHolder;
-  num oldTime, fps;
+  num oldTime, fps, 
+      w, // actual canvas width
+      h, // actual canvas height
+      invRatio; // inverse precentage shrunk/expanded from 540p
   
   Game(){
     cWrap = query('.canvasWrap');
@@ -41,28 +44,34 @@ class Game{
 
   */
   void resizeGame(){
-    num maxScaleFactor = 60; // 540p
+    num maxScaleFactor = 70; // 60 ==> 540p
     num scaledW = maxScaleFactor*16,
         scaledH = maxScaleFactor*9;
     
-    num gW = (window.innerWidth > scaledW) ? scaledW : window.innerWidth;
-    num gH = (window.innerHeight > scaledH) ? scaledH : window.innerHeight;
-    num scaleX = gW / FULLW;
-    num scaleY = gH / FULLH;
-    num ratio = gW / gH;
-    optimalRatio = (scaleX < scaleY) ? scaleX : scaleY;
+    w = (window.innerWidth > scaledW) ? scaledW : window.innerWidth;
+    h = (window.innerHeight > scaledH) ? scaledH : window.innerHeight;
+    num scaleX = w / FULLW;
+    num scaleY = h / FULLH;
+//    num aspectRatio = gW / gH;
+    num ratio = (scaleX < scaleY) ? scaleX : scaleY;
     
-//    if(ratio >= 1.77 && ratio <= 1.79){    //1080p
-//      optimalRatio = ratio;
+//    if(ratio >= 1.77 && aspectRatio <= 1.79){    //1080p
+//      game.ratio = aspectRatio;
 //    }
 //    else {
-      gW = FULLW * optimalRatio;
-      gH = FULLH * optimalRatio;
+      w = FULLW * ratio;
+      h = FULLH * ratio;
     //}
     
-    cWrap.style.width = '$gW\px';
-    cWrap.style.height = '$gH\px';
-    cWrap.style.marginTop = '${(window.innerHeight - gH)/2}\px';
+    invRatio = 1 / ratio; 
+    print(invRatio);
+      
+    cWrap.style.width = '$w\px';
+    cWrap.style.height = '$h\px';
+    
+    num mTop = (window.innerHeight - h)/2;
+    
+    cWrap.style.marginTop = '$mTop\px';
   }
   
   void gameLoop(num time){

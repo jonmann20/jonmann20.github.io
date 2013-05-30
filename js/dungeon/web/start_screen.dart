@@ -1,9 +1,14 @@
 part of dungeon;
 
 class StartScreen{
-  bool isOptions = false;
-  final String ret = 'PRESS ESC TO RETURN';
+  bool isOptions = false, linkClicked = false;
+  final String ret = 'PRESS ESC TO RETURN',
+               ent = 'NEW GAME';
   int OPEN_GAME = 1, OPEN_START = 2;
+  Rect mouse = new Rect(-1, -1, 8, 8), newGame;
+  String linkColor = 'rgb(213, 213, 213)';
+  
+  var mouseMoveE, mouseClickE;
   
   StartScreen(){
     window.requestAnimationFrame(startScreenLoop);
@@ -19,8 +24,8 @@ class StartScreen{
     final String title = 'DUNGEON';
     
     ctx.font = "43px 'Press Start 2P'";
-    num tmpW = ctx.measureText(title).width;
-    num titleW = HALFW - tmpW/2;
+    final num tmpW = ctx.measureText(title).width;
+    final num titleW = HALFW - tmpW/2;
     
     ctx.fillStyle = 'rgb(21, 21, 21)';                // shadow
     ctx.fillText(title, titleW + 3, 80 + 4);
@@ -43,6 +48,7 @@ class StartScreen{
   bool startScreen(){  
     if(key.isPressed(KeyCode.ENTER) || DEBUG_OVERWORLD || DEBUG_LVL){
       key.lastKeyDown = KeyCode.BACKSPACE;
+      mouseEvents();
       return true;
     }
     
@@ -93,17 +99,22 @@ class StartScreen{
       if(key.lastKeyDown == KeyCode.ESC){
         isOptions = false;
         key.lastKeyDown = KeyCode.BACKSPACE;
+        mouseEvents();
       }
       
       drawOptions();
     }
-    else if(key.lastKeyDown == KeyCode.ENTER || DEBUG_OVERWORLD || DEBUG_LVL){
+    else if(linkClicked || DEBUG_OVERWORLD || DEBUG_LVL){
       key.lastDirDown = KeyCode.BACKSPACE; // prevent navigating overworld
+      resetMouseEvents();
       return OPEN_GAME;
     }
-    else if(key.lastKeyDown == KeyCode.O)
+    else if(key.lastKeyDown == KeyCode.O){
       isOptions = true;
+      resetMouseEvents();
+    }
     else if(key.lastKeyDown == KeyCode.ESC){
+      resetMouseEvents();
       return OPEN_START;
     }
     else
@@ -117,13 +128,17 @@ class StartScreen{
     drawBg(Color.BROWN.name);
     drawTitle();
     
-    final String ent = 'NEW GAME            PRESS ENTER',
-                 load = 'LOAD GAME                      ',
+    final String load = 'LOAD GAME',
                  opt = "PRESS 'o' FOR OPTIONS";
                  
+    // for testing link
+    //ctx.fillStyle = 'orange';
+    //ctx.fillRect(newGame.x, newGame.y, newGame.w, newGame.h); 
+                 
     ctx.font = "15px 'Press Start 2P'";
-    ctx.fillStyle = 'rgb(213, 213, 213)';
-    ctx.fillText(ent, HALFW - ctx.measureText(ent).width/2, 202);
+    ctx.fillStyle = linkColor;
+    //ctx.fillText(ent, HALFW - ctx.measureText(ent).width/2, 202);
+    ctx.fillText(ent, newGame.x, newGame.y + newGame.h);
     
     ctx.font = "15px 'Press Start 2P'";
     ctx.fillStyle = 'rgb(163, 163, 163)';
@@ -133,7 +148,6 @@ class StartScreen{
     ctx.fillStyle = 'rgb(213, 213, 213)';
     ctx.fillText(opt, HALFW - ctx.measureText(opt).width/2, 407);
     ctx.fillText(ret, HALFW - ctx.measureText(ret).width/2, 442);
-    
   }
   void drawOptions(){
     drawBg(Color.BROWN.name);
@@ -154,6 +168,38 @@ class StartScreen{
     ctx.fillText(ret, HALFW - ctx.measureText(ret).width/2, 442);
   }
   
+  void mouseEvents(){
+    newGame = new Rect(HALFW - 57, 192, 120, 13);
+    
+    //print('newGame: (${newGame.x}, ${newGame.y}, ${newGame.w}, ${newGame.h})');
+    
+    mouseMoveE = canvas.onMouseMove.listen((e){
+      mouse.x = e.layerX*game.invRatio;
+      mouse.y = e.layerY*game.invRatio;
+      //print('mouse: (${mouse.x}, ${mouse.y})');
+      
+      if(util.checkCollision(mouse, newGame)){
+        canvas.style.cursor = 'pointer';
+        linkColor = 'blue';
+      }
+      else{
+        canvas.style.cursor = 'auto';
+        linkColor = 'rgb(213, 213, 213)';
+      }
+      
+    });
+    
+    mouseClickE = canvas.onClick.listen((e){
+      if(util.checkCollision(mouse, newGame))
+        linkClicked = true;
+    });
+  }
   
+  void resetMouseEvents(){
+    mouseMoveE.cancel();
+    mouseClickE.cancel();
+    canvas.style.cursor = 'auto';
+    linkColor = 'rgb(213, 213, 213)';
+  }
   
 }
