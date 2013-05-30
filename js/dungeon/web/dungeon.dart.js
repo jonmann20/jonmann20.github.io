@@ -6170,7 +6170,6 @@ Game: {"": "Object;fpsHolder,oldTime,fps,w<,h,invRatio",
     this.w = t2 * ratio;
     this.h = t3 * ratio;
     this.invRatio = 1 / ratio;
-    $.Primitives_printString($.toString$0(this.invRatio));
     t1 = $.cWrap.style;
     t2 = $.S(this.w) + "px";
     t1.set$width;
