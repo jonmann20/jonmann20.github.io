@@ -1,4 +1,4 @@
-var render = {
+/*var render = {
     init: function(){
     	// background
     	if(lvl[game.lvl].status){
@@ -65,4 +65,4 @@ var render = {
         ctx.font = "9px Helvetica";
         ctx.fillText(hit() + " fps", (canvas.width - 31), 10);   
 	},
-};
+};*/

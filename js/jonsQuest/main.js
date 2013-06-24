@@ -1,129 +1,133 @@
-var load = {
-	start: function(){
-		setInterval(utils.debugLoop, 1);
+load = function(){
+	return {
 		
-		this.meta();
-		this.loadingScreen();
-		this.setupInput();
-		
-		Game.init();
-		Hero.init();
-		Monster.init();
-		
-		this.pageElems();
-		this.postLoad();
-	},
+		/*
+			REQUIRES: game and hero singleton objects already instantiated
+		*/
+		init: function(){
+			//setInterval(utils.debugLoop, 1)
+			
+			meta()
+			loadingScreen()
+			setupInput()
+			pageElems()
+			
+			// initialize
+			level.setup()
+			hero.init()
+			Monster.init()
+			
+		    utils.reset()
+	    	game.loop()		// start game
+		}
+	}
 	
-	meta: function(){
-		canvas = $('canvas')[0];
-		ctx = canvas.getContext('2d');
-		canvas.width = 720;
-		canvas.height = 180;
-	},
+	function meta(){
+		canvas = $('canvas')[0]
+		ctx = canvas.getContext('2d')
+		canvas.width = 720
+		canvas.height = 360
+	}
 	
-	loadingScreen: function(){
-		ctx.fillStyle = "#e1e1e1";
-		ctx.font = "25px Helvetica";
-		ctx.fillText('Taking longer than normal ...', 150, canvas.height/2);
-	},
+	function loadingScreen(){
+		ctx.fillStyle = "#e1e1e1"
+		ctx.font = "25px Helvetica"
+		ctx.fillText('Taking longer than normal ...', 150, canvas.height/2)
+	}
 	
-	setupInput: function(){
+	function setupInput(){
 		// global key input
-		keysDown = {};
+		keysDown = {}
 		
 		addEventListener("keydown", function (e) {
 		    if(e.keyCode == 32)
-		    	e.preventDefault(); 	// space bar scrolling to bottom of page
+		    	e.preventDefault() 		// space bar scrolling to bottom of page
 		    else if(e.keyCode == 77)	// 'm' => mute/unmute
-		    	utils.muteHelper();
+		    	utils.muteHelper()
 		    	
 		    	
-		    keysDown[e.keyCode] = true;
-		}, false);
+		    keysDown[e.keyCode] = true
+		}, false)
 		
-		addEventListener("keyup", function (e) {delete keysDown[e.keyCode];}, false);
-	},
+		addEventListener("keyup", function (e) {delete keysDown[e.keyCode];}, false)
+	}
 	
-	pageElems: function(){
-		var DEFAULT_UPGRADE_MSG = 'Not Enough Upgrade Points!!';
+	function pageElems(){
+		var DEFAULT_UPGRADE_MSG = 'Not Enough Upgrade Points!!'
 		
 		$('.bulletUpgrade').unbind('click').click(function(e){
-			e.preventDefault();
+			e.preventDefault()
 			
 			if(bullet.cost <= upgrade.points){
-			    bullet.color = 'red';
-			    ++bullet.speed;
-				upgrade.points -= bullet.cost;
+			    bullet.color = 'red'
+			    ++bullet.speed
+				upgrade.points -= bullet.cost
 				
-				upgrade.msg = 'Bullet speed upgraded to ' + bullet.speed;
+				upgrade.msg = 'Bullet speed upgraded to ' + bullet.speed
 			}
 			else
-				upgrade.msg = DEFAULT_UPGRADE_MSG;
+				upgrade.msg = DEFAULT_UPGRADE_MSG
 				
-			$('#bulletSpeed').val(bullet.speed);
-			$("#gameMsg").text(upgrade.msg);
-		});
-		
+			$('#bulletSpeed').val(bullet.speed)
+			$("#gameMsg").text(upgrade.msg)
+		})
+	
 		$('.heroSpeedUpgrade').unbind('click').click(function(e){
-			e.preventDefault();
+			e.preventDefault()
 		    
 		    if(hero.speedCost <= upgrade.points){
-			    ++hero.speed;
-				upgrade.points -= hero.speedCost;
+			    ++hero.speed
+				upgrade.points -= hero.speedCost
 				
 			    upgrade.msg = "Hero's speed upgraded to " + hero.speed;
 			}
 			else
-				upgrade.msg = DEFAULT_UPGRADE_MSG;
+				upgrade.msg = DEFAULT_UPGRADE_MSG
 				
-			$('#heroSpeed').val(hero.speed);
-			$("#gameMsg").text(upgrade.msg); 
-		});
+			$('#heroSpeed').val(hero.speed)
+			$("#gameMsg").text(upgrade.msg)
+		})
 		
 		$('.heroJumpUpgrade').unbind('click').click(function(e){
-			e.preventDefault();
+			e.preventDefault()
 		    
 		    if(hero.jumpPower == hero.jumpPowerMax)
-		    	upgrade.msg = 'Already Maxed Out!!';
+		    	upgrade.msg = 'Already Maxed Out!!'
 		    else if(hero.jumpCost <= upgrade.points){
-			    ++hero.jumpPower;
-				upgrade.points -= hero.jumpCost;
+			    ++hero.jumpPower
+				upgrade.points -= hero.jumpCost
 				
-			    upgrade.msg = "Hero's jump power upgraded to " + hero.speed;
+			    upgrade.msg = "Hero's jump power upgraded to " + hero.speed
 			}
 			else
-				upgrade.msg = DEFAULT_UPGRADE_MSG;
+				upgrade.msg = DEFAULT_UPGRADE_MSG
 				
-			$('#heroJump').val(hero.jumpPower);
-			$("#gameMsg").text(upgrade.msg); 
-		});
+			$('#heroJump').val(hero.jumpPower)
+			$("#gameMsg").text(upgrade.msg)
+		})
 
 		
 		// Upgrade Shop Default Values
-		$('#bulletSpeed').val(bullet.speed);
-		$('#heroSpeed').val(hero.speed);
-		$('#heroJump').val(hero.jumpPower);
+		$('#bulletSpeed').val(bullet.speed)
+		$('#heroSpeed').val(hero.speed)
+		$('#heroJump').val(hero.jumpPower)
 		
 		// Upgrade Shop Default Costs
-		$('#bulletCost').val(bullet.cost);
-		$('#heroSpeedCost').val(hero.speedCost);
-		$('#heroJumpCost').val(hero.jumpCost);
-	},
-	
-	postLoad: function(){
-        game.sound.bgMusic.lvl0.loop = true;
-        game.sound.bgMusic.lvl0.pause();
-        utils.muteSound(true);
+		$('#bulletCost').val(bullet.cost)
+		$('#heroSpeedCost').val(hero.speedCost)
+		$('#heroJumpCost').val(hero.jumpCost)
+		
+		
+        game.sound.bgMusic.lvl0.loop = true
+        game.sound.bgMusic.lvl0.pause()
+        utils.muteSound(true)
         
         $('.audioState').click(function(){
-			utils.muteHelper();
-        });
-	    
-	    utils.reset();
-	    gameLoop();	// start game
+			utils.muteHelper()
+        })
 	}
-};
+}()
 
 $(function(){
-	load.start();		// pre-load game
-});
+	load.init()		// pre-load game
+})

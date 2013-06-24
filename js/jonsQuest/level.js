@@ -7,7 +7,7 @@ var level = {
 		lvl = new Array(NUM_LEVELS);
 		
 		lvlBg = {
-			lvl0: '../img/jonsQuest/platforms.png',
+			lvl0: '../img/jonsQuest/big_lvl0.jpg',//'../img/jonsQuest/platforms.png',
 			lvl1: 'none',
 		    lvl2: '../img/jonsQuest/lvl2.jpg',
 		    lvl3: '../img/jonsQuest/lvl3.jpg',
@@ -15,18 +15,27 @@ var level = {
 		};
 		
 		lvlCollisionPts = {
+			/*
 			lvl0: {	
+							obj0: {
+								x: 112,
+								y: 119,	
+								w: 62,
+								h: 61
+							},
+							obj1: {
+								x: 348, 
+								y: 95,
+								w: 217, 
+								h: 21
+							}
+						},*/
+			lvl0: {
 				obj0: {
-					x: 112,
-					y: 119,	
-					w: 62,
-					h: 61
-				},
-				obj1: {
-					x: 348, 
-					y: 95,
-					w: 217, 
-					h: 21
+					x: 694,
+					y: 308,
+					w: 971,
+					h: 52
 				}
 			},
 			lvl3: {
@@ -96,7 +105,8 @@ var level = {
 	render: function(){
 		// background
     	if(lvl[game.lvl].status){
-    		ctx.drawImage(lvlBgImg['lvl' + game.lvl], 0, 0);
+    		//ctx.drawImage(lvlBgImg['lvl' + game.lvl], 0, 0);
+    		ctx.drawImage(lvlBgImg['lvl' + game.lvl], hero.lvlX, 0, canvas.width, canvas.height, 0, 0, canvas.width, canvas.height);
     	}
     	else{
     		if(lvl[game.lvl].bgColor)

@@ -149,6 +149,7 @@ class StartScreen{
     ctx.fillText(opt, HALFW - ctx.measureText(opt).width/2, 407);
     ctx.fillText(ret, HALFW - ctx.measureText(ret).width/2, 442);
   }
+  
   void drawOptions(){
     drawBg(Color.BROWN.name);
     drawTitle();
@@ -176,7 +177,8 @@ class StartScreen{
     mouseMoveE = canvas.onMouseMove.listen((e){
       mouse.x = e.layerX*game.invRatio;
       mouse.y = e.layerY*game.invRatio;
-      //print('mouse: (${mouse.x}, ${mouse.y})');
+      
+      print('mouse: (${mouse.x}, ${mouse.y})');
       
       if(util.checkCollision(mouse, newGame)){
         canvas.style.cursor = 'pointer';

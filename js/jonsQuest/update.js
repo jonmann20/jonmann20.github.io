@@ -1,4 +1,4 @@
-var update = {
+/*var update = {
 	init:function(){
 		this.inputHandler();
 		this.bulletHandler();
@@ -236,3 +236,4 @@ var update = {
 	}
 	
 };// end update
+*/
