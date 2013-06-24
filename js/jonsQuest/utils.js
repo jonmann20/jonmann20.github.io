@@ -19,9 +19,11 @@ utils = {
 		//print_r('lvlBgImg')
 	},
 
-	isCollision : function(a, b, moe) {
-		if ((a.x + moe <= (b.x + b.w)) && // a is to the left of the right side of b
-			(b.x + moe <= (a.x + a.w)) && // a is to the right of the left side of b
+	isCollision : function(a, b, moe, isLvl) {
+		var aX = (typeof(isLvl) !== 'undefined')  ? a.x + a.lvlX : a.x
+		
+		if ((aX + moe <= (b.x + b.w)) && // a is to the left of the right side of b
+			(b.x + moe <= (aX + a.w)) && // a is to the right of the left side of b
 			(a.y + moe <= (b.y + b.h)) && // a is higher than the bot of b
 			(b.y + moe <= (a.y + a.h)) 	  // a is lower than the top of b
 		){
@@ -31,48 +33,6 @@ utils = {
 		return false
 	},
 	
-	lvlCollis: function(a,b,moe){
-		
-		//console.log({i: a.x, j: a.lvlX, k: b.x})
-		
-		var aLX = a.x + a.lvlX// - a.w
-
-		//console.log('first: ' + a.lvlX + ' <= ' + (b.x + b.w))
-		//console.log('second: ' + (b.x + moe) + ' <= ' + (aLX + a.w))
-		//console.log('third: ' + a.y + ' <= ' + (b.y + b.h))
-		//console.log('fourth: ' + b.y + ' <= ' + (a.y + a.h))
-
-		var one = false,
-			two = false,
-			three = false,
-			four = false
-
-		if((aLX+ moe <= (b.x + b.w)))
-	 		one = true
-		if (b.x + moe <= (aLX + a.w))
-			two = true
-		if(a.y + moe <= (b.y + b.h))
-			three = true
-		if(b.y + moe <= (a.y + a.h))
-			four = true
-			
-		//console.log({a: one, b: two, c: three, d: four})
-		
-
-		if ((aLX+ moe <= (b.x + b.w)) && // a is to the left of the right side of b
-			(b.x + moe <= (aLX + a.w)) && // a is to the right of the left side of b
-			(a.y + moe <= (b.y + b.h)) && // a is higher than the bot of b
-			(b.y + moe <= (a.y + a.h)) // a is lower than the top of b
-		) {
-
-			console.log('true')
-
-			return true
-		}
-
-		return false
-	},
-
 	drawEllipse : function(x, y, w, h) {
 		var kappa = .5522848,
 			ox = (w / 2) * kappa, // control point offset horizontal

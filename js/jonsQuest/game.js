@@ -1,7 +1,11 @@
 game = function(){
+	var totalTime = 0,
+		lastFPS = 0
+	
 	return {
 		gravity: 1,
 		friction: 1,
+		padBot: 20,
 		lvl: 0,
 		fps: 60,
 		sound: {
@@ -25,7 +29,10 @@ game = function(){
 		
 				update()
 				render()
+				
 				drawFPS(Math.round(1000 / dt))
+				
+				++totalTime
 				
 			}, 1000 / game.fps)
 		}
@@ -35,7 +42,7 @@ game = function(){
 	
 	function update(){
 		hero.update()
-		//Monster.update()
+		monster.update()
 			
 		level.update()
 	}
@@ -43,15 +50,19 @@ game = function(){
 	function render(){
 		level.render()
 	    	
-    	//Monster.render()
+    	monster.render()
 		hero.render()
 	}
 	
    	function drawFPS(num){
-	    ctx.fillStyle = "rgba(23,23,23, 0.6)"
+	    ctx.fillStyle = "rgba(23,23,23, 0.7)"
 	    ctx.fillRect((canvas.width - 37), 1, 35, 14)
         ctx.fillStyle = "#e1e1e1"
         ctx.font = "9px Helvetica"
-        ctx.fillText(num + " fps", (canvas.width - 31), 10);  
+        
+        if(totalTime % 12 == 0)
+        	lastFPS = num
+    	
+	  	ctx.fillText(lastFPS + " fps", (canvas.width - 31), 10);
 	}
 }()

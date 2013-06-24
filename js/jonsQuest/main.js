@@ -15,7 +15,7 @@ load = function(){
 			// initialize
 			level.setup()
 			hero.init()
-			Monster.init()
+			monster.init()
 			
 		    utils.reset()
 	    	game.loop()		// start game
@@ -32,7 +32,7 @@ load = function(){
 	function loadingScreen(){
 		ctx.fillStyle = "#e1e1e1"
 		ctx.font = "25px Helvetica"
-		ctx.fillText('Taking longer than normal ...', 150, canvas.height/2)
+		ctx.fillText('Loading...', 150, canvas.height/2)
 	}
 	
 	function setupInput(){

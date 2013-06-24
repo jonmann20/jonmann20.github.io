@@ -12,60 +12,24 @@ var level = {
 		    lvl2: '../img/jonsQuest/lvl2.jpg',
 		    lvl3: '../img/jonsQuest/lvl3.jpg',
 		    lvl4: '../img/jonsQuest/lvl4.png'
-		};
+		}
 		
 		lvlCollisionPts = {
-			/*
-			lvl0: {	
-							obj0: {
-								x: 112,
-								y: 119,	
-								w: 62,
-								h: 61
-							},
-							obj1: {
-								x: 348, 
-								y: 95,
-								w: 217, 
-								h: 21
-							}
-						},*/
 			lvl0: {
 				obj0: {
 					x: 694,
-					y: 308,
+					y: 286,
 					w: 971,
-					h: 52
-				}
-			},
-			lvl3: {
-				obj0: {
-					x: 0,	
-					y: 125,
-					w: 245,
-					h: 55
+					h: 54
 				},
 				obj1: {
-					x: 313,	
-					y: 125,
-					w: 218,	
-					h: 55
-				},
-				obj2: {
-					x: 559,
-					y: 79,
-					w: 71,
-					h: 27
-				},
-				obj3: {
-					x: 678,	
-					y: 125,
-					w: 36,	
-					h: 55
+					x: 410,
+					y: 190,
+					w: 190,
+					h: 40
 				}
-				
 			}
-		};
+		}
 		
 		for(var i=0; i < NUM_LEVELS; i++){
 			lvl[i] = {
@@ -76,8 +40,8 @@ var level = {
 		}
 		
 		utils.loadImages(lvlBg, function(num) {
-			lvl[num].status = true;		
-		});
+			lvl[num].status = true
+		})
 	},
 	
 	/******************** Update ********************/
@@ -105,7 +69,6 @@ var level = {
 	render: function(){
 		// background
     	if(lvl[game.lvl].status){
-    		//ctx.drawImage(lvlBgImg['lvl' + game.lvl], 0, 0);
     		ctx.drawImage(lvlBgImg['lvl' + game.lvl], hero.lvlX, 0, canvas.width, canvas.height, 0, 0, canvas.width, canvas.height);
     	}
     	else{

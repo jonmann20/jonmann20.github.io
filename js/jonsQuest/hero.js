@@ -28,7 +28,7 @@ hero = function(){
 		init: function(){
 			// dirty harry sprite source		
 			// http://opengameart.org/content/2d-hero
-			//heroImgL.src = '../img/jonsQuest/dirtyHarrySprite.png';
+			//hero.img.src = '../img/jonsQuest/dirtyHarrySprite.png';
 			
 			hero.imgL = new Image()
 			hero.imgR = new Image()
@@ -67,8 +67,8 @@ hero = function(){
 		    hero.y = 0
 		    hero.vY = 0
 		}
-		else if(hero.y > (canvas.height - hero.h)){ // bottom
-		    hero.y = canvas.height - hero.h
+		else if(hero.y > (canvas.height - game.padBot - hero.h)){ // bottom
+		    hero.y = canvas.height - game.padBot - hero.h
 		    hero.isJumping = false
 		}
 		else if(hero.onObj){ 						// on top of obj
@@ -96,9 +96,9 @@ hero = function(){
 		
 	function checkCollision(){
 		//---hero and monster
-		/*
+		
 		if(utils.isCollision(hero, monster, 0))
-					utils.reset();*/
+			utils.reset()
 		
 	    
 	    bulletHandler()		// bullet's and monster/screen
@@ -113,16 +113,9 @@ hero = function(){
 			k = lvlCollisionPts[i][j]
 			
 			// using player dimensions as the moe
-			if(utils.lvlCollis(hero, k, 0)){
+			if(utils.isCollision(hero, k, 0, true)){
 				if(hero.dirR){								// left side of obj
-					
-					//console.log(hero.lvlX + ',,' + hero.x + ' < ' + k.x)
 					if(hero.lvlX - hero.x < k.x){
-						//hero.onObjX = k.x - hero.w
-						
-						//console.log({a: hero.x, b: hero.lvlX, c: k.x})
-						
-						
 						hero.onObjX = k.x-hero.lvlX - hero.w
 						hero.onObjLvlX = hero.lvlX
 																		
@@ -138,7 +131,6 @@ hero = function(){
 					}
 				}
 				
-				console.log({a: (hero.y+hero.h-17), b: k.y})
 				
 				if((hero.x != hero.onObjX) && ((hero.y + hero.h - 17) < k.y) && // top of obj 
 					(hero.vY > 0)	// moving down
@@ -147,9 +139,6 @@ hero = function(){
 					hero.isJumping = false
 					hero.onObj = true
 					collisionDir = Dir.TOP
-					
-					console.log('top')
-					
 				}
 				else{												// bot of obj
 					if((hero.y + hero.h) > (k.y + k.h)){
@@ -165,8 +154,6 @@ hero = function(){
 				if((collisionDir == Dir.LEFT) || (collisionDir == Dir.RIGHT)){
 					hero.x = hero.onObjX
 					hero.lvlX = hero.onObjLvlX
-					
-					//console.log('x = ' + hero.onObjX + '\t == ' + hero.x)
 				}
 				
 				break
@@ -245,12 +232,12 @@ hero = function(){
 		hero.y += hero.vY
 		
 		
-		if((hero.dirR && hero.x >= ((canvas.width/2) + 70)) ||
-		   (!hero.dirR && hero.x <= ((canvas.width/2) - 70))
+		if(((hero.dirR && hero.x >= ((canvas.width/2) + 60)) ||
+		   (!hero.dirR && hero.x <= ((canvas.width/2) - 70))) &&
+		   (hero.lvlX + hero.vX >= 0)
+		   // && hero.lvlX + hero.vX <= canvas.width)
 	    ){
-			
-			if(hero.lvlX + hero.vX >= 0)// &&			   hero.lvlX + hero.vX <= canvas.width)
-				hero.lvlX += hero.vX
+			hero.lvlX += hero.vX
 		}
 		else {
 			hero.x += hero.vX
