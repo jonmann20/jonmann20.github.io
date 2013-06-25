@@ -24,7 +24,7 @@ function deleteHTML {
 		ff=${f#/home/jon/git/jonmann20.github.com/} #TODO: change to path???
 		fname=${ff%.*}
 	
-		if [[ ("$fname" == "js/computerGraphics/web/computergraphics") || "$fname" == "js/dungeon/web/dungeon" || "$fname" == "js/dart/dungeon/web/dungeon" ]]
+		if [[ ("$fname" == "js/computerGraphics/web/computergraphics") || "$fname" == "games/dungeon/web/dungeon" ]]
 		then
 			echo -e "\t $RED  -skipped $fname $RESET"	
 		else
