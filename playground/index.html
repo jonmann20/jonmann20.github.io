@@ -1,0 +1,198 @@
+
+<!DOCTYPE html>
+<!--[if lte IE 8]>      
+	<html class='ie8 oldIE'> 
+	<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>		
+<![endif]-->
+<!--[if IE 9]>     <html class='ie9 oldIE'> <![endif]-->
+<!--[if gte IE 10 | !(IE)]><!--> 	 <html> <!--<![endif]-->  
+<head>
+	<meta charset='utf-8'>
+    <title>Playground</title>
+    <meta name='description' content='A place to create tech demos and other random things.' />
+    <meta name='keywords' content='' />
+    <meta name='viewport' content='width=device-width' />
+
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300|Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+    <link rel='stylesheet' type='text/css' href='../css/the.css' />
+    <link rel='icon' type='image/ico' href='../img/favicon.ico'>
+    </head>
+<body class='playground absHover'>
+    <div class='page'>
+	    <div class='inner clr'>
+	    				<header>
+				<nav>
+	            	<a href='../index'>Jon Wiedmann<br />.com</a>
+	            </nav>
+	            <nav class='hdrNav2'>
+	            	<a href='../games/'>Games</a>
+	            	<a href='../music/'>Music</a>
+	            	<a href='../playground/'>Playground</a>
+	            	  	            	<a href='../portfolio/'>Portfolio</a>
+	            </nav>
+	        </header>
+	        			
+			<section class='main'>
+				
+<div class="colL">
+	<h1>Playground</h1>
+	<p>Check out some tech demos.</p><br />
+	
+    <ul>
+    <li><a id="bCube" href="breakdancing-cube">Breakdancing Cube</a></li>
+    <li><a id="stars" href="stars">Starry Background</a></li>
+    <li><a id="bPit" href="ballPit">Ball Pit</a></li>
+    <li><a id="floatingSun" href="floating-sun">Floating Sun</a></li>
+    <li><a id="uStream" href="USTREAM-demo">USTREAM demo</a></li>
+</ul></div>
+<div class="colR">
+	<div id="divDefault">
+		<h2>Explore</h2>
+		<p>Hover over the links to learn about the demos.</p>
+		
+		<pre class='duffsDevice'>
+
+<a href="//en.wikipedia.org/wiki/Duff's_device" target="_blank">Duff&rsquo;s Device:</a>
+
+int n = (len + 7) >> 3;
+switch(len % 8){
+    case 0: do{ *to = *from++;
+    case 7:     *to = *from++;
+    case 6:     *to = *from++;
+    case 5:     *to = *from++;
+    case 4:     *to = *from++;
+    case 3:     *to = *from++;
+    case 2:     *to = *from++;
+    case 1:     *to = *from++;
+            } while(--n > 0);
+}
+        </pre>
+	</div>
+	<div id="divBreakdancingCube">
+		<h2>Breakdancing Cube</h2>
+		<p>A pure CSS<sub>3</sub> animation demo.</p>
+	</div>
+	<div id="divStarryBackground">
+		<h3>Starry Background</h3>
+		<p>A Javascript and HTML<sub>5</sub> canvas example showcasing a starry background.</p>
+		<a id="stars" class='opaque' href="stars"><img src='../img/playground/starryBgPreview.jpg' alt='stars in the galaxy' /></a>
+	</div>
+	<div id="divBallPit">
+		<h3>Ball Pit</h3>
+		<p>A Javascript and HTML<sub>5</sub> canvas example with balls colliding into the edges of a box.</p>
+		<a id="bPit" class='opaque' href="ballPit"><img src='../img/playground/ballPitPreview.jpg' alt='ballpit' /></a>
+	</div>
+	<div id="divUstream">
+        <h3>USTREAM demo</h3>
+        <p>A USTREAM api demo.</p>
+    </div>
+    <div id="divFloatingSun">
+        <h3>Floating Sun</h3>
+        <p>A computer graphics simulation, involving a light source and water.</p>
+    </div>
+
+			</section>
+	    </div>        
+                <footer>
+            <div>
+            	<span class='footL'>
+            		<a href='../about'>About</a> 
+            		<a class='footContact' href='../contact'>Contact</a>
+            		<a class='imgLinks' href='//facebook.com/jon.wiedmann' target='_blank'>
+            			<i class='spriteIcons facebook'>Facebook</i>
+            		</a>
+            		<a class='imgLinks' href='//youtube.com/user/jonmann19/videos' target='_blank'>
+            			<i class='spriteIcons youtube'>YouTube</i>
+            		</a>
+            		<a class='imgLinks' href='//twitter.com/#!/jonmann20' target='_blank'>
+            			<i class='spriteIcons twitter'>Twitter</i>
+            		</a>
+            		<a class='imgLinks' href='//plus.google.com/u/2/113437309528838781826/posts' target='_blank'>
+            			<i class='spriteIcons googlePlus'>Google Plus</i>
+            		</a>
+            		<a class='imgLinks' href='//github.com/jonmann20' target='_blank'>
+            		    <i class='spriteIcons github'>GitHub</i>
+            		</a>
+            	</span>
+            	<span class='footR'>
+            		<a href='../index'>Jon Wiedmann</a> &mdash; 2013            	</span>
+            </div>
+        </footer>
+            </div>    
+    <!--[if lt IE 9]>
+	    <script src='//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js'></script>
+	<![endif]-->
+	<!--[if gte IE 9]><!-->
+	    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+	<!--[endif]-->
+    
+		<script src="../js/plugins/jquery.hoverIntent.min.js"></script>
+		<script>
+			$(function() {
+				var active = "Default";
+				
+				function hideOld(name){
+					if(active != name){
+						$("#div" + active).fadeOut(250);
+						$("#div" + name).fadeIn(250);
+					}
+				};
+				
+				function keepNew(name){
+					active = name;
+				};
+				
+				$("#bCube").hoverIntent({
+					over: function(){
+		         		hideOld("BreakdancingCube");
+		      		},
+		      		timeout: 0,
+		      		out: function(){
+		      			keepNew("BreakdancingCube");
+		      		}
+				});
+				
+				$("#stars").hoverIntent({
+					over: function(){
+		         		hideOld("StarryBackground");
+		      		},
+		      		timeout: 0,
+		      		out: function(){
+		      			keepNew("StarryBackground");
+		      		}
+				});
+				
+				$("#bPit").hoverIntent({
+					over: function(){
+		         		hideOld("BallPit");
+		      		},
+		      		timeout: 0,
+		      		out: function(){
+		      			keepNew("BallPit");
+		      		}
+				});
+				
+                $("#uStream").hoverIntent({
+                    over: function(){
+                        hideOld("Ustream");
+                    },
+                    timeout: 0,
+                    out: function(){
+                        keepNew("Ustream");
+                    }
+                });
+				
+				$("#floatingSun").hoverIntent({
+                    over: function(){
+                        hideOld("FloatingSun");
+                    },
+                    timeout: 0,
+                    out: function(){
+                        keepNew("FloatingSun");
+                    }
+                });
+			});
+		
+		</script> 
+	</body>
+</html>
