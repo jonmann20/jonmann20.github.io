@@ -1,30 +1,35 @@
 lvl0 = function(){
 	
-	//var s = null
-	
 	return {
 		sack: null,
 		
 		init: function(){
-			var g = new GameObject()
-			g.init(700, 75, 20, 20)
+			var g = new GameObj()
+			g.init(680, 71, 20, 24, 'img/sack.png')
 			
 			this.sack = new Sack();
-			this.sack.init(g);
+			this.sack.init(g, 5);
 		},
 		
 		update: function(){
-			// fix positioning
 			
-			//console.log(s.x + '--- ' + hero.x + ',' + hero.lvlX)
+			if(!this.sack.collected){
 			
-			//s.x -= hero.lvlX
+				if(utils.isCollision(hero, this.sack, 0)){
+					this.sack.collected = true
+					
+					hero.ammo += this.sack.val
+					//util.drawValPopup(hero.ammo, 'ammo')
+				}
+			}
 			
 			
 		},
 		
 		render: function(){
-			this.sack.draw();
+			
+			if(!this.sack.collected)
+				this.sack.draw();
 		}
 	}
 	

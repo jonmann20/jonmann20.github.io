@@ -28,8 +28,11 @@ load = function(){
 	function meta(){
 		canvas = $('canvas')[0]
 		ctx = canvas.getContext('2d')
-		canvas.width = 720
-		canvas.height = 360
+		FULLW = canvas.width = 720
+		FULLH = canvas.height = 440
+		
+		FULLH -= game.padHUD
+		
 	}
 	
 	function loadingScreen(){

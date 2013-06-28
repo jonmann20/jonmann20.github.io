@@ -105,8 +105,8 @@ utils = {
 			hero.y = 0
 		}
 
-		monster.x = (Math.random() * (canvas.width - monster.w - monster.offset))
-		monster.y = (Math.random() * (canvas.height - monster.h - monster.offset))
+		monster.x = (Math.random() * (FULLW - monster.w - monster.offset))
+		monster.y = (Math.random() * (FULLH - monster.h - monster.offset))
 		monster.initX = monster.x
 		monster.initY = monster.y
 
@@ -136,6 +136,11 @@ utils = {
 		}
 	},
 
+	
+	drawValPopup: function(item, msg){
+		
+	},
+	
 	// 8 versions over original each with 1/8 of full opacity (square filter)
 	blur : function(numPasses, callback) {
 		ctx.globalAlpha = 0.125;

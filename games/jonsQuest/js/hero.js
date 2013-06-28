@@ -24,6 +24,7 @@ hero = function(){
 		jumpMod: 5,			// jumpMod must == jumpPower
 		jumpPower: 5,
 		jumpPowerMax: 10,
+		ammo: 0,
 		
 		init: function(){
 			img = new Image()
@@ -179,15 +180,21 @@ hero = function(){
 	    	hero.vX = 0
 	    
 	    if(74 in keysDown){ 			// shoot (j)
-	    	utils.playSound(game.sound.gun)
-	        
-            bulletArr[bulletArr.length] = {
-                x: hero.x,
-                y: hero.y,
-                w: bullet.w,
-                h: bullet.h,
-                dirR: hero.dirR
-            }
+	    	
+	    	if(hero.ammo > 0){
+	    	
+		    	utils.playSound(game.sound.gun)
+		        
+	            bulletArr[bulletArr.length] = {
+	                x: hero.x,
+	                y: hero.y,
+	                w: bullet.w,
+	                h: bullet.h,
+	                dirR: hero.dirR
+	            }
+		    	
+		    	--hero.ammo
+	    	}
 	        
 	        delete keysDown[74]
 		}
@@ -225,13 +232,17 @@ hero = function(){
 		hero.y += hero.vY
 		
 		
-		if(((hero.dirR && hero.x >= ((canvas.width/2) + 60)) ||
-		   (!hero.dirR && hero.x <= ((canvas.width/2) - 70))) &&
+		if(((hero.dirR && hero.x >= ((canvas.width/2) + 35)) ||
+		   (!hero.dirR && hero.x <= ((canvas.width/2) - 45))) &&
 		   (hero.lvlX + hero.vX >= 0)
 		   // && hero.lvlX + hero.vX <= canvas.width)
 	    ){
 			hero.lvlX += hero.vX
+			
+			
+			// TODO: move to better location
 			lvl0.sack.x -= hero.vX
+			monster.x -= hero.vX
 		}
 		else {
 			hero.x += hero.vX

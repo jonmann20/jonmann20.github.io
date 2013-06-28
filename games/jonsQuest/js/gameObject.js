@@ -1,4 +1,4 @@
-GameObject = function(){
+GameObj = function(){
 	var img = null,
 		ready = false
 	
@@ -10,11 +10,17 @@ GameObject = function(){
 		w: -1,
 		h: -1,
 		
-		init: function(xx, yy, ww, hh){
+		init: function(xx, yy, ww, hh, src){
 			this.initX = this.x = xx
 			this.intiY = this.y = yy
 			this.w = ww
 			this.h = hh	
+			
+			if(typeof(src) !== 'undefined'){
+				img = new Image()
+				img.onload = function(){ready = true}
+				img.src = src
+			}
 		},
 		
 		
