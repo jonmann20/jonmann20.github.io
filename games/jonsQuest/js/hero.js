@@ -231,6 +231,7 @@ hero = function(){
 		   // && hero.lvlX + hero.vX <= canvas.width)
 	    ){
 			hero.lvlX += hero.vX
+			lvl0.sack.x -= hero.vX
 		}
 		else {
 			hero.x += hero.vX

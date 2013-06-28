@@ -17,6 +17,9 @@ load = function(){
 			hero.init()
 			monster.init()
 			
+			lvl0.init()
+			
+			
 		    utils.reset()
 	    	game.loop()		// start game
 		}

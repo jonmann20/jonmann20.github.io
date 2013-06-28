@@ -97,7 +97,7 @@ utils = {
 	},
 
 	reset : function() {
-		hero.x = 5
+		hero.x = 23
 		hero.y = canvas.height - hero.h
 		hero.isJumping = false
 

@@ -14,16 +14,22 @@ var level = {
 		lvlCollisionPts = {
 			lvl0: {
 				obj0: {
-					x: 694,
-					y: 286,
-					w: 971,
-					h: 54
+					x: 310,
+					y: 160,
+					w: 200,
+					h: 30
 				},
 				obj1: {
-					x: 410,
-					y: 190,
-					w: 190,
-					h: 40
+					x: 600,
+					y: 94,
+					w: 200,
+					h: 30
+				},
+				obj2: {
+					x: 562,
+					y: 229,
+					w: 300,
+					h: 30
 				}
 			}
 		}
@@ -43,6 +49,10 @@ var level = {
 	
 	/******************** Update ********************/
 	update: function(){
+		
+    	if(game.lvl == 0)
+    		lvl0.update()
+		
 		var tempLvl = game.lvl + 1;
 		
 		if(tempLvl >= NUM_LEVELS)
@@ -76,5 +86,9 @@ var level = {
     			
     		ctx.fillRect(0, 0, canvas.width, canvas.height);
     	}
+    	
+    	if(game.lvl == 0)
+    		lvl0.render()
+    	
 	}
 };

@@ -98,7 +98,10 @@
       $pageBodyClass = 'games pageFullW jonsQuest';
 	  $pageJs = '
 	  	<script src="js/utils.js"></script>
-	  	<script src="js/level.js"></script>
+		<script src="js/gameObject.js"></script>
+		<script src="js/gameItem.js"></script>
+	  	<script src="js/level/level.js"></script>
+		<script src="js/level/level0.js"></script>
 	  	<script src="js/game.js"></script>
 	  	<script src="js/hero.js"></script>
 	  	<script src="js/monster.js"></script>
