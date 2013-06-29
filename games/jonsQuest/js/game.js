@@ -1,6 +1,6 @@
 game = function(){
 	var	avgFPS = 0,
-		time,
+		_time,
 		fpsHistory = [0]
 	
 	function update(){
@@ -27,7 +27,7 @@ game = function(){
     	if(num != 'Infinity')
         	fpsHistory.push(num)
         	
-        if(game.totalTime % 20 == 0){
+        if(game.totalTicks % 20 == 0){
         	var tot = 0
         	for(var i in fpsHistory){
         		tot += fpsHistory[i]
@@ -37,7 +37,7 @@ game = function(){
         	fpsHistory = []
         }
     	
-	  	ctx.fillText(avgFPS + " FPS", (FULLW - 85), FULLH + 66);
+	  	ctx.fillText(avgFPS + " FPS", FULLW - 84, FULLH + 65);
 	}
 	
 	return {
@@ -47,7 +47,7 @@ game = function(){
 		padHUD: 80,
 		lvl: 0,
 		fps: 60,
-		totalTime: 0,
+		totalTicks: 0,
 		actualTime: 0,
 		sound: {
 		    bgMusic: {
@@ -64,16 +64,21 @@ game = function(){
 				requestAnimFrame(game.loop)
 			
 				var now = new Date().getTime(),
-		             dt = now - (time || now)
+		             dt = now - (_time || now)
 		 
-		    	time = now
+		    	_time = now
 		
 				update()
 				render()
 				
+				
 				drawFPS(Math.round(1000 / dt))
 				
-				++game.totalTime
+				++game.totalTicks
+				
+				if(game.totalTicks % 60 == 0)
+					++game.actualTime
+				
 				
 			}, 1000 / game.fps)
 		}

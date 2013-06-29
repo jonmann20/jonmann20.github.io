@@ -5,20 +5,62 @@ level = function() {
 		syringe = null,
 		medKit = null
 	
+	function drawHUD(){
+		// background
+		ctx.fillStyle = "#070707"
+		ctx.fillRect(0, FULLH, FULLW, game.padHUD)
+		
+        ctx.fillStyle = "#ddd"
+        ctx.font = "12px 'Press Start 2P'"
+        	
+        	
+    	ctx.fillText("HP-" + hero.healthLvl, 15, FULLH + 24)
+    	ctx.fillText("MP-" + hero.manaLvl, 15, FULLH + 48)
+    	ctx.fillText("XP", 15, FULLH + 71)
+    	
+		// hp kit
+    	ctx.fillText(hero.medKits, 210, FULLH + 50)
+    	medKit.draw()
+    	
+		// mp kit
+		ctx.fillText("0", 315, FULLH + 50)
+		syringe.draw()
+    	
+		// ammo
+    	ctx.fillText(hero.ammo, 420, FULLH + 50)
+    	shuriken.draw()
+		
+		// money
+		ctx.fillText("0", 525, FULLH + 50)
+		cash.draw()
+		
+		// time
+		var min = Math.floor(game.actualTime / 60),
+			sec = game.actualTime % 60
+		
+			if(sec < 10)
+				sec = '0' + sec
+			
+			if(min < 10)
+				min = '0' + min
+		
+		ctx.fillText(min + ':' + sec, FULLW - 84, FULLH + 34)
+	}
+		
 	return {
 		setup: function(){
 			
 			medKit = new GameObj()
-			medKit.init(238, FULLH + 31, 25, 22, 'img/medKit.png')
+			medKit.init(238, FULLH + 31, 25, 24, 'img/medKit.png')
 			
 			syringe = new GameObj()
-			syringe.init(342, FULLH + 31, 30, 30, 'img/syringe.png')
+			syringe.init(342, FULLH + 31, 25, 25, 'img/syringe.png')
 			
 			shuriken = new GameObj()
-			shuriken.init(446, FULLH + 33, 20, 20, 'img/shuriken.png')
+			shuriken.init(447, FULLH + 32, 24, 24, 'img/shuriken.png')
 			
 			cash = new GameObj()
-			cash.init(548, FULLH + 33, 21, 18, 'img/cash.png')
+			cash.init(548, FULLH + 33, 22, 24, 'img/cash.png')
 			
 			
 			// levels
@@ -108,56 +150,11 @@ level = function() {
 	    		ctx.fillRect(0, 0, FULLW, FULLH)
 	    	}
 	    	
-	    	this.drawHUD()
+	    	drawHUD()
 	    	
 	    	if(game.lvl == 0)
 	    		lvl0.render()
 	    	
-		},
-		
-		drawHUD: function(){
-			// background
-			ctx.fillStyle = "#070707"
-			ctx.fillRect(0, FULLH, FULLW, game.padHUD)
-			
-	        ctx.fillStyle = "#ddd"
-	        ctx.font = "12px 'Press Start 2P'"
-	        	
-	    	// hp
-	    	ctx.fillText("HP: |---|", 15, FULLH + 33)
-			
-			// hp kit
-	    	ctx.fillText("0", 210, FULLH + 50)
-	    	medKit.draw()
-	    	
-			// mp
-	    	ctx.fillText("MP: |---|", 15, FULLH + 63)
-			
-			// mp kit
-			ctx.fillText("0", 315, FULLH + 50)
-			syringe.draw()
-	    	
-			// ammo
-	    	ctx.fillText(hero.ammo, 420, FULLH + 50)
-	    	shuriken.draw()
-			
-			// money
-			ctx.fillText("0", 525, FULLH + 50)
-			cash.draw()
-			
-			// level name
-			
-			// time
-			var sec = Math.floor(game.totalTime / 60),
-				min = Math.floor(sec / 60)
-				
-				if(sec < 10)
-					sec = '0' + sec
-				
-				if(min < 10)
-					min = '0' + min
-			
-			ctx.fillText(min + ':' + sec, FULLW - 85, FULLH + 35)
 		}
 	}
 }()

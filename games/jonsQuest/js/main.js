@@ -10,7 +10,6 @@ load = function(){
 			meta()
 			loadingScreen()
 			setupInput()
-			pageElems()
 			
 			// initialize
 			level.setup()
@@ -33,6 +32,13 @@ load = function(){
 		
 		FULLH -= game.padHUD
 		
+        game.sound.bgMusic.lvl0.loop = true
+        game.sound.bgMusic.lvl0.pause()
+        utils.muteSound(true)
+        
+        $('.audioState').on('click', function(){
+			utils.muteHelper()
+        })
 	}
 	
 	function loadingScreen(){
@@ -56,81 +62,6 @@ load = function(){
 		}, false)
 		
 		addEventListener("keyup", function (e) {delete keysDown[e.keyCode];}, false)
-	}
-	
-	function pageElems(){
-		var DEFAULT_UPGRADE_MSG = 'Not Enough Upgrade Points!!'
-		
-		$('.bulletUpgrade').unbind('click').click(function(e){
-			e.preventDefault()
-			
-			if(bullet.cost <= upgrade.points){
-			    bullet.color = 'red'
-			    ++bullet.speed
-				upgrade.points -= bullet.cost
-				
-				upgrade.msg = 'Bullet speed upgraded to ' + bullet.speed
-			}
-			else
-				upgrade.msg = DEFAULT_UPGRADE_MSG
-				
-			$('#bulletSpeed').val(bullet.speed)
-			$("#gameMsg").text(upgrade.msg)
-		})
-	
-		$('.heroSpeedUpgrade').unbind('click').click(function(e){
-			e.preventDefault()
-		    
-		    if(hero.speedCost <= upgrade.points){
-			    ++hero.speed
-				upgrade.points -= hero.speedCost
-				
-			    upgrade.msg = "Hero's speed upgraded to " + hero.speed;
-			}
-			else
-				upgrade.msg = DEFAULT_UPGRADE_MSG
-				
-			$('#heroSpeed').val(hero.speed)
-			$("#gameMsg").text(upgrade.msg)
-		})
-		
-		$('.heroJumpUpgrade').unbind('click').click(function(e){
-			e.preventDefault()
-		    
-		    if(hero.jumpPower == hero.jumpPowerMax)
-		    	upgrade.msg = 'Already Maxed Out!!'
-		    else if(hero.jumpCost <= upgrade.points){
-			    ++hero.jumpPower
-				upgrade.points -= hero.jumpCost
-				
-			    upgrade.msg = "Hero's jump power upgraded to " + hero.speed
-			}
-			else
-				upgrade.msg = DEFAULT_UPGRADE_MSG
-				
-			$('#heroJump').val(hero.jumpPower)
-			$("#gameMsg").text(upgrade.msg)
-		})
-
-		
-		// Upgrade Shop Default Values
-		$('#bulletSpeed').val(bullet.speed)
-		$('#heroSpeed').val(hero.speed)
-		$('#heroJump').val(hero.jumpPower)
-		
-		// Upgrade Shop Default Costs
-		$('#bulletCost').val(bullet.cost)
-		$('#heroSpeedCost').val(hero.speedCost)
-		$('#heroJumpCost').val(hero.jumpCost)
-		
-		
-        game.sound.bgMusic.lvl0.loop = true
-        game.sound.bgMusic.lvl0.pause()
-        utils.muteSound(true)
-        
-        $('.audioState').click(function(){
-			utils.muteHelper()
-        })
 	}
 }()
 

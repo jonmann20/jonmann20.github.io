@@ -3,51 +3,7 @@ hero = function(){
 		img = null,
 		showStep = true
 	
-	return {
-		x: 0,				// top left of sprite
-		y: 0,
-		lvlX: 0,				
-		w: 28,
-		h: 38,
-		vX: 0,
-		vY: 0,
-		maxVx: 6,
-		maxVy: 15,
-		dirR: true, 
-		speed: 1.5,
-		speedCost: 8,
-		isJumping: false,
-		onObj: true,
-		onObjX: -1,
-		onObjY: -1,
-		jumpCost: 8,
-		jumpMod: 5,			// jumpMod must == jumpPower
-		jumpPower: 5,
-		jumpPowerMax: 10,
-		ammo: 0,
 		
-		init: function(){
-			img = new Image()
-			
-			img.onload = function() {imgReady = true}
-			img.src = 'img/player.png';
-			
-		},
-		
-		update: function(){
-			checkInput()
-			updatePosition()
-			checkCollision()
-			
-			//console.log({a: hero.lvlX, b: hero.x})
-		},
-	
-		render: function(){
-			drawHero()
-	    	drawBullets()
-		}
-	}
-	
 	/*********************** Update ***********************/
 	
 	function offObj(){
@@ -255,7 +211,7 @@ hero = function(){
 	function drawHero(){
 		if(imgReady){
 			
-			if(game.totalTime % 12 == 0)
+			if(game.totalTicks % 12 == 0)
 				showStep = showStep ? false : true
 			
 			
@@ -282,12 +238,34 @@ hero = function(){
     		
     		
     		ctx.drawImage(img, hero.sx, hero.sy, hero.w, hero.h, hero.x, hero.y, hero.w, hero.h);
-    		
     	}
 	}
 	
+	function drawHealth(){
+		for(var i=0; i < hero.health; ++i){
+			ctx.fillStyle = "red"
+			ctx.fillRect(80 + i*21, FULLH + 14, 19, 8)
+		}
+	}
+	
+	function drawMana(){
+		for(var i=0; i < hero.mana; ++i){
+			ctx.fillStyle = "#00b6ff"
+			ctx.fillRect(80 + i*21, FULLH + 37, 19, 8)
+		}
+	}
+	
+	function drawXP(){
+		ctx.fillStyle = "#ddd"
+        ctx.font = "12px 'Press Start 2P'"
+        	
+    	var zero = (hero.xp < 10) ? '0' : ''
+        	
+    	ctx.fillText(zero + hero.xp + '/' + hero.xpNeeded, 80, FULLH + 71)
+	}
+	
 	function drawBullets(){
-		for(var i=0; i < bulletArr.length; i++){
+		for(var i=0; i < bulletArr.length; ++i){
     	    var dirOffset = 0 
 	    	    
             if(bulletArr[i].dirR)
@@ -296,5 +274,62 @@ hero = function(){
             ctx.fillStyle = bullet.color
             utils.drawEllipse(bulletArr[i].x + dirOffset, bulletArr[i].y + 4.5, bullet.w, bullet.h)
         }
+	}
+		
+	return {
+		x: 0,				// top left of sprite
+		y: 0,
+		lvlX: 0,				
+		w: 28,
+		h: 38,
+		vX: 0,
+		vY: 0,
+		maxVx: 6,
+		maxVy: 15,
+		dirR: true, 
+		speed: 1.5,
+		isJumping: false,
+		onObj: true,
+		onObjX: -1,
+		onObjY: -1,
+		jumpMod: 5,			// jumpMod must == jumpPower
+		jumpPower: 5,
+		jumpPowerMax: 10,
+		ammo: 0,
+		health: 4,
+		maxHealth: 4,
+		healthLvl: 1,
+		mana: 3,
+		maxMana: 4,
+		manaLvl: 1,
+		lvl: 1,
+		xp: 0,
+		xpNeeded: 50,
+		medKits: 1,
+		
+		init: function(){
+			img = new Image()
+			
+			img.onload = function() {imgReady = true}
+			img.src = 'img/player.png';
+			
+		},
+		
+		update: function(){
+			checkInput()
+			updatePosition()
+			checkCollision()
+			
+			//console.log({a: hero.lvlX, b: hero.x})
+		},
+	
+		render: function(){
+			drawHero()
+	    	drawBullets()
+	    	
+			drawHealth()
+			drawMana()
+			drawXP()
+		}
 	}
 }()

@@ -350,13 +350,31 @@ footer .footR {
 .home .twitter-timeline {margin-top: 15px;}
 
 
-/* games */
+/********** Games **********/
+/* landing */
 .games input[readonly] {width: 20px; font-size: 1em; background-color: transparent; color: #e1e1e1; text-align: center;}
 .games .keyAction {width: 63px; display: inline-block;}
 .games .goals {margin-bottom: 20px;}
 #divDungeon img{box-shadow: none;}
 
-.jonsQuest .audioSwitch {margin-top: 15px;}
+/* Jon's Quest */
+.jonsQuest .canvasWrap {
+	width: 910px;
+	margin: 0 auto;
+	padding-top: 3%;
+}
+/*.jonsQuest canvas {width: 100%; height: 100%;}*/
+
+.jonsQuest .gameInstructions h1 {
+	margin: 45px 0;
+	font-size: 1.7em;
+}
+.jonsQuest .gameInstructions h2 {
+	font-size: 1.32em;
+}
+.jonsQuest .goals {
+	width: 147px;
+}
 .jonsQuest .audioSwitch button {padding: 3px; border: 1px inset; border-radius: 2px; width: 26px; height: 25px; background-color: #ddd;}
 .jonsQuest .audioSwitch button:hover {background-color: #eee;}
 .jonsQuest .audioSwitch button:active {border: 1px outset;}
@@ -364,36 +382,6 @@ footer .footR {
 .jonsQuest .audioSwitch .off:hover {box-shadow: 0 0 17px red;}
 .jonsQuest .audioSwitch .on {border-color: #0ff; box-shadow: 0 0 8px #0ff;}
 .jonsQuest .audioSwitch .on:hover {box-shadow: 0 0 14px #0ff;}
-.jonsQuest .canvasWrap {
-	min-width: 720px;
-	min-height: 180px;
-	max-width: 1370px;
-	width: 100%;
-}
-/*.jonsQuest canvas {width: 100%; height: 100%;}*/
-
-.gameInstructions h4 {margin-top: 20px;}
-.upgradeStore {
-	width: 340px;
-	margin: 15px 0 0 0;
-	float: left;
-}
-.upgradeStore h3 {margin-top: 25px;}
-.upgradeStore .btnUpgrade {
-	background: url('../img/upgrade.png') no-repeat;
-	width: 14px;
-	height: 14px;
-	display: block;
-	margin: 0 auto;
-}
-.upgradeStore .btnUpgrade:hover {cursor: pointer;}
-.upgradeStore table {margin-top: 15px;}
-.upgradeStore th {padding: 0 28px 2px 0; margin-bottom: 5px; border-bottom: 1px solid #ff6a00;}
-.upgradeStore th:first-child {padding-right: 77px;}
-.upgradeStore th:last-child {padding-right: 6px;}
-.upgradeStore .firstRow td {padding-top: 10px;}
-.upgradeStore td {padding-bottom: 10px;}
-.upgradeStore #gameMsg {color: #E01B25; text-align: left;}
 .debug {
 	width: 430px; 
 	float: right; 
@@ -402,6 +390,7 @@ footer .footR {
 	font-size: 1.1em;
 }
 
+/* Dungeon */
 .dungeon {
 	background: #000;
 	font-family: 'Press Start 2P', cursive;
@@ -426,12 +415,20 @@ footer .footR {
     opacity: 0.01;
 }
 
-/* music */
-.musicHome .colR {width: 55%;}
-.bass .colR p {margin-bottom: 10px;}
-.mandolin audio {margin: 15px 0;}
 
-/* Playground */
+/********** Music **********/
+.musicHome .colR {
+	width: 55%;
+}
+.bass .colR p {
+	margin-bottom: 10px;
+}
+.mandolin audio {
+	margin: 15px 0;
+}
+
+
+/********** Playground **********/
 .playground .duffsDevice {
 	font-family: consolas, monospace;
 }
@@ -496,7 +493,9 @@ footer .footR {
 .playground .vid3 {top: 8px; left: 792px;}
 .playground .vid4 {top: 280px; left: 911px;}
 */
-.bDancingCube .main {min-height: 38em;}
+.bDancingCube .main {
+	min-height: 38em;
+}
 .iframeWrap {
 	margin-top: -480px;
 	
@@ -512,24 +511,32 @@ footer .footR {
 	cursor: grabbing;
 }
 
-/* portfolio */
+/********** Portfolio **********/
 .portfolio .colR {
 	min-height: 37.5em;
 }
 
-/* not-found */
+
+/********** Not Found **********/
 .unhappyImg {
 	width: 200px !important;
 	box-shadow: none;
 }
 
-/* rates */
-.rates h3 span {font-size: .9em;}
 
-/* About */
-.about .colR {widtH: 57%;}
+/********** Rates **********/
+.rates h3 span {
+	font-size: .9em;
+}
 
-/* Contact Me */
+
+/********** About **********/
+.about .colR {
+	widtH: 57%;
+}
+
+
+/********** Contact Me **********/
 .contact label {display: block; width: 115px; float: left;}
 .contact .avail {cursor: pointer; color: #999; margin-top: -5px;}
 .contact .avail span {font-size: .8em; display: block;}
