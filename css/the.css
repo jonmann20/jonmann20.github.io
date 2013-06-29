@@ -352,10 +352,32 @@ footer .footR {
 
 /********** Games **********/
 /* landing */
-.games input[readonly] {width: 20px; font-size: 1em; background-color: transparent; color: #e1e1e1; text-align: center;}
-.games .keyAction {width: 63px; display: inline-block;}
-.games .goals {margin-bottom: 20px;}
-#divDungeon img{box-shadow: none;}
+.games input[readonly] {
+	width: 20px;
+	font-size: 1em;
+	background-color: transparent; 
+	color: #e1e1e1; 
+	text-align: center;
+}
+.games .keyAction {
+	width: 63px; 
+	display: inline-block;
+}
+.games .goals {
+	margin-bottom: 20px;
+}
+.games .techUsed,
+.games .srcCode {
+	margin-top: 30px;
+}
+.games .techUsed .lh,
+.games .srcCode .lh {
+	margin-left: -30px;	
+}
+#divJonsQuest img,
+#divDungeon img {
+	box-shadow: none;
+}
 
 /* Jon's Quest */
 .jonsQuest .canvasWrap {
