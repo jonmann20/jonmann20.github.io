@@ -1,16 +1,24 @@
 level = function() {
 	
 	var shuriken = null,
-		cash = null
+		cash = null,
+		syringe = null,
+		medKit = null
 	
 	return {
 		setup: function(){
 			
+			medKit = new GameObj()
+			medKit.init(238, FULLH + 31, 25, 22, 'img/medKit.png')
+			
+			syringe = new GameObj()
+			syringe.init(342, FULLH + 31, 30, 30, 'img/syringe.png')
+			
 			shuriken = new GameObj()
-			shuriken.init(275, FULLH + 33, 20, 20, 'img/shuriken.png')
+			shuriken.init(446, FULLH + 33, 20, 20, 'img/shuriken.png')
 			
 			cash = new GameObj()
-			cash.init(375, FULLH + 33, 21, 18, 'img/cash.png')
+			cash.init(548, FULLH + 33, 21, 18, 'img/cash.png')
 			
 			
 			// levels
@@ -109,30 +117,32 @@ level = function() {
 		
 		drawHUD: function(){
 			// background
-			ctx.fillStyle = "#000"
+			ctx.fillStyle = "#070707"
 			ctx.fillRect(0, FULLH, FULLW, game.padHUD)
 			
 	        ctx.fillStyle = "#ddd"
 	        ctx.font = "12px 'Press Start 2P'"
 	        	
 	    	// hp
-	    	ctx.fillText("HP: |---|", 10, FULLH + 33)
+	    	ctx.fillText("HP: |---|", 15, FULLH + 33)
 			
 			// hp kit
-	    	ctx.fillText("0 HP K", 145, FULLH + 33)
+	    	ctx.fillText("0", 210, FULLH + 50)
+	    	medKit.draw()
 	    	
 			// mp
-	    	ctx.fillText("MP: |---|", 10, FULLH + 63)
+	    	ctx.fillText("MP: |---|", 15, FULLH + 63)
 			
 			// mp kit
-			ctx.fillText("0 MP K", 145, FULLH + 63)
+			ctx.fillText("0", 315, FULLH + 50)
+			syringe.draw()
 	    	
 			// ammo
-	    	ctx.fillText(hero.ammo, 248, FULLH + 50)
+	    	ctx.fillText(hero.ammo, 420, FULLH + 50)
 	    	shuriken.draw()
 			
 			// money
-			ctx.fillText("0", 345, FULLH + 50)
+			ctx.fillText("0", 525, FULLH + 50)
 			cash.draw()
 			
 			// level name
