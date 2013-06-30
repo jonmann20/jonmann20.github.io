@@ -20,7 +20,7 @@ load = function(){
 			
 			
 		    utils.reset()
-	    	game.loop()		// start game
+	    	startScreen.loop()
 		}
 	}
 	
@@ -31,6 +31,9 @@ load = function(){
 		FULLH = canvas.height = 440
 		
 		FULLH -= game.padHUD
+		
+		HALFW = FULLW / 2
+		HALFH = FULLH / 2
 		
         game.sound.bgMusic.lvl0.loop = true
         game.sound.bgMusic.lvl0.pause()

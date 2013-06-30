@@ -1,159 +1,192 @@
-utils = {
-	playSound : function(sound) {
-		if (sound.ended)
-			sound.play()
-		else {
-			sound.pause()
-			sound.currentTime = 0
-			sound.play()
-		}
-	},
-
-	debugLoop : function() {
-		//print_r('hero')
-		//print_r('lvlCollisionPts')
-		//print_r('bullet')
-		//print_r('monster')
-		//print_r('lvl')
-		//print_r('lvlBg')
-		//print_r('lvlBgImg')
-	},
-
-	isCollision : function(a, b, moe, isLvl) {
-		var aX = (typeof(isLvl) !== 'undefined')  ? a.x + a.lvlX : a.x
-		
-		if ((aX + moe <= (b.x + b.w)) && // a is to the left of the right side of b
-			(b.x + moe <= (aX + a.w)) && // a is to the right of the left side of b
-			(a.y + moe <= (b.y + b.h)) && // a is higher than the bot of b
-			(b.y + moe <= (a.y + a.h)) 	  // a is lower than the top of b
-		){
-			return true
-		}
-
-		return false
-	},
+utils = function(){
 	
-	drawEllipse : function(x, y, w, h) {
-		var kappa = .5522848,
-			ox = (w / 2) * kappa, // control point offset horizontal
-			oy = (h / 2) * kappa, // control point offset vertical
-			xe = x + w, // x-end
-			ye = y + h, // y-end
-			xm = x + w / 2, // x-middle
-			ym = y + h / 2 // y-middle
-
-		ctx.beginPath()
-		ctx.moveTo(x, ym)
-		ctx.bezierCurveTo(x, ym - oy, xm - ox, y, xm, y)
-		ctx.bezierCurveTo(xm + ox, y, xe, ym - oy, xe, ym)
-		ctx.bezierCurveTo(xe, ym + oy, xm + ox, ye, xm, ye)
-		ctx.bezierCurveTo(xm - ox, ye, x, ym + oy, x, ym)
-		ctx.closePath()
-		ctx.fill()
-	},
-
-	muteHelper : function() {
-		if ($('.audioState').hasClass('off')) {
-			$('.audioState').html('On')
-			$('.audioState').removeClass('off')
-			$('.audioState').addClass('on')
-
-			this.muteSound(false)
-		} else {
-			$('.audioState').html('Off')
-			$('.audioState').removeClass('on')
-			$('.audioState').addClass('off')
-
-			this.muteSound(true)
-		}
-	},
-
-	muteSound : function(mute) {
-		// not working???
-		// for(var i in game.sound){
-		// i.muted = val
-		// }
-
-		var volumeReduction = mute ? 0 : 0.25
-
-		game.sound.bgMusic.lvl0.muted = mute
-		if (mute)
-			game.sound.bgMusic.lvl0.pause()
-		else
-			game.sound.bgMusic.lvl0.play()
-		//game.sound.bgMusic.lvl0.volume = volumeReduction
-
-		game.sound.gun.muted = mute
-		game.sound.gun.volume = volumeReduction
-
-		game.sound.thud.muted = mute
-		game.sound.thud.volume = volumeReduction
-
-		game.sound.jump.muted = mute
-		game.sound.jump.volume = volumeReduction
-
-		game.sound.step.muted = mute
-		game.sound.step.volume = volumeReduction
-	},
-
-	reset : function() {
-		hero.x = 23
-		hero.y = canvas.height - hero.h
-		hero.isJumping = false
-
-		if (game.lvl == 3) {// TODO: getting reset somewhere???
-			hero.y = 0
-		}
-
-		monster.x = (Math.random() * (FULLW - monster.w - monster.offset))
-		monster.y = (Math.random() * (FULLH - monster.h - monster.offset))
-		monster.initX = monster.x
-		monster.initY = monster.y
-
-		bulletArr.length = 0
-		++monster.numCaught
-		upgrade.points += 2
-
-		$('#upgradePoints').val(upgrade.points)
-		$('#curLvl').val(game.lvl)
-		$('#numCaught').val(monster.numCaught)
-	},
-
-	loadImages : function(imgArr, callback) {
-		var count = 0
-		for (var key in imgArr) {
-			if (imgArr[key] != 'none') {
-				lvlBgImg[key] = new Image()
-				lvlBgImg[key].onload = function() {
-					callback(this.num)
-				}
-
-				lvlBgImg[key].src = imgArr[key]
-				lvlBgImg[key].num = count
-			}
+	var alpha = 1,
+		fadeOut = true
+	
+	return {
+		playSound : function(sound, stopPrev) {
 			
-			++count
-		}
-	},
-
-	
-	drawValPopup: function(item, msg){
-		
-	},
-	
-	// 8 versions over original each with 1/8 of full opacity (square filter)
-	blur : function(numPasses, callback) {
-		ctx.globalAlpha = 0.125;
-		for (var i = 1; i <= numPasses; i++) {
-			for (var y = -1; y < 2; y++) {
-				for (var x = -1; x < 2; x++) {
-					callback(x, y)
+			stopPrev = (typeof(stopPrev) !== 'undefined') ? stopPrev : true 
+			
+			if (sound.ended)
+				sound.play()
+			else {
+				
+				if(stopPrev || sound.currentTime == 0){
+				
+					sound.pause()
+					sound.currentTime = 0
+					sound.play()
 				}
 			}
+		},
+		
+		blinkText: function(fontSize, x, y, str){
+			
+			str = (typeof(str) !== 'undefined') ? str : 'PRESS ENTER'
+			
+		    if(alpha <= 0)
+		      fadeOut = false
+		    else if(alpha > 1.55)
+		      fadeOut = true
+		    
+		    var theDt = game.dt / 1000
+		    
+		    alpha += fadeOut ? -theDt : theDt
+		    
+		    // press enter
+		    ctx.font = fontSize + "px 'Press Start 2P'"
+		    var tmpW = ctx.measureText(str).width
+		    ctx.fillStyle = 'rgba(233, 233, 233,' + alpha + ')'
+		    ctx.fillText(str, x - tmpW/2, y)
+		},
+	
+		debugLoop : function() {
+			//print_r('hero')
+			//print_r('lvlCollisionPts')
+			//print_r('bullet')
+			//print_r('monster')
+			//print_r('lvl')
+			//print_r('lvlBg')
+			//print_r('lvlBgImg')
+		},
+	
+		isCollision : function(a, b, moe, isLvl) {
+			var aX = (typeof(isLvl) !== 'undefined')  ? a.x + a.lvlX : a.x
+			
+			if ((aX + moe <= (b.x + b.w)) && // a is to the left of the right side of b
+				(b.x + moe <= (aX + a.w)) && // a is to the right of the left side of b
+				(a.y + moe <= (b.y + b.h)) && // a is higher than the bot of b
+				(b.y + moe <= (a.y + a.h)) 	  // a is lower than the top of b
+			){
+				return true
+			}
+	
+			return false
+		},
+		
+		drawEllipse : function(x, y, w, h) {
+			var kappa = .5522848,
+				ox = (w / 2) * kappa, // control point offset horizontal
+				oy = (h / 2) * kappa, // control point offset vertical
+				xe = x + w, // x-end
+				ye = y + h, // y-end
+				xm = x + w / 2, // x-middle
+				ym = y + h / 2 // y-middle
+	
+			ctx.beginPath()
+			ctx.moveTo(x, ym)
+			ctx.bezierCurveTo(x, ym - oy, xm - ox, y, xm, y)
+			ctx.bezierCurveTo(xm + ox, y, xe, ym - oy, xe, ym)
+			ctx.bezierCurveTo(xe, ym + oy, xm + ox, ye, xm, ye)
+			ctx.bezierCurveTo(xm - ox, ye, x, ym + oy, x, ym)
+			ctx.closePath()
+			ctx.fill()
+		},
+	
+		muteHelper : function() {
+			if ($('.audioState').hasClass('off')) {
+				$('.audioState').html('On')
+				$('.audioState').removeClass('off')
+				$('.audioState').addClass('on')
+	
+				this.muteSound(false)
+			} else {
+				$('.audioState').html('Off')
+				$('.audioState').removeClass('on')
+				$('.audioState').addClass('off')
+	
+				this.muteSound(true)
+			}
+		},
+	
+		muteSound : function(mute) {
+			// not working???
+			// for(var i in game.sound){
+			// i.muted = val
+			// }
+	
+			var volumeReduction = mute ? 0 : 0.25
+	
+			game.sound.bgMusic.lvl0.muted = mute
+			if (mute)
+				game.sound.bgMusic.lvl0.pause()
+			else
+				game.sound.bgMusic.lvl0.play()
+			//game.sound.bgMusic.lvl0.volume = volumeReduction
+	
+			game.sound.gun.muted = mute
+			game.sound.gun.volume = volumeReduction
+	
+			game.sound.thud.muted = mute
+			game.sound.thud.volume = volumeReduction
+	
+			game.sound.jump.muted = mute
+			game.sound.jump.volume = volumeReduction
+	
+			game.sound.step.muted = mute
+			game.sound.step.volume = volumeReduction
+		},
+	
+		reset : function() {
+			hero.x = 23
+			hero.y = canvas.height - hero.h
+			hero.isJumping = false
+	
+			if (game.lvl == 3) {// TODO: getting reset somewhere???
+				hero.y = 0
+			}
+	
+			monster.x = (Math.random() * (FULLW - monster.w - monster.offset))
+			monster.y = (Math.random() * (FULLH - monster.h - monster.offset))
+			monster.initX = monster.x
+			monster.initY = monster.y
+	
+			bulletArr.length = 0
+			++monster.numCaught
+			upgrade.points += 2
+	
+			$('#upgradePoints').val(upgrade.points)
+			$('#curLvl').val(game.lvl)
+			$('#numCaught').val(monster.numCaught)
+		},
+	
+		loadImages : function(imgArr, callback) {
+			var count = 0
+			for (var key in imgArr) {
+				if (imgArr[key] != 'none') {
+					lvlBgImg[key] = new Image()
+					lvlBgImg[key].onload = function() {
+						callback(this.num)
+					}
+	
+					lvlBgImg[key].src = imgArr[key]
+					lvlBgImg[key].num = count
+				}
+				
+				++count
+			}
+		},
+	
+		
+		drawValPopup: function(item, msg){
+			
+		},
+		
+		// 8 versions over original each with 1/8 of full opacity (square filter)
+		blur : function(numPasses, callback) {
+			ctx.globalAlpha = 0.125;
+			for (var i = 1; i <= numPasses; i++) {
+				for (var y = -1; y < 2; y++) {
+					for (var x = -1; x < 2; x++) {
+						callback(x, y)
+					}
+				}
+			}
+			ctx.globalAlpha = 1.0
 		}
-		ctx.globalAlpha = 1.0
 	}
-}
+}()
 
 // globals
 bulletArr = [];

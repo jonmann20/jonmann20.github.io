@@ -8,6 +8,7 @@ game = function(){
 		monster.update()
 			
 		level.update()
+		
 	}
 	
 	function render(){
@@ -46,6 +47,7 @@ game = function(){
 		padBot: 119,	/* total padding */
 		padHUD: 80,
 		lvl: 0,
+		dt: 0,
 		fps: 60,
 		totalTicks: 0,
 		actualTime: 0,
@@ -56,15 +58,17 @@ game = function(){
 		    gun: new Audio('audio/raygun.mp3'),
 		    thud: new Audio('audio/thud.mp3'),
 		    step: new Audio('audio/step.mp3'),
-		    jump: new Audio('audio/jump.mp3')
+		    jump: new Audio('audio/jump.mp3'),
+		    death: new Audio('audio/DiscsOfTron_Cascade.mp3')
 		},
 		
 		loop: function(){
 			setTimeout(function(){
 				requestAnimFrame(game.loop)
 			
-				var now = new Date().getTime(),
-		             dt = now - (_time || now)
+				var now = new Date().getTime()
+	            
+	            game.dt = now - (_time || now)
 		 
 		    	_time = now
 		
@@ -72,7 +76,7 @@ game = function(){
 				render()
 				
 				
-				drawFPS(Math.round(1000 / dt))
+				drawFPS(Math.round(1000 / game.dt))
 				
 				++game.totalTicks
 				

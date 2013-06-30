@@ -47,8 +47,22 @@ hero = function(){
 	function checkCollision(){
 		//---hero and monster
 		
-		if(utils.isCollision(hero, monster, 0))
-			utils.reset()
+		if(!hero.invincible && utils.isCollision(hero, monster, 0)){
+			//utils.reset()
+			
+			utils.playSound(game.sound.thud, false)
+			
+			hero.invincible = true
+			
+			if(--hero.health <= 0){
+				utils.playSound(game.sound.death, false)
+				
+				
+				alert('you died')
+				location.reload()
+			}
+			
+		}
 		
 	    
 	    bulletHandler()		// bullet's and monster/screen
@@ -209,8 +223,17 @@ hero = function(){
 	
 	/*********************** Render ***********************/
 	function drawHero(){
-		if(imgReady){
+		
+		if(hero.invincible){	// TODO: allow for separate 'hit' and 'invincible' states
 			
+			if(hero.invincibleTimer % 5 == 0)
+				ctx.fillStyle = "red"
+			else 
+				ctx.fillStyle = "#fff"
+				
+			ctx.fillRect(hero.x, hero.y, hero.w, hero.h)
+		}
+		else if(imgReady){
 			if(game.totalTicks % 12 == 0)
 				showStep = showStep ? false : true
 			
@@ -296,6 +319,9 @@ hero = function(){
 		jumpPower: 5,
 		jumpPowerMax: 10,
 		ammo: 0,
+		invincible: false,
+		invincibleTimer: 60,
+		initInvincibleTimer: 60,
 		health: 4,
 		maxHealth: 4,
 		healthLvl: 1,
@@ -319,6 +345,15 @@ hero = function(){
 			checkInput()
 			updatePosition()
 			checkCollision()
+			
+			
+			if(hero.invincible)
+				--hero.invincibleTimer
+			
+			if(hero.invincibleTimer <= 0){
+				hero.invincible = false
+				hero.invincibleTimer = hero.initInvincibleTimer
+			}
 			
 			//console.log({a: hero.lvlX, b: hero.x})
 		},
