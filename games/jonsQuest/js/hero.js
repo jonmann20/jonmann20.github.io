@@ -222,45 +222,69 @@ hero = function(){
 	
 	
 	/*********************** Render ***********************/
-	function drawHero(){
+	
+	var Inv_e = {NOT_HIT: 0, HIT_WHITE: 1, HIT_RED: 2}
+	
+	var playerD = {x: 2, y: 2},
+		playerL = {x: 32, y: 2},
+		playerLRed = {x: 62, y: 2},
+		playerLStep = {x: 92, y: 2},
+		playerLWhite = {x: 2, y: 42},
+		playerR = {x:32, y: 42},
+		playerRRed = {x:62, y: 42},
+		playerRStep = {x: 92, y: 42},
+		playerRWhite = {x: 2, y: 82},
+		playerU = {x: 32, y: 82},
+		player_picked = {x: 62, y: 82}
 		
-		if(hero.invincible){	// TODO: allow for separate 'hit' and 'invincible' states
-			
-			if(hero.invincibleTimer % 5 == 0)
-				ctx.fillStyle = "red"
-			else 
-				ctx.fillStyle = "#fff"
-				
-			ctx.fillRect(hero.x, hero.y, hero.w, hero.h)
-		}
-		else if(imgReady){
+	
+	
+	function drawHero(){
+		if(imgReady){
 			if(game.totalTicks % 12 == 0)
 				showStep = showStep ? false : true
 			
+			var inv = Inv_e.NOT_HIT
+			if(hero.invincible)
+				inv = (hero.invincibleTimer % 5 == 0) ? Inv_e.HIT_WHITE : Inv_e.HIT_RED		// TODO: allow for separate 'hit' and 'invincible' states
+			
+			var pos = {x: 0, y: 0}
 			
 			// TODO: move to update
     		if(hero.dirR){
-    			hero.sx = 92
-    			hero.sy = 2
+    			pos = playerR
     			
 	   			if(showStep && 68 in keysDown){ 
-    				hero.sx = 2
-    				hero.sy = 42
+    				pos = playerRStep
     			}
+ 
+ 				if(inv == Inv_e.HIT_WHITE){
+ 					pos = playerRWhite
+ 				}
+ 				else if(inv == Inv_e.HIT_RED){
+ 					pos = playerRRed
+ 				}
  
     		}
     		else{
-    			hero.sx = 32
-				hero.sy = 2
+    			pos = playerL
 
     			if(showStep && 65 in keysDown){ 
-    				hero.sx = 62
-    				hero.sy = 2
+    				pos = playerLStep
     			}
+    			
+    			if(inv == Inv_e.HIT_WHITE){
+					pos = playerLWhite
+    			}
+    			else if(inv == Inv_e.HIT_RED){
+					pos = playerLRed
+    			}
+    			
     		}
     		
     		
-    		ctx.drawImage(img, hero.sx, hero.sy, hero.w, hero.h, hero.x, hero.y, hero.w, hero.h);
+    		//hero.sx = 32
+    		ctx.drawImage(img, pos.x, pos.y, hero.w, hero.h, hero.x, hero.y, hero.w, hero.h);
     	}
 	}
 	
@@ -320,8 +344,8 @@ hero = function(){
 		jumpPowerMax: 10,
 		ammo: 0,
 		invincible: false,
-		invincibleTimer: 60,
-		initInvincibleTimer: 60,
+		invincibleTimer: 40,
+		initInvincibleTimer: 40,
 		health: 4,
 		maxHealth: 4,
 		healthLvl: 1,

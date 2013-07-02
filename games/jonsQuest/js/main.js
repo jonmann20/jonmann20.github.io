@@ -21,6 +21,7 @@ load = function(){
 			
 		    utils.reset()
 	    	startScreen.loop()
+	    	//game.loop()
 		}
 	}
 	

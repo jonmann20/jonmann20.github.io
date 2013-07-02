@@ -126,6 +126,9 @@ utils = function(){
 	
 			game.sound.step.muted = mute
 			game.sound.step.volume = volumeReduction
+			
+			game.sound.death.muted = mute
+			game.sound.death.volume = volumeReduction
 		},
 	
 		reset : function() {

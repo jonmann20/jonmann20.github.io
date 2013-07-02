@@ -1,7 +1,7 @@
 /* ----------------------------------------------------
    created with http://www.texturepacker.com 
    ----------------------------------------------------
-   $TexturePacker:SmartUpdate:8f0d5340949e05b22294f425fc79bb2e$
+   $TexturePacker:SmartUpdate:4acd818d9e5d9bfa6a4b87d582ad189e$
    ----------------------------------------------------
 
    usage: <span class="{-spritename-} sprite"></span>
@@ -14,6 +14,12 @@
 
 .playerD {width:28px; height:38px; background-position: -2px -2px}
 .playerL {width:28px; height:38px; background-position: -32px -2px}
-.playerR {width:28px; height:38px; background-position: -2px -42px}
-.playerU {width:28px; height:38px; background-position: -32px -42px}
-.player_picked {width:28px; height:38px; background-position: -2px -82px}
+.playerLRed {width:28px; height:38px; background-position: -62px -2px}
+.playerLStep {width:28px; height:38px; background-position: -92px -2px}
+.playerLWhite {width:28px; height:38px; background-position: -2px -42px}
+.playerR {width:28px; height:38px; background-position: -32px -42px}
+.playerRRed {width:28px; height:38px; background-position: -62px -42px}
+.playerRStep {width:28px; height:38px; background-position: -92px -42px}
+.playerRWhite {width:28px; height:38px; background-position: -2px -82px}
+.playerU {width:28px; height:38px; background-position: -32px -82px}
+.player_picked {width:28px; height:38px; background-position: -62px -82px}
