@@ -32,11 +32,11 @@ level = function() {
 		syringe.draw()
     	
 		// ammo
-    	ctx.fillText(hero.ammo, 420, FULLH + 50)
+    	ctx.fillText(hero.ammo, 410, FULLH + 50)
     	shuriken.draw()
 		
 		// money
-		ctx.fillText("0", 525, FULLH + 50)
+		ctx.fillText(hero.cash, 515, FULLH + 50)
 		cash.draw()
 		
 		// time
@@ -73,6 +73,7 @@ level = function() {
 		
 	return {
 		collisionPts: {},
+		width: 0,
 		
 		
 		init: function(){
@@ -115,7 +116,6 @@ level = function() {
 			
 			for(var i=0; i < NUM_LEVELS; i++){
 				lvl[i] = {
-					monsters: i*2,
 					status: false,
 					bgColor: '#'+Math.floor(Math.random()*16777215).toString(16)
 				}
@@ -129,30 +129,22 @@ level = function() {
 			})
 			
 			level.reset()
+			lvl0.init()
 		},
 		
 		reset : function() {
+			level.width = 3198
+			
+			
 			hero.x = 23
 			hero.y = canvas.height - hero.h
 			hero.isJumping = false
 	
-			if (game.lvl == 3) {// TODO: getting reset somewhere???
-				hero.y = 0
-			}
-	
-			monster.x = (Math.random() * (FULLW - monster.w - monster.offset))
-			monster.y = (Math.random() * (FULLH - monster.h - monster.offset))
-			monster.initX = monster.x
-			monster.initY = monster.y
-	
-			hero.bulletArr.length = 0
-			++monster.numCaught
+			hero.bulletArr.length = 0		// TODO: cache num bullets
 		},
 		
 		/******************** Update ********************/
 		update: function(){
-			
-			//monster.update()
 			
 	    	if(game.lvl == 0)
 	    		lvl0.update()
@@ -162,18 +154,12 @@ level = function() {
 			if(tempLvl >= NUM_LEVELS)
 				tempLvl = NUM_LEVELS - 1
 				
-			if(lvl[tempLvl].monsters != 0 && 
-				monster.numCaught != recentLvlUpdate &&
-				monster.numCaught == lvl[tempLvl].monsters
-			){
-				++game.lvl
-			    recentLvlUpdate = monster.numCaught
-			    
-			    --monster.numCaught
-				upgrade.points -= 2
-			    
-			    utils.reset()
-		    }
+			// if(	){        should reset level
+				// ++game.lvl
+			    // recentLvlUpdate = 
+// 			    
+			    // utils.reset()
+		    // }
 		},
 		
 		updateObjs: function(){
@@ -200,8 +186,6 @@ level = function() {
 	    	
 	    	if(game.lvl == 0)
 	    		lvl0.render()
-	    	
-	    	//monster.render()
 	    	
 		}
 	}

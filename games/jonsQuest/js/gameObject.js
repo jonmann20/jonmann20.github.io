@@ -9,6 +9,7 @@ GameObj = function(){
 		y: -1,
 		w: -1,
 		h: -1,
+		vY: 0,
 		
 		init: function(xx, yy, ww, hh, src){
 			this.initX = this.x = xx
@@ -23,6 +24,11 @@ GameObj = function(){
 			}
 		},
 		
+		updatePos: function(){
+			
+			if(this.y < FULLH - game.padFloor - this.h)
+				this.y += this.vY
+		},
 		
 		draw: function(){
 			if(ready){

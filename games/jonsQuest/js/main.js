@@ -54,7 +54,6 @@ load = function(){
 			level.init()
 			hero.init()
 			
-			lvl0.init()
 	    	//startScreen.loop()
 	    	game.loop()
 		}

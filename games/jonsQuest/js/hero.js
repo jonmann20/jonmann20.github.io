@@ -54,10 +54,20 @@ hero = function(){
 	    for(var i=0; i < hero.bulletArr.length; i++){
 	    	hero.bulletArr[i].x += hero.bulletArr[i].dirR ? bullet.speed : -bullet.speed // update position
 	    	
-	    	// check collision
-	        if(utils.isCollision(hero.bulletArr[i], monster, 0))						// bullet and monster
-                level.reset()
-            else if(hero.bulletArr[i].x > canvas.width || hero.bulletArr[i].x < 0)		// bullet and screen
+	    	// bullet and level object
+            var k, 
+                lvl = 'lvl' + game.lvl,
+                wasCollision = false
+                
+    		for(var j in level.collisionPts[lvl]){
+				k = level.collisionPts[lvl][j]
+			
+				if(utils.isCollision(hero.bulletArr[i], k, 0)){
+					wasCollision = true
+				}
+			}
+                
+            if(wasCollision || hero.bulletArr[i].x > canvas.width || hero.bulletArr[i].x < 0)		// bullet and screen
             	hero.bulletArr.splice(i, 1) // remove ith item
 	    }
 	}
@@ -65,25 +75,27 @@ hero = function(){
 	function checkCollision(){
 		//---hero and monster
 		
+		/*
 		if(!hero.invincible && utils.isCollision(hero, monster, 0)){
-			// level.reset()
-			
-			utils.playSound(game.sound.thud, false)
-			
-			hero.invincible = true
-			
-			if(--hero.health <= 0){
-				utils.playSound(game.sound.death, false)
-				
-				
-				alert('you died')
-				location.reload()
-			}
-			
-		}
+					// level.reset()
+					
+					utils.playSound(game.sound.thud, false)
+					
+					hero.invincible = true
+					
+					if(--hero.health <= 0){
+						utils.playSound(game.sound.death, false)
+						
+						
+						alert('you died')
+						location.reload()
+					}
+					
+				}*/
+		
 		
 	    
-	    bulletHandler()		// bullet's and monster/screen
+	    bulletHandler()		// bullet's and screen
 		screenCollision()	// hero and screen/ top of obj
 		
 		//---hero and game objects
@@ -219,11 +231,10 @@ hero = function(){
 		
 		hero.y += hero.vY
 		
-		
 		if(((hero.dirR && hero.x >= ((canvas.width/2) + 35)) ||
 		   (!hero.dirR && hero.x <= ((canvas.width/2) - 45))) &&
-		   (hero.lvlX + hero.vX >= 0)
-		   // && hero.lvlX + hero.vX <= canvas.width)
+		   (hero.lvlX + hero.vX >= 0) &&
+		   (hero.lvlX + hero.vX <= level.width - canvas.width)
 	    ){
 			hero.lvlX += hero.vX
 			level.updateObjs()
@@ -293,8 +304,6 @@ hero = function(){
     			
     		}
     		
-    		
-    		//hero.sx = 32
     		ctx.drawImage(img, pos.x, pos.y, hero.w, hero.h, hero.x, hero.y, hero.w, hero.h);
     	}
 	}
@@ -355,6 +364,8 @@ hero = function(){
 		
 		
 	return {
+		ammo: 20,
+		cash: 0,
 		x: 0,				// top left of sprite
 		y: 0,
 		lvlX: 0,				
@@ -373,14 +384,13 @@ hero = function(){
 		jumpMod: 5,			// jumpMod must == jumpPower
 		jumpPower: 5,
 		jumpPowerMax: 10,
-		ammo: 0,
 		invincible: false,
 		invincibleTimer: 40,
 		initInvincibleTimer: 40,
 		health: 4,
 		maxHealth: 4,
 		healthLvl: 1,
-		mana: 3,
+		mana: 0,
 		maxMana: 4,
 		manaLvl: 1,
 		lvl: 1,

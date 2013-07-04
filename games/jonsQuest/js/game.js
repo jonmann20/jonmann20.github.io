@@ -42,6 +42,7 @@ game = function(){
 		friction: 1,
 		padBot: 119,	/* total padding */
 		padHUD: 80,
+		padFloor: 39,
 		lvl: 0,
 		dt: 0,
 		fps: 60,

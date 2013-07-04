@@ -46,7 +46,6 @@
 		<script src="js/level/level0.js"></script>
 	  	<script src="js/game.js"></script>
 	  	<script src="js/hero.js"></script>
-	  	<script src="js/monster.js"></script>
 	  	<script src="js/main.js"></script>
 	  ';
      
