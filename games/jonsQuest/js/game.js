@@ -5,16 +5,11 @@ game = function(){
 	
 	function update(){
 		hero.update()
-		monster.update()
-			
 		level.update()
-		
 	}
 	
 	function render(){
 		level.render()
-	    	
-    	monster.render()
 		hero.render()
 	}
 	
@@ -41,6 +36,7 @@ game = function(){
 	  	ctx.fillText(avgFPS + " FPS", FULLW - 84, FULLH + 65);
 	}
 	
+	
 	return {
 		gravity: 1,
 		friction: 1,
@@ -62,12 +58,11 @@ game = function(){
 		    death: new Audio('audio/DiscsOfTron_Cascade.mp3')
 		},
 		
-		loop: function(){
-			setTimeout(function(){
+		loop: function(frameTime){
+			//setTimeout(function(){
 				requestAnimFrame(game.loop)
 			
-				var now = new Date().getTime()
-	            
+				var now = frameTime
 	            game.dt = now - (_time || now)
 		 
 		    	_time = now
@@ -83,8 +78,19 @@ game = function(){
 				if(game.totalTicks % 60 == 0)
 					++game.actualTime
 				
-				
-			}, 1000 / game.fps)
+			//}, 1000 / game.fps)
 		}
+	}
+}()
+
+
+requestAnimFrame = function() {
+	return requestAnimationFrame || 
+		   webkitRequestAnimationFrame || 
+		   mozRequestAnimationFrame || 
+		   oRequestAnimationFrame ||
+		   
+		   function(callback) {
+		       setTimeout(callback, 1000 / game.fps)
 	}
 }()

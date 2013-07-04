@@ -3,9 +3,14 @@ level = function() {
 	var shuriken = null,
 		cash = null,
 		syringe = null,
-		medKit = null
+		medKit = null,
+		
+		NUM_LEVELS = 5,
+		lvl = new Array(NUM_LEVELS),
+		recentLvlUpdate = 0,
+		lvlBgImg = {}
 	
-	function drawHUD(){
+	function drawHUD(){	// TODO: break out static parts
 		// background
 		ctx.fillStyle = "#070707"
 		ctx.fillRect(0, FULLH, FULLW, game.padHUD)
@@ -46,9 +51,31 @@ level = function() {
 		
 		ctx.fillText(min + ':' + sec, FULLW - 84, FULLH + 34)
 	}
+	
+	function loadBgImages(imgArr, callback) {
+		var count = 0
+		
+		for (var key in imgArr) {
+			if (imgArr[key] != 'none') {
+				lvlBgImg[key] = new Image()
+				lvlBgImg[key].onload = function() {
+					callback(this.num)
+				}
+
+				lvlBgImg[key].src = imgArr[key]
+				lvlBgImg[key].num = count
+			}
+			
+			++count
+		}
+	}
+		
 		
 	return {
-		setup: function(){
+		collisionPts: {},
+		
+		
+		init: function(){
 			
 			medKit = new GameObj()
 			medKit.init(238, FULLH + 31, 25, 24, 'img/medKit.png')
@@ -63,18 +90,7 @@ level = function() {
 			cash.init(548, FULLH + 33, 22, 24, 'img/cash.png')
 			
 			
-			// levels
-			recentLvlUpdate = 0;
-			NUM_LEVELS = 5
-			lvlBgImg = {}
-			lvl = new Array(NUM_LEVELS);
-			
-			lvlBg = {
-				lvl0: 'img/lvl0.jpg',
-				lvl1: 'none'
-			}
-			
-			lvlCollisionPts = {
+			level.collisionPts = {
 				lvl0: {
 					obj0: {
 						x: 310,
@@ -105,13 +121,38 @@ level = function() {
 				}
 			}
 			
-			utils.loadImages(lvlBg, function(num) {
+			loadBgImages({
+				lvl0: 'img/lvl0.jpg',
+				lvl1: 'none'
+			}, function(num) {
 				lvl[num].status = true
 			})
+			
+			level.reset()
+		},
+		
+		reset : function() {
+			hero.x = 23
+			hero.y = canvas.height - hero.h
+			hero.isJumping = false
+	
+			if (game.lvl == 3) {// TODO: getting reset somewhere???
+				hero.y = 0
+			}
+	
+			monster.x = (Math.random() * (FULLW - monster.w - monster.offset))
+			monster.y = (Math.random() * (FULLH - monster.h - monster.offset))
+			monster.initX = monster.x
+			monster.initY = monster.y
+	
+			hero.bulletArr.length = 0
+			++monster.numCaught
 		},
 		
 		/******************** Update ********************/
 		update: function(){
+			
+			//monster.update()
 			
 	    	if(game.lvl == 0)
 	    		lvl0.update()
@@ -135,6 +176,11 @@ level = function() {
 		    }
 		},
 		
+		updateObjs: function(){
+			if(game.lvl == 0)
+				lvl0.updateObjs()
+		},
+		
 		/******************** Render ********************/
 		render: function(){
 			// background
@@ -154,6 +200,8 @@ level = function() {
 	    	
 	    	if(game.lvl == 0)
 	    		lvl0.render()
+	    	
+	    	//monster.render()
 	    	
 		}
 	}

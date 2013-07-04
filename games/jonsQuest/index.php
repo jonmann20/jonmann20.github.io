@@ -40,6 +40,7 @@
 		<script src="js/utils.js"></script>
 		<script src="js/gameObject.js"></script>
 		<script src="js/gameItem.js"></script>
+		<script src="js/enemy/enemy.js"></script>
 		<script src="js/startScreen.js"></script>
 	  	<script src="js/level/level.js"></script>
 		<script src="js/level/level0.js"></script>

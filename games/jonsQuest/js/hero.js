@@ -1,7 +1,25 @@
 hero = function(){
 	var imgReady = false,
 		img = null,
-		showStep = true
+		showStep = true,
+		bullet = {
+			color : "rgba(192, 192, 192, .75)",
+			w : 19.5,
+			h : 9,
+			speed : 8
+		},
+		Dir = Object.freeze({
+			NONE : 0,
+			TOP : 1,
+			BOT : 2,
+			LEFT : 3,
+			RIGHT : 4
+		}),
+		Inv_e = Object.freeze({
+			NOT_HIT: 0,
+			HIT_WHITE: 1,
+			HIT_RED: 2
+		})
 	
 		
 	/*********************** Update ***********************/
@@ -33,14 +51,14 @@ hero = function(){
 	}
 	
 	function bulletHandler(){
-	    for(var i=0; i < bulletArr.length; i++){
-	    	bulletArr[i].x += bulletArr[i].dirR ? bullet.speed : -bullet.speed // update position
+	    for(var i=0; i < hero.bulletArr.length; i++){
+	    	hero.bulletArr[i].x += hero.bulletArr[i].dirR ? bullet.speed : -bullet.speed // update position
 	    	
 	    	// check collision
-	        if(utils.isCollision(bulletArr[i], monster, 0))						// bullet and monster
-                utils.reset()
-            else if(bulletArr[i].x > canvas.width || bulletArr[i].x < 0)		// bullet and screen
-            	bulletArr.splice(i, 1) // remove ith item
+	        if(utils.isCollision(hero.bulletArr[i], monster, 0))						// bullet and monster
+                level.reset()
+            else if(hero.bulletArr[i].x > canvas.width || hero.bulletArr[i].x < 0)		// bullet and screen
+            	hero.bulletArr.splice(i, 1) // remove ith item
 	    }
 	}
 		
@@ -48,7 +66,7 @@ hero = function(){
 		//---hero and monster
 		
 		if(!hero.invincible && utils.isCollision(hero, monster, 0)){
-			//utils.reset()
+			// level.reset()
 			
 			utils.playSound(game.sound.thud, false)
 			
@@ -73,8 +91,8 @@ hero = function(){
 			i = 'lvl' + game.lvl,
 			collisionDir = Dir.NONE
 			
-		for(var j in lvlCollisionPts[i]){
-			k = lvlCollisionPts[i][j]
+		for(var j in level.collisionPts[i]){
+			k = level.collisionPts[i][j]
 			
 			// using player dimensions as the moe
 			if(utils.isCollision(hero, k, 0, true)){
@@ -155,7 +173,7 @@ hero = function(){
 	    	
 		    	utils.playSound(game.sound.gun)
 		        
-	            bulletArr[bulletArr.length] = {
+	            hero.bulletArr[hero.bulletArr.length] = {
 	                x: hero.x,
 	                y: hero.y,
 	                w: bullet.w,
@@ -208,11 +226,7 @@ hero = function(){
 		   // && hero.lvlX + hero.vX <= canvas.width)
 	    ){
 			hero.lvlX += hero.vX
-			
-			
-			// TODO: move to better location
-			lvl0.sack.x -= hero.vX
-			monster.x -= hero.vX
+			level.updateObjs()
 		}
 		else {
 			hero.x += hero.vX
@@ -222,8 +236,6 @@ hero = function(){
 	
 	
 	/*********************** Render ***********************/
-	
-	var Inv_e = {NOT_HIT: 0, HIT_WHITE: 1, HIT_RED: 2}
 	
 	var playerD = {x: 2, y: 2},
 		playerL = {x: 32, y: 2},
@@ -237,7 +249,6 @@ hero = function(){
 		playerU = {x: 32, y: 82},
 		player_picked = {x: 62, y: 82}
 		
-	
 	
 	function drawHero(){
 		if(imgReady){
@@ -312,16 +323,36 @@ hero = function(){
 	}
 	
 	function drawBullets(){
-		for(var i=0; i < bulletArr.length; ++i){
+		for(var i=0; i < hero.bulletArr.length; ++i){
     	    var dirOffset = 0 
 	    	    
-            if(bulletArr[i].dirR)
+            if(hero.bulletArr[i].dirR)
                 dirOffset = hero.w / 2
 	            
             ctx.fillStyle = bullet.color
-            utils.drawEllipse(bulletArr[i].x + dirOffset, bulletArr[i].y + 4.5, bullet.w, bullet.h)
+            drawEllipse(hero.bulletArr[i].x + dirOffset, hero.bulletArr[i].y + 4.5, bullet.w, bullet.h)
         }
 	}
+	
+	function drawEllipse(x, y, w, h) {
+		var kappa = .5522848,
+			ox = (w / 2) * kappa, // control point offset horizontal
+			oy = (h / 2) * kappa, // control point offset vertical
+			xe = x + w, // x-end
+			ye = y + h, // y-end
+			xm = x + w / 2, // x-middle
+			ym = y + h / 2 // y-middle
+
+		ctx.beginPath()
+		ctx.moveTo(x, ym)
+		ctx.bezierCurveTo(x, ym - oy, xm - ox, y, xm, y)
+		ctx.bezierCurveTo(xm + ox, y, xe, ym - oy, xe, ym)
+		ctx.bezierCurveTo(xe, ym + oy, xm + ox, ye, xm, ye)
+		ctx.bezierCurveTo(xm - ox, ye, x, ym + oy, x, ym)
+		ctx.closePath()
+		ctx.fill()
+	}
+		
 		
 	return {
 		x: 0,				// top left of sprite
@@ -356,6 +387,7 @@ hero = function(){
 		xp: 0,
 		xpNeeded: 50,
 		medKits: 1,
+		bulletArr: [],
 		
 		init: function(){
 			img = new Image()
