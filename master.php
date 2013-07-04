@@ -76,7 +76,7 @@ $pageDescription = isset($pageDescription) ? $pageDescription : '';
             		<a class='imgLinks' href='//youtube.com/user/jonmann19/videos' target='_blank'>
             			<i class='spriteIcons youtube'>YouTube</i>
             		</a>
-            		<a class='imgLinks' href='//twitter.com/#!/jonmann20' target='_blank'>
+            		<a class='imgLinks' href='//twitter.com/jonmann20' target='_blank'>
             			<i class='spriteIcons twitter'>Twitter</i>
             		</a>
             		<a class='imgLinks' href='//plus.google.com/u/2/113437309528838781826/posts' target='_blank'>
@@ -84,6 +84,9 @@ $pageDescription = isset($pageDescription) ? $pageDescription : '';
             		</a>
             		<a class='imgLinks' href='//github.com/jonmann20' target='_blank'>
             		    <i class='spriteIcons github'>GitHub</i>
+            		</a>
+        		    <a class='imgLinks' href='//www.linkedin.com/pub/jon-wiedmann/67/42b/b64' target='_blank'>
+            		    <i class='spriteIcons linkedIn'>GitHub</i>
             		</a>
             	</span>
             	<span class='footR'>

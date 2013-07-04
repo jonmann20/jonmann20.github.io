@@ -83,8 +83,9 @@ br.clr {
 .facebook {width:16px; height:16px; background-position: -2px -2px}
 .github {width:16px; height:16px; background-position: -20px -2px}
 .googlePlus {width:16px; height:16px; background-position: -38px -2px}
-.twitter {width:16px; height:16px; background-position: -2px -20px}
-.youtube {width:16px; height:16px; background-position: -20px -20px}
+.linkedIn {width:18px; height:18px; background-position: -56px -2px}
+.twitter {width:16px; height:16px; background-position: -76px -2px}
+.youtube {width:16px; height:16px; background-position: -94px -2px}
 
 /*********** Global ***********/
 /* Scrollbar */
@@ -301,13 +302,15 @@ footer .footL .imgLinks i {
 	position: absolute;
 	cursor: pointer;
 	border-radius: 2px;  
-	transition:         all .2s ease-in-out;
+	transition: all .15s ease-in-out;
+	-webkit-filter: grayscale(.3);
+	-webkit-filter: brightness(.85);
 }
 footer .footL .imgLinks i:hover{
-	box-shadow: 0px 1px 11px -1px #58aad2;
-	transition: all .1s;
-	-webkit-transform: scale(1.33);
-	transform: scale(1.33);
+	box-shadow: 0px 1px 11px 1px #58aad2;
+	transition: all 0s ease-in-out;
+	-webkit-filter: grayscale(0);
+	-webkit-filter: brightness(1);
 }
 footer .footR {
 	float: right;

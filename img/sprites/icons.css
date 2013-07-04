@@ -1,7 +1,7 @@
 /* ----------------------------------------------------
-   created with http://www.texturepacker.com 
+   created with http://www.codeandweb.com/texturepacker 
    ----------------------------------------------------
-   $TexturePacker:SmartUpdate:5e2a30ad651bbde6e7883761719d76eb$
+   $TexturePacker:SmartUpdate:916cd2f9a3fe929b239da90f3b212760$
    ----------------------------------------------------
 
    usage: <span class="{-spritename-} sprite"></span>
@@ -15,5 +15,6 @@
 .facebook {width:16px; height:16px; background-position: -2px -2px}
 .github {width:16px; height:16px; background-position: -20px -2px}
 .googlePlus {width:16px; height:16px; background-position: -38px -2px}
-.twitter {width:16px; height:16px; background-position: -2px -20px}
-.youtube {width:16px; height:16px; background-position: -20px -20px}
+.linkedIn {width:18px; height:18px; background-position: -56px -2px}
+.twitter {width:16px; height:16px; background-position: -76px -2px}
+.youtube {width:16px; height:16px; background-position: -94px -2px}
