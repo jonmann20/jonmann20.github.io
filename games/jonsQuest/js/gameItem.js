@@ -14,8 +14,10 @@ GameItem = function(){
 	
 	return {
 		collected: false,
-		val: -1,
+		holding: false,
 		visible: true,
+		val: -1,
+		
 		
 		init: function(g, v, vis){
 			$.extend(this, g)

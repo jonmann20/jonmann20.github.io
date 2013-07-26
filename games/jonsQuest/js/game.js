@@ -11,6 +11,8 @@ game = function(){
 	function render(){
 		level.render()
 		hero.render()
+		
+		level.drawAfterHero()
 	}
 	
    	function drawFPS(num){

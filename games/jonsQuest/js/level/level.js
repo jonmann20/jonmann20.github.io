@@ -186,7 +186,15 @@ level = function() {
 	    	
 	    	if(game.lvl == 0)
 	    		lvl0.render()
-	    	
+		},
+		
+		drawAfterHero: function(){
+			if(game.lvl == 0){
+				if(lvl0.crate.holding)
+					lvl0.crate.draw()
+				
+			}
 		}
+		
 	}
 }()

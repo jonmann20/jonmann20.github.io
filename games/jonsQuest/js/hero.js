@@ -211,6 +211,11 @@ hero = function(){
 		    }
 		}
 		
+		if(32 in keysDown){				// dropObject (spacebar)
+			lvl0.crate.holding = false
+		}
+		
+		
 		if(hero.isJumping){
 			if(hero.jumpMod > 0){
 				hero.vY -= hero.jumpMod
