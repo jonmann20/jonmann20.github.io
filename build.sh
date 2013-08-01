@@ -43,7 +43,7 @@ function compilePHP {
 		ff=${f#/home/jon/git/jonmann20.github.com/} #TODO: change to path???
 		fname=${ff%.*}
 		
-		if [[ ("$fname" == "master") || ("$fname" == "controllers/contactController") || ("$fname" == "games/gamesMaster") || ("$fname" == "games/gamesNav") || ("$fname" == "music/musicNav") || ("$fname" == "playground/playgroundNav") ]]
+		if [[ ("$fname" == "master") || ("$fname" == "games/gamesMaster") || ("$fname" == "games/gamesNav") || ("$fname" == "music/musicNav") || ("$fname" == "playground/playgroundNav") ]]
 		then
 			echo -e "\t $RED -skipped $fname $RESET"
 		else
