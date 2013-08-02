@@ -33,15 +33,9 @@
 			<li><a href='http://www.aptana.com/products/studio3' target='_blank'>Aptana Studio 3</a> &mdash; A web IDE.</li>
 		</ul>
 		
-		<ul class='srcCode'>
-			<li class='lh'>Source Code:</li>
-			<li>
-				<a href='https://github.com/jonmann20/jonmann20.github.com/tree/master/games/jonsQuest' target='_blank'>
-					https://github.com/jonmann20/jonmann20.github.com/tree/master/games/jonsQuest
-				</a>
-			</li>
-		</ul>
-		
+		<a class='bigBtn' href='https://github.com/jonmann20/jonmann20.github.com/tree/master/games/jonsQuest' target="_blank" title='Source Code on Github'>
+			<span aria-hidden='true' class='icon-github'></span>Source Code 
+		</a>
 	</div>
 	<div id="divDungeon">
 		<h3>Dungeon</h3>
@@ -55,14 +49,9 @@
 			<li><a href='//www.dartlang.org/' target='_blank'>Dart</a> &mdash; An intermediary language (created by google) which is then compiled into Javascript.</li>
 		</ul>
 		
-		<ul class='srcCode'>
-			<li class='lh'>Source Code:</li>
-			<li>
-				<a href='https://github.com/jonmann20/jonmann20.github.com/tree/master/games/dungeon' target='_blank'>
-					https://github.com/jonmann20/jonmann20.github.com/tree/master/games/dungeon
-				</a>
-			</li>
-		</ul>
+		<a class='bigBtn' href='https://github.com/jonmann20/jonmann20.github.com/tree/master/games/dungeon' target="_blank" title='Source Code on Github'>
+			<span aria-hidden='true' class='icon-github'></span>Source Code 
+		</a>
 	</div>
 	<div id="divInteractive">
 	    <h3>Interactive Platformer</h3>
@@ -70,6 +59,10 @@
 	    <a href='//github.com/jkotzian/Interactive-Platformer' class='opaque' target='_blank'>
 	        <img src="../img/characterConcepts1.jpg" alt="Interactive Platformer" />
 	    </a>
+	    
+	    <a class='bigBtn' href='//github.com/jkotzian/Interactive-Platformer' target="_blank" title='Source Code on Github'>
+			<span aria-hidden='true' class='icon-github'></span>Source Code 
+		</a>
 	</div>
 </div> 
 

@@ -23,6 +23,85 @@ button:hover{
 	cursor: pointer;
 }
 
+
+/********** Fonts ********/
+@font-face {
+	font-family: 'icomoon';
+	src:url('/font/icomoon.eot');
+	src:url('/font/icomoon.eot?#iefix') format('embedded-opentype'),
+		url('/font/icomoon.woff') format('woff'),
+		url('/font/icomoon.ttf') format('truetype'),
+		url('/font/icomoon.svg#icomoon') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+/* Use the following CSS code if you want to use data attributes for inserting your icons */
+[data-icon]:before {
+	font-family: 'icomoon';
+	content: attr(data-icon);
+	speak: none;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+}
+
+/* Use the following CSS code if you want to have a class per icon */
+/*
+Instead of a list of all class selectors,
+you can use the generic selector below, but it's slower:
+[class*="icon-"] {
+*/
+.icon-github, .icon-home, .icon-facebook, .icon-twitter, .icon-music, .icon-coffee, .icon-google-plus, .icon-linkedin, .icon-github-2, .icon-code, .icon-briefcase, .icon-youtube {
+	font-family: 'icomoon';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+}
+.icon-github:before {
+	content: "\e000";
+}
+.icon-home:before {
+	content: "\e001";
+}
+.icon-facebook:before {
+	content: "\e002";
+}
+.icon-twitter:before {
+	content: "\e003";
+}
+.icon-music:before {
+	content: "\e004";
+}
+.icon-coffee:before {
+	content: "\e005";
+}
+.icon-google-plus:before {
+	content: "\e006";
+}
+.icon-linkedin:before {
+	content: "\e007";
+}
+.icon-github-2:before {
+	content: "\e008";
+}
+.icon-code:before {
+	content: "\e009";
+}
+.icon-briefcase:before {
+	content: "\e00b";
+}
+.icon-youtube:before {
+	content: "\e00a";
+}
+
+
 /*********** utils ***********/
 img {
 	max-width: 100%;
@@ -63,6 +142,33 @@ br.clr {
 	-ms-user-select: none;
 	user-select: none;
 }
+.bigBtn {
+	display: block;
+	margin-top: 30px;
+	width: 150px;
+	padding: 9px 14px;
+	border-radius: 10px;
+	font-weight: bold;
+	font-size: 1.2em;
+	color: #eaeaea !important;
+	background: hsla(0, 0%, 42%, 0.64);
+	box-shadow: 0 5px 0 hsla(0, 0%, 29%, 0.64);
+	opacity: 1;
+}
+.bigBtn span {
+	padding-right: 10px;
+	vertical-align: -1px;
+}
+.bigBtn:hover,
+.bigBtn:focus {
+	background: hsl(25, 100%, 40%);
+	box-shadow: 0 5px 0 hsl(25, 100%, 20%);
+}
+.bigBtn:active {
+	box-shadow: none;
+	margin-top: 35px;
+	transition: all 0s;
+}
 .absHover .colR > div {
 	position: absolute;
 	display: none;
@@ -78,14 +184,7 @@ br.clr {
 }
 
 /*********** Sprites ***********/
-.spriteIcons {display:inline-block; overflow:hidden; background-repeat: no-repeat;background-image:url(../img/sprites/icons.png);text-indent:-999em}
 
-.facebook {width:16px; height:16px; background-position: -2px -2px}
-.github {width:16px; height:16px; background-position: -20px -2px}
-.googlePlus {width:16px; height:16px; background-position: -38px -2px}
-.linkedIn {width:18px; height:18px; background-position: -56px -2px}
-.twitter {width:16px; height:16px; background-position: -76px -2px}
-.youtube {width:16px; height:16px; background-position: -94px -2px}
 
 /*********** Global ***********/
 /* Scrollbar */
@@ -136,10 +235,15 @@ a:hover {
 	opacity: 1;
 	text-shadow: #61b0d7 0 0 6px;
 }
-a:visited, a:active {color: #5dafd7;}
+a:visited, 
+a:active {
+	color: #5dafd7;
+}
 
 /* Layout */
-html {min-height: 100%;}
+html {
+	min-height: 100%;
+}
 body {
 	line-height: 1.25; 
 	font-size: 87.5%;
@@ -184,6 +288,12 @@ header .hdrNav2 {
 	margin-top: 28px;
 	padding-top: 5px;
 }
+header span {
+	font-size: 0.6em;
+	-webkit-text-stroke: 0;
+	text-stroke: 0;
+
+}
 header nav a,
 header nav a:active, 
 header nav a:visited {
@@ -191,7 +301,6 @@ header nav a:visited {
 	-webkit-text-stroke: 1px #8cb118;
 	text-stroke: 1px #8cb118;
 	text-shadow: 0 3px 3px #000;
- 	margin: 2px 0;
 	opacity: .93;
 	display: block;
 	font-weight: 700;
@@ -214,16 +323,13 @@ header nav ul #cube {
 	height: inherit;
 } 
 
-.games header .hdrNav2 a:nth-child(1),
-.music header .hdrNav2 a:nth-child(2),
-.playground header .hdrNav2 a:nth-child(3),
-.portfolio header .hdrNav2 a:nth-child(4) {
-	background: url('../img/triforce.png') 0 no-repeat;
+.home header nav:first-child span,
+.games header .hdrNav2 a:nth-child(1) span,
+.music header .hdrNav2 a:nth-child(2) span,
+.playground header .hdrNav2 a:nth-child(3) span,
+.portfolio header .hdrNav2 a:nth-child(4) span {
+	color: hsl(60, 68%, 59%) !important;
 }
-.games header .hdrNav2 a:nth-child(1) {margin: 2px 18px 0 18px;}
-.music header .hdrNav2 a:nth-child(2) {margin: 0 22px 0 22px;}
-.playground header .hdrNav2 a:nth-child(3) {margin: 0 -4px 0 -3px;}
-.portfolio header .hdrNav2 a:nth-child(4) {margin: 0 10px 2px 10px;}
 
 .nav1 #bCube,
 .nav2 #stars,
@@ -289,28 +395,18 @@ footer .footL a {
 	margin: 0 0.4em;
 }
 footer .footL .imgLinks {  
-	opacity: .95;
-	display: inline-block; 
-	width: 16px; 
-	height: 16px;
-	vertical-align: bottom;
+	font-size: 1.25em;
+	-webkit-text-stroke: 0;
+	text-stroke: 0;
+	text-shadow: 3px  3px 0 #000;
+	vertical-align: -2px;
+}
+footer .footL .imgLinks:hover {
+	text-shadow: none;
+	opacity: 0.8;
 }
 footer .footContact {
 	margin-right: 1.3em !important;
-}
-footer .footL .imgLinks i {
-	position: absolute;
-	cursor: pointer;
-	border-radius: 2px;  
-	transition: all .15s ease-in-out;
-	-webkit-filter: grayscale(.3);
-	-webkit-filter: brightness(.85);
-}
-footer .footL .imgLinks i:hover{
-	box-shadow: 0px 1px 11px 1px #58aad2;
-	transition: all 0s ease-in-out;
-	-webkit-filter: grayscale(0);
-	-webkit-filter: brightness(1);
 }
 footer .footR {
 	float: right;
@@ -369,12 +465,10 @@ footer .footR {
 .games .goals {
 	margin-bottom: 20px;
 }
-.games .techUsed,
-.games .srcCode {
+.games .techUsed {
 	margin-top: 30px;
 }
-.games .techUsed .lh,
-.games .srcCode .lh {
+.games .techUsed .lh {
 	margin-left: -30px;	
 }
 #divJonsQuest img,

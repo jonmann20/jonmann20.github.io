@@ -35,16 +35,30 @@ $pageDescription = isset($pageDescription) ? $pageDescription : '';
 	    	<? if(!$pageFullWidth){ ?>
 			<header>
 				<nav>
-	            	<a href='<?= $pageRoot; ?>index'>Jon Wiedmann<br />.com</a>
+	            	<a href='<?= $pageRoot; ?>index'>
+	            		<span aria-hidden='true' class='icon-home'></span> Jon Wiedmann<br />.com
+            		</a>
 	            </nav>
 	            <nav class='hdrNav2'>
-	            	<a href='<?= $pageRoot; ?>games/'>Games</a>
-	            	<a href='<?= $pageRoot; ?>music/'>Music</a>
-	            	<a href='<?= $pageRoot; ?>playground/'>Playground</a>
-	            	  <? if(strpos($pageBodyClass, 'playInner') !== false){ 
-						  require_once(dirname(__FILE__) . '/playground/playgroundNav.php');
-                      } ?>
-	            	<a href='<?= $pageRoot; ?>portfolio/'>Portfolio</a>
+	            	<a href='<?= $pageRoot; ?>games/'>
+	            		<span aria-hidden='true' class='icon-code'></span> Games
+            		</a>
+	            	<a href='<?= $pageRoot; ?>music/'>
+	            		<span aria-hidden='true' class='icon-music'></span> Music
+            		</a>
+	            	<a href='<?= $pageRoot; ?>playground/'>
+	            		<span aria-hidden='true' class='icon-coffee'></span> Playground
+            		</a>
+            		
+		            	<? 
+		            		if(strpos($pageBodyClass, 'playInner') !== false){ 
+								require_once(dirname(__FILE__) . '/playground/playgroundNav.php');
+		                	} 
+	                    ?>
+	                  
+	            	<a href='<?= $pageRoot; ?>portfolio/'>
+	            		<span aria-hidden='true' class='icon-briefcase'></span> Portfolio
+            		</a>
 	            </nav>
 	        </header>
 	        <? } else { ?>
@@ -71,22 +85,22 @@ $pageDescription = isset($pageDescription) ? $pageDescription : '';
             		<a href='<?= $pageRoot; ?>about'>About</a> 
             		<a class='footContact' href='<?= $pageRoot; ?>contact'>Contact</a>
             		<a class='imgLinks' href='//facebook.com/jon.wiedmann' target='_blank'>
-            			<i class='spriteIcons facebook'>Facebook</i>
+            			<span aria-hidden='true' class='icon-facebook' title='Facebook'></span>
             		</a>
             		<a class='imgLinks' href='//youtube.com/user/jonmann19/videos' target='_blank'>
-            			<i class='spriteIcons youtube'>YouTube</i>
+            			<span aria-hidden='true' class='icon-youtube' title='YouTube'></span>
             		</a>
             		<a class='imgLinks' href='//twitter.com/jonmann20' target='_blank'>
-            			<i class='spriteIcons twitter'>Twitter</i>
+            			<span aria-hidden='true' class='icon-twitter' title='Twitter'></span>
             		</a>
             		<a class='imgLinks' href='//plus.google.com/u/2/113437309528838781826/posts' target='_blank'>
-            			<i class='spriteIcons googlePlus'>Google Plus</i>
+            			<span aria-hidden='true' class='icon-google-plus' title='Google+'></span>
             		</a>
             		<a class='imgLinks' href='//github.com/jonmann20' target='_blank'>
-            		    <i class='spriteIcons github'>GitHub</i>
+            		    <span aria-hidden='true' class='icon-github' title='Github'></span>
             		</a>
         		    <a class='imgLinks' href='//www.linkedin.com/pub/jon-wiedmann/67/42b/b64' target='_blank'>
-            		    <i class='spriteIcons linkedIn'>GitHub</i>
+            		    <span aria-hidden='true' class='icon-linkedin' title='LinkedIn'></span>
             		</a>
             	</span>
             	<span class='footR'>
