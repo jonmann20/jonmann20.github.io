@@ -1,7 +1,7 @@
 #---notes
 #
 #  run in powershell with:
-#         ./build.ps1 <args>
+#         ./build.ps1 <arg(s)>
 
 #--globals
 $phpExe = "C:\xampp\php\php"
@@ -58,34 +58,47 @@ function compilePHP(){
         $f.fullname.split("\") | ForEach {
             
             if($count -gt 4) {
-                $name += "$_/"
+                $name += "$_\"
             }
             
             $count++
         }
-        $name = $name.substring(0, $name.length-1)
+        $name = $name.substring(0, $name.length-5)
     
-        if(($name -eq "master.php") -or 
-           ($name -eq "games/gamesMaster.php") -or
-           ($name -eq "games/gamesNav.php") -or
-           ($name -eq "music/musicNav.php") -or
-           ($name -eq "playground/playgroundNav.php")
+        if(($name -eq "master") -or 
+           ($name -eq "games\gamesMaster") -or
+           ($name -eq "games\gamesNav") -or
+           ($name -eq "music\musicNav") -or
+           ($name -eq "playground\playgroundNav")
         ){
             Write-Host "`t -Skipped" $name -foregroundcolor "red"
         }
         else {
             Write-Host "`t Compiling" $name -foregroundcolor "green"
             
+            #& $phpExe ${path}${name}".php" > ${path}${name}".html"
             
-            $name = $name.substring(0, $name.length-4)
             
-            & $phpExe ${path}${name}".php" > ${path}${name}".html"
+            #--- compile async
+            $phpFile = $path + $name + ".php" 
+            $htmlFile = $path + $name + ".html"
+
+            $job = Start-Job -ScriptBlock {
+               & $args[0] $args[1] > $args[2]
+            } -argumentlist @($phpExe, $phpFile, $htmlFile)
+            
+            Wait-Job $job
+            
+            #--- convert to utf8
+            $htmlFileContent = gc $htmlFile
+            $htmlFileContent | Set-Content -Encoding UTF8 $htmlFile
         }
     }
     
     echo ""
 }
 
+#--- Check Command Line Arguments
 
 if($args[0] -eq "prd") {
 
@@ -93,7 +106,7 @@ if($args[0] -eq "prd") {
         echo "---- no php files found to compile ----"
     }
     else {
-        compilephp
+        compilePHP
     }
 
 }
@@ -102,78 +115,9 @@ elseif($args[0] -eq "dev") {
         echo "---- no html files found to delete ----"
     }
     else {
-        deletehtml
+        deleteHTML
     }
 }
 else {
     echo "must append 'dev | prd'"
 }
-
-
-
-
-
-#Get-ChildItem -Path $path -Recurse -Include "*.html" | Write-Host $_.FullName 
-#gci $path -r *.html -Exclude 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# function compile($files, $pathIn, $pathOut){
-	# foreach ($file in $files) {
-		# $base = $file.BaseName
-	
-		# Write-Host "`tCompiling " $file.Name
-	
-		# & ${path}php.exe $file.FullName > ${pathOut}"${base}.html"
-	# }
-# }
-
-# #----- root level -----
-# $files = Get-ChildItem -r $path_in -i *.php
-
-# compile $files $path_in $path_out
-
-# #----- music level -----
-# $pathIn = $path_in + "music\"
-# $pathOut = $path_out + "music\"
-# $files = Get-ChildItem -r $pathIn -i *.php
-
-# compile $files $pathIn $pathOut
-
-# #----- games level -----
-# $pathIn = $path_in + "games\"
-# $pathOut = $path_out + "games\"
-# $files = Get-ChildItem -r $pathIn -i *.php
-
-# compile $files $pathIn $pathOut
-
-# #----- playground level -----
-# $pathIn = $path_in + "playground\"
-# $pathOut = $path_out + "playground\"
-# $files = Get-ChildItem -r $pathIn -i *.php
-
-# compile $files $pathIn $pathOut
-
-# #----- portfolio level -----
-# $pathIn = $path_in + "portfolio\"
-# $pathOut = $path_out + "portfolio\"
-# $files = Get-ChildItem -r $pathIn -i *.php
-
-# compile $files $pathIn $pathOut
-
-
-
-
-#----- Notes -----
-#Get-ChildItem -r
