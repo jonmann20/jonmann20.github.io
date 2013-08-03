@@ -5,7 +5,11 @@
 	<p>Check out some of my other sites and affiliations.</p>
 	
 	<ul>
-        <li><a id='enlighten' href='//www.enlighten.com' target='_blank'>Enlighten Agency</a></li>
+        <li>
+    		<a id='enlighten' href='//www.enlighten.com' target='_blank'>
+    			Enlighten Agency
+			</a>
+		</li>
         <li><a id='pico' href='//www.picocal.com' target='_blank'>PicoCal Inc.</a></li>
         <li><a id='nology' href='//twitter.com/Nologydigital' target='_blank'>Nology Digital</a></li>
     </ul>
@@ -50,55 +54,12 @@
     $pageBodyClass = 'portfolio absHover';
 	$pageJs = '
 		<script src="../js/plugins/jquery.hoverIntent.min.js"></script>
+		<script src="/js/plugins/jquery.hoverCarousel.js"></script>
 		<script>
-			
-			$(function() {
-				var active = "Default";
-				
-				function hideOld(name){
-					if(active != name){
-						$("#div" + active).fadeOut(250);
-						$("#div" + name).fadeIn(250);
-					}
-				};
-				
-				function keepNew(name){
-					active = name;
-				};
-				
-				$("#enlighten").hoverIntent({
-					over: function(){
-		         		hideOld("Enlighten");
-		      		},
-		      		timeout: 0,
-		      		out: function(){
-		      			keepNew("Enlighten");
-		      		}
-				});
-				
-				$("#pico").hoverIntent({
-					over: function(){
-		         		hideOld("Pico");
-		      		},
-		      		timeout: 0,
-		      		out: function(){
-		      			keepNew("Pico");
-		      		}
-				});
-				
-				$("#nology").hoverIntent({
-					over: function(){
-		         		hideOld("Nology");
-		      		},
-		      		timeout: 0,
-		      		out: function(){
-		      			keepNew("Nology");
-		      		}
-				});
-				
-			});
-		
-		</script> 
+			$(function(){
+				$("ul").hoverCarousel();
+			})
+		</script>
 	';
 	 
 	require_once(dirname(__FILE__) . '/' . $pageRoot . 'master.php');

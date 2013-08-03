@@ -3,9 +3,21 @@
 <div class="colL">
 	<h2>Games</h2>
     <ul>
-        <li><a href="jonsQuest" id="jonsQuest">Jon&#700;s Quest</a></li>
-        <li><a href="dungeon" id="dungeon">Dungeon</a></li>
-        <li><a href="//github.com/jkotzian/Interactive-Platformer" target='_blank' id="interactive">Interactive Platformer</a></li>
+        <li>
+        	<a href="jonsQuest" id="jonsQuest">
+        		Jon&#700;s Quest
+    		</a>
+    	</li>
+        <li>
+        	<a href="dungeon" id="dungeon">
+        		Dungeon
+    		</a>
+    	</li>
+        <li>
+        	<a href="//github.com/jkotzian/Interactive-Platformer" target='_blank' id="interactive">
+        		Interactive Platformer
+    		</a>
+    	</li>
     </ul>
 </div>
 <div class="colR">
@@ -13,7 +25,7 @@
 		<h3>Discover More</h3>
 		<p>Hover over the links to find out more.</p>
 	</div>
-		<div id="divJonsQuest">
+	<div id="divJonsQuest">
 		<h5>Jon&#700;s Quest</h5>
 		<p>A platformer game engine demo written in pure Javascript.</p>
 		
@@ -76,56 +88,13 @@
 	  $pageRoot = '../';
 	  $pageBodyClass = 'absHover games';
 	  $pageJs = '
-		<script src="../js/plugins/jquery.hoverIntent.min.js"></script>
-		<script async defer>
-			$(function() {
-				
-				var active = "Default";
-				
-				function hideOld(name){
-					if(active != name){
-						$("#div" + active).fadeOut(250);
-						$("#div" + name).fadeIn(250);
-					}
-				};
-				
-				function keepNew(name){
-					active = name;
-				};
-				
-				$("#jonsQuest").hoverIntent({
-					over: function(){
-		         		hideOld("JonsQuest");
-		      		},
-		      		timeout: 0,
-		      		out: function(){
-		      			keepNew("JonsQuest");
-		      		}
-				});
-				
-				$("#dungeon").hoverIntent({
-					over: function(){
-		         		hideOld("Dungeon");
-		      		},
-		      		timeout: 0,
-		      		out: function(){
-		      			keepNew("Dungeon");
-		      		}
-				});
-                
-                $("#interactive").hoverIntent({
-                    over: function(){
-                        hideOld("Interactive");
-                    },
-                    timeout: 0,
-                    out: function(){
-                        keepNew("Interactive");
-                    }
-                });
-				
-			});
-		
-		</script> 
+		<script src="/js/plugins/jquery.hoverIntent.min.js"></script>
+		<script src="/js/plugins/jquery.hoverCarousel.js"></script>
+		<script>
+			$(function(){
+				$(".colL ul").hoverCarousel();
+			})
+		</script>
 	';
 	 
 	 require_once(dirname(__FILE__) . '/' . $pageRoot . 'master.php');
