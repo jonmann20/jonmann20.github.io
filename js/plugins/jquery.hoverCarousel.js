@@ -29,7 +29,7 @@
 		}
 		
 		
-		$(this).append('<a href="#" class="bigBtn">Next</a>');
+		//$(this).append('<a href="#" class="bigBtn">Next</a>');
 		
 		var that = $(this);
 		var overID;
@@ -46,6 +46,7 @@
 	     });
 	     
 	     
+/*
 	     $(this).find('.bigBtn').on('click', function(e){
 	     	e.preventDefault();
 	     	
@@ -65,7 +66,8 @@
 			id = fixFirstLetter(id);
 			hideOld(id);
 			keepNew(id);
-	     });
+	     });*/
+
 	}
 	
 	

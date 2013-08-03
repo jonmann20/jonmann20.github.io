@@ -4,7 +4,10 @@ Master = function(){
     return {
 		
         init: function(){
-          if(this.isTouchDevice()){
+          if(this.isTouchDevice() ||1){
+          	
+          	$('.absHover .colL ul').css({listStyleType: 'none'});
+          	$('.absHover .colL ul a').addClass('bigBtn');
           	
           	$('.absHover .colR > div').css({
           		display: 'block',
