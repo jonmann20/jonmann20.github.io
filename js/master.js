@@ -4,7 +4,7 @@ Master = function(){
     return {
 		
         init: function(){
-          if(this.isTouchDevice() ||1){
+          if(this.isTouchDevice()){
           	
           	$('.absHover .colL ul').css({listStyleType: 'none'});
           	$('.absHover .colL ul a').addClass('bigBtn');
