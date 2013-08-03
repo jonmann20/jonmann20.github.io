@@ -11,7 +11,7 @@
 </div>
 <div class='colR'>
     <h1>Welcome</h1>
-    <p>Thanks for visiting my site.  This site was built with the intention of showcasing some of my technical ability.	This site has information regarding my work experience and hobbies.</p><br />
+    <p>Thanks for visiting my site.  This site was built with the intention of showcasing some of my technical ability.	This site has information regarding my work experience and hobbies.</p>
     <p>Please feel free to poke around or learn more <a href='about'>about me.</a></p>
     
     <a class='twitter-timeline' href='https://twitter.com/jonmann20' data-widget-id='243420536208752640'>Tweets by @jonmann20</a>

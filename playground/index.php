@@ -2,7 +2,7 @@
 
 <div class="colL">
 	<h1>Playground</h1>
-	<p>Check out some tech demos.</p><br />
+	<p>Check out some tech demos.</p>
 	
     <? include_once('playgroundNav.php'); ?>
 </div>

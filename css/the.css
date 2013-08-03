@@ -1,21 +1,9 @@
-/* Reset */
-* {
-	margin: 0;
-	padding: 0;
-	border: 0;
-}
-article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{
-	display: block;
-}
-ul,ol{margin-left:2.125em;}
-blockquote,q{quotes: none;}
-blockquote:before,blockquote:after,q:before,q:after{content:'';content:none;}
-table{border-collapse:collapse;border-spacing:0;}
+/* override browser  */
 input,textarea{outline-color: #888;}
 input:focus,textarea:focus{box-shadow: 2px 2px 16px 2px rgba(0, 0, 0, 0.45);}
 input[type=submit],
 button {
-	transition:         all .35s ease-out;
+	transition: all .35s ease-out;
 }
 input[type=submit]:hover,
 input[type=color]:hover,
@@ -54,7 +42,7 @@ Instead of a list of all class selectors,
 you can use the generic selector below, but it's slower:
 [class*="icon-"] {
 */
-.icon-github, .icon-home, .icon-facebook, .icon-twitter, .icon-music, .icon-coffee, .icon-google-plus, .icon-linkedin, .icon-github-2, .icon-code, .icon-briefcase, .icon-youtube {
+.icon-github, .icon-home, .icon-facebook, .icon-twitter, .icon-music, .icon-google-plus, .icon-linkedin, .icon-briefcase, .icon-mail, .icon-youtube-sign, .icon-volume-mute, .icon-volume-high, .icon-controllernes, .icon-beaker {
 	font-family: 'icomoon';
 	speak: none;
 	font-style: normal;
@@ -79,26 +67,32 @@ you can use the generic selector below, but it's slower:
 .icon-music:before {
 	content: "\e004";
 }
-.icon-coffee:before {
-	content: "\e005";
-}
 .icon-google-plus:before {
 	content: "\e006";
 }
 .icon-linkedin:before {
 	content: "\e007";
 }
-.icon-github-2:before {
-	content: "\e008";
-}
-.icon-code:before {
-	content: "\e009";
-}
 .icon-briefcase:before {
 	content: "\e00b";
 }
-.icon-youtube:before {
+.icon-mail:before {
+	content: "\e00c";
+}
+.icon-youtube-sign:before {
+	content: "\f166";
+}
+.icon-volume-mute:before {
 	content: "\e00a";
+}
+.icon-volume-high:before {
+	content: "\e00d";
+}
+.icon-controllernes:before {
+	content: "\f2d2";
+}
+.icon-beaker:before {
+	content: "\f0c3";
 }
 
 
@@ -242,20 +236,23 @@ a:active {
 
 /* Layout */
 html {
-	min-height: 100%;
+
+}
+
+html, body {
+	height: 100%;
+	background: radial-gradient(closest-side at 50% 36% , hsl(240, 10%, 20%), hsl(58, 7%, 12%));
 }
 body {
 	line-height: 1.25; 
 	font-size: 87.5%;
 	font-family: Verdana, Calibri, Helvetica, Arial, sans-serif;
 	color: #eaeaea;
-	
-	background: #222;
-	background: radial-gradient(closest-side at 50% 36% , hsl(240, 10%, 20%), hsl(58, 7%, 12%)) repeat scroll 0 0 transparent;
 }
 .page {
 	max-width: 1520px; 
 	margin: 0 auto;
+	min-height: 90%;
 }
 .inner {
 	margin: 0 auto;
@@ -266,7 +263,7 @@ body {
 /* Header */
 header {
 	float: left;
-	margin-right: 60px;
+	margin-right: 55px;
 }
 header nav {
 	font-family: 'Open Sans Condensed', 'Verdana', sans-serif;
@@ -292,7 +289,10 @@ header span {
 	font-size: 0.6em;
 	-webkit-text-stroke: 0;
 	text-stroke: 0;
-
+	display: block;
+}
+header .icon-controllernes {
+	font-size: 0.72em;
 }
 header nav a,
 header nav a:active, 
@@ -304,6 +304,11 @@ header nav a:visited {
 	opacity: .93;
 	display: block;
 	font-weight: 700;
+	margin-bottom: 21px;
+	line-height: 1.1;
+}
+.hdrNav2 ul a {
+	margin-bottom: 4px;
 }
 header nav a:hover {
 	text-shadow: #8cb118 0 0 7px;
@@ -328,9 +333,8 @@ header nav ul #cube {
 .music header .hdrNav2 a:nth-child(2) span,
 .playground header .hdrNav2 a:nth-child(3) span,
 .portfolio header .hdrNav2 a:nth-child(4) span {
-	color: hsl(60, 68%, 59%) !important;
+	color: hsl(0, 70%, 56%) !important;
 }
-
 .nav1 #bCube,
 .nav2 #stars,
 .nav3 #bPit,
@@ -345,9 +349,12 @@ header nav ul #cube {
 .nav4 #floatingSun:hover {
 	text-shadow: #ff6a00 0 0 18px;
 }
+
+/* Main */
 .main {
 	margin-top: 40px;
 	overflow: hidden;
+	padding-left: 4px;
 }
 .colL {
 	float: left;
@@ -362,30 +369,28 @@ header nav ul #cube {
 
 /* Footer */
 footer {
-	background-color: rgba(50, 50, 50, 0.64);
-	border-radius: 14px;
-	width: 87%;
-	height: 27px;
-	padding: 13px 0 5px 0;
-	margin: 2.5% auto 2% auto;
-	font-family:  'Open Sans';
-	font-style: italic;
-	font-size: 90%;
+	position: absolute;
+	bottom: 0;
+	width: 100%;
 }
 footer div {
 	margin: 0 auto;
-	width: 90%;
 	min-width: 500px;
+	width: 75%;
+	max-width: 1520px;
+	
+	background-color: rgba(50, 50, 50, 0.64);
+	border-radius: 14px;
+	height: 27px;
+	padding: 13px 20px 5px;
+	margin: 2.5% auto 4% auto;
+	font-family: 'Open Sans';
+	font-style: italic;
 }
 footer a {
-	-webkit-text-stroke: 1px #61b0d7;
-	text-stroke: 1px #61b0d7;
-	text-shadow:
-    	 3px  3px 0 #000,
-    	-1px -1px 0 #000,  
-    	 1px -1px 0 #000,
-    	-1px  1px 0 #000,
-    	 1px  1px 0 #000;
+	-webkit-text-stroke: 1px #5dafd7;
+	text-stroke: 1px #5dafd7;
+	text-shadow: 3px 3px 0 #000;
     font-weight: 700;
 }
 footer .footL {
@@ -398,12 +403,18 @@ footer .footL .imgLinks {
 	font-size: 1.25em;
 	-webkit-text-stroke: 0;
 	text-stroke: 0;
-	text-shadow: 3px  3px 0 #000;
+	text-shadow: 3px 3px 0 #000;
 	vertical-align: -2px;
 }
-footer .footL .imgLinks:hover {
-	text-shadow: none;
-	opacity: 0.8;
+footer .imgLinks span {
+	transition: all 0.28s ease-out;
+}
+footer .footL .imgLinks:hover span {
+	text-shadow: #61b0d7 0 0 6px;
+}
+footer .icon-youtube-sign {
+	font-size: 1.26em;
+	vertical-align: -2px;
 }
 footer .footContact {
 	margin-right: 1.3em !important;
@@ -450,6 +461,10 @@ footer .footR {
 
 
 /********** Games **********/
+.gamesMaster {
+	background: #000;
+}
+
 /* landing */
 .games input[readonly] {
 	width: 20px;
@@ -550,6 +565,11 @@ footer .footR {
 /********** Playground **********/
 .playground .duffsDevice {
 	font-family: consolas, monospace;
+	background: rgba(30,30,30,0.3);
+	padding: 0px 0 0 22px;
+	width: 290px;
+	border-radius: 10px;
+	box-shadow: 4px 3px 18px rgba(0, 0, 0, 0.4);
 }
 .playground input[type=color] {
 	position: absolute; 
@@ -656,39 +676,6 @@ footer .footR {
 
 
 /********** Contact Me **********/
-.contact label {display: block; width: 115px; float: left;}
-.contact .avail {cursor: pointer; color: #999; margin-top: -5px;}
-.contact .avail span {font-size: .8em; display: block;}
-.contact .toggleShow {overflow: hidden; display: none;}
-.contact .toggleShow label {
-	float: none;
-	display: inline;
-}
-.contact input[type=text],
-.contact input[type=email] {
-	width: 178px;
-}
-.contact input, 
-.contact textarea {
-	color: #bbb;
-	margin-bottom: 12px;
-	border-radius: 1.5px;
-	padding: 5px;
-	background: rgba(91, 91, 91, .4);
-}
-.contact textarea {width: 50%; min-height: 55px;}
-.contact input[type=checkbox] {margin-bottom: 0;}
-.contact input[type=submit] {
-	margin-top: 1em;
-	padding: 4px;
-	border-radius: 4px;
-	background: rgba(120,120,120,.9);
-	color: #ccc;
-}
-.contact input[type=submit]:hover {
-	background-color: #ccc;
-	color: #222;
-}
 
 
 /* Responsive */
@@ -699,12 +686,84 @@ footer .footR {
 	.home .colR {width: 57%;}
 }
 @media screen and (max-width: 1182px) {
-  	.home .colL {width: 100%;}
+  	.home .colL {
+  		width: 100%;
+	}
+	.colR {
+		float: left;
+		width: 100%;
+		margin-top: 25px;
+	}
   	.home .colR {
   		float: left;
   		width: 75%;
   		margin-top: 500px;
   	}
+  	footer {
+  		position: relative;
+  	}
+}
+@media screen and (max-width: 610px) {
+	header { 
+		width: 100%;
+		float: none;
+		margin-top: 15px;
+	}
+	header nav {
+		width: 80%;
+		margin: 0 auto;
+	}
+	header nav a span {
+		display: none;
+	}
+	.main {
+		text-align: center;
+		overflow: visible;
+	}
+	.colL {
+		max-width: 100% !important;
+		width: 100%;
+	}
+	#slideshow {
+		height: 475px;
+		width: 345px;
+	}
+	#slideshow img {
+		left: 50%;
+		margin-left: -97px;
+	}
+	.colR {
+		width: 100% !important;
+		margin-top: 30px;
+		border-top: 1px solid rgba(57, 57, 57, .88);
+		box-shadow: 0 -3px 4px -4px;
+	}
+	.home .colR {
+		margin-top: 0 !important;
+		border-top: 0;
+	}
+	.music .colR {
+		border-top: 0;
+	}
+	.absHover .colR > div {
+		display: block;
+		width: 100%;
+		position: static;
+		margin-bottom: 45px;
+	}
+	#divDefault {
+		display: none !important;
+	}
+	.absHover .colR div > p {
+		width: 100%;
+	}
+	ul {
+		list-style-type: none;
+		padding: 0;
+	}
+	.bigBtn {
+		margin: 30px auto 0;
+	}
 }
 
 /* cube */

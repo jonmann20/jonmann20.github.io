@@ -5,7 +5,7 @@ $pageHeader = isset($pageHeader) ? $pageHeader : '';
 ?>
 
 <!DOCTYPE html>
-<html>  
+<html class='gamesMaster'>  
 <head>
 	<meta charset='utf-8'>
     <title><?= $pageTitle; ?></title>

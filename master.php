@@ -25,6 +25,8 @@ $pageDescription = isset($pageDescription) ? $pageDescription : '';
     <meta name='viewport' content='width=device-width' />
 
 	<link href='http://fonts.googleapis.com/css?family=Press+Start+2P|Open+Sans|Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+    
+    <link rel='stylesheet' type='text/css' href='<?= $pageRoot; ?>css/normalize.css' />
     <link rel='stylesheet' type='text/css' href='<?= $pageRoot; ?>css/the.css' />
     <link rel='icon' type='image/ico' href='<?= $pageRoot; ?>img/favicon.ico'>
     <?= $pageHeader; ?>
@@ -41,13 +43,13 @@ $pageDescription = isset($pageDescription) ? $pageDescription : '';
 	            </nav>
 	            <nav class='hdrNav2'>
 	            	<a href='<?= $pageRoot; ?>games/'>
-	            		<span aria-hidden='true' class='icon-code'></span> Games
+	            		<span aria-hidden='true' class='icon-controllernes'></span> Games
             		</a>
 	            	<a href='<?= $pageRoot; ?>music/'>
 	            		<span aria-hidden='true' class='icon-music'></span> Music
             		</a>
 	            	<a href='<?= $pageRoot; ?>playground/'>
-	            		<span aria-hidden='true' class='icon-coffee'></span> Playground
+	            		<span aria-hidden='true' class='icon-beaker'></span> Playground
             		</a>
             		
 		            	<? 
@@ -77,8 +79,10 @@ $pageDescription = isset($pageDescription) ? $pageDescription : '';
 				<?= $pageMainContent; ?>
 			</section>
 	    </div><?// end inner ?>
-        
-        <? if(!$pageFullWidth){ ?>
+    </div><?// end page ?>
+    
+    
+    <? if(!$pageFullWidth){ ?>
         <footer>
             <div>
             	<span class='footL'>
@@ -88,7 +92,7 @@ $pageDescription = isset($pageDescription) ? $pageDescription : '';
             			<span aria-hidden='true' class='icon-facebook' title='Facebook'></span>
             		</a>
             		<a class='imgLinks' href='//youtube.com/user/jonmann19/videos' target='_blank'>
-            			<span aria-hidden='true' class='icon-youtube' title='YouTube'></span>
+            			<span aria-hidden='true' class='icon-youtube-sign' title='YouTube'></span>
             		</a>
             		<a class='imgLinks' href='//twitter.com/jonmann20' target='_blank'>
             			<span aria-hidden='true' class='icon-twitter' title='Twitter'></span>
@@ -109,7 +113,10 @@ $pageDescription = isset($pageDescription) ? $pageDescription : '';
             </div>
         </footer>
         <? } ?>
-    </div><?// end page ?>
+    
+    
+    
+    
     
     <!--[if lt IE 9]>
 	    <script src='//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js'></script>

@@ -2,7 +2,7 @@
 
 <div class='colL'>
 	<h1>Porfolio</h1>
-	<p>Check out some of my other sites and affiliations.</p><br />
+	<p>Check out some of my other sites and affiliations.</p>
 	
 	<ul>
         <li><a id='enlighten' href='//www.enlighten.com' target='_blank'>Enlighten Agency</a></li>
