@@ -307,6 +307,9 @@ header nav a:visited {
 	margin-bottom: 21px;
 	line-height: 1.1;
 }
+header nav:first-child a {
+	margin-bottom: 0;
+}
 .hdrNav2 ul a {
 	margin-bottom: 4px;
 }
@@ -369,8 +372,8 @@ header nav ul #cube {
 
 /* Footer */
 footer {
-	position: absolute;
-	bottom: 0;
+	position: relative;
+	bottom: 35px;
 	width: 100%;
 }
 footer div {
@@ -497,8 +500,6 @@ footer .footR {
 	margin: 0 auto;
 	padding-top: 3%;
 }
-/*.jonsQuest canvas {width: 100%; height: 100%;}*/
-
 .jonsQuest .gameInstructions h1 {
 	margin: 45px 0;
 	font-size: 1.7em;
@@ -509,13 +510,37 @@ footer .footR {
 .jonsQuest .goals {
 	width: 147px;
 }
-.jonsQuest .audioSwitch button {padding: 3px; border: 1px inset; border-radius: 2px; width: 26px; height: 25px; background-color: #ddd;}
-.jonsQuest .audioSwitch button:hover {background-color: #eee;}
-.jonsQuest .audioSwitch button:active {border: 1px outset;}
-.jonsQuest .audioSwitch .off {border-color: red; box-shadow: 0 0 8px red;}
-.jonsQuest .audioSwitch .off:hover {box-shadow: 0 0 17px red;}
-.jonsQuest .audioSwitch .on {border-color: #0ff; box-shadow: 0 0 8px #0ff;}
-.jonsQuest .audioSwitch .on:hover {box-shadow: 0 0 14px #0ff;}
+.jonsQuest .audioSwitch button {
+	padding: 4px 3px 4px 5px;
+	border: 1px inset;
+	border-radius: 2px;]
+	width: 26px;
+	height: 25px;
+	background-color: #ddd;
+}
+.jonsQuest .audioSwitch button:hover {
+	background-color: #eee;
+}
+.jonsQuest .audioSwitch button:active {
+	border: 1px outset;
+}
+.jonsQuest .audioSwitch button span {
+	font-size: 1.2em;
+}
+.jonsQuest .audioSwitch .off {
+	border-color: red;
+	box-shadow: 0 0 8px red;
+}
+.jonsQuest .audioSwitch .off:hover {
+	box-shadow: 0 0 17px red;
+}
+.jonsQuest .audioSwitch .on {
+	border-color: #0ff;
+	box-shadow: 0 0 8px #0ff;
+}
+.jonsQuest .audioSwitch .on:hover {
+	box-shadow: 0 0 14px #0ff;
+}
 .debug {
 	width: 430px; 
 	float: right; 
@@ -565,7 +590,7 @@ footer .footR {
 /********** Playground **********/
 .playground .duffsDevice {
 	font-family: consolas, monospace;
-	background: rgba(30,30,30,0.3);
+	background: rgba(17, 17, 17, 0.58);
 	padding: 0px 0 0 22px;
 	width: 290px;
 	border-radius: 10px;
@@ -627,11 +652,6 @@ footer .footR {
 .uWrap .list li .vid {
 	display: none;
 }
-/*.playground .vid1 {top: 270px;}
-.playground .vid2 {top: 10px; left: 362px;}
-.playground .vid3 {top: 8px; left: 792px;}
-.playground .vid4 {top: 280px; left: 911px;}
-*/
 .bDancingCube .main {
 	min-height: 38em;
 }
@@ -675,98 +695,7 @@ footer .footR {
 }
 
 
-/********** Contact Me **********/
-
-
-/* Responsive */
-@media screen and (max-width: 1265px) {
-	.inner {width: 96%;}
-}
-@media screen and (max-width: 1290px) {
-	.home .colR {width: 57%;}
-}
-@media screen and (max-width: 1182px) {
-  	.home .colL {
-  		width: 100%;
-	}
-	.colR {
-		float: left;
-		width: 100%;
-		margin-top: 25px;
-	}
-  	.home .colR {
-  		float: left;
-  		width: 75%;
-  		margin-top: 500px;
-  	}
-  	footer {
-  		position: relative;
-  	}
-}
-@media screen and (max-width: 610px) {
-	header { 
-		width: 100%;
-		float: none;
-		margin-top: 15px;
-	}
-	header nav {
-		width: 80%;
-		margin: 0 auto;
-	}
-	header nav a span {
-		display: none;
-	}
-	.main {
-		text-align: center;
-		overflow: visible;
-	}
-	.colL {
-		max-width: 100% !important;
-		width: 100%;
-	}
-	#slideshow {
-		height: 475px;
-		width: 345px;
-	}
-	#slideshow img {
-		left: 50%;
-		margin-left: -97px;
-	}
-	.colR {
-		width: 100% !important;
-		margin-top: 30px;
-		border-top: 1px solid rgba(57, 57, 57, .88);
-		box-shadow: 0 -3px 4px -4px;
-	}
-	.home .colR {
-		margin-top: 0 !important;
-		border-top: 0;
-	}
-	.music .colR {
-		border-top: 0;
-	}
-	.absHover .colR > div {
-		display: block;
-		width: 100%;
-		position: static;
-		margin-bottom: 45px;
-	}
-	#divDefault {
-		display: none !important;
-	}
-	.absHover .colR div > p {
-		width: 100%;
-	}
-	ul {
-		list-style-type: none;
-		padding: 0;
-	}
-	.bigBtn {
-		margin: 30px auto 0;
-	}
-}
-
-/* cube */
+/**** cube ****/
 @-webkit-keyframes spinningH {
 	 0%   {-webkit-transform: rotateX(0deg) rotateY(0deg);}
 	 25%  {-webkit-transform: rotateX(180deg) rotateY(180deg);}
@@ -889,3 +818,103 @@ footer .footR {
 		font-weight: 500;
 	} 
 }
+
+
+
+/************ Responsive ************/
+@media screen and (max-width: 1265px) {
+	.inner {width: 96%;}
+}
+@media screen and (max-width: 1290px) {
+	.home .colR {width: 57%;}
+}
+@media screen and (max-width: 1182px) {
+  	.colL {
+  		width: 100% !important;
+	}
+	.colR {
+		float: left;
+		width: 100% !important;
+		margin-top: 25px;
+	}
+  	.home .colR {
+  		float: left;
+  		width: 75%;
+  		margin-top: 500px;
+  	}
+  	.absHover .colR > div {
+  		width: 100%;
+  		max-width: 528px;
+  	}
+  	.absHover .colR div p {
+  		width: 100%;
+  		margin-bottom: 15px;
+  	}
+  	footer {
+  		padding: 10px 0 8px;
+  		bottom: 0;
+  	}
+}
+@media screen and (max-width: 610px) {
+	header { 
+		width: 100%;
+		float: none;
+		margin-top: 15px;
+	}
+	header nav {
+		width: 80%;
+		margin: 0 auto;
+	}
+	header nav a span {
+		display: none;
+	}
+	.main {
+		text-align: center;
+		overflow: visible;
+	}
+	.colL {
+		max-width: 100% !important;
+		width: 100%;
+	}
+	#slideshow {
+		height: 475px;
+		width: 345px;
+	}
+	#slideshow img {
+		left: 50%;
+		margin-left: -97px;
+	}
+	.colR {
+		width: 100% !important;
+		margin-top: 30px;
+		border-top: 1px solid rgba(57, 57, 57, .88);
+		box-shadow: 0 -3px 4px -4px;
+	}
+	.home .colR {
+		margin-top: 0 !important;
+		border-top: 0;
+	}
+	.music .colR {
+		border-top: 0;
+	}
+	.absHover .colR > div {
+		display: block;
+		width: 100%;
+		position: static;
+		margin-bottom: 45px;
+	}
+	#divDefault {
+		display: none !important;
+	}
+	.absHover .colR div > p {
+		width: 100%;
+	}
+	ul {
+		list-style-type: none;
+		padding: 0;
+	}
+	.bigBtn {
+		margin: 30px auto 0;
+	}
+}
+

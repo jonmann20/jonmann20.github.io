@@ -23,7 +23,7 @@
 				<span class="keyAction">
 					AUDIO:
 				</span>
-				M .... <button class="audioState off">Off</button>
+				M .... <button class="audioState off"><span aria-hidden="true" class="icon-volume-mute"></span> </button>
 			</li>
 		</ul>
 	';

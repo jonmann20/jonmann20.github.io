@@ -25,13 +25,13 @@ utils = function(){
 		
 		muteHelper : function() {
 			if ($('.audioState').hasClass('off')) {
-				$('.audioState').html('On')
+				$('.audioState span').removeClass('icon-volume-mute').addClass('icon-volume-high')
 				$('.audioState').removeClass('off')
 				$('.audioState').addClass('on')
 	
 				this.muteSound(false)
 			} else {
-				$('.audioState').html('Off')
+				$('.audioState span').removeClass('icon-volume-high').addClass('icon-volume-mute')
 				$('.audioState').removeClass('on')
 				$('.audioState').addClass('off')
 	

@@ -124,6 +124,9 @@ $pageDescription = isset($pageDescription) ? $pageDescription : '';
 	<!--[if gte IE 9]><!-->
 	    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
 	<!--[endif]-->
+	
+	<script src="/js/master.js" type="text/javascript"></script>
+	
     <?= $pageJs; ?>
 </body>
 </html>
