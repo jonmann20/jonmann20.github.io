@@ -11,7 +11,6 @@
 				
 		}
 		
-		
 		options = $.extend({}, $.fn.hoverCarousel.defaultOptions, options);
 		var active = fixFirstLetter(options.active);
 		
@@ -33,41 +32,39 @@
 		$(this).append('<a href="#" class="bigBtn">Next</a>');
 		
 		var that = $(this);
+		var overID;
 		
-		$(this).find('a').hoverIntent({			
+		$(this).find('a:not(.bigBtn)').hoverIntent({			
 			over: function(){
-				
-				var id;
-				
-				if($(this).hasClass('bigBtn')){
-					
-					var cur = '#' + fixFirstLetter(active, true);
-					
-					console.log(cur);
-					
-					if(cur == '#default'){
-						id = that.children('li').first().children('a').attr('id');
-					}
-					else {
-						id = $(cur).parent().next().children('a').attr('id')
-					}
-					
-					id = fixFirstLetter(id);
-				}
-				else {
-					id = fixFirstLetter($(this).attr('id'));
-		   	 	}
-		   	 	
-		   	 	console.log(id)
-		   	 	
-		   	 	hideOld(id);
-		   	 	
+				overID = fixFirstLetter($(this).attr('id'));
+		   	 	hideOld(overID);
       		},
 		    timeout: 0,
 		    out: function(){
-		    	var id = fixFirstLetter($(this).attr('id'));
-		    	keepNew(id);
+		    	keepNew(overID);
 		    }
+	     });
+	     
+	     
+	     $(this).find('.bigBtn').on('click', function(e){
+	     	e.preventDefault();
+	     	
+			var id;
+			var cur = '#' + fixFirstLetter(active, true);
+			
+			if(cur == '#default'){
+				id = that.children('li').first().children('a').attr('id');
+			}
+			else if(!$(cur).parent().next().is('li')) {
+				id = 'default';
+			}
+			else {
+				id= $(cur).parent().next().children('a').attr('id');
+			}
+			
+			id = fixFirstLetter(id);
+			hideOld(id);
+			keepNew(id);
 	     });
 	}
 	
