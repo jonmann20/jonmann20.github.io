@@ -1,9 +1,18 @@
 Master = function(){
     
+    function hoverEvents(){
+
+    }
+    
+    
     // public
     return {
 		
         init: function(){
+        	
+        	
+        	
+        	
           if(this.isTouchDevice()){
           	
           	$('.absHover .colL ul').css({listStyleType: 'none'});

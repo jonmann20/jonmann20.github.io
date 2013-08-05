@@ -53,7 +53,9 @@
 		<h3>Dungeon</h3>
 		<p>A top down RPG.</p>
 		
-		<img src='../img/playerBig.png' alt='Dungeon player' />
+		<a href='dungeon'>
+			<img src='../img/playerBig.png' alt='Dungeon player' />
+		</a>
 		
 		<ul class='techUsed'>
 			<li class='lh'>Tech used in making the game:</li>

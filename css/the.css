@@ -10,9 +10,14 @@ input[type=color]:hover,
 button:hover{
 	cursor: pointer;
 }
+img {
+	max-width: 100%;
+	border-radius: 4px;
+	box-shadow: 4px 3px 18px rgba(0, 0, 0, 0.4);
+}
 
 
-/********** Fonts ********/
+/*************** Fonts *************/
 @font-face {
 	font-family: 'icomoon';
 	src:url('/font/icomoon.eot');
@@ -108,16 +113,7 @@ you can use the generic selector below, but it's slower:
 	content: "\e00f";
 }
 
-/*********** utils ***********/
-img {
-	max-width: 100%;
-	border-radius: 4px;
-	box-shadow: 4px 3px 18px rgba(0, 0, 0, 0.4);
-}
-sub {
-	font-size: .9em;
-	vertical-align: -3px;
-}
+/**************** Utilities ****************/
 .noHeaderR {
 	margin-top: .55em;
 }
@@ -193,10 +189,7 @@ br.clr {
 	max-height: 460px;
 }
 
-/*********** Sprites ***********/
-
-
-/*********** Global ***********/
+/**************** Global ****************/
 /* Scrollbar */
 ::-webkit-scrollbar{
 	width: 12px;
@@ -235,7 +228,7 @@ h1,h2,h3,h4,h5,h6 {
 	margin: .5em 0 .3em 0;
 }
 a {
-	transition:         all .33s ease-out;
+	transition: all .33s ease-out;
 	opacity: .8; 
 	color: #61b0d7;
 	text-decoration: none;
@@ -251,7 +244,8 @@ a:active {
 }
 
 /* Layout */
-html, body {
+html, 
+body {
 	height: 100%;
 	background: radial-gradient(closest-side at 50% 36% , hsl(240, 10%, 20%), hsl(58, 7%, 12%));
 }
@@ -272,7 +266,7 @@ body {
 	min-height: 40em;
 }
 
-/* Header */
+/**************** Header ****************/
 header {
 	float: left;
 	margin-right: 55px;
@@ -289,27 +283,9 @@ header nav {
 	border-radius: 0 45px;
 	box-shadow: 0 0 2px 4px rgba(57, 57, 57, 0.88);
 }
-header nav:first-child {
-	border-radius: 45px 0;	
-	line-height: 1;
-	text-indent: 9px;
-}
-header .hdrNav2 {
-	margin-top: 28px;
-	padding-top: 5px;
-}
-header span {
-	font-size: 0.6em;
-	-webkit-text-stroke: 0;
-	text-stroke: 0;
-	display: block;
-}
-header .icon-controllernes {
-	font-size: 0.72em;
-}
 header nav a,
-header nav a:active, 
 header nav a:visited {
+	text-align: right;
 	color: #8cb118 !important; 
 	-webkit-text-stroke: 1px #8cb118;
 	text-stroke: 1px #8cb118;
@@ -317,18 +293,77 @@ header nav a:visited {
 	opacity: .93;
 	display: block;
 	font-weight: 700;
-	margin-bottom: 21px;
-	line-height: 1.1;
-}
-header nav:first-child a {
-	margin-bottom: 0;
-}
-.hdrNav2 ul a {
-	margin-bottom: 4px;
+	margin-right: 11px;
+	line-height: 1.2;
 }
 header nav a:hover {
 	text-shadow: #8cb118 0 0 7px;
 }
+header nav a span {
+	font-size: 0.6em;
+	-webkit-text-stroke: 0;
+	text-stroke: 0;
+	display: block;
+	float: right;
+	margin-left: 15px;
+	transition: all 0.33s;
+	padding-top: 10px;
+}
+header nav a:hover span,
+.home header nav:first-child span,
+.blog header .hdrNav2 a:nth-child(1) span,
+.games header .hdrNav2 a:nth-child(2) span,
+.music header .hdrNav2 a:nth-child(3) span,
+.playground header .hdrNav2 a:nth-child(4) span,
+.portfolio header .hdrNav2 a:nth-child(5) span {
+	color: hsl(0, 70%, 56%) !important;
+	text-shadow: 0 3px 3px #000;
+	transition: color 0.33s;
+	opacity: 0.93;
+}
+
+/* First Nav */
+header nav:first-child {
+	border-radius: 45px 0;	
+	text-indent: 9px;
+}
+header nav:first-child span {
+	float: none;
+	margin-left: 0;
+	padding-top: 0;
+}
+header nav:first-child a {
+	text-align: center;
+	line-height: 1.1 !important;
+	margin-bottom: 0;
+	margin-right: 0;
+}
+
+/* Second Nav */
+.hdrNav2 {
+	margin-top: 28px;
+	padding-top: 5px;
+}
+.hdrNav2 ul a {
+	margin-bottom: 4px;
+}
+.hdrNav2 a:active span {
+	position: relative;
+	left: -2px;
+}
+.hdrNav2 .icon-controllernes {
+	font-size: 0.72em;
+}
+
+/* Back Nav */
+.backNav span {
+	display: inline;
+}
+.backNav a:hover span {
+	color: #8cb118 !important
+}
+
+/* Playground Nav */
 header nav ul {
 	list-style-type: none;
 	font-size: 58%;
@@ -346,19 +381,10 @@ header nav ul #cube {
 	width: inherit;
 	height: inherit;
 } 
-
-.home header nav:first-child span,
-.games header .hdrNav2 a:nth-child(1) span,
-.music header .hdrNav2 a:nth-child(2) span,
-.playground header .hdrNav2 a:nth-child(3) span,
-.portfolio header .hdrNav2 a:nth-child(4) span,
-.blog header .hdrNav2 a:nth-child(5) span {
-	color: hsl(0, 70%, 56%) !important;
-}
 .nav1 #bCube,
 .nav2 #stars,
 .nav3 #bPit,
-.nav4 #floatingSun  {
+.nav4 #floatingSun {
 	color: #ff6a00 !important;
 	-webkit-text-stroke: 1px #ff6a00;
 	text-stroke: 1px #ff6a00;
@@ -369,11 +395,9 @@ header nav ul #cube {
 .nav4 #floatingSun:hover {
 	text-shadow: #ff6a00 0 0 18px;
 }
-.backNav span {
-	display: inline;
-}
 
-/* Main */
+
+/****** Main ******/
 .main {
 	margin-top: 40px;
 	overflow: hidden;
@@ -426,17 +450,11 @@ footer .footL .imgLinks {
 	font-size: 1.25em;
 	-webkit-text-stroke: 0;
 	text-stroke: 0;
-	text-shadow: 3px 3px 0 #000;
+	opacity: 1;
 	vertical-align: -2px;
 }
-footer .imgLinks span {
-	transition: all 0.28s ease-out;
-}
-footer .footL .imgLinks:hover span {
-	text-shadow: #61b0d7 0 0 6px;
-}
 footer .icon-youtube-sign {
-	font-size: 1.26em;
+	font-size: 1.254em;
 	vertical-align: -2px;
 }
 footer .footContact {
@@ -452,7 +470,7 @@ footer .footR {
 	width: 80%;
 }
 
-/************** Pages ***********************/
+/************************ Pages ***********************/
 /* Full Width */
 .pageFullW .page {max-width: 98%;}
 .pageFullW .inner {width: 99.1%;}
@@ -514,7 +532,6 @@ footer .footR {
 #divDungeon img {
 	box-shadow: none;
 }
-
 .debug {
 	width: 430px; 
 	float: right; 
@@ -735,6 +752,9 @@ footer .footR {
 	header nav {
 		width: 80%;
 		margin: 0 auto;
+	}
+	header nav a {
+		text-align: center;
 	}
 	header nav a span {
 		display: none;

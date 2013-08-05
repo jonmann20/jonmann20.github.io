@@ -42,6 +42,9 @@ $pageDescription = isset($pageDescription) ? $pageDescription : '';
             		</a>
 	            </nav>
 	            <nav class='hdrNav2'>
+            		<a href='<?= $pageRoot; ?>blog/'>
+            			<span aria-hidden='true' class='icon-folder-open'></span> Blog
+        			</a>
 	            	<a href='<?= $pageRoot; ?>games/'>
 	            		<span aria-hidden='true' class='icon-controllernes'></span> Games
             		</a>
@@ -61,9 +64,6 @@ $pageDescription = isset($pageDescription) ? $pageDescription : '';
 	            	<a href='<?= $pageRoot; ?>portfolio/'>
 	            		<span aria-hidden='true' class='icon-briefcase'></span> Portfolio
             		</a>
-            		<a href='<?= $pageRoot; ?>blog/'>
-            			<span aria-hidden='true' class='icon-folder-open'></span> Blog
-        			</a>
 	            </nav>
 	        </header>
 	        <? } else { ?>

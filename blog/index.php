@@ -5,9 +5,7 @@
 
 <article>
 	
-	<section>
-		<h1>Coming Soon?</h1>
-	</section>
+	<h2>Coming Soon?</h1>	
 	
 	<!-- <section>
 		<h1>Post Title</h1>
