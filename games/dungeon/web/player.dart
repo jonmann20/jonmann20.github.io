@@ -11,9 +11,9 @@ class Player extends GameObj{
   SpritePos 
       imgD = new SpritePos(2, 2),
       imgL = new SpritePos(32, 2),
-      imgR = new SpritePos(2, 42),
-      imgU = new SpritePos(32, 42),
-      imgPicked = new SpritePos(2, 82);
+      imgR = new SpritePos(32, 42),
+      imgU = new SpritePos(32, 82),
+      imgPicked = new SpritePos(62, 82);
   
   Player(num ix, num iy, num w, num h, [String str=null]) : super(ix, iy, w, h, str){
     vX = vY = atkDownTime = 0;

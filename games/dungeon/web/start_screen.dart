@@ -178,7 +178,7 @@ class StartScreen{
       mouse.x = e.layerX*game.invRatio;
       mouse.y = e.layerY*game.invRatio;
       
-      print('mouse: (${mouse.x}, ${mouse.y})');
+      //print('mouse: (${mouse.x}, ${mouse.y})');
       
       if(util.checkCollision(mouse, newGame)){
         canvas.style.cursor = 'pointer';

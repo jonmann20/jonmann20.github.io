@@ -14,6 +14,7 @@ $htmlFiles += gci ${path}"music\*" *.html
 $htmlFiles += gci ${path}"games\*" *.html
 $htmlFiles += gci ${path}"games\jonsQuest\*" *.html
 $htmlFiles += gci ${path}"games\dungeon\*" *.html
+$htmlFiles += gci ${path}"blog\*" *.html
 
 $phpFiles = gci ${path}"*" *.php
 $phpFiles += gci ${path}"portfolio\*" *.php
@@ -22,6 +23,7 @@ $phpFiles += gci ${path}"music\*" *.php
 $phpFiles += gci ${path}"games\*" *.php
 $phpFiles += gci ${path}"games\jonsQuest\*" *.php
 $phpFiles += gci ${path}"games\dungeon\*" *.php
+$phpFiles += gci ${path}"blog\*" *.php
 
 #---functions---
 function deleteHTML(){

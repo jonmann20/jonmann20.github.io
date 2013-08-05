@@ -24,6 +24,7 @@ button:hover{
 	font-style: normal;
 }
 
+
 /* Use the following CSS code if you want to use data attributes for inserting your icons */
 [data-icon]:before {
 	font-family: 'icomoon';
@@ -42,7 +43,7 @@ Instead of a list of all class selectors,
 you can use the generic selector below, but it's slower:
 [class*="icon-"] {
 */
-.icon-github, .icon-home, .icon-facebook, .icon-twitter, .icon-music, .icon-google-plus, .icon-linkedin, .icon-briefcase, .icon-mail, .icon-youtube-sign, .icon-volume-mute, .icon-volume-high, .icon-controllernes, .icon-beaker {
+.icon-github, .icon-home, .icon-facebook, .icon-twitter, .icon-music, .icon-google-plus, .icon-linkedin, .icon-briefcase, .icon-mail, .icon-youtube-sign, .icon-volume-mute, .icon-controllernes, .icon-beaker, .icon-github-2, .icon-volume-medium, .icon-feed, .icon-arrow-left, .icon-folder-open {
 	font-family: 'icomoon';
 	speak: none;
 	font-style: normal;
@@ -85,16 +86,27 @@ you can use the generic selector below, but it's slower:
 .icon-volume-mute:before {
 	content: "\e00a";
 }
-.icon-volume-high:before {
-	content: "\e00d";
-}
 .icon-controllernes:before {
 	content: "\f2d2";
 }
 .icon-beaker:before {
 	content: "\f0c3";
 }
-
+.icon-github-2:before {
+	content: "\e008";
+}
+.icon-volume-medium:before {
+	content: "\e005";
+}
+.icon-feed:before {
+	content: "\e00d";
+}
+.icon-arrow-left:before {
+	content: "\e00e";
+}
+.icon-folder-open:before {
+	content: "\e00f";
+}
 
 /*********** utils ***********/
 img {
@@ -239,10 +251,6 @@ a:active {
 }
 
 /* Layout */
-html {
-
-}
-
 html, body {
 	height: 100%;
 	background: radial-gradient(closest-side at 50% 36% , hsl(240, 10%, 20%), hsl(58, 7%, 12%));
@@ -268,6 +276,7 @@ body {
 header {
 	float: left;
 	margin-right: 55px;
+	margin-bottom: 40px;
 }
 header nav {
 	font-family: 'Open Sans Condensed', 'Verdana', sans-serif;
@@ -329,6 +338,9 @@ header nav ul {
 	padding: 10px 0;
 	border-radius: 1px;
 }
+header nav ul a:active {
+	margin-bottom: 4px;
+}
 header nav ul #cube {
 	margin: inherit;
 	width: inherit;
@@ -339,7 +351,8 @@ header nav ul #cube {
 .games header .hdrNav2 a:nth-child(1) span,
 .music header .hdrNav2 a:nth-child(2) span,
 .playground header .hdrNav2 a:nth-child(3) span,
-.portfolio header .hdrNav2 a:nth-child(4) span {
+.portfolio header .hdrNav2 a:nth-child(4) span,
+.blog header .hdrNav2 a:nth-child(5) span {
 	color: hsl(0, 70%, 56%) !important;
 }
 .nav1 #bCube,
@@ -355,6 +368,9 @@ header nav ul #cube {
 .nav3 #bPit:hover,
 .nav4 #floatingSun:hover {
 	text-shadow: #ff6a00 0 0 18px;
+}
+.backNav span {
+	display: inline;
 }
 
 /* Main */
@@ -470,6 +486,7 @@ footer .footR {
 /********** Games **********/
 .gamesMaster {
 	background: #000;
+	height: auto;
 }
 
 /* landing */
@@ -498,53 +515,6 @@ footer .footR {
 	box-shadow: none;
 }
 
-/* Jon's Quest */
-.jonsQuest .canvasWrap {
-	width: 910px;
-	margin: 0 auto;
-	padding-top: 3%;
-}
-.jonsQuest .gameInstructions h1 {
-	margin: 45px 0;
-	font-size: 1.7em;
-}
-.jonsQuest .gameInstructions h2 {
-	font-size: 1.32em;
-}
-.jonsQuest .goals {
-	width: 147px;
-}
-.jonsQuest .audioSwitch button {
-	padding: 4px 3px 4px 5px;
-	border: 1px inset;
-	border-radius: 2px;]
-	width: 26px;
-	height: 25px;
-	background-color: #ddd;
-}
-.jonsQuest .audioSwitch button:hover {
-	background-color: #eee;
-}
-.jonsQuest .audioSwitch button:active {
-	border: 1px outset;
-}
-.jonsQuest .audioSwitch button span {
-	font-size: 1.2em;
-}
-.jonsQuest .audioSwitch .off {
-	border-color: red;
-	box-shadow: 0 0 8px red;
-}
-.jonsQuest .audioSwitch .off:hover {
-	box-shadow: 0 0 17px red;
-}
-.jonsQuest .audioSwitch .on {
-	border-color: #0ff;
-	box-shadow: 0 0 8px #0ff;
-}
-.jonsQuest .audioSwitch .on:hover {
-	box-shadow: 0 0 14px #0ff;
-}
 .debug {
 	width: 430px; 
 	float: right; 
@@ -605,6 +575,7 @@ footer .footR {
 	margin: -6px 0 0 4px;
 	width: 29px;
 	height: 30px;
+	border: 0;
 	background-color: transparent;
 }
 .playground .ballPit canvas,
@@ -656,9 +627,6 @@ footer .footR {
 .uWrap .list li .vid {
 	display: none;
 }
-.bDancingCube .main {
-	min-height: 38em;
-}
 .iframeWrap {
 	margin-top: -480px;
 	
@@ -698,107 +666,6 @@ footer .footR {
 	widtH: 57%;
 }
 
-
-/**** cube ****/
-@-webkit-keyframes spinningH {
-	 0%   {-webkit-transform: rotateX(0deg) rotateY(0deg);}
-	 25%  {-webkit-transform: rotateX(180deg) rotateY(180deg);}
-	 50%  {-webkit-transform: rotateX(90deg) rotateY(0deg);}
-	 75%  {-webkit-transform: rotateX(270deg) rotateY(270deg);}
-	 100% {-webkit-transform: rotateX(360deg) rotateY(360deg);}
-}
-
-@keyframes spinningH {
-	 0%   {transform: rotateX(0deg) rotateY(0deg);}
-	 25%  {transform: rotateX(180deg) rotateY(180deg);}
-	 50%  {transform: rotateX(90deg) rotateY(0deg);}
-	 75%  {transform: rotateX(270deg) rotateY(270deg);}
-	 100% {transform: rotateX(360deg) rotateY(360deg);}
-}
-
-.container {
-	-webkit-perspective : 1000px;
-	-moz-perspective    : 1000px;
-	-ms-perspective     : 1000px;
-	perspective         : 1000px;
-
-	-webkit-perspective-origin  : 50% 50%;
-	-moz-perspective-origin     : 50% 50%;
-	-moz-transform-origin       : 50% 50%;
-	-ms-perspective-origin      : 50% 50%;
-	perspective-origin          : 50% 50%;
- 	
- 	font-size: 2.25em;
-	margin: 65px 0 290px 360px;
-	display: block;
-	
-	-webkit-box-reflect: below 165px linear-gradient(to bottom, transparent, transparent 42%, rgba(255,255,255,0.5));
- }
-.oldIE .container {display: none;}
-
-.animate { /* 1 interation(s) */
-	-webkit-animation : spinningH 5s infinite linear;
-	animation         : spinningH 5s infinite linear;
-}
-
-#cube {
-	position: relative;
-	margin: 0 auto;
-	height: 144px;
-	width: 144px;
-
-	transition        : all 2s linear;
-
-	-webkit-transform-style: preserve-3d;
-	transform-style        : preserve-3d;
-}
-
-#cube > div {
-	position: absolute;
-	height: 144px;
-	width: 144px;
-	padding: 10px;
-	opacity: 0.87;
-	background-position: center center;
-	background-color: rgba(20, 20, 20, .7);
-}
-#cube > div span {
-	padding-top: 52px;
-	display: block;
-	text-align: center;
-}
-#cube > div span.long {
- 	-webkit-transform: rotate(41deg);
-	transform        : rotate(41deg);
-	font-size: .75em;
-	padding: 49px 0 0 21px;
-	display: block;
-	letter-spacing: 3px;
-}
-#cube div:nth-child(1) {
-	-webkit-transform: translateZ(82px);
-	transform        : translateZ(82px);
-}
-#cube div:nth-child(2) {
-	-webkit-transform: rotateY(90deg) translateZ(82px);
-	transform        : rotateY(90deg) translateZ(82px);
-}
-#cube div:nth-child(3) {
-	-webkit-transform: rotateY(180deg) translateZ(82px);
-	transform        : rotateY(180deg) translateZ(82px);
-}
-#cube div:nth-child(4) {
-	-webkit-transform: rotateY(-90deg) translateZ(82px);
-	transform        : rotateY(-90deg) translateZ(82px);
-}
-#cube div:nth-child(5) {
-	-webkit-transform: rotateX(-90deg) translateZ(82px) rotate(180deg);
-	transform        : rotateX(-90deg) translateZ(82px) rotate(180deg);
-}
-#cube div:nth-child(6)  {
-	-webkit-transform: rotateX(90deg) translateZ(82px);
-	transform        : rotateX(90deg) translateZ(82px);
-}
 
 /*********** IE fixes ***********/
 /* ie8 */

@@ -1,0 +1,47 @@
+.jonsQuest .canvasWrap {
+	width: 910px;
+	margin: 0 auto;
+	padding-top: 3%;
+}
+.jonsQuest .gameInstructions h1 {
+	margin: 45px 0;
+	font-size: 1.7em;
+}
+.jonsQuest .gameInstructions h2 {
+	font-size: 1.32em;
+}
+.jonsQuest .goals {
+	width: 147px;
+}
+.jonsQuest .audioSwitch button {
+	padding: 4px 3px 4px 6px;
+	border: 1px inset;
+	border-radius: 2px;]
+	width: 26px;
+	height: 25px;
+	background-color: #ddd;
+}
+.jonsQuest .audioSwitch button:hover {
+	background-color: #eee;
+}
+.jonsQuest .audioSwitch button:active {
+	border: 1px outset;
+}
+.jonsQuest .audioSwitch button span {
+	font-size: 1.2em;
+	margin-top: -1px;
+}
+.jonsQuest .audioSwitch .off {
+	border-color: red;
+	box-shadow: 0 0 8px red;
+}
+.jonsQuest .audioSwitch .off:hover {
+	box-shadow: 0 0 17px red;
+}
+.jonsQuest .audioSwitch .on {
+	border-color: #0ff;
+	box-shadow: 0 0 8px #0ff;
+}
+.jonsQuest .audioSwitch .on:hover {
+	box-shadow: 0 0 14px #0ff;
+}

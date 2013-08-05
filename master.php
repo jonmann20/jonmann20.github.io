@@ -61,12 +61,17 @@ $pageDescription = isset($pageDescription) ? $pageDescription : '';
 	            	<a href='<?= $pageRoot; ?>portfolio/'>
 	            		<span aria-hidden='true' class='icon-briefcase'></span> Portfolio
             		</a>
+            		<a href='<?= $pageRoot; ?>blog/'>
+            			<span aria-hidden='true' class='icon-folder-open'></span> Blog
+        			</a>
 	            </nav>
 	        </header>
 	        <? } else { ?>
 	        	<header>
-					<nav>
-	            		<a href='<? echo $pageRoot . $pageBack ?>/'>&larr; Back</a>
+					<nav class="backNav">
+	            		<a href='<? echo $pageRoot . $pageBack ?>/'>
+	            			<span aria-hidden='true' class='icon-arrow-left'></span> Back
+            			</a>
 	            	</nav>
 	            	
 	            	<div class='gameInstructions'>
@@ -101,7 +106,7 @@ $pageDescription = isset($pageDescription) ? $pageDescription : '';
             			<span aria-hidden='true' class='icon-google-plus' title='Google+'></span>
             		</a>
             		<a class='imgLinks' href='//github.com/jonmann20' target='_blank'>
-            		    <span aria-hidden='true' class='icon-github' title='Github'></span>
+            		    <span aria-hidden='true' class='icon-github-2' title='Github'></span>
             		</a>
         		    <a class='imgLinks' href='//www.linkedin.com/pub/jon-wiedmann/67/42b/b64' target='_blank'>
             		    <span aria-hidden='true' class='icon-linkedin' title='LinkedIn'></span>

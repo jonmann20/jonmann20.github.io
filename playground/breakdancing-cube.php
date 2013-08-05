@@ -26,6 +26,7 @@
       $pageKeywords = 'CSS3, HTML5';
       $pageRoot = '../';
       $pageBodyClass = 'playground playInner bDancingCube nav1';
+	  $pageHeader = '<link rel="stylesheet" type="text/css" href="/css/bCube.css" />';
       $pageJs = '
       <script>
   			$(function() {

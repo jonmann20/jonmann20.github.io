@@ -23,7 +23,7 @@ class Game{
     
     key = new Keyboard();
     util = new Utils();
-    p = new Player(0, 0, 28, 38, 'sprites/player/player.png');
+    p = new Player(0, 0, 28, 38, 'sprites/player/playerDungeon.png');
     overworld = new Overworld();
     level = new Level();
     

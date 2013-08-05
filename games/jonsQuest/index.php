@@ -36,6 +36,7 @@
 	$pageTitle = "Jon&rsquo;s Quest | Games";
 	$pageRoot = '../../';
     $pageBodyClass = 'games pageFullW jonsQuest';
+	$pageHeader = '<link rel="stylesheet" type="text/css" href="css/jonsQuest.css" />';
 	$pageJs = '
 		<script src="js/utils.js"></script>
 		<script src="js/gameObject.js"></script>

@@ -94,7 +94,7 @@ then
 elif [[ "$1" == "prd" ]]
 then
 	compilePHP
-	compressCSS
+	#compressCSS
 elif [[ "$1" == "test" ]]
 then
 	echo "in test"
