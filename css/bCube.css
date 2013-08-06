@@ -1,7 +1,11 @@
 .bDancingCube .main {
 	min-height: 38em;
 }
-
+.iframeWrap iframe {
+	background: rgba(17,17,17, 0.58);
+	padding: 10px;
+	box-shadow: 4px 3px 18px rgba(0, 0, 0, 0.4);
+}
 
 
 @-webkit-keyframes spinningH {
