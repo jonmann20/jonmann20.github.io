@@ -346,6 +346,7 @@ header nav:first-child a {
 }
 .hdrNav2 ul a {
 	margin-bottom: 4px;
+	text-align: center;
 }
 .hdrNav2 a:active span {
 	position: relative;
