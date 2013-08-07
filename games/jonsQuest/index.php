@@ -18,7 +18,8 @@
 			<li><span class="keyAction">LEFT:</span> A</li>
 			<li><span class="keyAction">RIGHT:</span> D</li>
 			<li><span class="keyAction">THROW:</span> J</li>
-			<li><span class="keyAction">JUMP:</span> K</li><br />
+			<li><span class="keyAction">JUMP:</span> K</li>
+			<li><span class="keyAction">DROP:</span> SPACE</li><br />
 			<li class="audioSwitch">
 				<span class="keyAction">
 					AUDIO:

@@ -19,7 +19,8 @@ hero = function(){
 			NOT_HIT: 0,
 			HIT_WHITE: 1,
 			HIT_RED: 2
-		})
+		}),
+		gameOver = false
 	
 		
 	/*********************** Update ***********************/
@@ -160,6 +161,9 @@ hero = function(){
 	}
 	
 	function checkInput(){
+		
+		hero.dir = Dir.NONE
+		
 		if(!hero.onObj)
 			hero.vY = ((hero.vY + game.gravity) > hero.maxVy) ? hero.maxVy : (hero.vY + game.gravity)
 		
@@ -169,11 +173,13 @@ hero = function(){
 		if(65 in keysDown){ 			// left (a)
 		    hero.vX = (Math.abs(hero.vX - hero.speed) > hero.maxVx) ? -hero.maxVx : (hero.vX - hero.speed)
 		    hero.dirR = false
+		    hero.dir = Dir.LEFT
 		}
 		
 		if(68 in keysDown){ 			// right (d)
 		    hero.vX = (Math.abs(hero.vX + hero.speed) > hero.maxVx) ? hero.maxVx : (hero.vX + hero.speed)
 		    hero.dirR = true
+		    hero.dir = Dir.RIGHT
 	    }
 	    
 	    if(Math.abs(hero.vX) < hero.speed)
@@ -221,6 +227,7 @@ hero = function(){
 				hero.vY -= hero.jumpMod
 				--hero.jumpMod
 			}
+			hero.dir = Dir.TOP
 		}
 		else{
 			hero.jumpMod = hero.jumpPower
@@ -278,7 +285,15 @@ hero = function(){
 			var pos = {x: 0, y: 0}
 			
 			// TODO: move to update
-    		if(hero.dirR){
+			
+			
+			if(hero.vX == 0 && hero.dir == Dir.NONE){
+				pos = playerD
+			}
+			// else if(hero.dir == Dir.TOP){ // jumping
+				// pos = playerU
+			// }
+    		else if(hero.dirR){
     			pos = playerR
     			
 	   			if(showStep && 68 in keysDown){ 
@@ -380,9 +395,11 @@ hero = function(){
 		vY: 0,
 		maxVx: 6,
 		maxVy: 15,
+		dir: Dir.NONE,
 		dirR: true, 
 		speed: 1.5,
 		isJumping: false,
+		isCarrying: false,
 		onObj: true,
 		onObjX: -1,
 		onObjY: -1,
@@ -424,6 +441,12 @@ hero = function(){
 			if(hero.invincibleTimer <= 0){
 				hero.invincible = false
 				hero.invincibleTimer = hero.initInvincibleTimer
+			}
+			
+			if(hero.health <= 0 && !gameOver){
+				alert('You died')
+				location.reload()
+				gameOver = true
 			}
 			
 			//console.log({a: hero.lvlX, b: hero.x})

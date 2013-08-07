@@ -28,6 +28,8 @@ GameObj = function(){
 			
 			if(this.y < FULLH - game.padFloor - this.h)
 				this.y += this.vY
+			else
+				this.y = FULLH -game.padFloor - this.h
 		},
 		
 		draw: function(){

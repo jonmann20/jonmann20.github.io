@@ -25,7 +25,7 @@ lvl0 = function() {
 				hiddenCash.init(hCash_g, 10, false)
 
 			var crate_g = GameObj()
-			crate_g.init(400, FULLH - game.padFloor - 27, 25, 27, 'img/crate.png')				lvl0.crate = GameItem()
+			crate_g.init(400, FULLH - game.padFloor - 26, 24, 26, 'img/crate.png')				lvl0.crate = GameItem()
 				lvl0.crate.init(crate_g)
 				
 			belt = GameObj()
@@ -84,6 +84,11 @@ lvl0 = function() {
 			// cyborg
 			if (utils.isCollision(hero, cyborg, 0)) {
 				cyborg.active = true
+				
+				if(!hero.invincible){
+					hero.invincible = true
+					--hero.health
+				}
 			}
 
 		},
@@ -105,8 +110,15 @@ lvl0 = function() {
 			cyborg.draw()
 			belt.draw()
 			
-			if(!lvl0.crate.holding)
+			if(!lvl0.crate.holding){
 				lvl0.crate.draw()
+			}
+			else {
+				if(hero.vX == 0){
+					lvl0.crate.x += hero.dirR ? -20 : 24
+					lvl0.crate.y += 6
+				}
+			}
 		}
 	}
 
