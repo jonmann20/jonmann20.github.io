@@ -29,14 +29,14 @@
     $pageBodyClass = 'home';
 	 
 	$pageJs = "
-	    <script defer async>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='//platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','twitter-wjs');</script>
-	    
-		<script src='/js/plugins/jquery.cycle.lite.js'></script>
+		<script src='/js/plugins/jquery.cycle-lite.min.js'></script>
 	    <script>
 		  	$(function(){
 				$('#slideshow').cycle();
 		  	});
 	    </script>
+	    
+	    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='//platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','twitter-wjs');</script>
 	";
 	  
 	include_once($pageRoot . 'master.php');
