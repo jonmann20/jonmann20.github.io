@@ -685,18 +685,8 @@ footer .footR {
 }
 
 
-/*********** IE fixes ***********/
-/* ie8 */
-.ie8 a{color:#61b0d7;text-decoration:none;outline:none;}
-.ie8 a:hover{text-decoration:underline;}
-.ie8 footer{background-color:#282828;}
-
-/* ie9 */
-.ie9 header nav a{font-weight: 900;}
-.ie9 header nav a:hover{text-decoration:underline;}
-
-
-@media screen and (-webkit-min-device-pixel-ratio: 0){ /* Chrome Hack!! */
+/****** Chrome Hack!! ******/
+@media screen and (-webkit-min-device-pixel-ratio: 0){
 	header nav {
 		font-size: 224%;
 	}

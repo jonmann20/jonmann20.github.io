@@ -29,6 +29,11 @@ $pageDescription = isset($pageDescription) ? $pageDescription : '';
     <link rel='stylesheet' type='text/css' href='<?= $pageRoot; ?>css/normalize.css' />
     <link rel='stylesheet' type='text/css' href='<?= $pageRoot; ?>css/the.css' />
     <link rel='icon' type='image/ico' href='<?= $pageRoot; ?>img/favicon.ico'>
+    
+	<!--[if lte IE 9]>
+		    <link rel='stylesheet' type='text/css' href='<?= $pageRoot; ?>css/oldIE.css' />
+    <![endif]-->
+    
     <?= $pageHeader; ?>
 </head>
 <body class='<?= $pageBodyClass; ?>'>
