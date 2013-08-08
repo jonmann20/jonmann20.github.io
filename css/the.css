@@ -382,18 +382,20 @@ header nav ul #cube {
 	width: inherit;
 	height: inherit;
 } 
-.nav1 #bCube,
-.nav2 #stars,
-.nav3 #bPit,
-.nav4 #floatingSun {
+.nav1 .playgroundNav li:nth-child(1) a,
+.nav2 .playgroundNav li:nth-child(2) a,
+.nav3 .playgroundNav li:nth-child(3) a,
+.nav4 .playgroundNav li:nth-child(4) a,
+.nav6 .playgroundNav li:nth-child(6) a {
 	color: #ff6a00 !important;
 	-webkit-text-stroke: 1px #ff6a00;
 	text-stroke: 1px #ff6a00;
 }
-.nav1 #bCube:hover,
-.nav2 #stars:hover,
-.nav3 #bPit:hover,
-.nav4 #floatingSun:hover {
+.nav1 .playgroundNav li:nth-child(1) a:hover,
+.nav2 .playgroundNav li:nth-child(2) a:hover,
+.nav3 .playgroundNav li:nth-child(3) a:hover,
+.nav4 .playgroundNav li:nth-child(4) a:hover,
+.nav6 .playgroundNav li:nth-child(6) a:hover {
 	text-shadow: #ff6a00 0 0 18px;
 }
 
@@ -658,6 +660,10 @@ footer .footR {
 	cursor: -webkit-grabbing; 
 	cursor: -moz-grabbing;
 	cursor: grabbing;
+}
+
+.nav6 .main {
+	padding-bottom: 5px;
 }
 
 /********** Portfolio **********/

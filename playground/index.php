@@ -57,6 +57,10 @@ switch(len % 8){
         <h3>USTREAM demo</h3>
         <p>A USTREAM api demo.</p>
     </div>
+    <div id='divBObj'>
+        <h3>Bouncing Object</h3>
+        <p>A kinematic equations bouncing object demo.</p>
+    </div>
 
 <?
 	$pageMainContent = ob_get_contents();
