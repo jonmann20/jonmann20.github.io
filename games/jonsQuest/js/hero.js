@@ -444,6 +444,9 @@ hero = function(){
 			}
 			
 			if(hero.health <= 0 && !gameOver){
+				utils.playSound(game.sound.death, false)
+				game.sound.bgMusic.lvl0.muted = true
+				
 				alert('You died')
 				location.reload()
 				gameOver = true

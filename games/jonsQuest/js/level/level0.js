@@ -86,6 +86,8 @@ lvl0 = function() {
 				cyborg.active = true
 				
 				if(!hero.invincible){
+					utils.playSound(game.sound.thud, true)
+					
 					hero.invincible = true
 					--hero.health
 				}
