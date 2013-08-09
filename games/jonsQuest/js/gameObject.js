@@ -37,7 +37,7 @@ GameObj = function(){
 				ctx.drawImage(img, this.x, this.y)
 			}
 			else {
-				ctx.fillStyle = "red"
+				ctx.fillStyle = 'red'
 				ctx.fillRect(this.x, this.y, this.w, this.h)
 			}
 		}

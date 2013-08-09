@@ -17,7 +17,7 @@ lvl0 = function() {
 			var cyborg_g = GameObj()
 			cyborg_g.init(2100, FULLH - game.padFloor - 38 + 3, 28, 38, 'img/cyborgBnW.png')
 				cyborg = Enemy()
-				cyborg.init(cyborg_g)
+				cyborg.init(cyborg_g, 5)
 
 			var hCash_g = GameObj()
 			hCash_g.init(140, 50, 22, 24, 'img/cash.png')
@@ -81,8 +81,8 @@ lvl0 = function() {
 			lvl0.crate.updatePos()
 			
 
-			// cyborg
-			if (utils.isCollision(hero, cyborg, 0)) {
+			// hero and cyborg
+			if (cyborg.health > 0 && utils.isCollision(hero, cyborg, 0)) {
 				cyborg.active = true
 				
 				if(!hero.invincible){
@@ -92,6 +92,24 @@ lvl0 = function() {
 					--hero.health
 				}
 			}
+			
+			
+			
+			// bullet and cyborg
+		    for(var i=0; i < hero.bulletArr.length; i++){
+		    	
+	            var wasCollision = false
+	                
+					if(utils.isCollision(hero.bulletArr[i], cyborg, 0)){
+						wasCollision = true
+						utils.playSound(game.sound.thud, true)
+					}
+	                
+	            if(wasCollision){
+	            	hero.bulletArr.splice(i, 1) // remove ith item
+	            	--cyborg.health
+	            }
+		    }
 
 		},
 

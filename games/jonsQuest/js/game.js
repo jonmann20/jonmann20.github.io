@@ -45,20 +45,22 @@ game = function(){
 		padBot: 119,	/* total padding */
 		padHUD: 80,
 		padFloor: 39,
-		lvl: 0,
+		lvl: -1,
 		dt: 0,
 		fps: 60,
 		totalTicks: 0,
 		actualTime: 0,
 		sound: {
 		    bgMusic: {
-		         lvl0: new Audio('audio/firstChiptune/firstChiptune.mp3')
+		         start: new Audio('audio/firstChiptune/firstChiptune.mp3'),
+		         lvl0: new Audio('audio/inspiredBySparkMan/sparkBoy.mp3')
 		    },
 		    gun: new Audio('audio/raygun.mp3'),
 		    thud: new Audio('audio/thud.mp3'),
 		    step: new Audio('audio/step.mp3'),
 		    jump: new Audio('audio/jump.mp3'),
-		    death: new Audio('audio/DiscsOfTron_Cascade.mp3')
+		    death: new Audio('audio/DiscsOfTron_Cascade.mp3'),
+		    isOn: false
 		},
 		
 		loop: function(frameTime){

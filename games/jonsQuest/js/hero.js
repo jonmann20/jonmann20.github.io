@@ -187,8 +187,9 @@ hero = function(){
 	    
 	    if(74 in keysDown){ 			// shoot (j)
 	    	
-	    	if(hero.ammo > 0){
-	    	
+	    	if(hero.ammo > 0 && 
+	    	   ((hero.dir == Dir.LEFT) || (hero.dir == Dir.RIGHT))
+    	    ){
 		    	utils.playSound(game.sound.gun)
 		        
 	            hero.bulletArr[hero.bulletArr.length] = {

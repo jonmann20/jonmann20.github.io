@@ -29,13 +29,14 @@ utils = function(){
 				$('.audioState').removeClass('off')
 				$('.audioState').addClass('on')
 	
-				this.muteSound(false)
-			} else {
+				utils.muteSound(false)
+			} 
+			else {
 				$('.audioState span').removeClass('icon-volume-medium').addClass('icon-volume-mute')
 				$('.audioState').removeClass('on')
 				$('.audioState').addClass('off')
 	
-				this.muteSound(true)
+				utils.muteSound(true)
 			}
 		},
 	
@@ -45,14 +46,29 @@ utils = function(){
 			// i.muted = val
 			// }
 	
-			var volumeReduction = mute ? 0 : 0.25
+			game.sound.isOn = !mute
 	
-			game.sound.bgMusic.lvl0.muted = mute
-			if (mute)
-				game.sound.bgMusic.lvl0.pause()
-			else
-				game.sound.bgMusic.lvl0.play()
-			//game.sound.bgMusic.lvl0.volume = volumeReduction
+			var volumeReduction = mute ? 0 : 0.25
+			switch(game.lvl){
+				case -1:
+				
+					game.sound.bgMusic.start.muted = mute
+					mute ?
+						game.sound.bgMusic.start.pause():
+						game.sound.bgMusic.start.play()
+					
+					//game.sound.bgMusic.start.volume = volumeReduction
+				
+					break
+				case 0:
+					game.sound.bgMusic.lvl0.muted = mute
+					mute ?
+						game.sound.bgMusic.lvl0.pause():
+						game.sound.bgMusic.lvl0.play()
+					
+					//game.sound.bgMusic.lvl0.volume = volumeReduction
+				break
+			}
 	
 			game.sound.gun.muted = mute
 			game.sound.gun.volume = volumeReduction

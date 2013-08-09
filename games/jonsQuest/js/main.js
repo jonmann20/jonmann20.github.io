@@ -10,13 +10,17 @@ load = function(){
 		HALFW = FULLW / 2
 		HALFH = FULLH / 2
 		
-        game.sound.bgMusic.lvl0.loop = true
-        game.sound.bgMusic.lvl0.pause()
+		game.sound.bgMusic.start.loop = true
+		game.sound.bgMusic.start.pause()
+		
         utils.muteSound(true)
         
         $('.audioState').on('click', function(){
 			utils.muteHelper()
         })
+        
+        //----- for testing audio -----
+        utils.muteHelper()
         
 		// loading screen
 		ctx.fillStyle = "#e1e1e1"
@@ -54,8 +58,8 @@ load = function(){
 			level.init()
 			hero.init()
 			
-	    	//startScreen.loop()
-	    	game.loop()
+	    	startScreen.loop()
+	    	//game.loop()
 		}
 	}
 }()
