@@ -7,3 +7,8 @@
 	<li><a href="trumpet">Trumpet</a></li>
 	<li><a href="voice">Voice</a></li>
 </ul>
+
+<h2 class='subHead'>Other:</h2>
+<ul>
+	<li><a href='chiptunes'>Chiptunes</a></li>
+</ul>
