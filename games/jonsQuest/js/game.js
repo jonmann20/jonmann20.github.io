@@ -38,6 +38,20 @@ game = function(){
 	  	ctx.fillText(avgFPS + " FPS", FULLW - 84, FULLH + 65);
 	}
 	
+	function doTimers(now){
+		// dt and fps
+        game.dt = now - (_time || now)
+    	_time = now
+		    	
+		drawFPS(Math.round(1000 / game.dt))
+		
+		// ticks
+		++game.totalTicks
+		
+		if(game.totalTicks % 60 == 0)
+			++game.actualTime
+	}
+	
 	
 	return {
 		gravity: 1,
@@ -65,24 +79,14 @@ game = function(){
 		
 		loop: function(frameTime){
 			//setTimeout(function(){
-				requestAnimFrame(game.loop)
-			
-				var now = frameTime
-	            game.dt = now - (_time || now)
-		 
-		    	_time = now
-		
+				checkInput()
+				
 				update()
 				render()
 				
+				doTimers(frameTime)
 				
-				drawFPS(Math.round(1000 / game.dt))
-				
-				++game.totalTicks
-				
-				if(game.totalTicks % 60 == 0)
-					++game.actualTime
-				
+				requestAnimFrame(game.loop)
 			//}, 1000 / game.fps)
 		}
 	}

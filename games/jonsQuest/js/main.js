@@ -20,7 +20,7 @@ load = function(){
         })
         
         //----- for testing audio -----
-        utils.muteHelper()
+        //utils.muteHelper()
         
 		// loading screen
 		ctx.fillStyle = "#e1e1e1"

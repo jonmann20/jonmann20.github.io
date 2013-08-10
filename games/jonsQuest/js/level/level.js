@@ -28,7 +28,7 @@ level = function() {
     	medKit.draw()
     	
 		// mp kit
-		ctx.fillText("0", 315, FULLH + 50)
+		ctx.fillText(hero.manaKits, 315, FULLH + 50)
 		syringe.draw()
     	
 		// ammo

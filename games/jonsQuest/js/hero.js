@@ -2,34 +2,10 @@ hero = function(){
 	var imgReady = false,
 		img = null,
 		showStep = true,
-		bullet = {
-			color : "rgba(192, 192, 192, .75)",
-			w : 19.5,
-			h : 9,
-			speed : 8
-		},
-		Dir = Object.freeze({
-			NONE : 0,
-			TOP : 1,
-			BOT : 2,
-			LEFT : 3,
-			RIGHT : 4
-		}),
-		Inv_e = Object.freeze({
-			NOT_HIT: 0,
-			HIT_WHITE: 1,
-			HIT_RED: 2
-		}),
 		gameOver = false
 	
 		
 	/*********************** Update ***********************/
-	
-	function offObj(){
-		hero.onObj = false
-		hero.onObjX = -1
-		hero.onObjY = -1
-	}
 	
 	function screenCollision(){
 		if(hero.y < 0){								// top
@@ -60,13 +36,14 @@ hero = function(){
                 lvl = 'lvl' + game.lvl,
                 wasCollision = false
                 
-    		for(var j in level.collisionPts[lvl]){
+    		/* this is not working quickly enough!!!!!
+			for(var j in level.collisionPts[lvl]){
 				k = level.collisionPts[lvl][j]
-			
-				if(utils.isCollision(hero.bulletArr[i], k, 0)){
+										 if(utils.isCollision(hero.bulletArr[i], k, 0)){
 					wasCollision = true
 				}
-			}
+			}*/
+			
                 
             if(wasCollision || hero.bulletArr[i].x > canvas.width || hero.bulletArr[i].x < 0)		// bullet and screen
             	hero.bulletArr.splice(i, 1) // remove ith item
@@ -74,28 +51,6 @@ hero = function(){
 	}
 		
 	function checkCollision(){
-		//---hero and monster
-		
-		/*
-		if(!hero.invincible && utils.isCollision(hero, monster, 0)){
-					// level.reset()
-					
-					utils.playSound(game.sound.thud, false)
-					
-					hero.invincible = true
-					
-					if(--hero.health <= 0){
-						utils.playSound(game.sound.death, false)
-						
-						
-						alert('you died')
-						location.reload()
-					}
-					
-				}*/
-		
-		
-	    
 	    bulletHandler()		// bullet's and screen
 		screenCollision()	// hero and screen/ top of obj
 		
@@ -156,84 +111,8 @@ hero = function(){
 		}
 		
 		if(collisionDir == Dir.NONE){
-			offObj()
+			hero.offObj()
 		}
-	}
-	
-	function checkInput(){
-		
-		hero.dir = Dir.NONE
-		
-		if(!hero.onObj)
-			hero.vY = ((hero.vY + game.gravity) > hero.maxVy) ? hero.maxVy : (hero.vY + game.gravity)
-		
-		if(hero.vX != 0)
-			hero.vX += (hero.vX > 0) ? -game.friction : game.friction;
-		
-		if(65 in keysDown){ 			// left (a)
-		    hero.vX = (Math.abs(hero.vX - hero.speed) > hero.maxVx) ? -hero.maxVx : (hero.vX - hero.speed)
-		    hero.dirR = false
-		    hero.dir = Dir.LEFT
-		}
-		
-		if(68 in keysDown){ 			// right (d)
-		    hero.vX = (Math.abs(hero.vX + hero.speed) > hero.maxVx) ? hero.maxVx : (hero.vX + hero.speed)
-		    hero.dirR = true
-		    hero.dir = Dir.RIGHT
-	    }
-	    
-	    if(Math.abs(hero.vX) < hero.speed)
-	    	hero.vX = 0
-	    
-	    if(74 in keysDown){ 			// shoot (j)
-	    	
-	    	if(hero.ammo > 0 && 
-	    	   ((hero.dir == Dir.LEFT) || (hero.dir == Dir.RIGHT))
-    	    ){
-		    	utils.playSound(game.sound.gun)
-		        
-	            hero.bulletArr[hero.bulletArr.length] = {
-	                x: hero.x,
-	                y: hero.y,
-	                w: bullet.w,
-	                h: bullet.h,
-	                dirR: hero.dirR
-	            }
-		    	
-		    	--hero.ammo
-	    	}
-	        
-	        delete keysDown[74]
-		}
-		
-		if(75 in keysDown){ 			// jump (k)
-		    if(!hero.isJumping){
-		    	game.sound.jump.play()
-		        
-		        hero.vY = 0
-		      	hero.isJumping = true
-		      	offObj()
-		      	
-		      	delete keysDown[75]
-		    }
-		}
-		
-		if(32 in keysDown){				// dropObject (spacebar)
-			lvl0.crate.holding = false
-		}
-		
-		
-		if(hero.isJumping){
-			if(hero.jumpMod > 0){
-				hero.vY -= hero.jumpMod
-				--hero.jumpMod
-			}
-			hero.dir = Dir.TOP
-		}
-		else{
-			hero.jumpMod = hero.jumpPower
-		}
-		
 	}
 	
 	function updatePosition(){	
@@ -288,7 +167,7 @@ hero = function(){
 			// TODO: move to update
 			
 			
-			if(hero.vX == 0 && hero.dir == Dir.NONE){
+			if(hero.isCarrying && hero.vX == 0 && hero.dir == Dir.NONE){
 				pos = playerD
 			}
 			// else if(hero.dir == Dir.TOP){ // jumping
@@ -329,6 +208,18 @@ hero = function(){
     	}
 	}
 	
+	function drawBullets(){
+		for(var i=0; i < hero.bulletArr.length; ++i){
+    	    var dirOffset = 0 
+	    	    
+            if(hero.bulletArr[i].dirR)
+                dirOffset = hero.w / 2
+	            
+            ctx.fillStyle = bullet.color
+            utils.drawEllipse(hero.bulletArr[i].x + dirOffset, hero.bulletArr[i].y + 4.5, bullet.w, bullet.h)
+        }
+	}
+	
 	function drawHealth(){
 		for(var i=0; i < hero.health; ++i){
 			ctx.fillStyle = "red"
@@ -350,37 +241,6 @@ hero = function(){
     	var zero = (hero.xp < 10) ? '0' : ''
         	
     	ctx.fillText(zero + hero.xp + '/' + hero.xpNeeded, 80, FULLH + 71)
-	}
-	
-	function drawBullets(){
-		for(var i=0; i < hero.bulletArr.length; ++i){
-    	    var dirOffset = 0 
-	    	    
-            if(hero.bulletArr[i].dirR)
-                dirOffset = hero.w / 2
-	            
-            ctx.fillStyle = bullet.color
-            drawEllipse(hero.bulletArr[i].x + dirOffset, hero.bulletArr[i].y + 4.5, bullet.w, bullet.h)
-        }
-	}
-	
-	function drawEllipse(x, y, w, h) {
-		var kappa = .5522848,
-			ox = (w / 2) * kappa, // control point offset horizontal
-			oy = (h / 2) * kappa, // control point offset vertical
-			xe = x + w, // x-end
-			ye = y + h, // y-end
-			xm = x + w / 2, // x-middle
-			ym = y + h / 2 // y-middle
-
-		ctx.beginPath()
-		ctx.moveTo(x, ym)
-		ctx.bezierCurveTo(x, ym - oy, xm - ox, y, xm, y)
-		ctx.bezierCurveTo(xm + ox, y, xe, ym - oy, xe, ym)
-		ctx.bezierCurveTo(xe, ym + oy, xm + ox, ye, xm, ye)
-		ctx.bezierCurveTo(xm - ox, ye, x, ym + oy, x, ym)
-		ctx.closePath()
-		ctx.fill()
 	}
 		
 		
@@ -411,15 +271,16 @@ hero = function(){
 		invincibleTimer: 40,
 		initInvincibleTimer: 40,
 		health: 4,
-		maxHealth: 4,
+		maxHealth: 5,
+		medKits: 1,
 		healthLvl: 1,
 		mana: 0,
 		maxMana: 4,
+		manaKits: 1,
 		manaLvl: 1,
 		lvl: 1,
 		xp: 0,
 		xpNeeded: 50,
-		medKits: 1,
 		bulletArr: [],
 		
 		init: function(){
@@ -430,8 +291,13 @@ hero = function(){
 			
 		},
 		
+		offObj: function(){
+			hero.onObj = false
+			hero.onObjX = -1
+			hero.onObjY = -1
+		},
+		
 		update: function(){
-			checkInput()
 			updatePosition()
 			checkCollision()
 			
@@ -453,7 +319,6 @@ hero = function(){
 				gameOver = true
 			}
 			
-			//console.log({a: hero.lvlX, b: hero.x})
 		},
 	
 		render: function(){

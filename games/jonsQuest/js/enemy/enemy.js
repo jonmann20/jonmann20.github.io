@@ -13,9 +13,7 @@ Enemy = function(){
 	function _draw(){
 		return function(){
 			if(this.health > 0){
-				
 				drawHealth(this)
-				
 				parentDraw.apply(this)
 			}
 			
@@ -30,7 +28,6 @@ Enemy = function(){
 			$.extend(this, g)
 			this.health = initHealth = ht
 
-			this.x = 240
 			parentDraw = this.draw
 			this.draw = _draw()	
 		},

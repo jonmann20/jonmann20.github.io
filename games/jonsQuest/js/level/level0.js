@@ -66,6 +66,7 @@ lvl0 = function() {
 			// crate
 			if (!lvl0.crate.holding) {
 				if (utils.isCollision(hero, lvl0.crate, 12)) {
+					hero.isCarrying = true
 					lvl0.crate.holding = true
 					lvl0.crate.vY = 6.5
 				}
@@ -81,35 +82,44 @@ lvl0 = function() {
 			lvl0.crate.updatePos()
 			
 
-			// hero and cyborg
-			if (cyborg.health > 0 && utils.isCollision(hero, cyborg, 0)) {
-				cyborg.active = true
-				
-				if(!hero.invincible){
-					utils.playSound(game.sound.thud, true)
+			
+			if (cyborg.health > 0){
+				// hero and cyborg
+				if(utils.isCollision(hero, cyborg, 0)) {
+					cyborg.active = true
 					
-					hero.invincible = true
-					--hero.health
-				}
-			}
-			
-			
-			
-			// bullet and cyborg
-		    for(var i=0; i < hero.bulletArr.length; i++){
-		    	
-	            var wasCollision = false
-	                
-					if(utils.isCollision(hero.bulletArr[i], cyborg, 0)){
-						wasCollision = true
+					if(!hero.invincible){
 						utils.playSound(game.sound.thud, true)
+						
+						hero.invincible = true
+						--hero.health
 					}
-	                
-	            if(wasCollision){
-	            	hero.bulletArr.splice(i, 1) // remove ith item
-	            	--cyborg.health
-	            }
-		    }
+				}
+				
+				// bullets and cyborg
+			    for(var i=0; i < hero.bulletArr.length; i++){
+			    	
+		            var wasCollision = false
+		                
+						if(utils.isCollision(hero.bulletArr[i], cyborg, 0)){
+							wasCollision = true
+							utils.playSound(game.sound.thud, true)
+						}
+		                
+		            if(wasCollision){
+		            	cyborg.active = true
+		            	
+		            	hero.bulletArr.splice(i, 1) // remove ith item
+		            	--cyborg.health
+		            	
+		            	if(cyborg.health <= 0) {
+		            		utils.playSound(game.sound.death, false)
+		            		
+		            		hero.xp += 2
+		            	}
+		            }
+			    }
+			}
 
 		},
 
