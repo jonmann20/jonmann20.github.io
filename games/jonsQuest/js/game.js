@@ -55,7 +55,7 @@ game = function(){
 	
 	return {
 		gravity: 1,
-		friction: 0.4,
+		friction: 0.45,
 		padBot: 119,	/* total padding */
 		padHUD: 80,
 		padFloor: 39,

@@ -4,7 +4,6 @@ load = function(){
 		ctx = canvas.getContext('2d')
 		FULLW = canvas.width = 720
 		FULLH = canvas.height = 440
-		
 		FULLH -= game.padHUD
 		
 		HALFW = FULLW / 2

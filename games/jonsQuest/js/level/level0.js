@@ -15,7 +15,7 @@ lvl0 = function() {
 				sack.init(sack_g, 5)
 
 			var cyborg_g = GameObj()
-			cyborg_g.init(2100, FULLH - game.padFloor - 38 + 3, 28, 38, 'img/cyborgBnW.png')
+			cyborg_g.init(2100, FULLH - game.padFloor - 38 + 1, 28, 38, 'img/cyborgBnW.png')
 				cyborg = Enemy()
 				cyborg.init(cyborg_g, 5)
 

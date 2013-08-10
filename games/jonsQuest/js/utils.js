@@ -162,7 +162,7 @@ Inv_e = Object.freeze({
 })
 
 bullet = {
-	color: "rgba(192, 192, 192, .75)",
+	color: "rgba(0, 182, 255, .85)",
 	w: 19.5,
 	h: 9,
 	speed: 8

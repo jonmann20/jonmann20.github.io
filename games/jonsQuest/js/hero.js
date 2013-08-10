@@ -1,7 +1,7 @@
 hero = function(){
 	var imgReady = false,
 		img = null,
-		showStep = true,
+		showRun = true,
 		gameOver = false
 	
 		
@@ -141,22 +141,29 @@ hero = function(){
 	/*********************** Render ***********************/
 	
 	var playerD = {x: 2, y: 2},
-		playerL = {x: 32, y: 2},
-		playerLRed = {x: 62, y: 2},
-		playerLStep = {x: 92, y: 2},
-		playerLWhite = {x: 2, y: 42},
-		playerR = {x:32, y: 42},
-		playerRRed = {x:62, y: 42},
-		playerRStep = {x: 92, y: 42},
-		playerRWhite = {x: 2, y: 82},
-		playerU = {x: 32, y: 82},
-		player_picked = {x: 62, y: 82}
+		
+		playerL = {x: 2, y: 42},
+		playerLStep = {x: 2, y: 82},
+		
+		player_picked = {x: 62, y: 122},
+		
+		playerR = {x: 2, y: 162},
+		playerR1 = {x: 2, y: 202},
+		playerR2 = {x: 2, y: 242},
+		playerRStep = {x: 2, y: 282},
+
+		playerU = {x: 32, y: 322},
+		
+		playerLRed = {x: -1, y: -1},
+		playerLWhite = {x: -1, y: -1},
+		playerRWhite = {x: -1, y: -1},
+		playerRRed = {x: -1, y: -1};
 		
 	
 	function drawHero(){
 		if(imgReady){
 			if(game.totalTicks % 12 == 0)
-				showStep = showStep ? false : true
+				showRun = !showRun
 			
 			var inv = Inv_e.NOT_HIT
 			if(hero.invincible)
@@ -176,8 +183,15 @@ hero = function(){
     		else if(hero.dirR){
     			pos = playerR
     			
-	   			if(showStep && 68 in keysDown){ 
-    				pos = playerRStep
+	   			if(68 in keysDown){
+	   				console.log(hero.vX)
+	   				if(Math.abs(hero.vX) <= hero.speed*3)
+	   					pos = playerRStep
+   					else if(showRun){
+   						pos = playerR2
+   					}
+   					else 
+   						pos = playerR1
     			}
  
  				if(inv == Inv_e.HIT_WHITE){
@@ -191,7 +205,7 @@ hero = function(){
     		else{
     			pos = playerL
 
-    			if(showStep && 65 in keysDown){ 
+    			if(showRun && 65 in keysDown){ 
     				pos = playerLStep
     			}
     			
@@ -254,11 +268,11 @@ hero = function(){
 		h: 38,
 		vX: 0,
 		vY: 0,
-		maxVx: 6,
+		maxVx: 8,
 		maxVy: 15,
 		dir: Dir.NONE,
 		dirR: true, 
-		speed: 1.5,
+		speed: 0.7,			// actuallly acceleration
 		isJumping: false,
 		isCarrying: false,
 		onObj: true,
