@@ -8,10 +8,12 @@ $pageGameInstructions = isset($pageGameInstructions) ? $pageGameInstructions : '
 $pageKeywords = isset($pageKeywords) ? $pageKeywords : '';
 $pageDescription = isset($pageDescription) ? $pageDescription : '';
 
+$pagePrd = defined('STDIN');
+
 ?>
 
 <!DOCTYPE html>
-<!--[if lte IE 8]>      
+<!--[if IE 8]>      
 	<html class='ie8 oldIE'> 
 	<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>		
 <![endif]-->
@@ -26,13 +28,21 @@ $pageDescription = isset($pageDescription) ? $pageDescription : '';
 
 	<link href='http://fonts.googleapis.com/css?family=Press+Start+2P|Open+Sans|Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
     
-    <link rel='stylesheet' type='text/css' href='<?= $pageRoot; ?>css/normalize.css' />
-    <link rel='stylesheet' type='text/css' href='<?= $pageRoot; ?>css/the.css' />
-    <link rel='icon' type='image/ico' href='<?= $pageRoot; ?>img/favicon.ico'>
+    <?
+    	if($pagePrd){
+    		echo "<link rel='stylesheet' type='text/css' href='/css/the.min.css' />";
+		}
+		else {
+		    echo "<link rel='stylesheet' type='text/css' href='/css/normalize.css' />";
+    		echo "<link rel='stylesheet' type='text/css' href='/css/the.css' />";	
+		}
+    ?>
     
 	<!--[if lte IE 9]>
 		    <link rel='stylesheet' type='text/css' href='<?= $pageRoot; ?>css/oldIE.css' />
     <![endif]-->
+    
+    <link rel='icon' type='image/ico' href='<?= $pageRoot; ?>img/favicon.ico'>
     
     <?= $pageHeader; ?>
 </head>
@@ -132,7 +142,17 @@ $pageDescription = isset($pageDescription) ? $pageDescription : '';
 	    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 	<!--[endif]-->
 	
-	<script src="/js/master.js" type="text/javascript"></script>
+	<?
+    	if($pagePrd){
+    		echo "<script src='/js/the.min.js'></script>";
+			include_once("analytics.php");
+		}
+		else {
+		    echo "<script src='/js/master.js'></script>";	
+		}
+    ?>
+	
+	
 	
     <?= $pageJs; ?>
 </body>

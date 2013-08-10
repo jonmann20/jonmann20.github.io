@@ -13,7 +13,8 @@ path="/home/jon/git/jonmann20.github.com/"
 
 htmlFiles=$(find ${path} -name '*.html')
 phpFiles=$(find ${path} -name '*.php')
-cssFiles="the.css" #reset.css 
+cssFiles="normalize.css the.css" 
+jsFiles="master.js"
 
 
 #---functions----
@@ -75,6 +76,26 @@ function compressCSS {
 	rm ${path}css/combined.css
 }
 
+function compressJS {
+	echo -e "----- Compressing JS -----"
+	absJSFiles=""
+	
+	for f in $jsFiles
+	do
+		echo -e "\tcombining $f"
+		absJsFiles+="${path}js/$f "
+	done
+	
+	cat $absJsFiles > ${path}js/combined.js
+	
+	echo -e "\n\tminifying combined.js";
+	java -jar $yuiJar ${path}js/combined.js -o ${path}js/the.min.js
+	
+	echo -e "\tremoving combined.js";
+	rm ${path}js/combined.js
+	
+}
+
 function pushToGithub {
 	echo "----- Pushing to GitHub -----"
 	d=$(date +"%b %d, %Y")" "
@@ -94,7 +115,8 @@ then
 elif [[ "$1" == "prd" ]]
 then
 	compilePHP
-	#compressCSS
+	compressCSS
+	compressJS
 elif [[ "$1" == "test" ]]
 then
 	echo "in test"
