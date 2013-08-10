@@ -3,6 +3,7 @@
 #---color aliases
 RED=${txtbld}$(tput setaf 1)
 GREEN=$(tput setaf 2)
+CYAN=$(tput setaf 6)
 RESET=$(tput sgr0)
 
 #---globals
@@ -14,8 +15,6 @@ path="/home/jon/git/jonmann20.github.com/"
 htmlFiles=$(find ${path} -name '*.html')
 phpFiles=$(find ${path} -name '*.php')
 cssFiles="normalize.css the.css" 
-jsFiles="master.js"
-
 
 #---functions----
 function deleteHTML {
@@ -69,31 +68,44 @@ function compressCSS {
 	cat $absCssFiles > ${path}css/combined.css
 	
 	
-	echo -e "\n\tminifying combined.css";
-	java -jar $yuiJar ${path}css/combined.css -o ${path}css/the.min.css
+	echo -e "\n\tminifying combined.css --> /min/master.css";
+	java -jar $yuiJar ${path}css/combined.css -o ${path}css/min/master.css
 	
 	echo -e "\tremoving combined.css";
 	rm ${path}css/combined.css
 }
 
-function compressJS {
-	echo -e "----- Compressing JS -----"
-	absJSFiles=""
+
+function compressJsSet {	# $1= out file; $2= in files path; $3= in files
+		
+	echo -e "\n\t--- $1 ---"
+	absJsFiles=""
 	
-	for f in $jsFiles
+	for f in $3
 	do
-		echo -e "\tcombining $f"
-		absJsFiles+="${path}js/$f "
+		echo -e "\t\t $CYAN combining $f $RESET"
+		absJsFiles+="${path}${2}js/$f "
 	done
-	
+		
+	echo -e "\t\t $GREEN minifying combined.js --> /min/$1 $RESET";
 	cat $absJsFiles > ${path}js/combined.js
+	java -jar $yuiJar ${path}js/combined.js -o ${path}js/min/$1
 	
-	echo -e "\n\tminifying combined.js";
-	java -jar $yuiJar ${path}js/combined.js -o ${path}js/the.min.js
-	
-	echo -e "\tremoving combined.js";
+	echo -e "\t\t $RED removing  combined.js $RESET";
 	rm ${path}js/combined.js
+}
+
+
+function compressJS {
+	echo -e "\n----- Compressing JS -----"
 	
+	masterJsFiles="the.js analytics.js"
+	bPitJsFiles="ballPit.js"
+	jQuestJsFiles="utils.js gameObject.js gameItem.js enemy/enemy.js startScreen.js input.js level/level.js level/level0.js game.js hero.js main.js"
+
+	compressJsSet "master.js" "" "$masterJsFiles"
+	compressJsSet "ballPit.js" "" "$bPitJsFiles"
+	compressJsSet "jonsQuest.js" "games/jonsQuest/" "$jQuestJsFiles"
 }
 
 function pushToGithub {
@@ -114,15 +126,22 @@ then
 	deleteHTML
 elif [[ "$1" == "prd" ]]
 then
+	deleteHTML
 	compilePHP
 	compressCSS
 	compressJS
-elif [[ "$1" == "test" ]]
+elif [[ "$1" == "css" ]]
 then
-	echo "in test"
+	compressJS
+elif [[ "$1" == "js" ]]
+then
+	compressJS
+elif [[ "$1" == "push" ]]
+then
+	echo "in push"
 	#pushToGithub
 else
-	echo -e "\t $RED must append 'dev | prd' $RESET"
+	echo -e "\t $RED must append 'dev | prd | css | js | push' $RESET"
 fi
 
 

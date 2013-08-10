@@ -22,15 +22,22 @@
 </div>
 
 <?
-	  $pageMainContent = ob_get_contents();
-	  ob_end_clean();
+	$pageMainContent = ob_get_contents();
+	ob_end_clean();
+  
+	$pageTitle = 'Ball Pit | Games';
+	$pageDescription = 'A canvas example showcasing a ball pit.';
+	$pageKeywords = 'canvas, html5';
+	$pageRoot = '../';
+	$pageBodyClass = 'playground playInner nav3';
+  
+  
+	$pageJs = defined('STDIN') ?
+				'<script src="/js/min/ballPit.js"></script>' :
+			
+				'<script src="/js/ballPit.js"></script>
+	';
 	  
-	  $pageTitle = 'Ball Pit | Games';
-      $pageDescription = 'A canvas example showcasing a ball pit.';
-      $pageKeywords = 'canvas, html5';
-	  $pageRoot = '../';
-      $pageBodyClass = 'playground playInner nav3';
-	  $pageJs = '<script src="../js/ballPit.js"></script>';
 	  
 	  require_once(dirname(__FILE__) . '/' . $pageRoot . 'master.php');
 ?>

@@ -1,6 +1,6 @@
-GameObj = function(){
+window.GameObj = function(){
 	var img = null,
-		ready = false
+		ready = false;
 	
 	return {
 		initX: -1,
@@ -12,34 +12,33 @@ GameObj = function(){
 		vY: 0,
 		
 		init: function(xx, yy, ww, hh, src){
-			this.initX = this.x = xx
-			this.intiY = this.y = yy
-			this.w = ww
-			this.h = hh	
+			this.initX = this.x = xx;
+			this.intiY = this.y = yy;
+			this.w = ww;
+			this.h = hh;
 			
-			if(typeof(src) !== 'undefined'){
-				img = new Image()
-				img.onload = function(){ready = true}
-				img.src = src
+			if(typeof(src) !== "undefined"){
+				img = new Image();
+				img.onload = function(){ready = true;}
+				img.src = src;
 			}
 		},
 		
 		updatePos: function(){
-			
 			if(this.y < FULLH - game.padFloor - this.h)
-				this.y += this.vY
+				this.y += this.vY;
 			else
-				this.y = FULLH -game.padFloor - this.h
+				this.y = FULLH -game.padFloor - this.h;
 		},
 		
 		draw: function(){
 			if(ready){
-				ctx.drawImage(img, this.x, this.y)
+				ctx.drawImage(img, this.x, this.y);
 			}
 			else {
-				ctx.fillStyle = 'red'
-				ctx.fillRect(this.x, this.y, this.w, this.h)
+				ctx.fillStyle = "red";
+				ctx.fillRect(this.x, this.y, this.w, this.h);
 			}
 		}
-	}
+	};
 }

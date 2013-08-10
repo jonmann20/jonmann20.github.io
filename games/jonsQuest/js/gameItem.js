@@ -1,11 +1,11 @@
-GameItem = function(){
+window.GameItem = function(){
 	
-	var parentDraw = null
+	var parentDraw = null;
 	
 	function _draw(){
 		return function(){
 			if(this.visible && !this.collected){
-				parentDraw.apply(this)
+				parentDraw.apply(this);
 			}
 			
 		}
@@ -20,18 +20,17 @@ GameItem = function(){
 		
 		
 		init: function(g, v, vis){
-			$.extend(this, g)
+			$.extend(this, g);
 			
-			this.val = v
+			this.val = v;
 			
-			if(typeof(vis) !== 'undefined')
-				this.visible = vis
+			if(typeof(vis) !== "undefined")
+				this.visible = vis;
 			
-			
-			parentDraw = this.draw
-			this.draw = _draw()	
+			parentDraw = this.draw;
+			this.draw = _draw();	
 		}
 		
-	}
+	};
 }
 

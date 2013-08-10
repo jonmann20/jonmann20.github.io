@@ -30,7 +30,7 @@ $pagePrd = defined('STDIN');
     
     <?
     	if($pagePrd){
-    		echo "<link rel='stylesheet' type='text/css' href='/css/the.min.css' />";
+    		echo "<link rel='stylesheet' type='text/css' href='/css/min/master.css' />";
 		}
 		else {
 		    echo "<link rel='stylesheet' type='text/css' href='/css/normalize.css' />";
@@ -144,8 +144,7 @@ $pagePrd = defined('STDIN');
 	
 	<?
     	if($pagePrd){
-    		echo "<script src='/js/the.min.js'></script>";
-			include_once("analytics.php");
+    		echo "<script src='/js/min/master.js'></script>";
 		}
 		else {
 		    echo "<script src='/js/master.js'></script>";	

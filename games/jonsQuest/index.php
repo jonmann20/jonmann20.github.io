@@ -38,23 +38,23 @@
 	$pageRoot = '../../';
     $pageBodyClass = 'games pageFullW jonsQuest';
 	$pageHeader = '<link rel="stylesheet" type="text/css" href="css/jonsQuest.css" />';
-	$pageJs = '
-		<script src="js/utils.js"></script>
-		<script src="js/gameObject.js"></script>
-		<script src="js/gameItem.js"></script>
-		<script src="js/enemy/enemy.js"></script>
-		<script src="js/startScreen.js"></script>
-		<script src="js/input.js"></script>
-	  	<script src="js/level/level.js"></script>
-		<script src="js/level/level0.js"></script>
-	  	<script src="js/game.js"></script>
-	  	<script src="js/hero.js"></script>
-	  	<script src="js/main.js"></script>
-	  ';
+	
+	$pageJs = defined('STDIN') ?
+				'<script src="/js/min/jonsQuest.js"></script>' :
+
+				'<script src="js/utils.js"></script>
+				<script src="js/gameObject.js"></script>
+				<script src="js/gameItem.js"></script>
+				<script src="js/enemy/enemy.js"></script>
+				<script src="js/startScreen.js"></script>
+				<script src="js/input.js"></script>
+			  	<script src="js/level/level.js"></script>
+				<script src="js/level/level0.js"></script>
+			  	<script src="js/game.js"></script>
+			  	<script src="js/hero.js"></script>
+			  	<script src="js/main.js"></script>
+	';
      
-    // $pageJs = '<script src="js/jonsQuest.min.js.gz"></script>';
-      
-      
 	require_once(dirname(__FILE__) . '/' . $pageRoot . 'master.php');
 ?>
      
