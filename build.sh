@@ -115,9 +115,11 @@ function pushToGithub { # $1= commit msg
 	
 	if [[ "$1" != "" ]]
 	then
-		git commit -am "$1"
+		git add -A
+		git commit -m "$1"
 	else
-		git commit -am 'default'
+		git add -A
+		git commit -m 'default'
 	fi
 	
 	git push
