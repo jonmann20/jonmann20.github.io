@@ -122,7 +122,7 @@ function pushToGithub { # $1= commit msg
 	
 	git push
 }
-
+ 
 
 #----- Run Program -----
 
