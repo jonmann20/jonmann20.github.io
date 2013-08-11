@@ -162,7 +162,6 @@ hero = function(){
 				// pos = playerU
 			// }
     		else if(hero.dirR){
-    			pos = spriteArr["playerRight"];
     			
 	   			if(68 in keysDown){
 	   				if(Math.abs(hero.vX) <= hero.speed*3)
@@ -173,6 +172,9 @@ hero = function(){
    					else 
    						pos = spriteArr["playerRight_Run1"];
     			}
+    			else
+    				pos = spriteArr["playerRight"];
+    				
  
  				// if(inv == Inv_e.HIT_WHITE){
  					// pos = spriteArr["playerRight_White"];
@@ -180,10 +182,8 @@ hero = function(){
  				// else if(inv == Inv_e.HIT_RED){
  					// pos = playerRRed
  				// }
- 
     		}
     		else{
-    			pos = spriteArr["playerLeft"];
 
     			if(showRun && 65 in keysDown){ 
     				if(Math.abs(hero.vX) <= hero.speed*3)
@@ -194,6 +194,9 @@ hero = function(){
    					else 
    						pos = spriteArr["playerLeft_Run1"];
     			}
+    			else
+    				pos = spriteArr["playerLeft"];
+    			
     			
     			// if(inv == Inv_e.HIT_WHITE){
 					// pos = playerLWhite
@@ -201,7 +204,6 @@ hero = function(){
     			// else if(inv == Inv_e.HIT_RED){
 					// pos = playerLRed
     			// }
-    			
     		}
     		
     		ctx.drawImage(img, pos.x, pos.y, hero.w, hero.h, hero.x, hero.y, hero.w, hero.h);
@@ -287,10 +289,10 @@ hero = function(){
 			img = new Image()
 			
 			img.onload = function() {imgReady = true}
-			img.src = 'img/player.png';
+			img.src = '../dungeon/img/sprites/player/player.png';
 			
 			
-			$.get('player.xml', function(xml){
+			$.get('../dungeon/img/sprites/player/player.xml', function(xml){
 				var wrap = $(xml).find('sprite');
 				
 				$(wrap).each(function(){

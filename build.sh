@@ -108,13 +108,18 @@ function compressJS {
 	compressJsSet "jonsQuest.js" "games/jonsQuest/" "$jQuestJsFiles"
 }
 
-function pushToGithub {
+function pushToGithub { # $1= commit msg
 	echo "----- Pushing to GitHub -----"
-	d=$(date +"%b %d, %Y")" "
-	d+=$(date +%r)
 	
-	echo -e "\t$d"
-	git commit -am 'from build.sh $d'
+	commitMsg="from build.sh"
+	
+	if [[ "$1" != "" ]]
+	then
+		git commit -am "$1"
+	else
+		git commit -am 'default'
+	fi
+	
 	git push
 }
 
@@ -138,8 +143,7 @@ then
 	compressJS
 elif [[ "$1" == "push" ]]
 then
-	echo "in push"
-	#pushToGithub
+	pushToGithub "$2"
 else
 	echo -e "\t $RED must append 'dev | prd | css | js | push' $RESET"
 fi

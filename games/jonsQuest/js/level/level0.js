@@ -52,7 +52,7 @@ lvl0 = function() {
 				for (var i = 0; i < hero.bulletArr.length; ++i) {
 					if (utils.isCollision(hero.bulletArr[i], hiddenCash, -17)) {
 						hiddenCash.visible = true
-						hiddenCash.vY = 3
+						hiddenCash.vY = 4
 					}
 				}
 			} 
