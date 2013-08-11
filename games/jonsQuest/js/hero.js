@@ -2,7 +2,8 @@ hero = function(){
 	var imgReady = false,
 		img = null,
 		showRun = true,
-		gameOver = false
+		gameOver = false,
+		spriteArr = [];
 	
 		
 	/*********************** Update ***********************/
@@ -140,26 +141,6 @@ hero = function(){
 	
 	/*********************** Render ***********************/
 	
-	var playerD = {x: 2, y: 2},
-		
-		playerL = {x: 2, y: 42},
-		playerLStep = {x: 2, y: 82},
-		
-		player_picked = {x: 62, y: 122},
-		
-		playerR = {x: 2, y: 162},
-		playerR1 = {x: 2, y: 202},
-		playerR2 = {x: 2, y: 242},
-		playerRStep = {x: 2, y: 282},
-
-		playerU = {x: 32, y: 322},
-		
-		playerLRed = {x: -1, y: -1},
-		playerLWhite = {x: -1, y: -1},
-		playerRWhite = {x: -1, y: -1},
-		playerRRed = {x: -1, y: -1};
-		
-	
 	function drawHero(){
 		if(imgReady){
 			if(game.totalTicks % 12 == 0)
@@ -175,46 +156,51 @@ hero = function(){
 			
 			
 			if(hero.isCarrying && hero.vX == 0 && hero.dir == Dir.NONE){
-				pos = playerD
+				pos = spriteArr["playerDown"];
 			}
 			// else if(hero.dir == Dir.TOP){ // jumping
 				// pos = playerU
 			// }
     		else if(hero.dirR){
-    			pos = playerR
+    			pos = spriteArr["playerRight"];
     			
 	   			if(68 in keysDown){
-	   				console.log(hero.vX)
 	   				if(Math.abs(hero.vX) <= hero.speed*3)
-	   					pos = playerRStep
+	   					pos = spriteArr["playerRight_Step"];
    					else if(showRun){
-   						pos = playerR2
+   						pos = spriteArr["playerRight_Run2"];
    					}
    					else 
-   						pos = playerR1
+   						pos = spriteArr["playerRight_Run1"];
     			}
  
- 				if(inv == Inv_e.HIT_WHITE){
- 					pos = playerRWhite
- 				}
- 				else if(inv == Inv_e.HIT_RED){
- 					pos = playerRRed
- 				}
+ 				// if(inv == Inv_e.HIT_WHITE){
+ 					// pos = spriteArr["playerRight_White"];
+ 				// }
+ 				// else if(inv == Inv_e.HIT_RED){
+ 					// pos = playerRRed
+ 				// }
  
     		}
     		else{
-    			pos = playerL
+    			pos = spriteArr["playerLeft"];
 
     			if(showRun && 65 in keysDown){ 
-    				pos = playerLStep
+    				if(Math.abs(hero.vX) <= hero.speed*3)
+	   					pos = spriteArr["playerLeft_Step"];
+   					else if(showRun){
+   						pos = spriteArr["playerLeft_Run2"];
+   					}
+   					else 
+   						pos = spriteArr["playerLeft_Run1"];
     			}
     			
-    			if(inv == Inv_e.HIT_WHITE){
-					pos = playerLWhite
-    			}
-    			else if(inv == Inv_e.HIT_RED){
-					pos = playerLRed
-    			}
+    			// if(inv == Inv_e.HIT_WHITE){
+					// pos = playerLWhite
+    			// }
+    			// else if(inv == Inv_e.HIT_RED){
+					// pos = playerLRed
+    			// }
     			
     		}
     		
@@ -302,6 +288,21 @@ hero = function(){
 			
 			img.onload = function() {imgReady = true}
 			img.src = 'img/player.png';
+			
+			
+			$.get('player.xml', function(xml){
+				var wrap = $(xml).find('sprite');
+				
+				$(wrap).each(function(){
+					var name = $(this).attr('n'),
+						x = $(this).attr('x'),
+						y = $(this).attr('y');
+					
+					name = name.substring(0, name.length-4);
+					spriteArr[name] = {x: x, y: y};
+				});
+				
+			});
 			
 		},
 		
