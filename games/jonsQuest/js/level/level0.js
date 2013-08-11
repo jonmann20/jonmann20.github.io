@@ -3,7 +3,8 @@ lvl0 = function() {
 	var cyborg = null,
 		hiddenCash = null,
 		sack = null,
-		belt = null
+		belt = null,
+		belt2 = null
 		
 
 	return {
@@ -30,6 +31,8 @@ lvl0 = function() {
 				
 			belt = GameObj()
 			belt.init(1300, 80, 340, 190, 'img/belt.png')
+			belt2 = GameObj()
+			belt2.init(1300, 80, 340, 190, 'img/belt2.png')
 		},
 
 		update: function() {
@@ -138,7 +141,10 @@ lvl0 = function() {
 
 			hiddenCash.draw()
 			cyborg.draw()
-			belt.draw()
+			if(game.totalTicks % 60 == 0)
+				belt2.draw();
+			else
+				belt.draw();
 			
 			if(!lvl0.crate.holding){
 				lvl0.crate.draw()
