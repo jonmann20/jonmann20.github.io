@@ -141,9 +141,27 @@ utils = function(){
 			ctx.bezierCurveTo(xm - ox, ye, x, ym + oy, x, ym)
 			ctx.closePath()
 			ctx.fill()
+		},
+		
+		
+		
+		drawRotate: function(img, x, y, angle){
+		    ctx.save();
+		    
+		    ctx.translate(x, y);								// move co-ord sys to img origin
+		    ctx.rotate(this.degToRad(angle));
+		    ctx.translate(-img.width * 0.5, -img.height * 0.5); // move to top left of img
+		    
+		    ctx.drawImage(img, 0, 0);
+		    
+		    ctx.restore();
+		},
+		
+		degToRad: function(deg){
+			return deg * 0.0174532925199432957;
 		}
-	}
-}()
+	};
+}();
 
 
 // global enums
@@ -167,4 +185,5 @@ bullet = {
 	h: 9,
 	speed: 8
 }
+
 

@@ -137,6 +137,12 @@ then
 	compilePHP
 	compressCSS
 	compressJS
+	
+	if [[ "$2" != "" ]]
+	then
+		pushToGithub "$2"
+	fi
+	
 elif [[ "$1" == "css" ]]
 then
 	compressJS

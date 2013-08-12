@@ -39,7 +39,8 @@ function checkInput(){
 	                y: hero.y,
 	                w: bullet.w,
 	                h: bullet.h,
-	                dirR: hero.dirR
+	                dirR: hero.dirR,
+	                deg: 0
 	            }
 		    	
 		    	--hero.ammo

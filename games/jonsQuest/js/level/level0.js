@@ -18,7 +18,7 @@ lvl0 = function() {
 			var cyborg_g = GameObj()
 			cyborg_g.init(2100, FULLH - game.padFloor - 38 + 1, 28, 38, 'img/cyborgBnW.png')
 				cyborg = Enemy()
-				cyborg.init(cyborg_g, 5)
+				cyborg.init(cyborg_g, 1)
 
 			var hCash_g = GameObj()
 			hCash_g.init(140, 50, 22, 24, 'img/cash.png')
@@ -37,16 +37,15 @@ lvl0 = function() {
 
 		update: function() {
 
-			hiddenCash.updatePos()
-			cyborg.update()
+			hiddenCash.updatePos();
+			cyborg.update();
 
 			// sack
 			if (!sack.collected) {
 				if (utils.isCollision(hero, sack, 0)) {
-					sack.collected = true
+					sack.collected = true;
 
-					hero.ammo += sack.val
-					//util.drawValPopup(hero.ammo, 'ammo')
+					hero.ammo += sack.val;
 				}
 			}
 
@@ -54,8 +53,8 @@ lvl0 = function() {
 			if (!hiddenCash.visible) {
 				for (var i = 0; i < hero.bulletArr.length; ++i) {
 					if (utils.isCollision(hero.bulletArr[i], hiddenCash, -17)) {
-						hiddenCash.visible = true
-						hiddenCash.vY = 4
+						hiddenCash.visible = true;
+						hiddenCash.vY = 4;
 					}
 				}
 			} 
@@ -110,15 +109,13 @@ lvl0 = function() {
 						}
 		                
 		            if(wasCollision){
-		            	cyborg.active = true
+		            	cyborg.active = true;
 		            	
-		            	hero.bulletArr.splice(i, 1) // remove ith item
-		            	--cyborg.health
+		            	hero.bulletArr.splice(i, 1); // remove ith item
+		            	--cyborg.health;
 		            	
 		            	if(cyborg.health <= 0) {
-		            		utils.playSound(game.sound.death, false)
-		            		
-		            		hero.xp += 2
+		            		cyborg.death();
 		            	}
 		            }
 			    }
@@ -141,6 +138,7 @@ lvl0 = function() {
 
 			hiddenCash.draw()
 			cyborg.draw()
+			
 			if(game.totalTicks % 60 == 0)
 				belt2.draw();
 			else

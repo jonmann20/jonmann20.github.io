@@ -122,8 +122,8 @@ level = function() {
 			}
 			
 			loadBgImages({
-				lvl0: 'img/lvl0.jpg',
-				lvl1: 'none'
+				lvl0: "img/lvl0.jpg",
+				lvl1: "none"
 			}, function(num) {
 				lvl[num].status = true
 			})
@@ -135,7 +135,6 @@ level = function() {
 		reset : function() {
 			level.width = 3198
 			
-			
 			hero.x = 23
 			hero.y = canvas.height - hero.h
 			hero.isJumping = false
@@ -146,13 +145,16 @@ level = function() {
 		/******************** Update ********************/
 		update: function(){
 			
-	    	if(game.lvl == 0)
-	    		lvl0.update()
+	    	switch(game.lvl){
+	    		case 0:
+	    			lvl0.update();
+	    			break;
+	    	}
 			
-			var tempLvl = game.lvl + 1
-			
-			if(tempLvl >= NUM_LEVELS)
-				tempLvl = NUM_LEVELS - 1
+			// var tempLvl = game.lvl+1;
+// 			
+			// if(tempLvl >= NUM_LEVELS)
+				// tempLvl = NUM_LEVELS-1;
 				
 			// if(	){        should reset level
 				// ++game.lvl
@@ -163,29 +165,35 @@ level = function() {
 		},
 		
 		updateObjs: function(){
-			if(game.lvl == 0)
-				lvl0.updateObjs()
+			switch(game.lvl){
+	    		case 0:
+	    			lvl0.updateObjs()
+	    			break;
+	    	}
 		},
 		
 		/******************** Render ********************/
 		render: function(){
 			// background
 	    	if(lvl[game.lvl].status){
-	    		ctx.drawImage(lvlBgImg['lvl' + game.lvl], hero.lvlX, 0, FULLW, FULLH, 0, 0, FULLW, FULLH)
+	    		ctx.drawImage(lvlBgImg["lvl" + game.lvl], hero.lvlX, 0, FULLW, FULLH, 0, 0, FULLW, FULLH)
 	    	}
 	    	else{
 	    		if(lvl[game.lvl].bgColor)
 	    			ctx.fillStyle = lvl[game.lvl].bgColor
 	    		else
-	    			ctx.fillStyle = '#222'
+	    			ctx.fillStyle = "#222";
 	    			
-	    		ctx.fillRect(0, 0, FULLW, FULLH)
+	    		ctx.fillRect(0, 0, FULLW, FULLH);
 	    	}
 	    	
-	    	drawHUD()
+	    	drawHUD();
 	    	
-	    	if(game.lvl == 0)
-	    		lvl0.render()
+	    	switch(game.lvl){
+	    		case 0:
+	    			lvl0.render();
+	    			break;
+	    	}
 		},
 		
 		drawAfterHero: function(){

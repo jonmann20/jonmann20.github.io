@@ -39,6 +39,8 @@ window.GameObj = function(){
 				ctx.fillStyle = "red";
 				ctx.fillRect(this.x, this.y, this.w, this.h);
 			}
-		}
+		},
+		
+		getImg: function(){ return img; }
 	};
 }

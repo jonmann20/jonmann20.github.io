@@ -3,15 +3,18 @@ hero = function(){
 		img = null,
 		showRun = true,
 		gameOver = false,
-		spriteArr = [];
+		spriteArr = [],
+		shuriken = null,
+		shurikenReady = false,
+		shurikenDeg = 0;
 	
 		
 	/*********************** Update ***********************/
 	
 	function screenCollision(){
 		if(hero.y < 0){								// top
-		    hero.y = 0
-		    hero.vY = 0
+		    hero.y = 0;
+		    hero.vY = 0;
 		}
 		else if(hero.y > (canvas.height - game.padBot - hero.h)){ // bottom
 		    hero.y = canvas.height - game.padBot - hero.h
@@ -47,38 +50,37 @@ hero = function(){
 			
                 
             if(wasCollision || hero.bulletArr[i].x > canvas.width || hero.bulletArr[i].x < 0)		// bullet and screen
-            	hero.bulletArr.splice(i, 1) // remove ith item
+            	hero.bulletArr.splice(i, 1); // remove ith item
 	    }
 	}
 		
 	function checkCollision(){
-	    bulletHandler()		// bullet's and screen
-		screenCollision()	// hero and screen/ top of obj
+	    bulletHandler();		// bullet's and screen
+		screenCollision();	// hero and screen/ top of obj
 		
 		//---hero and game objects
 		var k, 
-			i = 'lvl' + game.lvl,
-			collisionDir = Dir.NONE
+			i = "lvl" + game.lvl,
+			collisionDir = Dir.NONE;
 			
 		for(var j in level.collisionPts[i]){
-			k = level.collisionPts[i][j]
+			k = level.collisionPts[i][j];
 			
 			// using player dimensions as the moe
 			if(utils.isCollision(hero, k, 0, true)){
 				if(hero.dirR){								// left side of obj
 					if(hero.lvlX - hero.x < k.x){
-						hero.onObjX = k.x-hero.lvlX - hero.w
-						hero.onObjLvlX = hero.lvlX
+						hero.onObjX = k.x-hero.lvlX - hero.w;
+						hero.onObjLvlX = hero.lvlX;
 																		
-						collisionDir = Dir.LEFT
-						
+						collisionDir = Dir.LEFT;
 					}
 				}
 				else{										// right side of obj
 					if((hero.x + hero.lvlX + hero.w) > (k.x + k.w)){
-						hero.onObjX = k.x-hero.lvlX + k.w
-						hero.onObjLvlX = hero.lvlX
-						collisionDir = Dir.RIGHT
+						hero.onObjX = k.x-hero.lvlX + k.w;
+						hero.onObjLvlX = hero.lvlX;
+						collisionDir = Dir.RIGHT;
 					}
 				}
 				
@@ -86,54 +88,54 @@ hero = function(){
 				if((hero.x != hero.onObjX) && ((hero.y + hero.h - 17) < k.y) && // top of obj 
 					(hero.vY > 0)	// moving down
 				){		
-					hero.onObjY = hero.y = k.y - hero.h
-					hero.isJumping = false
-					hero.onObj = true
-					collisionDir = Dir.TOP
+					hero.onObjY = hero.y = k.y - hero.h;
+					hero.isJumping = false;
+					hero.onObj = true;
+					collisionDir = Dir.TOP;
 				}
 				else{												// bot of obj
 					if((hero.y + hero.h) > (k.y + k.h)){
-						hero.onObjY = hero.y = k.y + k.h
-						hero.jumpMod = 0
-						hero.vY = 0
-						collisionDir = Dir.BOT
+						hero.onObjY = hero.y = k.y + k.h;
+						hero.jumpMod = 0;
+						hero.vY = 0;
+						collisionDir = Dir.BOT;
 					}
 				}
 			}
 			
 			if(collisionDir != Dir.NONE){
 				if((collisionDir == Dir.LEFT) || (collisionDir == Dir.RIGHT)){
-					hero.x = hero.onObjX
-					hero.lvlX = hero.onObjLvlX
+					hero.x = hero.onObjX;
+					hero.lvlX = hero.onObjLvlX;
 				}
 				
-				break
+				break;
 			}
 		}
 		
 		if(collisionDir == Dir.NONE){
-			hero.offObj()
+			hero.offObj();
 		}
 	}
 	
 	function updatePosition(){	
 		if(hero.x != (hero.x + hero.vX))
-			game.sound.step.play()
+			game.sound.step.play();
 		
 		//game.sound.thud.play();
 		
-		hero.y += hero.vY
+		hero.y += hero.vY;
 		
 		if(((hero.dirR && hero.x >= ((canvas.width/2) + 35)) ||
 		   (!hero.dirR && hero.x <= ((canvas.width/2) - 45))) &&
 		   (hero.lvlX + hero.vX >= 0) &&
 		   (hero.lvlX + hero.vX <= level.width - canvas.width)
 	    ){
-			hero.lvlX += hero.vX
-			level.updateObjs()
+			hero.lvlX += hero.vX;
+			level.updateObjs();
 		}
 		else {
-			hero.x += hero.vX
+			hero.x += hero.vX;
 		}
 		
 	}
@@ -144,11 +146,11 @@ hero = function(){
 	function drawHero(){
 		if(imgReady){
 			if(game.totalTicks % 12 == 0)
-				showRun = !showRun
+				showRun = !showRun;
 			
 			var inv = Inv_e.NOT_HIT
 			if(hero.invincible)
-				inv = (hero.invincibleTimer % 5 == 0) ? Inv_e.HIT_WHITE : Inv_e.HIT_RED		// TODO: allow for separate 'hit' and 'invincible' states
+				inv = (hero.invincibleTimer % 5 == 0) ? Inv_e.HIT_WHITE : Inv_e.HIT_RED;		// TODO: allow for separate 'hit' and 'invincible' states
 			
 			var pos = {x: 0, y: 0}
 			
@@ -212,37 +214,43 @@ hero = function(){
 	
 	function drawBullets(){
 		for(var i=0; i < hero.bulletArr.length; ++i){
-    	    var dirOffset = 0 
+    	    var dirOffset = 0;
 	    	    
             if(hero.bulletArr[i].dirR)
-                dirOffset = hero.w / 2
+                dirOffset = hero.w / 2;
 	            
-            ctx.fillStyle = bullet.color
-            utils.drawEllipse(hero.bulletArr[i].x + dirOffset, hero.bulletArr[i].y + 4.5, bullet.w, bullet.h)
+        	hero.bulletArr[i].deg += 5;
+            
+            utils.drawRotate(
+            	shuriken, 
+            	hero.bulletArr[i].x + dirOffset,
+            	hero.bulletArr[i].y + 4.5,
+        	 	hero.bulletArr[i].deg
+    	 	);
+            
         }
 	}
 	
 	function drawHealth(){
 		for(var i=0; i < hero.health; ++i){
-			ctx.fillStyle = "red"
-			ctx.fillRect(80 + i*21, FULLH + 14, 19, 8)
+			ctx.fillStyle = "red";
+			ctx.fillRect(80 + i*21, FULLH + 14, 19, 8);
 		}
 	}
 	
 	function drawMana(){
 		for(var i=0; i < hero.mana; ++i){
-			ctx.fillStyle = "#00b6ff"
-			ctx.fillRect(80 + i*21, FULLH + 37, 19, 8)
+			ctx.fillStyle = "#00b6ff";
+			ctx.fillRect(80 + i*21, FULLH + 37, 19, 8);
 		}
 	}
 	
 	function drawXP(){
-		ctx.fillStyle = "#ddd"
-        ctx.font = "12px 'Press Start 2P'"
+		ctx.fillStyle = "#ddd";
+        ctx.font = "12px 'Press Start 2P'";
         	
-    	var zero = (hero.xp < 10) ? '0' : ''
-        	
-    	ctx.fillText(zero + hero.xp + '/' + hero.xpNeeded, 80, FULLH + 71)
+    	var zero = (hero.xp < 10) ? '0' : '';
+    	ctx.fillText(zero + hero.xp + '/' + hero.xpNeeded, 80, FULLH + 71);
 	}
 		
 		
@@ -286,10 +294,10 @@ hero = function(){
 		bulletArr: [],
 		
 		init: function(){
-			img = new Image()
+			img = new Image();
 			
-			img.onload = function() {imgReady = true}
-			img.src = '../dungeon/img/sprites/player/player.png';
+			img.onload = function() {imgReady = true;}
+			img.src = "../dungeon/img/sprites/player/player.png";
 			
 			
 			$.get('../dungeon/img/sprites/player/player.xml', function(xml){
@@ -306,45 +314,48 @@ hero = function(){
 				
 			});
 			
+			shuriken = new Image();
+			shuriken.src = "img/shuriken.png";
+			shuriken.onload = function() {shurikenReady = true;}
+			
 		},
 		
 		offObj: function(){
-			hero.onObj = false
-			hero.onObjX = -1
-			hero.onObjY = -1
+			hero.onObj = false;
+			hero.onObjX = -1;
+			hero.onObjY = -1;
 		},
 		
 		update: function(){
-			updatePosition()
-			checkCollision()
-			
+			updatePosition();
+			checkCollision();
 			
 			if(hero.invincible)
-				--hero.invincibleTimer
+				--hero.invincibleTimer;
 			
 			if(hero.invincibleTimer <= 0){
-				hero.invincible = false
-				hero.invincibleTimer = hero.initInvincibleTimer
+				hero.invincible = false;
+				hero.invincibleTimer = hero.initInvincibleTimer;
 			}
 			
 			if(hero.health <= 0 && !gameOver){
-				utils.playSound(game.sound.death, false)
-				game.sound.bgMusic.lvl0.muted = true
+				utils.playSound(game.sound.death, false);
+				game.sound.bgMusic.lvl0.muted = true;
 				
 				alert('You died')
-				location.reload()
-				gameOver = true
+				location.reload();
+				gameOver = true;
 			}
 			
 		},
 	
 		render: function(){
-			drawHero()
-	    	drawBullets()
+			drawHero();
+	    	drawBullets();
 	    	
-			drawHealth()
-			drawMana()
-			drawXP()
+			drawHealth();
+			drawMana();
+			drawXP();
 		}
 	}
 }()
