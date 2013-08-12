@@ -207,13 +207,13 @@ h1,h2,h3,h4,h5,h6 {
 }
 a {
 	transition: all .33s ease-out;
-	opacity: .8; 
 	color: #61b0d7;
+	color: hsla(200, 60%, 60%, 0.8);
 	text-decoration: none;
 	outline: none;
 }
 a:hover {
-	opacity: 1;
+	color: hsla(200, 60%, 60%, 1);
 	text-shadow: #61b0d7 0 0 6px;
 }
 a:visited, 
@@ -268,17 +268,20 @@ header nav {
 header nav a,
 header nav a:visited {
 	text-align: right;
-	color: #8cb118 !important; 
-	-webkit-text-stroke: 1px #8cb118;
-	text-stroke: 1px #8cb118;
+	color: rgba(140, 177, 24, 0.93) !important; 
+	-webkit-text-stroke: 1px rgba(140, 177, 24, 0.93);
+	text-stroke: 1px rgba(140, 177, 24, 0.93);
 	text-shadow: 0 3px 3px #000;
-	opacity: .93;
 	display: block;
 	margin-right: 19px;
 	line-height: 1.2;
+	transition: 0;
 }
 header nav a:hover {
-	text-shadow: #8cb118 0 0 7px;
+	text-shadow: 0 3px 3px #000;
+	-webkit-text-stroke: 1px hsla(0, 70%, 56%, 1);
+	text-stroke: 1px hsla(0, 70%, 56%, 1);
+	color: hsla(0, 70%, 56%, 1) !important;
 }
 header nav a span {
 	font-size: 0.6em;
@@ -287,7 +290,6 @@ header nav a span {
 	display: block;
 	float: right;
 	margin-left: 15px;
-	transition: all 0.33s;
 	padding-top: 10px;
 }
 header nav a:hover span,
@@ -297,10 +299,8 @@ header nav a:hover span,
 .music header .hdrNav2 a:nth-child(3) span,
 .playground header .hdrNav2 a:nth-child(4) span,
 .portfolio header .hdrNav2 a:nth-child(5) span {
-	color: hsl(0, 70%, 56%) !important;
+	color: hsla(0, 70%, 56%, 1) !important;
 	text-shadow: 0 3px 3px #000;
-	transition: all 0.33s;
-	opacity: 0.93;
 }
 
 /* First Nav */
@@ -413,6 +413,7 @@ footer div {
 footer a {
 	-webkit-text-stroke: 1px #5dafd7;
 	text-stroke: 1px #5dafd7;
+	transition: 0;
 }
 footer .footL {
 	float: left;

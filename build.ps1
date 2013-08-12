@@ -104,7 +104,11 @@ function compilePHP(){
 
 if($args[0] -eq "prd") {
 
-    if(!$phpfiles){
+    if($htmlFiles){
+        deleteHTML
+    }
+
+    if(!$phpFiles){
         echo "---- no php files found to compile ----"
     }
     else {
@@ -113,7 +117,7 @@ if($args[0] -eq "prd") {
 
 }
 elseif($args[0] -eq "dev") {
-    if(!$htmlfiles){
+    if(!$htmlFiles){
         echo "---- no html files found to delete ----"
     }
     else {
