@@ -30,8 +30,7 @@
 		<p>A platformer game engine demo written in pure Javascript.</p>
 		
 		<a href='jonsQuest/' class='opaque' id='jonsQuest'>
-    		<img src='jonsQuest/img/player.png' alt='hero sprite' />
-    		<img src='jonsQuest/img/monster.gif' alt='monster' />
+    		<img src='/img/playerBig.png' alt='hero sprite' />
     		<img src='jonsQuest/img/syringe.png' alt='syringe' />
     		<img src='jonsQuest/img/cash.png' alt='cash' />
     		<img src='jonsQuest/img/sack.png' alt='sack' />

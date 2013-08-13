@@ -78,7 +78,7 @@ startScreen = function(){
 			ctx.fillText('U', startX+26, startY+3);
 			ctx.fillStyle = "#ff6a00";
 			ctx.fillText('U', startX+22, startY);
-		ctx.setTransform(1, 0, 0.01, 1.65, 0, -5);
+		ctx.setTransform(1, 0, 0.03, 1.6, 0, 0);
 			ctx.fillStyle = "#222";
 			ctx.fillText('E', startX+50, startY+3);
 			ctx.fillStyle = "#ff6a00";

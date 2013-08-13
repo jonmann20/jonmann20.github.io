@@ -15,6 +15,7 @@ function checkInput(){
 		    hero.dirR = false
 		    hero.dir = Dir.LEFT
 		}
+
 		
 		
 		//----- right (d)
@@ -24,8 +25,12 @@ function checkInput(){
 		    hero.dir = Dir.RIGHT
 	    }
 	    
-	    if(Math.abs(hero.vX) < hero.speed)
-	    	hero.vX = 0
+	    if(Math.abs(hero.vX) < hero.speed){    
+	    	hero.vX = 0;
+	    }
+	    else if(((hero.dir != Dir.LEFT) && (hero.dir != Dir.RIGHT))){
+	    	hero.vX /= 1.2;
+	    }
 	    
 	    
 	    //----- shoot (j)

@@ -12,11 +12,7 @@ hero = function(){
 	/*********************** Update ***********************/
 	
 	function screenCollision(){
-		if(hero.y < 0){								// top
-		    hero.y = 0;
-		    hero.vY = 0;
-		}
-		else if(hero.y > (canvas.height - game.padBot - hero.h)){ // bottom
+		if(hero.y > (canvas.height - game.padBot - hero.h)){ // bottom
 		    hero.y = canvas.height - game.padBot - hero.h
 		    hero.isJumping = false
 		}
@@ -140,91 +136,88 @@ hero = function(){
 		
 	}
 	
+	function getSpritePos(){
+		if(game.totalTicks % 12 == 0)
+			showRun = !showRun;
+			
+		var inv = Inv_e.NOT_HIT
+		if(hero.invincible)
+			inv = (hero.invincibleTimer % 5 == 0) ? Inv_e.HIT_WHITE : Inv_e.HIT_RED;		// TODO: allow for separate 'hit' and 'invincible' states
+		
+		var pos = {x: 0, y: 0};
+		
+		
+		if(hero.isCarrying && hero.vX == 0 && hero.dir == Dir.NONE){
+			pos = spriteArr["playerDown"];
+		}
+		else if(hero.dirR){
+			if(hero.dir == Dir.RIGHT){
+   				if(Math.abs(hero.vX) <= hero.speed*3.5)
+   					pos = spriteArr["playerRight_Step"];
+				else if(showRun){
+					pos = spriteArr["playerRight_Run1"];
+				}
+				else 
+					pos = spriteArr["playerRight_Run2"]; // testing 2
+			}
+			else
+				pos = spriteArr["playerRight"];
+    				
+ 
+ 				// if(inv == Inv_e.HIT_WHITE){
+				// pos = spriteArr["playerRight_White"];
+			// }
+			// else if(inv == Inv_e.HIT_RED){
+				// pos = playerRRed
+			// }
+		}
+		else{
+			if(hero.dir == Dir.LEFT){ 
+				
+				if(Math.abs(hero.vX) <= hero.speed*3.5)
+   					pos = spriteArr["playerLeft_Step"];
+				else if(showRun){
+					pos = spriteArr["playerLeft_Run1"];
+				}
+				else 
+					pos = spriteArr["playerLeft_Run2"];
+			}
+			else
+				pos = spriteArr["playerLeft"];
+			
+			
+			// if(inv == Inv_e.HIT_WHITE){
+				// pos = playerLWhite
+			// }
+			// else if(inv == Inv_e.HIT_RED){
+				// pos = playerLRed
+			// }
+		}
+		
+		hero.sx = pos.x;
+		hero.sy = pos.y;
+	}
 	
 	/*********************** Render ***********************/
 	
 	function drawHero(){
 		if(imgReady){
-			if(game.totalTicks % 12 == 0)
-				showRun = !showRun;
-			
-			var inv = Inv_e.NOT_HIT
-			if(hero.invincible)
-				inv = (hero.invincibleTimer % 5 == 0) ? Inv_e.HIT_WHITE : Inv_e.HIT_RED;		// TODO: allow for separate 'hit' and 'invincible' states
-			
-			var pos = {x: 0, y: 0}
-			
-			// TODO: move to update
-			
-			
-			if(hero.isCarrying && hero.vX == 0 && hero.dir == Dir.NONE){
-				pos = spriteArr["playerDown"];
-			}
-			// else if(hero.dir == Dir.TOP){ // jumping
-				// pos = playerU
-			// }
-    		else if(hero.dirR){
-    			
-	   			if(68 in keysDown){
-	   				if(Math.abs(hero.vX) <= hero.speed*3)
-	   					pos = spriteArr["playerRight_Step"];
-   					else if(showRun){
-   						pos = spriteArr["playerRight_Run2"];
-   					}
-   					else 
-   						pos = spriteArr["playerRight_Run1"];
-    			}
-    			else
-    				pos = spriteArr["playerRight"];
-    				
- 
- 				// if(inv == Inv_e.HIT_WHITE){
- 					// pos = spriteArr["playerRight_White"];
- 				// }
- 				// else if(inv == Inv_e.HIT_RED){
- 					// pos = playerRRed
- 				// }
-    		}
-    		else{
-
-    			if(showRun && 65 in keysDown){ 
-    				if(Math.abs(hero.vX) <= hero.speed*3)
-	   					pos = spriteArr["playerLeft_Step"];
-   					else if(showRun){
-   						pos = spriteArr["playerLeft_Run2"];
-   					}
-   					else 
-   						pos = spriteArr["playerLeft_Run1"];
-    			}
-    			else
-    				pos = spriteArr["playerLeft"];
-    			
-    			
-    			// if(inv == Inv_e.HIT_WHITE){
-					// pos = playerLWhite
-    			// }
-    			// else if(inv == Inv_e.HIT_RED){
-					// pos = playerLRed
-    			// }
-    		}
-    		
-    		ctx.drawImage(img, pos.x, pos.y, hero.w, hero.h, hero.x, hero.y, hero.w, hero.h);
+    		ctx.drawImage(img, hero.sx, hero.sy, hero.w, hero.h, hero.x, hero.y, hero.w, hero.h);
     	}
 	}
 	
 	function drawBullets(){
 		for(var i=0; i < hero.bulletArr.length; ++i){
-    	    var dirOffset = 0;
-	    	    
-            if(hero.bulletArr[i].dirR)
-                dirOffset = hero.w / 2;
+    	    var dirOffset = hero.bulletArr[i].dirR ?
+    							hero.w : 
+    							0;
 	            
         	hero.bulletArr[i].deg += 5;
             
             utils.drawRotate(
             	shuriken, 
             	hero.bulletArr[i].x + dirOffset,
-            	hero.bulletArr[i].y + 4.5,
+            	hero.bulletArr[i].y + 20,
         	 	hero.bulletArr[i].deg
     	 	);
             
@@ -259,6 +252,8 @@ hero = function(){
 		cash: 0,
 		x: 0,				// top left of sprite
 		y: 0,
+		sx: 0,				// sprite pos
+		sy: 0,
 		lvlX: 0,				
 		w: 28,
 		h: 38,
@@ -347,6 +342,7 @@ hero = function(){
 				gameOver = true;
 			}
 			
+			getSpritePos();
 		},
 	
 		render: function(){
