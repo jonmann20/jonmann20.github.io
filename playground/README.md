@@ -1,5 +1,5 @@
 ﻿Playground
 ==========
 
-Random web tech demoes.
+Random web tech demos.
 -----------------------
