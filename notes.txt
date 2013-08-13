@@ -1,63 +1,22 @@
-// Git for DreamHost:
-// http://craigjolicoeur.com/blog/hosting-git-repositories-on-dreamhost
-
-// github test
-
-
-// xampp
+//----- xampp
 sudo /opt/lampp/lampp start
 sudo /opt/lampp/lampp restart
 sudo /opt/lampp/lampp stop
 sudo /opt/lampp/lampp
 
 
-#bash notes
+//------ bash notes
 
 note="hi"
 
-$note			#dereferences note
+$note				// dereferences note
 note+=" world"
 
 
-		d=$(date +"%b %d, %Y")" "
-		d+=$(date +%r)
+d=$(date +"%b %d, %Y")" "
+d+=$(date +%r)
 		
-		echo -e "\t$d"
-
-
-
+echo -e "\t$d"
 
 
 // http://opengameart.org/content/2d-hero
-
-// testing vs git
-
-
-
-
-# Minify JavaScripts
-
-# If the output file already exists, we don't want to double its size. Remove it.
-if [ -e "./$BUNDLEFILE" ]; then
-    echo -e "Removing existing copy of $BUNDLEFILE."
-    rm $BUNDLEFILE
-fi
-
-# Fetch external dependencies, like jQuery
-echo -e "\nFetching a copy of jQuery v1.4.2..."
-wget -O $BUNDLEFILE --progress=dot http://code.jquery.com/jquery-1.4.2.min.js
-
-echo -e "\nMinifying JavaScripts..."
-jslist=`find . -type f -name \*.js`
-
-for jsfile in $jslist
-do
-    if [ ./$BUNDLEFILE != ${jsfile} ]
-    then
-        echo "Processing: ${jsfile}"
-        java -jar ${YUICOMPRESSOR} ${jsfile} >> $BUNDLEFILE
-    fi  
-done
-
-echo -e "\nDone."
-exit 0
