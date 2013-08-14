@@ -22,24 +22,24 @@ var Master = (function () {
                     marginBottom: 45
                 })
 
-                $('.absHover .colR #divDefault').hide()
+                $('.absHover .colR #divDefault').hide();
 
                 $('footer').css({
                     padding: '10px 0 8px',
                     bottom: 0
-                })
+                });
             }
 
         },
 
         isTouchDevice: function () {
             return !!('ontouchstart' in window) 		// works on most browsers 
-      			|| !!('onmsgesturechange' in window) 	// works on ie10
+      			|| !!('onmsgesturechange' in window); 	// works on ie10
         }
 
-    }
+    };
 })();
 
-$(function(){
-	Master.init()
-})
+$(function () {
+    Master.init();
+});

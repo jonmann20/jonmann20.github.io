@@ -15,7 +15,7 @@ utils = function(){
 			    sound.play();
 			else {
 				
-				if(stopPrev || sound.currentTime == 0){
+				if(stopPrev || sound.currentTime === 0){
 				
 				    sound.pause();
 				    sound.currentTime = 0;
@@ -112,7 +112,7 @@ utils = function(){
 		
 		/*************** Game Engine ***************/
 		isCollision: function(a, b, moe, isLvl) {
-			var aX = (typeof(isLvl) !== 'undefined')  ? a.x + a.lvlX : a.x
+		    var aX = (typeof (isLvl) !== 'undefined') ? a.x + a.lvlX : a.x;
 			
 			if ((aX + moe <= (b.x + b.w)) && // a is to the left of the right side of b
 				(b.x + moe <= (aX + a.w)) && // a is to the right of the left side of b
@@ -135,14 +135,14 @@ utils = function(){
 				ym = y + h / 2 // y-middle
 		    ;
 	
-			ctx.beginPath()
-			ctx.moveTo(x, ym)
-			ctx.bezierCurveTo(x, ym - oy, xm - ox, y, xm, y)
-			ctx.bezierCurveTo(xm + ox, y, xe, ym - oy, xe, ym)
-			ctx.bezierCurveTo(xe, ym + oy, xm + ox, ye, xm, ye)
-			ctx.bezierCurveTo(xm - ox, ye, x, ym + oy, x, ym)
-			ctx.closePath()
-			ctx.fill()
+		    ctx.beginPath();
+		    ctx.moveTo(x, ym);
+		    ctx.bezierCurveTo(x, ym - oy, xm - ox, y, xm, y);
+		    ctx.bezierCurveTo(xm + ox, y, xe, ym - oy, xe, ym);
+			ctx.bezierCurveTo(xe, ym + oy, xm + ox, ye, xm, ye);
+			ctx.bezierCurveTo(xm - ox, ye, x, ym + oy, x, ym);
+			ctx.closePath();
+			ctx.fill();
 		},
 		
 		

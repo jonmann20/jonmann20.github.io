@@ -90,7 +90,7 @@ var fixArr = function(num) {
 			
 			if(ball.velocity.x == 0)
 				ball.velocity.x = 1;
-			if(ball.velocity.y == 0)
+			if(ball.velocity.y === 0)
 				ball.velocity.y = 1;
 			
 			ballArr.push(ball);		

@@ -82,7 +82,7 @@ var lvl0 = (function () {
 
                 lvl0.crate.y = hero.y;
             }
-            lvl0.crate.updatePos()
+            lvl0.crate.updatePos();
 
 
 
@@ -149,7 +149,7 @@ var lvl0 = (function () {
                 lvl0.crate.draw();
             }
             else {
-                if (hero.vX == 0) {
+                if (hero.vX === 0) {
                     lvl0.crate.x += hero.dirR ? -20 : 24;
                     lvl0.crate.y += 6;
                 }

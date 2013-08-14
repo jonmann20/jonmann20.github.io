@@ -41,9 +41,9 @@ var hero = (function(){
 	        hero.bulletArr[i].x += hero.bulletArr[i].dirR ? bullet.speed : -bullet.speed; // update position
 	    	
 	    	// bullet and level object
-            var k, 
+	        var k,
                 lvl = 'lvl' + game.lvl,
-                wasCollision = false
+                wasCollision = false;
                 
     		/* this is not working quickly enough!!!!!
 			for(var j in level.collisionPts[lvl]){
@@ -127,7 +127,7 @@ var hero = (function(){
 		
 		if(hero.isJumping){
 			if(hero.jumpMod > 0){
-				hero.vY -= hero.jumpMod
+			    hero.vY -= hero.jumpMod;
 				--hero.jumpMod;
 			}
 			hero.dir = Dir.TOP;
@@ -305,7 +305,7 @@ var hero = (function(){
 		init: function(){
 			img = new Image();
 			
-			img.onload = function() {imgReady = true;}
+			img.onload = function () { imgReady = true; };
 			img.src = "../dungeon/img/sprites/player/player.png";
 			
 			
@@ -325,7 +325,7 @@ var hero = (function(){
 			
 			shuriken = new Image();
 			shuriken.src = "img/shuriken.png";
-			shuriken.onload = function() {shurikenReady = true;}
+			shuriken.onload = function () { shurikenReady = true; };
 			
 		},
 		
@@ -351,7 +351,7 @@ var hero = (function(){
 				utils.playSound(game.sound.death, false);
 				game.sound.bgMusic.lvl0.muted = true;
 				
-				alert('You died')
+				alert('You died');
 				location.reload();
 				gameOver = true;
 			}

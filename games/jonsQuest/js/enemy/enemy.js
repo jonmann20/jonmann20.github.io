@@ -55,7 +55,7 @@ var Enemy = function () {
             }
             else if (!alive)
                 return;
-            else if (this.active && game.totalTicks % 3 == 0) {
+            else if (this.active && game.totalTicks % 3 === 0) {
                 if (this.x < hero.x)
                     ++this.x;
                 else if (this.x > hero.x)

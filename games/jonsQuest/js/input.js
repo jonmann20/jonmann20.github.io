@@ -4,28 +4,28 @@ function setupInput(){
 	lastKeyDown = -1;
 	
 	addEventListener('keydown', function (e) {
-		
-	    if(e.keyCode == 32)
-	    	e.preventDefault() 				//----- space bar (scrolling to bottom of page)
-	    else if(e.keyCode == 77)			//----- mute/unmute (m)
+
+	    if (e.keyCode == 32)
+	        e.preventDefault(); 			//----- space bar (scrolling to bottom of page)
+	    else if (e.keyCode == 77)			//----- mute/unmute (m)
 	        utils.muteHelper();
-    	else if(e.keyCode == 75 &&			//----- jump (k)
+	    else if (e.keyCode == 75 &&			//----- jump (k)
     		   (!hero.isJumping && ((lastKeyDown != 75) || !(75 in keysDown))) &&
     		   (hero.onObj || hero.onGround)
-		){
-			game.sound.jump.play();
-			hero.vY = 0;
-			hero.isJumping = true;
-			hero.offObj();
-			
-			//delete keysDown[75];
-    	}
-		else if(e.keyCode == 74	&&		//----- shoot (j) 			
+		) {
+	        game.sound.jump.play();
+	        hero.vY = 0;
+	        hero.isJumping = true;
+	        hero.offObj();
+
+	        //delete keysDown[75];
+	    }
+	    else if (e.keyCode == 74 &&		//----- shoot (j) 			
    				((lastKeyDown != 74) || !(74 in keysDown))
-   		){
-	    	if(hero.ammo > 0 && !hero.isCarrying){
-		    	utils.playSound(game.sound.gun);
-		        
+   		) {
+	        if (hero.ammo > 0 && !hero.isCarrying) {
+	            utils.playSound(game.sound.gun);
+
 	            hero.bulletArr[hero.bulletArr.length] = {
 	                x: hero.x,
 	                y: hero.y,
@@ -34,30 +34,30 @@ function setupInput(){
 	                dirR: hero.dirR,
 	                deg: 0
 	            };
-		    	
-		    	--hero.ammo;
-	    	}
-	        
+
+	            --hero.ammo;
+	        }
+
 	        //delete keysDown[74]
-		}
-	    
-	    lastKeyDown = e.keyCode;	
-	    	
+	    }
+
+	    lastKeyDown = e.keyCode;
+
 	    keysDown[e.keyCode] = true;
-	}, false)
+	}, false);
 	
-	addEventListener('keyup', function (e) {delete keysDown[e.keyCode]}, false);
+	addEventListener('keyup', function (e) { delete keysDown[e.keyCode];}, false);
 }
 
 
 function checkInput(){
 		
-		hero.dir = Dir.NONE
+    hero.dir = Dir.NONE;
 		
-		if(!hero.onObj)
-			hero.vY = ((hero.vY + game.gravity) > hero.maxVy) ? hero.maxVy : (hero.vY + game.gravity)
+    if (!hero.onObj)
+        hero.vY = ((hero.vY + game.gravity) > hero.maxVy) ? hero.maxVy : (hero.vY + game.gravity);
 		
-		if(hero.vX != 0)
+		if(hero.vX !== 0)
 			hero.vX += (hero.vX > 0) ? -game.friction : game.friction;
 			
 			
@@ -66,9 +66,9 @@ function checkInput(){
 			
 		//----- left (a)
 		if(65 in keysDown){ 			
-		    hero.vX = (Math.abs(hero.vX - hero.speed) > hero.maxVx) ? -hero.maxVx : (hero.vX - hero.speed)
-		    hero.dirR = false
-		    hero.dir = Dir.LEFT
+		    hero.vX = (Math.abs(hero.vX - hero.speed) > hero.maxVx) ? -hero.maxVx : (hero.vX - hero.speed);
+		    hero.dirR = false;
+		    hero.dir = Dir.LEFT;
 		}
 
 		
