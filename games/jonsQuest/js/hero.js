@@ -1,4 +1,4 @@
-hero = function(){
+window.hero = (function(){
 	var imgReady = false,
 		img = null,
 		showRun = true,
@@ -6,24 +6,33 @@ hero = function(){
 		spriteArr = [],
 		shuriken = null,
 		shurikenReady = false,
-		shurikenDeg = 0;
+		shurikenDeg = 0
+	;
 	
 		
 	/*********************** Update ***********************/
 	
 	function screenCollision(){
+		
+		hero.onGround = false;
+		
+		if(hero.y < -hero.h){
+			hero.y = -hero.h;
+			hero.vY = 0;
+		}
 		if(hero.y > (canvas.height - game.padBot - hero.h)){ // bottom
 		    hero.y = canvas.height - game.padBot - hero.h
-		    hero.isJumping = false
+		    hero.isJumping = false;
+		    hero.onGround = true;
 		}
 		else if(hero.onObj){ 						// on top of obj
-			hero.y = hero.onObjY
+			hero.y = hero.onObjY;
 		}
 	
 		if(hero.x < 0) 								// left
-		    hero.x = 0
+		    hero.x = 0;
 		else if(hero.x > (canvas.width - hero.w)){ 	// right 
-		    hero.x = canvas.width - hero.w
+		    hero.x = canvas.width - hero.w;
 	   }
 	}
 	
@@ -115,10 +124,20 @@ hero = function(){
 	}
 	
 	function updatePosition(){	
+		
+		if(hero.isJumping){
+			if(hero.jumpMod > 0){
+				hero.vY -= hero.jumpMod
+				--hero.jumpMod;
+			}
+			hero.dir = Dir.TOP;
+		}
+		else{
+			hero.jumpMod = hero.jumpPower;
+		}
+		
 		if(hero.x != (hero.x + hero.vX))
 			game.sound.step.play();
-		
-		//game.sound.thud.play();
 		
 		hero.y += hero.vY;
 		
@@ -140,12 +159,7 @@ hero = function(){
 		if(game.totalTicks % 12 == 0)
 			showRun = !showRun;
 			
-		var inv = Inv_e.NOT_HIT
-		if(hero.invincible)
-			inv = (hero.invincibleTimer % 5 == 0) ? Inv_e.HIT_WHITE : Inv_e.HIT_RED;		// TODO: allow for separate 'hit' and 'invincible' states
-		
 		var pos = {x: 0, y: 0};
-		
 		
 		if(hero.isCarrying && hero.vX == 0 && hero.dir == Dir.NONE){
 			pos = spriteArr["playerDown"];
@@ -162,14 +176,6 @@ hero = function(){
 			}
 			else
 				pos = spriteArr["playerRight"];
-    				
- 
- 				// if(inv == Inv_e.HIT_WHITE){
-				// pos = spriteArr["playerRight_White"];
-			// }
-			// else if(inv == Inv_e.HIT_RED){
-				// pos = playerRRed
-			// }
 		}
 		else{
 			if(hero.dir == Dir.LEFT){ 
@@ -184,15 +190,22 @@ hero = function(){
 			}
 			else
 				pos = spriteArr["playerLeft"];
-			
-			
-			// if(inv == Inv_e.HIT_WHITE){
-				// pos = playerLWhite
-			// }
-			// else if(inv == Inv_e.HIT_RED){
-				// pos = playerLRed
-			// }
 		}
+		
+		var inv = hero.invincibleTimer % 20;
+		
+		if(hero.invincible && ( 
+				inv == 0 ||
+				inv == 1 ||
+				inv == 2 ||
+				inv == 3 ||
+				inv == 4 ||
+				inv == 5 ||
+				inv == 6
+		)){
+			pos = {x: -1, y: -1};
+		}
+		
 		
 		hero.sx = pos.x;
 		hero.sy = pos.y;
@@ -266,6 +279,7 @@ hero = function(){
 		speed: 0.7,			// actuallly acceleration
 		isJumping: false,
 		isCarrying: false,
+		onGround: true,
 		onObj: true,
 		onObjX: -1,
 		onObjY: -1,
@@ -273,8 +287,8 @@ hero = function(){
 		jumpPower: 5,
 		jumpPowerMax: 10,
 		invincible: false,
-		invincibleTimer: 40,
-		initInvincibleTimer: 40,
+		invincibleTimer: 120,
+		initInvincibleTimer: 120,
 		health: 4,
 		maxHealth: 5,
 		medKits: 1,
@@ -353,5 +367,5 @@ hero = function(){
 			drawMana();
 			drawXP();
 		}
-	}
-}()
+	};
+})();

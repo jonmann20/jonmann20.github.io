@@ -152,7 +152,7 @@ utils = function(){
 		    ctx.rotate(this.degToRad(angle));
 		    ctx.translate(-img.width * 0.5, -img.height * 0.5); // move to top left of img
 		    
-		    ctx.scale(0.75, 0.75);
+		    //ctx.scale(0.75, 0.75);
 		    ctx.drawImage(img, 0, 0);
 		    
 		    ctx.restore();
