@@ -23,7 +23,7 @@ window.game = (function(){
     	if(num != 'Infinity')
         	fpsHistory.push(num);
         	
-        if(game.totalTicks % 20 == 0){
+        if(game.totalTicks % 20 === 0){
         	var tot = 0;
         	for(var i in fpsHistory){
         		tot += fpsHistory[i];
@@ -42,7 +42,7 @@ window.game = (function(){
 		    	
 		drawFPS(Math.round(1000 / game.dt));
 		
-		if(++game.totalTicks % 60 == 0)
+		if(++game.totalTicks % 60 === 0)
 			++game.actualTime;
 	}
 	

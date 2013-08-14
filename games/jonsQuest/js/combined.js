@@ -14,7 +14,7 @@ utils = function(){
 				sound.play()
 			else {
 				
-				if(stopPrev || sound.currentTime == 0){
+				if(stopPrev || sound.currentTime === 0){
 				
 					sound.pause()
 					sound.currentTime = 0

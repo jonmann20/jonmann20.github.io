@@ -156,12 +156,12 @@ var hero = (function(){
 	}
 	
 	function getSpritePos(){
-		if(game.totalTicks % 12 == 0)
+		if(game.totalTicks % 12 === 0)
 			showRun = !showRun;
 			
 		var pos = {x: 0, y: 0};
 		
-		if(hero.isCarrying && hero.vX == 0 && hero.dir == Dir.NONE){
+		if(hero.isCarrying && hero.vX === 0 && hero.dir == Dir.NONE){
 			pos = spriteArr["playerDown"];
 		}
 		else if(hero.dirR){
@@ -195,7 +195,7 @@ var hero = (function(){
 		var inv = hero.invincibleTimer % 20;
 		
 		if(hero.invincible && ( 
-				inv == 0 ||
+				inv === 0 ||
 				inv == 1 ||
 				inv == 2 ||
 				inv == 3 ||

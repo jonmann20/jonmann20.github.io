@@ -1,4 +1,4 @@
-level = function () {
+var level = (function () {
 
     var shuriken = null,
 		cash = null,
@@ -8,7 +8,8 @@ level = function () {
 		NUM_LEVELS = 5,
 		lvl = new Array(NUM_LEVELS),
 		recentLvlUpdate = 0,
-		lvlBgImg = {};
+		lvlBgImg = {}
+    ;
 
     function drawHUD() {	// TODO: break out static parts
         // background
@@ -205,4 +206,4 @@ level = function () {
         }
 
     };
-}();
+})();

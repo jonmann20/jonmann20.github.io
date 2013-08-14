@@ -20,7 +20,7 @@ var Master = (function () {
                     position: 'static',
                     width: '100%',
                     marginBottom: 45
-                })
+                });
 
                 $('.absHover .colR #divDefault').hide();
 

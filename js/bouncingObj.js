@@ -1,4 +1,4 @@
-Bounce = function () {
+var Bounce = (function () {
     var canvas,
 		ctx,
 		obj = {
@@ -172,7 +172,7 @@ Bounce = function () {
         }
     };
 
-}();
+})();
 
 window.requestAnimFrame = (function(){
 	return  window.requestAnimationFrame       || 
