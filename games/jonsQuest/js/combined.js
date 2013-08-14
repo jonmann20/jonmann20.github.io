@@ -125,7 +125,7 @@ utils = function(){
 		},
 		
 		drawEllipse: function(x, y, w, h) {
-			var kappa = .5522848,
+			var kappa = 0.5522848,
 				ox = (w / 2) * kappa, // control point offset horizontal
 				oy = (h / 2) * kappa, // control point offset vertical
 				xe = x + w, // x-end

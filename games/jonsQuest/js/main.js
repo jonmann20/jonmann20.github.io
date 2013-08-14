@@ -1,4 +1,4 @@
-window.load = (function(){
+var load = (function(){
 	function setupMeta(){
 		canvas = $('canvas')[0];
 		ctx = canvas.getContext('2d');

@@ -8,7 +8,7 @@ function setupInput(){
 	    if(e.keyCode == 32)
 	    	e.preventDefault() 				//----- space bar (scrolling to bottom of page)
 	    else if(e.keyCode == 77)			//----- mute/unmute (m)
-	    	utils.muteHelper()
+	        utils.muteHelper();
     	else if(e.keyCode == 75 &&			//----- jump (k)
     		   (!hero.isJumping && ((lastKeyDown != 75) || !(75 in keysDown))) &&
     		   (hero.onObj || hero.onGround)

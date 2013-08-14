@@ -1,4 +1,4 @@
-window.hero = (function(){
+var hero = (function(){
 	var imgReady = false,
 		img = null,
 		showRun = true,
@@ -21,7 +21,7 @@ window.hero = (function(){
 			hero.vY = 0;
 		}
 		if(hero.y > (canvas.height - game.padBot - hero.h)){ // bottom
-		    hero.y = canvas.height - game.padBot - hero.h
+		    hero.y = canvas.height - game.padBot - hero.h;
 		    hero.isJumping = false;
 		    hero.onGround = true;
 		}
@@ -38,7 +38,7 @@ window.hero = (function(){
 	
 	function bulletHandler(){
 	    for(var i=0; i < hero.bulletArr.length; i++){
-	    	hero.bulletArr[i].x += hero.bulletArr[i].dirR ? bullet.speed : -bullet.speed // update position
+	        hero.bulletArr[i].x += hero.bulletArr[i].dirR ? bullet.speed : -bullet.speed; // update position
 	    	
 	    	// bullet and level object
             var k, 

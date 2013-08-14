@@ -1,6 +1,7 @@
 monster = function(){
-	var imgReady = false,
+    var imgReady = false,
 		img = null
+    ;
 	
 	return {
 		numCaught: -1,
@@ -11,14 +12,14 @@ monster = function(){
 		w: 34,
 		h: 49,
 		offset: 25,
-		movement: .5,
+		movement: 0.5,
 		down: true,
 		
 		init: function(){
-			img = new Image()
+		    img = new Image();
 			
 			img.onload = function() {imgReady = true}
-			img.src = 'img/monster.gif'
+			img.src = 'img/monster.gif';
 		},
 		
 		update: function(){

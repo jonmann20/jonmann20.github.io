@@ -8,9 +8,9 @@ startScreen = function(){
 	function update(){
 		if(13 in keysDown){
 			
-			++game.lvl
+		    ++game.lvl;
 			
-			game.sound.bgMusic.start.pause()			
+			game.sound.bgMusic.start.pause();
 	        game.sound.bgMusic.lvl0.loop = true
 	        
 	        game.sound.isOn ?

@@ -48,8 +48,8 @@ Bounce = function(){
 		if(obj.vX > 0)
 			obj.aX -= friction
 			
-		if(obj.vX == 0)
-			obj.aX = 0
+		if (obj.vX == 0)
+		    obj.aX = 0;
 			
 			
 		if(obj.vY < 0)
