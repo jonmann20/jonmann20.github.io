@@ -103,13 +103,16 @@ function compilePHP(){
 function pushToGithub($msg) { # $1= commit msg
 	echo "----- Pushing to GitHub -----"
 	
-	if($msg -ne ""){ 
+	if($msg){ 
+    
+        echo "why"
+    
 		git add -A
 		git commit -m $msg
     }
 	else{
 		git add -A
-		git commit -m "default push"
+		git commit -m 'default push'
 	}
 	
 	git push

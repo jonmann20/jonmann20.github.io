@@ -117,7 +117,7 @@ function pushToGithub { # $1= commit msg
 		git commit -m "$1"
 	else
 		git add -A
-		git commit -m "default push"
+		git commit -m 'default push'
 	fi
 	
 	git push
