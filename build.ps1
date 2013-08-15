@@ -25,7 +25,7 @@ $phpFiles += gci ${path}"games\jonsQuest\*" *.php
 $phpFiles += gci ${path}"games\dungeon\*" *.php
 $phpFiles += gci ${path}"blog\*" *.php
 
-#---functions---
+
 function deleteHTML(){
     echo "----- deleting HTML -----"
      
