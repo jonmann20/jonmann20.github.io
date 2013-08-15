@@ -111,15 +111,13 @@ function compressJS {
 function pushToGithub { # $1= commit msg
 	echo "----- Pushing to GitHub -----"
 	
-	commitMsg="from build.sh"
-	
 	if [[ "$1" != "" ]]
 	then
 		git add -A
 		git commit -m "$1"
 	else
 		git add -A
-		git commit -m 'default'
+		git commit -m "default push"
 	fi
 	
 	git push

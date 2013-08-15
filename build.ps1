@@ -28,7 +28,7 @@ $phpFiles += gci ${path}"blog\*" *.php
 #---functions---
 function deleteHTML(){
     echo "----- deleting HTML -----"
-    
+     
     foreach($f in $htmlFiles) {
         $count=0
         $name=""
@@ -100,6 +100,22 @@ function compilePHP(){
     echo ""
 }
 
+function pushToGithub($msg) { # $1= commit msg
+	echo "----- Pushing to GitHub -----"
+	
+	if($msg -ne ""){ 
+		git add -A
+		git commit -m $msg
+    }
+	else{
+		git add -A
+		git commit -m "default push"
+	}
+	
+	git push
+}
+
+
 #--- Check Command Line Arguments
 
 if($args[0] -eq "prd") {
@@ -114,6 +130,10 @@ if($args[0] -eq "prd") {
     else {
         compilePHP
     }
+    
+    if($args[1] -ne ""){
+        pushToGithub $args[1]
+    }
 
 }
 elseif($args[0] -eq "dev") {
@@ -124,6 +144,9 @@ elseif($args[0] -eq "dev") {
         deleteHTML
     }
 }
+elseif($args[0] -eq "push"){
+    pushToGithub $args[1]
+}
 else {
-    echo "must append 'dev | prd'"
+    echo "must append 'dev | prd | push'"
 }
