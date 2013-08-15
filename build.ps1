@@ -5,6 +5,8 @@
 
 #--globals
 $phpExe = "C:\xampp\php\php"
+$yuiJar = "C:\Users\jwiedmann\node_modules\yuicompressor\build\yuicompressor-2.4.8.jar"
+
 $path = "C:\Users\jwiedmann\git\jonmann20.github.com\"
 
 $htmlFiles = gci ${path}"*" *.html
@@ -24,7 +26,6 @@ $phpFiles += gci ${path}"games\*" *.php
 $phpFiles += gci ${path}"games\jonsQuest\*" *.php
 $phpFiles += gci ${path}"games\dungeon\*" *.php
 $phpFiles += gci ${path}"blog\*" *.php
-
 
 function deleteHTML(){
     echo "----- deleting HTML -----"
@@ -100,6 +101,27 @@ function compilePHP(){
     echo ""
 }
 
+function compressCSS {
+	echo "----- Compressing CSS -----"
+	$absCssFiles = @()  #empty array
+	
+    $cssFiles = "normalize.css","the.css"
+    
+    foreach($f in $cssFiles){
+		Write-Host "`t combining $f"
+		$absCssFiles += "${path}css/$f"
+	}
+    
+    Get-Content $absCssFiles | Out-File -Encoding UTF8 "${path}css\combined.css"    # concatenate
+	
+	Write-Host "`n`t minifying combined.css --> /min/master.css";
+    iex 'java -jar $yuijar "${path}css\combined.css" > "${path}css\min\master.css"' # minify
+    
+	Write-Host "`t removing combined.css";
+	rm "${path}css/combined.css"
+}
+
+
 function pushToGithub($msg) { # $1= commit msg
 	echo "----- Pushing to GitHub -----"
 	
@@ -124,12 +146,8 @@ if($args[0] -eq "prd") {
         deleteHTML
     }
 
-    if(!$phpFiles){
-        echo "---- no php files found to compile ----"
-    }
-    else {
-        compilePHP
-    }
+    compilePHP
+    compressCSS
     
     if($args[1]){
         pushToGithub $args[1]
@@ -144,9 +162,12 @@ elseif($args[0] -eq "dev") {
         deleteHTML
     }
 }
+elseif($args[0] -eq "css") {
+    compressCSS
+}
 elseif($args[0] -eq "push"){
     pushToGithub $args[1]
 }
 else {
-    echo "must append 'dev | prd | push'"
+    echo "must append 'dev | prd | css | push'"
 }
