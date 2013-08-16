@@ -1,12 +1,12 @@
 header {
-	width: 11%;
+	width: 220px;
 }
 .jonsQuest .main {
 	padding-bottom: 0;
 }
 .jonsQuest .canvasWrap {
 	min-width: 720px;
-	width: 80%;
+	width: 81%;
 	max-widtH: 1275px;
 	margin: 0 auto;
 	padding-top: 3%;

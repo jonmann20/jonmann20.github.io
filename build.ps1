@@ -165,9 +165,12 @@ elseif($args[0] -eq "dev") {
 elseif($args[0] -eq "css") {
     compressCSS
 }
+elseif($args[0] -eq "js") { #TODO: build this
+    compressJS
+}
 elseif($args[0] -eq "push"){
     pushToGithub $args[1]
 }
 else {
-    echo "must append 'dev | prd | css | push'"
+    echo "must append 'dev | prd | css | js | push'"
 }
