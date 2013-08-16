@@ -1,13 +1,13 @@
-#---notes
+﻿#---notes
 #
 #  run in powershell with:
 #         ./build.ps1 <arg(s)>
 
 #--globals
 $phpExe = "C:\xampp\php\php"
-$yuiJar = "C:\Users\jwiedmann\node_modules\yuicompressor\build\yuicompressor-2.4.8.jar"
+$yuiJar = "C:\Program Files (x86)\yuicompressor-2.4.8.jar"
 
-$path = "C:\Users\jwiedmann\git\jonmann20.github.com\"
+$path = "C:\git\jonmann20.github.com\"
 
 $htmlFiles = gci ${path}"*" *.html
 $htmlFiles += gci ${path}"portfolio\*" *.html
@@ -36,7 +36,7 @@ function deleteHTML(){
     
         $f.fullname.split("\") | ForEach {
             
-            if($count -gt 4) {
+            if($count -gt 2) {
                 $name += "$_/"
             }
             
@@ -60,7 +60,7 @@ function compilePHP(){
     
         $f.fullname.split("\") | ForEach {
             
-            if($count -gt 4) {
+            if($count -gt 2) {
                 $name += "$_\"
             }
             

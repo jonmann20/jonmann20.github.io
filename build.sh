@@ -16,7 +16,7 @@ htmlFiles=$(find ${path} -name '*.html')
 phpFiles=$(find ${path} -name '*.php')
 cssFiles="normalize.css the.css" 
 
-#---functions----
+
 function deleteHTML {
 	echo "----- deleting HTML -----"
 	for f in $htmlFiles
@@ -35,6 +35,7 @@ function deleteHTML {
 	done
 	echo ""
 }
+
 function compilePHP {
 	echo "----- compiling PHP to HTML -----"
 
