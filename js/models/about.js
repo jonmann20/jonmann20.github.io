@@ -1,13 +1,14 @@
-﻿jw.AboutModel = (function () {
+﻿jw.AboutModel = (function ($, undefined) {
     return {
         render: function (that) {
-            body.removeClass().addClass("about");
+            jw.Utils.resetModel();
 
             that.load("/about.html", function (data) {
-                main.html(data);
+                jw.main.html(data);
             });
 
-            document.title = "About"
+            document.title = "About";
+            jw.body.addClass("about");
         }
     };
-})();
+})(jQuery);

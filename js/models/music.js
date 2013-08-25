@@ -1,4 +1,4 @@
-﻿jw.MusicModel = (function () {
+﻿jw.MusicModel = (function ($, undefined) {
 
     var year = jw.Utils.getYear();
 
@@ -11,11 +11,11 @@
 
     return {
         render: function (that, page) {
-            if (page === "index") {
-                body.removeClass().addClass("music musicHome");
+            jw.Utils.resetModel();
 
+            if (page === "index") {
                 that.load("/music/index.html", function (data) {
-                    main.html(data);
+                    jw.main.html(data);
                     addNav(that);
 
                     $(".teaching").text(year - 2008);
@@ -23,108 +23,97 @@
                 });
 
                 document.title = "Music";
+                jw.body.addClass("music musicHome");
             }
             else if (page === "bass") {
-                body.removeClass().addClass("music bass");
-
                 that.load("/music/bass.html", function (data) {
-                    main.html(data);
+                    jw.main.html(data);
                     addNav(that);
 
                     $(".playing").text(year - 2009);
                 });
 
                 document.title = "Bass | Music";
+                jw.body.addClass("music bass");
             }
             else if (page === "chiptunes") {
-                body.removeClass().addClass("music");
-
                 that.load("/music/chiptunes.html", function (data) {
-                    main.html(data);
+                    jw.main.html(data);
                     addNav(that);
                 });
 
                 document.title = "Chiptunes | Music";
+                jw.body.addClass("music");
             }
             else if (page === "guitar") {
-                body.removeClass().addClass("music");
-
                 that.load("/music/guitar.html", function (data) {
-                    main.html(data);
+                    jw.main.html(data);
                     addNav(that);
 
                     $(".playing").text(year - 2002);
                 });
 
                 document.title = "Guitar | Music";
+                jw.body.addClass("music");
             }
             else if (page === "mandolin") {
-                body.removeClass().addClass("music mandolin");
-
                 that.load("/music/mandolin.html", function (data) {
-                    main.html(data);
+                    jw.main.html(data);
                     addNav(that);
 
                     $(".playing").text(year - 2008);
                 });
 
                 document.title = "Mandolin | Music";
+                jw.body.addClass("music mandolin");
             }
             else if (page === "piano") {
-                body.removeClass().addClass("music");
-
                 that.load("/music/piano.html", function (data) {
-                    main.html(data);
+                    jw.main.html(data);
                     addNav(that);
 
                     $(".playing").text(year - 1994);
                 });
 
                 document.title = "Piano | Music";
+                jw.body.addClass("music");
             }
             else if (page === "trumpet") {
-                body.removeClass().addClass("music trumpet");
-
                 that.load("/music/trumpet.html", function (data) {
-                    main.html(data);
+                    jw.main.html(data);
                     addNav(that);
 
                     $(".playing").text(year - 1998);
                 });
 
                 document.title = "Trumpet | Music";
+                jw.body.addClass("music trumpet");
             }
             else if (page === "rates") {
-                body.removeClass().addClass("music rates");
-
                 that.load("/music/rates.html", function (data) {
-                    main.html(data);
+                    jw.main.html(data);
                     addNav(that);
-
-                    $("meta[name=description]").remove();
-                    $("meta[name=robots]").remove();        // TODO: fix in other renders
-                    $("head").append("<meta name='description' content='Music Lesson Rates'>" +
-                                     "<meta name='robots' rel='none' />"
-                    );
-
                 });
 
                 document.title = "Rates | Music";
+                jw.head.append("<meta name='description' content='Music Lesson Rates'>" +
+                               "<meta name='robots' rel='none' />"
+                );
+                jw.body.addClass("music rates");
             }
             else if (page === "voice") {
-                body.removeClass().addClass("music");
-
                 that.load("/music/voice.html", function (data) {
-                    main.html(data);
+                    jw.main.html(data);
                     addNav(that);
 
                     $(".playing").text(year - 2009);
                 });
 
                 document.title = "Voice | Music";
+                jw.body.addClass("music");
             }
 
 
         }
     };
-})();
+})(jQuery);

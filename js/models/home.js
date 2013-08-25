@@ -1,13 +1,13 @@
-﻿jw.HomeModel = (function () {
+﻿jw.HomeModel = (function ($, undefined) {
 
     return {
         render: function (that) {
-            body.removeClass().addClass("home");
+            jw.Utils.resetModel();
 
             that.load("/home.html", function (data) {
-                main.html(data);
+                jw.main.html(data);
 
-                jw.Utils.require("http://platform.twitter.com/widgets.js", function (alreadyCreated) {
+                jw.Utils.require("//platform.twitter.com/widgets.js", function (alreadyCreated) {
                     if(!alreadyCreated){
                         twttr.widgets.load();
                     }
@@ -19,12 +19,11 @@
             });
 
             document.title = "Jon Wiedmann";
-
-            $("meta[name=description]").remove();
-            $("head").append("<meta name='description'" +
-                "content='Jon Wiedmann&#700;s personal website.  This site is set up to showcase some of my technical ability." +
-	  		        "This site has information regarding my work experience and hobbies.'" +
-            ">");
+            jw.head.append("<meta name='description' content='Jon Wiedmann&#700;s personal website.  This site is set up to showcase some of my technical ability. " +
+                                    "This site has information regarding my work experience and hobbies.' />" +
+                           "<meta name='keywords' content='Jon Wiedmann, Web Developer, PHP, HTML5, CSS, jQuery, Javascript, sammy.js' />"
+            );
+            jw.body.addClass("home");
         }
     };
-})();
+})(jQuery);

@@ -11,7 +11,7 @@ RewriteRule ^(.*)index.php$ http://localhost/$1 [R=301,L]
 Options +Multiviews
 
 #-----404 handling
-ErrorDocument 404 http://localhost/not-found
+#ErrorDocument 404 http://localhost/not-found
 
 #-----browser caching
 <IfModule mod_expires.c>

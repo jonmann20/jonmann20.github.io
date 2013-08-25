@@ -1,8 +1,9 @@
 ﻿jw.Main = (function () {
 
     function declareGlobals() {
-        window.body = $("body");
-        window.main = $(".main");
+        jw.head = $("head");
+        jw.body = $("body");
+        jw.main = $(".main");
     }
 
     return {

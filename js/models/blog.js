@@ -1,13 +1,14 @@
-﻿jw.BlogModel = (function () {
+﻿jw.BlogModel = (function ($, undefined) {
     return {
         render: function (that) {
-            body.removeClass().addClass("blog");
+            jw.Utils.resetModel();
 
             that.load("/blog/index.html", function (data) {
-                main.html(data);
+                jw.main.html(data);
             });
 
-            document.title = "Blog"
+            document.title = "Blog";
+            jw.body.addClass("blog");
         }
     };
-})();
+})(jQuery);

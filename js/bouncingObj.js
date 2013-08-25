@@ -1,4 +1,4 @@
-var Bounce = (function () {
+jw.Bounce = (function ($, undefined) {
     var canvas,
 		ctx,
 		obj = {
@@ -172,7 +172,7 @@ var Bounce = (function () {
         }
     };
 
-})();
+})(jQuery);
 
 window.requestAnimFrame = (function(){
 	return  window.requestAnimationFrame       || 
@@ -187,5 +187,5 @@ window.requestAnimFrame = (function(){
 
 
 $(function () {
-    Bounce.init();
+    jw.Bounce.init();
 });

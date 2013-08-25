@@ -1,12 +1,11 @@
-﻿jw.PortfolioModel = (function () {
+﻿jw.PortfolioModel = (function ($, undefined) {
     return {
         render: function (that, page) {
+            jw.Utils.resetModel();
+
             if (page === "index") {
-
-                body.removeClass().addClass("portfolio absHover");
-
                 that.load("/portfolio/index.html", function (data) {
-                    main.html(data);
+                    jw.main.html(data);
 
                     jw.Utils.require("/js/plugins/jquery.hoverIntent.min.js", function () { });
 
@@ -17,12 +16,8 @@
                 });
 
                 document.title = "Portfolio";
-            }
-            else if (page === "bass") {
-
-
-                document.title = "Bass | Music";
+                jw.body.addClass("portfolio absHover");
             }
         }
     };
-})();
+})(jQuery);

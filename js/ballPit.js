@@ -1,11 +1,10 @@
-jw.BallPit = (function () {
+jw.BallPit = (function ($, undefined) {
 
     var canvas = $('canvas')[0],
         ctx = canvas.getContext('2d'),
         radius = 3.5,
         ballArr = []
     ;
-
 
     window.requestAnimFrame = (function () {
         return window.requestAnimationFrame ||
@@ -171,12 +170,4 @@ jw.BallPit = (function () {
             });
         }
     };
-})();
-
-
-$(function () {
-
-    // TODO: move to playground model
-
-    jw.BallPit.init();
-});
+})(jQuery);

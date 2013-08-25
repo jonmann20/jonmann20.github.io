@@ -21,7 +21,7 @@
         setup();
 
         function setup() {
-            var canvas = $('canvas')[0],
+            var canvas = a('canvas')[0],
                 c = canvas.getContext('2d'),
                 points = [];
 
@@ -32,7 +32,7 @@
                 }
             }
 
-            $(document).mousemove(function (e) {
+            a(document).mousemove(function (e) {
                 mouse_x = e.pageX - HALF_WIDTH; //- this.offsetLeft
                 mouse_y = e.pageY - HALF_HEIGHT; //- this.offsetTop
             });

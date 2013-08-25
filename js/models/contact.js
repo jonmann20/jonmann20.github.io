@@ -1,13 +1,14 @@
-﻿jw.ContactModel = (function () {
+﻿jw.ContactModel = (function ($, undefined) {
     return {
         render: function (that) {
-            body.removeClass().addClass("contact");
+            jw.Utils.resetModel();
 
             that.load("/contact.html", function (data) {
-                main.html(data);
+                jw.main.html(data);
             });
 
-            document.title = "Contact Me"
+            document.title = "Contact Me";
+            jw.body.addClass("contact");
         }
     };
-})();
+})(jQuery);

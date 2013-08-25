@@ -1,4 +1,4 @@
-jw.Routing = (function () {
+jw.Routing = (function ($, undefined) {
     var app = $.sammy(function () {
         //----- Home
         this.get('/', function () {
@@ -84,14 +84,25 @@ jw.Routing = (function () {
             jw.PlaygroundModel.render(this, "ballPit");
         });
 
-        this.get("#playground/breackdancing-cube", function () {
+        this.get("#playground/breakdancing-cube", function () {
             jw.PlaygroundModel.render(this, "bCube");
+        });
+
+        this.get("#playground/floating-sun", function () {
+            jw.PlaygroundModel.render(this, "fSun");
+        });
+
+        this.get("#playground/bouncing-object", function () {
+            jw.PlaygroundModel.render(this, "bObj");
         });
 
         this.get("#playground/starry-background", function () {
             jw.PlaygroundModel.render(this, "stars");
         });
 
+        this.get("#playground/USTREAM-demo", function () {
+            jw.PlaygroundModel.render(this, "ustream");
+        });
         
 
         //----- Portfolio
@@ -105,4 +116,4 @@ jw.Routing = (function () {
             app.run();
         }
     };
-})();
+})(jQuery);
