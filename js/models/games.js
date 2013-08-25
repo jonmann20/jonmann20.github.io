@@ -8,7 +8,11 @@
                 that.load("/games/index.html", function (data) {
                     main.html(data);
 
-                    $(".colL ul").hoverCarousel();
+                    jw.Utils.require("/js/plugins/jquery.hoverIntent.min.js", function () { });
+
+                    jw.Utils.require("/js/plugins/jquery.hoverCarousel.js", function () {
+                        $("ul").hoverCarousel();
+                    });
                 });
 
                 location.title = "Games";
@@ -23,7 +27,7 @@
                 body.removeClass().addClass("games pageFullW jonsQuest");
 
                 that.load("/games/jonsQuest/index.html", function (data) {
-                    main.html(data);
+                    body.html(data);
                 });
 
                 location.title = "Jon's Quest | Games";

@@ -22,6 +22,10 @@
 
                 that.load("/playground/ballPit.html", function (data) {
                     main.html(data);
+
+                    jw.Utils.require("/js/ballPit.js", function () {
+                        // TODO: init from here (not ballPit.js)
+                    });
                 });
 
                 document.title = "Ball Pit | Playground";

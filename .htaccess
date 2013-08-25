@@ -60,8 +60,9 @@ ExpiresDefault "access 2 days"
 Header set Cache-Control "max-age=290304000, public"
 </filesMatch>
 
-#-----opentype fonts
+#----- fonts
 AddType font/opentype otf
+AddType application/font-woff woff
 
 #-----gzip
 <files *.js.gz>

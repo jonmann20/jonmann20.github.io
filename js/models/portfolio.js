@@ -8,15 +8,20 @@
                 that.load("/portfolio/index.html", function (data) {
                     main.html(data);
 
-                    $("ul").hoverCarousel();
+                    jw.Utils.require("/js/plugins/jquery.hoverIntent.min.js", function () { });
+
+                    jw.Utils.require("/js/plugins/jquery.hoverCarousel.js", function(){
+                        $("ul").hoverCarousel();
+                    });
+
                 });
 
-                location.title = "Portfolio";
+                document.title = "Portfolio";
             }
             else if (page === "bass") {
 
 
-                location.title = "Bass | Music";
+                document.title = "Bass | Music";
             }
         }
     };

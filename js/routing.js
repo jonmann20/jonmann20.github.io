@@ -1,7 +1,4 @@
 jw.Routing = (function () {
-    window.body = $("body");
-    window.main = $(".main");
-
     var app = $.sammy(function () {
         //----- Home
         this.get('/', function () {
@@ -32,13 +29,13 @@ jw.Routing = (function () {
             jw.GamesModel.render(this, "index");
         });
 
-        this.get("#games/dungeon", function () {
-            jw.GamesModel.render(this, "dungeon");
-        });
+        //this.get("#games/dungeon", function () {
+        //    jw.GamesModel.render(this, "dungeon");
+        //});
 
-        this.get("#games/jonsQuest", function () {
-            jw.GamesModel.render(this, "jonsQuest");
-        });
+        //this.get("#games/jonsQuest", function () {
+        //    jw.GamesModel.render(this, "jonsQuest");
+        //});
 
         //----- Music
         this.get("#music", function () {
@@ -48,6 +45,35 @@ jw.Routing = (function () {
         this.get("#music/bass", function () {
             jw.MusicModel.render(this, "bass");
         });
+
+        this.get("#music/chiptunes", function () {
+            jw.MusicModel.render(this, "chiptunes");
+        });
+
+        this.get("#music/guitar", function () {
+            jw.MusicModel.render(this, "guitar");
+        });
+
+        this.get("#music/mandolin", function () {
+            jw.MusicModel.render(this, "mandolin");
+        });
+
+        this.get("#music/piano", function () {
+            jw.MusicModel.render(this, "piano");
+        });
+
+        this.get("#music/trumpet", function () {
+            jw.MusicModel.render(this, "trumpet");
+        });
+
+        this.get("#music/rates", function () {
+            jw.MusicModel.render(this, "rates");
+        });
+
+        this.get("#music/voice", function () {
+            jw.MusicModel.render(this, "voice");
+        });
+        
 
         //----- Playground
         this.get("#playground", function () {
@@ -76,13 +102,7 @@ jw.Routing = (function () {
 
     return {
         init: function () {
-            $(".dateYear").text(new Date().getFullYear());
-
             app.run();
         }
     };
 })();
-
-$(function () {
-    jw.Routing.init();
-});

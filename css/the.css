@@ -187,9 +187,15 @@ br.clr {
 .absHover .colR #divDefault {
 	display: block;
 }
+#slideshow {
+    height: 34em;
+}
 #slideshow img {
 	display: none;
 	max-height: 460px;
+}
+#slideshow img:first-child {
+    display: block;
 }
 
 /**************** Global ****************/
@@ -470,8 +476,6 @@ footer .footR {
 }
 
 /* home */
-.home .colL {width: 40%; min-width: 229px; max-width: 350px;}
-.home .colL img {min-width: 150px;}
 .home .colR {min-width: 400px;}
 .home .colR iframe {margin-top: 15px; width: 390px;}
 .home .twitter-timeline {margin-top: 15px;}
@@ -537,15 +541,12 @@ footer .footR {
 .dungeon .preTransition{
     opacity: 1;
 }
-.dungeon .duringTransition{
+.dungeon .duringTransition {
     opacity: 0.01;
 }
 
 
 /********** Music **********/
-.musicHome .colR {
-	width: 55%;
-}
 .bass .colR p {
 	margin-bottom: 10px;
 }
@@ -649,16 +650,6 @@ footer .footR {
 }
 
 /********** Portfolio **********/
-.portfolio .colR {
-	min-height: 37.5em;
-}
-
-
-/********** Not Found **********/
-.unhappyImg {
-	width: 200px !important;
-	box-shadow: none;
-}
 
 
 /********** Rates **********/
@@ -668,9 +659,6 @@ footer .footR {
 
 
 /********** About **********/
-.about .colR {
-	widtH: 57%;
-}
 
 
 /************ Responsive ************/
@@ -692,7 +680,6 @@ footer .footR {
   	.home .colR {
   		float: left;
   		width: 75%;
-  		margin-top: 500px;
   	}
   	.absHover .colR > div {
   		width: 100%;
