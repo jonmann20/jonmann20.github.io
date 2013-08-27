@@ -10,7 +10,8 @@
         "/js/ballPit.js": "scriptBallPit",
         "/js/html5_star.js": "scriptHtml5Star",
         "/js/bouncingObj.js": "scriptBObj",
-        "/js/computerGraphics/web/computergraphics.dart.js": "scriptComputerGraphics"
+        "/js/computerGraphics/web/computergraphics.dart.js": "scriptComputerGraphics",
+        "/js/ustream.js": "scriptUstream"
     }
 
 
@@ -31,6 +32,7 @@
             return new Date().getFullYear();
         },
         resetModel: function () {
+            jw.main.html("");
             jw.body.removeClass();
             document.title = "";
             $("meta[name=description]").remove();
@@ -41,3 +43,15 @@
         }
     };
 })(jQuery);
+
+
+window.requestAnimFrame = (function () {
+    return window.requestAnimationFrame ||
+    		window.webkitRequestAnimationFrame ||
+            window.mozRequestAnimationFrame ||
+            window.oRequestAnimationFrame ||
+			function (callback) {
+			    window.setTimeout(callback, 1000 / 60);
+			};
+})();
+

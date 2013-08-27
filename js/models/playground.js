@@ -37,91 +37,6 @@
         });
     }
 
-    /********** USTRAM **********/
-    function truncate(str){
-        if(strlen(str) > 22) {
-            str = str.substr(0, 22) + "...";
-        }
-        return str;
-    }
-
-    function getVidList(){
-        var $request = 'http://api.ustream.tv';
-        var $format = 'php';                // this can be xml, json, html, or php
-        var $args = 'subject=channel';
-        $args += '&uid=sharewohl';
-        $args += '&command=listAllVideos';
-        $args += '&params=';
-        $args += '&page=1';
-        $args += '&limit=5';
-        $args += '&key=8EC9915C3CC87E5F5A6E2D84FAD520A7';
-    
-        // Get and config the curl session object
-        var $session = curl_init($request + '/' + $format + '?' + $args);
-        curl_setopt($session, CURLOPT_HEADER, false);
-        curl_setopt($session, CURLOPT_RETURNTRANSFER, true);
-    
-        //execute the request and close
-        var $response = curl_exec($session);
-        curl_close($session);
-    
-        // this line works because we requested $format='php' and not some other output format
-        var $resultsArray = unserialize($response);
-    
-        return $resultsArray['results'];
-    }
-
-    function getRandom(){
-        var $request =  'http://api.ustream.tv';
-        var $format = 'php';                // this can be xml, json, html, or php
-        $args = 'subject=stream';
-        $args += '&uid=all';
-        $args += '&command=getRandom';
-        $args += '&params=';
-        $args += '&page=1';
-        $args += '&limit=1';
-        $args += '&key=8EC9915C3CC87E5F5A6E2D84FAD520A7';
-    
-        // Get and config the curl session object
-        var $session = curl_init($request + '/' + $format + '?' + $args);
-        curl_setopt($session, CURLOPT_HEADER, false);
-        curl_setopt($session, CURLOPT_RETURNTRANSFER, true);
-    
-        //execute the request and close
-        var $response = curl_exec($session);
-        curl_close($session);
-    
-        // this line works because we requested $format='php' and not some other output format
-        var $resultsArray = unserialize($response);
-    
-        var $result1 = $resultsArray['results'];
-        var $result =  $result1[0];
-        return $result['embedTag'];
-    }
-
-
-    function ustream() {
-        jw.Utils.require("//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js", function () {
-            $(".list li").draggable({
-                stop: function(e, ui){
-                    $(this).css({height: "21px"});
-                    $(this).children(".vid").css({display: "block"});
-                },
-                cancel: "object"
-            });
-
-            var list = getVidList();
-            
-            var str = '<ul>';
-            for(var i=0; i < list.length; ++i){
-                str += '<li><div class="vid">' + list[i]['embedTag'] + '</div>' + truncate(list[i]['title']) + '</li>';
-            }
-            str += '</ul>';
-
-            $(".list").html(str);
-        });
-    }
-
 
     return {
         render: function (that, page) {
@@ -175,10 +90,12 @@
                 jw.body.addClass("playground playInner nav2");
             }
             else if (page === "bObj") {
-                that.load("/playground/stars.html", function (data) {
+                that.load("/playground/bouncing-object.html", function (data) {
                     jw.main.html(data);
 
-                    jw.Utils.require("/js/bouncingObj.js", function () { });
+                    jw.Utils.require("/js/bouncingObj.js", function () {
+                        jw.Bounce.init();
+                    });
                 });
 
                 document.title = "Bouncing Object | Playground";
@@ -191,14 +108,16 @@
                 that.load("/playground/USTREAM-demo.html", function (data) {
                     jw.main.html(data);
 
-                    ustream();  // TODO: move to own file; migrate PHP code to JS/json
+                    jw.Utils.require("/js/ustream.js", function () {
+                        jw.Ustream.init();
+                    });
                 });
 
                 document.title = "USTREAM demo | Playground";
                 jw.head.append("<meta name='description' content='A USTREAM api demo.' />" +
                                "<meta name='keywords' content='USTREAM' />"
                 );
-                jw.body.addClass("playground playInner pageFullW uStreamPage nav5");
+                jw.body.addClass("playground playInner uStreamPage nav5");
             }
             else if (page === "bCube") {
                 that.load("/playground/breakdancing-cube.html", function (data) {
@@ -228,7 +147,6 @@
                 );
                 jw.body.addClass("playground playInner nav4");
             }
-
 
 
             if (page !== "index") {

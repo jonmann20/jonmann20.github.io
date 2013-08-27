@@ -3,17 +3,33 @@
 <head>
 	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width" />
-
-	<link href="http://fonts.googleapis.com/css?family=Press+Start+2P|Open+Sans|Open+Sans+Condensed:300" rel="stylesheet" type="text/css">
-    
-	<link rel="stylesheet" type="text/css" href="/css/normalize.css" />
-    <link rel="stylesheet" type="text/css" href="/css/the.css" />
-    
     <link rel="icon" type="image/ico" href="/img/favicon.ico">
-	<script>
-		// setup namespace
-		var jw = {};
-	</script>    
+
+	<link href="//fonts.googleapis.com/css?family=Press+Start+2P|Open+Sans|Open+Sans+Condensed:300" rel="stylesheet" type="text/css">
+
+    <script>
+        // setup namespace
+        var jw = {
+            debug: (location.hostname === "localhost")
+        };
+        
+        (function () {
+            function addCSS(src) {
+                var cssLink = document.createElement("link");
+                cssLink.setAttribute("rel", "stylesheet");
+                cssLink.setAttribute("href", src);
+                document.getElementsByTagName("head")[0].appendChild(cssLink);
+            }
+
+            if (jw.debug) {
+                addCSS("/css/normalize.css");
+                addCSS("/css/the.css");
+            }
+            else {
+                addCSS("/css/min/master.css");
+            }
+        })();
+</script>
 </head>
 <body>
     <div class="page">
@@ -86,20 +102,34 @@
         </div>
     </footer>
     
-    <!--<script src="/js/analytics.js"></script>-->
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-	<script src="/js/plugins/sammy.js"></script>
-    <script src="/js/utils.js"></script>
-    <script src="/js/models/home.js"></script>
-	<script src="/js/models/about.js"></script>
-    <script src="/js/models/contact.js"></script>
-	<script src="/js/models/blog.js"></script>
-    <script src="/js/models/games.js"></script>
-    <script src="/js/models/music.js"></script>
-    <script src="/js/models/playground.js"></script>
-    <script src="/js/models/portfolio.js"></script>
-	<script src="/js/routing.js"></script>
-    <script src="/js/main.js"></script>
+    <script>
+        $(function () {
+            jw.numScripts = 12;
+            jw.scriptsLoaded = 0;
 
+            if (jw.debug) {
+                $.getScript("/js/plugins/sammy.js", ++jw.scriptsLoaded);
+                $.getScript("/js/utils.js", ++jw.scriptsLoaded);
+                $.getScript("/js/models/home.js", ++jw.scriptsLoaded);
+                $.getScript("/js/models/about.js", ++jw.scriptsLoaded);
+                $.getScript("/js/models/contact.js", ++jw.scriptsLoaded);
+                $.getScript("/js/models/blog.js", ++jw.scriptsLoaded);
+                $.getScript("/js/models/games.js", ++jw.scriptsLoaded);
+                $.getScript("/js/models/music.js", ++jw.scriptsLoaded);
+                $.getScript("/js/models/playground.js", ++jw.scriptsLoaded);
+                $.getScript("/js/models/portfolio.js", ++jw.scriptsLoaded);
+                $.getScript("/js/routing.js", ++jw.scriptsLoaded);
+                $.getScript("/js/main.js", ++jw.scriptsLoaded);
+            }
+            else {
+                jw.numScripts = 1;
+                jw.scriptsLoaded = 0;
+
+                $.getScript("/js/min/master.js", ++jw.scriptsLoaded);
+            }
+        });
+
+    </script>
 </body>
 </html>

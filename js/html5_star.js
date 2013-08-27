@@ -23,7 +23,8 @@
         function setup() {
             var canvas = a('canvas')[0],
                 c = canvas.getContext('2d'),
-                points = [];
+                points = []
+            ;
 
             function initPoints() {
                 for (i = 0; i < numPoints; i++) {
@@ -73,20 +74,10 @@
                 }
             }
 
-            window.requestAnimFrame = (function () {
-                return window.requestAnimationFrame ||
-                        window.webkitRequestAnimationFrame ||
-                        window.mozRequestAnimationFrame ||
-                        window.oRequestAnimationFrame ||
-                        function (callback) {
-                            window.setTimeout(callback, 1000 / 60);
-                        };
-            })();
-
-            var loop = function () {
+            function loop() {
                 requestAnimFrame(loop);
                 render();
-            };
+            }
 
             // start program
             initPoints();

@@ -17,5 +17,10 @@
 })();
 
 $(function () {
-    jw.Main.init();
+    var waitForScripts = setInterval(function () {
+        if (jw.scriptsLoaded === jw.numScripts) {
+            jw.Main.init();
+            clearInterval(waitForScripts);
+        }
+    }, 10)
 });

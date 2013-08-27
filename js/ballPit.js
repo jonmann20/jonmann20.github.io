@@ -6,17 +6,6 @@ jw.BallPit = (function ($, undefined) {
         ballArr = []
     ;
 
-    window.requestAnimFrame = (function () {
-        return window.requestAnimationFrame ||
-                window.webkitRequestAnimationFrame ||
-                window.mozRequestAnimationFrame ||
-                window.oRequestAnimationFrame ||
-                function (callback) {
-                    window.setTimeout(callback, 1000 / 60);
-                };
-    })();
-
-
     function ballPitMain() {
         // initialize the array of balls
         for (var i = 0; i < 20; i++) {

@@ -212,8 +212,7 @@ h1,h2,h3,h4,h5,h6 {
 	margin: .5em 0 .3em 0;
 }
 a {
-	transition: all .33s ease-out;
-	color: #61b0d7;
+	/*transition: all .33s ease-out;*/
 	color: hsla(200, 60%, 60%, 0.8);
 	text-decoration: none;
 	outline: none;
@@ -370,6 +369,7 @@ header nav ul #cube {
 .nav2 .playgroundNav li:nth-child(2) a,
 .nav3 .playgroundNav li:nth-child(3) a,
 .nav4 .playgroundNav li:nth-child(4) a,
+.nav5 .playgroundNav li:nth-child(5) a,
 .nav6 .playgroundNav li:nth-child(6) a {
 	color: #ff6a00 !important;
 	-webkit-text-stroke: 1px #ff6a00;
@@ -379,6 +379,7 @@ header nav ul #cube {
 .nav2 .playgroundNav li:nth-child(2) a:hover,
 .nav3 .playgroundNav li:nth-child(3) a:hover,
 .nav4 .playgroundNav li:nth-child(4) a:hover,
+.nav5 .playgroundNav li:nth-child(5) a:hover,
 .nav6 .playgroundNav li:nth-child(6) a:hover {
 	text-shadow: #ff6a00 0 0 18px;
 }
@@ -403,12 +404,13 @@ header nav ul #cube {
 
 /* Footer */
 footer {
-	position: relative;
+	position: absolute;
 	bottom: 0;
-	background-color: #111;
+	background-color: #161616;
 	width: 100%;
 	height: 29px;
-	padding-top: 11px;
+	padding: 30px 0 60px;
+    font-size: 138%;
 }
 footer div {
 	width: 75%;
@@ -589,7 +591,7 @@ footer .footR {
 	margin-bottom: 5px;
 }
 .playground .uWrap {
-	background: url('../img/playground/Meeting_Room.jpg');	
+	background: url('/img/playground/Meeting_Room.jpg');	
 	width: 1024px;
 	height: 685px;
 }
@@ -601,12 +603,12 @@ footer .footR {
 	list-style-type: none;
 	padding: 0 0 0 2px;
 	margin-left: 0;
-	box-shadow: 4px 3px 18px rgba(0, 0, 0, 0.4);
-	background-color: rgba(19, 19, 19, .3);
+	box-shadow: 4px 3px 18px rgba(0, 0, 0, 0.8);
+	background-color: rgba(19, 19, 19, .7);
 }
 .uWrap .list li {
 	cursor: move;
-	margin: 2px 0;
+	margin: 2px 0 10px;
 	padding: 2px;
 	font-size: 119%;
 	text-shadow: 1px 1px 11px #000, 1px 1px 12px #000;
@@ -782,4 +784,3 @@ footer .footR {
 		margin-right: 0 !important;
 	}
 }
-
