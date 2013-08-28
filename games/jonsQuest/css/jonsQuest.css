@@ -1,6 +1,13 @@
 header {
 	width: 220px;
 }
+.debug {
+	width: 430px; 
+	float: right; 
+	margin-top: 20px;
+	font-family: consolas, 'courier new', monospace;
+	font-size: 1.1em;
+}
 .jonsQuest .main {
 	padding-bottom: 0;
 }
@@ -55,4 +62,18 @@ header {
 }
 .jonsQuest .audioSwitch .on:hover {
 	box-shadow: 0 0 14px #0ff;
+}
+input[readonly] {
+	width: 20px;
+	font-size: 1em;
+	background-color: transparent; 
+	color: #e1e1e1; 
+	text-align: center;
+}
+.keyAction {
+	width: 63px; 
+	display: inline-block;
+}
+.goals {
+	margin-bottom: 20px;
 }

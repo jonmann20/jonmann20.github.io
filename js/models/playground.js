@@ -1,43 +1,5 @@
 ﻿jw.PlaygroundModel = (function ($, undefined) {
 
-    /********** Stars **********/
-    function initStar(w, color) {
-        $("#html5_star").star_bg({
-            window_width: w,
-            window_height: "400",
-            star_color: color,
-            window_background: "",
-            star_count: "1300",
-            star_depth: "330",
-            container: "html5_star"
-        });
-    };
-
-    function stars() {
-        var w = $(".main").width();
-        var color = $("input[type=radio]:checked").val();
-        initStar(w, color);
-
-        $("input[type=color]").change(function () {
-            color = $(this).val();
-
-            $("canvas").remove();
-            $(".canvasWrap").append($("<canvas id=\'html5_star\'>unsupported browser</canvas>"));
-
-            initStar(w, color);
-        });
-
-        $("input[type=radio]").on("click", function () {
-            color = $("input[type=radio]:checked").val();
-
-            $("canvas").remove();
-            $(".canvasWrap").append($("<canvas id=\'html5_star\'>unsupported browser</canvas>"));
-
-            initStar(w, color);
-        });
-    }
-
-
     return {
         render: function (that, page) {
             jw.Utils.resetModel();
@@ -64,7 +26,9 @@
                     jw.main.html(data);
 
                     jw.Utils.require("/js/ballPit.js", function () {
-                        jw.BallPit.init();
+                        console.log("init ballpit");
+
+                            jw.BallPit.init();
                     });
                 });
 
@@ -78,8 +42,11 @@
                 that.load("/playground/stars.html", function (data) {
                     jw.main.html(data);
 
-                    jw.Utils.require("/js/html5_star.js", function () {
-                        stars();    // TODO: move to its own file
+                    // TODO: load these async
+                    jw.Utils.require("/js/plugins/jquery.star_bg.js", function () {
+                        jw.Utils.require("/js/stars.js", function (cached) {
+                            jw.StarryBg.init();
+                        });
                     });
                 });
 

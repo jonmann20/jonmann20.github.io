@@ -7069,4 +7069,4 @@ function init() {
     return newIsolate;
   };
 }
-//@ sourceMappingURL=computergraphics.dart.js.map
+//@ sourceMappingURL=/js/computerGraphics/web/computergraphics.dart.js.map

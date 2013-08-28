@@ -1,117 +1,131 @@
 jw.Routing = (function ($, undefined) {
     var app = $.sammy(function () {
         //----- Home
-        this.get('/', function () {
+        this.route("get",'/', function () {
             jw.HomeModel.render(this);
+            jw.Routing.lastPg = "home";
         });
 
-        this.get("#home", function () {
+        this.route("get", "#home", function () {
             jw.HomeModel.render(this);
+            jw.Routing.lastPg = "home";
         });
 
         //----- About
-        this.get("#about", function () {
+        this.route("get", "#about", function () {
             jw.AboutModel.render(this);
+            jw.Routing.lastPg = "about";
         });
 
         //----- Contact
-        this.get("#contact", function () {
+        this.route("get", "#contact", function () {
             jw.ContactModel.render(this);
+            jw.Routing.lastPg = "contact";
         });
 
         //----- Blog
-        this.get("#blog", function () {
+        this.route("get", "#blog", function () {
             jw.BlogModel.render(this);
+            jw.Routing.lastPg = "blog";
         });
 
         //----- Games
-        this.get("#games", function () {
+        this.route("get", "#games", function () {
             jw.GamesModel.render(this, "index");
+            jw.Routing.lastPg = "games/index";
         });
-
-        //this.get("#games/dungeon", function () {
-        //    jw.GamesModel.render(this, "dungeon");
-        //});
-
-        //this.get("#games/jonsQuest", function () {
-        //    jw.GamesModel.render(this, "jonsQuest");
-        //});
 
         //----- Music
-        this.get("#music", function () {
+        this.route("get", "#music", function () {
             jw.MusicModel.render(this, "index");
+            jw.Routing.lastPg = "music/index";
         });
 
-        this.get("#music/bass", function () {
+        this.route("get", "#music/bass", function () {
             jw.MusicModel.render(this, "bass");
+            jw.Routing.lastPg = "music/bass";
         });
 
-        this.get("#music/chiptunes", function () {
+        this.route("get", "#music/chiptunes", function () {
             jw.MusicModel.render(this, "chiptunes");
+            jw.Routing.lastPg = "music/chiptunes";
         });
 
-        this.get("#music/guitar", function () {
+        this.route("get", "#music/guitar", function () {
             jw.MusicModel.render(this, "guitar");
+            jw.Routing.lastPg = "music/guitar";
         });
 
-        this.get("#music/mandolin", function () {
+        this.route("get", "#music/mandolin", function () {
             jw.MusicModel.render(this, "mandolin");
+            jw.Routing.lastPg = "music/mandolin";
         });
 
-        this.get("#music/piano", function () {
+        this.route("get", "#music/piano", function () {
             jw.MusicModel.render(this, "piano");
+            jw.Routing.lastPg = "music/piano";
         });
 
-        this.get("#music/trumpet", function () {
+        this.route("get", "#music/trumpet", function () {
             jw.MusicModel.render(this, "trumpet");
+            jw.Routing.lastPg = "music/trumpet";
         });
 
-        this.get("#music/rates", function () {
+        this.route("get", "#music/rates", function () {
             jw.MusicModel.render(this, "rates");
+            jw.Routing.lastPg = "music/rates";
         });
 
-        this.get("#music/voice", function () {
+        this.route("get", "#music/voice", function () {
             jw.MusicModel.render(this, "voice");
+            jw.Routing.lastPg = "music/voice";
         });
         
-
         //----- Playground
-        this.get("#playground", function () {
+        this.route("get", "#playground", function () {
             jw.PlaygroundModel.render(this, "index");
+            jw.Routing.lastPg = "playground/index";
         });
 
-        this.get("#playground/ballPit", function () {
+        this.route("get", "#playground/ballPit", function () {
             jw.PlaygroundModel.render(this, "ballPit");
+            jw.Routing.lastPg = "ballPit";
         });
 
-        this.get("#playground/breakdancing-cube", function () {
+        this.route("get", "#playground/breakdancing-cube", function () {
             jw.PlaygroundModel.render(this, "bCube");
+            jw.Routing.lastPg = "bCube";
         });
 
-        this.get("#playground/floating-sun", function () {
+        this.route("get", "#playground/floating-sun", function () {
             jw.PlaygroundModel.render(this, "fSun");
+            jw.Routing.lastPg = "fSun";
         });
 
-        this.get("#playground/bouncing-object", function () {
+        this.route("get", "#playground/bouncing-object", function () {
             jw.PlaygroundModel.render(this, "bObj");
+            jw.Routing.lastPg = "bObj";
         });
 
-        this.get("#playground/starry-background", function () {
+        this.route("get", "#playground/starry-background", function () {
             jw.PlaygroundModel.render(this, "stars");
+            jw.Routing.lastPg = "stars";
         });
 
-        this.get("#playground/USTREAM-demo", function () {
+        this.route("get", "#playground/USTREAM-demo", function () {
             jw.PlaygroundModel.render(this, "ustream");
+            jw.Routing.lastPg = "ustream";
         });
         
-
         //----- Portfolio
-        this.get("#portfolio", function () {
+        this.route("get", "#portfolio", function () {
             jw.PortfolioModel.render(this, "index");
+            jw.Routing.lastPg = "portfolio/index";
         });
     });
 
     return {
+        lastPg: null,
         init: function () {
             app.run();
         }

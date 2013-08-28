@@ -1,27 +1,30 @@
 ﻿jw.Utils = (function ($, undefined) {
 
-    var srcHash = {
+    var jsSrcHash = {
         // src: id
-        "//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js": "scriptJqueryUI",
-        "//platform.twitter.com/widgets.js": "twitter-wjs",
-        "/js/plugins/jquery.cycle.lite.js": "scriptCycleLite",
-        "/js/plugins/jquery.hoverIntent.min.js": "scriptHoverIntent",
-        "/js/plugins/jquery.hoverCarousel.js": "scriptHoverCarousel",
-        "/js/ballPit.js": "scriptBallPit",
-        "/js/html5_star.js": "scriptHtml5Star",
-        "/js/bouncingObj.js": "scriptBObj",
-        "/js/computerGraphics/web/computergraphics.dart.js": "scriptComputerGraphics",
-        "/js/ustream.js": "scriptUstream"
-    }
-
+        "//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js": false,
+        "//platform.twitter.com/widgets.js": false,
+        "/js/plugins/jquery.cycle.lite.js": false,
+        "/js/plugins/jquery.hoverIntent.min.js": false,
+        "/js/plugins/jquery.hoverCarousel.js": false,
+        "/js/plugins/jquery.star_bg.js": false,
+        "/js/stars.js": false,
+        "/js/ballPit.js": false,
+        "/js/bouncingObj.js": false,
+        "/js/computerGraphics/web/computergraphics.dart.js": false,
+        "/js/ustream.js": false
+    };
 
     return {
-        require: function (src, callback) { // callback(alreadyCreated)
-            var id = srcHash[src];
-
-            if (!$('#' + id).length) {
-                $.getScript(src, function (data) {
-                    callback(false);
+        require: function (src, callback) { // callback(cached)
+            if (!jsSrcHash[src]) {
+                $.ajax({
+                    url: src,
+                    dataType: "script",
+                    success: function (data) {
+                        jsSrcHash[src] = true;
+                        callback(false);
+                    }
                 });
             }
             else {
@@ -32,13 +35,20 @@
             return new Date().getFullYear();
         },
         resetModel: function () {
-            jw.main.html("");
+            if (jw.Routing.lastPg === "ballPit") {
+                jw.BallPit.deInit();
+            }
+            else if (jw.Routing.lastPg === "stars") {
+                jw.StarryBg.deInit();
+            }
+
+            jw.main.empty();
             jw.body.removeClass();
             document.title = "";
-            $("meta[name=description]").remove();
-            $("meta[name=keywords]").remove();
+            $("meta[name=description], meta[name=keywords]").remove();
             $("meta[name=robots]").remove();
 
+            // if page not playground inner
             $(".dPlaygroundNav").hide();
         }
     };

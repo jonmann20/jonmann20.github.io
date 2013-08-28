@@ -1,86 +1,62 @@
 jw.BallPit = (function ($, undefined) {
 
-    var canvas = $('canvas')[0],
-        ctx = canvas.getContext('2d'),
-        radius = 3.5,
-        ballArr = []
+    var canvas,
+        ctx,
+        radius,
+        ballArr,
+        animLoop
     ;
 
-    function ballPitMain() {
-        // initialize the array of balls
-        for (var i = 0; i < 20; i++) {
-            var ball = {
-                x: Math.floor(Math.random() * (canvas.width + 1)),
-                y: Math.floor(Math.random() * (canvas.height + 1)),
-                velocity: {
-                    x: Math.floor(Math.random() * (-3)),  // [-2, 2]
-                    y: Math.floor(Math.random() * 7) - 3  // [-3, 3]
-                }
-            };
-            ballArr.push(ball);
+    function update() {
+        // update position
+        for (var i in ballArr) {
+            ballArr[i].x += ballArr[i].velocity.x;
+            ballArr[i].y += ballArr[i].velocity.y;
         }
 
-        runSim();
-    };
+        // detect collisions
+        var b;
 
+        for (var i = 0; i < ballArr.length; i++) {
+            b = ballArr[i];
 
-    var update = {
-        init: function () {
+            if (b.x < 0 && b.velocity.x < 0)
+                b.velocity.x = -b.velocity.x;
 
-            // update position
-            for (var i in ballArr) {
-                ballArr[i].x += ballArr[i].velocity.x;
-                ballArr[i].y += ballArr[i].velocity.y;
-            }
+            if (b.y >= canvas.height && b.velocity.y > 0)
+                b.velocity.y = -b.velocity.y;
 
-            // detect collisions
-            var b;
+            if (b.x >= canvas.width && b.velocity.x > 0)
+                b.velocity.x = -b.velocity.x;
 
-            for (var i = 0; i < ballArr.length; i++) {
-                b = ballArr[i];
-
-                if (b.x < 0 && b.velocity.x < 0)
-                    b.velocity.x = -b.velocity.x;
-
-                if (b.y >= canvas.height && b.velocity.y > 0)
-                    b.velocity.y = -b.velocity.y;
-
-                if (b.x >= canvas.width && b.velocity.x > 0)
-                    b.velocity.x = -b.velocity.x;
-
-                if (b.y < 0 && b.velocity.y < 0)
-                    b.velocity.y = -b.velocity.y;
-            }
+            if (b.y < 0 && b.velocity.y < 0)
+                b.velocity.y = -b.velocity.y;
         }
-    };
+    }
 
-    var render = {
-        init: function () {
-            // draw background
-            ctx.fillStyle = "#0098ff";
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
+    function render() {
+        // draw background
+        ctx.fillStyle = "#0098ff";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-            // draw balls 
-            ctx.fillStyle = "#e1e1e1";
-            for (var i in ballArr) {
-                ctx.beginPath();
-                ctx.arc(ballArr[i].x, ballArr[i].y, radius, 0, 2 * Math.PI, false);
-                ctx.fill();
-                ctx.lineWidth = radius / 15;
-                ctx.strokeStyle = '#19a2ff';
-                ctx.stroke();
-                ctx.closePath();
-            }
+        // draw balls 
+        ctx.fillStyle = "#e1e1e1";
+        for (var i in ballArr) {
+            ctx.beginPath();
+            ctx.arc(ballArr[i].x, ballArr[i].y, radius, 0, 2 * Math.PI, false);
+            ctx.fill();
+            ctx.lineWidth = radius / 15;
+            ctx.strokeStyle = '#19a2ff';
+            ctx.stroke();
+            ctx.closePath();
         }
-    };
-
+    }
+    
     function runSim() {
-        setTimeout(function () {
-            requestAnimFrame(runSim);
-
-            update.init();
-            render.init();
-        }, 1000 / 60);
+        update();
+        render();
+        
+        animLoop = requestAnimFrame(runSim);
     }
 
     function fixArr(num) {
@@ -104,7 +80,7 @@ jw.BallPit = (function ($, undefined) {
                     }
                 };
 
-                if (ball.velocity.x == 0)
+                if (ball.velocity.x === 0)
                     ball.velocity.x = 1;
                 if (ball.velocity.y === 0)
                     ball.velocity.y = 1;
@@ -131,32 +107,53 @@ jw.BallPit = (function ($, undefined) {
 
     return {
         init: function () {
-            canvas.width = $('.main').width() / 1.5;
+            canvas = $("canvas")[0];
+            ctx = canvas.getContext("2d");
+            radius = 3.5;
+            ballArr = [];
+
+            canvas.width = $(".main").width() / 1.5;
             canvas.height = canvas.width / 2;
 
-            // run default simulation
-            ballPitMain();
-
             // set up modifications 
-            $('.numBalls').change(function () {
+            $(".numBalls").on("change", function () {
                 var num = $(this).val();
-                $('.litNumBalls').html(num);
+                $(".litNumBalls").text(num);
                 fixArr(num);
             });
 
-            $('.sizeBalls').change(function () {
+            $(".sizeBalls").on("change", function () {
                 var num = $(this).val();
-                $('.litSizeBalls').html(num);
+                $(".litSizeBalls").text(num);
                 radius = num;
             });
 
-            $('.speedBalls').change(function () {
+            $(".speedBalls").on("change", function () {
                 var num = $(this).val();
-
-                updateUserSpeed($('.litSpeedBalls').html(), num);
-
-                $('.litSpeedBalls').html(num);
+                updateUserSpeed($(".litSpeedBalls").text(), num);
+                $(".litSpeedBalls").text(num);
             });
+
+
+            // initialize the array of balls
+            for (var i = 0; i < 20; i++) {
+                var ball = {
+                    x: Math.floor(Math.random() * (canvas.width + 1)),
+                    y: Math.floor(Math.random() * (canvas.height + 1)),
+                    velocity: {
+                        x: Math.floor(Math.random() * (-3)),  // [-2, 2]
+                        y: Math.floor(Math.random() * 7) - 3  // [-3, 3]
+                    }
+                };
+                ballArr.push(ball);
+            }
+
+            // run default simulation
+            runSim();
+        },
+        deInit: function () {
+            window.cancelAnimationFrame(animLoop);
+            $(".numBalls, .sizeBalls, .speedBalls").off();
         }
     };
 })(jQuery);

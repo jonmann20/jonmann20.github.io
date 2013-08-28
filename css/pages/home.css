@@ -1,0 +1,22 @@
+﻿.home .colR {
+    min-width: 400px;
+}
+.home .colR iframe {
+    margin-top: 15px;
+    width: 390px;
+}
+.home .twitter-timeline {
+    margin-top: 15px;
+}
+
+/* Slideshow */
+#slideshow {
+    height: 34em;
+}
+#slideshow img {
+	display: none;
+	max-height: 460px;
+}
+#slideshow img:first-child {
+    display: block;
+}
