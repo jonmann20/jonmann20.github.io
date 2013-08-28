@@ -41,6 +41,9 @@
             else if (jw.Routing.lastPg === "stars") {
                 jw.StarryBg.deInit();
             }
+            else if (jw.Routing.lastPg === "bObj") {
+                jw.Bounce.deInit();
+            }
 
             jw.main.empty();
             jw.body.removeClass();

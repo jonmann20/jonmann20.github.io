@@ -26,9 +26,7 @@
                     jw.main.html(data);
 
                     jw.Utils.require("/js/ballPit.js", function () {
-                        console.log("init ballpit");
-
-                            jw.BallPit.init();
+                        jw.BallPit.init();
                     });
                 });
 
@@ -105,7 +103,9 @@
                 that.load("/playground/floating-sun.html", function (data) {
                     jw.main.html(data);
 
-                    jw.Utils.require("/js/computerGraphics/web/computergraphics.dart.js", function () { });
+                    // TODO: update dart code with callback to init/deInit from JS
+                    //jw.Utils.require("/js/computerGraphics/web/computergraphics.dart.js", function () { });
+                    $.getScript("/js/computerGraphics/web/computergraphics.dart.js");
                 });
 
                 document.title = "Floating Sun | Playground";

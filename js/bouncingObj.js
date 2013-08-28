@@ -1,22 +1,12 @@
 jw.Bounce = (function ($, undefined) {
     var canvas,
 		ctx,
-		obj = {
-		    color: '#FBCF32',
-		    w: 40,
-		    h: 40,
-		    r: 20,
-		    x: 0,
-		    y: 0,
-		    vX: 0,
-		    vY: 0,
-		    aX: 0,
-		    aY: 0
-		},
-		gravity = 1.2,
-		friction = 0.015,
+		obj,
+		gravity,
+		friction,
 		_time,
-		dt
+		dt,
+        animLoop
     ;
 
 
@@ -66,8 +56,6 @@ jw.Bounce = (function ($, undefined) {
 
         if (Math.abs(obj.vY) < 1)
             obj.vY = 0;
-
-        //console.log(obj.vX)
     }
 
     function doPosition() {
@@ -86,10 +74,6 @@ jw.Bounce = (function ($, undefined) {
             else {
                 obj.vY = obj.aY = 0;
             }
-
-
-            //obj.vX *= 2.4
-
         }
 
     }
@@ -135,8 +119,8 @@ jw.Bounce = (function ($, undefined) {
 
         update();
         render();
-
-        requestAnimFrame(loop);
+        
+        animLoop = requestAnimFrame(loop);
     }
 
 
@@ -150,7 +134,7 @@ jw.Bounce = (function ($, undefined) {
     }
 
     function clickEvents() {
-        $('.bigBtn').on('click', function (e) {
+        $(".bigBtn").on("click", function (e) {
             e.preventDefault();
 
             setup();
@@ -159,16 +143,35 @@ jw.Bounce = (function ($, undefined) {
 
     return {
         init: function () {
-            canvas = $('canvas')[0];
-            ctx = canvas.getContext('2d');
-            canvas.width = $('.main').width() / 1.5;
+            obj = {
+                color: '#FBCF32',
+                w: 40,
+                h: 40,
+                r: 20,
+                x: 0,
+                y: 0,
+                vX: 0,
+                vY: 0,
+                aX: 0,
+                aY: 0
+            };
+            gravity = 1.2;
+            friction = 0.015;
+
+            canvas = $("canvas")[0];
+            ctx = canvas.getContext("2d");
+            canvas.width = $(".main").width() / 1.5;
             canvas.height = canvas.width / 2;
 
             clickEvents();
 
             setup();
 
-            requestAnimFrame(loop);
+            animLoop = requestAnimFrame(loop);
+        },
+        deInit: function () {
+            window.cancelAnimationFrame(animLoop);
+            $(".bigBtn").off();
         }
     };
 
