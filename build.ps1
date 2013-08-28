@@ -103,11 +103,13 @@ $yuiJar = "${path}bin\yuicompressor-2.4.8.jar"
     # echo ""
 # }
 
+
+# combines /index.html css includes
 function compressCSS() {
 	echo "----- Compressing CSS -----";
 	$absCssFiles = @();  #empty array
 	
-    $cssFiles = "normalize.css","the.css";
+    $cssFiles = "normalize.css", "overrideUtils.css", "layout.css";
     
     foreach($f in $cssFiles){
 		Write-Host "`t combining $f";
@@ -123,6 +125,7 @@ function compressCSS() {
 	rm "${path}css/combined.css";
 }
 
+# combines /index.html js includes + google analytics
 function compressJS() {
 	echo "----- Compressing JS -----";
 	$absJsFiles = @();  # empty array

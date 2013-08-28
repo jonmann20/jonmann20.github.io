@@ -12,8 +12,8 @@ yuiJar="/usr/share/yui-compressor/yui-compressor.jar"
 
 path="/home/jon/git/jonmann20.github.com/"
 
-htmlFiles=$(find ${path} -name '*.html')
-phpFiles=$(find ${path} -name '*.php')
+#htmlFiles=$(find ${path} -name '*.html')
+#phpFiles=$(find ${path} -name '*.php')
 cssFiles="normalize.css the.css" 
 
 
