@@ -1,37 +1,31 @@
 header {
 	width: 220px;
 }
-.debug {
-	width: 430px; 
-	float: right; 
-	margin-top: 20px;
-	font-family: consolas, 'courier new', monospace;
-	font-size: 1.1em;
+header nav a {
+    -webkit-text-stroke: 0 !important;
+    text-stroke: 0 !important;
 }
-.jonsQuest .main {
-	padding-bottom: 0;
-}
-.jonsQuest .canvasWrap {
+.canvasWrap {
 	min-width: 720px;
-	width: 720px;   /*81%;*/
 	max-widtH: 1275px;
-	margin: 0 auto;
 	padding-top: 3%;
+    margin: 0 auto;
 }
-.jonsQuest .canvasWrap canvas {
+.canvasWrap canvas {
 	width: 100%;
+    margin: 0 auto;
 }
-.jonsQuest .gameInstructions h1 {
+.gameInstructions h1 {
 	margin: 45px 0;
 	font-size: 1.7em;
 }
-.jonsQuest .gameInstructions h2 {
+.gameInstructions h2 {
 	font-size: 1.32em;
 }
-.jonsQuest .goals {
+.goals {
 	width: 147px;
 }
-.jonsQuest .audioSwitch button {
+.audioSwitch button {
 	padding: 4px 3px 4px 6px;
 	border: 1px inset;
 	border-radius: 2px;]
@@ -39,28 +33,28 @@ header {
 	height: 25px;
 	background-color: #ddd;
 }
-.jonsQuest .audioSwitch button:hover {
+.audioSwitch button:hover {
 	background-color: #eee;
 }
-.jonsQuest .audioSwitch button:active {
+.audioSwitch button:active {
 	border: 1px outset;
 }
-.jonsQuest .audioSwitch button span {
+.audioSwitch button span {
 	font-size: 1.2em;
 	margin-top: -1px;
 }
-.jonsQuest .audioSwitch .off {
+.audioSwitch .off {
 	border-color: red;
 	box-shadow: 0 0 8px red;
 }
-.jonsQuest .audioSwitch .off:hover {
+.off:hover {
 	box-shadow: 0 0 17px red;
 }
-.jonsQuest .audioSwitch .on {
+.audioSwitch .on {
 	border-color: #0ff;
 	box-shadow: 0 0 8px #0ff;
 }
-.jonsQuest .audioSwitch .on:hover {
+.audioSwitch .on:hover {
 	box-shadow: 0 0 14px #0ff;
 }
 input[readonly] {

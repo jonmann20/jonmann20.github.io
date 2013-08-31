@@ -22,5 +22,5 @@ $(function () {
             jw.Main.init();
             clearInterval(waitForScripts);
         }
-    }, 10)
+    }, 10);
 });

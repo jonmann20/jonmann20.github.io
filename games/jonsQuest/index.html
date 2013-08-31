@@ -9,10 +9,33 @@
 
     <link href="http://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
 
-    <link rel="stylesheet" href="/css/normalize.css" />
-    <link rel="stylesheet" href="/css/overrideUtils.css" />
-    <link rel="stylesheet" href="/css/layout.css" />
-    <link rel="stylesheet" href="css/jonsQuest.css" />
+
+    <script>
+        // setup namespace
+        var jq = {
+            debug: (location.hostname === "localhost")
+        };
+
+        (function () {
+            function addCSS(src) {
+                var cssLink = document.createElement("link");
+                cssLink.setAttribute("rel", "stylesheet");
+                cssLink.setAttribute("href", src);
+                document.getElementsByTagName("head")[0].appendChild(cssLink);
+            }
+
+            if (jq.debug) {
+                addCSS("/css/normalize.css");
+                addCSS("/css/overrideUtils.css");
+                addCSS("/css/layout.css");
+                addCSS("/games/jonsQuest/css/jonsQuest.css")
+            }
+            else {
+                addCSS("/css/min/pageJonsQuest.css");
+            }
+        })();
+    </script>
+
 </head>
 <body class="pageFullW jonsQuest">
     <div class="page">
@@ -20,7 +43,7 @@
             <header>
                 <nav class="backNav">
                     <a href="/#games">
-                        <span aria-hidden="true" class="icon-arrow-left"></span> Back
+                        <span class="icon-arrow-left"></span> Back
                     </a>
                 </nav>
 
@@ -49,27 +72,44 @@
                 </div>
             </header>
 
-            <div class="canvasWrap clr">
-                <canvas>
-                    unsupported browser
-                </canvas>
-            </div>
-            <div class="debug"></div>
+            <section class="main">
+                <div class="canvasWrap clr">
+                    <canvas>
+                        unsupported browser
+                    </canvas>
+                </div>
+            </section>
         </div>
     </div>
 
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-    <script src="js/utils.js"></script>
-    <script src="js/gameObject.js"></script>
-    <script src="js/gameItem.js"></script>
-    <script src="js/enemy/enemy.js"></script>
-    <script src="js/startScreen.js"></script>
-    <script src="js/input.js"></script>
-    <script src="js/level/level.js"></script>
-    <script src="js/level/level0.js"></script>
-    <script src="js/game.js"></script>
-    <script src="js/hero.js"></script>
-    <script src="js/main.js"></script>
 
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script>
+        $(function () {
+            jq.numScripts = 11;
+            jq.scriptsLoaded = 0;
+
+            if (jq.debug) {
+                $.getScript("js/utils.js", ++jq.scriptsLoaded);
+                $.getScript("js/gameObject.js", ++jq.scriptsLoaded);
+                $.getScript("js/gameItem.js", ++jq.scriptsLoaded);
+                $.getScript("js/enemy/enemy.js", ++jq.scriptsLoaded);
+                $.getScript("js/startScreen.js", ++jq.scriptsLoaded);
+                $.getScript("js/input.js", ++jq.scriptsLoaded);
+                $.getScript("js/level/level.js", ++jq.scriptsLoaded);
+                $.getScript("js/level/level0.js", ++jq.scriptsLoaded);
+                $.getScript("js/game.js", ++jq.scriptsLoaded);
+                $.getScript("js/hero.js", ++jq.scriptsLoaded);
+                $.getScript("js/main.js", ++jq.scriptsLoaded);
+            }
+            else {
+                jq.numScripts = 1;
+                jq.scriptsLoaded = 0;
+
+                $.getScript("/js/min/pageJonsQuest.js", ++jq.scriptsLoaded);
+            }
+        });
+
+    </script>
 </body>
 </html>

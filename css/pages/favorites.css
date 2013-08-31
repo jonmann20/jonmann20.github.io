@@ -6,12 +6,13 @@
     background: rgba(0,0,0,0.3);
     padding: 16px 5px;
     width: 56%;
-    float: left;
+    float: right;
+    margin-bottom: 15px;
     border-radius: 6px;
 }
 .main section:nth-child(odd) {
     width: 39%;
-    margin-right: 23px;
+    float: left;
 }
 ol {
     list-style-type: none;
