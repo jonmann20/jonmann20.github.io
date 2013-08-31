@@ -36,7 +36,7 @@ function compressJS() {
 	echo "----- Compressing JS -----";
 	$absJsFiles = @();  # empty array
 	
-    $jsFiles = "analytics.js", "/plugins/sammy.js","utils.js", "/models/home.js", "/models/about.js", "/models/contact.js", "/models/blog.js", "/models/games.js", "/models/music.js", "/models/playground.js", "/models/portfolio.js", "routing.js", "main.js";
+    $jsFiles = "analytics.js", "/plugins/sammy.js","utils.js", "/models/home.js", "/models/about.js", "/models/contact.js", "/models/favorites.js", "/models/blog.js", "/models/games.js", "/models/music.js", "/models/playground.js", "/models/portfolio.js", "routing.js", "main.js";
     
     foreach($f in $jsFiles){
 		Write-Host "`t combining $f" -foregroundcolor "cyan";
