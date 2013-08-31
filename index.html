@@ -43,6 +43,7 @@
 	            </nav>
 	            <nav class="hdrNav2">
 
+<<<<<<< HEAD
             		<a href="#blog">
             			<span class="icon-folder-open"></span> Blog
         			</a>
@@ -54,12 +55,32 @@
             		</a>
 	            	<a href="#playground">
 	            		<span class="icon-beaker"></span> Playground
+=======
+            		<!--<a href="#blog">
+            			<span class="icon-folder-open"></span> Blog
+        			</a>-->
+                    <a href="#favorites">
+                        Favorites <span class="icon-folder-open"></span>
+                    </a>
+	            	<a href="#games">
+	            		Games <span class="icon-controllernes"></span>
+            		</a>
+	            	<a href="#music">
+	            		Music <span class="icon-music"></span>
+            		</a>
+	            	<a href="#playground">
+	            		Playground <span class="icon-beaker"></span>
+>>>>>>> dev
             		</a>
 
                     <div class="dPlaygroundNav"></div>
 
 	            	<a href="#portfolio">
+<<<<<<< HEAD
 	            		<span class="icon-briefcase"></span> Portfolio
+=======
+	            		Portfolio <span class="icon-briefcase"></span>
+>>>>>>> dev
             		</a>
 
 	            </nav>
@@ -106,6 +127,12 @@
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
     <script>
         $(function () {
+<<<<<<< HEAD
+=======
+            jw.numScripts = 13;
+            jw.scriptsLoaded = 0;
+
+>>>>>>> dev
             if (jw.debug) {
                 jw.numScripts = 12;
                 jw.scriptsLoaded = 0;
@@ -115,6 +142,7 @@
                 $.getScript("/js/models/home.js", ++jw.scriptsLoaded);
                 $.getScript("/js/models/about.js", ++jw.scriptsLoaded);
                 $.getScript("/js/models/contact.js", ++jw.scriptsLoaded);
+                $.getScript("/js/models/favorites.js", ++jw.scriptsLoaded);
                 $.getScript("/js/models/blog.js", ++jw.scriptsLoaded);
                 $.getScript("/js/models/games.js", ++jw.scriptsLoaded);
                 $.getScript("/js/models/music.js", ++jw.scriptsLoaded);

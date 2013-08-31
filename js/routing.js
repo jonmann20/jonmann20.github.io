@@ -23,6 +23,12 @@ jw.Routing = (function ($, undefined) {
             jw.Routing.lastPg = "contact";
         });
 
+        //----- Favorites
+        this.route("get", "#favorites", function () {
+            jw.FavoritesModel.render(this);
+            jw.Routing.lastPg = "favorites";
+        });
+
         //----- Blog
         this.route("get", "#blog", function () {
             jw.BlogModel.render(this);
