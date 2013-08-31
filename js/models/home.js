@@ -8,9 +8,10 @@
                 jw.main.html(data);
 
                 jw.Utils.require("//platform.twitter.com/widgets.js", function (alreadyCreated) {
-                    if(!alreadyCreated){
+                    console.log(alreadyCreated)
+                    //if(!alreadyCreated){
                         twttr.widgets.load();
-                    }
+                    //}
                 });
 
                 jw.Utils.require("/js/plugins/jquery.cycle.lite.js", function (alreadyCreated) {
