@@ -6,6 +6,8 @@
         jw.main = $(".main");
     }
 
+
+
     return {
         init: function () {
             declareGlobals();

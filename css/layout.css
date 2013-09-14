@@ -13,7 +13,7 @@ body {
 .page {
 	position: relative;
 	max-width: 1520px; 
-	min-height: 93%;
+	min-height: 93.6%;
 	margin: 0 auto -40px;
 }
 .inner {
@@ -39,7 +39,7 @@ header nav {
 	background: rgba(57, 57, 57, .88);
 	margin-top: 26px;
 	padding: 10px;
-	min-width: 160px;
+	min-width: 165px;
 	border-radius: 0 45px;
 	box-shadow: 0 0 2px 4px rgba(57, 57, 57, 0.88);
 }
@@ -69,13 +69,11 @@ header nav a span {
 	padding-top: 10px;
 }
 header nav a:hover span,
-.home header nav:first-child span,
-/*.blog header .hdrNav2 a:nth-child(1) span,*/
-.favs header .hdrNav2 a:nth-child(1) span,
-.games header .hdrNav2 a:nth-child(2) span,
-.music header .hdrNav2 a:nth-child(3) span,
-.playground header .hdrNav2 a:nth-child(4) span,
-.portfolio header .hdrNav2 a:nth-child(5) span {
+.home .icon-home,
+.games .icon-controllernes,
+.music .icon-music,
+.playground .icon-beaker,
+.portfolio .icon-briefcase {
 	color: hsla(0, 70%, 56%, 1) !important;
 	text-shadow: 0 3px 3px #000;
 }
@@ -181,14 +179,13 @@ header nav ul #cube {
 footer {
 	position: relative;
 	bottom: 0;
-	background-color: #161616;
 	width: 100%;
 	height: 29px;
 	padding: 30px 0 45px;
     font-size: 138%;
 }
 footer div {
-	width: 75%;
+	width: 70%;
 	margin: 0 auto;
 }
 footer a {
@@ -200,7 +197,7 @@ footer .footL {
 	float: left;
 }
 footer .footL a {
-	margin: 0 0.4em;
+	margin: 0 0.3em;
 }
 footer .name {
 	display: inline-block;
@@ -272,11 +269,11 @@ footer .footR {
 /*#endregion*/
 
 /*#region ************ Responsive ************/
-@media screen and (max-width: 1265px) {
-	.inner {width: 96%;}
-}
 @media screen and (max-width: 1325px) {
 	.home .colR {width: 56%;}
+}
+@media screen and (max-width: 1265px) {
+	.inner {width: 96%;}
 }
 @media screen and (max-width: 1182px) {
   	.colL {
@@ -300,9 +297,41 @@ footer .footR {
   		margin-bottom: 15px;
   	}
 }
-@media screen and (max-width: 720px) {
-	footer .imgLinks {
+@media screen and (max-width: 1008px) {
+    footer div {
+        width: 96%;
+    }
+    footer .imgLinks {
 		margin: 0 !important;
+	}
+}
+@media screen and (max-width: 650px) {
+    footer {
+		height: 200px;
+        margin-bottom: 15px;
+	}
+    footer a {
+		display: block;
+		margin-bottom: 10px !important;
+	}
+	footer .footL {
+		float: none;
+		width: 140px;
+		margin: 0 auto;
+		display: block;
+        padding-bottom: 30px;
+	}
+    footer .footL a:not(.imgLinks) {
+        text-align: center;
+    }
+	footer .footR {
+		display: none;
+	}
+	footer .name {
+		text-indent: 3px;
+	}
+	footer .footContact {
+		margin-right: 0 !important;
 	}
 }
 @media screen and (max-width: 610px) {
@@ -369,28 +398,7 @@ footer .footR {
 	.bigBtn {
 		margin: 30px auto 0;
 	}
-	footer {
-		height: 200px;
-	}
-	footer .footL {
-		float: none;
-		width: 120px;
-		margin: 0 auto;
-		display: block;
-	}
-	footer .footR {
-		display: none;
-	}
-	footer a {
-		display: block;
-		margin-bottom: 10px !important;
-	}
-	footer .name {
-		text-indent: 3px;
-	}
-	footer .footContact {
-		margin-right: 0 !important;
-	}
+
 }
 /*#endregion*/
 

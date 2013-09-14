@@ -169,8 +169,8 @@ br.clr {
 	font-weight: bold;
 	font-size: 1.2em;
 	color: #eaeaea !important;
-	background: hsla(0, 0%, 42%, 0.64);
-	box-shadow: 0 5px 0 hsla(0, 0%, 29%, 0.64);
+	background: rgba(107, 107, 107, 0.64);
+	box-shadow: 0 3px 0 rgba(54, 54, 54, 0.94);
 	opacity: 1;
 }
 .bigBtn span {
@@ -179,8 +179,8 @@ br.clr {
 }
 .bigBtn:hover,
 .bigBtn:focus {
-	background: hsl(25, 100%, 40%);
-	box-shadow: 0 5px 0 hsl(25, 100%, 20%);
+	background: rgb(204, 85, 0);
+	box-shadow: 0 3px 0 rgb(102, 43, 0);
 }
 .bigBtn:active {
 	box-shadow: none;
