@@ -118,6 +118,15 @@ a:active {
 .icon-folder-open:before {
 	content: "\e00f";
 }
+.icon-soundcloud:before {
+	content: "\e009";
+}
+.icon-user:before {
+	content: "\e010";
+}
+.icon-phone:before {
+	content: "\e011";
+}
 /*#endregion*/
 
 /*#region ************ Utilities *************/
