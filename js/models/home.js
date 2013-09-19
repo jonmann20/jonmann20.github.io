@@ -8,7 +8,6 @@
                 jw.main.html(data);
 
                 jw.Utils.require("//platform.twitter.com/widgets.js", function (alreadyCreated) {
-                    console.log(alreadyCreated)
                     //if(!alreadyCreated){
                         twttr.widgets.load();
                     //}

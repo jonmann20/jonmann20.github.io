@@ -43,7 +43,7 @@ var lvl0 = (function () {
 
             // sack
             if (!sack.collected) {
-                if (utils.isCollision(hero, sack, 0)) {
+                if (Physics.isCollision(hero, sack, 0)) {
                     sack.collected = true;
 
                     hero.ammo += sack.val;
@@ -53,14 +53,14 @@ var lvl0 = (function () {
             // hidden cash
             if (!hiddenCash.visible) {
                 for (var i = 0; i < hero.bulletArr.length; ++i) {
-                    if (utils.isCollision(hero.bulletArr[i], hiddenCash, -17)) {
+                    if (Physics.isCollision(hero.bulletArr[i], hiddenCash, -17)) {
                         hiddenCash.visible = true;
                         hiddenCash.vY = 4;
                     }
                 }
             }
             else if (!hiddenCash.collected) {
-                if (utils.isCollision(hero, hiddenCash, 0)) {
+                if (Physics.isCollision(hero, hiddenCash, 0)) {
                     hiddenCash.collected = true;
                     hero.cash += hiddenCash.val;
                 }
@@ -68,7 +68,7 @@ var lvl0 = (function () {
 
             // crate
             if (!lvl0.crate.holding) {
-                if (utils.isCollision(hero, lvl0.crate, 12)) {
+                if (Physics.isCollision(hero, lvl0.crate, 12)) {
                     hero.isCarrying = true;
                     lvl0.crate.holding = true;
                     lvl0.crate.vY = 6.5;
@@ -88,11 +88,11 @@ var lvl0 = (function () {
 
             if (cyborg.health > 0) {
                 // hero and cyborg
-                if (utils.isCollision(hero, cyborg, 0)) {
+                if (Physics.isCollision(hero, cyborg, 0)) {
                     cyborg.active = true;
 
                     if (!hero.invincible) {
-                        utils.playSound(game.sound.thud, true);
+                        audio.play(audio.thud, true);
 
                         hero.invincible = true;
                         --hero.health;
@@ -104,9 +104,9 @@ var lvl0 = (function () {
 
                     var wasCollision = false;
 
-                    if (utils.isCollision(hero.bulletArr[i], cyborg, 0)) {
+                    if (Physics.isCollision(hero.bulletArr[i], cyborg, 0)) {
                         wasCollision = true;
-                        utils.playSound(game.sound.thud, true);
+                        audio.play(audio.thud, true);
                     }
 
                     if (wasCollision) {

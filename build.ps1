@@ -76,15 +76,20 @@ function compressJS() {
 		
 		$jqJsFiles = "js/analytics.js", 
 					 "${pth}utils.js",
-					 "${pth}gameObject.js",
-					 "${pth}gameItem.js",
+					 "${pth}audio/audio.js",
+					 "${pth}graphics/graphics.js",
+					 "${pth}physics/physics.js",
+					 "${pth}engine/gameObject.js",
+					 "${pth}engine/gameItem.js",
 					 "${pth}enemy/enemy.js",
-					 "${pth}startScreen.js",
-					 "${pth}input.js",
+					 "${pth}level/startScreen.js",
 					 "${pth}level/level.js",
 					 "${pth}level/level0.js",
-					 "${pth}game.js",
-					 "${pth}hero.js",
+					 "${pth}engine/game.js",
+					 "${pth}hero/hero.js",
+					 "${pth}hero/heroGraphics.js",
+					 "${pth}hero/heroPhysics.js",
+					 "${pth}hero/heroInput.js",
 					 "${pth}main.js"
 		 ;
 		

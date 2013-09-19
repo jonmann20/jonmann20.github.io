@@ -67,7 +67,7 @@ var Enemy = function () {
         death: function () {
             clearDir = hero.dirR;
 
-            utils.playSound(game.sound.death, false);
+            audio.play(audio.death, false);
             hero.xp += 2;
             alive = false;
             deadOnScreen = true;

@@ -86,20 +86,25 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
     <script>
         $(function () {
-            jq.numScripts = 11;
+            jq.numScripts = 16;
             jq.scriptsLoaded = 0;
 
             if (jq.debug) {
                 $.getScript("js/utils.js", ++jq.scriptsLoaded);
-                $.getScript("js/gameObject.js", ++jq.scriptsLoaded);
-                $.getScript("js/gameItem.js", ++jq.scriptsLoaded);
+                $.getScript("js/audio/audio.js", ++jq.scriptsLoaded);
+                $.getScript("js/graphics/graphics.js", ++jq.scriptsLoaded);
+                $.getScript("js/physics/physics.js", ++jq.scriptsLoaded);
+                $.getScript("js/engine/gameObject.js", ++jq.scriptsLoaded);
+                $.getScript("js/engine/gameItem.js", ++jq.scriptsLoaded);
                 $.getScript("js/enemy/enemy.js", ++jq.scriptsLoaded);
-                $.getScript("js/startScreen.js", ++jq.scriptsLoaded);
-                $.getScript("js/input.js", ++jq.scriptsLoaded);
+                $.getScript("js/level/startScreen.js", ++jq.scriptsLoaded);
                 $.getScript("js/level/level.js", ++jq.scriptsLoaded);
                 $.getScript("js/level/level0.js", ++jq.scriptsLoaded);
-                $.getScript("js/game.js", ++jq.scriptsLoaded);
-                $.getScript("js/hero.js", ++jq.scriptsLoaded);
+                $.getScript("js/engine/game.js", ++jq.scriptsLoaded);
+                $.getScript("js/hero/heroGraphics.js", ++jq.scriptsLoaded);
+                $.getScript("js/hero/heroPhysics.js", ++jq.scriptsLoaded);
+                $.getScript("js/hero/heroInput.js", ++jq.scriptsLoaded);
+                $.getScript("js/hero/hero.js", ++jq.scriptsLoaded);
                 $.getScript("js/main.js", ++jq.scriptsLoaded);
             }
             else {
