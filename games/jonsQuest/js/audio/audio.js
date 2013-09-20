@@ -2,11 +2,17 @@
 
     return {
         bgMusic: new Audio("audio/firstChiptune/firstChiptune.mp3"),
-        gun: new Audio("audio/raygun.mp3"),
+        enterSound: new Audio("audio/synthetic_explosion_1.mp3"),
+        itemPickedUp: new Audio("audio/life_pickup.mp3"),
+        heartbeat: new Audio("audio/heartbeat.mp3"),
+        jump: new Audio("audio/jump.mp3"),
         thud: new Audio("audio/thud.mp3"),
         step: new Audio("audio/step.mp3"),
-        jump: new Audio("audio/jump.mp3"),
-        death: new Audio("audio/DiscsOfTron_Cascade.mp3"),
+        effort: new Audio("audio/woosh.mp3"),
+        discovery: new Audio("audio/spell3.mp3"),
+        enemyDeath: new Audio("audio/death.mp3"),
+        heroDeath: new Audio("audio/DiscsOfTron_Cascade.mp3"),
+        enchant: new Audio("audio/enchant.mp3"),
         isOn: false,
 
 
@@ -42,12 +48,19 @@
         },
 
         mute: function (onOrOff) {
-            audio.bgMusic.muted = 
-            audio.gun.muted = 
+            audio.discovery.muted =
+            audio.enterSound.muted =
+            audio.bgMusic.muted =
+            audio.itemPickedUp.muted =
+            audio.heartbeat.muted =
+            audio.effort.muted = 
             audio.thud.muted = 
             audio.jump.muted = 
             audio.step.muted = 
-            audio.death.muted = onOrOff;
+            audio.enemyDeath.muted =
+            audio.heroDeath.muted =
+            audio.enchant.muted =
+                onOrOff;
 
             onOrOff ?
                 audio.bgMusic.pause() :

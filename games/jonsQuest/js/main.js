@@ -13,13 +13,19 @@ jq.Main = (function () {
 
     function setAudio() {
         audio.bgMusic.loop = true;
+        audio.bgMusic.volume = 0.7;
         audio.bgMusic.pause();
+
+        audio.enemyDeath.volume = 0.6;
+        audio.jump.volume = 0.4;
+        audio.thud.volume = 0.78;
+        audio.discovery.volume = 0.7;
 
         audio.mute(true);
         $(".audioState").on("click", audio.handleMuteButton);
 
         //----- for testing audio -----
-        //audio.handleMuteButton()
+        audio.handleMuteButton()
     }
 
     function setupLoadingScreen() {

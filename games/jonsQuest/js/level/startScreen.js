@@ -11,14 +11,19 @@ var startScreen = (function () {
 
             ++game.lvl;
 
+            audio.enterSound.play();
+
             audio.bgMusic.pause();
-            audio.bgMusic = new Audio("audio/inspiredBySparkMan/sparkBoy.mp3");
-            audio.bgMusic.loop = true;
 
-            audio.isOn ?
-	           	audio.bgMusic.play() :
-	           	audio.bgMusic.pause();
+            setTimeout(function(){
+                audio.bgMusic = new Audio("audio/inspiredBySparkMan/sparkBoy.mp3");
+                audio.bgMusic.loop = true;
+                audio.bgMusic.volume = 0.45;
 
+                audio.isOn ?
+                    audio.bgMusic.play() :
+                    audio.bgMusic.pause();
+            }, 1000);
 
             game.loop();		// start game
         }

@@ -45,6 +45,7 @@ var lvl0 = (function () {
             if (!sack.collected) {
                 if (Physics.isCollision(hero, sack, 0)) {
                     sack.collected = true;
+                    audio.itemPickedUp.play();
 
                     hero.ammo += sack.val;
                 }
@@ -56,12 +57,15 @@ var lvl0 = (function () {
                     if (Physics.isCollision(hero.bulletArr[i], hiddenCash, -17)) {
                         hiddenCash.visible = true;
                         hiddenCash.vY = 4;
+
+                        audio.discovery.play();
                     }
                 }
             }
             else if (!hiddenCash.collected) {
                 if (Physics.isCollision(hero, hiddenCash, 0)) {
                     hiddenCash.collected = true;
+                    audio.itemPickedUp.play();
                     hero.cash += hiddenCash.val;
                 }
             }
@@ -92,7 +96,7 @@ var lvl0 = (function () {
                     cyborg.active = true;
 
                     if (!hero.invincible) {
-                        audio.play(audio.thud, true);
+                        audio.play(audio.heartbeat, true);
 
                         hero.invincible = true;
                         --hero.health;

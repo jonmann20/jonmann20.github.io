@@ -27,7 +27,7 @@ var HeroInputComponent = function () {
                         ((lastKeyDown != 74) || !(74 in keysDown))
                 ) {
                     if (hero.ammo > 0 && !hero.isCarrying) {
-                        audio.play(audio.gun);
+                        audio.play(audio.effort);
 
                         hero.bulletArr[hero.bulletArr.length] = {
                             x: hero.x,
@@ -101,6 +101,8 @@ var HeroInputComponent = function () {
                 if(hero.medKits > 0 && hero.health < hero.maxHealth){
                     ++hero.health;
                     --hero.medKits;
+
+                    audio.play(audio.enchant, true);
                 }
             }
 		
@@ -110,6 +112,8 @@ var HeroInputComponent = function () {
                 if(hero.manaKits > 0 && hero.mana < hero.maxMana){
                     ++hero.mana;
                     --hero.manaKits;
+
+                    audio.play(audio.enchant, true);
                 }
             }
 		

@@ -26,8 +26,8 @@ var hero = (function () {
         }
 
         if (hero.health <= 0 && !gameOver) {
-            audio.play(audio.death, false);
-            audio.bgMusic.lvl0.muted = true;
+            audio.heroDeath.play();
+            audio.bgMusic.muted = true;
 
             alert("You died");
             location.reload();

@@ -123,7 +123,12 @@ var HeroPhysicsComponent = function () {
                         collisionDir = Dir.TOP;
                     }
                     else{												// bot of obj
-                        if((hero.y + hero.h) > (k.y + k.h)){
+                        if ((hero.y + hero.h) > (k.y + k.h)) {
+                            
+                            if (hero.vY < -4) {
+                                audio.play(audio.thud, true);
+                            }
+
                             hero.onObjY = hero.y = k.y + k.h;
                             hero.jumpMod = 0;
                             hero.vY = 0;

@@ -40,8 +40,6 @@ var bullet = {
 window.requestAnimFrame = (function () {
     return window.requestAnimationFrame ||
 		   window.webkitRequestAnimationFrame ||
-		   window.mozRequestAnimationFrame ||
-		   window.oRequestAnimationFrame ||
 
 		   function (callback) {
 		       setTimeout(callback, 1000 / game.fps);
