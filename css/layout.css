@@ -59,6 +59,9 @@ header nav a:hover,
 .backNav a:hover span {
 	text-shadow: 0 0 6px rgba(140, 177, 24, 1);
 }
+header nav a:active {
+    background: transparent;
+}
 header nav a span {
 	font-size: 0.6em;
 	-webkit-text-stroke: 0;

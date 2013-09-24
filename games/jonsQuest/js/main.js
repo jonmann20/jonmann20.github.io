@@ -24,6 +24,20 @@ jq.Main = (function () {
         audio.mute(true);
         $(".audioState").on("click", audio.handleMuteButton);
 
+        var wasClicked = false;
+        $(".resize").on("click", function(){
+            if (wasClicked) {
+                $(canvas).css({ width: "auto" });
+                $(this).text("Make Bigger");
+            }
+            else {
+                $(canvas).css({ width: "100%" });
+                $(this).text("Make Smaller");
+            }
+
+            wasClicked = !wasClicked;
+        });
+
         //----- for testing audio -----
         audio.handleMuteButton()
     }

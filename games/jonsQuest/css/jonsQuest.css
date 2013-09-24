@@ -12,7 +12,7 @@ header nav a {
     margin: 0 auto;
 }
 .canvasWrap canvas {
-	width: 100%;
+	/*width: 100%;*/
     margin: 0 auto;
 }
 .gameInstructions h1 {
@@ -56,6 +56,9 @@ header nav a {
 }
 .audioSwitch .on:hover {
 	box-shadow: 0 0 14px #0ff;
+}
+.resize {
+    margin-top: 10px;
 }
 input[readonly] {
 	width: 20px;

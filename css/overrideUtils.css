@@ -41,6 +41,9 @@ a:visited,
 a:active {
 	color: #5dafd7;
 }
+a:focus {
+    outline: 0;
+}
 /*#endregion*/
 
 /*#region Fonts */

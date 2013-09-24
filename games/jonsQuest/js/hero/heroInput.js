@@ -12,6 +12,8 @@ var HeroInputComponent = function () {
                     e.preventDefault(); 			//----- space bar (scrolling to bottom of page)
                 else if (e.keyCode == 77)			//----- mute/unmute (m)
                     audio.handleMuteButton();
+                else if(e.keyCode == 66)            //----- resize (b)
+                    $(".resize").trigger("click");
                 else if (e.keyCode == 75 &&			//----- jump (k)
                        (!hero.isJumping && ((lastKeyDown != 75) || !(75 in keysDown))) &&
                        (hero.onObj || hero.onGround)
