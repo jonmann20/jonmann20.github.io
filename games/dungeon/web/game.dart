@@ -71,6 +71,7 @@ class Game{
     num mTop = (window.innerHeight - h)/2;
     
     cWrap.style.marginTop = '$mTop\px';
+    //var boudingRect = canvas.getBoundingClientRect();
   }
   
   void gameLoop(num time){
@@ -86,7 +87,7 @@ class Game{
     dt = (t-old)/1000;
     
     if(t.toInt() % 12 == 0){
-      fps = (1/dt).toInt();
+      fps = (1~/dt);
       fpsHolder.text = 'Dungeon: $fps fps';
     }
     oldTime = t;

@@ -99,22 +99,22 @@ class StartScreen{
       if(key.lastKeyDown == KeyCode.ESC){
         isOptions = false;
         key.lastKeyDown = KeyCode.BACKSPACE;
-        mouseEvents();
+        //mouseEvents();
       }
       
       drawOptions();
     }
-    else if(linkClicked || DEBUG_OVERWORLD || DEBUG_LVL){
+    else if(/*linkClicked*/ key.lastKeyDown == KeyCode.ENTER || DEBUG_OVERWORLD || DEBUG_LVL){
       key.lastDirDown = KeyCode.BACKSPACE; // prevent navigating overworld
-      resetMouseEvents();
+      //resetMouseEvents();
       return OPEN_GAME;
     }
     else if(key.lastKeyDown == KeyCode.O){
       isOptions = true;
-      resetMouseEvents();
+      //resetMouseEvents();
     }
     else if(key.lastKeyDown == KeyCode.ESC){
-      resetMouseEvents();
+      //resetMouseEvents();
       return OPEN_START;
     }
     else
@@ -129,8 +129,14 @@ class StartScreen{
     drawTitle();
     
     final String load = 'LOAD GAME',
-                 opt = "PRESS 'o' FOR OPTIONS";
+                 opt = "PRESS 'o' FOR OPTIONS",
+                 enter = "PRESS 'ENTER' TO START";
                  
+    
+    ctx.font = "13px 'Press Start 2P'";
+    ctx.fillStyle = 'rgb(213, 213, 213)';
+    ctx.fillText(enter, HALFW - ctx.measureText(enter).width/2, 372);
+    
     // for testing link
     //ctx.fillStyle = 'orange';
     //ctx.fillRect(newGame.x, newGame.y, newGame.w, newGame.h); 
@@ -172,29 +178,32 @@ class StartScreen{
   void mouseEvents(){
     newGame = new Rect(HALFW - 57, 192, 120, 13);
     
-    //print('newGame: (${newGame.x}, ${newGame.y}, ${newGame.w}, ${newGame.h})');
+    //var boundingRect = canvas.getBoundingClientRect();
     
-    mouseMoveE = canvas.onMouseMove.listen((e){
-      mouse.x = e.layerX*game.invRatio;
-      mouse.y = e.layerY*game.invRatio;
-      
-      //print('mouse: (${mouse.x}, ${mouse.y})');
-      
-      if(util.checkCollision(mouse, newGame)){
-        canvas.style.cursor = 'pointer';
-        linkColor = 'blue';
-      }
-      else{
-        canvas.style.cursor = 'auto';
-        linkColor = 'rgb(213, 213, 213)';
-      }
-      
-    });
     
-    mouseClickE = canvas.onClick.listen((e){
-      if(util.checkCollision(mouse, newGame))
-        linkClicked = true;
-    });
+    
+//    mouseMoveE = canvas.onMouseMove.listen((e){
+//      mouse.x = e.clientX - boundingRect.left;
+//      mouse.y = e.clientY - boundingRect.top;
+//      
+//      print(mouse.x);
+//      print(mouse.y);
+//      
+//      if(util.checkCollision(mouse, newGame)){
+//        canvas.style.cursor = "pointer";
+//        linkColor = "blue";
+//      }
+//      else{
+//        canvas.style.cursor = "auto";
+//        linkColor = "rgb(213, 213, 213)";
+//      }
+//      
+//    });
+//    
+//    mouseClickE = canvas.onClick.listen((e){
+//      if(util.checkCollision(mouse, newGame))
+//        linkClicked = true;
+//    });
   }
   
   void resetMouseEvents(){

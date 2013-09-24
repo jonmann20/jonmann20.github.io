@@ -379,6 +379,8 @@ JSNumber: {"": "num/Interceptor;",
       return result + other;
   },
   $tdiv: function(receiver, other) {
+    if (typeof other !== "number")
+      throw H.wrapException(new P.ArgumentError(other));
     return this.toInt$0(receiver / other);
   },
   $shr: function(receiver, other) {
@@ -3163,7 +3165,7 @@ _Future__propagateToListeners: function(source, listeners) {
     t2.listenerValueOrError_2 = null;
     t2.isPropagationAborted_3 = false;
     t4._openCallbacks = t4._openCallbacks - 1;
-    t4._runInZone$2(new P._Future__propagateToListeners_closure0(t1, t2, hasError, listeners), false);
+    t4._runInZone$2(new P._Future__propagateToListeners_closure0(t2, t1, hasError, listeners), false);
     if (t2.isPropagationAborted_3)
       return;
     t3 = t2.listenerHasValue_1 === true;
@@ -3243,7 +3245,7 @@ _Future__propagateToListeners_closure: {"": "Closure;box_2,listener_3",
   $is_void_: true
 },
 
-_Future__propagateToListeners_closure0: {"": "Closure;box_2,box_1,hasError_4,listener_5",
+_Future__propagateToListeners_closure0: {"": "Closure;box_1,box_2,hasError_4,listener_5",
   call$0: function() {
     var value, error, test, matchesTest, e, s, t1, t2, t3, exception;
     try {
@@ -4965,9 +4967,6 @@ Window__isDartLocation: function(thing) {
 Interceptor_CssStyleDeclarationBase: {"": "Interceptor+CssStyleDeclarationBase;"},
 
 CssStyleDeclarationBase: {"": "Object;",
-  set$cursor: function(receiver, value) {
-    this.setProperty$3(receiver, "cursor", value, "");
-  },
   set$height: function(receiver, value) {
     this.setProperty$3(receiver, "height", value, "");
   },
@@ -5144,75 +5143,6 @@ ImmutableListMixin: {"": "Object;",
   },
   $isList: true,
   $asList: null
-},
-
-Point: {"": "Object;x>,y>",
-  toString$0: function(_) {
-    return "(" + H.S(this.x) + ", " + H.S(this.y) + ")";
-  },
-  $eq: function(_, other) {
-    var t1, t2;
-    if (other == null)
-      return false;
-    t1 = J.getInterceptor(other);
-    if (typeof other !== "object" || other === null || !t1.$isPoint)
-      return false;
-    t1 = this.x;
-    t2 = other.x;
-    if (t1 == null ? t2 == null : t1 === t2) {
-      t1 = this.y;
-      t2 = other.y;
-      t2 = t1 == null ? t2 == null : t1 === t2;
-      t1 = t2;
-    } else
-      t1 = false;
-    return t1;
-  },
-  get$hashCode: function(_) {
-    var t1, t2;
-    t1 = J.get$hashCode$(this.x);
-    t2 = J.get$hashCode$(this.y);
-    return P.JenkinsSmiHash_finish(P.JenkinsSmiHash_combine(P.JenkinsSmiHash_combine(0, t1), t2));
-  },
-  $add: function(_, other) {
-    var t1, t2, t3;
-    t1 = this.x;
-    t2 = J.getInterceptor$x(other);
-    t3 = t2.get$x(other);
-    if (t1 == null)
-      throw t1.$add();
-    if (typeof t3 !== "number")
-      throw H.iae(t3);
-    t3 = C.JSNumber_methods.$add(t1, t3);
-    t1 = this.y;
-    t2 = t2.get$y(other);
-    if (t1 == null)
-      throw t1.$add();
-    if (typeof t2 !== "number")
-      throw H.iae(t2);
-    return new W.Point(t3, C.JSNumber_methods.$add(t1, t2));
-  },
-  $sub: function(_, other) {
-    var t1, t2, t3, t4;
-    t1 = this.x;
-    t2 = J.getInterceptor$x(other);
-    t3 = t2.get$x(other);
-    if (t1 == null)
-      throw t1.$sub();
-    if (t3 == null)
-      throw H.iae(t3);
-    t4 = this.y;
-    t2 = t2.get$y(other);
-    if (t4 == null)
-      throw t4.$sub();
-    if (t2 == null)
-      throw H.iae(t2);
-    return new W.Point(t1 - t3, t4 - t2);
-  },
-  toInt$0: function(_) {
-    return new W.Point(J.toInt$0$n(this.x), J.toInt$0$n(this.y));
-  },
-  $isPoint: true
 },
 
 FixedSizeListIterator: {"": "Object;_array,_length,_position,_current",
@@ -5405,8 +5335,6 @@ MetaElement: {"": "HtmlElement;name="},
 
 MeterElement: {"": "HtmlElement;value="},
 
-MouseEvent: {"": "UIEvent;", $isMouseEvent: true, $asMouseEvent: null},
-
 Node: {"": "EventTarget;",
   toString$0: function(receiver) {
     var t1 = receiver.nodeValue;
@@ -5436,11 +5364,7 @@ TrackElement: {"": "HtmlElement;src}"},
 
 TransitionEvent: {"": "Event;", $isTransitionEvent: true, $asTransitionEvent: null},
 
-UIEvent: {"": "Event;_layerX:layerX=,_layerY:layerY=",
-  get$layerX: function(receiver) {
-    return new W.Point(receiver.layerX, receiver.layerY).x;
-  }
-},
+UIEvent: {"": "Event;"},
 
 VideoElement: {"": "MediaElement;height%,width%"},
 
@@ -5903,14 +5827,11 @@ Game: {"": "Object;fpsHolder,oldTime,fps,w,h,invRatio",
     if (typeof t2 !== "number")
       throw t2.$div();
     $.dt = t2 / 1000;
-    t1 = t1.toInt$0(t);
-    if (typeof t1 !== "number")
-      throw t1.$mod();
-    if (C.JSNumber_methods.$mod(t1, 12) === 0) {
+    if (C.JSNumber_methods.$mod(t1.toInt$0(t), 12) === 0) {
       t1 = $.dt;
       if (t1 == null)
         throw H.iae(t1);
-      this.fps = C.JSNumber_methods.toInt$0(1 / t1);
+      this.fps = C.JSInt_methods.$tdiv(1, t1);
       this.fpsHolder.textContent = "Dungeon: " + H.S(this.fps) + " fps";
     }
     this.oldTime = t;
@@ -6002,7 +5923,7 @@ Game_closure0: {"": "Closure;this_1",
   }
 },
 
-GameObj: {"": "Object;ix,iy,w<,h<,x>,y>,ready,img,src",
+GameObj: {"": "Object;ix,iy,w,h,x,y,ready,img,src",
   draw$1: function(sp) {
     var t1, t2, t3, t4, t5, t6;
     if (this.src != null && this.ready) {
@@ -7638,27 +7559,25 @@ StartScreen: {"": "Object;isOptions,linkClicked,ret,ent,OPEN_GAME,OPEN_START,mou
     return new F.BoundClosure$1(this, F.StartScreen.prototype.homeScreenLoop$1, null, "homeScreenLoop$1");
   },
   homeScreen$0: function() {
+    var t1, t2;
     if (this.isOptions) {
-      var t1 = $.key;
+      t1 = $.key;
       if (t1.lastKeyDown === 27) {
         this.isOptions = false;
         t1.lastKeyDown = 8;
-        this.mouseEvents$0();
       }
       this.drawOptions$0();
-    } else if (this.linkClicked || $.DEBUG_OVERWORLD || $.DEBUG_LVL) {
-      $.key.lastDirDown = 8;
-      this.resetMouseEvents$0();
-      return this.OPEN_GAME;
     } else {
-      t1 = $.key.lastKeyDown;
-      if (t1 === 79) {
+      t1 = $.key;
+      t2 = t1.lastKeyDown;
+      if (t2 === 13 || $.DEBUG_OVERWORLD || $.DEBUG_LVL) {
+        t1.lastDirDown = 8;
+        return this.OPEN_GAME;
+      } else if (t2 === 79)
         this.isOptions = true;
-        this.resetMouseEvents$0();
-      } else if (t1 === 27) {
-        this.resetMouseEvents$0();
+      else if (t2 === 27)
         return this.OPEN_START;
-      } else
+      else
         this.drawHomeScreen$0();
     }
     return 0;
@@ -7668,39 +7587,49 @@ StartScreen: {"": "Object;isOptions,linkClicked,ret,ent,OPEN_GAME,OPEN_START,mou
     this.drawBg$1(C.Color_Yf3.name);
     this.drawTitle$0();
     t1 = $.ctx;
-    t1.font = "15px 'Press Start 2P'";
-    t1.fillStyle = this.linkColor;
+    t1.font = "13px 'Press Start 2P'";
+    t1.fillStyle = "rgb(213, 213, 213)";
+    t2 = $.get$HALFW();
+    t3 = $.ctx.measureText("PRESS 'ENTER' TO START").width;
+    if (t3 == null)
+      throw t3.$div();
+    if (t2 == null)
+      throw t2.$sub();
+    t1.fillText("PRESS 'ENTER' TO START", t2 - t3 / 2, 372);
+    t3 = $.ctx;
+    t3.font = "15px 'Press Start 2P'";
+    t3.fillStyle = this.linkColor;
     t2 = this.newGame;
-    t1.fillText(this.ent, t2.x, J.$add$ns(t2.y, t2.h));
+    t3.fillText(this.ent, t2.x, J.$add$ns(t2.y, t2.h));
     t2 = $.ctx;
     t2.font = "15px 'Press Start 2P'";
     t2.fillStyle = "rgb(163, 163, 163)";
-    t1 = $.get$HALFW();
-    t3 = $.ctx.measureText("LOAD GAME").width;
-    if (t3 == null)
-      throw t3.$div();
+    t3 = $.get$HALFW();
+    t1 = $.ctx.measureText("LOAD GAME").width;
     if (t1 == null)
-      throw t1.$sub();
-    t2.fillText("LOAD GAME", t1 - t3 / 2, 232);
-    t3 = $.ctx;
-    t3.font = "13px 'Press Start 2P'";
-    t3.fillStyle = "rgb(213, 213, 213)";
-    t1 = $.get$HALFW();
+      throw t1.$div();
+    if (t3 == null)
+      throw t3.$sub();
+    t2.fillText("LOAD GAME", t3 - t1 / 2, 232);
+    t1 = $.ctx;
+    t1.font = "13px 'Press Start 2P'";
+    t1.fillStyle = "rgb(213, 213, 213)";
+    t3 = $.get$HALFW();
     t2 = $.ctx.measureText("PRESS 'o' FOR OPTIONS").width;
     if (t2 == null)
       throw t2.$div();
-    if (t1 == null)
-      throw t1.$sub();
-    t3.fillText("PRESS 'o' FOR OPTIONS", t1 - t2 / 2, 407);
-    t2 = $.ctx;
-    t1 = this.ret;
-    t3 = $.get$HALFW();
-    t4 = $.ctx.measureText(t1).width;
-    if (t4 == null)
-      throw t4.$div();
     if (t3 == null)
       throw t3.$sub();
-    t2.fillText(t1, t3 - t4 / 2, 442);
+    t1.fillText("PRESS 'o' FOR OPTIONS", t3 - t2 / 2, 407);
+    t2 = $.ctx;
+    t3 = this.ret;
+    t1 = $.get$HALFW();
+    t4 = $.ctx.measureText(t3).width;
+    if (t4 == null)
+      throw t4.$div();
+    if (t1 == null)
+      throw t1.$sub();
+    t2.fillText(t3, t1 - t4 / 2, 442);
   },
   drawOptions$0: function() {
     var t1, t2, t3, t4;
@@ -7732,78 +7661,16 @@ StartScreen: {"": "Object;isOptions,linkClicked,ret,ent,OPEN_GAME,OPEN_START,mou
     t3.fillText(t2, t1 - t4 / 2, 442);
   },
   mouseEvents$0: function() {
-    var t1, t2;
-    t1 = $.get$HALFW();
+    var t1 = $.get$HALFW();
     if (t1 == null)
       throw t1.$sub();
     this.newGame = new F.Rect(t1 - 57, 192, 120, 13);
-    t1 = $.canvas;
-    t1.get$onMouseMove;
-    t1 = C.EventStreamProvider_mousemove.forElement$1(t1);
-    t2 = new W._EventStreamSubscription(0, t1._target, t1._eventType, new F.StartScreen_mouseEvents_closure(this), t1._useCapture);
-    H.setRuntimeTypeInfo(t2, [H.getRuntimeTypeArgument(t1, "_EventStream", 0)]);
-    t2._tryResume$0();
-    this.mouseMoveE = t2;
-    t2 = $.canvas;
-    t2.get$onClick;
-    t2 = C.EventStreamProvider_click.forElement$1(t2);
-    t1 = new W._EventStreamSubscription(0, t2._target, t2._eventType, new F.StartScreen_mouseEvents_closure0(this), t2._useCapture);
-    H.setRuntimeTypeInfo(t1, [H.getRuntimeTypeArgument(t2, "_EventStream", 0)]);
-    t1._tryResume$0();
-    this.mouseClickE = t1;
-  },
-  resetMouseEvents$0: function() {
-    this.mouseMoveE.cancel$0();
-    this.mouseClickE.cancel$0();
-    J.set$cursor$x($.canvas.style, "auto");
-    this.linkColor = "rgb(213, 213, 213)";
-  }
-},
-
-StartScreen_mouseEvents_closure: {"": "Closure;this_0",
-  call$1: function(e) {
-    var t1, t2, t3, t4, t5, t6;
-    t1 = this.this_0;
-    t2 = t1.mouse;
-    t3 = J.getInterceptor$x(e);
-    t4 = t3.get$layerX(e);
-    t5 = $.game;
-    t6 = t5.invRatio;
-    if (t4 == null)
-      throw t4.$mul();
-    if (t6 == null)
-      throw H.iae(t6);
-    t2.x = t4 * t6;
-    t3 = new W.Point(t3.get$_layerX(e), t3.get$_layerY(e)).y;
-    t5 = t5.invRatio;
-    if (t3 == null)
-      throw t3.$mul();
-    if (t5 == null)
-      throw H.iae(t5);
-    t2.y = t3 * t5;
-    t2 = $.util.checkCollision$2(t2, t1.newGame);
-    t3 = $.canvas;
-    if (t2) {
-      J.set$cursor$x(t3.style, "pointer");
-      t1.linkColor = "blue";
-    } else {
-      J.set$cursor$x(t3.style, "auto");
-      t1.linkColor = "rgb(213, 213, 213)";
-    }
-  }
-},
-
-StartScreen_mouseEvents_closure0: {"": "Closure;this_1",
-  call$1: function(e) {
-    var t1 = this.this_1;
-    if ($.util.checkCollision$2(t1.mouse, t1.newGame))
-      t1.linkClicked = true;
   }
 },
 
 Utils: {"": "Object;alpha,tmpW,textPos,fadeOut,slideOut,flashTxtDone",
   checkCollision$3: function(a, b, moe) {
-    if (J.$le$n(J.$add$ns(a.get$x(a), moe), J.$add$ns(b.get$x(b), b.get$w())) && J.$le$n(J.$add$ns(b.get$x(b), moe), J.$add$ns(a.get$x(a), a.get$w())) && J.$le$n(J.$add$ns(a.get$y(a), moe), J.$add$ns(b.get$y(b), b.get$h())) && J.$le$n(J.$add$ns(b.get$y(b), moe), J.$add$ns(a.get$y(a), a.get$h())))
+    if (J.$le$n(J.$add$ns(a.x, moe), J.$add$ns(b.x, b.w)) && J.$le$n(J.$add$ns(b.x, moe), J.$add$ns(a.x, a.w)) && J.$le$n(J.$add$ns(a.y, moe), J.$add$ns(b.y, b.h)) && J.$le$n(J.$add$ns(b.y, moe), J.$add$ns(a.y, a.h)))
       return true;
     return false;
   },
@@ -7904,7 +7771,7 @@ Color: {"": "Object;name", static: {
 }
 },
 
-Rect: {"": "Object;x>,y>,w<,h<"},
+Rect: {"": "Object;x,y,w,h"},
 
 SpritePos: {"": "Object;sx,sy"},
 
@@ -7942,18 +7809,6 @@ Device_isWebKit: function() {
   if ($.Device__isWebKit == null)
     $.Device__isWebKit = P.Device_isOpera() !== true && J.contains$2$asx(window.navigator.userAgent, "WebKit", 0);
   return $.Device__isWebKit;
-},
-
-JenkinsSmiHash_combine: function(hash, value) {
-  hash = 536870911 & hash + value;
-  hash = 536870911 & hash + ((524287 & hash) << 10 >>> 0);
-  return (hash ^ C.JSInt_methods.$shr(hash, 6)) >>> 0;
-},
-
-JenkinsSmiHash_finish: function(hash) {
-  hash = 536870911 & hash + ((67108863 & hash) << 3 >>> 0);
-  hash = (hash ^ C.JSInt_methods.$shr(hash, 11)) >>> 0;
-  return 536870911 & hash + ((16383 & hash) << 15 >>> 0);
 },
 
 CssClassSetImpl: {"": "Object;",
@@ -8040,14 +7895,13 @@ J.JSBool.$isObject = true;
 W.TransitionEvent.$isObject = true;
 W.DeviceOrientationEvent.$isObject = true;
 J.JSArray.$isObject = true;
-W.MouseEvent.$isObject = true;
 J.JSNumber.$isnum = true;
 J.JSNumber.$isObject = true;
 J.JSInt.$isint = true;
 J.JSInt.$isnum = true;
 J.JSInt.$isObject = true;
-J.JSString.$isObject = true;
 J.JSString.$isString = true;
+J.JSString.$isObject = true;
 P._EventSink.$is_EventSink = true;
 P._EventSink.$isObject = true;
 P.ReceivePort.$isObject = true;
@@ -8144,12 +7998,10 @@ C.Color_AeS = new F.Color("#efce9b");
 C.Color_Yf3 = new F.Color("#ae7446");
 C.Color_axY = new F.Color("#333");
 C.Duration_0 = new P.Duration(0);
-C.EventStreamProvider_click = new W.EventStreamProvider("click");
 C.EventStreamProvider_deviceorientation = new W.EventStreamProvider("deviceorientation");
 C.EventStreamProvider_keydown = new W.EventStreamProvider("keydown");
 C.EventStreamProvider_keyup = new W.EventStreamProvider("keyup");
 C.EventStreamProvider_load = new W.EventStreamProvider("load");
-C.EventStreamProvider_mousemove = new W.EventStreamProvider("mousemove");
 C.EventStreamProvider_resize = new W.EventStreamProvider("resize");
 C.JSArray_methods = J.JSArray.prototype;
 C.JSInt_methods = J.JSInt.prototype;
@@ -8295,9 +8147,6 @@ J.get$value$x = function(receiver) {
 J.get$width$x = function(receiver) {
   return J.getInterceptor$x(receiver).get$width(receiver);
 };
-J.set$cursor$x = function(receiver, value) {
-  return J.getInterceptor$x(receiver).set$cursor(receiver, value);
-};
 J.set$height$x = function(receiver, value) {
   return J.getInterceptor$x(receiver).set$height(receiver, value);
 };
@@ -8309,9 +8158,6 @@ J.set$src$x = function(receiver, value) {
 };
 J.set$width$x = function(receiver, value) {
   return J.getInterceptor$x(receiver).set$width(receiver, value);
-};
-J.toInt$0$n = function(receiver) {
-  return J.getInterceptor$n(receiver).toInt$0(receiver);
 };
 J.toList$0$ax = function(receiver) {
   return J.getInterceptor$ax(receiver).toList$0(receiver);
@@ -8468,8 +8314,6 @@ H.defineNativeMethods("HTMLMetaElement", W.MetaElement);
 
 H.defineNativeMethods("HTMLMeterElement", W.MeterElement);
 
-H.defineNativeMethods("DragEvent|MSPointerEvent|MouseEvent|MouseScrollEvent|MouseWheelEvent|PointerEvent|WheelEvent", W.MouseEvent);
-
 H.defineNativeMethods("Document|DocumentFragment|DocumentType|Entity|HTMLDocument|Notation|SVGDocument|ShadowRoot", W.Node);
 
 H.defineNativeMethodsNonleaf("Node", W.Node);
@@ -8496,7 +8340,7 @@ H.defineNativeMethods("HTMLTrackElement", W.TrackElement);
 
 H.defineNativeMethods("TransitionEvent|WebKitTransitionEvent", W.TransitionEvent);
 
-H.defineNativeMethods("CompositionEvent|FocusEvent|SVGZoomEvent|TextEvent|TouchEvent", W.UIEvent);
+H.defineNativeMethods("CompositionEvent|DragEvent|FocusEvent|MSPointerEvent|MouseEvent|MouseScrollEvent|MouseWheelEvent|PointerEvent|SVGZoomEvent|TextEvent|TouchEvent|WheelEvent", W.UIEvent);
 
 H.defineNativeMethodsNonleaf("UIEvent", W.UIEvent);
 

@@ -1,7 +1,7 @@
 library dungeon;
 
 import 'dart:html';
-import 'dart:math';
+//import 'dart:math';
 //import 'package:js/js.dart' as js;
 
 part 'game.dart';
@@ -37,6 +37,7 @@ num FULLW = 854,                // 480p; 16:9 ==> 53.375*16 x 53.375*9
     HALFH = FULLH/2,
     NUM_LVLS = 3,               // includes 0 ==> startpad/overworld
     DEBUG_LVL_NUM = 1;
+//var boundingRect;
 
 // globally used elements
 GameObj stairs = new GameObj(0, 0, 40, 40, 'stairsR.png');
