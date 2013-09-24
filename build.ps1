@@ -1,7 +1,7 @@
 ﻿#--- globals
 $path = "C:\git\jonmann20.github.com\";
 $yuiJar = "${path}bin\yuicompressor-2.4.8.jar";
-$closureJar = "${path}bin\closureCompiler.jar";
+$closureJar = "${path}bin\closure.jar";
 
 function compressCSS() {
 	echo "----- Compressing CSS -----";
@@ -63,7 +63,19 @@ function compressJS() {
 		Get-Content $absMasterJsFiles | Out-File -Encoding UTF8 "${path}js\combined.js";    # concatenate
 		
 		Write-Host "`n`t`t minifying combined.js --> /min/master.js" -foregroundcolor "green";
-		iex 'java -jar $closureJar --charset UTF-8 "${path}js\combined.js" > "${path}js\min\master.js"';  # minify (charset not working)
+		#iex 'java -jar $closureJar --charset UTF-8 "${path}js\combined.js" > "${path}js\min\master.js"';  # minify (charset not working)
+		
+		$inFile = $path + "js\combined.js";
+		$outFile = $path + "js\min\master.js";
+		
+		$job = start-job -scriptblock {
+			& java -jar $args[0] $args[1] > $args[2]
+		} -argumentlist @($closureJar, $inFile, $outFile)
+		wait-job $job
+		
+		write-host "`t`t converting /min/master.js to utf8" -foregroundcolor "gray";
+		$outContent = gc $outFile
+		$outContent | Set-Content -Encoding UTF8 $outFile
 		
 		Write-Host "`t`t removing combined.js" -foregroundcolor "gray";
 		rm "${path}js/combined.js";
@@ -102,7 +114,17 @@ function compressJS() {
 		Get-Content $absJqJsFiles | Out-File -Encoding UTF8 "${path}js\combined.js";    # concatenate
 		
 		Write-Host "`n`t`t minifying combined.js --> /min/pageJonsQuest.js" -foregroundcolor "green";
-		iex 'java -jar $closureJar "${path}js\combined.js" > "${path}js\min\pageJonsQuest.js"';  # minify
+		
+		$outFile = $path + "js\min\pageJonsQuest.js";
+		
+		$job = start-job -scriptblock {
+			& java -jar $args[0] $args[1] > $args[2]
+		} -argumentlist @($closureJar, $inFile, $outFile)
+		wait-job $job
+		
+		write-host "`t`t converting /min/pageJonsQuest.js to utf8" -foregroundcolor "gray";
+		$outContent = gc $outFile
+		$outContent | Set-Content -Encoding UTF8 $outFile
 		
 		Write-Host "`t`t removing combined.js" -foregroundcolor "gray";
 		rm "${path}js/combined.js";
