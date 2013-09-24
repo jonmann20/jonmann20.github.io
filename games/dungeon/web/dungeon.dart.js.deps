@@ -9,6 +9,7 @@ file:///C:/Program Files/darteditor-win32-64/dart/dart-sdk/lib/_internal/lib/asy
 file:///C:/Program Files/darteditor-win32-64/dart/dart-sdk/lib/_internal/lib/collection_dev_patch.dart
 file:///C:/Program Files/darteditor-win32-64/dart/dart-sdk/lib/_internal/lib/collection_patch.dart
 file:///C:/Program Files/darteditor-win32-64/dart/dart-sdk/lib/_internal/lib/constant_map.dart
+file:///C:/Program Files/darteditor-win32-64/dart/dart-sdk/lib/_internal/lib/convert_patch.dart
 file:///C:/Program Files/darteditor-win32-64/dart/dart-sdk/lib/_internal/lib/core_patch.dart
 file:///C:/Program Files/darteditor-win32-64/dart/dart-sdk/lib/_internal/lib/foreign_helper.dart
 file:///C:/Program Files/darteditor-win32-64/dart/dart-sdk/lib/_internal/lib/interceptors.dart
@@ -20,7 +21,6 @@ file:///C:/Program Files/darteditor-win32-64/dart/dart-sdk/lib/_internal/lib/js_
 file:///C:/Program Files/darteditor-win32-64/dart/dart-sdk/lib/_internal/lib/js_number.dart
 file:///C:/Program Files/darteditor-win32-64/dart/dart-sdk/lib/_internal/lib/js_rti.dart
 file:///C:/Program Files/darteditor-win32-64/dart/dart-sdk/lib/_internal/lib/js_string.dart
-file:///C:/Program Files/darteditor-win32-64/dart/dart-sdk/lib/_internal/lib/json_patch.dart
 file:///C:/Program Files/darteditor-win32-64/dart/dart-sdk/lib/_internal/lib/math_patch.dart
 file:///C:/Program Files/darteditor-win32-64/dart/dart-sdk/lib/_internal/lib/native_helper.dart
 file:///C:/Program Files/darteditor-win32-64/dart/dart-sdk/lib/_internal/lib/regexp_helper.dart
@@ -51,6 +51,19 @@ file:///C:/Program Files/darteditor-win32-64/dart/dart-sdk/lib/collection/list.d
 file:///C:/Program Files/darteditor-win32-64/dart/dart-sdk/lib/collection/maps.dart
 file:///C:/Program Files/darteditor-win32-64/dart/dart-sdk/lib/collection/queue.dart
 file:///C:/Program Files/darteditor-win32-64/dart/dart-sdk/lib/collection/splay_tree.dart
+file:///C:/Program Files/darteditor-win32-64/dart/dart-sdk/lib/convert/ascii.dart
+file:///C:/Program Files/darteditor-win32-64/dart/dart-sdk/lib/convert/byte_conversion.dart
+file:///C:/Program Files/darteditor-win32-64/dart/dart-sdk/lib/convert/chunked_conversion.dart
+file:///C:/Program Files/darteditor-win32-64/dart/dart-sdk/lib/convert/codec.dart
+file:///C:/Program Files/darteditor-win32-64/dart/dart-sdk/lib/convert/convert.dart
+file:///C:/Program Files/darteditor-win32-64/dart/dart-sdk/lib/convert/converter.dart
+file:///C:/Program Files/darteditor-win32-64/dart/dart-sdk/lib/convert/encoding.dart
+file:///C:/Program Files/darteditor-win32-64/dart/dart-sdk/lib/convert/html_escape.dart
+file:///C:/Program Files/darteditor-win32-64/dart/dart-sdk/lib/convert/json.dart
+file:///C:/Program Files/darteditor-win32-64/dart/dart-sdk/lib/convert/latin1.dart
+file:///C:/Program Files/darteditor-win32-64/dart/dart-sdk/lib/convert/line_splitter.dart
+file:///C:/Program Files/darteditor-win32-64/dart/dart-sdk/lib/convert/string_conversion.dart
+file:///C:/Program Files/darteditor-win32-64/dart/dart-sdk/lib/convert/utf.dart
 file:///C:/Program Files/darteditor-win32-64/dart/dart-sdk/lib/core/bool.dart
 file:///C:/Program Files/darteditor-win32-64/dart/dart-sdk/lib/core/comparable.dart
 file:///C:/Program Files/darteditor-win32-64/dart/dart-sdk/lib/core/core.dart
@@ -68,6 +81,7 @@ file:///C:/Program Files/darteditor-win32-64/dart/dart-sdk/lib/core/iterable.dar
 file:///C:/Program Files/darteditor-win32-64/dart/dart-sdk/lib/core/iterator.dart
 file:///C:/Program Files/darteditor-win32-64/dart/dart-sdk/lib/core/list.dart
 file:///C:/Program Files/darteditor-win32-64/dart/dart-sdk/lib/core/map.dart
+file:///C:/Program Files/darteditor-win32-64/dart/dart-sdk/lib/core/null.dart
 file:///C:/Program Files/darteditor-win32-64/dart/dart-sdk/lib/core/num.dart
 file:///C:/Program Files/darteditor-win32-64/dart/dart-sdk/lib/core/object.dart
 file:///C:/Program Files/darteditor-win32-64/dart/dart-sdk/lib/core/pattern.dart
@@ -99,24 +113,19 @@ file:///C:/Program Files/darteditor-win32-64/dart/dart-sdk/lib/math/math.dart
 file:///C:/Program Files/darteditor-win32-64/dart/dart-sdk/lib/math/random.dart
 file:///C:/Program Files/darteditor-win32-64/dart/dart-sdk/lib/svg/dart2js/svg_dart2js.dart
 file:///C:/Program Files/darteditor-win32-64/dart/dart-sdk/lib/typed_data/dart2js/typed_data_dart2js.dart
-file:///C:/Program Files/darteditor-win32-64/dart/dart-sdk/lib/utf/utf.dart
-file:///C:/Program Files/darteditor-win32-64/dart/dart-sdk/lib/utf/utf16.dart
-file:///C:/Program Files/darteditor-win32-64/dart/dart-sdk/lib/utf/utf32.dart
-file:///C:/Program Files/darteditor-win32-64/dart/dart-sdk/lib/utf/utf8.dart
-file:///C:/Program Files/darteditor-win32-64/dart/dart-sdk/lib/utf/utf_stream.dart
 file:///C:/Program Files/darteditor-win32-64/dart/dart-sdk/lib/web_audio/dart2js/web_audio_dart2js.dart
 file:///C:/Program Files/darteditor-win32-64/dart/dart-sdk/lib/web_gl/dart2js/web_gl_dart2js.dart
 file:///C:/Program Files/darteditor-win32-64/dart/dart-sdk/lib/web_sql/dart2js/web_sql_dart2js.dart
-file:///C:/Users/jwiedmann/git/jonmann20.github.com/games/dungeon/web/dungeon.dart
-file:///C:/Users/jwiedmann/git/jonmann20.github.com/games/dungeon/web/enemies/enemy.dart
-file:///C:/Users/jwiedmann/git/jonmann20.github.com/games/dungeon/web/game.dart
-file:///C:/Users/jwiedmann/git/jonmann20.github.com/games/dungeon/web/game_object.dart
-file:///C:/Users/jwiedmann/git/jonmann20.github.com/games/dungeon/web/input.dart
-file:///C:/Users/jwiedmann/git/jonmann20.github.com/games/dungeon/web/levels/arena.dart
-file:///C:/Users/jwiedmann/git/jonmann20.github.com/games/dungeon/web/levels/level.dart
-file:///C:/Users/jwiedmann/git/jonmann20.github.com/games/dungeon/web/levels/level1/level1.dart
-file:///C:/Users/jwiedmann/git/jonmann20.github.com/games/dungeon/web/overworld.dart
-file:///C:/Users/jwiedmann/git/jonmann20.github.com/games/dungeon/web/player.dart
-file:///C:/Users/jwiedmann/git/jonmann20.github.com/games/dungeon/web/player_items.dart
-file:///C:/Users/jwiedmann/git/jonmann20.github.com/games/dungeon/web/start_screen.dart
-file:///C:/Users/jwiedmann/git/jonmann20.github.com/games/dungeon/web/utils.dart
+file:///C:/git/jonmann20.github.com/games/dungeon/web/dungeon.dart
+file:///C:/git/jonmann20.github.com/games/dungeon/web/enemies/enemy.dart
+file:///C:/git/jonmann20.github.com/games/dungeon/web/game.dart
+file:///C:/git/jonmann20.github.com/games/dungeon/web/game_object.dart
+file:///C:/git/jonmann20.github.com/games/dungeon/web/input.dart
+file:///C:/git/jonmann20.github.com/games/dungeon/web/levels/arena.dart
+file:///C:/git/jonmann20.github.com/games/dungeon/web/levels/level.dart
+file:///C:/git/jonmann20.github.com/games/dungeon/web/levels/level1/level1.dart
+file:///C:/git/jonmann20.github.com/games/dungeon/web/overworld.dart
+file:///C:/git/jonmann20.github.com/games/dungeon/web/player.dart
+file:///C:/git/jonmann20.github.com/games/dungeon/web/player_items.dart
+file:///C:/git/jonmann20.github.com/games/dungeon/web/start_screen.dart
+file:///C:/git/jonmann20.github.com/games/dungeon/web/utils.dart

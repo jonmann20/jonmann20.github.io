@@ -15,7 +15,7 @@ class GameObj{
     
     if(src != null){
       img = new ImageElement();
-      img.src = '/games/dungeon/img/$src';
+      img.src = 'img/$src';
       
       img.width = this.w;
       img.height = this.h;

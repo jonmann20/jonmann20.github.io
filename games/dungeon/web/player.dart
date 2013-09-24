@@ -30,16 +30,16 @@ class Player extends GameObj{
                new SpritePos(2, 24), 
                new SpritePos(2, 24), 
                new SpritePos(2, 24), 
-               'sprites/items/device/device.png'
+               "sprites/items/device/device.png"
     );
     sword = new Item(0, 0, 9, 20,
               new SpritePos(2, 2), 
               new SpritePos(12, 2), 
               new SpritePos(12, 2), 
               new SpritePos(12, 2), 
-              'sprites/items/sword/sword.png'
+              "sprites/items/sword/sword.png"
     );
-    heart = new GameObj(0, 0, 9, 9, 'heart.png');
+    heart = new GameObj(0, 0, 9, 9, "heart.png");
   }
   
   void update(){
@@ -47,7 +47,7 @@ class Player extends GameObj{
     //movLocked = false;    // for debugging
     
     if(health <= 0){
-      window.alert('You Died');
+      window.alert("You Died");
       
       vX = vY = 0;
       movLocked = true;
