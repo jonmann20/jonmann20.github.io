@@ -1,6 +1,7 @@
 ﻿#--- globals
-$path = "C:\git\jonmann20.github.com\"
-$yuiJar = "${path}bin\yuicompressor-2.4.8.jar"
+$path = "C:\git\jonmann20.github.com\";
+$yuiJar = "${path}bin\yuicompressor-2.4.8.jar";
+$closureJar = "${path}bin\closureCompiler.jar";
 
 function compressCSS() {
 	echo "----- Compressing CSS -----";
@@ -62,7 +63,7 @@ function compressJS() {
 		Get-Content $absMasterJsFiles | Out-File -Encoding UTF8 "${path}js\combined.js";    # concatenate
 		
 		Write-Host "`n`t`t minifying combined.js --> /min/master.js" -foregroundcolor "green";
-		iex 'java -jar $yuijar "${path}js\combined.js" > "${path}js\min\master.js"';  # minify
+		iex 'java -jar $closureJar --charset UTF-8 "${path}js\combined.js" > "${path}js\min\master.js"';  # minify (charset not working)
 		
 		Write-Host "`t`t removing combined.js" -foregroundcolor "gray";
 		rm "${path}js/combined.js";
@@ -101,7 +102,7 @@ function compressJS() {
 		Get-Content $absJqJsFiles | Out-File -Encoding UTF8 "${path}js\combined.js";    # concatenate
 		
 		Write-Host "`n`t`t minifying combined.js --> /min/pageJonsQuest.js" -foregroundcolor "green";
-		iex 'java -jar $yuijar "${path}js\combined.js" > "${path}js\min\pageJonsQuest.js"';  # minify
+		iex 'java -jar $closureJar "${path}js\combined.js" > "${path}js\min\pageJonsQuest.js"';  # minify
 		
 		Write-Host "`t`t removing combined.js" -foregroundcolor "gray";
 		rm "${path}js/combined.js";
