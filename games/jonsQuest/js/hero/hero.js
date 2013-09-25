@@ -76,16 +76,15 @@ var hero = (function () {
 		
 		if(hero.invincible && ( 
 				inv === 0 ||
-				inv == 1 ||
-				inv == 2 ||
-				inv == 3 ||
-				inv == 4 ||
-				inv == 5 ||
-				inv == 6
+				inv === 1 ||
+				inv === 2 ||
+				inv === 3 ||
+				inv === 4 ||
+				inv === 5 ||
+				inv === 6
 		)){
 			pos = {x: -1, y: -1};
 		}
-		
 		
 		hero.sx = pos.x;
 		hero.sy = pos.y;
@@ -93,7 +92,7 @@ var hero = (function () {
 	
 	/*********************** Render ***********************/
 	function drawHero(){
-		if(imgReady){
+		if(imgReady && hero.sx >= 0 && hero.sy >= 0){
     		ctx.drawImage(img, hero.sx, hero.sy, hero.w, hero.h, hero.x, hero.y, hero.w, hero.h);
     	}
 	}
@@ -147,10 +146,10 @@ var hero = (function () {
 		init: function(){
 			img = new Image();
 			img.onload = function () { imgReady = true; };
-			img.src = "../dungeon/img/sprites/player/player.png";
+			img.src = "../dungeon/web/img/sprites/player/player.png";
 			
 			// grab texturePacker's sprite coords
-			$.get('../dungeon/img/sprites/player/player.xml', function(xml){
+			$.get('../dungeon/web/img/sprites/player/player.xml', function(xml){
 				var wrap = $(xml).find('sprite');
 				
 				$(wrap).each(function(){

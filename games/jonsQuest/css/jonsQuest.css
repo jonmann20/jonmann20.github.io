@@ -1,3 +1,6 @@
+body {
+    
+}
 header {
 	width: 220px;
 }
@@ -25,7 +28,7 @@ header nav a {
 .goals {
 	width: 147px;
 }
-.audioSwitch button {
+button {
 	padding: 4px 3px 4px 6px;
 	border: 1px inset;
 	border-radius: 2px;]
@@ -33,28 +36,28 @@ header nav a {
 	height: 25px;
 	background-color: #ddd;
 }
-.audioSwitch button:hover {
+button:hover {
 	background-color: #eee;
 }
-.audioSwitch button:active {
+button:active {
 	border: 1px outset;
 }
-.audioSwitch button span {
+button span {
 	font-size: 1.2em;
 	margin-top: -1px;
 }
-.audioSwitch .off {
+.off {
 	border-color: red;
 	box-shadow: 0 0 8px red;
 }
 .off:hover {
 	box-shadow: 0 0 17px red;
 }
-.audioSwitch .on {
+.on {
 	border-color: #0ff;
 	box-shadow: 0 0 8px #0ff;
 }
-.audioSwitch .on:hover {
+.on:hover {
 	box-shadow: 0 0 14px #0ff;
 }
 .resize {

@@ -130,6 +130,12 @@ a:focus {
 .icon-phone:before {
 	content: "\e011";
 }
+.icon-expand:before {
+	content: "\e012";
+}
+.icon-contract:before {
+	content: "\e013";
+}
 /*#endregion*/
 
 /*#region ************ Utilities *************/

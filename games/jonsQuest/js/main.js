@@ -27,12 +27,20 @@ jq.Main = (function () {
         var wasClicked = false;
         $(".resize").on("click", function(){
             if (wasClicked) {
-                $(canvas).css({ width: "auto" });
-                $(this).text("Make Bigger");
+                $(canvas).css({ width: "", height: "" });
+                $(this).attr("class", "resize off");
+                $(this).children("span").attr("class", "icon-expand");
             }
             else {
                 $(canvas).css({ width: "100%" });
-                $(this).text("Make Smaller");
+
+                // fix for IE
+                var width = $(canvas).width();
+                $(canvas).css({ height: 0.611 * width });
+
+
+                $(this).attr("class", "resize on");
+                $(this).children("span").attr("class", "icon-contract");
             }
 
             wasClicked = !wasClicked;

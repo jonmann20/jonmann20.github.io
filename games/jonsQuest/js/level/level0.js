@@ -94,17 +94,18 @@ var lvl0 = (function () {
                 // hero and cyborg
                 if (Physics.isCollision(hero, cyborg, 0)) {
                     cyborg.active = true;
-
+                    
                     if (!hero.invincible) {
                         audio.play(audio.heartbeat, true);
 
                         hero.invincible = true;
                         --hero.health;
                     }
+                    
                 }
 
                 // bullets and cyborg
-                for (var i = 0; i < hero.bulletArr.length; i++) {
+                for (var i = 0; i < hero.bulletArr.length; ++i) {
 
                     var wasCollision = false;
 
@@ -144,7 +145,7 @@ var lvl0 = (function () {
             hiddenCash.draw();
             cyborg.draw();
 
-            if (game.totalTicks % 60 == 0)
+            if (game.totalTicks % 60 === 0)
                 belt2.draw();
             else
                 belt.draw();
