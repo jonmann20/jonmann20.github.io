@@ -1,4 +1,4 @@
-window.GameObj = function () {
+var GameObj = function () {
     var img = null,
 		ready = false;
 

@@ -1,3 +1,13 @@
+var Foo = function (xx) {
+    return {
+        x: xx,
+
+        func: function () {
+            console.log(this.x);
+        }
+    };
+};
+
 var lvl0 = (function () {
 
     var cyborg = null,
@@ -11,10 +21,25 @@ var lvl0 = (function () {
     return {
 
         init: function () {
-            var sack_g = GameObj();
-            sack_g.init(680, 71, 20, 24, 'img/sack.png');
+            //var sack_g = GameObj();
+            //sack_g.init(680, 71, 20, 24, 'img/sack.png');
+            //sack = GameItem();
+            //sack.init(sack_g, 5);
+            var f = Foo(12);
+            console.log(f);
+            var g = Foo(10);
+            g.func();
+            f.func();
+            
+            console.log("sack");
             sack = GameItem();
-            sack.init(sack_g, 5);
+            sack.init(
+                GameObj().init(680, 71, 20, 24, "img/sack.png"),
+                5
+            );
+
+            
+            
 
             var cyborg_g = GameObj();
             cyborg_g.init(2100, FULLH - game.padFloor - 38 + 1, 28, 38, 'img/cyborgBnW.png');
@@ -37,7 +62,7 @@ var lvl0 = (function () {
         },
 
         update: function () {
-
+            
             hiddenCash.updatePos();
             cyborg.update();
 

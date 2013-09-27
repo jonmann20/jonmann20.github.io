@@ -3,8 +3,9 @@ jq.Main = (function () {
     function setCanvasGlobals() {
         canvas = $("canvas")[0];
         ctx = canvas.getContext("2d");
-        FULLW = canvas.width = 720;
-        FULLH = canvas.height = 440;
+
+        FULLW = canvas.width;
+        FULLH = canvas.height;
         FULLH -= game.padHUD;
 
         HALFW = FULLW / 2;
@@ -46,14 +47,14 @@ jq.Main = (function () {
             wasClicked = !wasClicked;
         });
 
-        //----- for testing audio -----
-        audio.handleMuteButton()
+        //----- enable audio on start -----
+        //audio.handleMuteButton()
     }
 
     function setupLoadingScreen() {
         ctx.fillStyle = "#e1e1e1";
-        ctx.font = "25px Helvetica";
-        ctx.fillText("Loading...", 150, canvas.height / 2);
+        ctx.font = "25px 'Press Start 2P'";
+        ctx.fillText("LOADING...", HALFW - 80, HALFH + 20);
     }
 
     return {
@@ -69,8 +70,11 @@ jq.Main = (function () {
             level.init();
             hero.init();
 
+            
             startScreen.loop();
             //game.loop();
+            
+            
         }
     }
 })();

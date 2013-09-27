@@ -51,6 +51,71 @@ var HeroPhysicsComponent = function () {
         }
     }
 
+    function heroAndLvlCollision() {
+        var k,
+                i = "lvl" + game.lvl,
+                collisionDir = Dir.NONE;
+
+        for (var j in level.collisionPts[i]) {
+            k = level.collisionPts[i][j];
+
+            // using player dimensions as the moe
+            if (Physics.isCollision(hero, k, 0, true)) {
+                if (hero.dirR) {								// left side of obj
+                    if (hero.lvlX - hero.x < k.x) {
+                        hero.onObjX = k.x - hero.lvlX - hero.w;
+                        hero.onObjLvlX = hero.lvlX;
+
+                        collisionDir = Dir.LEFT;
+                    }
+                }
+                else {										// right side of obj
+                    if ((hero.x + hero.lvlX + hero.w) > (k.x + k.w)) {
+                        hero.onObjX = k.x - hero.lvlX + k.w;
+                        hero.onObjLvlX = hero.lvlX;
+                        collisionDir = Dir.RIGHT;
+                    }
+                }
+
+
+                if ((hero.x != hero.onObjX) && ((hero.y + hero.h - 17) < k.y) && // top of obj 
+                    (hero.vY > 0)	// moving down
+                ) {
+                    hero.onObjY = hero.y = k.y - hero.h;
+                    hero.isJumping = false;
+                    hero.onObj = true;
+                    collisionDir = Dir.TOP;
+                }
+                else {												// bot of obj
+                    if ((hero.y + hero.h) > (k.y + k.h)) {
+
+                        if (hero.vY < -4) {
+                            audio.play(audio.thud, true);
+                        }
+
+                        hero.onObjY = hero.y = k.y + k.h;
+                        hero.jumpMod = 0;
+                        hero.vY = 0;
+                        collisionDir = Dir.BOT;
+                    }
+                }
+            }
+
+            if (collisionDir != Dir.NONE) {
+                if ((collisionDir == Dir.LEFT) || (collisionDir == Dir.RIGHT)) {
+                    hero.x = hero.onObjX;
+                    hero.lvlX = hero.onObjLvlX;
+                }
+
+                break;
+            }
+        }
+
+        if (collisionDir == Dir.NONE) {
+            hero.offObj();
+        }
+    }
+
 
     return {
         updatePosition: function (){	
@@ -87,69 +152,10 @@ var HeroPhysicsComponent = function () {
 	        bulletHandler();		// bullet's and screen
             screenCollision();	    // hero and screen/ top of obj
 		
-            //---hero and game objects
-            var k, 
-                i = "lvl" + game.lvl,
-                collisionDir = Dir.NONE;
-			
-            for(var j in level.collisionPts[i]){
-                k = level.collisionPts[i][j];
-			
-                // using player dimensions as the moe
-                if(Physics.isCollision(hero, k, 0, true)){
-                    if(hero.dirR){								// left side of obj
-                        if(hero.lvlX - hero.x < k.x){
-                            hero.onObjX = k.x-hero.lvlX - hero.w;
-                            hero.onObjLvlX = hero.lvlX;
-																		
-                            collisionDir = Dir.LEFT;
-                        }
-                    }
-                    else{										// right side of obj
-                        if((hero.x + hero.lvlX + hero.w) > (k.x + k.w)){
-                            hero.onObjX = k.x-hero.lvlX + k.w;
-                            hero.onObjLvlX = hero.lvlX;
-                            collisionDir = Dir.RIGHT;
-                        }
-                    }
-				
-				
-                    if((hero.x != hero.onObjX) && ((hero.y + hero.h - 17) < k.y) && // top of obj 
-                        (hero.vY > 0)	// moving down
-                    ){		
-                        hero.onObjY = hero.y = k.y - hero.h;
-                        hero.isJumping = false;
-                        hero.onObj = true;
-                        collisionDir = Dir.TOP;
-                    }
-                    else{												// bot of obj
-                        if ((hero.y + hero.h) > (k.y + k.h)) {
-                            
-                            if (hero.vY < -4) {
-                                audio.play(audio.thud, true);
-                            }
+            heroAndLvlCollision();
 
-                            hero.onObjY = hero.y = k.y + k.h;
-                            hero.jumpMod = 0;
-                            hero.vY = 0;
-                            collisionDir = Dir.BOT;
-                        }
-                    }
-                }
-			
-                if(collisionDir != Dir.NONE){
-                    if((collisionDir == Dir.LEFT) || (collisionDir == Dir.RIGHT)){
-                        hero.x = hero.onObjX;
-                        hero.lvlX = hero.onObjLvlX;
-                    }
-				
-                    break;
-                }
-            }
-		
-            if(collisionDir == Dir.NONE){
-                hero.offObj();
-            }
+            //---hero and game objects
+            
         }
     };
 };

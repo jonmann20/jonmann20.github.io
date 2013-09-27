@@ -17,6 +17,7 @@ header nav a {
 .canvasWrap canvas {
 	/*width: 100%;*/
     margin: 0 auto;
+    background: #000;
 }
 .gameInstructions h1 {
 	margin: 45px 0;

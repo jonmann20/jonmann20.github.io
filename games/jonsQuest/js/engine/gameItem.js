@@ -1,4 +1,4 @@
-window.GameItem = function () {
+var GameItem = function () {
 
     var parentDraw = null;
 
@@ -21,7 +21,7 @@ window.GameItem = function () {
 
         init: function (g, v, vis) {
             $.extend(this, g);
-
+            console.log(g);
             this.val = v;
 
             if (typeof (vis) !== "undefined")
