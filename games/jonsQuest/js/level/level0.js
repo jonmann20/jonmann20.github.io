@@ -1,13 +1,3 @@
-var Foo = function (xx) {
-    return {
-        x: xx,
-
-        func: function () {
-            console.log(this.x);
-        }
-    };
-};
-
 var lvl0 = (function () {
 
     var cyborg = null,
@@ -21,44 +11,31 @@ var lvl0 = (function () {
     return {
 
         init: function () {
-            //var sack_g = GameObj();
-            //sack_g.init(680, 71, 20, 24, 'img/sack.png');
-            //sack = GameItem();
-            //sack.init(sack_g, 5);
-            var f = Foo(12);
-            console.log(f);
-            var g = Foo(10);
-            g.func();
-            f.func();
-            
-            console.log("sack");
             sack = GameItem();
             sack.init(
-                GameObj().init(680, 71, 20, 24, "img/sack.png"),
+                GameObj(680, 71, 20, 24, "img/sack.png"),
                 5
             );
 
-            
-            
-
-            var cyborg_g = GameObj();
-            cyborg_g.init(2100, FULLH - game.padFloor - 38 + 1, 28, 38, 'img/cyborgBnW.png');
             cyborg = Enemy();
-            cyborg.init(cyborg_g, 1);
+            cyborg.init(
+                GameObj(2100, FULLH - game.padFloor - 38 + 1, 28, 38, "img/cyborgBnW.png"), 
+                1
+            );
 
-            var hCash_g = GameObj();
-            hCash_g.init(140, 50, 22, 24, 'img/cash.png');
             hiddenCash = GameItem();
-            hiddenCash.init(hCash_g, 10, false);
+            hiddenCash.init(
+                GameObj(140, 50, 22, 24, "img/cash.png"), 
+                10, 
+                false
+            );
+            lvl0.crate = GameItem();
+            lvl0.crate.init(
+                GameObj(400, FULLH - game.padFloor - 26, 24, 26, "img/crate.png")
+            );
 
-            var crate_g = GameObj();
-            crate_g.init(400, FULLH - game.padFloor - 26, 24, 26, 'img/crate.png');            lvl0.crate = GameItem();
-            lvl0.crate.init(crate_g);
-
-            belt = GameObj();
-            belt.init(1300, 80, 340, 190, 'img/belt.png');
-            belt2 = GameObj();
-            belt2.init(1300, 80, 340, 190, 'img/belt2.png');
+            belt = GameObj(1300, 80, 340, 190, "img/belt.png");
+            belt2 = GameObj(1300, 80, 340, 190, "img/belt2.png");
         },
 
         update: function () {

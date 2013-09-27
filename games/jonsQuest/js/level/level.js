@@ -57,7 +57,7 @@ var level = (function () {
         var count = 0;
 
         for (var key in imgArr) {
-            if (imgArr[key] != 'none') {
+            if (imgArr[key] !== "none") {
                 lvlBgImg[key] = new Image();
                 lvlBgImg[key].onload = function () {
                     callback(this.num);
@@ -79,18 +79,10 @@ var level = (function () {
 
         init: function () {
 
-            medKit = new GameObj();
-            medKit.init(238, FULLH + 31, 25, 24, 'img/medKit.png');
-
-            syringe = new GameObj();
-            syringe.init(342, FULLH + 31, 25, 25, 'img/syringe.png');
-
-            shuriken = new GameObj();
-            shuriken.init(447, FULLH + 32, 24, 24, 'img/shuriken.png');
-
-            cash = new GameObj();
-            cash.init(548, FULLH + 33, 22, 24, 'img/cash.png');
-
+            medKit = GameObj(238, FULLH + 31, 25, 24, "img/medKit.png");
+            syringe = GameObj(342, FULLH + 31, 25, 25, "img/syringe.png");
+            shuriken = GameObj(447, FULLH + 32, 24, 24, "img/shuriken.png");
+            cash = GameObj(548, FULLH + 33, 22, 24, "img/cash.png");
 
             level.collisionPts = {
                 lvl0: {
