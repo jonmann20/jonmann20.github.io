@@ -62,6 +62,8 @@ var game = (function(){
 	    loop: function (frameTime) {
 	        //setTimeout(function(){
 
+
+
 	        update();
 	        render();
 

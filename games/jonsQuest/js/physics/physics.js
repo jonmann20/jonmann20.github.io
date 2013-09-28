@@ -20,3 +20,5 @@ var Physics = (function () {
         }
     };
 })();
+
+//@ sourceURL=physics.js

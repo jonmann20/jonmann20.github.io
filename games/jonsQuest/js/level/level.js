@@ -73,7 +73,7 @@ var level = (function () {
 
 
     return {
-        collisionPts: {},
+        collisionPts: [],
         width: 0,
 
 
@@ -84,8 +84,9 @@ var level = (function () {
             shuriken = GameObj(447, FULLH + 32, 24, 24, "img/shuriken.png");
             cash = GameObj(548, FULLH + 33, 22, 24, "img/cash.png");
 
-            level.collisionPts = {
-                lvl0: {
+            level.collisionPts = [
+                // level 0
+                {
                     obj0: {
                         x: 310,
                         y: 161,
@@ -105,9 +106,10 @@ var level = (function () {
                         h: 30
                     }
                 }
-            };
+            ];
 
-            for (var i = 0; i < NUM_LEVELS; i++) {
+
+            for (var i = 0; i < NUM_LEVELS; ++i) {
                 lvl[i] = {
                     status: false,
                     bgColor: '#' + Math.floor(Math.random() * 16777215).toString(16)
@@ -199,3 +201,5 @@ var level = (function () {
 
     };
 })();
+
+//@ sourceURL=level.js

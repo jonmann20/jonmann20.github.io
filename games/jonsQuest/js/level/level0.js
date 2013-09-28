@@ -6,10 +6,24 @@ var lvl0 = (function () {
 		belt = null,
 		belt2 = null
     ;
+    var k = [];
+    var m = -0.52845528455;
+    
+    function beltPhysics() {
+        if (Physics.isCollision(hero, belt, 0)) {
+            hero.isJumping = false;
+            hero.onObj = true;
+
+            var b = belt.initY + belt.h - hero.h;
+            var x = Math.abs(hero.lvlX - 680); // 680 is the init hero.lvlX when you enter the box from the left
+            
+            hero.y = m * x + b;
+            hero.onObjY = hero.y;
+        }
+    }
 
 
     return {
-
         init: function () {
             sack = GameItem();
             sack.init(
@@ -31,11 +45,10 @@ var lvl0 = (function () {
             );
             lvl0.crate = GameItem();
             lvl0.crate.init(
-                GameObj(400, FULLH - game.padFloor - 26, 24, 26, "img/crate.png")
+                GameObj(500, FULLH - game.padFloor - 26, 24, 26, "img/crate.png")
             );
 
-            belt = GameObj(1300, 80, 340, 190, "img/belt.png");
-            belt2 = GameObj(1300, 80, 340, 190, "img/belt2.png");
+            belt = GameObj(1100, 80, 340, 190, "img/belt.png");
         },
 
         update: function () {
@@ -127,6 +140,9 @@ var lvl0 = (function () {
                         }
                     }
                 }
+
+
+                beltPhysics();
             }
 
         },
@@ -147,9 +163,9 @@ var lvl0 = (function () {
             hiddenCash.draw();
             cyborg.draw();
 
-            if (game.totalTicks % 60 === 0)
-                belt2.draw();
-            else
+            //if (game.totalTicks % 60 === 0)
+            //    belt.draw(with differnt sprite);
+            //else
                 belt.draw();
 
             if (!lvl0.crate.holding) {
@@ -161,7 +177,14 @@ var lvl0 = (function () {
                     lvl0.crate.y += 6;
                 }
             }
+
+            for(var i=0; i < k.length; ++i){
+                k[i].draw();
+            }
+
         }
     };
 
 })();
+
+//@ sourceURL=level0.js

@@ -4,7 +4,6 @@
 var hero = (function () {
     var self = this,
         input = null,           // the hero input component
-        physics = null,         // the hero physics component
         graphics = null,        // the hero graphics component
 
         imgReady = false,
@@ -142,6 +141,7 @@ var hero = (function () {
 		xp: 0,
 		xpNeeded: 50,
 		bulletArr: [],
+		physics: null,         // the hero physics component
 		
 		init: function(){
 			img = new Image();
@@ -165,7 +165,7 @@ var hero = (function () {
 			
 			input = HeroInputComponent();
 			    input.init();
-			physics = HeroPhysicsComponent();
+			hero.physics = HeroPhysicsComponent();
 			graphics = HeroGraphicsComponent();
 			    graphics.init();
 		},
@@ -178,8 +178,8 @@ var hero = (function () {
 		
 		update: function () {
 		    input.check();
-			physics.updatePosition();
-			physics.checkCollision();
+			hero.physics.updatePosition();
+			hero.physics.checkCollision();
 			
 			checkHealth();
 			getSpritePos();
@@ -195,3 +195,5 @@ var hero = (function () {
 		}
 	};
 })();
+
+//@ sourceURL=hero.js

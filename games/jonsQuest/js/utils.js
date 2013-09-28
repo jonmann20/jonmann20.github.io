@@ -9,6 +9,13 @@ var utils = (function () {
 	return {
 		degToRad: function(deg){
 			return deg * 0.0174532925199432957;
+		},
+
+		printMouse: function () {
+		    $("canvas").on("mousemove", function (e) {
+
+		        console.log(e.offsetX, e.offsetY);
+		    });
 		}
 	};
 })();
@@ -20,7 +27,8 @@ var Dir = Object.freeze({
     TOP: 1,
     BOT: 2,
     LEFT: 3,
-    RIGHT: 4
+    RIGHT: 4,
+    IN: 5
 });
 
 var Inv_e = Object.freeze({
@@ -45,3 +53,5 @@ window.requestAnimFrame = (function () {
 		       setTimeout(callback, 1000 / game.fps);
 		   };
 })();
+
+//@ sourceURL=utils.js

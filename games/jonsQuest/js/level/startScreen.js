@@ -7,7 +7,7 @@ var startScreen = (function () {
     ;
 
     function update() {
-        if (13 in keysDown) {
+        if (13 in keysDown || jq.debugGame) {
 
             ++game.lvl;
 
