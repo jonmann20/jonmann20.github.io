@@ -11,11 +11,36 @@ var utils = (function () {
 			return deg * 0.0174532925199432957;
 		},
 
+        /**** Debug Printers ****/
 		printMouse: function () {
 		    $("canvas").on("mousemove", function (e) {
-
 		        console.log(e.offsetX, e.offsetY);
 		    });
+		},
+
+		printDir: function (dir) {
+		    switch (dir) {
+		        case 0:
+		            console.log("Dir.NONE");
+		            break;
+		        case 1:
+		            console.log("Dir.TOP");
+		            break;
+		        case 2:
+		            console.log("Dir.BOT");
+		            break;
+		        case 3:
+		            console.log("Dir.LEFT");
+		            break;
+		        case 4:
+		            console.log("Dir.RIGHT");
+		            break;
+		        case 5:
+		            console.log("Dir.IN");
+		            break;
+		        default:
+		            console.log("Dir.unknown");
+		    }
 		}
 	};
 })();
@@ -37,12 +62,17 @@ var Inv_e = Object.freeze({
     HIT_RED: 2
 });
 
+var KeyCode = Object.freeze({
+    ENTER: 13
+});
+
 var bullet = {
     color: "rgba(0, 182, 255, .85)",
     w: 19.5,
     h: 9,
-    speed: 8
+    speed: 230
 };
+
 
 // global functions
 window.requestAnimFrame = (function () {

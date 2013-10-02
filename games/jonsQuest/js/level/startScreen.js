@@ -7,12 +7,10 @@ var startScreen = (function () {
     ;
 
     function update() {
-        if (13 in keysDown || jq.debugGame) {
-
+        if (lastKeyDown == KeyCode.ENTER) {
             ++game.lvl;
 
             audio.enterSound.play();
-
             audio.bgMusic.pause();
 
             setTimeout(function(){
@@ -25,7 +23,7 @@ var startScreen = (function () {
                     audio.bgMusic.pause();
             }, 1000);
 
-            game.loop();		// start game
+            game.loop();
         }
         else {
             requestAnimFrame(startScreen.loop);
@@ -118,7 +116,7 @@ var startScreen = (function () {
             render();
 
             var now = new Date().getTime();
-            game.dt = now - (_time || now);		// using game.dt avoids modifying utils method
+            game.dt = now - (_time || now);		// TODO: use internal var
             _time = now;
 
         }

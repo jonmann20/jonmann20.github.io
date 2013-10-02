@@ -11,25 +11,34 @@ var HeroPhysicsComponent = function () {
             hero.y = -hero.h;
             hero.vY = 0;
         }
+
         if (hero.y > (canvas.height - game.padBot - hero.h)) { // bottom
             hero.y = canvas.height - game.padBot - hero.h;
             hero.isJumping = false;
             hero.onGround = true;
+
+            hero.vY = 0;
         }
         else if (hero.onObj) { 						// on top of obj
             hero.y = hero.onObjY;
+            hero.vY = 0;
         }
 
-        if (hero.x < 0) 								// left
+        if (hero.x < 0) { 								// left
             hero.x = 0;
+            hero.vX = 0;
+        }
         else if (hero.x > (canvas.width - hero.w)) { 	// right 
             hero.x = canvas.width - hero.w;
+            hero.vX = 0;
         }
     }
 
     function bulletHandler() {
-        for (var i = 0; i < hero.bulletArr.length; i++) {
-            hero.bulletArr[i].x += hero.bulletArr[i].dirR ? bullet.speed : -bullet.speed; // update position
+        for (var i = 0; i < hero.bulletArr.length; ++i) {
+            var fixBs = (bullet.speed / game.fps);
+            console.log(hero.bulletArr[i].dirR)
+            hero.bulletArr[i].x += hero.bulletArr[i].dirR ? fixBs : fixBs; // update position
 
             // bullet and level object
             var k,
@@ -101,31 +110,39 @@ var HeroPhysicsComponent = function () {
     return {
         updatePosition: function (){	
 		    if(hero.isJumping){
-			    if(hero.jumpMod > 0){
+		        if (hero.jumpMod > 0) {
+		            //console.log(hero.vY);
+
 			        hero.vY -= hero.jumpMod;
-			        --hero.jumpMod;
-			    }
-                hero.dir = Dir.TOP;
+		            //--hero.jumpMod;
+
+			        hero.jumpMod -= 6; // rise speed
+		        }
+		        else {
+		            hero.vY += 26; // drop quickly
+		        }
             }
             else{
 			    hero.jumpMod = hero.jumpPower;
             }
 		
-            if(hero.x != (hero.x + hero.vX))
+            if(hero.x != (hero.x + hero.vX))    // TODO: ???
                 audio.step.play();
 		
-            hero.y += hero.vY;
+            hero.y += (hero.vY / game.fps);
 		
-            if(((hero.dirR && hero.x >= ((canvas.width/2) + 35)) ||
-               (!hero.dirR && hero.x <= ((canvas.width/2) - 45))) &&
-               (hero.lvlX + hero.vX >= 0) &&
-               (hero.lvlX + hero.vX <= level.width - canvas.width)
+            var fixVx = (hero.vX / game.fps);
+
+            if(((hero.dir == Dir.RIGHT && hero.x >= ((canvas.width/2) + 35)) ||
+               (hero.dir == Dir.LEFT && hero.x <= ((canvas.width/2) - 45))) &&
+               (hero.lvlX + fixVx >= 0) &&
+               (hero.lvlX + fixVx <= level.width - canvas.width)
             ){
-                hero.lvlX += hero.vX;
+                hero.lvlX += fixVx;
                 level.updateObjs();
             }
             else {
-                hero.x += hero.vX;
+                hero.x += fixVx;
             }
         },
 
@@ -148,7 +165,7 @@ var HeroPhysicsComponent = function () {
 
                 collisionDir = Dir.IN;
 
-                if (hero.dirR && (hero.lvlX - hero.x < obj.x)) {                    // left side of obj
+                if (hero.dir == Dir.RIGHT && (hero.lvlX - hero.x < obj.x)) {                    // left side of obj
                     collisionDir = Dir.LEFT;
                 }
                 else if ((hero.x + hero.lvlX + hero.w) > (obj.x + obj.w)) {         // right side of obj

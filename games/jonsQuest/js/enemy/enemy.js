@@ -65,7 +65,7 @@ var Enemy = function () {
         },
 
         death: function () {
-            clearDir = hero.dirR;
+            clearDir = (hero.dir == Dir.RIGHT);
 
             audio.enemyDeath.play();
             hero.xp += 2;

@@ -2,7 +2,7 @@
     The hero singleton object.
 */
 var hero = (function () {
-    var self = this,
+    var //self = this,
         input = null,           // the hero input component
         graphics = null,        // the hero graphics component
 
@@ -35,31 +35,31 @@ var hero = (function () {
     }
 
 	function getSpritePos(){
-		if(game.totalTicks % 12 === 0)
-			showRun = !showRun;
-			
+	    if (game.totalTicks % 10 === 0) {
+	        showRun = !showRun;
+	    }
+
 		var pos = {x: 0, y: 0};
 		
-		if(hero.isCarrying && hero.vX === 0 && hero.dir == Dir.NONE){
+		if(hero.isCarrying && hero.vX === 0){
 			pos = spriteArr["playerDown"];
 		}
-		else if(hero.dirR){
-			if(hero.dir == Dir.RIGHT){
-   				if(Math.abs(hero.vX) <= hero.speed*3.5)
+		else if(hero.dir == Dir.RIGHT){
+			if(hero.vX > 0){
+   				if(Math.abs(hero.vX) <= hero.aX*3.5)
    					pos = spriteArr["playerRight_Step"];
 				else if(showRun){
 					pos = spriteArr["playerRight_Run1"];
 				}
 				else 
-					pos = spriteArr["playerRight_Run2"]; // testing 2
+					pos = spriteArr["playerRight_Run2"];
 			}
 			else
 				pos = spriteArr["playerRight"];
 		}
-		else{
-			if(hero.dir == Dir.LEFT){ 
-				
-				if(Math.abs(hero.vX) <= hero.speed*3.5)
+		else if(hero.dir == Dir.LEFT){ 
+			if(hero.vX < 0){
+				if(Math.abs(hero.vX) <= hero.aX*3.5)
    					pos = spriteArr["playerLeft_Step"];
 				else if(showRun){
 					pos = spriteArr["playerLeft_Run1"];
@@ -73,15 +73,7 @@ var hero = (function () {
 		
 		var inv = hero.invincibleTimer % 20;
 		
-		if(hero.invincible && ( 
-				inv === 0 ||
-				inv === 1 ||
-				inv === 2 ||
-				inv === 3 ||
-				inv === 4 ||
-				inv === 5 ||
-				inv === 6
-		)){
+		if(hero.invincible && (inv >= 0 && inv <= 6)){
 			pos = {x: -1, y: -1};
 		}
 		
@@ -98,11 +90,10 @@ var hero = (function () {
 		
 		
 	return {
-	    protectedInfo: {
+	    //protectedInfo: {
             //...
-	    },
-		ammo: 20,
-		cash: 0,
+	    //},
+
 		x: 0,				// top left of sprite
 		y: 0,
 		sx: 0,				// sprite pos
@@ -110,22 +101,21 @@ var hero = (function () {
 		lvlX: 0,				
 		w: 28,
 		h: 38,
-		vX: 0,
+		vX: 0,              // pixels per second
 		vY: 0,
-		maxVx: 8,
-		maxVy: 15,
-		dir: Dir.NONE,
-		dirR: true, 
-		speed: 0.7,			// actuallly acceleration
+		maxVx: 325,
+		maxVy: 300,
+		aX: 27,			    // horizontal acceleration
+		dir: Dir.RIGHT,
 		isJumping: false,
 		isCarrying: false,
 		onGround: true,
 		onObj: true,
 		onObjX: -1,
 		onObjY: -1,
-		jumpMod: 5,			// jumpMod must == jumpPower
-		jumpPower: 5,
-		jumpPowerMax: 10,
+		jumpMod: 64,			// jumpMod must == jumpPower;  
+		jumpPower: 64,          
+		//jumpPowerMax: 50,
 		invincible: false,
 		invincibleTimer: 120,
 		initInvincibleTimer: 120,
@@ -137,6 +127,8 @@ var hero = (function () {
 		maxMana: 4,
 		manaKits: 1,
 		manaLvl: 1,
+		ammo: 20,
+		cash: 0,
 		lvl: 1,
 		xp: 0,
 		xpNeeded: 50,

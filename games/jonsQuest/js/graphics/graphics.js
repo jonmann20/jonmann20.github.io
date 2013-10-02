@@ -16,7 +16,7 @@ var Graphics = (function () {
             else if (alpha > 1.55)
                 fadeOut = true;
 
-            var theDt = game.dt / 1000;
+            var theDt = game.dt / 1000; // TODO: use acutal time
 
             alpha += fadeOut ? -theDt : theDt;
 

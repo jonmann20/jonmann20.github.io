@@ -6,7 +6,7 @@ var HeroInputComponent = function () {
 	        keysDown = {};
             lastKeyDown = -1;
 	
-            addEventListener('keydown', function (e) {
+            addEventListener("keydown", function (e) {
 
                 if (e.keyCode == 32)
                     e.preventDefault(); 			//----- space bar (scrolling to bottom of page)
@@ -31,12 +31,14 @@ var HeroInputComponent = function () {
                     if (hero.ammo > 0 && !hero.isCarrying) {
                         audio.play(audio.effort);
 
+                        utils.printDir(hero.dir);
+
                         hero.bulletArr[hero.bulletArr.length] = {
                             x: hero.x,
                             y: hero.y,
                             w: bullet.w,
                             h: bullet.h,
-                            dirR: hero.dirR,
+                            dirR: (hero.dir == Dir.RIGHT),
                             deg: 0
                         };
 
@@ -51,43 +53,38 @@ var HeroInputComponent = function () {
                 keysDown[e.keyCode] = true;
             }, false);
 	
-            addEventListener('keyup', function (e) { delete keysDown[e.keyCode];}, false);
+            addEventListener("keyup", function (e) { delete keysDown[e.keyCode];}, false);
         },
 
         check: function(){
-            hero.dir = Dir.NONE;
-		
             if (!hero.onObj)
                 hero.vY = ((hero.vY + game.gravity) > hero.maxVy) ? hero.maxVy : (hero.vY + game.gravity);
-		
-            if(hero.vX !== 0)
-                hero.vX += (hero.vX > 0) ? -game.friction : game.friction;
-			
-			
-			
+
+
+
             // --------- keys pressed --------
-			
+            var leftOrRight = false;
             //----- left (a)
             if(65 in keysDown){ 			
-                hero.vX = (Math.abs(hero.vX - hero.speed) > hero.maxVx) ? -hero.maxVx : (hero.vX - hero.speed);
-                hero.dirR = false;
+                hero.vX = (Math.abs(hero.vX - hero.aX) > hero.maxVx) ? -hero.maxVx : (hero.vX - hero.aX);
                 hero.dir = Dir.LEFT;
+                leftOrRight = true;
             }
 
 		
-		
             //----- right (d)
-            if(68 in keysDown){ 			
-                hero.vX = (Math.abs(hero.vX + hero.speed) > hero.maxVx) ? hero.maxVx : (hero.vX + hero.speed);
-                hero.dirR = true;
+            if (68 in keysDown) {
+                hero.vX = (Math.abs(hero.vX + hero.aX) > hero.maxVx) ? hero.maxVx : (hero.vX + hero.aX);
                 hero.dir = Dir.RIGHT;
+                leftOrRight = true;
             }
 	    
-            if(Math.abs(hero.vX) < hero.speed){    
+            if(Math.abs(hero.vX) < hero.aX){    
                 hero.vX = 0;
             }
-            else if(((hero.dir != Dir.LEFT) && (hero.dir != Dir.RIGHT))){
-                hero.vX /= 1.2;
+            else if(!leftOrRight){
+                //hero.vX += (hero.vX > 0) ? -game.friction : game.friction;
+                hero.vX /= 1.26;
             }
 	    
 	    

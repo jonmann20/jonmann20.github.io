@@ -94,7 +94,7 @@ var lvl0 = (function () {
                 }
             }
             else {
-                if (hero.dirR)
+                if (hero.dir == Dir.RIGHT)
                     lvl0.crate.x = hero.x + 22;
                 else
                     lvl0.crate.x = hero.x - 22;
@@ -148,11 +148,13 @@ var lvl0 = (function () {
         },
 
         updateObjs: function () {
-            sack.x -= hero.vX;
-            cyborg.x -= hero.vX;
-            hiddenCash.x -= hero.vX;
-            belt.x -= hero.vX;
-            lvl0.crate.x -= hero.vX;
+            var fix = (hero.vX / game.fps);
+            
+            sack.x -= fix;
+            cyborg.x -= fix;
+            hiddenCash.x -= fix;
+            belt.x -= fix;
+            lvl0.crate.x -= fix;
         },
 
         render: function () {
@@ -173,7 +175,7 @@ var lvl0 = (function () {
             }
             else {
                 if (hero.vX === 0) {
-                    lvl0.crate.x += hero.dirR ? -20 : 24;
+                    lvl0.crate.x += (hero.dir == Dir.RIGHT) ? -20 : 24;
                     lvl0.crate.y += 6;
                 }
             }

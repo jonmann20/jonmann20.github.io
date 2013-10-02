@@ -48,7 +48,8 @@ jq.Main = (function () {
         });
 
         //----- enable audio on start -----
-        audio.handleMuteButton()
+        if(!jq.debug)
+            audio.handleMuteButton()
     }
 
     function setupLoadingScreen() {
@@ -70,15 +71,20 @@ jq.Main = (function () {
             level.init();
             hero.init();
 
+            console.log()
             
-            
-            //jq.debugGame = true;
-            //setTimeout(function () {
-                startScreen.loop();
-            //}, jq.debugGame ? 250 : 0);     // TODO: do callbacks from constructors before starting game
-            
+            startScreen.loop();
 
-            //utils.printMouse();
+            if (jq.debug) {
+                setTimeout(function () {
+                    lastKeyDown = KeyCode.ENTER;
+                }, 300);   // TODO: do callbacks from constructors before starting game
+            }
+            else {
+                startScreen.loop();
+            }
+
+            
         }
     }
 })();
