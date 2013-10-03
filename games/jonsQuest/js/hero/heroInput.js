@@ -14,7 +14,7 @@ var HeroInputComponent = function () {
                     audio.handleMuteButton();
                 else if(e.keyCode == 66)            //----- resize (b)
                     $(".resize").trigger("click");
-                else if (e.keyCode == 75 &&			//----- jump (k)
+                else if (e.keyCode == 75 &&			//----- jump (k);       TODO: move to check() function
                        (!hero.isJumping && ((lastKeyDown != 75) || !(75 in keysDown))) &&
                        (hero.onObj || hero.onGround)
                 ) {
@@ -22,16 +22,12 @@ var HeroInputComponent = function () {
                     hero.vY = 0;
                     hero.isJumping = true;
                     hero.offObj();
-
-                    //delete keysDown[75];
                 }
-                else if (e.keyCode == 74 &&		//----- shoot (j) 			
+                else if (e.keyCode == 74 &&		//----- shoot (j);          TODO: move to check() function
                         ((lastKeyDown != 74) || !(74 in keysDown))
                 ) {
-                    if (hero.ammo > 0 && !hero.isCarrying) {
+                    if (hero.ammo-- > 0 && !hero.isCarrying) {
                         audio.play(audio.effort);
-
-                        utils.printDir(hero.dir);
 
                         hero.bulletArr[hero.bulletArr.length] = {
                             x: hero.x,
@@ -41,25 +37,29 @@ var HeroInputComponent = function () {
                             dirR: (hero.dir == Dir.RIGHT),
                             deg: 0
                         };
-
-                        --hero.ammo;
                     }
-
-                    //delete keysDown[74]
                 }
 
                 lastKeyDown = e.keyCode;
-
                 keysDown[e.keyCode] = true;
             }, false);
 	
             addEventListener("keyup", function (e) { delete keysDown[e.keyCode];}, false);
         },
 
-        check: function(){
-            if (!hero.onObj)
+        check: function () {
+            if (!hero.isJumping || hero.isJumping && hero.jumpMod <= 0) {
                 hero.vY = ((hero.vY + game.gravity) > hero.maxVy) ? hero.maxVy : (hero.vY + game.gravity);
+            }
 
+            if (hero.isJumping) {
+                if (hero.jumpMod > 0) {
+                    hero.vY -= 50 * hero.jumpMod--;
+                }
+            }
+            else {
+                hero.jumpMod = hero.jumpMod0;
+            }
 
 
             // --------- keys pressed --------

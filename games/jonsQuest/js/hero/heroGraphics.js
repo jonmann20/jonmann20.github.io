@@ -16,7 +16,6 @@ var HeroGraphicsComponent = function () {
             shuriken.onload = function () { shurikenReady = true; };
         },
 
-
         drawBullets: function(){
 		    for(var i=0; i < hero.bulletArr.length; ++i){
 		        var dirOffset = hero.bulletArr[i].dirR ?

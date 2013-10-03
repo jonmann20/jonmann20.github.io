@@ -63,14 +63,16 @@ var Inv_e = Object.freeze({
 });
 
 var KeyCode = Object.freeze({
-    ENTER: 13
+    ENTER: 13,
+    J: 74,
+    K: 75
 });
 
 var bullet = {
     color: "rgba(0, 182, 255, .85)",
     w: 19.5,
     h: 9,
-    speed: 230
+    speed: 290
 };
 
 

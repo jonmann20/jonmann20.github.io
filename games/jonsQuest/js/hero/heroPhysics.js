@@ -7,12 +7,11 @@ var HeroPhysicsComponent = function () {
     function screenCollision() {
         hero.onGround = false;
 
-        if (hero.y < -hero.h) {
+        if (hero.y < -hero.h) {                     // feet above top of screen
             hero.y = -hero.h;
             hero.vY = 0;
         }
-
-        if (hero.y > (canvas.height - game.padBot - hero.h)) { // bottom
+        else if (hero.y >= (canvas.height - game.padBot - hero.h)) { // bottom
             hero.y = canvas.height - game.padBot - hero.h;
             hero.isJumping = false;
             hero.onGround = true;
@@ -37,8 +36,8 @@ var HeroPhysicsComponent = function () {
     function bulletHandler() {
         for (var i = 0; i < hero.bulletArr.length; ++i) {
             var fixBs = (bullet.speed / game.fps);
-            console.log(hero.bulletArr[i].dirR)
-            hero.bulletArr[i].x += hero.bulletArr[i].dirR ? fixBs : fixBs; // update position
+
+            hero.bulletArr[i].x += hero.bulletArr[i].dirR ? fixBs : -fixBs; // update position
 
             // bullet and level object
             var k,
@@ -109,29 +108,14 @@ var HeroPhysicsComponent = function () {
 
     return {
         updatePosition: function (){	
-		    if(hero.isJumping){
-		        if (hero.jumpMod > 0) {
-		            //console.log(hero.vY);
-
-			        hero.vY -= hero.jumpMod;
-		            //--hero.jumpMod;
-
-			        hero.jumpMod -= 6; // rise speed
-		        }
-		        else {
-		            hero.vY += 26; // drop quickly
-		        }
-            }
-            else{
-			    hero.jumpMod = hero.jumpPower;
-            }
-		
-            if(hero.x != (hero.x + hero.vX))    // TODO: ???
-                audio.step.play();
-		
             hero.y += (hero.vY / game.fps);
-		
+
+
             var fixVx = (hero.vX / game.fps);
+
+            if (hero.x != (hero.x + fixVx)) {
+                audio.step.play();
+            }
 
             if(((hero.dir == Dir.RIGHT && hero.x >= ((canvas.width/2) + 35)) ||
                (hero.dir == Dir.LEFT && hero.x <= ((canvas.width/2) - 45))) &&
@@ -154,8 +138,8 @@ var HeroPhysicsComponent = function () {
         },
 
         /*
-            checks collision between hero and k
-            returns Dir
+            Checks for a collision between hero and obj.
+            Returns a collision direction.
         */
         objCollision: function(obj) {
             var collisionDir = Dir.NONE;
@@ -165,7 +149,7 @@ var HeroPhysicsComponent = function () {
 
                 collisionDir = Dir.IN;
 
-                if (hero.dir == Dir.RIGHT && (hero.lvlX - hero.x < obj.x)) {                    // left side of obj
+                if (hero.dir == Dir.RIGHT && (hero.lvlX - hero.x < obj.x)) {        // left side of obj
                     collisionDir = Dir.LEFT;
                 }
                 else if ((hero.x + hero.lvlX + hero.w) > (obj.x + obj.w)) {         // right side of obj
@@ -174,7 +158,8 @@ var HeroPhysicsComponent = function () {
 
 
                 if ((hero.x != hero.onObjX) && ((hero.y + hero.h - 17) < obj.y) &&  // top of obj 
-                    (hero.vY > 0)	// moving down
+                    (hero.vY > 0) ||	// moving down 
+                    hero.onObj
                 ) {
                     collisionDir = Dir.TOP;
                 }

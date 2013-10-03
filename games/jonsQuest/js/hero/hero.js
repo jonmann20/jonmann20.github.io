@@ -1,5 +1,6 @@
 /*
     The hero singleton object.
+    Kinematic units are in pixels per second.
 */
 var hero = (function () {
     var //self = this,
@@ -21,7 +22,7 @@ var hero = (function () {
 
         if (hero.invincibleTimer <= 0) {
             hero.invincible = false;
-            hero.invincibleTimer = hero.initInvincibleTimer;
+            hero.invincibleTimer = hero.invincibleTimer0;
         }
 
         if (hero.health <= 0 && !gameOver) {
@@ -96,15 +97,15 @@ var hero = (function () {
 
 		x: 0,				// top left of sprite
 		y: 0,
-		sx: 0,				// sprite pos
+		sx: 0,				// sprite position
 		sy: 0,
-		lvlX: 0,				
+		lvlX: 0,			
 		w: 28,
 		h: 38,
-		vX: 0,              // pixels per second
+		vX: 0,
 		vY: 0,
-		maxVx: 325,
-		maxVy: 300,
+		maxVx: 325,         // TODO: should be const
+		maxVy: 400,         // TODO: should be const
 		aX: 27,			    // horizontal acceleration
 		dir: Dir.RIGHT,
 		isJumping: false,
@@ -113,12 +114,11 @@ var hero = (function () {
 		onObj: true,
 		onObjX: -1,
 		onObjY: -1,
-		jumpMod: 64,			// jumpMod must == jumpPower;  
-		jumpPower: 64,          
-		//jumpPowerMax: 50,
+		jumpMod: 4,
+		jumpMod0: 4,            // TODO: should be const
 		invincible: false,
 		invincibleTimer: 120,
-		initInvincibleTimer: 120,
+		invincibleTimer0: 120,  // TODO: should be const
 		health: 4,
 		maxHealth: 5,
 		medKits: 1,
@@ -135,6 +135,7 @@ var hero = (function () {
 		bulletArr: [],
 		physics: null,         // the hero physics component
 		
+
 		init: function(){
 			img = new Image();
 			img.onload = function () { imgReady = true; };
@@ -169,9 +170,9 @@ var hero = (function () {
 		},
 		
 		update: function () {
-		    input.check();
-			hero.physics.updatePosition();
-			hero.physics.checkCollision();
+		    input.check();                          // updates velocities
+			hero.physics.updatePosition();          // updates positions
+			hero.physics.checkCollision();          // checks new positions
 			
 			checkHealth();
 			getSpritePos();

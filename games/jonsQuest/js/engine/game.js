@@ -44,11 +44,14 @@ var game = (function(){
 
    	    //console.log(game.actualTime + 's', hero.x + "px");
    	    //console.log(game.actualTime + 's', hero.y + "px");
-   	}, 1000)
 
-	
+   	    //console.log(game.actualTime + 's', hero.vY / game.fps));
+
+   	}, 1000);
+
+   	
 	return {
-	    gravity: 1,
+	    gravity: 60,
 	    //friction: 35,
 	    padBot: 119,	// total padding
 	    padHUD: 80,
