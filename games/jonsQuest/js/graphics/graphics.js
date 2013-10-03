@@ -3,26 +3,31 @@
 */
 var Graphics = (function () {
 
-    var alpha = 1,
-        fadeOut = false,
-        alphaPauseTime = 0,
-        alphaPauseTime0 = 10,
-        ticker = 1,  // 1.0 --> 0.0 --> 1.0 --> ...
-        tickerStep = 0.02
-    ;
+    var alpha = 1;
 
     return {
+        ticker: 1,              // 1.0 --> 0.0 --> 1.0 --> ...
+        tickerStep: 0.01,
+        fadeOut: false,
+
+
         blinkText: function (fontSize, x, y, str) {
             str = (typeof (str) !== "undefined") ? str : "PRESS ENTER";
 
-            if (ticker >= 1.35 || ticker <= tickerStep) {
-                fadeOut = !fadeOut;
+            if (Graphics.ticker >= 1.35 || Graphics.ticker <= Graphics.tickerStep) {
+                Graphics.fadeOut = !Graphics.fadeOut;
             }
 
-            ticker += fadeOut ? -tickerStep : tickerStep;
-            alpha = (ticker > 1) ? 1 : ticker;
+            if (Graphics.ticker >= 1) {
+                alpha = 1;
+            }
+            else if (Graphics.ticker <= Graphics.tickerStep) {
+                alpha = 0;
+            }
+            else {
+                alpha = Graphics.ticker;
+            }
 
-            
             ctx.font = fontSize + "px 'Press Start 2P'";
             var tmpW = ctx.measureText(str).width;
             ctx.fillStyle = "rgba(233, 233, 233," + alpha + ')';

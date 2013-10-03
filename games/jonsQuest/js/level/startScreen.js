@@ -2,7 +2,9 @@ var startScreen = (function () {
 
     var copyTitle1 = "JON'S",
 		copyTitle2 = "QUEST",
-		copyLine = String.fromCharCode("169") + " 2013 JON WIEDMANN"
+		copyLine = String.fromCharCode("169") + " 2013 JON WIEDMANN",
+        updateSetInterval = null,
+        renderAnimFrame = null
     ;
 
     function update() {
@@ -22,14 +24,15 @@ var startScreen = (function () {
                     audio.bgMusic.pause();
             }, 1000);
 
+            clearInterval(updateSetInterval);
+            cancelAnimationFrame(renderAnimFrame);
             game.start();
-        }
-        else {
-            requestAnimFrame(startScreen.loop);
         }
     }
 
     function render() {
+        renderAnimFrame = requestAnimFrame(render);
+        
         ctx.fillStyle = "#000";
         ctx.fillRect(0, 0, FULLW, FULLH + game.padHUD);
 
@@ -110,8 +113,12 @@ var startScreen = (function () {
     }
 
     return {
-        loop: function () {
-            update();           // TODO: split update and render
+        start: function () {
+            updateSetInterval = setInterval(function () {
+                Graphics.ticker += Graphics.fadeOut ? -Graphics.tickerStep : Graphics.tickerStep;
+                update();
+            }, game.updateFPS);
+
             render();
         }
     };

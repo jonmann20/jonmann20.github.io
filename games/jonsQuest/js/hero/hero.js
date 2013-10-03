@@ -104,10 +104,10 @@ var hero = (function () {
 		h: 38,
 		vX: 0,
 		vY: 0,
-		maxVx: 3.7,         // TODO: should be const
-		maxVy: 3.7,         // TODO: should be const
-		aX: 0.19,
-		aY: 0.59,
+		maxVx: 3.6,         // TODO: should be const
+		maxVy: 3.6,         // TODO: should be const
+		aX: 0.17,
+		aY: 0.42,
 		jumpMod: 4,
 		jumpMod0: 4,            // TODO: should be const
 		dir: Dir.RIGHT,

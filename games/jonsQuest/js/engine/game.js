@@ -1,6 +1,6 @@
 var game = (function(){
 	var	avgFPS = 0,
-		updateTimePrev = 0,
+		//updateTimePrev = 0,
         renderTimePrev = 0,
         lag = 0,
 		fpsHistory = [0]
@@ -36,15 +36,20 @@ var game = (function(){
 	    if (actualFPS != "Infinity") {
 	        fpsHistory.push(actualFPS);
 	    }
-    	
+	    
     	if (game.totalTicks % 120 === 0) {
     	    var tot = 0;
             
     	    for (var i in fpsHistory) {
         		tot += fpsHistory[i];
         	}
-        	
-        	avgFPS = Math.floor(tot / fpsHistory.length);
+    	    
+    	    if (fpsHistory.length > 0) {
+    	        avgFPS = Math.floor(tot / fpsHistory.length);
+    	    }
+    	    else {
+    	        avgFPS = 0;
+    	    }
         	fpsHistory = [];
         }
     	
@@ -54,13 +59,14 @@ var game = (function(){
 	}
    	
 	return {
-	    gravity: 0.2,
+	    gravity: 0.09,
 	    //friction: 35,
 	    padBot: 119,	// total padding
 	    padHUD: 80,
 	    padFloor: 39,
 	    lvl: -1,
-	    updateTimeBtw: 0,
+	    updateFPS: 1000 / 120,  // 1000 / 120 ==> 2x target rate of 60fps
+	    //updateTimeBtw: 0,
 	    renderTimeBtw: 0,
 	    totalTicks: 0,      // ticks are update iterations
 	    actualTime: 0,
@@ -70,21 +76,22 @@ var game = (function(){
             // update at fixed time interval
 	        setInterval(function () {
 	            ++game.totalTicks;
+	            Graphics.ticker += Graphics.fadeOut ? -Graphics.tickerStep : Graphics.tickerStep;
 
-	            var updateTimeCur = new Date().getTime();
+	            //var updateTimeCur = new Date().getTime();
 
-	            if ((updateTimeCur - updateTimePrev) > 0) {
-	                game.updateTimeBtw = updateTimeCur - updateTimePrev;
-	            }
+	            //if ((updateTimeCur - updateTimePrev) > 0) {
+	                //game.updateTimeBtw = updateTimeCur - updateTimePrev;
+	            //}
 
-	            updateTimePrev = updateTimeCur;
-	            lag += game.updateTimeBtw;
-
-	            while (lag >= game.updateTimeBtw) {      // TODO: interpolate if needed
+	            //updateTimePrev = updateTimeCur;
+	            //lag += game.updateTimeBtw;
+	            
+	            //while (lag >= game.updateTimeBtw) {      // TODO: interpolate if needed
 	                update();
-	                lag -= game.updateTimeBtw;
-	            }
-	        }, 1000 / 120); // 2x target rate of 60fps
+	                //lag -= game.updateTimeBtw;
+	            //}
+	        }, game.updateFPS); 
 
 
             // render w/vsync (let browser decide)

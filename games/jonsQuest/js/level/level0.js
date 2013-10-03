@@ -71,13 +71,17 @@ var lvl0 = (function () {
                 for (var i = 0; i < hero.bulletArr.length; ++i) {
                     if (Physics.isCollision(hero.bulletArr[i], hiddenCash, -17)) {
                         hiddenCash.visible = true;
-                        hiddenCash.vY = 4;
-
                         audio.discovery.play();
                     }
                 }
             }
             else if (!hiddenCash.collected) {
+
+                if (hiddenCash.visible) {
+                    hiddenCash.vY += game.gravity;
+                }
+
+
                 if (Physics.isCollision(hero, hiddenCash, 0)) {
                     hiddenCash.collected = true;
                     audio.itemPickedUp.play();

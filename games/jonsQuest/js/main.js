@@ -82,16 +82,13 @@ jq.Main = (function () {
             }, 1000);
 
 
-
-            startScreen.loop();
+            startScreen.start();
 
             //if (jq.debug) {
             //    setTimeout(function () {
             //        lastKeyDown = KeyCode.ENTER;
             //    }, 300);   // TODO: do callbacks from constructors before starting game
             //}
-
-            
         }
     }
 })();
