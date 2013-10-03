@@ -36,7 +36,7 @@ var hero = (function () {
     }
 
 	function getSpritePos(){
-	    if (game.totalTicks % 10 === 0) {
+	    if (game.totalTicks % 30 === 0) {
 	        showRun = !showRun;
 	    }
 
@@ -104,9 +104,12 @@ var hero = (function () {
 		h: 38,
 		vX: 0,
 		vY: 0,
-		maxVx: 325,         // TODO: should be const
-		maxVy: 400,         // TODO: should be const
-		aX: 27,			    // horizontal acceleration
+		maxVx: 3.7,         // TODO: should be const
+		maxVy: 3.7,         // TODO: should be const
+		aX: 0.19,
+		aY: 0.59,
+		jumpMod: 4,
+		jumpMod0: 4,            // TODO: should be const
 		dir: Dir.RIGHT,
 		isJumping: false,
 		isCarrying: false,
@@ -114,8 +117,6 @@ var hero = (function () {
 		onObj: true,
 		onObjX: -1,
 		onObjY: -1,
-		jumpMod: 4,
-		jumpMod0: 4,            // TODO: should be const
 		invincible: false,
 		invincibleTimer: 120,
 		invincibleTimer0: 120,  // TODO: should be const

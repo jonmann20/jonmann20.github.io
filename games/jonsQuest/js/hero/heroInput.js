@@ -26,7 +26,7 @@ var HeroInputComponent = function () {
                 else if (e.keyCode == 74 &&		//----- shoot (j);          TODO: move to check() function
                         ((lastKeyDown != 74) || !(74 in keysDown))
                 ) {
-                    if (hero.ammo-- > 0 && !hero.isCarrying) {
+                    if (hero.ammo > 0 && !hero.isCarrying) {
                         audio.play(audio.effort);
 
                         hero.bulletArr[hero.bulletArr.length] = {
@@ -37,6 +37,8 @@ var HeroInputComponent = function () {
                             dirR: (hero.dir == Dir.RIGHT),
                             deg: 0
                         };
+
+                        --hero.ammo;
                     }
                 }
 
@@ -48,18 +50,34 @@ var HeroInputComponent = function () {
         },
 
         check: function () {
-            if (!hero.isJumping || hero.isJumping && hero.jumpMod <= 0) {
-                hero.vY = ((hero.vY + game.gravity) > hero.maxVy) ? hero.maxVy : (hero.vY + game.gravity);
-            }
+            var doGravity = false;
 
             if (hero.isJumping) {
                 if (hero.jumpMod > 0) {
-                    hero.vY -= 50 * hero.jumpMod--;
+                    hero.vY -= hero.aY * hero.jumpMod--;
+                }
+                else {
+                    doGravity = true;
                 }
             }
             else {
                 hero.jumpMod = hero.jumpMod0;
+                doGravity = true;
             }
+
+
+            if (doGravity) {
+                var fixVy = hero.vY + game.gravity;
+
+                if (fixVy > hero.maxVY) {
+                    hero.vY = hero.maxVy;
+                }
+                else {
+                    hero.vY = fixVy;
+                }
+            }
+
+
 
 
             // --------- keys pressed --------

@@ -72,7 +72,7 @@ var bullet = {
     color: "rgba(0, 182, 255, .85)",
     w: 19.5,
     h: 9,
-    speed: 290
+    speed: 3.3
 };
 
 
@@ -82,7 +82,7 @@ window.requestAnimFrame = (function () {
 		   window.webkitRequestAnimationFrame ||
 
 		   function (callback) {
-		       setTimeout(callback, 1000 / game.fps);
+		       setTimeout(callback, 16.6666666667); // 60fps fallback
 		   };
 })();
 

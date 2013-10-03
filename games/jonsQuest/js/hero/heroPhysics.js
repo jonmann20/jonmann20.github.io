@@ -35,26 +35,11 @@ var HeroPhysicsComponent = function () {
 
     function bulletHandler() {
         for (var i = 0; i < hero.bulletArr.length; ++i) {
-            var fixBs = (bullet.speed / game.fps);
+            hero.bulletArr[i].x += hero.bulletArr[i].dirR ? bullet.speed : -bullet.speed; // update position
 
-            hero.bulletArr[i].x += hero.bulletArr[i].dirR ? fixBs : -fixBs; // update position
-
-            // bullet and level object
-            var k,
-                lvl = 'lvl' + game.lvl,
-                wasCollision = false;
-
-            /* this is not working quickly enough!!!!!
-			for(var j in level.collisionPts[lvl]){
-				k = level.collisionPts[lvl][j]
-										 if(physics.isCollision(hero.bulletArr[i], k, 0)){
-					wasCollision = true
-				}
-			}*/
-
-
-            if (wasCollision || hero.bulletArr[i].x > canvas.width || hero.bulletArr[i].x < 0)		// bullet and screen
+            if (hero.bulletArr[i].x > canvas.width || hero.bulletArr[i].x < 0) {		// bullet and screen
                 hero.bulletArr.splice(i, 1); // remove ith item
+            }
         }
     }
 
@@ -108,26 +93,23 @@ var HeroPhysicsComponent = function () {
 
     return {
         updatePosition: function (){	
-            hero.y += (hero.vY / game.fps);
-
-
-            var fixVx = (hero.vX / game.fps);
-
-            if (hero.x != (hero.x + fixVx)) {
+            if (hero.x != (hero.x + hero.vX)) {
                 audio.step.play();
             }
 
             if(((hero.dir == Dir.RIGHT && hero.x >= ((canvas.width/2) + 35)) ||
                (hero.dir == Dir.LEFT && hero.x <= ((canvas.width/2) - 45))) &&
-               (hero.lvlX + fixVx >= 0) &&
-               (hero.lvlX + fixVx <= level.width - canvas.width)
+               (hero.lvlX + hero.vX >= 0) &&
+               (hero.lvlX + hero.vX <= level.width - canvas.width)
             ){
-                hero.lvlX += fixVx;
+                hero.lvlX += hero.vX;
                 level.updateObjs();
             }
             else {
-                hero.x += fixVx;
+                hero.x += hero.vX;
             }
+
+            hero.y += hero.vY;
         },
 
         checkCollision: function () {

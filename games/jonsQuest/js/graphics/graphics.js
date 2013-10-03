@@ -4,26 +4,28 @@
 var Graphics = (function () {
 
     var alpha = 1,
-        fadeOut = true
+        fadeOut = false,
+        alphaPauseTime = 0,
+        alphaPauseTime0 = 10,
+        ticker = 1,  // 1.0 --> 0.0 --> 1.0 --> ...
+        tickerStep = 0.02
     ;
 
     return {
         blinkText: function (fontSize, x, y, str) {
-            str = (typeof (str) !== 'undefined') ? str : 'PRESS ENTER';
+            str = (typeof (str) !== "undefined") ? str : "PRESS ENTER";
 
-            if (alpha <= 0)
-                fadeOut = false;
-            else if (alpha > 1.55)
-                fadeOut = true;
+            if (ticker >= 1.35 || ticker <= tickerStep) {
+                fadeOut = !fadeOut;
+            }
 
-            var theDt = game.dt / 1000; // TODO: use acutal time
+            ticker += fadeOut ? -tickerStep : tickerStep;
+            alpha = (ticker > 1) ? 1 : ticker;
 
-            alpha += fadeOut ? -theDt : theDt;
-
-            // press enter
+            
             ctx.font = fontSize + "px 'Press Start 2P'";
             var tmpW = ctx.measureText(str).width;
-            ctx.fillStyle = 'rgba(233, 233, 233,' + alpha + ')';
+            ctx.fillStyle = "rgba(233, 233, 233," + alpha + ')';
             ctx.fillText(str, x - tmpW / 2, y);
         },
 

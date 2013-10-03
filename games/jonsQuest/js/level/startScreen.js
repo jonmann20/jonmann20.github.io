@@ -1,7 +1,6 @@
 var startScreen = (function () {
 
-    var _time = 0,
-		copyTitle1 = "JON'S",
+    var copyTitle1 = "JON'S",
 		copyTitle2 = "QUEST",
 		copyLine = String.fromCharCode("169") + " 2013 JON WIEDMANN"
     ;
@@ -23,7 +22,7 @@ var startScreen = (function () {
                     audio.bgMusic.pause();
             }, 1000);
 
-            game.loop();
+            game.start();
         }
         else {
             requestAnimFrame(startScreen.loop);
@@ -112,13 +111,8 @@ var startScreen = (function () {
 
     return {
         loop: function () {
-            update();
+            update();           // TODO: split update and render
             render();
-
-            var now = new Date().getTime();
-            game.dt = now - (_time || now);		// TODO: use internal var
-            _time = now;
-
         }
     };
 })();

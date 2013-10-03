@@ -1,16 +1,27 @@
 var game = (function(){
 	var	avgFPS = 0,
-		timePrev = 0,
+		updateTimePrev = 0,
+        renderTimePrev = 0,
         lag = 0,
 		fpsHistory = [0]
 	;
 	
-	function update(){
+	function update() {
 		hero.update();
 		level.update();
 	}
 	
-	function render(){
+	function render(renderTimeCur) {
+        // timers
+	    if ((renderTimeCur - renderTimePrev) > 0) {
+	        game.renderTimeBtw = renderTimeCur - renderTimePrev;
+	    }
+	    renderTimePrev = renderTimeCur;
+
+
+	    requestAnimFrame(render);
+        
+	    // drawing
 		level.render();
 		hero.render();
 		
@@ -18,17 +29,18 @@ var game = (function(){
 		drawFPS();
 	}
 	
-   	function drawFPS(){
-        ctx.fillStyle = "#ddd";
-        ctx.font = "12px 'Press Start 2P'";
-        
-    	if(game.fps != "Infinity")
-        	fpsHistory.push(game.fps);
+	function drawFPS(fps) {
+
+	    var actualFPS = (1000 / game.renderTimeBtw);
+
+	    if (actualFPS != "Infinity") {
+	        fpsHistory.push(actualFPS);
+	    }
     	
-    	if (game.totalTicks % 40 === 0) {
+    	if (game.totalTicks % 120 === 0) {
     	    var tot = 0;
             
-        	for(var i in fpsHistory){
+    	    for (var i in fpsHistory) {
         		tot += fpsHistory[i];
         	}
         	
@@ -36,77 +48,47 @@ var game = (function(){
         	fpsHistory = [];
         }
     	
+    	ctx.fillStyle = "#ddd";
+    	ctx.font = "12px 'Press Start 2P'";
 	  	ctx.fillText(avgFPS + " FPS", FULLW - 84, FULLH + 65);
 	}
-
-   	setInterval(function () {
-   	    ++game.actualTime;
-
-   	    //console.log(game.actualTime + 's', hero.x + "px");
-   	    //console.log(game.actualTime + 's', hero.y + "px");
-
-   	    //console.log(game.actualTime + 's', hero.vY / game.fps));
-
-   	}, 1000);
-
    	
 	return {
-	    gravity: 60,
+	    gravity: 0.2,
 	    //friction: 35,
 	    padBot: 119,	// total padding
 	    padHUD: 80,
 	    padFloor: 39,
 	    lvl: -1,
-	    fps: 60,            // fps and dt will be updated dynamically
-	    dt: 1000 / 60,      // ms per loop
-	    totalTicks: 0,      // TODO: use actualTime, totalTicks depends on loop fps 
+	    updateTimeBtw: 0,
+	    renderTimeBtw: 0,
+	    totalTicks: 0,      // ticks are update iterations
 	    actualTime: 0,
 
-	    loop: function(){
-	        requestAnimFrame(game.loop);
+	    start: function () {
 
-	        ++game.totalTicks;
+            // update at fixed time interval
+	        setInterval(function () {
+	            ++game.totalTicks;
 
-	        var timeCur = new Date().getTime();
+	            var updateTimeCur = new Date().getTime();
 
-	        if ((timeCur - timePrev) > 0) {
-	            game.dt = timeCur - timePrev;
-	        }
+	            if ((updateTimeCur - updateTimePrev) > 0) {
+	                game.updateTimeBtw = updateTimeCur - updateTimePrev;
+	            }
 
-	        timePrev = timeCur;
-	        lag += game.dt;
-	        game.fps = 1000 / game.dt;
+	            updateTimePrev = updateTimeCur;
+	            lag += game.updateTimeBtw;
+
+	            while (lag >= game.updateTimeBtw) {      // TODO: interpolate if needed
+	                update();
+	                lag -= game.updateTimeBtw;
+	            }
+	        }, 1000 / 120); // 2x target rate of 60fps
 
 
-	        while (lag >= game.dt) {
-	            update();
-	            lag -= game.dt;
-	        }
-
+            // render w/vsync (let browser decide)
 	        render();
-	    },
-
-
-	    //loop: function (frameTime) {
-	    //    //setTimeout(function () {
-        //    //setInterval(function(){
-	        
-	    //    doTimers(frameTime);
-	        
-	    //    console.log(frameTime, physicsDt);
-
-	    //    physicsDt += frameTime || 0;
-	    //    if (physicsDt > 16) {
-	    //        update();
-	    //        physicsDt -= 16;
-	    //    }
-
-        //    render();
-
-
-	    //    requestAnimFrame(game.loop);
-
-	    //    //}, 1000 / game.fps);
-	    //}
+	    }
 	};
 })();

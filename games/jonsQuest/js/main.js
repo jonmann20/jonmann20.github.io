@@ -70,19 +70,26 @@ jq.Main = (function () {
 
             level.init();
             hero.init();
-
-            console.log()
             
+
+            // game timer
+            setInterval(function () {
+                ++game.actualTime;
+
+                //console.log(game.actualTime + 's', hero.x + "px");
+                //console.log(game.actualTime + 's', hero.y + "px");
+
+            }, 1000);
+
+
+
             startScreen.loop();
 
-            if (jq.debug) {
-                setTimeout(function () {
-                    lastKeyDown = KeyCode.ENTER;
-                }, 300);   // TODO: do callbacks from constructors before starting game
-            }
-            else {
-                startScreen.loop();
-            }
+            //if (jq.debug) {
+            //    setTimeout(function () {
+            //        lastKeyDown = KeyCode.ENTER;
+            //    }, 300);   // TODO: do callbacks from constructors before starting game
+            //}
 
             
         }

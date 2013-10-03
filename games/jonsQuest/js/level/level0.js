@@ -148,13 +148,11 @@ var lvl0 = (function () {
         },
 
         updateObjs: function () {
-            var fix = (hero.vX / game.fps);
-            
-            sack.x -= fix;
-            cyborg.x -= fix;
-            hiddenCash.x -= fix;
-            belt.x -= fix;
-            lvl0.crate.x -= fix;
+            sack.x -= hero.vX;
+            cyborg.x -= hero.vX;
+            hiddenCash.x -= hero.vX;
+            belt.x -= hero.vX;
+            lvl0.crate.x -= hero.vX;
         },
 
         render: function () {
