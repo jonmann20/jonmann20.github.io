@@ -1,4 +1,9 @@
-﻿/*
+﻿/// <reference path="hero.js" />
+/// <reference path="heroInput.js" />
+/// <reference path="heroGraphics.js" />
+/// <reference path="../physics/physics.js" />
+
+/*
     The physics component of hero.
 */
 var HeroPhysicsComponent = function () {
@@ -18,7 +23,7 @@ var HeroPhysicsComponent = function () {
 
             hero.vY = 0;
         }
-        else if (hero.onObj) { 						// on top of obj
+        else if (hero.isOnObj) { 						// on top of obj
             hero.y = hero.onObjY;
             hero.vY = 0;
         }
@@ -44,45 +49,17 @@ var HeroPhysicsComponent = function () {
     }
 
     function heroAndLvlCollision() {
-        var i = game.lvl;
+        var i = game.lvl,
+            collisionDir = Dir.NONE;
 
         for (var j in level.collisionPts[i]) {
             var k = level.collisionPts[i][j];
-            var collisionDir = hero.physics.objCollision(k);
+            collisionDir = hero.physics.objCollision(k);
 
-            // TODO: move this to a "solid rectangle object"
-            if (collisionDir != Dir.NONE) {
+            Physics.solidRectCollision(collisionDir, k);
 
-                if (collisionDir == Dir.LEFT) {
-                    hero.onObjX = k.x - hero.lvlX - hero.w;
-                    hero.onObjLvlX = hero.lvlX;
-                }
-                else if (collisionDir == Dir.RIGHT) {
-                    hero.onObjX = k.x - hero.lvlX + k.w;
-                    hero.onObjLvlX = hero.lvlX;
-                }
-                else if (collisionDir == Dir.TOP) {
-                    hero.onObjY = hero.y = k.y - hero.h;
-                    hero.isJumping = false;
-                    hero.onObj = true;
-                }
-                else if (collisionDir == Dir.BOT) {
-                    if (hero.vY < -4) {
-                        audio.play(audio.thud, true);
-                    }
-
-                    hero.onObjY = hero.y = k.y + k.h;
-                    hero.jumpMod = 0;
-                    hero.vY = 0;
-                }
-
-                if ((collisionDir == Dir.LEFT) || (collisionDir == Dir.RIGHT)) {
-                    hero.x = hero.onObjX;
-                    hero.lvlX = hero.onObjLvlX;
-                }
-
+            if (collisionDir != Dir.NONE)
                 break;
-            }
         }
 
         if (collisionDir == Dir.NONE) {
@@ -139,9 +116,8 @@ var HeroPhysicsComponent = function () {
                 }
 
 
-                if ((hero.x != hero.onObjX) && ((hero.y + hero.h - 17) < obj.y) &&  // top of obj 
-                    (hero.vY > 0) ||	// moving down 
-                    hero.onObj
+                if ((hero.x != hero.onObjX) && ((hero.y + hero.h - ((obj.h / 2) + 1)) < obj.y) &&  // top of obj
+                    (hero.vY > 0) || hero.isOnObj   // moving down OR already on
                 ) {
                     collisionDir = Dir.TOP;
                 }

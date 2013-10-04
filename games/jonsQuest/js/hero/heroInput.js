@@ -1,3 +1,11 @@
+/// <reference path="hero.js" />
+/// <reference path="heroGraphics.js" />
+/// <reference path="heroPhysics.js" />
+/// <reference path="../physics/physics.js" />
+
+/*
+    The input component of hero.
+*/
 var HeroInputComponent = function () {
 
     return {
@@ -16,7 +24,7 @@ var HeroInputComponent = function () {
                     $(".resize").trigger("click");
                 else if (e.keyCode == 75 &&			//----- jump (k);       TODO: move to check() function
                        (!hero.isJumping && ((lastKeyDown != 75) || !(75 in keysDown))) &&
-                       (hero.onObj || hero.onGround)
+                       (hero.isOnObj || hero.onGround)
                 ) {
                     audio.jump.play();
                     hero.vY = 0;
@@ -65,9 +73,8 @@ var HeroInputComponent = function () {
                 doGravity = true;
             }
 
-
             if (doGravity) {
-                var fixVy = hero.vY + game.gravity;
+                var fixVy = hero.vY + game.gravity*2;
 
                 if (fixVy > hero.maxVY) {
                     hero.vY = hero.maxVy;
@@ -76,8 +83,6 @@ var HeroInputComponent = function () {
                     hero.vY = fixVy;
                 }
             }
-
-
 
 
             // --------- keys pressed --------
@@ -137,3 +142,5 @@ var HeroInputComponent = function () {
         }
     };
 };
+
+//@ sourceURL=heroInput.js

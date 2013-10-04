@@ -1,3 +1,9 @@
+/// <reference path="../hero/hero.js" />
+/// <reference path="../hero/heroInput.js" />
+/// <reference path="../hero/heroGraphics.js" />
+/// <reference path="../hero/heroPhysics.js" />
+/// <reference path="../physics/physics.js" />
+
 var lvl0 = (function () {
 
     var cyborg = null,
@@ -6,19 +12,15 @@ var lvl0 = (function () {
 		belt = null,
 		belt2 = null
     ;
-    var k = [];
+    //var k = [];
     var m = -0.52845528455;
     
     function beltPhysics() {
         if (Physics.isCollision(hero, belt, 0)) {
-            hero.isJumping = false;
-            hero.onObj = true;
-
             var b = belt.initY + belt.h - hero.h;
             var x = Math.abs(hero.lvlX - 680); // 680 is the init hero.lvlX when you enter the box from the left
-            
-            hero.y = m * x + b;
-            hero.onObjY = hero.y;
+
+            hero.onObj(m * x + b);
         }
     }
 
@@ -33,7 +35,7 @@ var lvl0 = (function () {
 
             cyborg = Enemy();
             cyborg.init(
-                GameObj(2100, FULLH - game.padFloor - 38 + 1, 28, 38, "img/cyborgBnW.png"), 
+                GameObj(1700, FULLH - game.padFloor - 38 + 1, 28, 38, "img/cyborgBnW.png"), 
                 1
             );
 
@@ -81,7 +83,6 @@ var lvl0 = (function () {
                     hiddenCash.vY += game.gravity;
                 }
 
-
                 if (Physics.isCollision(hero, hiddenCash, 0)) {
                     hiddenCash.collected = true;
                     audio.itemPickedUp.play();
@@ -96,6 +97,17 @@ var lvl0 = (function () {
                     lvl0.crate.holding = true;
                     lvl0.crate.vY = 6.5;
                 }
+
+                //var collisionDir = hero.physics.objCollision(lvl0.crate);
+                
+                //if (collisionDir != Dir.TOP && collisionDir != Dir.NONE) {
+                //    hero.isCarrying = true;
+                //    lvl0.crate.holding = true;
+                //    lvl0.crate.vY = 6.5;
+                //}
+                //else if(collisionDir == Dir.TOP){
+                //    hero.onObj(hero.y -1);
+                //}
             }
             else {
                 if (hero.dir == Dir.RIGHT)
@@ -182,9 +194,9 @@ var lvl0 = (function () {
                 }
             }
 
-            for(var i=0; i < k.length; ++i){
-                k[i].draw();
-            }
+            //for(var i=0; i < k.length; ++i){
+            //    k[i].draw();
+            //}
 
         }
     };

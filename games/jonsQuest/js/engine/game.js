@@ -59,7 +59,7 @@ var game = (function(){
 	}
    	
 	return {
-	    gravity: 0.09,
+	    gravity: 0.07,
 	    //friction: 35,
 	    padBot: 119,	// total padding
 	    padHUD: 80,
@@ -99,3 +99,5 @@ var game = (function(){
 	    }
 	};
 })();
+
+//@ sourceURL=game.js

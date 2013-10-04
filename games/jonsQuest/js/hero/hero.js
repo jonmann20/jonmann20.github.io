@@ -1,6 +1,10 @@
+/// <reference path="heroInput.js" />
+/// <reference path="heroGraphics.js" />
+/// <reference path="heroInput.js" />
+/// <reference path="../physics/physics.js" />
+
 /*
     The hero singleton object.
-    Kinematic units are in pixels per second.
 */
 var hero = (function () {
     var //self = this,
@@ -24,7 +28,7 @@ var hero = (function () {
             hero.invincible = false;
             hero.invincibleTimer = hero.invincibleTimer0;
         }
-
+        
         if (hero.health <= 0 && !gameOver) {
             audio.heroDeath.play();
             audio.bgMusic.muted = true;
@@ -72,9 +76,9 @@ var hero = (function () {
 				pos = spriteArr["playerLeft"];
 		}
 		
-		var inv = hero.invincibleTimer % 20;
+		var inv = hero.invincibleTimer % 40;
 		
-		if(hero.invincible && (inv >= 0 && inv <= 6)){
+		if(hero.invincible && (inv >= 0 && inv <= 16)){
 			pos = {x: -1, y: -1};
 		}
 		
@@ -105,16 +109,16 @@ var hero = (function () {
 		vX: 0,
 		vY: 0,
 		maxVx: 3.6,         // TODO: should be const
-		maxVy: 3.6,         // TODO: should be const
+		maxVy: 10,         // TODO: should be const
 		aX: 0.17,
-		aY: 0.42,
+		aY: 0.5,
 		jumpMod: 4,
 		jumpMod0: 4,            // TODO: should be const
 		dir: Dir.RIGHT,
 		isJumping: false,
 		isCarrying: false,
 		onGround: true,
-		onObj: true,
+		isOnObj: true,
 		onObjX: -1,
 		onObjY: -1,
 		invincible: false,
@@ -164,8 +168,16 @@ var hero = (function () {
 			    graphics.init();
 		},
 		
+		onObj: function(y){
+		    hero.isJumping = false;
+		    hero.isOnObj = true;
+
+		    hero.y = y;
+		    hero.onObjY = y;
+		},
+
 		offObj: function(){
-			hero.onObj = false;
+		    hero.isOnObj = false;
 			hero.onObjX = -1;
 			hero.onObjY = -1;
 		},
