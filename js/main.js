@@ -21,8 +21,10 @@
 $(function () {
     var waitForScripts = setInterval(function () {
         if (jw.scriptsLoaded === jw.numScripts) {
-            jw.Main.init();
             clearInterval(waitForScripts);
+            jw.Main.init();
         }
-    }, 10);
+    }, 15);
 });
+
+//@ sourceURL=main.js

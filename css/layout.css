@@ -2,6 +2,9 @@
 html, 
 body {
 	height: 100%;
+    position: relative;
+    z-index: -2;
+    background: #222;
 	background: radial-gradient(closest-side at 50% 36% , hsl(240, 10%, 20%), hsl(58, 7%, 12%));
 }
 body {
@@ -36,12 +39,13 @@ header nav {
 	font-family: 'Open Sans Condensed', 'Verdana', sans-serif;
 	font-size: 2.1em;
 	text-align: center;
-	background: rgba(57, 57, 57, .88);
-	margin-top: 26px;
+	background: rgb(57, 57, 57);
+	margin-top: 35px;
 	padding: 10px;
 	min-width: 165px;
-	border-radius: 0 45px;
-	box-shadow: 0 0 2px 4px rgba(57, 57, 57, 0.88);
+	border-radius: 0 40px;
+    position: relative;
+    box-shadow: 0 0 8px 0 rgba(0,0,0,0.4);
 }
 header nav a,
 header nav a:visited {
@@ -87,7 +91,7 @@ header nav a:hover span,
 
 /* First Nav */
 header nav:first-child {
-	border-radius: 45px 0;	
+	border-radius: 40px 0;	
 	text-indent: 9px;
 }
 header nav:first-child span {
@@ -104,7 +108,7 @@ header nav:first-child a {
 
 /* Second Nav */
 .hdrNav2 {
-	margin-top: 28px;
+	margin-top: 42px;
 	padding-top: 5px;
 }
 .hdrNav2 ul a {
@@ -185,11 +189,28 @@ header nav ul #cube {
 /*#region ************** Footer **************/
 footer {
 	position: relative;
-	bottom: 0;
+	bottom: -24px;
 	width: 100%;
 	height: 29px;
-	padding: 30px 0 40px;
-    font-size: 138%;
+	padding: 24px 0;
+    font-size: 136%;
+    background: rgb(57, 56, 57);
+    border-top: 1px solid rgb(65,64,65);
+}
+footer:before,
+footer:after {
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: 0;
+    background: rgb(45, 45, 49);
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+footer:before { /* bottom of stack */
+    background: rgba(47, 46, 50, 0.45);
+    top: -20px;
 }
 footer div {
 	width: 70%;
