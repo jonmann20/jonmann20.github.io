@@ -7,13 +7,18 @@
     }
 
 
-
     return {
         init: function () {
             declareGlobals();
-            jw.Routing.init();
 
-            $(".dateYear").text(jw.Utils.getYear());
+            var waitForScriptEval = setInterval(function () {
+                if (typeof(jw.Utils) !== "undefined" && typeof (jw.Routing) !== "undefined") {
+                    $(".dateYear").text(jw.Utils.getYear());
+                    jw.Routing.init();
+
+                    clearInterval(waitForScriptEval);
+                }
+            }, 25);
         }
     }
 })();
@@ -24,7 +29,7 @@ $(function () {
             clearInterval(waitForScripts);
             jw.Main.init();
         }
-    }, 15);
+    }, 25);
 });
 
 //@ sourceURL=main.js

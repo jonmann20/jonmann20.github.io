@@ -4,8 +4,8 @@ body {
 	height: 100%;
     position: relative;
     z-index: -2;
-    background: #222;
-	background: radial-gradient(closest-side at 50% 36% , hsl(240, 10%, 20%), hsl(58, 7%, 12%));
+    background: rgb(35, 28, 32);
+	background: radial-gradient(closest-side at 50% 36% , rgb(46, 46, 56), rgb(35, 28, 32));
 }
 body {
 	line-height: 1.25; 
@@ -16,16 +16,13 @@ body {
 .page {
 	position: relative;
 	max-width: 1520px; 
-	min-height: 93.6%;
-	margin: 0 auto -40px;
+	min-height: 100%;
+	margin: 0 auto;
 }
 .inner {
 	margin: 0 auto;
 	width: 88%;
-	min-height: 40em;
-}
-.push {
-	height: 60px;
+	min-height: 66em;
 }
 /*#endregion*/
 
@@ -36,22 +33,22 @@ header {
 	margin-bottom: 40px;
 }
 header nav {
-	font-family: 'Open Sans Condensed', 'Verdana', sans-serif;
+	font-family: "Open Sans Condensed", "Verdana", sans-serif;
 	font-size: 2.1em;
 	text-align: center;
-	background: rgb(57, 57, 57);
+	background: rgb(59, 58, 59);
 	margin-top: 35px;
 	padding: 10px;
 	min-width: 165px;
-	border-radius: 0 40px;
+	border-radius: 0 43px;
     position: relative;
     box-shadow: 0 0 8px 0 rgba(0,0,0,0.4);
 }
 header nav a,
 header nav a:visited {
 	text-align: right;
-	color: rgba(140, 177, 24, 0.93) !important; 
-	-webkit-text-stroke: 1px rgba(140, 177, 24, 0.93);
+	color: rgba(140, 177, 24, 0.8) !important; 
+	-webkit-text-stroke: 1px rgba(140, 177, 24, 0.8);
 	text-stroke: 1px rgba(140, 177, 24, 0.93);
 	text-shadow: 0 3px 3px #000;
 	display: block;
@@ -91,7 +88,7 @@ header nav a:hover span,
 
 /* First Nav */
 header nav:first-child {
-	border-radius: 40px 0;	
+	border-radius: 43px 0;	
 	text-indent: 9px;
 }
 header nav:first-child span {
@@ -190,12 +187,13 @@ header nav ul #cube {
 footer {
 	position: relative;
 	bottom: -24px;
+    margin-top: -94px;
 	width: 100%;
 	height: 29px;
-	padding: 24px 0;
-    font-size: 136%;
-    background: rgb(57, 56, 57);
-    border-top: 1px solid rgb(65,64,65);
+	padding: 20px 0;
+    font-size: 127%;
+    background: rgb(55, 54, 55);
+    border-top: 1px solid rgb(67, 66, 67);
 }
 footer:before,
 footer:after {
@@ -203,13 +201,13 @@ footer:after {
     position: absolute;
     top: -10px;
     left: 0;
-    background: rgb(45, 45, 49);
+    background: rgb(47, 46, 47);
     width: 100%;
     height: 100%;
     z-index: -1;
 }
 footer:before { /* bottom of stack */
-    background: rgba(47, 46, 50, 0.45);
+    background: rgba(47, 46, 47, 0.45);
     top: -20px;
 }
 footer div {
@@ -217,9 +215,9 @@ footer div {
 	margin: 0 auto;
 }
 footer a {
-	-webkit-text-stroke: 1px #5dafd7;
-	text-stroke: 1px #5dafd7;
 	transition: 0;
+    font-size: 1.25em;
+	vertical-align: -2px;
 }
 footer .footL {
 	float: left;
@@ -231,15 +229,13 @@ footer .name {
 	display: inline-block;
 	text-indent: -999em;
 }
-footer .footL .imgLinks {  
-	font-size: 1.25em;
-	-webkit-text-stroke: 0;
-	text-stroke: 0;
-	vertical-align: -2px;
-}
 footer .icon-youtube-sign {
 	font-size: 1.254em;
 	vertical-align: -2px;
+}
+footer .footAbout .name,
+footer .footContact .name {
+    text-indent: 0;
 }
 footer .footContact {
 	margin-right: 1.3em !important;
@@ -329,33 +325,34 @@ footer .footR {
     footer div {
         width: 96%;
     }
-    footer .imgLinks {
+    footer a {
 		margin: 0 !important;
 	}
 }
-@media screen and (max-width: 745px) {
+@media screen and (max-width: 745px) { /* vertical footer */
+    footer {
+        height: 366px;
+    }
     footer a {
 		display: block;
 		margin-bottom: 10px !important;
         font-size: 24px;
-        -webkit-text-stroke: 0;
-        text-stroke: 0;
+        text-align: right;
 	}
 	footer .footL {
 		float: none;
-		width: 172px;
+		width: 192px;
 		margin: 0 auto;
 		display: block;
         padding-bottom: 30px;
 	}
-    footer .footL a:not(.imgLinks) {
-        text-align: center;
-    }
 	footer .footR {
 		display: none;
 	}
-	footer .name {
-		text-indent: 3px;
+    footer .name {
+		text-indent: 0;
+        width: 139px;
+        padding-right: 6px;
 	}
 	footer .footContact {
 		margin-right: 0 !important;
@@ -397,7 +394,6 @@ footer .footR {
 		width: 100% !important;
 		margin-top: 30px;
 		border-top: 1px solid rgba(57, 57, 57, .88);
-		box-shadow: 0 -3px 4px -4px;
 	}
 	.home .colR {
 		margin-top: 0 !important;
@@ -425,7 +421,9 @@ footer .footR {
 	.bigBtn {
 		margin: 30px auto 0;
 	}
-
+    footer {
+        margin-top: 0;
+    }
 }
 /*#endregion*/
 
