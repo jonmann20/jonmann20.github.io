@@ -5,14 +5,12 @@
 
             if (page === "index") {
                 that.load("/games/index.html", function (data) {
-                    jw.main.html(data);
-
                     jw.Utils.require("/js/plugins/jquery.hoverIntent.min.js", function () { });
 
                     jw.Utils.require("/js/plugins/jquery.hoverCarousel.js", function () {
                         $("ul").hoverCarousel();
                     });
-                });
+                }).swap();
 
                 document.title = "Games";
                 jw.body.addClass("absHover games");

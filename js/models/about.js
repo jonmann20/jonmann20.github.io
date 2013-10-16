@@ -3,9 +3,7 @@
         render: function (that) {
             jw.Utils.resetModel();
 
-            that.load("/about.html", function (data) {
-                jw.main.html(data);
-            });
+            that.load("/about.html").swap();
 
             document.title = "About";
             jw.body.addClass("about");

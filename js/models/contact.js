@@ -3,9 +3,7 @@
         render: function (that) {
             jw.Utils.resetModel();
 
-            that.load("/contact.html", function (data) {
-                jw.main.html(data);
-            });
+            that.load("/contact.html").swap();
 
             document.title = "Contact Me";
             jw.body.addClass("contact");

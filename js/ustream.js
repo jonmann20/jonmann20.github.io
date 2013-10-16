@@ -49,3 +49,5 @@
         }
     };
 })(jQuery);
+
+//@ sourceURL=ustream.js

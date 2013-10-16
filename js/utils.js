@@ -45,7 +45,6 @@
                 jw.Bounce.deInit();
             }
 
-            jw.main.empty();
             jw.body.removeClass();
             document.title = "";
             $("meta[name=description], meta[name=keywords]").remove();
@@ -67,3 +66,5 @@ window.requestAnimFrame = (function () {
 			    window.setTimeout(callback, 1000 / 60);
 			};
 })();
+
+//@ sourceURL=utils.js

@@ -1,5 +1,5 @@
 jw.Routing = (function ($, undefined) {
-    var app = $.sammy(function () {
+    var app = $.sammy(".main", function () {
         //----- Home
         this.route("get",'/', function () {
             jw.HomeModel.render(this);
@@ -132,6 +132,8 @@ jw.Routing = (function ($, undefined) {
 
     return {
         lastPg: null,
+
+
         init: function () {
             app.run();
         }

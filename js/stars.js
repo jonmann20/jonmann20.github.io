@@ -52,3 +52,5 @@
         }
     };
 })(jQuery);
+
+//@ sourceURL=stars.js

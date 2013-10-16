@@ -5,8 +5,6 @@
             jw.Utils.resetModel();
 
             that.load("/home.html", function (data) {
-                jw.main.html(data);
-
                 jw.Utils.require("//platform.twitter.com/widgets.js", function (alreadyCreated) {
                     //if(!alreadyCreated){
                         twttr.widgets.load();
@@ -16,7 +14,7 @@
                 jw.Utils.require("/js/plugins/jquery.cycle.lite.js", function (alreadyCreated) {
                     $("#slideshow").cycle();
                 });
-            });
+            }).swap();
 
             document.title = "Jon Wiedmann";
             jw.head.append("<meta name='description' content='Jon Wiedmann&#700;s personal website.  This site is set up to showcase some of my technical ability. " +

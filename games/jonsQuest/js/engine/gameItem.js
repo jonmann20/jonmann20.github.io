@@ -34,3 +34,4 @@ var GameItem = function () {
     };
 };
 
+//@ sourceURL=gameItem.js

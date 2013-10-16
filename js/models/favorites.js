@@ -4,9 +4,7 @@
         render: function (that) {
             jw.Utils.resetModel();
 
-            that.load("/favorites.html", function (data) {
-                jw.main.html(data);
-            });
+            that.load("/favorites.html").swap();
 
             document.title = "Favorites";
             jw.head.append("<meta name='description' content='Jon Wiedmann&#700;s personal website.  This site is set up to showcase some of my technical ability. " +

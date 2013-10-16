@@ -3,14 +3,14 @@ html,
 body {
 	height: 100%;
     position: relative;
-    z-index: -2;
+    z-index: 0;
     background: rgb(35, 28, 32);
 	background: radial-gradient(closest-side at 50% 36% , rgb(46, 46, 56), rgb(35, 28, 32));
 }
 body {
 	line-height: 1.25; 
 	font-size: 87.5%;
-	font-family: 'Open Sans', Verdana, Calibri, Helvetica, Arial, sans-serif;
+	font-family: "Open Sans", Verdana, Calibri, Helvetica, Arial, sans-serif;
 	color: #eaeaea;
 }
 .page {
@@ -47,8 +47,8 @@ header nav {
 header nav a,
 header nav a:visited {
 	text-align: right;
-	color: rgba(140, 177, 24, 0.8) !important; 
-	-webkit-text-stroke: 1px rgba(140, 177, 24, 0.8);
+	color: rgba(140, 177, 24, 0.84) !important; 
+	-webkit-text-stroke: 1px rgba(140, 177, 24, 0.84);
 	text-stroke: 1px rgba(140, 177, 24, 0.93);
 	text-shadow: 0 3px 3px #000;
 	display: block;

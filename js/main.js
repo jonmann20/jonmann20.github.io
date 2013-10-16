@@ -3,7 +3,6 @@
     function declareGlobals() {
         jw.head = $("head");
         jw.body = $("body");
-        jw.main = $(".main");
     }
 
 
