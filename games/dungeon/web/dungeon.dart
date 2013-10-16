@@ -28,7 +28,7 @@ Level level;
 Overworld overworld;
 //AudioContext bgMusic;
 bool lvlSelected,
-     DEBUG_LVL = true,
+     DEBUG_LVL = false,
      DEBUG_OVERWORLD = false;   // skip start screen
 num curLvl, dt;
 num FULLW = 854,                // 480p; 16:9 ==> 53.375*16 x 53.375*9
