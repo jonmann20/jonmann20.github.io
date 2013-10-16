@@ -92,32 +92,42 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
     <script>
         $(function () {
-            jq.numScripts = 16;
             jq.scriptsLoaded = 0;
 
+            function getAndExecute(src) {
+                $.ajax({
+                    async: false,   // forces execution before callback
+                    type: "GET",
+                    dataType: "script",
+                    url: src,
+                    success: ++jq.scriptsLoaded
+                });
+            }
+
             if (jq.debug) {
-                $.getScript("js/utils.js", ++jq.scriptsLoaded);
-                $.getScript("js/audio/audio.js", ++jq.scriptsLoaded);
-                $.getScript("js/graphics/graphics.js", ++jq.scriptsLoaded);
-                $.getScript("js/physics/physics.js", ++jq.scriptsLoaded);
-                $.getScript("js/engine/gameObject.js", ++jq.scriptsLoaded);
-                $.getScript("js/engine/gameItem.js", ++jq.scriptsLoaded);
-                $.getScript("js/enemy/enemy.js", ++jq.scriptsLoaded);
-                $.getScript("js/level/startScreen.js", ++jq.scriptsLoaded);
-                $.getScript("js/level/level.js", ++jq.scriptsLoaded);
-                $.getScript("js/level/level0.js", ++jq.scriptsLoaded);
-                $.getScript("js/engine/game.js", ++jq.scriptsLoaded);
-                $.getScript("js/hero/heroGraphics.js", ++jq.scriptsLoaded);
-                $.getScript("js/hero/heroPhysics.js", ++jq.scriptsLoaded);
-                $.getScript("js/hero/heroInput.js", ++jq.scriptsLoaded);
-                $.getScript("js/hero/hero.js", ++jq.scriptsLoaded);
-                $.getScript("js/main.js", ++jq.scriptsLoaded);
+                jq.numScripts = 16;
+
+                getAndExecute("js/utils.js");
+                getAndExecute("js/audio/audio.js");
+                getAndExecute("js/graphics/graphics.js");
+                getAndExecute("js/physics/physics.js");
+                getAndExecute("js/engine/gameObject.js");
+                getAndExecute("js/engine/gameItem.js");
+                getAndExecute("js/enemy/enemy.js");
+                getAndExecute("js/level/startScreen.js");
+                getAndExecute("js/level/level.js");
+                getAndExecute("js/level/level0.js");
+                getAndExecute("js/engine/game.js");
+                getAndExecute("js/hero/heroGraphics.js");
+                getAndExecute("js/hero/heroPhysics.js");
+                getAndExecute("js/hero/heroInput.js");
+                getAndExecute("js/hero/hero.js");
+                getAndExecute("js/main.js");
             }
             else {
                 jq.numScripts = 1;
-                jq.scriptsLoaded = 0;
 
-                $.getScript("/js/min/pageJonsQuest.js", ++jq.scriptsLoaded);
+                getAndExecute("/js/min/pageJonsQuest.js");
             }
         });
 

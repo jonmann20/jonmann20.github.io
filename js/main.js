@@ -11,14 +11,8 @@
         init: function () {
             declareGlobals();
 
-            var waitForScriptEval = setInterval(function () {
-                if (typeof(jw.Utils) !== "undefined" && typeof (jw.Routing) !== "undefined") {
-                    $(".dateYear").text(jw.Utils.getYear());
-                    jw.Routing.init();
-
-                    clearInterval(waitForScriptEval);
-                }
-            }, 25);
+            jw.Routing.init();
+            $(".dateYear").text(jw.Utils.getYear());
         }
     }
 })();
@@ -29,7 +23,7 @@ $(function () {
             clearInterval(waitForScripts);
             jw.Main.init();
         }
-    }, 25);
+    }, 20);
 });
 
 //@ sourceURL=main.js

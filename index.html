@@ -30,7 +30,7 @@
                 addCSS("/css/min/master.css");
             }
         })();
-</script>
+    </script>
 </head>
 <body>
     <div class="page">
@@ -115,32 +115,41 @@
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
     <script>
         $(function () {
-            jw.numScripts = 13;
             jw.scriptsLoaded = 0;
-            
+
+            function getAndExecute(src) {
+                $.ajax({
+                    async: false,   // forces execution before callback
+                    type: "GET",
+                    dataType: "script",
+                    url: src,
+                    success: ++jw.scriptsLoaded
+                });
+            }
+
             if (jw.debug) {
-                $.getScript("/js/plugins/sammy.js", ++jw.scriptsLoaded);
-                $.getScript("/js/utils.js", ++jw.scriptsLoaded);
-                $.getScript("/js/models/home.js", ++jw.scriptsLoaded);
-                $.getScript("/js/models/about.js", ++jw.scriptsLoaded);
-                $.getScript("/js/models/contact.js", ++jw.scriptsLoaded);
-                $.getScript("/js/models/favorites.js", ++jw.scriptsLoaded);
-                $.getScript("/js/models/blog.js", ++jw.scriptsLoaded);
-                $.getScript("/js/models/games.js", ++jw.scriptsLoaded);
-                $.getScript("/js/models/music.js", ++jw.scriptsLoaded);
-                $.getScript("/js/models/playground.js", ++jw.scriptsLoaded);
-                $.getScript("/js/models/portfolio.js", ++jw.scriptsLoaded);
-                $.getScript("/js/routing.js", ++jw.scriptsLoaded);
-                $.getScript("/js/main.js", ++jw.scriptsLoaded);
+                jw.numScripts = 13;
+
+                getAndExecute("/js/plugins/sammy.js");
+                getAndExecute("/js/utils.js");
+                getAndExecute("/js/models/home.js");
+                getAndExecute("/js/models/about.js");
+                getAndExecute("/js/models/contact.js");
+                getAndExecute("/js/models/favorites.js");
+                getAndExecute("/js/models/blog.js");
+                getAndExecute("/js/models/games.js");
+                getAndExecute("/js/models/music.js");
+                getAndExecute("/js/models/playground.js");
+                getAndExecute("/js/models/portfolio.js");
+                getAndExecute("/js/routing.js");
+                getAndExecute("/js/main.js");
             }
             else {
                 jw.numScripts = 1;
-                jw.scriptsLoaded = 0;
 
-                $.getScript("/js/min/master.js", ++jw.scriptsLoaded);
+                getAndExecute("/js/min/master.js");
             }
         });
-
     </script>
 </body>
 </html>

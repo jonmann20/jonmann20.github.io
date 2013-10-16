@@ -87,7 +87,7 @@ jq.Main = (function () {
             if (jq.debug) {
                 setTimeout(function () {
                     lastKeyDown = KeyCode.ENTER;
-                }, 300);   // TODO: do callbacks from constructors before starting game
+                }, 300);   // TODO: shouldn't need to wait here
             }
         }
     }
@@ -100,7 +100,7 @@ $(function () {
             jq.Main.init();
             clearInterval(waitForScripts);
         }
-    }, 10);
+    }, 20);
 });
 
 //@ sourceURL=main.js
