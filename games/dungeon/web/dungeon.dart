@@ -27,8 +27,8 @@ Player p;
 Level level;
 Overworld overworld;
 //AudioContext bgMusic;
-bool lvlSelected, 
-     DEBUG_LVL = false,
+bool lvlSelected,
+     DEBUG_LVL = true,
      DEBUG_OVERWORLD = false;   // skip start screen
 num curLvl, dt;
 num FULLW = 854,                // 480p; 16:9 ==> 53.375*16 x 53.375*9
@@ -43,20 +43,19 @@ num FULLW = 854,                // 480p; 16:9 ==> 53.375*16 x 53.375*9
 GameObj stairs = new GameObj(0, 0, 40, 40, 'stairsR.png');
 
 void main(){
-  window.onLoad.listen((e){
-    
-//    var j = js.context;
-//    
-//    js.scoped((){
-//      j.audioJS();
-//    });
-//    
-//    // works in latest non Dartium
-//    var a = query('audio');
-//    a.play();
-    
-    
-    game = new Game();
-  });
-}
+	window.onLoad.listen((e){
 
+	//    var j = js.context;
+	//
+	//    js.scoped((){
+	//      j.audioJS();
+	//    });
+	//
+	//    // works in latest non Dartium
+	//    var a = query('audio');
+	//    a.play();
+
+
+	  game = new Game();
+	});
+}

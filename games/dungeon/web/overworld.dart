@@ -94,7 +94,9 @@ class Overworld{
     
     key.resetKeys();
     level.setStartPosition();
-    canvasListener.cancel();
+    
+    if(!DEBUG_LVL)
+        canvasListener.cancel();
   }
   
   void transition(int dir){

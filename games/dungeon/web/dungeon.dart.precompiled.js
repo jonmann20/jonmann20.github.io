@@ -5443,16 +5443,10 @@ Duration: {"": "Object;_duration<",
     return P.Duration$(0, 0, C.JSNumber_methods.$sub(this._duration, t1), 0, 0, 0);
   },
   $lt: function(_, other) {
-    var t1 = other.get$_duration();
-    if (typeof t1 !== "number")
-      throw H.iae(t1);
-    return C.JSNumber_methods.$lt(this._duration, t1);
+    return this._duration < other.get$_duration();
   },
   $gt: function(_, other) {
-    var t1 = other.get$_duration();
-    if (typeof t1 !== "number")
-      throw H.iae(t1);
-    return C.JSNumber_methods.$gt(this._duration, t1);
+    return this._duration > other.get$_duration();
   },
   $le: function(_, other) {
     return this._duration <= other.get$_duration();
@@ -6379,7 +6373,7 @@ main_closure: {"": "Closure;",
   }
 },
 
-Enemy: {"": "GameObj;initHealth,health,invincibleTimer,invincible,captured,imgCardReady,animate,cardSrc,name,imgCard,hdir,vdir,ix,iy,w,h,x,y,ready,img,src",
+Enemy: {"": "GameObj;ACCELERATION,initHealth,health,invincibleTimer,movTimer,invincible,captured,imgCardReady,animate,cardSrc,name,imgCard,ix,iy,w,h,x,y,ready,img,src",
   update$0: function() {
     var t1, t2, t3;
     if (this.invincible) {
@@ -6391,10 +6385,15 @@ Enemy: {"": "GameObj;initHealth,health,invincibleTimer,invincible,captured,imgCa
       }
     }
     if (this.animate) {
-      if (J.$lt$n(this.x, 0)) {
+      t1 = this.movTimer + 1;
+      this.movTimer = t1;
+      t1 = t1 > 110;
+    } else
+      t1 = false;
+    if (t1) {
+      if (J.$lt$n(this.x, 0))
         this.x = 0;
-        this.hdir = 39;
-      } else {
+      else {
         t1 = this.x;
         t2 = $.FULLW;
         t3 = this.w;
@@ -6406,20 +6405,14 @@ Enemy: {"": "GameObj;initHealth,health,invincibleTimer,invincible,captured,imgCa
           if (typeof t2 !== "number")
             throw H.iae(t2);
           this.x = t1 - t2;
-          this.hdir = 37;
-        } else {
-          t1 = this.hdir;
-          t2 = this.x;
-          if (t1 === 39)
-            this.x = J.$add$ns(t2, 1);
-          else
-            this.x = J.$sub$n(t2, 1);
-        }
+        } else if (J.$gt$n($.p.x, this.x))
+          this.x = J.$add$ns(this.x, this.ACCELERATION);
+        else if (J.$lt$n($.p.x, this.x))
+          this.x = J.$sub$n(this.x, this.ACCELERATION);
       }
-      if (J.$lt$n(this.y, 0)) {
+      if (J.$lt$n(this.y, 0))
         this.y = 0;
-        this.vdir = 40;
-      } else {
+      else {
         t1 = this.y;
         t2 = $.FULLH;
         t3 = this.h;
@@ -6431,17 +6424,14 @@ Enemy: {"": "GameObj;initHealth,health,invincibleTimer,invincible,captured,imgCa
           if (typeof t2 !== "number")
             throw H.iae(t2);
           this.y = t1 - t2;
-          this.vdir = 38;
-        } else {
-          t1 = this.vdir;
-          t2 = this.y;
-          if (t1 === 40)
-            this.y = J.$add$ns(t2, 1);
-          else
-            this.y = J.$sub$n(t2, 1);
-        }
+        } else if (J.$gt$n($.p.y, this.y))
+          this.y = J.$add$ns(this.y, this.ACCELERATION);
+        else if (J.$lt$n($.p.y, this.y))
+          this.y = J.$sub$n(this.y, this.ACCELERATION);
       }
     }
+    if (this.movTimer > 250)
+      this.movTimer = 0;
     t1 = $.p.sword;
     if (t1.inUse && $.util.checkCollision$2(t1, this))
       if (!this.invincible) {
@@ -6515,8 +6505,7 @@ Enemy: {"": "GameObj;initHealth,health,invincibleTimer,invincible,captured,imgCa
     this.imgCardReady = false;
     this.animate = false;
     this.invincibleTimer = 30;
-    this.hdir = 39;
-    this.vdir = 40;
+    this.movTimer = 0;
     t1 = this.cardSrc;
     if (t1 != null) {
       this.imgCard = W.ImageElement_ImageElement(null, null, null);
@@ -6532,7 +6521,7 @@ Enemy: {"": "GameObj;initHealth,health,invincibleTimer,invincible,captured,imgCa
   $isEnemy: true,
   static: {
 Enemy$: function(initHealth, cardSrc, $name, ix, iy, w, h, src) {
-  var t1 = new F.Enemy(initHealth, null, null, null, null, null, null, cardSrc, $name, null, null, null, ix, iy, w, h, null, null, null, null, null);
+  var t1 = new F.Enemy(0.9, initHealth, null, null, null, null, null, null, null, cardSrc, $name, null, ix, iy, w, h, null, null, null, null, null);
   t1.GameObj$5(ix, iy, w, h, src);
   t1.Enemy$8(initHealth, cardSrc, $name, ix, iy, w, h, src);
   return t1;
@@ -6594,22 +6583,6 @@ Game: {"": "Object;fpsHolder,oldTime,fps,w,h,invRatio",
   get$gameLoop: function() {
     return new P.BoundClosure$1(this, F.Game.prototype.gameLoop$1, null, "gameLoop$1");
   },
-  displayFps$2: function(t, old) {
-    var t1, t2;
-    t1 = J.getInterceptor$n(t);
-    t2 = t1.$sub(t, old);
-    if (typeof t2 !== "number")
-      throw t2.$div();
-    $.dt = t2 / 1000;
-    if (C.JSNumber_methods.$mod(t1.toInt$0(t), 12) === 0) {
-      t1 = $.dt;
-      if (typeof t1 !== "number")
-        throw H.iae(t1);
-      this.fps = C.JSInt_methods.$tdiv(1, t1);
-      this.fpsHolder.textContent = "Dungeon: " + H.S(this.fps) + " fps";
-    }
-    this.oldTime = t;
-  },
   update$0: function() {
     if ($.lvlSelected !== true || $.curLvl === 0)
       $.overworld.update$0();
@@ -6627,6 +6600,22 @@ Game: {"": "Object;fpsHolder,oldTime,fps,w,h,invRatio",
       if (!t1.invisible)
         t1.render$0();
     }
+  },
+  displayFps$2: function(t, old) {
+    var t1, t2;
+    t1 = J.getInterceptor$n(t);
+    t2 = t1.$sub(t, old);
+    if (typeof t2 !== "number")
+      throw t2.$div();
+    $.dt = t2 / 1000;
+    if (C.JSNumber_methods.$mod(t1.toInt$0(t), 12) === 0) {
+      t1 = $.dt;
+      if (typeof t1 !== "number")
+        throw H.iae(t1);
+      this.fps = C.JSInt_methods.$tdiv(1, t1);
+      this.fpsHolder.textContent = "Dungeon: " + H.S(this.fps) + " fps";
+    }
+    this.oldTime = t;
   },
   Game$0: function() {
     var t1, t2, t3, t4;
@@ -7502,7 +7491,8 @@ Overworld: {"": "Object;lvlArr,ovrCurLvl,fixX,fixY,boxW,boxH,boxPadBot",
     }
     $.key.resetKeys$0();
     $.level.setStartPosition$0();
-    $.canvasListener.cancel$0();
+    if (!$.DEBUG_LVL)
+      $.canvasListener.cancel$0();
   },
   transition$1: function(_, dir) {
     var t1, t2, t3;
@@ -8856,7 +8846,7 @@ $.p = null;
 $.level = null;
 $.overworld = null;
 $.lvlSelected = null;
-$.DEBUG_LVL = false;
+$.DEBUG_LVL = true;
 $.DEBUG_OVERWORLD = false;
 $.curLvl = null;
 $.dt = null;
@@ -11717,10 +11707,12 @@ function dart_precompiled($collectedClasses) {
   if ($desc instanceof Array)
     $desc = $desc[1];
   main_closure.prototype = $desc;
-  function Enemy(initHealth, health, invincibleTimer, invincible, captured, imgCardReady, animate, cardSrc, name, imgCard, hdir, vdir, ix, iy, w, h, x, y, ready, img, src) {
+  function Enemy(ACCELERATION, initHealth, health, invincibleTimer, movTimer, invincible, captured, imgCardReady, animate, cardSrc, name, imgCard, ix, iy, w, h, x, y, ready, img, src) {
+    this.ACCELERATION = ACCELERATION;
     this.initHealth = initHealth;
     this.health = health;
     this.invincibleTimer = invincibleTimer;
+    this.movTimer = movTimer;
     this.invincible = invincible;
     this.captured = captured;
     this.imgCardReady = imgCardReady;
@@ -11728,8 +11720,6 @@ function dart_precompiled($collectedClasses) {
     this.cardSrc = cardSrc;
     this.name = name;
     this.imgCard = imgCard;
-    this.hdir = hdir;
-    this.vdir = vdir;
     this.ix = ix;
     this.iy = iy;
     this.w = w;
