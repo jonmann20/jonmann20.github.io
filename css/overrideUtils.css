@@ -48,17 +48,17 @@ a:focus {
 
 /*#region Fonts */
 @font-face {
-	font-family: 'icomoon';
-	src:url('/font/icomoon.eot');
-	src:url('/font/icomoon.eot?#iefix') format('embedded-opentype'),
-		url('/font/icomoon.woff') format('woff'),
-		url('/font/icomoon.ttf') format('truetype'),
-		url('/font/icomoon.svg#icomoon') format('svg');
+	font-family: "icomoon";
+	src: url("/font/icomoon.eot");
+	src: url("/font/icomoon.svg#icomoon") format("svg"),
+         url("/font/icomoon.eot?#iefix") format("embedded-opentype"),
+		 url("/font/icomoon.ttf") format("truetype"),
+		 url("/font/icomoon.woff") format("woff");
 	font-weight: normal;
 	font-style: normal;
 }
 [class*="icon-"] {
-	font-family: 'icomoon';
+	font-family: "icomoon";
 	speak: none;
 	font-style: normal;
 	font-weight: normal;
@@ -66,6 +66,10 @@ a:focus {
 	text-transform: none;
 	line-height: 1;
 	-webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+.icon-uniF000:before {
+	content: "\f000";
 }
 .icon-github:before {
 	content: "\e000";
@@ -106,7 +110,7 @@ a:focus {
 .icon-beaker:before {
 	content: "\f0c3";
 }
-.icon-github-2:before {
+.icon-github2:before {
 	content: "\e008";
 }
 .icon-volume-medium:before {
@@ -135,6 +139,9 @@ a:focus {
 }
 .icon-contract:before {
 	content: "\e013";
+}
+.icon-link:before {
+	content: "\e600";
 }
 /*#endregion*/
 
@@ -173,7 +180,6 @@ br.clr {
 .noselect {
 	-webkit-touch-callout: none;
 	-webkit-user-select: none;
-	-khtml-user-select: none;
 	-moz-user-select: none;
 	-ms-user-select: none;
 	user-select: none;

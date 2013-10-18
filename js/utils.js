@@ -1,5 +1,7 @@
 ﻿jw.Utils = (function ($, undefined) {
 
+    var _main = $(".main");
+
     var jsSrcHash = {
         // src: id
         "//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js": false,
@@ -31,10 +33,14 @@
                 callback(true);
             }
         },
+
         getYear: function () {
             return new Date().getFullYear();
         },
+
         resetModel: function () {
+            _main.empty();
+
             if (jw.Routing.lastPg === "ballPit") {
                 jw.BallPit.deInit();
             }
