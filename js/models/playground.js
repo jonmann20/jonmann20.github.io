@@ -9,7 +9,7 @@
                     that.load("/playground/playgroundNav.html", function (data) {
                         $(".playgroundNav").html(data);
 
-                        $(".colL ul").hoverCarousel();
+                        $(".colL ul").listCarousel();
                     });
                 }).swap();
 

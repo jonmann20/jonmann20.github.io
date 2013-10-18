@@ -8,7 +8,7 @@
         "//platform.twitter.com/widgets.js": false,
         "/js/plugins/jquery.cycle.lite.js": false,
         "/js/plugins/jquery.hoverIntent.min.js": false,
-        "/js/plugins/jquery.hoverCarousel.js": false,
+        "/js/plugins/jquery.listCarousel.js": false,
         "/js/plugins/jquery.star_bg.js": false,
         "/js/stars.js": false,
         "/js/ballPit.js": false,
