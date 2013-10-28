@@ -1,4 +1,4 @@
-jq.Main = (function () {
+var Main = (function () {
 
     function setCanvasGlobals() {
         canvas = $("canvas")[0];
@@ -48,8 +48,7 @@ jq.Main = (function () {
         });
 
         //----- enable audio on start -----
-        if(!jq.debug)
-            audio.handleMuteButton()
+        audio.handleMuteButton()
     }
 
     function setupLoadingScreen() {
@@ -83,24 +82,12 @@ jq.Main = (function () {
 
 
             startScreen.start();
-
-            if (jq.debug) {
-                setTimeout(function () {
-                    lastKeyDown = KeyCode.ENTER;
-                }, 300);   // TODO: shouldn't need to wait here
-            }
         }
     }
 })();
 
-// pre-load game
 $(function () {
-    var waitForScripts = setInterval(function () {
-        if (jq.scriptsLoaded === jq.numScripts) {
-            jq.Main.init();
-            clearInterval(waitForScripts);
-        }
-    }, 20);
+    Main.init();
 });
 
 //@ sourceURL=main.js

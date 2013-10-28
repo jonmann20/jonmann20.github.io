@@ -1,6 +1,3 @@
-body {
-    
-}
 header {
 	width: 220px;
 }
@@ -75,4 +72,7 @@ input[readonly] {
 }
 .goals {
 	margin-bottom: 20px;
+}
+.padBot {
+    margin-bottom: 18px;
 }

@@ -8,33 +8,8 @@
     <title>Jon&#700;s Quest | Games</title>
 
     <link href="http://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
-
-
-    <script>
-        // setup namespace
-        var jq = {
-            debug: (location.hostname === "localhost")
-        };
-
-        (function () {
-            function addCSS(src) {
-                var cssLink = document.createElement("link");
-                cssLink.setAttribute("rel", "stylesheet");
-                cssLink.setAttribute("href", src);
-                document.getElementsByTagName("head")[0].appendChild(cssLink);
-            }
-
-            if (jq.debug) {
-                addCSS("/css/normalize.css");
-                addCSS("/css/overrideUtils.css");
-                addCSS("/css/layout.css");
-                addCSS("/games/jonsQuest/css/jonsQuest.css")
-            }
-            else {
-                addCSS("/css/min/pageJonsQuest.css");
-            }
-        })();
-    </script>
+    <link href="/css/min/master.css" rel="stylesheet">
+    <link href="css/jonsQuest.css" rel="stylesheet">
 </head>
 <body class="pageFullW jonsQuest">
     <div class="page">
@@ -54,15 +29,12 @@
                     </ul>
                     <ul>
                         <li><span class="keyAction">A:</span> LEFT</li>
-                        <li><span class="keyAction">D:</span> RIGHT</li>
-                        <br />
+                        <li class="padBot"><span class="keyAction">D:</span> RIGHT</li>
                         <li><span class="keyAction">J:</span> THROW</li>
                         <li><span class="keyAction">K:</span> JUMP</li>
-                        <li><span class="keyAction">SPACE</span> DROP</li>
-                        <br />
+                        <li class="padBot"><span class="keyAction">SPACE</span> DROP</li>
                         <li><span class="keyAction">H:</span> HEAL</li>
-                        <li><span class="keyAction">R:</span> RESTORE</li>
-                        <br />
+                        <li class="padBot"><span class="keyAction">R:</span> RESTORE</li>
                         <li class="audioSwitch">
                             <span class="keyAction">M:</span>
                             Audio .... <button class="audioState off"><span class="icon-volume-mute"></span> </button>
@@ -87,49 +59,7 @@
         </div>
     </div>
 
-
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-    <script>
-        $(function () {
-            jq.scriptsLoaded = 0;
-
-            function getAndExecute(src) {
-                $.ajax({
-                    async: false,   // forces execution before callback
-                    type: "GET",
-                    dataType: "script",
-                    url: src,
-                    success: ++jq.scriptsLoaded
-                });
-            }
-
-            if (jq.debug) {
-                jq.numScripts = 16;
-
-                getAndExecute("js/utils.js");
-                getAndExecute("js/audio/audio.js");
-                getAndExecute("js/graphics/graphics.js");
-                getAndExecute("js/physics/physics.js");
-                getAndExecute("js/engine/gameObject.js");
-                getAndExecute("js/engine/gameItem.js");
-                getAndExecute("js/enemy/enemy.js");
-                getAndExecute("js/level/startScreen.js");
-                getAndExecute("js/level/level.js");
-                getAndExecute("js/level/level0.js");
-                getAndExecute("js/engine/game.js");
-                getAndExecute("js/hero/heroGraphics.js");
-                getAndExecute("js/hero/heroPhysics.js");
-                getAndExecute("js/hero/heroInput.js");
-                getAndExecute("js/hero/hero.js");
-                getAndExecute("js/main.js");
-            }
-            else {
-                jq.numScripts = 1;
-
-                getAndExecute("/js/min/pageJonsQuest.js");
-            }
-        });
-
-    </script>
+    <script src="/js/min/pageJonsQuest.js"></script>
 </body>
 </html>
