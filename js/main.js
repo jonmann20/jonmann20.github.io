@@ -17,12 +17,5 @@
 })();
 
 $(function () {
-    var waitForScripts = setInterval(function () {
-        if (jw.scriptsLoaded === jw.numScripts) {
-            clearInterval(waitForScripts);
-            jw.Main.init();
-        }
-    }, 20);
+    jw.Main.init();
 });
-
-//@ sourceURL=main.js

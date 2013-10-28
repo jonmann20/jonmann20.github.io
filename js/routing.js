@@ -139,5 +139,3 @@ jw.Routing = (function ($, undefined) {
         }
     };
 })(jQuery);
-
-//@ sourceURL=routing.js

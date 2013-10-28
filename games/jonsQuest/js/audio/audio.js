@@ -70,5 +70,3 @@
         }
     };
 })();
-
-//@ sourceURL=/audio/audio.js

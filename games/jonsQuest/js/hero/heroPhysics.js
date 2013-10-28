@@ -130,5 +130,3 @@ var HeroPhysicsComponent = function () {
         }
     };
 };
-
-//@ sourceURL=heroPhysics.js

@@ -202,5 +202,3 @@ var lvl0 = (function () {
     };
 
 })();
-
-//@ sourceURL=level0.js

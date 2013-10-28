@@ -75,7 +75,6 @@ var bullet = {
     speed: 3.3
 };
 
-
 // global functions
 window.requestAnimFrame = (function () {
     return window.requestAnimationFrame ||
@@ -85,5 +84,3 @@ window.requestAnimFrame = (function () {
 		       setTimeout(callback, 16.6666666667); // 60fps fallback
 		   };
 })();
-
-//@ sourceURL=utils.js

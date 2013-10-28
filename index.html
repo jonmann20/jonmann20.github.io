@@ -1,35 +1,16 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
+    <title></title>
 	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/ico" href="/img/favicon.ico">
 
 	<link href="//fonts.googleapis.com/css?family=Press+Start+2P|Open+Sans|Open+Sans+Condensed:300" rel="stylesheet" type="text/css">
+    <link href="/css/min/master.css" rel="stylesheet" />
 
     <script>
-        // setup namespace
-        var jw = {
-            debug: (location.hostname === "localhost")
-        };
-        
-        (function () {
-            function addCSS(src) {
-                var cssLink = document.createElement("link");
-                cssLink.setAttribute("rel", "stylesheet");
-                cssLink.setAttribute("href", src);
-                document.getElementsByTagName("head")[0].appendChild(cssLink);
-            }
-
-            if (jw.debug) {
-                addCSS("/css/normalize.css");
-                addCSS("/css/overrideUtils.css");
-                addCSS("/css/layout.css");
-            }
-            else {
-                addCSS("/css/min/master.css");
-            }
-        })();
+        var jw = {};    // setup namespace
     </script>
 </head>
 <body>
@@ -113,43 +94,6 @@
     </footer>
     
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-    <script>
-        $(function () {
-            jw.scriptsLoaded = 0;
-
-            function getAndExecute(src) {
-                $.ajax({
-                    async: false,   // forces execution before callback
-                    type: "GET",
-                    dataType: "script",
-                    url: src,
-                    success: ++jw.scriptsLoaded
-                });
-            }
-
-            if (jw.debug) {
-                jw.numScripts = 13;
-
-                getAndExecute("/js/plugins/sammy.js");
-                getAndExecute("/js/utils.js");
-                getAndExecute("/js/models/home.js");
-                getAndExecute("/js/models/about.js");
-                getAndExecute("/js/models/contact.js");
-                getAndExecute("/js/models/favorites.js");
-                getAndExecute("/js/models/blog.js");
-                getAndExecute("/js/models/games.js");
-                getAndExecute("/js/models/music.js");
-                getAndExecute("/js/models/playground.js");
-                getAndExecute("/js/models/portfolio.js");
-                getAndExecute("/js/routing.js");
-                getAndExecute("/js/main.js");
-            }
-            else {
-                jw.numScripts = 1;
-
-                getAndExecute("/js/min/master.js");
-            }
-        });
-    </script>
+    <script src="/js/min/master.js"></script>
 </body>
 </html>

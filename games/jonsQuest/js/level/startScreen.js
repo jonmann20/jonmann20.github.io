@@ -123,5 +123,3 @@ var startScreen = (function () {
         }
     };
 })();
-
-//@ sourceURL=/level/startScreen.js

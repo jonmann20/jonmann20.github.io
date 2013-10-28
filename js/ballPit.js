@@ -157,5 +157,3 @@ jw.BallPit = (function ($, undefined) {
         }
     };
 })(jQuery);
-
-//@ sourceURL=ballPit.js

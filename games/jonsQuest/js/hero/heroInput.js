@@ -142,5 +142,3 @@ var HeroInputComponent = function () {
         }
     };
 };
-
-//@ sourceURL=heroInput.js

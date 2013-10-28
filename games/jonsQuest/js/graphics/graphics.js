@@ -68,5 +68,3 @@ var Graphics = (function () {
         }
     };
 })();
-
-//@ sourceURL=/graphics/graphics.js

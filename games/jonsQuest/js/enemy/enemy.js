@@ -75,5 +75,3 @@ var Enemy = function () {
 
     };
 };
-
-//@ sourceURL=/enemy/enemy.js

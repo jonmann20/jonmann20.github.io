@@ -40,5 +40,3 @@ var GameObj = function (xx, yy, ww, hh, src) {
         }
     };
 };
-
-//@ sourceURL=gameObject.js

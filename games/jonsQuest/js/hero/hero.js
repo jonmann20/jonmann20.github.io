@@ -201,5 +201,3 @@ var hero = (function () {
 		}
 	};
 })();
-
-//@ sourceURL=hero.js

@@ -201,5 +201,3 @@ var level = (function () {
 
     };
 })();
-
-//@ sourceURL=level.js

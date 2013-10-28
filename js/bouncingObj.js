@@ -176,5 +176,3 @@ jw.Bounce = (function ($, undefined) {
     };
 
 })(jQuery);
-
-//@ sourceURL=bouncingObj.js

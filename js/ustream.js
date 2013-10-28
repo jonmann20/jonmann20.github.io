@@ -49,5 +49,3 @@
         }
     };
 })(jQuery);
-
-//@ sourceURL=ustream.js

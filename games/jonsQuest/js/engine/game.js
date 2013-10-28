@@ -99,5 +99,3 @@ var game = (function(){
 	    }
 	};
 })();
-
-//@ sourceURL=game.js

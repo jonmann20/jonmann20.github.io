@@ -1,22 +1,17 @@
-//----- xampp
-sudo /opt/lampp/lampp start
-sudo /opt/lampp/lampp restart
-sudo /opt/lampp/lampp stop
-sudo /opt/lampp/lampp
+//---- grunt
+
+// open server in background
+windows:
+START grunt
+
+*nix:
+grunt &
 
 
-//------ bash notes
-
-note="hi"
-
-$note				// dereferences note
-note+=" world"
+// install new plugin
+npm install grunt-contrib-<name> --save
 
 
-d=$(date +"%b %d, %Y")" "
-d+=$(date +%r)
-		
-echo -e "\t$d"
 
 
 // http://opengameart.org/content/2d-hero
