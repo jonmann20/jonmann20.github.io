@@ -4,6 +4,45 @@ module.exports = function(grunt) {
 
 	// configure tasks
 	grunt.initConfig({
+	    clean: ["css/min", "js/min"],
+
+	    connect: {
+	        server: {
+	            options: {
+	                hostname: "jon",
+	                port: 80,
+	                keepalive: true
+	                //open: true
+	            }
+	        }
+	    },
+
+	    //watch: {
+	    //    css: {
+	    //        files: ["css/*.css"],
+	    //        tasks: ["cssmin"],
+	    //        options: {
+	    //            livereload: 80
+	    //        }
+	    //    },
+
+	    //    masterJs: {
+	    //        files: ["js/*.js"],
+	    //        tasks: ["uglify:masterJs"],
+	    //        options: {
+	    //            livereload: 80
+	    //        }
+	    //    },
+
+	    //    pageJonsQuestJs: {
+	    //        files: ["games/jonsQuest/**/*.js"],
+	    //        tasks: ["uglify:pageJonsQuestJs"],
+	    //        options: {
+	    //            livereload: 80
+	    //        }
+	    //    }
+	    //},
+
 	    concat_sourcemap: {
 	        options: {
                 sourcesContent: true
@@ -65,47 +104,7 @@ module.exports = function(grunt) {
 
 	    cssmin: {
 	        "<%= concat_sourcemap.css.dest %>": "<%= concat_sourcemap.css.src %>"
-	    },
-
-	    connect: {
-	        server: {
-	            options: {
-                    hostname: "jon",
-	                port: 80,
-	                keepalive: true
-                    //open: true
-	            }
-	        }
-	    },
-
-	    clean: ["css/min", "js/min"]
-
-	    //watch: {
-	    //    css: {
-	    //        files: ["css/*.css"],
-	    //        tasks: ["cssmin"],
-	    //        options: {
-	    //            livereload: 80
-	    //        }
-	    //    },
-
-	    //    masterJs: {
-	    //        files: ["js/*.js"],
-	    //        tasks: ["uglify:masterJs"],
-	    //        options: {
-	    //            livereload: 80
-	    //        }
-	    //    },
-
-	    //    pageJonsQuestJs: {
-	    //        files: ["games/jonsQuest/**/*.js"],
-	    //        tasks: ["uglify:pageJonsQuestJs"],
-	    //        options: {
-	    //            livereload: 80
-	    //        }
-	    //    }
-	    //}
-
+	    }
 
         // TODO: imagemin, htmlmin + copy, bower??, browserify??
 
@@ -115,13 +114,14 @@ module.exports = function(grunt) {
 	// local tasks
 	//grunt.loadTasks("tasks");
 
-	// external tasks (plugins)
-	grunt.loadNpmTasks("grunt-concat-sourcemap");
+    // external tasks (plugins)
+	grunt.loadNpmTasks("grunt-contrib-clean");
 	grunt.loadNpmTasks("grunt-contrib-connect");
+    //grunt.loadNpmTasks("grunt-contrib-watch");
+
+	grunt.loadNpmTasks("grunt-concat-sourcemap");
 	grunt.loadNpmTasks("grunt-contrib-uglify");
 	grunt.loadNpmTasks("grunt-contrib-cssmin");
-	grunt.loadNpmTasks("grunt-contrib-clean");
-	//grunt.loadNpmTasks("grunt-contrib-watch");
   
     // task runner options
 	grunt.registerTask("default", ["concat_sourcemap", "connect"]);
