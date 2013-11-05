@@ -91,13 +91,13 @@ module.exports = function(grunt) {
 	    uglify: {
 	        masterJs: {
 	            files: {
-	                "<%= concat_sourcemap.masterJs.dest %>": ["js/analytics.js", "<%= concat_sourcemap.masterJs.src %>"]
+	                "<%= concat_sourcemap.masterJs.dest %>": ["js/analytics.js", "js/clientSideLogging", "<%= concat_sourcemap.masterJs.src %>"]
 	            }
 	        },
 
 	        pageJonsQuestJs: {
 	            files: {
-	                "<%= concat_sourcemap.pageJonsQuestJs.dest %>": ["js/analytics.js", "<%= concat_sourcemap.pageJonsQuestJs.src %>"]
+	                "<%= concat_sourcemap.pageJonsQuestJs.dest %>": ["js/analytics.js", "js/clientSideLogging", "<%= concat_sourcemap.pageJonsQuestJs.src %>"]
 	            }
 	        }
 	    },
@@ -125,5 +125,6 @@ module.exports = function(grunt) {
   
     // task runner options
 	grunt.registerTask("default", ["concat_sourcemap", "connect"]);
+	grunt.registerTask("srv", ["connect"]);
 	grunt.registerTask("prd", ["uglify", "cssmin"]);
 };
