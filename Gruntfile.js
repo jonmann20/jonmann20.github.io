@@ -10,38 +10,11 @@ module.exports = function(grunt) {
 	        server: {
 	            options: {
 	                hostname: "jon",
-	                port: 80,
-	                keepalive: true
+	                port: 80
 	                //open: true
 	            }
 	        }
 	    },
-
-	    //watch: {
-	    //    css: {
-	    //        files: ["css/*.css"],
-	    //        tasks: ["cssmin"],
-	    //        options: {
-	    //            livereload: 80
-	    //        }
-	    //    },
-
-	    //    masterJs: {
-	    //        files: ["js/*.js"],
-	    //        tasks: ["uglify:masterJs"],
-	    //        options: {
-	    //            livereload: 80
-	    //        }
-	    //    },
-
-	    //    pageJonsQuestJs: {
-	    //        files: ["games/jonsQuest/**/*.js"],
-	    //        tasks: ["uglify:pageJonsQuestJs"],
-	    //        options: {
-	    //            livereload: 80
-	    //        }
-	    //    }
-	    //},
 
 	    concat_sourcemap: {
 	        options: {
@@ -55,7 +28,7 @@ module.exports = function(grunt) {
 	        		"js/utils.js",
 	        		"js/models/*.js",
 	        		"js/routing.js",
-	        		"js/main.js",
+	        		"js/main.js"
 	            ]
 	        },
 
@@ -87,6 +60,38 @@ module.exports = function(grunt) {
 	        }
 	    },
 
+	    watch: {
+	        //options: {
+	        //    livereload: true
+	        //},
+	        pageJonsQuestJs: {
+	            files: ["games/jonsQuest/**/*.js"],
+	            tasks: ["uglify:pageJonsQuestJs"]
+	        }
+	        //css: {
+	        //    files: ["<%= concat_sourcemap.css.dest %>"],                //"css/*.css"
+	        //    tasks: ["cssmin"],
+	        //    options: {
+	        //        livereload: true
+	        //    }
+	        //},
+
+	        //masterJs: {
+	        //    files: ["<%= concat_sourcemap.masterJs.dest %>"],           //"js/*.js"
+	        //    tasks: ["uglify:masterJs"],
+	        //    options: {
+	        //        livereload: 80
+	        //    }
+	        //},
+
+	        //pageJonsQuestJs: {
+	        //    files: ["/games/jonsQuest/js/physics/physics.js"],    //"games/jonsQuest/**/*.js"
+	        //    tasks: ["uglify:pageJonsQuestJs"],
+	        //    options: {
+	        //        livereload: true
+	        //    }
+	        //}
+	    },
 
 	    uglify: {
 	        masterJs: {
@@ -117,14 +122,14 @@ module.exports = function(grunt) {
     // external tasks (plugins)
 	grunt.loadNpmTasks("grunt-contrib-clean");
 	grunt.loadNpmTasks("grunt-contrib-connect");
-    //grunt.loadNpmTasks("grunt-contrib-watch");
+    grunt.loadNpmTasks("grunt-contrib-watch");
 
 	grunt.loadNpmTasks("grunt-concat-sourcemap");
 	grunt.loadNpmTasks("grunt-contrib-uglify");
 	grunt.loadNpmTasks("grunt-contrib-cssmin");
   
     // task runner options
-	grunt.registerTask("default", ["concat_sourcemap", "connect"]);
+	grunt.registerTask("default", ["concat_sourcemap", "connect", "watch"]);
 	grunt.registerTask("srv", ["connect"]);
 	grunt.registerTask("prd", ["uglify", "cssmin"]);
 };

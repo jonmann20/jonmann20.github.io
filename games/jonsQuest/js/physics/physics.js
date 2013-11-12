@@ -10,8 +10,7 @@ var Physics = (function () {
 
 
     return {
-        blah: 12,
-
+        // could be sped up by checking if a does NOT intersect with b (e.g. using OR)
         isCollision: function (a, b, moe, isLvl) {
             var aX = (typeof (isLvl) !== "undefined") ? a.x + a.lvlX : a.x;
 
@@ -26,6 +25,7 @@ var Physics = (function () {
             return false;
         },
 
+        // uses speculative contacts
         solidRectCollision: function (collisionDir, obj) {
             if (collisionDir != Dir.NONE) {
                 if (collisionDir == Dir.LEFT) {
@@ -49,6 +49,8 @@ var Physics = (function () {
                     hero.onObjY = hero.y = obj.y + obj.h;
                     hero.jumpMod = 0;
                     hero.vY = 0;
+                    console.log("bot");
+
                 }
 
                 if ((collisionDir == Dir.LEFT) || (collisionDir == Dir.RIGHT)) {

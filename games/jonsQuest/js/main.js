@@ -80,7 +80,6 @@ var Main = (function () {
 
             }, 1000);
 
-            console.log("which file2");
             startScreen.start();
         }
     }
