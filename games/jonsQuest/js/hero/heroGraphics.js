@@ -8,7 +8,6 @@ var HeroGraphicsComponent = function () {
         shurikenReady = false
     ;
 
-
     return {
         init: function(){
             shuriken = new Image();
@@ -30,7 +29,6 @@ var HeroGraphicsComponent = function () {
             	    hero.bulletArr[i].y + 20,
         	 	    hero.bulletArr[i].deg
     	 	    );
-            
 		    }
         },
 

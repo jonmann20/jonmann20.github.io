@@ -4,13 +4,11 @@
 /// <reference path="../physics/physics.js" />
 
 /*
-    The hero singleton object.
+    The hero object.
 */
 var hero = (function () {
-    var //self = this,
-        input = null,           // the hero input component
+    var input = null,           // the hero input component
         graphics = null,        // the hero graphics component
-
         imgReady = false,
 		img = null,
 		showRun = true,
@@ -95,10 +93,6 @@ var hero = (function () {
 		
 		
 	return {
-	    //protectedInfo: {
-            //...
-	    //},
-
 		x: 0,				// top left of sprite
 		y: 0,
 		sx: 0,				// sprite position
@@ -119,8 +113,6 @@ var hero = (function () {
 		isCarrying: false,
 		onGround: true,
 		isOnObj: true,
-		onObjX: -1,
-		onObjY: -1,
 		invincible: false,
 		invincibleTimer: 120,
 		invincibleTimer0: 120,  // TODO: should be const
@@ -146,7 +138,7 @@ var hero = (function () {
 			img.onload = function () { imgReady = true; };
 			img.src = "../dungeon/web/img/sprites/player/player.png";
 			
-			// grab texturePacker's sprite coords
+			// grab texturePacker's sprite coords; TODO: include on the page somehow??
 			$.get('../dungeon/web/img/sprites/player/player.xml', function(xml){
 				var wrap = $(xml).find('sprite');
 				
@@ -162,30 +154,21 @@ var hero = (function () {
 			});
 			
 			input = HeroInputComponent();
-			    input.init();
+			input.init();
+
 			hero.physics = HeroPhysicsComponent();
+
 			graphics = HeroGraphicsComponent();
-			    graphics.init();
-		},
-		
-		onObj: function(y){
-		    hero.isJumping = false;
-		    hero.isOnObj = true;
+			graphics.init();
 
-		    hero.y = y;
-		    hero.onObjY = y;
-		},
-
-		offObj: function(){
-		    hero.isOnObj = false;
-			hero.onObjX = -1;
-			hero.onObjY = -1;
+            // setup hero bounding box for collision detection
+			$.extend(hero, new SAT.Box(new SAT.Vector(hero.x, hero.y), hero.w, hero.h).toPolygon());
 		},
 		
 		update: function () {
 		    input.check();                          // updates velocities
 			hero.physics.updatePosition();          // updates positions
-			hero.physics.checkCollision();          // checks new positions
+			hero.physics.checkCollision();          // fix positions
 			
 			checkHealth();
 			getSpritePos();
@@ -194,7 +177,6 @@ var hero = (function () {
 		render: function(){
 			drawHero();
 	    	graphics.drawBullets();
-	    	
 			graphics.drawHealth();
 			graphics.drawMana();
 			graphics.drawXP();

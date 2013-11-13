@@ -35,6 +35,7 @@ module.exports = function(grunt) {
 	        pageJonsQuestJs: {
 	            dest: "js/min/pageJonsQuest.js",
 	            src: [
+                    pth + "hero/SAT.js",
 	                pth + "utils.js",
 	        		pth + "audio/audio.js",
 	        		pth + "graphics/graphics.js",
@@ -66,7 +67,7 @@ module.exports = function(grunt) {
 	        //},
 	        pageJonsQuestJs: {
 	            files: ["games/jonsQuest/**/*.js"],
-	            tasks: ["uglify:pageJonsQuestJs"]
+	            tasks: ["concat_sourcemap:pageJonsQuestJs"]
 	        }
 	        //css: {
 	        //    files: ["<%= concat_sourcemap.css.dest %>"],                //"css/*.css"

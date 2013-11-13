@@ -3,7 +3,7 @@ var Main = (function () {
     function setCanvasGlobals() {
         canvas = $("canvas")[0];
         ctx = canvas.getContext("2d");
-
+        
         FULLW = canvas.width;
         FULLH = canvas.height;
         FULLH -= game.padHUD;

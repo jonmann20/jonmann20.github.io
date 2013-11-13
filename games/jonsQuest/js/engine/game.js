@@ -1,9 +1,11 @@
-var game = (function(){
+var game = (function () {
 	var	avgFPS = 0,
 		//updateTimePrev = 0,
         renderTimePrev = 0,
         lag = 0,
-		fpsHistory = [0]
+		fpsHistory = [0],
+        renderLoop,         // used to turn off game
+        updateLoop          // used to turn off game
 	;
 	
 	function update() {
@@ -19,7 +21,7 @@ var game = (function(){
 	    renderTimePrev = renderTimeCur;
 
 
-	    requestAnimFrame(render);
+	    renderLoop = requestAnimFrame(render);
         
 	    // drawing
 		level.render();
@@ -30,7 +32,6 @@ var game = (function(){
 	}
 	
 	function drawFPS(fps) {
-
 	    var actualFPS = (1000 / game.renderTimeBtw);
 
 	    if (actualFPS != "Infinity") {
@@ -64,7 +65,7 @@ var game = (function(){
 	    padBot: 119,	// total padding
 	    padHUD: 80,
 	    padFloor: 39,
-	    lvl: -1,
+	    lvl: -1,    // TODO: make startscreen level 0
 	    updateFPS: 1000 / 120,  // 1000 / 120 ==> 2x target rate of 60fps
 	    //updateTimeBtw: 0,
 	    renderTimeBtw: 0,
@@ -74,7 +75,7 @@ var game = (function(){
 	    start: function () {
 
             // update at fixed time interval
-	        setInterval(function () {
+	        updateLoop = setInterval(function () {
 	            ++game.totalTicks;
 	            Graphics.ticker += Graphics.fadeOut ? -Graphics.tickerStep : Graphics.tickerStep;
 
@@ -96,6 +97,11 @@ var game = (function(){
 
             // render w/vsync (let browser decide)
 	        render();
+	    },
+
+	    stop: function () {
+	        window.cancelAnimationFrame(renderLoop);
+	        clearInterval(updateLoop);
 	    }
 	};
 })();

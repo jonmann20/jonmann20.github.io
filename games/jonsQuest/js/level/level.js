@@ -71,6 +71,19 @@ var level = (function () {
         }
     }
 
+    function showCollisionRects() {
+        ctx.fillStyle = "orange";
+        // show collisiton rectangles
+        for (var i = 0; i < lvlObjs.length; ++i) {
+            ctx.fillRect(
+                lvlObjs[i].pos.x,
+                lvlObjs[i].pos.y,
+                lvlObjs[i].edges[0].x,
+                lvlObjs[i].edges[1].y
+            );
+        }
+    }
+
 
     return {
         collisionPts: [],
@@ -78,35 +91,19 @@ var level = (function () {
 
 
         init: function () {
+            // level platforms objects
+            // setup shapes for collision detection
+            window.lvlObjs = [
+                new SAT.Box(new SAT.Vector(310, 161), 200, 30).toPolygon(),
+                new SAT.Box(new SAT.Vector(562, 230), 300, 30).toPolygon(),
+                new SAT.Box(new SAT.Vector(600, 95), 200, 30).toPolygon()
+            ];
+
 
             medKit = GameObj(238, FULLH + 31, 25, 24, "img/medKit.png");
             syringe = GameObj(342, FULLH + 31, 25, 25, "img/syringe.png");
             shuriken = GameObj(447, FULLH + 32, 24, 24, "img/shuriken.png");
             cash = GameObj(548, FULLH + 33, 22, 24, "img/cash.png");
-
-            level.collisionPts = [
-                // level 0
-                {
-                    obj0: {
-                        x: 310,
-                        y: 161,
-                        w: 200,
-                        h: 30
-                    },
-                    obj1: {
-                        x: 600,
-                        y: 95,
-                        w: 200,
-                        h: 30
-                    },
-                    obj2: {
-                        x: 562,
-                        y: 230,
-                        w: 300,
-                        h: 30
-                    }
-                }
-            ];
 
 
             for (var i = 0; i < NUM_LEVELS; ++i) {
@@ -160,6 +157,12 @@ var level = (function () {
         },
 
         updateObjs: function () {
+
+            // update level objects
+            for (var i = 0; i < lvlObjs.length; ++i) {
+                lvlObjs[i].pos.x -= hero.vX;
+            }
+
             switch (game.lvl) {
                 case 0:
                     lvl0.updateObjs();
@@ -182,6 +185,7 @@ var level = (function () {
                 ctx.fillRect(0, 0, FULLW, FULLH);
             }
 
+            //showCollisionRects();
             drawHUD();
 
             switch (game.lvl) {

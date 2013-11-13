@@ -29,7 +29,7 @@ var HeroInputComponent = function () {
                     audio.jump.play();
                     hero.vY = 0;
                     hero.isJumping = true;
-                    hero.offObj();
+                    hero.isOnObj = false;
                 }
                 else if (e.keyCode == 74 &&		//----- shoot (j);          TODO: move to check() function
                         ((lastKeyDown != 74) || !(74 in keysDown))
@@ -72,6 +72,7 @@ var HeroInputComponent = function () {
                 hero.jumpMod = hero.jumpMod0;
                 doGravity = true;
             }
+
 
             if (doGravity) {
                 var fixVy = hero.vY + game.gravity*2;

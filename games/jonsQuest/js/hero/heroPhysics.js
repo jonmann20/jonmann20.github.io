@@ -1,13 +1,22 @@
 ﻿/// <reference path="hero.js" />
 /// <reference path="heroInput.js" />
 /// <reference path="heroGraphics.js" />
-/// <reference path="../physics/physics.js" />
+/// <reference path="SAT.js" />
 
 /*
     The physics component of hero.
 */
 var HeroPhysicsComponent = function () {
-    //$.extend(this, hero.protectedInfo);
+
+    function bulletHandler() {
+        for (var i = 0; i < hero.bulletArr.length; ++i) {
+            hero.bulletArr[i].x += hero.bulletArr[i].dirR ? bullet.speed : -bullet.speed;   // update position
+
+            if (hero.bulletArr[i].x > canvas.width || hero.bulletArr[i].x < 0) {		    // bullet and screen
+                hero.bulletArr.splice(i, 1); // remove ith item
+            }
+        }
+    }
 
     function screenCollision() {
         hero.onGround = false;
@@ -23,10 +32,6 @@ var HeroPhysicsComponent = function () {
 
             hero.vY = 0;
         }
-        else if (hero.isOnObj) { 						// on top of obj
-            hero.y = hero.onObjY;
-            hero.vY = 0;
-        }
 
         if (hero.x < 0) { 								// left
             hero.x = 0;
@@ -38,39 +43,44 @@ var HeroPhysicsComponent = function () {
         }
     }
 
-    function bulletHandler() {
-        for (var i = 0; i < hero.bulletArr.length; ++i) {
-            hero.bulletArr[i].x += hero.bulletArr[i].dirR ? bullet.speed : -bullet.speed; // update position
-
-            if (hero.bulletArr[i].x > canvas.width || hero.bulletArr[i].x < 0) {		// bullet and screen
-                hero.bulletArr.splice(i, 1); // remove ith item
-            }
-        }
-    }
-
     function heroAndLvlCollision() {
-        var i = game.lvl,
-            collisionDir = Dir.NONE;
+        hero.pos.x = hero.x;
+        hero.pos.y = hero.y;        // TODO: convert interface to x and y NOT pos.x/y
 
-        for (var j in level.collisionPts[i]) {
-            var k = level.collisionPts[i][j];
-            collisionDir = hero.physics.objCollision(k);
+        hero.isOnObj = false;   // prevents jumping after walking off platform
 
-            Physics.solidRectCollision(collisionDir, k);
+        var response = new SAT.Response();
+        for (var i = 0; i < lvlObjs.length; ++i) {
+            // Check Level Object Collision
+            var collided = SAT.testPolygonPolygon(hero, lvlObjs[i], response);
 
-            if (collisionDir != Dir.NONE)
+            // Respond to Level Object Collision
+            if (collided) {
+                response.a.x = response.a.pos.x - response.overlapV.x;
+                response.a.y = response.a.pos.y - response.overlapV.y;
+
+                if (response.overlapN.y === 1) {    // on top
+                    hero.isOnObj = true;
+                    hero.isJumping = false;
+                    hero.vY = 0;    // BAD!!!!!
+                }
+                else if (response.overlapN.y === -1) { // on bot
+                    hero.vY = 0;    // BAD!!! (wrong location)
+                }
+
                 break;
+            }
+
+            response.clear();
         }
 
-        if (collisionDir == Dir.NONE) {
-            hero.offObj();
-        }
+        // idea to fix "hooking" around edges of platform
+        // http://stackoverflow.com/a/1355695/353166
     }
-
 
     return {
         updatePosition: function (){	
-            if (hero.x != (hero.x + hero.vX)) {
+            if (hero.x !== (hero.x + hero.vX)) {
                 audio.step.play();
             }
 
@@ -91,42 +101,8 @@ var HeroPhysicsComponent = function () {
 
         checkCollision: function () {
 	        bulletHandler();		// bullet's and screen
-            screenCollision();	    // hero and screen/ top of obj
-		
+            screenCollision();	    // hero and screen
             heroAndLvlCollision();
-        },
-
-        /*
-            Checks for a collision between hero and obj.
-            Returns a collision direction.
-        */
-        objCollision: function(obj) {
-            var collisionDir = Dir.NONE;
-
-            // using player dimensions as the moe
-            if (Physics.isCollision(hero, obj, 0, true)) {
-
-                collisionDir = Dir.IN;
-
-                if (hero.dir == Dir.RIGHT && (hero.lvlX - hero.x < obj.x)) {        // left side of obj
-                    collisionDir = Dir.LEFT;
-                }
-                else if ((hero.x + hero.lvlX + hero.w) > (obj.x + obj.w)) {         // right side of obj
-                    collisionDir = Dir.RIGHT;
-                }
-
-
-                if ((hero.x != hero.onObjX) && ((hero.y + hero.h - ((obj.h / 2) + 1)) < obj.y) &&  // top of obj
-                    (hero.vY > 0) || hero.isOnObj   // moving down OR already on
-                ) {
-                    collisionDir = Dir.TOP;
-                }
-                else if ((hero.y + hero.h) > (obj.y + obj.h)) {                     // bot of obj
-                    collisionDir = Dir.BOT;
-                }
-            }
-
-            return collisionDir;
         }
     };
 };

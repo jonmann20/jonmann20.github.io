@@ -20,7 +20,7 @@ var lvl0 = (function () {
             var b = belt.initY + belt.h - hero.h;
             var x = Math.abs(hero.lvlX - 680); // 680 is the init hero.lvlX when you enter the box from the left
 
-            hero.onObj(m * x + b);
+            //hero.onObj(m * x + b);
         }
     }
 
@@ -172,7 +172,6 @@ var lvl0 = (function () {
         },
 
         render: function () {
-
             if (!sack.collected)
                 sack.draw();
 
