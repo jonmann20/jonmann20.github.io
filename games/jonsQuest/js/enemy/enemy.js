@@ -37,9 +37,20 @@ var Enemy = function () {
         active: false,
         health: 0,
 
-        init: function (g, ht) {
-            $.extend(this, g);
-            this.health = initHealth = ht;
+
+        /*
+            Initializes an Enemy.
+         
+            @param {GameObj=} gObj A game object (super class).
+            @param {?number=} health The hp of the enemy, 0 by default.
+            @constructor
+        */
+        init: function (gObj, health) {
+            $.extend(this, gObj);
+
+            if (typeof (health) !== "undefined") {
+                this.health = initHealth = health;
+            }
 
             parentDraw = this.draw;
             this.draw = _draw();

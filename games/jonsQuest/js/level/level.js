@@ -1,3 +1,5 @@
+/// <reference path="../linker.js" />
+
 var level = (function () {
 
     var shuriken = null,
@@ -177,7 +179,7 @@ var level = (function () {
                 ctx.fillRect(0, 0, FULLW, FULLH);
             }
 
-            //showCollisionRects();
+            showCollisionRects();
             drawHUD();
 
             switch (game.lvl) {

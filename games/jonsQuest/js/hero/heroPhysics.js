@@ -1,7 +1,4 @@
-﻿/// <reference path="hero.js" />
-/// <reference path="heroInput.js" />
-/// <reference path="heroGraphics.js" />
-/// <reference path="SAT.js" />
+﻿/// <reference path="../linker.js" />
 
 /*
     The physics component of hero.

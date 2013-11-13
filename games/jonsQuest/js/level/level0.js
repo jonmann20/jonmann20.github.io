@@ -1,58 +1,104 @@
-/// <reference path="../hero/hero.js" />
-/// <reference path="../hero/heroInput.js" />
-/// <reference path="../hero/heroGraphics.js" />
-/// <reference path="../hero/heroPhysics.js" />
-/// <reference path="../physics/physics.js" />
+/// <reference path="../linker.js" />
 
 var lvl0 = (function () {
 
-    var cyborg = null,
-		hiddenCash = null,
-		sack = null,
-		belt = null,
-		belt2 = null
+    var cyborg,
+		hiddenCash,
+		sack,
+		belt,
+		door,
+        scale
     ;
+
+    function handleCrate() {
+        if (!lvl0.crate.holding) {
+            if (Physics.isCollision(hero, lvl0.crate, 12)) {
+                hero.isCarrying = true;
+                lvl0.crate.holding = true;
+                lvl0.crate.vY = 6.5;
+            }
+
+            Physics.terrainObjCollision(lvl0.crate, function (r) {
+                if (r.overlapN.y === 1) {    // on top
+                    lvl0.crate.vY = 0;
+                }
+            });
+        }
+        else {
+            if (hero.dir == Dir.RIGHT)
+                lvl0.crate.x = hero.x + 22;
+            else
+                lvl0.crate.x = hero.x - 22;
+
+            lvl0.crate.y = hero.y;
+        }
+        
+        lvl0.crate.updatePos();
+    }
 
 
     return {
         init: function () {
-            // platforms
+            //--- terrain
+
+            // 3 initial platforms
             level.terrain.push(
                 new SAT.Box(new SAT.Vector(310, 161), 200, 30).toPolygon(),
                 new SAT.Box(new SAT.Vector(562, 230), 300, 30).toPolygon(),
                 new SAT.Box(new SAT.Vector(600, 95), 200, 30).toPolygon()
             );
 
-
             // belt
             belt = GameObj(1100, 80, 340, 190, "img/belt.png");
 
             for (var i = 0, rise = 8.5, run=17; i < 15; ++i) {
-                level.terrain.push(new SAT.Box(new SAT.Vector(belt.x+18 + run * i, belt.y+140 - rise* i), run, 43).toPolygon())
+                level.terrain.push(new SAT.Box(new SAT.Vector(belt.x + 18 + run * i, belt.y + 140 - rise * i), run, 43).toPolygon());
             }
 
-            // Game Items
+            // platform + door
+            level.terrain.push(new SAT.Box(new SAT.Vector(belt.x + belt.w - 70, belt.y + 20), 200, 50).toPolygon());
+            door = GameItem();
+            door.init(
+                GameObj(belt.x + belt.w + 85, belt.y - 40, 25, 60, null)
+            );
+
+            // sack
             sack = GameItem();
             sack.init(
                 GameObj(680, 71, 20, 24, "img/sack.png"),
                 5
             );
 
+            // cyborg
             cyborg = Enemy();
             cyborg.init(
                 GameObj(1700, FULLH - game.padFloor - 38 + 1, 28, 38, "img/cyborgBnW.png"), 
                 1
             );
+            
 
+            // hidden cash
             hiddenCash = GameItem();
             hiddenCash.init(
                 GameObj(140, 50, 22, 24, "img/cash.png"), 
                 10, 
                 false
             );
-            lvl0.crate = GameItem();
+            // crate 1            lvl0.crate = GameItem();
             lvl0.crate.init(
-                GameObj(500, FULLH - game.padFloor - 26, 24, 26, "img/crate.png")
+                GameObj(500, FULLH - game.padFloor - 26, 24, 26, "img/crate.png"),
+                0,
+                true,
+                true
+            );
+
+            // scale
+            scale = GameItem();
+            scale.init(
+                GameObj(door.x + 330, FULLH - game.padFloor - 210, 450, 210, null),
+                0,
+                true,
+                true
             );
         },
 
@@ -94,35 +140,9 @@ var lvl0 = (function () {
             }
 
             // crate
-            if (!lvl0.crate.holding) {
-                if (Physics.isCollision(hero, lvl0.crate, 12)) {
-                    hero.isCarrying = true;
-                    lvl0.crate.holding = true;
-                    lvl0.crate.vY = 6.5;
-                }
+            handleCrate();
 
-                //var collisionDir = hero.physics.objCollision(lvl0.crate);
-                
-                //if (collisionDir != Dir.TOP && collisionDir != Dir.NONE) {
-                //    hero.isCarrying = true;
-                //    lvl0.crate.holding = true;
-                //    lvl0.crate.vY = 6.5;
-                //}
-                //else if(collisionDir == Dir.TOP){
-                //    hero.onObj(hero.y -1);
-                //}
-            }
-            else {
-                if (hero.dir == Dir.RIGHT)
-                    lvl0.crate.x = hero.x + 22;
-                else
-                    lvl0.crate.x = hero.x - 22;
-
-                lvl0.crate.y = hero.y;
-            }
-            lvl0.crate.updatePos();
-
-
+            // cyborg
             if (cyborg.health > 0) {
                 // hero and cyborg
                 if (Physics.isCollision(hero, cyborg, 0)) {
@@ -158,6 +178,14 @@ var lvl0 = (function () {
                     }
                 }
             }
+
+            // door
+            if (Physics.isCollision(hero, door, 0)) {
+                alert("Level 1 completed");
+            }
+
+            // scale
+
         },
 
         updateObjs: function () {
@@ -166,6 +194,8 @@ var lvl0 = (function () {
             hiddenCash.x -= hero.vX;
             belt.x -= hero.vX;
             lvl0.crate.x -= hero.vX;
+            door.x -= hero.vX;
+            scale.x -= hero.vX;
         },
 
         render: function () {
@@ -174,6 +204,8 @@ var lvl0 = (function () {
 
             hiddenCash.draw();
             cyborg.draw();
+            door.draw();
+            scale.draw();
 
             //if (game.totalTicks % 60 === 0)
             //    belt.draw(with differnt sprite);

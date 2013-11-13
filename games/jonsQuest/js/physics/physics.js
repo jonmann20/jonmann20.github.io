@@ -18,6 +18,29 @@ var Physics = (function () {
             }
 
             return false;
+        },
+
+        // uses SAT
+        terrainObjCollision: function (a, callback) {
+            a.pos.x = a.x;
+            a.pos.y = a.y;        // TODO: convert interface to x and y NOT pos.x/y
+
+            var response = new SAT.Response();
+            for (var i = 0; i < level.terrain.length; ++i) {
+                // Check Level Object Collision
+                var collided = SAT.testPolygonPolygon(a, level.terrain[i], response);
+
+                // Respond to Level Object Collision
+                if (collided) {
+                    response.a.x = response.a.pos.x - response.overlapV.x;
+                    response.a.y = response.a.pos.y - response.overlapV.y;
+
+                    callback(response);
+                    break;
+                }
+
+                response.clear();
+            }
         }
     };
 })();

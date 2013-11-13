@@ -81,6 +81,12 @@ var Main = (function () {
             }, 1000);
 
             startScreen.start();
+
+
+            if (location.host === "jon") {  // dev enviroment
+                lastKeyDown = KeyCode.ENTER;
+                audio.handleMuteButton();
+            }
         }
     }
 })();

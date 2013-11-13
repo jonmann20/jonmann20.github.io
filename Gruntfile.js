@@ -35,7 +35,7 @@ module.exports = function(grunt) {
 	        pageJonsQuestJs: {
 	            dest: "js/min/pageJonsQuest.js",
 	            src: [
-                    pth + "hero/SAT.js",
+                    pth + "physics/SAT.js",
 	                pth + "utils.js",
 	        		pth + "audio/audio.js",
 	        		pth + "graphics/graphics.js",
@@ -131,6 +131,6 @@ module.exports = function(grunt) {
   
     // task runner options
 	grunt.registerTask("default", ["concat_sourcemap", "connect", "watch"]);
-	grunt.registerTask("srv", ["connect"]);
+	grunt.registerTask("srv", ["connect", "watch"]);
 	grunt.registerTask("prd", ["uglify", "cssmin"]);
 };

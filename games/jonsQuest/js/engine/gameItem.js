@@ -18,14 +18,29 @@ var GameItem = function () {
         visible: true,
         val: -1,
 
+        /*
+            Initializes a Game Item.
+         
+            @param {GameObj=} gObj A game object (super class).
+            @param {?number=} val The value of the game item, -1 by default.
+            @param {?bool=} visible A visibility flag, true by default.
+            @param {?bool=} sat A flag to add the SAT functionality to the game item, not enabled by default.
+            @constructor
+        */
+        init: function (gObj, val, visible, sat) {
+            $.extend(this, gObj);
 
-        init: function (g, v, vis) {
-            $.extend(this, g);
+            if (typeof(val) !== "undefined") {
+                this.val = val;
+            }
 
-            this.val = v;
+            if (typeof (visible) !== "undefined") {
+                this.visible = visible;
+            }
 
-            if (typeof (vis) !== "undefined")
-                this.visible = vis;
+            if (typeof (sat) !== "undefined") {
+                $.extend(this, new SAT.Box(new SAT.Vector(this.x, this.y), this.w, this.h).toPolygon());
+            }
 
             parentDraw = this.draw;
             this.draw = _draw();
