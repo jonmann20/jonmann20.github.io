@@ -12,21 +12,26 @@ var lvl0 = (function () {
 		belt = null,
 		belt2 = null
     ;
-    //var k = [];
-    var m = -0.52845528455;
-    
-    function beltPhysics() {
-        if (Physics.isCollision(hero, belt, 0)) {
-            var b = belt.initY + belt.h - hero.h;
-            var x = Math.abs(hero.lvlX - 680); // 680 is the init hero.lvlX when you enter the box from the left
-
-            //hero.onObj(m * x + b);
-        }
-    }
 
 
     return {
         init: function () {
+            // platforms
+            level.terrain.push(
+                new SAT.Box(new SAT.Vector(310, 161), 200, 30).toPolygon(),
+                new SAT.Box(new SAT.Vector(562, 230), 300, 30).toPolygon(),
+                new SAT.Box(new SAT.Vector(600, 95), 200, 30).toPolygon()
+            );
+
+
+            // belt
+            belt = GameObj(1100, 80, 340, 190, "img/belt.png");
+
+            for (var i = 0, rise = 8.5, run=17; i < 15; ++i) {
+                level.terrain.push(new SAT.Box(new SAT.Vector(belt.x+18 + run * i, belt.y+140 - rise* i), run, 43).toPolygon())
+            }
+
+            // Game Items
             sack = GameItem();
             sack.init(
                 GameObj(680, 71, 20, 24, "img/sack.png"),
@@ -49,8 +54,6 @@ var lvl0 = (function () {
             lvl0.crate.init(
                 GameObj(500, FULLH - game.padFloor - 26, 24, 26, "img/crate.png")
             );
-
-            belt = GameObj(1100, 80, 340, 190, "img/belt.png");
         },
 
         update: function () {
@@ -120,7 +123,6 @@ var lvl0 = (function () {
             lvl0.crate.updatePos();
 
 
-
             if (cyborg.health > 0) {
                 // hero and cyborg
                 if (Physics.isCollision(hero, cyborg, 0)) {
@@ -137,7 +139,6 @@ var lvl0 = (function () {
 
                 // bullets and cyborg
                 for (var i = 0; i < hero.bulletArr.length; ++i) {
-
                     var wasCollision = false;
 
                     if (Physics.isCollision(hero.bulletArr[i], cyborg, 0)) {
@@ -156,11 +157,7 @@ var lvl0 = (function () {
                         }
                     }
                 }
-
-
-                beltPhysics();
             }
-
         },
 
         updateObjs: function () {
@@ -192,11 +189,6 @@ var lvl0 = (function () {
                     lvl0.crate.y += 6;
                 }
             }
-
-            //for(var i=0; i < k.length; ++i){
-            //    k[i].draw();
-            //}
-
         }
     };
 

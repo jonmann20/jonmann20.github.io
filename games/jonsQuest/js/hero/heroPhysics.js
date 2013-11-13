@@ -50,9 +50,9 @@ var HeroPhysicsComponent = function () {
         hero.isOnObj = false;   // prevents jumping after walking off platform
 
         var response = new SAT.Response();
-        for (var i = 0; i < lvlObjs.length; ++i) {
+        for (var i = 0; i < level.terrain.length; ++i) {
             // Check Level Object Collision
-            var collided = SAT.testPolygonPolygon(hero, lvlObjs[i], response);
+            var collided = SAT.testPolygonPolygon(hero, level.terrain[i], response);
 
             // Respond to Level Object Collision
             if (collided) {

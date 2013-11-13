@@ -73,33 +73,25 @@ var level = (function () {
 
     function showCollisionRects() {
         ctx.fillStyle = "orange";
-        // show collisiton rectangles
-        for (var i = 0; i < lvlObjs.length; ++i) {
+
+        for (var i = 0; i < level.terrain.length; ++i) {
             ctx.fillRect(
-                lvlObjs[i].pos.x,
-                lvlObjs[i].pos.y,
-                lvlObjs[i].edges[0].x,
-                lvlObjs[i].edges[1].y
+                level.terrain[i].pos.x,
+                level.terrain[i].pos.y,
+                level.terrain[i].edges[0].x,
+                level.terrain[i].edges[1].y
             );
         }
     }
 
 
     return {
-        collisionPts: [],
+        terrain: [],
         width: 0,
+        
 
 
         init: function () {
-            // level platforms objects
-            // setup shapes for collision detection
-            window.lvlObjs = [
-                new SAT.Box(new SAT.Vector(310, 161), 200, 30).toPolygon(),
-                new SAT.Box(new SAT.Vector(562, 230), 300, 30).toPolygon(),
-                new SAT.Box(new SAT.Vector(600, 95), 200, 30).toPolygon()
-            ];
-
-
             medKit = GameObj(238, FULLH + 31, 25, 24, "img/medKit.png");
             syringe = GameObj(342, FULLH + 31, 25, 25, "img/syringe.png");
             shuriken = GameObj(447, FULLH + 32, 24, 24, "img/shuriken.png");
@@ -159,8 +151,8 @@ var level = (function () {
         updateObjs: function () {
 
             // update level objects
-            for (var i = 0; i < lvlObjs.length; ++i) {
-                lvlObjs[i].pos.x -= hero.vX;
+            for (var i = 0; i < level.terrain.length; ++i) {
+                level.terrain[i].pos.x -= hero.vX;
             }
 
             switch (game.lvl) {
