@@ -12,17 +12,17 @@ var lvl0 = (function () {
 
     function handleCrate() {
         if (!lvl0.crate.holding) {
-            if (Physics.isCollision(hero, lvl0.crate, 12)) {
-                hero.isCarrying = true;
-                lvl0.crate.holding = true;
-                lvl0.crate.vY = 6.5;
-            }
-
-            Physics.terrainObjCollision(lvl0.crate, function (r) {
-                if (r.overlapN.y === 1) {    // on top
-                    lvl0.crate.vY = 0;
+            Physics.lvlObjCollision(lvl0.crate, function (r) {
+                if (r.overlapN.y === 1) {    // crate on top of platform
+                    lvl0.crate.vY = 0;      // (wrong location??)
+                    level.items.push(lvl0.crate);
                 }
             });
+
+            var idx = level.items.indexOf(lvl0.crate);
+            if (idx < 0 && lvl0.crate.onGround) {
+                level.items.push(lvl0.crate);
+            }
         }
         else {
             if (hero.dir == Dir.RIGHT)
@@ -39,10 +39,8 @@ var lvl0 = (function () {
 
     return {
         init: function () {
-            //--- terrain
-
             // 3 initial platforms
-            level.terrain.push(
+            level.objs.push(
                 new SAT.Box(new SAT.Vector(310, 161), 200, 30).toPolygon(),
                 new SAT.Box(new SAT.Vector(562, 230), 300, 30).toPolygon(),
                 new SAT.Box(new SAT.Vector(600, 95), 200, 30).toPolygon()
@@ -52,11 +50,11 @@ var lvl0 = (function () {
             belt = GameObj(1100, 80, 340, 190, "img/belt.png");
 
             for (var i = 0, rise = 8.5, run=17; i < 15; ++i) {
-                level.terrain.push(new SAT.Box(new SAT.Vector(belt.x + 18 + run * i, belt.y + 140 - rise * i), run, 43).toPolygon());
+                level.objs.push(new SAT.Box(new SAT.Vector(belt.x + 18 + run * i, belt.y + 140 - rise * i), run, 43).toPolygon());
             }
 
             // platform + door
-            level.terrain.push(new SAT.Box(new SAT.Vector(belt.x + belt.w - 70, belt.y + 20), 200, 50).toPolygon());
+            level.objs.push(new SAT.Box(new SAT.Vector(belt.x + belt.w - 70, belt.y + 20), 200, 50).toPolygon());
             door = GameItem();
             door.init(
                 GameObj(belt.x + belt.w + 85, belt.y - 40, 25, 60, null)
@@ -91,19 +89,37 @@ var lvl0 = (function () {
                 true,
                 true
             );
+            lvl0.crate.item_t = "crate";
 
             // scale
-            scale = GameItem();
+            // TODO: split into 3 scale platforms
+            scale = GameItem(); 
             scale.init(
                 GameObj(door.x + 330, FULLH - game.padFloor - 210, 450, 210, null),
                 0,
                 true,
                 true
             );
+
+
+
+            // add objects to the level
+            level.objs.push(
+                sack,
+                cyborg,
+                hiddenCash,
+                belt,
+                door,
+                scale
+            );
+
+            // add movable items to the level
+            level.items.push(
+                lvl0.crate
+            );
         },
 
         update: function () {
-            
             hiddenCash.updatePos();
             cyborg.update();
 
@@ -184,41 +200,30 @@ var lvl0 = (function () {
                 alert("Level 1 completed");
             }
 
-            // scale
 
-        },
-
-        updateObjs: function () {
-            sack.x -= hero.vX;
-            cyborg.x -= hero.vX;
-            hiddenCash.x -= hero.vX;
-            belt.x -= hero.vX;
-            lvl0.crate.x -= hero.vX;
-            door.x -= hero.vX;
-            scale.x -= hero.vX;
         },
 
         render: function () {
             if (!sack.collected)
                 sack.draw();
 
-            hiddenCash.draw();
-            cyborg.draw();
-            door.draw();
-            scale.draw();
+            if(hiddenCash.visible)
+                hiddenCash.draw();
 
-            //if (game.totalTicks % 60 === 0)
-            //    belt.draw(with differnt sprite);
-            //else
-                belt.draw();
+            if(!cyborg.deadOffScreen)
+                cyborg.draw();
+
+            door.draw();
+            belt.draw();
+            scale.draw();
 
             if (!lvl0.crate.holding) {
                 lvl0.crate.draw();
             }
             else {
                 if (hero.vX === 0) {
-                    lvl0.crate.x += (hero.dir == Dir.RIGHT) ? -20 : 24;
-                    lvl0.crate.y += 6;
+                    lvl0.crate.x = hero.x + 2;
+                    lvl0.crate.y = hero.y + 11;
                 }
             }
         }

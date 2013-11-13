@@ -38,7 +38,7 @@ var GameItem = function () {
                 this.visible = visible;
             }
 
-            if (typeof (sat) !== "undefined") {
+            if (typeof (sat) !== "undefined" && sat === true) {
                 $.extend(this, new SAT.Box(new SAT.Vector(this.x, this.y), this.w, this.h).toPolygon());
             }
 

@@ -24,11 +24,8 @@ var Enemy = function () {
                 if (deadOnScreen)
                     ctx.globalAlpha = 0.3;
 
-
                 parentDraw.apply(this);
-
                 ctx.restore();
-
             }
         }
     }
@@ -36,6 +33,7 @@ var Enemy = function () {
     return {
         active: false,
         health: 0,
+        deadOffScreen: false,
 
 
         /*
@@ -59,10 +57,12 @@ var Enemy = function () {
         update: function () {
             if (deadOnScreen) {
                 this.x += clearDir ? 2 : -2;
-                this.y -= 14;
+                this.y -= 9;
 
-                if (this.x < 0 || this.x > FULLW)
+                if (this.x < 0 || this.x > FULLW) {
                     deadOnScreen = false;
+                    this.deadOffScreen = true;
+                }
             }
             else if (!alive)
                 return;

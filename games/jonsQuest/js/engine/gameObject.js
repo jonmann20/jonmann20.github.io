@@ -1,10 +1,14 @@
+/*
+    GameObj is the base class from which all objects in the game inherit from.
+*/
 var GameObj = function (xx, yy, ww, hh, src) {
     var img = null,
-		ready = false;
+		imgReady = false
+    ;
 
     if (typeof (src) !== "undefined") {
         img = new Image();
-        img.onload = function () { ready = true; };
+        img.onload = function () { imgReady = true; };
         img.src = src;
     }
 
@@ -16,27 +20,28 @@ var GameObj = function (xx, yy, ww, hh, src) {
         w: ww,
         h: hh,
         vY: 0,
+        onGround: false,
 
 
         updatePos: function () {
-            if (this.y < FULLH - game.padFloor - this.h)
+            if (this.y < FULLH - game.padFloor - this.h) {
                 this.y += this.vY;
-            else
+                this.onGround = false;
+            }
+            else {
                 this.y = FULLH - game.padFloor - this.h;
+                this.onGround = true;
+            }
         },
 
         draw: function () {
-            if (ready) {
+            if (imgReady) {
                 ctx.drawImage(img, this.x, this.y);
             }
             else {
                 ctx.fillStyle = "red";
                 ctx.fillRect(this.x, this.y, this.w, this.h);
             }
-        },
-
-        getImg: function () {
-            return img;
         }
     };
 };

@@ -76,22 +76,25 @@ var level = (function () {
     function showCollisionRects() {
         ctx.fillStyle = "orange";
 
-        for (var i = 0; i < level.terrain.length; ++i) {
-            ctx.fillRect(
-                level.terrain[i].pos.x,
-                level.terrain[i].pos.y,
-                level.terrain[i].edges[0].x,
-                level.terrain[i].edges[1].y
-            );
+        for (var i = 0; i < level.objs.length; ++i) {
+            if (typeof (level.objs[i].pos) !== "undefined") {
+
+                ctx.fillRect(
+                    level.objs[i].pos.x,
+                    level.objs[i].pos.y,
+                    level.objs[i].edges[0].x,
+                    level.objs[i].edges[1].y
+                );
+            }
         }
     }
 
 
     return {
-        terrain: [],
+        objs: [],       // dynamically holds all of the objects for the level;
+        items: [],      // dynamically holds all of the items for the level (movable items)
         width: 0,
         
-
 
         init: function () {
             medKit = GameObj(238, FULLH + 31, 25, 24, "img/medKit.png");
@@ -130,7 +133,6 @@ var level = (function () {
 
         /******************** Update ********************/
         update: function () {
-
             switch (game.lvl) {
                 case 0:
                     lvl0.update();
@@ -151,17 +153,17 @@ var level = (function () {
         },
 
         updateObjs: function () {
-
-            // update level objects
-            for (var i = 0; i < level.terrain.length; ++i) {
-                level.terrain[i].pos.x -= hero.vX;
+            // fix position relative to the "camera" view
+            for (var i = 0; i < level.objs.length; ++i) {
+                if (typeof (level.objs[i].pos) !== "undefined") {
+                    level.objs[i].pos.x -= hero.vX;
+                }
+                else {
+                    level.objs[i].x -= hero.vX;
+                }
             }
 
-            switch (game.lvl) {
-                case 0:
-                    lvl0.updateObjs();
-                    break;
-            }
+            lvl0.crate.x -= hero.vX;    // TEMP fix for crate
         },
 
         /******************** Render ********************/
@@ -179,7 +181,6 @@ var level = (function () {
                 ctx.fillRect(0, 0, FULLW, FULLH);
             }
 
-            showCollisionRects();
             drawHUD();
 
             switch (game.lvl) {
@@ -187,6 +188,8 @@ var level = (function () {
                     lvl0.render();
                     break;
             }
+
+            showCollisionRects();
         },
 
         drawAfterHero: function () {

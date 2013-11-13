@@ -1,4 +1,6 @@
-﻿/*
+﻿/// <reference path="../linker.js" />
+
+/*
     A library of generic physics functions.
 */
 var Physics = (function () {
@@ -6,6 +8,7 @@ var Physics = (function () {
 
     return {
         // could be sped up by checking if a does NOT intersect with b (i.e. using OR)
+        // uses simple Speculative Contacts
         isCollision: function (a, b, moe, isLvl) {
             var aX = (typeof (isLvl) !== "undefined") ? a.x + a.lvlX : a.x;
 
@@ -20,27 +23,57 @@ var Physics = (function () {
             return false;
         },
 
-        // uses SAT
-        terrainObjCollision: function (a, callback) {
-            a.pos.x = a.x;
-            a.pos.y = a.y;        // TODO: convert interface to x and y NOT pos.x/y
+        // uses SAT and AABB
+        lvlObjCollision: function (a, callback) {
+            if (typeof (a.pos) !== "undefined") {
+                a.pos.x = a.x;
+                a.pos.y = a.y;        // TODO: convert interface to x and y NOT pos.x/y
+            }
 
             var response = new SAT.Response();
-            for (var i = 0; i < level.terrain.length; ++i) {
-                // Check Level Object Collision
-                var collided = SAT.testPolygonPolygon(a, level.terrain[i], response);
+            for (var i = 0; i < level.objs.length; ++i) {
 
-                // Respond to Level Object Collision
-                if (collided) {
-                    response.a.x = response.a.pos.x - response.overlapV.x;
-                    response.a.y = response.a.pos.y - response.overlapV.y;
+                if (typeof (level.objs[i].pos) !== "undefined"
+                    //&& level.objs[i] !== a         // checks if object is in list (by reference)
+                ) {
 
-                    callback(response);
-                    break;
+                    // Check Level Object Collision
+                    var collided = SAT.testPolygonPolygon(a, level.objs[i], response);
+
+                    // Respond to Level Object Collision
+                    if (collided) {
+                        response.a.x = response.a.pos.x - response.overlapV.x;
+                        response.a.y = response.a.pos.y - response.overlapV.y;
+                        
+                        if (typeof (level.objs[i].item_t) !== "undefined") {
+                            response.item_t = level.objs[i].item_t;
+                        }
+
+                        callback(response);
+                        break;
+                    }
+
+                    response.clear();
                 }
-
-                response.clear();
             }
+
+
+            // idea to fix "hooking" around edges of platform
+            // http://stackoverflow.com/a/1355695/353166
+        },
+
+        isSATcollision: function (a, b, callback) {
+            a.pos.x = a.x;
+            a.pos.y = a.y;
+
+            b.pos.x = b.x;
+            b.pos.y = b.y;
+
+            var response = new SAT.Response();
+            var collided = SAT.testPolygonPolygon(a, b, response);
+
+            if (collided)
+                callback(response);
         }
     };
 })();

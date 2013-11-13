@@ -41,38 +41,37 @@ var HeroPhysicsComponent = function () {
     }
 
     function heroAndLvlCollision() {
-        hero.pos.x = hero.x;
-        hero.pos.y = hero.y;        // TODO: convert interface to x and y NOT pos.x/y
-
         hero.isOnObj = false;   // prevents jumping after walking off platform
 
-        var response = new SAT.Response();
-        for (var i = 0; i < level.terrain.length; ++i) {
-            // Check Level Object Collision
-            var collided = SAT.testPolygonPolygon(hero, level.terrain[i], response);
+        Physics.lvlObjCollision(hero, function (r) {
+            if (r.overlapN.y === 1) {                       // on top
+                hero.isOnObj = true;
+                hero.isJumping = false;
+                hero.vY = 0;    // (wrong location??)
+            }
+            else if (r.overlapN.y === -1) {                 // on bot
+                hero.vY = 0;    // (wrong location??)
+            }
+        });
 
-            // Respond to Level Object Collision
-            if (collided) {
-                response.a.x = response.a.pos.x - response.overlapV.x;
-                response.a.y = response.a.pos.y - response.overlapV.y;
-
-                if (response.overlapN.y === 1) {    // on top
+        if (!lvl0.crate.holding && !(32 in keysDown)) {// spacebar
+            Physics.isSATcollision(hero, lvl0.crate, function (r) {
+                if (r.overlapN.y === 1) {
+                    hero.y -= r.overlapV.y;
                     hero.isOnObj = true;
                     hero.isJumping = false;
-                    hero.vY = 0;    // BAD!!!!!
+                    hero.vY = 0;    // (wrong location??)
                 }
-                else if (response.overlapN.y === -1) { // on bot
-                    hero.vY = 0;    // BAD!!! (wrong location)
+                else {
+                    hero.isCarrying = true;
+                    lvl0.crate.holding = true;      
+                    lvl0.crate.vY = 6.5;
+
+                    var idx = level.items.indexOf(lvl0.crate);  // TODO: use level.items to make this code more general
+                    level.items.splice(idx, 1);
                 }
-
-                break;
-            }
-
-            response.clear();
+            });
         }
-
-        // idea to fix "hooking" around edges of platform
-        // http://stackoverflow.com/a/1355695/353166
     }
 
     return {
