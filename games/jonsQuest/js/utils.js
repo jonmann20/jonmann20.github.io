@@ -3,7 +3,7 @@
     Also used for global data structures, enums, and functions.
 */
 var utils = (function () {
-    	
+    var cboxMenu;
 
 
 	return {
@@ -41,6 +41,20 @@ var utils = (function () {
 		        default:
 		            console.log("Dir.unknown");
 		    }
+		},
+
+		toggleMenu: function () {
+
+		    if ($("#colorbox").css("display") === "block") {
+		        cboxMenu.colorbox.close();
+		    }
+		    else {
+		        cboxMenu = $.colorbox({
+		            html: $(".gameInstructions").html(),
+		            width: 250,
+		            height: 460
+		        });
+		    }
 		}
 	};
 })();
@@ -65,8 +79,16 @@ var Inv_e = Object.freeze({
 var KeyCode = Object.freeze({
     ENTER: 13,
     J: 74,
-    K: 75
+    K: 75,
+    O: 79
 });
+
+var Color = Object.freeze({
+    LIGHT_BROWN: "#c44525",
+    DARK_BROWN: "#672819",
+    LIGHT_GREEN: "#166a38"
+});
+
 
 var bullet = {
     color: "rgba(0, 182, 255, .85)",

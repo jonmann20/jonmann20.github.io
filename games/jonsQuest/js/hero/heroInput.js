@@ -49,6 +49,9 @@ var HeroInputComponent = function () {
                         --hero.ammo;
                     }
                 }
+                else if (e.keyCode == KeyCode.O) {      //----- options (o)
+                    utils.toggleMenu();
+                }
 
                 lastKeyDown = e.keyCode;
                 keysDown[e.keyCode] = true;

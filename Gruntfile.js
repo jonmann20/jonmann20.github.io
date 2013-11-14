@@ -35,6 +35,7 @@ module.exports = function(grunt) {
 	        pageJonsQuestJs: {
 	            dest: "js/min/pageJonsQuest.js",
 	            src: [
+                    "js/plugins/jquery.colorbox-min.js",
                     pth + "physics/SAT.js",
 	                pth + "utils.js",
 	        		pth + "audio/audio.js",
@@ -65,6 +66,7 @@ module.exports = function(grunt) {
 	        //options: {
 	        //    livereload: true
 	        //},
+
 	        pageJonsQuestJs: {
 	            files: ["games/jonsQuest/**/*.js"],
 	            tasks: ["concat_sourcemap:pageJonsQuestJs"]

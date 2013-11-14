@@ -79,7 +79,8 @@ var level = (function () {
         for (var i = 0; i < level.objs.length; ++i) {
             if (typeof (level.objs[i].pos) !== "undefined") {
 
-                ctx.fillRect(
+                //ctx.fillRect(
+                Graphics.drawPlatform(
                     level.objs[i].pos.x,
                     level.objs[i].pos.y,
                     level.objs[i].edges[0].x,
@@ -169,18 +170,19 @@ var level = (function () {
         /******************** Render ********************/
         render: function () {
             // background
-            if (lvl[game.lvl].status) {
-                ctx.drawImage(lvlBgImg["lvl" + game.lvl], hero.lvlX, 0, FULLW, FULLH, 0, 0, FULLW, FULLH);
-            }
-            else {
-                if (lvl[game.lvl].bgColor)
-                    ctx.fillStyle = lvl[game.lvl].bgColor;
-                else
-                    ctx.fillStyle = "#222";
-
+            //if (lvl[game.lvl].status) {
+            //    ctx.drawImage(lvlBgImg["lvl" + game.lvl], hero.lvlX, 0, FULLW, FULLH, 0, 0, FULLW, FULLH);
+            //}
+            //else {
+                //if (lvl[game.lvl].bgColor)
+                //    ctx.fillStyle = lvl[game.lvl].bgColor;
+                //else
+                ctx.fillStyle = Color.LIGHT_GREEN;
                 ctx.fillRect(0, 0, FULLW, FULLH);
-            }
+            //}
 
+            // floor
+            Graphics.drawPlatform(0, FULLH - game.padFloor-1, FULLW, game.padFloor+1);  // start floor 1px higher to have hero "sink" into floor
             drawHUD();
 
             switch (game.lvl) {

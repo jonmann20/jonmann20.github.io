@@ -23,29 +23,34 @@ var Main = (function () {
         audio.discovery.volume = 0.7;
 
         audio.mute(true);
-        $(".audioState").on("click", audio.handleMuteButton);
+        $(document).on("click", ".audioState", audio.handleMuteButton);
 
-        var wasClicked = false;
-        $(".resize").on("click", function(){
-            if (wasClicked) {
-                $(canvas).css({ width: "", height: "" });
-                $(this).attr("class", "resize off");
-                $(this).children("span").attr("class", "icon-expand");
-            }
-            else {
-                $(canvas).css({ width: "100%" });
+        //var wasClicked = false;
+        //$(".resize").on("click", function(){
+        //    if (wasClicked) {
+        //        $(canvas).css({ width: "", height: "" });
+        //        $(this).attr("class", "resize off");
+        //        $(this).children("span").attr("class", "icon-expand");
+        //    }
+        //    else {
+        //        $(canvas).css({ width: "100%" });
 
-                // fix for IE
-                var width = $(canvas).width();
-                $(canvas).css({ height: 0.611 * width });
+        //        // fix for IE
+        //        var width = $(canvas).width();
+        //        $(canvas).css({ height: 0.611 * width });
 
 
-                $(this).attr("class", "resize on");
-                $(this).children("span").attr("class", "icon-contract");
-            }
+        //        $(this).attr("class", "resize on");
+        //        $(this).children("span").attr("class", "icon-contract");
+        //    }
 
-            wasClicked = !wasClicked;
-        });
+        //    wasClicked = !wasClicked;
+        //});
+
+        $(".menu").on("click", function (e) {
+            e.preventDefault();
+            utils.toggleMenu();
+        })
 
         //----- enable audio on start -----
         audio.handleMuteButton()

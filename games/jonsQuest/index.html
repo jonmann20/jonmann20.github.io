@@ -8,54 +8,53 @@
     <title>Jon&#700;s Quest | Games</title>
 
     <link href="http://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
-    <link href="/css/min/master.css" rel="stylesheet">
+    <link href="/css/overrideUtils.css" rel="stylesheet">
+    <link href="/css/plugins/colorbox.css" rel="stylesheet">
     <link href="css/jonsQuest.css" rel="stylesheet">
 </head>
-<body class="pageFullW jonsQuest">
-    <div class="page">
-        <div class="inner clr">
-            <header>
-                <nav class="backNav">
-                    <a href="/#games">
-                        <span class="icon-arrow-left"></span> Back
-                    </a>
-                </nav>
+<body>
+    <header>
+        <h1>Jon's Quest</h1>
+        
+        <a href="/#games">Back</a>
+        <a href="#" class="menu">Game Menu</a>
+    </header>
 
-                <div class="gameInstructions">
-                    <h1 class="titleHeader">Jon&#700;s Quest</h1>
-                    <h2>Instructions</h2>
-                    <ul class="goals">
-                        <li><span>GOAL:</span> Become the world's most powerful ninja.</li>
-                    </ul>
-                    <ul>
-                        <li><span class="keyAction">A:</span> LEFT</li>
-                        <li class="padBot"><span class="keyAction">D:</span> RIGHT</li>
-                        <li><span class="keyAction">J:</span> THROW</li>
-                        <li><span class="keyAction">K:</span> JUMP</li>
-                        <li class="padBot"><span class="keyAction">SPACE</span> DROP</li>
-                        <li><span class="keyAction">H:</span> HEAL</li>
-                        <li class="padBot"><span class="keyAction">R:</span> RESTORE</li>
-                        <li class="audioSwitch">
-                            <span class="keyAction">M:</span>
-                            Audio .... <button class="audioState off"><span class="icon-volume-mute"></span> </button>
-                        </li>
-                        <li>
-                            <span class="keyAction">B:</span>
-                            Resize .... <button class="resize off"><span class="icon-expand"></span></button>
-                        </li>
-                    </ul>
-                </div>
-            </header>
-
-            <section class="main">
-                <div class="canvasWrap clr">
-                    <canvas width="720" height="440">
-                        unsupported browser
-                    </canvas>
-                </div>
-            </section>
-        </div>
+    <div class="canvasWrap">
+        <!-- 16:9 * 60 -->
+        <canvas width="960" height="540">
+            unsupported browser
+        </canvas>
     </div>
+
+
+    <div class="gameInstructions">
+        <h2>Instructions</h2>
+        <ul class="goals">
+            <li><span>GOAL:</span> Become the world's most powerful ninja.</li>
+        </ul>
+        <ul>
+            <li><span class="keyAction">A:</span> left</li>
+            <li class="padBot"><span class="keyAction">D:</span> right</li>
+            <li><span class="keyAction">J:</span> throw</li>
+            <li><span class="keyAction">K:</span> jump</li>
+            <li class="padBot"><span class="keyAction">SPACE</span> drop</li>
+            <li><span class="keyAction">H:</span> HEAL</li>
+            <li class="padBot"><span class="keyAction">R:</span> restore</li>
+            <li class="padBot"><span class="keyAction">O:</span> menu</li>
+
+            <li class="audioSwitch">
+                <span class="keyAction">M:</span>
+                Audio .... <button class="audioState off"><span class="icon-volume-mute"></span> </button>
+            </li>
+
+            <!--<li>
+                <span class="keyAction">B:</span>
+                Resize .... <button class="resize off"><span class="icon-expand"></span></button>
+            </li>-->
+        </ul>
+    </div>
+
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
     <script src="/js/min/pageJonsQuest.js"></script>

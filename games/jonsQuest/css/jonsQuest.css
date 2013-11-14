@@ -1,27 +1,38 @@
 header {
-	width: 220px;
+    position: absolute;
+    top: 5px;
+    left: 18px;
 }
-header nav a {
-    -webkit-text-stroke: 0 !important;
-    text-stroke: 0 !important;
+.menu {
+    padding-left: 15px;
 }
+
+
 .canvasWrap {
-	min-width: 720px;
-	max-widtH: 1275px;
-	padding-top: 3%;
-    margin: 0 auto;
+    width: 960px;
+    height: 540px;
+    position: absolute;
+    left: 50%;
+    top: 25px;
+    margin: 0 0 0 -480px;  /* half h, half w*/
+    box-shadow: 0 0 10px 3px #222;
 }
 .canvasWrap canvas {
-	/*width: 100%;*/
     margin: 0 auto;
     background: #000;
 }
-.gameInstructions h1 {
-	margin: 45px 0;
-	font-size: 1.7em;
+
+
+/* Colorboxes */
+.gameInstructions {
+    display: none;
 }
-.gameInstructions h2 {
-	font-size: 1.32em;
+#cboxLoadedContent {
+    background: rgb(37, 30, 34);
+    padding: 10px;
+}
+#cboxLoadedContent h2 {
+	margin-top: 0;
 }
 .goals {
 	width: 147px;

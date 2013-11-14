@@ -1,4 +1,8 @@
 ﻿/*#region **** override browser elts ****/
+body {
+    background: rgb(37, 30, 34);
+    color: #e1e1e1;
+}
 input,
 textarea {
     outline-color: #888;

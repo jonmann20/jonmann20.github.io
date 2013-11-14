@@ -5,7 +5,6 @@ var lvl0 = (function () {
     var cyborg,
 		hiddenCash,
 		sack,
-		belt,
 		door,
         scale
     ;
@@ -41,23 +40,34 @@ var lvl0 = (function () {
         init: function () {
             // 3 initial platforms
             level.objs.push(
-                new SAT.Box(new SAT.Vector(310, 161), 200, 30).toPolygon(),
-                new SAT.Box(new SAT.Vector(562, 230), 300, 30).toPolygon(),
-                new SAT.Box(new SAT.Vector(600, 95), 200, 30).toPolygon()
+                new SAT.Box(new SAT.Vector(200, 196), 267, 40).toPolygon(),
+                new SAT.Box(new SAT.Vector(562, 290), 300, 40).toPolygon(),
+                new SAT.Box(new SAT.Vector(600, 95), 200, 40).toPolygon()
             );
 
-            // belt
-            belt = GameObj(1100, 80, 340, 190, "img/belt.png");
+            // stairs
+            var stairs = {
+                x: 1160,
+                y: 210,
+                w: 0,
+                h: 0
+            };
 
-            for (var i = 0, rise = 8.5, run=17; i < 15; ++i) {
-                level.objs.push(new SAT.Box(new SAT.Vector(belt.x + 18 + run * i, belt.y + 140 - rise * i), run, 43).toPolygon());
+            var rise = 5,   // delta h between steps
+                run = 17    // delta w between steps
+            ;
+
+            for (var i = 0; i < 15; ++i) {
+                level.objs.push(new SAT.Box(new SAT.Vector(stairs.x + run * i, stairs.y - rise * i), run+1, 50).toPolygon());
+                stairs.w += run;
+                stairs.h += rise;
             }
-
+            
             // platform + door
-            level.objs.push(new SAT.Box(new SAT.Vector(belt.x + belt.w - 70, belt.y + 20), 200, 50).toPolygon());
+            level.objs.push(new SAT.Box(new SAT.Vector(stairs.x + stairs.w, stairs.y - stairs.h), 200, 50).toPolygon());
             door = GameItem();
             door.init(
-                GameObj(belt.x + belt.w + 85, belt.y - 40, 25, 60, null)
+                GameObj(stairs.x + stairs.w + 155, stairs.y - stairs.h - 53, 25, 60, null)
             );
 
             // sack
@@ -84,7 +94,7 @@ var lvl0 = (function () {
             );
             // crate 1            lvl0.crate = GameItem();
             lvl0.crate.init(
-                GameObj(500, FULLH - game.padFloor - 26, 24, 26, "img/crate.png"),
+                GameObj(600, FULLH - game.padFloor - 26, 24, 26, "img/crate.png"),
                 0,
                 true,
                 true
@@ -108,7 +118,6 @@ var lvl0 = (function () {
                 sack,
                 cyborg,
                 hiddenCash,
-                belt,
                 door,
                 scale
             );
@@ -213,8 +222,7 @@ var lvl0 = (function () {
             if(!cyborg.deadOffScreen)
                 cyborg.draw();
 
-            door.draw();
-            belt.draw();
+            Graphics.drawDoor(door.x, door.y, door.w, door.h);
             scale.draw();
 
             if (!lvl0.crate.holding) {

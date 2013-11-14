@@ -34,6 +34,38 @@ var Graphics = (function () {
             ctx.fillText(str, x - tmpW / 2, y);
         },
 
+        drawPlatform: function(x,y,w,h){
+            ctx.fillStyle = Color.LIGHT_BROWN;
+            ctx.fillRect(x, y, w, 1);
+
+            ctx.fillStyle = Color.DARK_BROWN;
+            ctx.fillRect(x, y+1, w, h-1);
+        },
+
+        drawDoor: function (x, y, w, h) {
+            // door
+            ctx.fillStyle = Color.LIGHT_BROWN;
+            ctx.fillRect(x+2, y+2, w-2, h-2);
+
+            ctx.fillStyle = Color.DARK_BROWN;
+
+            ctx.fillRect(x, y, 2, h);   // left frame
+            ctx.fillRect(x, y, w, 2);   // top frame
+            ctx.fillRect(x+w, y, 2, h);   // right frame
+
+            // door handle
+            ctx.beginPath();
+            ctx.arc(x + w - w / 3.2, y + h - h/3.4, 3, 0, 2 * Math.PI, false);
+            ctx.fill();
+            ctx.closePath();
+
+            // door
+            ctx.fillStyle = "#e1e1e1";
+            ctx.font = "12px 'Press Start 2P'";
+            ctx.fillText("EXIT", x - 7, y - 5);
+
+        },
+
         drawEllipse: function (x, y, w, h) {
             var kappa = 0.5522848,
 				ox = (w / 2) * kappa, // control point offset horizontal
