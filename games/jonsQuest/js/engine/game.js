@@ -27,7 +27,6 @@ var game = (function () {
 		level.render();
 		hero.render();
 		
-		level.drawAfterHero();
 		drawFPS();
 	}
 	

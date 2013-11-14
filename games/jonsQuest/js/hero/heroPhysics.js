@@ -40,7 +40,7 @@ var HeroPhysicsComponent = function () {
         }
     }
 
-    function heroAndLvlCollision() {
+    function levelCollision() {
         hero.isOnObj = false;   // prevents jumping after walking off platform
 
         Physics.lvlObjCollision(hero, function (r) {
@@ -54,24 +54,22 @@ var HeroPhysicsComponent = function () {
             }
         });
 
-        if (!lvl0.crate.holding && !(32 in keysDown)) {// spacebar
-            Physics.isSATcollision(hero, lvl0.crate, function (r) {
-                if (r.overlapN.y === 1) {
-                    hero.y -= r.overlapV.y;
-                    hero.isOnObj = true;
-                    hero.isJumping = false;
-                    hero.vY = 0;    // (wrong location??)
-                }
-                else {
-                    hero.isCarrying = true;
-                    lvl0.crate.holding = true;      
-                    lvl0.crate.vY = 6.5;
+        Physics.lvlItemCollision(function (r, idx) {
+            if (r.overlapN.y === 1) {
+                hero.y -= r.overlapV.y;
+                hero.isOnObj = true;
+                hero.isJumping = false;
+                hero.vY = 0;    // (wrong location??)
+            }
+            else {
+                r.b.holding = true;
+                r.b.vY = 6.5;
+                hero.curItem = r.b;
+                hero.isCarrying = true;
 
-                    var idx = level.items.indexOf(lvl0.crate);  // TODO: use level.items to make this code more general
-                    level.items.splice(idx, 1);
-                }
-            });
-        }
+                level.items.splice(idx, 1);
+            }
+        });
     }
 
     return {
@@ -86,7 +84,7 @@ var HeroPhysicsComponent = function () {
                (hero.lvlX + hero.vX <= level.width - canvas.width)
             ){
                 hero.lvlX += hero.vX;
-                level.updateObjs();
+                level.updateView();
             }
             else {
                 hero.x += hero.vX;
@@ -98,7 +96,7 @@ var HeroPhysicsComponent = function () {
         checkCollision: function () {
 	        bulletHandler();		// bullet's and screen
             screenCollision();	    // hero and screen
-            heroAndLvlCollision();
+            levelCollision();
         }
     };
 };

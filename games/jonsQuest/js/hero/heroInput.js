@@ -117,8 +117,8 @@ var HeroInputComponent = function () {
 	    
             //----- drop object (spacebar)
             if(32 in keysDown){				
-                lvl0.crate.holding = false;
                 hero.isCarrying = false;
+                hero.curItem.holding = false;
             }
 
 		

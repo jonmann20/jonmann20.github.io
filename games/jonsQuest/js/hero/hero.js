@@ -91,6 +91,12 @@ var hero = (function () {
     	}
 	}
 		
+    // used to draw things over the hero
+	function drawAfterHero() {
+	    if (hero.isCarrying){
+	        hero.curItem.draw();
+	    }
+	}
 		
 	return {
 		x: 0,				// top left of sprite
@@ -111,6 +117,7 @@ var hero = (function () {
 		dir: Dir.RIGHT,
 		isJumping: false,
 		isCarrying: false,
+        curItem: null,          // the item in hand
 		onGround: true,
 		isOnObj: true,
 		invincible: false,
@@ -176,10 +183,13 @@ var hero = (function () {
 	
 		render: function(){
 			drawHero();
-	    	graphics.drawBullets();
+
+			graphics.drawBullets();
 			graphics.drawHealth();
 			graphics.drawMana();
 			graphics.drawXP();
+
+			drawAfterHero();
 		}
 	};
 })();

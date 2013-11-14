@@ -62,7 +62,7 @@ var Graphics = (function () {
             // door
             ctx.fillStyle = "#e1e1e1";
             ctx.font = "12px 'Press Start 2P'";
-            ctx.fillText("EXIT", x - 7, y - 5);
+            ctx.fillText("EXIT", x - 8, y - 5);
 
         },
 
@@ -100,3 +100,39 @@ var Graphics = (function () {
         }
     };
 })();
+
+
+/* Images */
+//lvl = new Array(NUM_LEVELS),
+//lvlBgImg = {}
+//function loadBgImages(imgArr, callback) {
+//    var count = 0;
+
+//    for (var key in imgArr) {
+//        if (imgArr[key] !== "none") {
+//            lvlBgImg[key] = new Image();
+//            lvlBgImg[key].onload = function () {
+//                callback(this.num);
+//            };
+
+//            lvlBgImg[key].src = imgArr[key];
+//            lvlBgImg[key].num = count;
+//        }
+
+//        ++count;
+//    }
+//}
+
+//for (var i = 0; i < NUM_LEVELS; ++i) {
+//    lvl[i] = {
+//        status: false,
+//        bgColor: '#' + Math.floor(Math.random() * 16777215).toString(16)
+//    };
+//}
+
+//loadBgImages({
+//    lvl0: "img/lvl0.jpg",
+//    lvl1: "none"
+//}, function (num) {
+//    lvl[num].status = true;
+//});

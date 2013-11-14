@@ -5,14 +5,37 @@ var level = (function () {
     var shuriken = null,
 		cash = null,
 		syringe = null,
-		medKit = null,
+		medKit = null
 
-		NUM_LEVELS = 5,
-		lvl = new Array(NUM_LEVELS),
-		recentLvlUpdate = 0,
-		lvlBgImg = {}
+		//NUM_LEVELS = 5,
+		//recentLvlUpdate = 0
     ;
 
+    /********** Update **********/
+    function updateObjs() {
+        for (var i = 0; i < level.objs.length; ++i) {
+            if (typeof (level.objs[i].pos) !== "undefined") {       // TODO: update SAT api
+                level.objs[i].pos.x -= hero.vX;
+            }
+            else {
+                level.objs[i].x -= hero.vX;
+            }
+        }
+    }
+
+    function updateItems() {
+        for (var i = 0; i < level.items.length; ++i) {
+            //if (typeof (level.items[i].pos) !== "undefined") {
+            //    level.items[i].pos.x -= hero.vX;
+            //}
+            //else {
+                level.items[i].x -= hero.vX;
+            //}
+        }
+    }
+
+
+    /********** Render **********/
     function drawHUD() {	// TODO: break out static parts
         // background
         ctx.fillStyle = "#070707";
@@ -55,31 +78,10 @@ var level = (function () {
         ctx.fillText(min + ':' + sec, FULLW - 84, FULLH + 34);
     }
 
-    function loadBgImages(imgArr, callback) {
-        var count = 0;
-
-        for (var key in imgArr) {
-            if (imgArr[key] !== "none") {
-                lvlBgImg[key] = new Image();
-                lvlBgImg[key].onload = function () {
-                    callback(this.num);
-                };
-
-                lvlBgImg[key].src = imgArr[key];
-                lvlBgImg[key].num = count;
-            }
-
-            ++count;
-        }
-    }
-
-    function showCollisionRects() {
-        ctx.fillStyle = "orange";
-
+    // all of the collision rectangles in the level
+    function drawLvlObjs() {
         for (var i = 0; i < level.objs.length; ++i) {
-            if (typeof (level.objs[i].pos) !== "undefined") {
-
-                //ctx.fillRect(
+            if (typeof (level.objs[i].pos) !== "undefined") {       // TODO: fix SAT api
                 Graphics.drawPlatform(
                     level.objs[i].pos.x,
                     level.objs[i].pos.y,
@@ -95,35 +97,24 @@ var level = (function () {
         objs: [],       // dynamically holds all of the objects for the level;
         items: [],      // dynamically holds all of the items for the level (movable items)
         width: 0,
+        curLvl: null,   // alias for the current level e.g. lvl0
         
 
         init: function () {
+            // HUD icons
             medKit = GameObj(238, FULLH + 31, 25, 24, "img/medKit.png");
             syringe = GameObj(342, FULLH + 31, 25, 25, "img/syringe.png");
             shuriken = GameObj(447, FULLH + 32, 24, 24, "img/shuriken.png");
             cash = GameObj(548, FULLH + 33, 22, 24, "img/cash.png");
 
-
-            for (var i = 0; i < NUM_LEVELS; ++i) {
-                lvl[i] = {
-                    status: false,
-                    bgColor: '#' + Math.floor(Math.random() * 16777215).toString(16)
-                };
-            }
-
-            loadBgImages({
-                lvl0: "img/lvl0.jpg",
-                lvl1: "none"
-            }, function (num) {
-                lvl[num].status = true;
-            });
-
+            // start level 0
             level.reset();
-            lvl0.init();
+            curLvl = lvl0;
+            curLvl.init();
         },
 
         reset: function () {
-            level.width = 3198;
+            level.width = 2198;
 
             hero.x = 23;
             hero.y = canvas.height - hero.h;
@@ -134,73 +125,37 @@ var level = (function () {
 
         /******************** Update ********************/
         update: function () {
-            switch (game.lvl) {
-                case 0:
-                    lvl0.update();
-                    break;
-            }
+            curLvl.update();
 
             // var tempLvl = game.lvl+1;
-            // 			
             // if(tempLvl >= NUM_LEVELS)
-            // tempLvl = NUM_LEVELS-1;
+            //      tempLvl = NUM_LEVELS-1;
 
-            // if(	){        should reset level
-            // ++game.lvl
-            // recentLvlUpdate = 
+            // if(	){        // should reset level
+            //      ++game.lvl
             // 			    
-            // utils.reset()
+            //      utils.reset()
             // }
         },
 
-        updateObjs: function () {
-            // fix position relative to the "camera" view
-            for (var i = 0; i < level.objs.length; ++i) {
-                if (typeof (level.objs[i].pos) !== "undefined") {
-                    level.objs[i].pos.x -= hero.vX;
-                }
-                else {
-                    level.objs[i].x -= hero.vX;
-                }
-            }
-
-            lvl0.crate.x -= hero.vX;    // TEMP fix for crate
+        // fix positions relative to the "camera" view
+        updateView: function(){
+            updateObjs();
+            updateItems();
         },
+
 
         /******************** Render ********************/
         render: function () {
-            // background
-            //if (lvl[game.lvl].status) {
-            //    ctx.drawImage(lvlBgImg["lvl" + game.lvl], hero.lvlX, 0, FULLW, FULLH, 0, 0, FULLW, FULLH);
-            //}
-            //else {
-                //if (lvl[game.lvl].bgColor)
-                //    ctx.fillStyle = lvl[game.lvl].bgColor;
-                //else
-                ctx.fillStyle = Color.LIGHT_GREEN;
-                ctx.fillRect(0, 0, FULLW, FULLH);
-            //}
-
             // floor
             Graphics.drawPlatform(0, FULLH - game.padFloor-1, FULLW, game.padFloor+1);  // start floor 1px higher to have hero "sink" into floor
+
+            // HUD
             drawHUD();
 
-            switch (game.lvl) {
-                case 0:
-                    lvl0.render();
-                    break;
-            }
-
-            showCollisionRects();
-        },
-
-        drawAfterHero: function () {
-            if (game.lvl === 0) {
-                if (lvl0.crate.holding)
-                    lvl0.crate.draw();
-
-            }
+            // current level
+            curLvl.render();
+            drawLvlObjs();
         }
-
     };
 })();

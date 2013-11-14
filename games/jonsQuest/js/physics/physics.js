@@ -24,6 +24,7 @@ var Physics = (function () {
         },
 
         // uses SAT and AABB
+        // checks collision between a and the level objects
         lvlObjCollision: function (a, callback) {
             if (typeof (a.pos) !== "undefined") {
                 a.pos.x = a.x;
@@ -60,6 +61,17 @@ var Physics = (function () {
 
             // idea to fix "hooking" around edges of platform
             // http://stackoverflow.com/a/1355695/353166
+        },
+
+        // checks collision between hero and the movable level items
+        lvlItemCollision: function (callback) {
+            if (!hero.isCarrying && !(32 in keysDown)) {// spacebar
+                for (var i = 0; i < level.items.length; ++i) {
+                    Physics.isSATcollision(hero, level.items[i], function (r) {
+                        callback(r, i);
+                    });
+                }
+            }
         },
 
         isSATcollision: function (a, b, callback) {

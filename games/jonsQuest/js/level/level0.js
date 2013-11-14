@@ -2,7 +2,8 @@
 
 var lvl0 = (function () {
 
-    var cyborg,
+    var crate,
+        cyborg,
 		hiddenCash,
 		sack,
 		door,
@@ -10,29 +11,29 @@ var lvl0 = (function () {
     ;
 
     function handleCrate() {
-        if (!lvl0.crate.holding) {
-            Physics.lvlObjCollision(lvl0.crate, function (r) {
+        if (!crate.holding) {
+            Physics.lvlObjCollision(crate, function (r) {
                 if (r.overlapN.y === 1) {    // crate on top of platform
-                    lvl0.crate.vY = 0;      // (wrong location??)
-                    level.items.push(lvl0.crate);
+                    crate.vY = 0;      // (wrong location??)
+                    level.items.push(crate);
                 }
             });
 
-            var idx = level.items.indexOf(lvl0.crate);
-            if (idx < 0 && lvl0.crate.onGround) {
-                level.items.push(lvl0.crate);
+            var idx = level.items.indexOf(crate);
+            if (idx < 0 && crate.onGround) {
+                level.items.push(crate);
             }
         }
         else {
-            if (hero.dir == Dir.RIGHT)
-                lvl0.crate.x = hero.x + 22;
+            if (hero.dir === Dir.RIGHT)
+                crate.x = hero.x + 22;
             else
-                lvl0.crate.x = hero.x - 22;
+                crate.x = hero.x - 22;
 
-            lvl0.crate.y = hero.y;
+            crate.y = hero.y;
         }
         
-        lvl0.crate.updatePos();
+        crate.updatePos();
     }
 
 
@@ -92,14 +93,14 @@ var lvl0 = (function () {
                 10, 
                 false
             );
-            // crate 1            lvl0.crate = GameItem();
-            lvl0.crate.init(
+            // crate 1            crate = GameItem();
+            crate.init(
                 GameObj(600, FULLH - game.padFloor - 26, 24, 26, "img/crate.png"),
                 0,
                 true,
                 true
             );
-            lvl0.crate.item_t = "crate";
+            crate.item_t = "crate";
 
             // scale
             // TODO: split into 3 scale platforms
@@ -110,7 +111,6 @@ var lvl0 = (function () {
                 true,
                 true
             );
-
 
 
             // add objects to the level
@@ -124,13 +124,17 @@ var lvl0 = (function () {
 
             // add movable items to the level
             level.items.push(
-                lvl0.crate
+                crate
             );
         },
 
         update: function () {
             hiddenCash.updatePos();
             cyborg.update();
+
+
+            // crate
+            handleCrate();
 
             // sack
             if (!sack.collected) {
@@ -163,9 +167,6 @@ var lvl0 = (function () {
                     hero.cash += hiddenCash.val;
                 }
             }
-
-            // crate
-            handleCrate();
 
             // cyborg
             if (cyborg.health > 0) {
@@ -208,11 +209,15 @@ var lvl0 = (function () {
             if (Physics.isCollision(hero, door, 0)) {
                 alert("Level 1 completed");
             }
-
-
         },
 
         render: function () {
+            // level background
+            ctx.fillStyle = Color.LIGHT_GREEN;
+            ctx.fillRect(0, 0, FULLW, FULLH - game.padFloor - 1);
+
+
+            // level objects/items
             if (!sack.collected)
                 sack.draw();
 
@@ -225,13 +230,13 @@ var lvl0 = (function () {
             Graphics.drawDoor(door.x, door.y, door.w, door.h);
             scale.draw();
 
-            if (!lvl0.crate.holding) {
-                lvl0.crate.draw();
+            if (!crate.holding) {
+                crate.draw();
             }
             else {
                 if (hero.vX === 0) {
-                    lvl0.crate.x = hero.x + 2;
-                    lvl0.crate.y = hero.y + 11;
+                    crate.x = hero.x + 2;
+                    crate.y = hero.y + 11;
                 }
             }
         }
