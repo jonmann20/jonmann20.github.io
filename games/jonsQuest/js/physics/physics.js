@@ -35,6 +35,7 @@ var Physics = (function () {
             for (var i = 0; i < level.objs.length; ++i) {
 
                 if (typeof (level.objs[i].pos) !== "undefined"
+                    && typeof level.objs[i].collidable === "undefined"
                     //&& level.objs[i] !== a         // checks if object is in list (by reference)
                 ) {
 

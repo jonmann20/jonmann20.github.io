@@ -59,12 +59,13 @@ var game = (function () {
 	}
    	
 	return {
+        over: false,        // indicates the game is finished
 	    gravity: 0.07,
 	    //friction: 35,
-	    padBot: 119,	// total padding
+	    padBot: 119,	    // total padding
 	    padHUD: 80,
 	    padFloor: 39,
-	    lvl: -1,    // TODO: make startscreen level 0
+	    lvl: -1,            // TODO: make startscreen level 0
 	    updateFPS: 1000 / 120,  // 1000 / 120 ==> 2x target rate of 60fps
 	    //updateTimeBtw: 0,
 	    renderTimeBtw: 0,

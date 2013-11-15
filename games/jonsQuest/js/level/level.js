@@ -82,6 +82,14 @@ var level = (function () {
     function drawLvlObjs() {
         for (var i = 0; i < level.objs.length; ++i) {
             if (typeof (level.objs[i].pos) !== "undefined") {       // TODO: fix SAT api
+
+                // check if visible
+                if (typeof (level.objs[i].visible) !== "undefined" &&   // TODO: all objs should have visible property (fix SAT api)
+                    !level.objs[i].visible
+                ) {
+                    continue;
+                }
+
                 Graphics.drawPlatform(
                     level.objs[i].pos.x,
                     level.objs[i].pos.y,
@@ -96,8 +104,7 @@ var level = (function () {
     return {
         objs: [],       // dynamically holds all of the objects for the level;
         items: [],      // dynamically holds all of the items for the level (movable items)
-        width: 0,
-        curLvl: null,   // alias for the current level e.g. lvl0
+        curLvl: null,   // alias for the current level object e.g. lvl0
         
 
         init: function () {
@@ -108,14 +115,12 @@ var level = (function () {
             cash = GameObj(548, FULLH + 33, 22, 24, "img/cash.png");
 
             // start level 0
+            level.curLvl = lvl0;
+            level.curLvl.init();
             level.reset();
-            curLvl = lvl0;
-            curLvl.init();
         },
 
         reset: function () {
-            level.width = 2198;
-
             hero.x = 23;
             hero.y = canvas.height - hero.h;
             hero.isJumping = false;
@@ -125,7 +130,7 @@ var level = (function () {
 
         /******************** Update ********************/
         update: function () {
-            curLvl.update();
+            level.curLvl.update();
 
             // var tempLvl = game.lvl+1;
             // if(tempLvl >= NUM_LEVELS)
@@ -154,7 +159,7 @@ var level = (function () {
             drawHUD();
 
             // current level
-            curLvl.render();
+            level.curLvl.render();
             drawLvlObjs();
         }
     };

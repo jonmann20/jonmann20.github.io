@@ -53,7 +53,7 @@ var HeroPhysicsComponent = function () {
                 hero.vY = 0;    // (wrong location??)
             }
         });
-
+        
         Physics.lvlItemCollision(function (r, idx) {
             if (r.overlapN.y === 1) {
                 hero.y -= r.overlapV.y;
@@ -61,9 +61,20 @@ var HeroPhysicsComponent = function () {
                 hero.isJumping = false;
                 hero.vY = 0;    // (wrong location??)
             }
-            else {
+            else if (r.b.grabbable) {
+
+                // TODO: check if player has left item before allowing re-pickup (instad of only checking spacebar)
+                
                 r.b.holding = true;
                 r.b.vY = 6.5;
+                r.b.onGround = false;
+
+                if (r.b.isOnObj) {
+                    r.b.isOnObj = false;
+                    r.b.onObj.grabbable = true;
+                    r.b.onObj = null;
+                }
+
                 hero.curItem = r.b;
                 hero.isCarrying = true;
 
@@ -77,11 +88,11 @@ var HeroPhysicsComponent = function () {
             if (hero.x !== (hero.x + hero.vX)) {
                 audio.step.play();
             }
-
+            
             if(((hero.dir == Dir.RIGHT && hero.x >= ((canvas.width/2) + 35)) ||
                (hero.dir == Dir.LEFT && hero.x <= ((canvas.width/2) - 45))) &&
                (hero.lvlX + hero.vX >= 0) &&
-               (hero.lvlX + hero.vX <= level.width - canvas.width)
+               (hero.lvlX + hero.vX <= level.curLvl.width - canvas.width)
             ){
                 hero.lvlX += hero.vX;
                 level.updateView();
@@ -90,7 +101,9 @@ var HeroPhysicsComponent = function () {
                 hero.x += hero.vX;
             }
 
-            hero.y += hero.vY;
+            if (!hero.onLadder) {
+                hero.y += hero.vY;
+            }
         },
 
         checkCollision: function () {

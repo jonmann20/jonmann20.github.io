@@ -2,42 +2,114 @@
 
 var lvl0 = (function () {
 
-    var crate,
+    var crates = [],
         cyborg,
 		hiddenCash,
 		sack,
 		door,
-        scale
+        scales = [],
+        ladder,
+        doLadder = false
     ;
 
-    function handleCrate() {
-        if (!crate.holding) {
-            Physics.lvlObjCollision(crate, function (r) {
-                if (r.overlapN.y === 1) {    // crate on top of platform
-                    crate.vY = 0;      // (wrong location??)
-                    level.items.push(crate);
-                }
-            });
+    function handleCrates() {   // TODO: abstract to any item (not just crates)
+        // crates and crates
+        var response = new SAT.Response();
+        for (var i = 0; i < crates.length; ++i) {
+            for (var j = 0; j < crates.length; ++j) {
+                if (i !== j && !crates[i].holding && !crates[j].holding) {
+                    var collided = SAT.testPolygonPolygon(crates[i], crates[j], response);
 
-            var idx = level.items.indexOf(crate);
-            if (idx < 0 && crate.onGround) {
-                level.items.push(crate);
+                    if (collided) {
+                        if (response.overlapN.y === 1) {   // a is on top of b
+                            response.a.x = response.a.pos.x - response.overlapV.x;
+                            response.a.y = response.a.pos.y - response.overlapV.y;
+
+                            response.a.isOnObj = true;
+                            response.a.onObj = response.b;
+                            response.b.grabbable = false;
+
+                            level.items.push(response.a);
+                        }
+                        else {
+                            //response.aisOnObj = false;
+                        }
+                    }
+
+                    response.clear();
+                }
+            }
+        }
+
+        // crates and level; hero and crates
+        for (var i = 0; i < crates.length; ++i) {
+
+            if (!crates[i].holding) {
+                Physics.lvlObjCollision(crates[i], function (r) {
+                    if (r.overlapN.y === 1) {    // crate on top of platform
+                        r.a.vY = 0;      // (wrong location??)
+                        level.items.push(r.a);
+                        r.a.onPlatform = true;
+                    }
+                });
+
+                var idx = level.items.indexOf(crates[i]);
+                if (idx < 0 && crates[i].onGround) {
+                    level.items.push(crates[i]);
+                }
+            }
+            else {
+                if (hero.dir === Dir.RIGHT)
+                    crates[i].x = hero.x + 22;
+                else
+                    crates[i].x = hero.x - 22;
+
+                crates[i].y = hero.y;
+            }
+
+            crates[i].updatePos();
+        }
+
+
+
+
+        // all crates on scale (do ladder)
+        
+
+
+        if (doLadder) {
+            var collided = SAT.testPolygonPolygon(hero, ladder);
+
+            if (collided) {
+                hero.onLadder = true;
+            }
+            else {
+                hero.onLadder = false;
             }
         }
         else {
-            if (hero.dir === Dir.RIGHT)
-                crate.x = hero.x + 22;
-            else
-                crate.x = hero.x - 22;
+            doLadder = true;
+            for (var i = 0; i < crates.length; ++i) {
+                if (!crates[i].onPlatform) {         // TODO: this only checks if all are on an obj (should check for correct platforms too)
+                    doLadder = false;
+                }
+            }
+            
+            if (doLadder) {
+                var result = $.grep(level.objs, function(e){
+                    return e.collidable === false;
+                });
+                result[0].visible = true;
+            }
 
-            crate.y = hero.y;
         }
-        
-        crate.updatePos();
     }
 
 
     return {
+        width: 2600,
+
+
         init: function () {
             // 3 initial platforms
             level.objs.push(
@@ -93,39 +165,52 @@ var lvl0 = (function () {
                 10, 
                 false
             );
-            // crate 1            crate = GameItem();
-            crate.init(
-                GameObj(600, FULLH - game.padFloor - 26, 24, 26, "img/crate.png"),
-                0,
-                true,
-                true
-            );
-            crate.item_t = "crate";
-
-            // scale
-            // TODO: split into 3 scale platforms
-            scale = GameItem(); 
-            scale.init(
-                GameObj(door.x + 330, FULLH - game.padFloor - 210, 450, 210, null),
-                0,
-                true,
-                true
-            );
-
 
             // add objects to the level
             level.objs.push(
                 sack,
                 cyborg,
                 hiddenCash,
-                door,
-                scale
+                door
             );
 
-            // add movable items to the level
-            level.items.push(
-                crate
+            ladder = GameItem();
+            ladder.init(
+                GameObj(stairs.x - 79, stairs.y, 80, FULLH - stairs.y , null),
+                0,
+                false,
+                true
             );
+            ladder.collidable = false;      // TODO: make better api; allows ladder to not be in normal collision detection
+            level.objs.push(ladder);
+
+            // scales; TODO: shouldn't be GameItem??
+            for (var i = 0; i < 3; ++i) {
+                scales[i] = new GameItem();
+                scales[i].init(
+                    GameObj(door.x + 330 + i*200, FULLH - game.padFloor - 110, 150, 40, null),
+                    0,
+                    true,
+                    true
+                );
+                
+                level.objs.push(scales[i]);
+            }                        // crates            for (var i = 0; i < 3; ++i) {
+                crates[i] = GameItem();
+                crates[i].init(
+                    GameObj(700, FULLH - game.padFloor - 26, 24, 26, "img/crate.png"),
+                    0,
+                    true,
+                    true
+                );
+                crates[i].item_t = "crate";     // TODO: make better api
+            }
+            crates[1].x = scales[1].x + scales[1].w / 2 - crates[0].w/2;
+            crates[2].x = scales[2].x + scales[2].w / 2 - crates[0].w / 2;
+
+            for (var i = 0; i < crates.length; ++i) {
+                level.items.push(crates[i]);
+            }
         },
 
         update: function () {
@@ -133,8 +218,8 @@ var lvl0 = (function () {
             cyborg.update();
 
 
-            // crate
-            handleCrate();
+            // crates
+            handleCrates();
 
             // sack
             if (!sack.collected) {
@@ -206,18 +291,20 @@ var lvl0 = (function () {
             }
 
             // door
-            if (Physics.isCollision(hero, door, 0)) {
+            if (!game.over && Physics.isCollision(hero, door, 0)) {
                 alert("Level 1 completed");
+                location.reload();
+                game.over = true;
             }
         },
 
         render: function () {
-            // level background
+            //---- level background
             ctx.fillStyle = Color.LIGHT_GREEN;
             ctx.fillRect(0, 0, FULLW, FULLH - game.padFloor - 1);
 
 
-            // level objects/items
+            //---- level objects/items
             if (!sack.collected)
                 sack.draw();
 
@@ -228,15 +315,17 @@ var lvl0 = (function () {
                 cyborg.draw();
 
             Graphics.drawDoor(door.x, door.y, door.w, door.h);
-            scale.draw();
 
-            if (!crate.holding) {
-                crate.draw();
-            }
-            else {
-                if (hero.vX === 0) {
-                    crate.x = hero.x + 2;
-                    crate.y = hero.y + 11;
+            // crates
+            for (var i = 0; i < crates.length; ++i) {
+                if (!crates[i].holding) {
+                    crates[i].draw();
+                }
+                else {
+                    if (hero.vX === 0) {
+                        crates[i].x = hero.x + 2;
+                        crates[i].y = hero.y + 11;
+                    }
                 }
             }
         }

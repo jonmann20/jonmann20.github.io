@@ -35,7 +35,7 @@ header {
 	margin-top: 0;
 }
 .goals {
-	width: 147px;
+	width: 180px;
 }
 button {
 	padding: 6px 5px 3px 6px;
@@ -78,7 +78,7 @@ input[readonly] {
 	text-align: center;
 }
 .keyAction {
-	width: 63px; 
+	width: 120px; 
 	display: inline-block;
 }
 .goals {

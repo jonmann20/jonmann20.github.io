@@ -21,16 +21,20 @@ var GameObj = function (xx, yy, ww, hh, src) {
         h: hh,
         vY: 0,
         onGround: false,
-
+        isOnObj: false,
+        onObj: null,        // contains the object holding up the object (directly below)
+        grabbable: true,
 
         updatePos: function () {
-            if (this.y < FULLH - game.padFloor - this.h) {
-                this.y += this.vY;
-                this.onGround = false;
-            }
-            else {
-                this.y = FULLH - game.padFloor - this.h;
-                this.onGround = true;
+            if (!this.isOnObj) {
+                if (this.y < FULLH - game.padFloor - this.h) {
+                    this.y += this.vY;
+                    this.onGround = false;
+                }
+                else {
+                    this.y = FULLH - game.padFloor - this.h;
+                    this.onGround = true;
+                }
             }
         },
 

@@ -77,7 +77,7 @@ var HeroInputComponent = function () {
             }
 
 
-            if (doGravity) {
+            if (doGravity && !hero.onLadder) {
                 var fixVy = hero.vY + game.gravity*2;
 
                 if (fixVy > hero.maxVY) {
@@ -114,11 +114,29 @@ var HeroInputComponent = function () {
                 hero.vX /= 1.26;
             }
 	    
+
+            //----- up (w)
+            if (KeyCode.W in keysDown) {
+                if (hero.onLadder) {
+                    --hero.y;
+                }
+            }
+
+            //----- down (s)
+            if (KeyCode.S in keysDown) {
+                if (hero.onLadder) {
+                    ++hero.y;
+                }
+            }
+
 	    
             //----- drop object (spacebar)
-            if(32 in keysDown){				
-                hero.isCarrying = false;
-                hero.curItem.holding = false;
+            if (32 in keysDown) {
+                if (hero.isCarrying) {
+                    hero.isCarrying = false;
+                    hero.curItem.holding = false;
+                    hero.curItem = null;
+                }
             }
 
 		

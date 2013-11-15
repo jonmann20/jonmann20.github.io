@@ -12,7 +12,6 @@ var hero = (function () {
         imgReady = false,
 		img = null,
 		showRun = true,
-		gameOver = false,
 		spriteArr = []
 	;
 	
@@ -27,13 +26,13 @@ var hero = (function () {
             hero.invincibleTimer = hero.invincibleTimer0;
         }
         
-        if (hero.health <= 0 && !gameOver) {
+        if (hero.health <= 0 && !game.over) {
             audio.heroDeath.play();
             audio.bgMusic.muted = true;
 
             alert("You died");
             location.reload();
-            gameOver = true;
+            game.over = true;
         }
     }
 
@@ -117,6 +116,7 @@ var hero = (function () {
 		dir: Dir.RIGHT,
 		isJumping: false,
 		isCarrying: false,
+        onLadder: false,
         curItem: null,          // the item in hand
 		onGround: true,
 		isOnObj: true,

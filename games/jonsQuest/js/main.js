@@ -88,9 +88,15 @@ var Main = (function () {
             startScreen.start();
 
 
-            if (location.host === "jon") {  // dev enviroment
+            if (location.host === "jon") {  // dev enviroment (debugging)
+
+                // skip start screen
                 lastKeyDown = KeyCode.ENTER;
+
+                // mute audio
                 audio.handleMuteButton();
+
+
             }
         }
     }

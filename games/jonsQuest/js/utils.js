@@ -51,8 +51,8 @@ var utils = (function () {
 		    else {
 		        cboxMenu = $.colorbox({
 		            html: $(".gameInstructions").html(),
-		            width: 250,
-		            height: 460
+		            width: 290,
+		            height: 490
 		        });
 		    }
 		}
@@ -80,7 +80,9 @@ var KeyCode = Object.freeze({
     ENTER: 13,
     J: 74,
     K: 75,
-    O: 79
+    O: 79,
+    S: 83,
+    W: 87
 });
 
 var Color = Object.freeze({
