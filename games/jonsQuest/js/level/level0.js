@@ -47,9 +47,10 @@ var lvl0 = (function () {
             if (!crates[i].holding) {
                 Physics.lvlObjCollision(crates[i], function (r) {
                     if (r.overlapN.y === 1) {    // crate on top of platform
-                        r.a.vY = 0;      // (wrong location??)
+                        r.a.vY = 0;
                         level.items.push(r.a);
                         r.a.onPlatform = true;
+                        r.b.holdingItem = "crate";
                     }
                 });
 
@@ -71,12 +72,7 @@ var lvl0 = (function () {
         }
 
 
-
-
-        // all crates on scale (do ladder)
-        
-
-
+        // all crates on scale
         if (doLadder) {
             var collided = SAT.testPolygonPolygon(hero, ladder);
 
@@ -88,12 +84,15 @@ var lvl0 = (function () {
             }
         }
         else {
-            doLadder = true;
-            for (var i = 0; i < crates.length; ++i) {
-                if (!crates[i].onPlatform) {         // TODO: this only checks if all are on an obj (should check for correct platforms too)
-                    doLadder = false;
+            var numCratesOnScales = 0;
+            for (var i = 0; i < level.objs.length; ++i) {
+                if (typeof (level.objs[i].type) !== "undefined" && level.objs[i].type === "scale" &&
+                    typeof (level.objs[i].holdingItem) !== "undefined" && level.objs[i].holdingItem === "crate") {
+                    ++numCratesOnScales;
                 }
             }
+
+            doLadder = (numCratesOnScales === 3);
             
             if (doLadder) {
                 var result = $.grep(level.objs, function(e){
@@ -107,7 +106,7 @@ var lvl0 = (function () {
 
 
     return {
-        width: 2600,
+        width: 2700,
 
 
         init: function () {
@@ -140,7 +139,7 @@ var lvl0 = (function () {
             level.objs.push(new SAT.Box(new SAT.Vector(stairs.x + stairs.w, stairs.y - stairs.h), 200, 50).toPolygon());
             door = GameItem();
             door.init(
-                GameObj(stairs.x + stairs.w + 155, stairs.y - stairs.h - 53, 25, 60, null)
+                GameObj(stairs.x + stairs.w + 155, stairs.y - stairs.h - 53, 25, 53, null)
             );
 
             // sack
@@ -176,24 +175,26 @@ var lvl0 = (function () {
 
             ladder = GameItem();
             ladder.init(
-                GameObj(stairs.x - 79, stairs.y, 80, FULLH - stairs.y , null),
+                GameObj(stairs.x - 67, stairs.y-1, 68, FULLH - stairs.y - game.padFloor , null),
                 0,
                 false,
                 true
             );
             ladder.collidable = false;      // TODO: make better api; allows ladder to not be in normal collision detection
+            ladder.type = "ladder";
             level.objs.push(ladder);
 
             // scales; TODO: shouldn't be GameItem??
             for (var i = 0; i < 3; ++i) {
                 scales[i] = new GameItem();
                 scales[i].init(
-                    GameObj(door.x + 330 + i*200, FULLH - game.padFloor - 110, 150, 40, null),
+                    GameObj(door.x + 350 + i*220, FULLH - game.padFloor - 110, 150, 40, null),
                     0,
                     true,
                     true
                 );
-                
+                scales[i].type = "scale";
+                scales[i].holdingItem = "none";
                 level.objs.push(scales[i]);
             }                        // crates            for (var i = 0; i < 3; ++i) {
                 crates[i] = GameItem();
@@ -299,11 +300,6 @@ var lvl0 = (function () {
         },
 
         render: function () {
-            //---- level background
-            ctx.fillStyle = Color.LIGHT_GREEN;
-            ctx.fillRect(0, 0, FULLW, FULLH - game.padFloor - 1);
-
-
             //---- level objects/items
             if (!sack.collected)
                 sack.draw();

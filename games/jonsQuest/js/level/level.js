@@ -80,6 +80,10 @@ var level = (function () {
 
     // all of the collision rectangles in the level
     function drawLvlObjs() {
+        //---- level background
+        ctx.fillStyle = Color.LIGHT_GREEN;
+        ctx.fillRect(0, 0, FULLW, FULLH - game.padFloor - 1);
+
         for (var i = 0; i < level.objs.length; ++i) {
             if (typeof (level.objs[i].pos) !== "undefined") {       // TODO: fix SAT api
 
@@ -90,12 +94,23 @@ var level = (function () {
                     continue;
                 }
 
-                Graphics.drawPlatform(
-                    level.objs[i].pos.x,
-                    level.objs[i].pos.y,
-                    level.objs[i].edges[0].x,
-                    level.objs[i].edges[1].y
-                );
+                if (typeof (level.objs[i].type) !== "undefined" && level.objs[i].type === "ladder") {     // ladder
+                    Graphics.drawLadder(level.objs[i]);
+                }
+                else {
+                    Graphics.drawPlatform(
+                        level.objs[i].pos.x,
+                        level.objs[i].pos.y,
+                        level.objs[i].edges[0].x,
+                        level.objs[i].edges[1].y
+                    );
+                }
+
+
+                if (typeof (level.objs[i].type) !== "undefined" && level.objs[i].type === "scale") {    // scale
+                    Graphics.drawPlatformStatus(level.objs[i]);
+                }
+
             }
         }
     }
@@ -153,14 +168,14 @@ var level = (function () {
         /******************** Render ********************/
         render: function () {
             // floor
-            Graphics.drawPlatform(0, FULLH - game.padFloor-1, FULLW, game.padFloor+1);  // start floor 1px higher to have hero "sink" into floor
+            Graphics.drawPlatform(0, FULLH - game.padFloor, FULLW, game.padFloor);
 
             // HUD
             drawHUD();
 
             // current level
-            level.curLvl.render();
             drawLvlObjs();
+            level.curLvl.render();
         }
     };
 })();

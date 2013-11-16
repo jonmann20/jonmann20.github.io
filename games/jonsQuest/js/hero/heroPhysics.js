@@ -48,6 +48,7 @@ var HeroPhysicsComponent = function () {
                 hero.isOnObj = true;
                 hero.isJumping = false;
                 hero.vY = 0;    // (wrong location??)
+                //++hero.y;
             }
             else if (r.overlapN.y === -1) {                 // on bot
                 hero.vY = 0;    // (wrong location??)

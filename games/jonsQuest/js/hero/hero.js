@@ -46,6 +46,9 @@ var hero = (function () {
 		if(hero.isCarrying && hero.vX === 0){
 			pos = spriteArr["playerDown"];
 		}
+		else if (hero.onLadder) {
+		    pos = spriteArr["playerUp"];
+		}
 		else if(hero.dir == Dir.RIGHT){
 			if(hero.vX > 0){
    				if(Math.abs(hero.vX) <= hero.aX*3.5)

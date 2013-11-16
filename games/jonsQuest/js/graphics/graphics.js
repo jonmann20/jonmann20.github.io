@@ -34,12 +34,83 @@ var Graphics = (function () {
             ctx.fillText(str, x - tmpW / 2, y);
         },
 
-        drawPlatform: function(x,y,w,h){
-            ctx.fillStyle = Color.LIGHT_BROWN;
-            ctx.fillRect(x, y, w, 1);
+        drawLadder: function (platform) {
+            var x = platform.pos.x,
+                y = platform.pos.y,
+                w = platform.edges[0].x,
+                h = platform.edges[1].y
+            ;
 
+            // sides
+            ctx.fillStyle = Color.LIGHT_BROWN;
+            ctx.fillRect(x, y, 5, h);
+            ctx.fillRect(x + w-5, y, 5, h);
+
+            // rungs
+            for (var i = 13; i < h; i+=20) {
+                ctx.fillRect(x, y+i, w, 8);
+            }
+
+
+        },
+
+        drawPlatform: function (x,y,w,h) {
+
+
+
+            // draw top border 1px above bounding box
+            ctx.fillStyle = Color.LIGHT_BROWN;
+            ctx.fillRect(x, y-1, w, 1);
+
+            // draw platform
             ctx.fillStyle = Color.DARK_BROWN;
-            ctx.fillRect(x, y+1, w, h-1);
+            ctx.fillRect(x, y, w, h);
+        },
+
+        drawPlatformStatus: function (platform) {
+
+            var x = platform.pos.x,
+                y = platform.pos.y,
+                w = platform.w,
+                h = platform.h,
+                theShape = 28,
+                halfTheShape = theShape/2,
+                midX = x + w/2 - halfTheShape,
+                midY = y + h/2 - halfTheShape
+            ;
+
+            ctx.lineWidth = 3;
+
+            if (platform.holdingItem === "crate") {
+                // draw check mark
+
+                ctx.strokeStyle = "green";
+
+                --midY;
+                ctx.beginPath();
+                ctx.moveTo(midX, midY + halfTheShape);
+                ctx.lineTo(midX + halfTheShape, midY + theShape);
+                ctx.moveTo(midX + halfTheShape-1, midY + theShape);
+                ctx.lineTo(midX + theShape+2, midY+2);
+                ctx.stroke();
+                ctx.closePath();
+
+            }
+            else {
+                // draw 'X'
+
+                ctx.strokeStyle = "red";
+
+                ctx.beginPath();
+                ctx.moveTo(midX, midY);
+                ctx.lineTo(midX + theShape, midY + theShape);
+                ctx.moveTo(midX, midY + theShape);
+                ctx.lineTo(midX + theShape, midY);
+                ctx.stroke();
+                ctx.closePath();
+            }
+
+            
         },
 
         drawDoor: function (x, y, w, h) {
