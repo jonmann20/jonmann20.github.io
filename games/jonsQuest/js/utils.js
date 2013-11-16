@@ -88,7 +88,10 @@ var KeyCode = Object.freeze({
 var Color = Object.freeze({
     LIGHT_BROWN: "#c44525",
     DARK_BROWN: "#672819",
-    LIGHT_GREEN: "#166a38"
+    LIGHT_GREEN: "#166a38",
+    SILVER: "#c0c0c0",
+    BLACK: "#000",
+    GOLD: "#ddaa13"
 });
 
 

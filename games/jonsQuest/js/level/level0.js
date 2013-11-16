@@ -32,7 +32,7 @@ var lvl0 = (function () {
                             level.items.push(response.a);
                         }
                         else {
-                            //response.aisOnObj = false;
+                            //response.a.isOnObj = false;
                         }
                     }
 
@@ -52,6 +52,9 @@ var lvl0 = (function () {
                         r.a.onPlatform = true;
                         r.b.holdingItem = "crate";
                     }
+                    //else {
+                    //    r.b.holdingItem = "none";
+                    //}
                 });
 
                 var idx = level.items.indexOf(crates[i]);

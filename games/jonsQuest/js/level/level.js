@@ -94,8 +94,13 @@ var level = (function () {
                     continue;
                 }
 
-                if (typeof (level.objs[i].type) !== "undefined" && level.objs[i].type === "ladder") {     // ladder
-                    Graphics.drawLadder(level.objs[i]);
+                if (typeof (level.objs[i].type) !== "undefined") {    
+                    if (level.objs[i].type === "ladder") {           // ladder
+                        Graphics.drawLadder(level.objs[i]);
+                    }
+                    else if (level.objs[i].type === "scale") {      // scale
+                        Graphics.drawScale(level.objs[i]);
+                    }
                 }
                 else {
                     Graphics.drawPlatform(
@@ -107,7 +112,7 @@ var level = (function () {
                 }
 
 
-                if (typeof (level.objs[i].type) !== "undefined" && level.objs[i].type === "scale") {    // scale
+                if (typeof (level.objs[i].type) !== "undefined" && level.objs[i].type === "scale") {    // scale status
                     Graphics.drawPlatformStatus(level.objs[i]);
                 }
 

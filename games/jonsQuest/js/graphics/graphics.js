@@ -50,14 +50,25 @@ var Graphics = (function () {
             for (var i = 13; i < h; i+=20) {
                 ctx.fillRect(x, y+i, w, 8);
             }
+        },
 
+        drawScale: function (platform) {
+            var x = platform.pos.x,
+                y = platform.pos.y,
+                w = platform.edges[0].x,
+                h = platform.edges[1].y
+            ;
 
+            // draw top border 1px above bounding box
+            ctx.fillStyle = Color.BLACK;
+            ctx.fillRect(x, y - 1, w, 1);
+
+            // draw platform
+            ctx.fillStyle = Color.DARK_BROWN;
+            ctx.fillRect(x, y, w, h);
         },
 
         drawPlatform: function (x,y,w,h) {
-
-
-
             // draw top border 1px above bounding box
             ctx.fillStyle = Color.LIGHT_BROWN;
             ctx.fillRect(x, y-1, w, 1);

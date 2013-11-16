@@ -94,7 +94,7 @@ var Main = (function () {
                 lastKeyDown = KeyCode.ENTER;
 
                 // mute audio
-                audio.handleMuteButton();
+                //audio.handleMuteButton();
 
 
             }

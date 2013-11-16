@@ -14,8 +14,11 @@ header {
     position: absolute;
     left: 50%;
     top: 25px;
-    margin: 0 0 0 -480px;  /* half h, half w*/
+    margin-left: -480px;  /* half w*/
     box-shadow: 0 0 10px 3px #222;
+}
+.canvasWrap .lt960 {
+    display: none;
 }
 .canvasWrap canvas {
     margin: 0 auto;
@@ -86,4 +89,39 @@ input[readonly] {
 }
 .padBot {
     margin-bottom: 18px;
+}
+
+@media screen and (max-width: 1272px) {
+    .canvasWrap {
+        left: auto;
+        right: 0;
+        margin-left: 0;
+    }
+}
+@media screen and (max-width: 1113px) {
+    header {
+        position: static;
+        text-align: center;
+    }
+    .canvasWrap {
+        right: auto;
+        left: 50%;
+        top: 95px;
+        margin-left: -480px
+    }
+}
+@media screen and (max-width: 959px) {
+    .canvasWrap {
+        position: static;
+        margin: 20px auto;
+        width: 234px;
+        box-shadow: none;
+        text-align: center;
+    }
+    .canvasWrap .lt960 {
+        display: block;
+    }
+    .canvasWrap canvas {
+        display: none;
+    }
 }

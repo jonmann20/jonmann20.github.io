@@ -86,7 +86,7 @@ var HeroPhysicsComponent = function () {
 
     return {
         updatePosition: function (){	
-            if (hero.x !== (hero.x + hero.vX)) {
+            if (!hero.isJumping && hero.x !== (hero.x + hero.vX)) {
                 audio.step.play();
             }
             
