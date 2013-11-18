@@ -6,10 +6,32 @@ var utils = (function () {
     var cboxMenu;
 
 
-	return {
-		degToRad: function(deg){
-			return deg * 0.0174532925199432957;
-		},
+    return {
+        degToRad: function(deg){
+            return deg * 0.0174532925199432957;
+        },
+
+        getTimeObj: function (t) {
+            if (t === 0) {
+                return { min: "00", sec: "00" };
+            }
+            
+            var min = Math.floor(t / 60);
+            var sec = t % 60;
+
+            if (sec < 10) {
+                sec = '0' + sec;
+            }
+
+            if (min < 10) {
+                min = '0' + min;
+            }
+
+            return {
+                min: min,
+                sec: sec
+            };
+        },
 
         /**** Debug Printers ****/
 		printMouse: function () {
@@ -82,7 +104,8 @@ var KeyCode = Object.freeze({
     K: 75,
     O: 79,
     S: 83,
-    W: 87
+    W: 87,
+    EMPTY: -1
 });
 
 var Color = Object.freeze({
@@ -91,7 +114,8 @@ var Color = Object.freeze({
     LIGHT_GREEN: "#166a38",
     SILVER: "#c0c0c0",
     BLACK: "#000",
-    GOLD: "#ddaa13"
+    GOLD: "#ddaa13",
+    ORANGE: "#ff6a00"
 });
 
 

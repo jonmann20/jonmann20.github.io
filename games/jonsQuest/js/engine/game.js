@@ -9,7 +9,10 @@ var game = (function () {
 	;
 	
 	function update() {
-		hero.update();
+	    if (!level.isCutscene) {
+	        hero.update();
+	    }
+
 		level.update();
 	}
 	
@@ -24,10 +27,13 @@ var game = (function () {
 	    renderLoop = requestAnimFrame(render);
         
 	    // drawing
-		level.render();
-		hero.render();
-		
-		drawFPS();
+	    level.render();
+
+	    if (!level.isCutscene) {
+	        hero.render();
+	        HUD.draw();
+	        drawFPS();
+	    }
 	}
 	
 	function drawFPS(fps) {
@@ -58,6 +64,7 @@ var game = (function () {
 	  	ctx.fillText(avgFPS + " FPS", FULLW - 84, FULLH + 65);
 	}
    	
+
 	return {
         over: false,        // indicates the game is finished
 	    gravity: 0.07,
@@ -71,6 +78,7 @@ var game = (function () {
 	    renderTimeBtw: 0,
 	    totalTicks: 0,      // ticks are update iterations
 	    actualTime: 0,
+
 
 	    start: function () {
 

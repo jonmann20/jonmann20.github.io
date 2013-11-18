@@ -2,15 +2,6 @@
 
 var level = (function () {
 
-    var shuriken = null,
-		cash = null,
-		syringe = null,
-		medKit = null
-
-		//NUM_LEVELS = 5,
-		//recentLvlUpdate = 0
-    ;
-
     /********** Update **********/
     function updateObjs() {
         for (var i = 0; i < level.objs.length; ++i) {
@@ -36,47 +27,6 @@ var level = (function () {
 
 
     /********** Render **********/
-    function drawHUD() {	// TODO: break out static parts
-        // background
-        ctx.fillStyle = "#070707";
-        ctx.fillRect(0, FULLH, FULLW, game.padHUD);
-
-        ctx.fillStyle = "#ddd";
-        ctx.font = "12px 'Press Start 2P'";
-
-
-        ctx.fillText("HP-" + hero.healthLvl, 15, FULLH + 24);
-        ctx.fillText("MP-" + hero.manaLvl, 15, FULLH + 48);
-        ctx.fillText("XP", 15, FULLH + 71);
-
-        // hp kit
-        ctx.fillText(hero.medKits, 210, FULLH + 50);
-        medKit.draw();
-
-        // mp kit
-        ctx.fillText(hero.manaKits, 315, FULLH + 50);
-        syringe.draw();
-
-        // ammo
-        ctx.fillText(hero.ammo, 410, FULLH + 50);
-        shuriken.draw();
-
-        // money
-        ctx.fillText(hero.cash, 515, FULLH + 50);
-        cash.draw();
-
-        // time
-        var min = Math.floor(game.actualTime / 60),
-			sec = game.actualTime % 60;
-
-        if (sec < 10)
-            sec = '0' + sec;
-
-        if (min < 10)
-            min = '0' + min;
-
-        ctx.fillText(min + ':' + sec, FULLW - 84, FULLH + 34);
-    }
 
     // all of the collision rectangles in the level
     function drawLvlObjs() {
@@ -122,25 +72,38 @@ var level = (function () {
 
 
     return {
-        objs: [],       // dynamically holds all of the objects for the level;
-        items: [],      // dynamically holds all of the items for the level (movable items)
-        curLvl: null,   // alias for the current level object e.g. lvl0
+        objs: [],           // dynamically holds all of the objects for the level;
+        items: [],          // dynamically holds all of the items for the level (movable items)
+        curLvl: null,       // alias for the current level object e.g. lvl0
+        isCutscene: false,
+        time: 0,
+        hiddenItemsFound: 0,
+        hiddenItems: 0,
         
 
         init: function () {
-            // HUD icons
-            medKit = GameObj(238, FULLH + 31, 25, 24, "img/medKit.png");
-            syringe = GameObj(342, FULLH + 31, 25, 25, "img/syringe.png");
-            shuriken = GameObj(447, FULLH + 32, 24, 24, "img/shuriken.png");
-            cash = GameObj(548, FULLH + 33, 22, 24, "img/cash.png");
-
             // start level 0
             level.curLvl = lvl0;
             level.curLvl.init();
             level.reset();
+
+            //level.complete();
         },
 
+        // called at end of level
+        complete: function () {
+            level.objs = [];
+            level.items = [];
+            level.curLvl = lvlComplete;
+            level.isCutscene = true;
+            level.time = game.actualTime;
+
+            // TODO: audio.lvlCompleted.play()
+        },
+
+        // called before start of level
         reset: function () {
+            level.hiddenItemsFound = 0;
             hero.x = 23;
             hero.y = canvas.height - hero.h;
             hero.isJumping = false;
@@ -151,16 +114,6 @@ var level = (function () {
         /******************** Update ********************/
         update: function () {
             level.curLvl.update();
-
-            // var tempLvl = game.lvl+1;
-            // if(tempLvl >= NUM_LEVELS)
-            //      tempLvl = NUM_LEVELS-1;
-
-            // if(	){        // should reset level
-            //      ++game.lvl
-            // 			    
-            //      utils.reset()
-            // }
         },
 
         // fix positions relative to the "camera" view
@@ -174,9 +127,6 @@ var level = (function () {
         render: function () {
             // floor
             Graphics.drawPlatform(0, FULLH - game.padFloor, FULLW, game.padFloor);
-
-            // HUD
-            drawHUD();
 
             // current level
             drawLvlObjs();

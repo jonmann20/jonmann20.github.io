@@ -113,6 +113,8 @@ var lvl0 = (function () {
 
 
         init: function () {
+            level.hiddenItems = 1;
+
             // 3 initial platforms
             level.objs.push(
                 new SAT.Box(new SAT.Vector(200, 196), 267, 40).toPolygon(),
@@ -254,6 +256,7 @@ var lvl0 = (function () {
                     hiddenCash.collected = true;
                     audio.itemPickedUp.play();
                     hero.cash += hiddenCash.val;
+                    ++level.hiddenItemsFound;
                 }
             }
 
@@ -296,9 +299,7 @@ var lvl0 = (function () {
 
             // door
             if (!game.over && Physics.isCollision(hero, door, 0)) {
-                alert("Level 1 completed");
-                location.reload();
-                game.over = true;
+                level.complete();
             }
         },
 

@@ -1,3 +1,7 @@
+/// <reference path="../linker.js" />
+
+// TODO: make part of game
+
 var startScreen = (function () {
 
     var copyTitle1 = "JON'S",
@@ -108,7 +112,7 @@ var startScreen = (function () {
         //---- copyright
         ctx.font = "13px 'Press Start 2P'";
         ctx.fillStyle = "#ddd";
-
+        
         ctx.fillText(copyLine, HALFW - ctx.measureText(copyLine).width / 2, FULLH + 44);
     }
 

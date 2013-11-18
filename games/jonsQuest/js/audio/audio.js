@@ -16,6 +16,50 @@
         isOn: false,
 
 
+        init: function(){
+            audio.bgMusic.loop = true;
+            audio.bgMusic.volume = 0.7;
+            audio.bgMusic.pause();
+
+            audio.enemyDeath.volume = 0.6;
+            audio.jump.volume = 0.4;
+            audio.thud.volume = 0.78;
+            audio.discovery.volume = 0.7;
+
+            audio.mute(true);
+            $(document).on("click", ".audioState", audio.handleMuteButton);
+
+            //var wasClicked = false;
+            //$(".resize").on("click", function(){
+            //    if (wasClicked) {
+            //        $(canvas).css({ width: "", height: "" });
+            //        $(this).attr("class", "resize off");
+            //        $(this).children("span").attr("class", "icon-expand");
+            //    }
+            //    else {
+            //        $(canvas).css({ width: "100%" });
+
+            //        // fix for IE
+            //        var width = $(canvas).width();
+            //        $(canvas).css({ height: 0.611 * width });
+
+
+            //        $(this).attr("class", "resize on");
+            //        $(this).children("span").attr("class", "icon-contract");
+            //    }
+
+            //    wasClicked = !wasClicked;
+            //});
+
+            $(".menu").on("click", function (e) {
+                e.preventDefault();
+                utils.toggleMenu();
+            })
+
+            //----- enable audio on start -----
+            audio.handleMuteButton()
+        },
+
         play: function (sound, stopPrev) {
             stopPrev = (typeof (stopPrev) !== 'undefined') ? stopPrev : true;
 

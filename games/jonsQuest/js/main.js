@@ -12,96 +12,75 @@ var Main = (function () {
         HALFH = FULLH / 2;
     }
 
-    function setAudio() {
-        audio.bgMusic.loop = true;
-        audio.bgMusic.volume = 0.7;
-        audio.bgMusic.pause();
-
-        audio.enemyDeath.volume = 0.6;
-        audio.jump.volume = 0.4;
-        audio.thud.volume = 0.78;
-        audio.discovery.volume = 0.7;
-
-        audio.mute(true);
-        $(document).on("click", ".audioState", audio.handleMuteButton);
-
-        //var wasClicked = false;
-        //$(".resize").on("click", function(){
-        //    if (wasClicked) {
-        //        $(canvas).css({ width: "", height: "" });
-        //        $(this).attr("class", "resize off");
-        //        $(this).children("span").attr("class", "icon-expand");
-        //    }
-        //    else {
-        //        $(canvas).css({ width: "100%" });
-
-        //        // fix for IE
-        //        var width = $(canvas).width();
-        //        $(canvas).css({ height: 0.611 * width });
-
-
-        //        $(this).attr("class", "resize on");
-        //        $(this).children("span").attr("class", "icon-contract");
-        //    }
-
-        //    wasClicked = !wasClicked;
-        //});
-
-        $(".menu").on("click", function (e) {
-            e.preventDefault();
-            utils.toggleMenu();
-        })
-
-        //----- enable audio on start -----
-        audio.handleMuteButton()
-    }
-
-    function setupLoadingScreen() {
+    function loadingScreen() {
         ctx.fillStyle = "#e1e1e1";
         ctx.font = "25px 'Press Start 2P'";
         ctx.fillText("LOADING...", HALFW - 80, HALFH + 20);
     }
 
+    function debug() {
+        // dev enviroment
+        if (location.host === "jon") {
+            // skip start screen
+            lastKeyDown = KeyCode.ENTER;
+
+            // mute audio
+            audio.handleMuteButton();
+        }
+    }
+
     return {
-        /*
-			REQUIRES: game and hero singleton objects already instantiated
-		*/
         init: function () {
             setCanvasGlobals();
+            loadingScreen();
 
-            setAudio();
-            setupLoadingScreen();
-
+            audio.init();
             level.init();
             hero.init();
-            
+            HUD.init();
 
-            // game timer
-            setInterval(function () {
-                ++game.actualTime;
+            // wait for google font
+            $(document).on("fontLoaded", function () {
 
-                //console.log(game.actualTime + 's', hero.x + "px");
-                //console.log(game.actualTime + 's', hero.y + "px");
+                // game timer
+                setInterval(function () {
+                    ++game.actualTime;
+                }, 1000);
 
-            }, 1000);
+                // start the game
+                startScreen.start();
+            });
+                
 
-            startScreen.start();
-
-
-            if (location.host === "jon") {  // dev enviroment (debugging)
-
-                // skip start screen
-                lastKeyDown = KeyCode.ENTER;
-
-                // mute audio
-                //audio.handleMuteButton();
-
-
-            }
+            debug();
         }
     }
 })();
 
 $(function () {
+    // load font
+    window.WebFontConfig = {
+        google: {
+            families: ['Press Start 2P']
+        },
+        active: function () {
+            $(document).trigger("fontLoaded");
+        },
+        inactive: function () {
+            alert("There was a problem loading a font from google, some text may not render correctly (refreshing the page may fix the issue).");
+            $(document).trigger("fontLoaded");
+        }
+    };
+
+    (function () {
+        var wf = document.createElement("script");
+        wf.src = "//ajax.googleapis.com/ajax/libs/webfont/1/webfont.js";
+        wf.type = "text/javascript";
+        wf.async = "true";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(wf, s);
+    })();
+
+
     Main.init();
 });

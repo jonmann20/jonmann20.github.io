@@ -46,7 +46,7 @@ var hero = (function () {
 		if(hero.isCarrying && hero.vX === 0){
 			pos = spriteArr["playerDown"];
 		}
-		else if (hero.onLadder) {
+		else if (hero.onLadder) {               // TODO: check if holding crate (shouldn't be allowed on ladder)
 		    pos = spriteArr["playerUp"];
 		}
 		else if(hero.dir == Dir.RIGHT){
@@ -149,7 +149,7 @@ var hero = (function () {
 			img.src = "../dungeon/web/img/sprites/player/player.png";
 			
 			// grab texturePacker's sprite coords; TODO: include on the page somehow??
-			$.get('../dungeon/web/img/sprites/player/player.xml', function(xml){
+			$.get("../dungeon/web/img/sprites/player/player.xml", function(xml){
 				var wrap = $(xml).find('sprite');
 				
 				$(wrap).each(function(){
@@ -186,12 +186,7 @@ var hero = (function () {
 	
 		render: function(){
 			drawHero();
-
 			graphics.drawBullets();
-			graphics.drawHealth();
-			graphics.drawMana();
-			graphics.drawXP();
-
 			drawAfterHero();
 		}
 	};
