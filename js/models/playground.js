@@ -87,19 +87,6 @@
                 );
                 jw.body.addClass("playground playInner bDancingCube nav1");
             }
-            else if (page === "fSun") {
-                that.load("/playground/floating-sun.html", function (data) {
-                    // TODO: update dart code with callback to init/deInit from JS
-                    //jw.Utils.require("/js/computerGraphics/web/computergraphics.dart.js", function () { });
-                    $.getScript("/js/computerGraphics/web/computergraphics.dart.js");
-                }).swap();
-
-                document.title = "Floating Sun | Playground";
-                jw.head.append("<meta name='description' content='A canvas example showcasing a computer graphics simulation.' />" +
-                               "<meta name='keywords' content='canvas, html5, computer graphics' />"
-                );
-                jw.body.addClass("playground playInner nav4");
-            }
 
 
             if (page !== "index") {

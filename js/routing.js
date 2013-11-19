@@ -103,11 +103,6 @@ jw.Routing = (function ($, undefined) {
             jw.Routing.lastPg = "bCube";
         });
 
-        this.route("get", "#playground/floating-sun", function () {
-            jw.PlaygroundModel.render(this, "fSun");
-            jw.Routing.lastPg = "fSun";
-        });
-
         this.route("get", "#playground/bouncing-object", function () {
             jw.PlaygroundModel.render(this, "bObj");
             jw.Routing.lastPg = "bObj";
