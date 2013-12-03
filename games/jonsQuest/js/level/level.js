@@ -74,7 +74,7 @@ var level = (function () {
     return {
         objs: [],           // dynamically holds all of the objects for the level;
         items: [],          // dynamically holds all of the items for the level (movable items)
-        curLvl: null,       // alias for the current level object e.g. lvl0
+        curLvl: null,       // alias for the current level object e.g. lvl1
         isCutscene: false,
         time: 0,
         hiddenItemsFound: 0,
@@ -82,12 +82,9 @@ var level = (function () {
         
 
         init: function () {
-            // start level 0
-            level.curLvl = lvl0;
+            level.curLvl = startScreen;     // startScreen == level '0'
             level.curLvl.init();
             level.reset();
-
-            //level.complete();
         },
 
         // called at end of level
@@ -104,10 +101,10 @@ var level = (function () {
         // called before start of level
         reset: function () {
             level.hiddenItemsFound = 0;
+
             hero.x = 23;
             hero.y = canvas.height - hero.h;
             hero.isJumping = false;
-
             hero.bulletArr.length = 0;		// TODO: cache num bullets
         },
 

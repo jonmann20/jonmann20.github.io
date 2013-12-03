@@ -5,9 +5,7 @@ var Main = (function () {
         ctx = canvas.getContext("2d");
         
         FULLW = canvas.width;
-        FULLH = canvas.height;
-        FULLH -= game.padHUD;
-
+        FULLH = canvas.height - game.padHUD;
         HALFW = FULLW / 2;
         HALFH = FULLH / 2;
     }
@@ -22,7 +20,7 @@ var Main = (function () {
         // dev enviroment
         if (location.host === "jon") {
             // skip start screen
-            lastKeyDown = KeyCode.ENTER;
+            //lastKeyDown = KeyCode.ENTER;
 
             // mute audio
             audio.handleMuteButton();
@@ -48,11 +46,12 @@ var Main = (function () {
                 }, 1000);
 
                 // start the game
-                startScreen.start();
+                //startScreen.start();
+                game.start();
             });
                 
 
-            debug();
+            //debug();
         }
     }
 })();

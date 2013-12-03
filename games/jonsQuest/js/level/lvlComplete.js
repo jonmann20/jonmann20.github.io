@@ -10,15 +10,21 @@ var lvlComplete = (function () {
 
         update: function () {
             if (KeyCode.ENTER in keysDown) {
-                switch(++game.lvl){
+                lastKeyDown = KeyCode.EMPTY;
+
+                switch (++game.lvl) {
                     case 1:
                         lvl1.init();
                         level.curLvl = lvl1;
                         break;
+                    case 2:
+                        lvl2.init();
+                        level.curLvl = lvl2;
+                        break;
                 }
 
                 level.isCutscene = false;
-                lastKeyDown = KeyCode.EMPTY;
+                level.reset();
             }
         },
 
