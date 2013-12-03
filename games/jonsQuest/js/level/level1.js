@@ -50,7 +50,9 @@ var lvl1 = (function () {
                         r.a.vY = 0;
                         level.items.push(r.a);
                         r.a.onPlatform = true;
+                        r.a.grabbable = false;
                         r.b.holdingItem = "crate";
+                        audio.thud.play();
                     }
                     //else {
                     //    r.b.holdingItem = "none";
