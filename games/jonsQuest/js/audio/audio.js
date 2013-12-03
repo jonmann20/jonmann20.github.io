@@ -110,6 +110,7 @@
             audio.enemyDeath.muted =
             audio.heroDeath.muted =
             audio.enchant.muted =
+            audio.exitSound.muted =
                 onOrOff;
 
             onOrOff ?
