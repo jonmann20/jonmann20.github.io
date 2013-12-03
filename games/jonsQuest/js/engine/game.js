@@ -1,3 +1,5 @@
+/// <reference path="../linker.js" />
+
 var game = (function () {
 	var	avgFPS = 0,
 		//updateTimePrev = 0,
@@ -9,7 +11,7 @@ var game = (function () {
 	;
 	
 	function update() {
-	    if (!level.isCutscene) {
+	    if (!level.isCutscene && !level.isTransitioning) {
 	        hero.update();
 	    }
 

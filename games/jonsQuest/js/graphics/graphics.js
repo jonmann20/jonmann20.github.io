@@ -1,15 +1,33 @@
-﻿/*
+﻿/// <reference path="../linker.js" />
+
+/*
     A library of generic graphics functions.
 */
 var Graphics = (function () {
 
-    var alpha = 1;
+    var alpha = 1,
+        canvasTransition = null
+    ;
 
     return {
         ticker: 1,              // 1.0 --> 0.0 --> 1.0 --> ...
         tickerStep: 0.01,
         fadeOut: false,
 
+
+        fadeCanvas: function(callback){
+            $(canvas).removeClass("preTransition");
+            $(canvas).addClass("duringTransition");
+
+            canvasTransition = $(canvas).on("transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd", function () {
+                canvasTransition.off();
+
+                $(this).removeClass("duringTransition");
+                $(this).addClass("preTransition");
+
+                callback();
+            });
+        },
 
         blinkText: function (fontSize, x, y, str) {
             str = (typeof (str) !== "undefined") ? str : "PRESS ENTER";
@@ -217,4 +235,29 @@ var Graphics = (function () {
 //    lvl1: "none"
 //}, function (num) {
 //    lvl[num].status = true;
+//});
+
+
+
+
+//var wasClicked = false;
+//$(".resize").on("click", function(){
+//    if (wasClicked) {
+//        $(canvas).css({ width: "", height: "" });
+//        $(this).attr("class", "resize off");
+//        $(this).children("span").attr("class", "icon-expand");
+//    }
+//    else {
+//        $(canvas).css({ width: "100%" });
+
+//        // fix for IE
+//        var width = $(canvas).width();
+//        $(canvas).css({ height: 0.611 * width });
+
+
+//        $(this).attr("class", "resize on");
+//        $(this).children("span").attr("class", "icon-contract");
+//    }
+
+//    wasClicked = !wasClicked;
 //});

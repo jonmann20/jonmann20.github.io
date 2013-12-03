@@ -2,6 +2,7 @@
 body {
     background: rgb(37, 30, 34);
     color: #e1e1e1;
+    margin: 0;
 }
 input,
 textarea {

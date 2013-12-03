@@ -76,8 +76,6 @@ var HUD = (function () {
 
             // time
             var time = utils.getTimeObj(game.actualTime);
-
-
             ctx.fillText(time.min + ':' + time.sec, FULLW - 84, FULLH + 34);
         }
     };

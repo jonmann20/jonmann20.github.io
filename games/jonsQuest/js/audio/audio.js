@@ -3,6 +3,7 @@
     return {
         bgMusic: new Audio("audio/firstChiptune/firstChiptune.mp3"),
         enterSound: new Audio("audio/synthetic_explosion_1.mp3"),
+        exitSound: new Audio("audio/annulet.mp3"),
         itemPickedUp: new Audio("audio/life_pickup.mp3"),
         heartbeat: new Audio("audio/heartbeat.mp3"),
         jump: new Audio("audio/jump.mp3"),
@@ -29,28 +30,6 @@
             audio.mute(true);
             $(document).on("click", ".audioState", audio.handleMuteButton);
 
-            //var wasClicked = false;
-            //$(".resize").on("click", function(){
-            //    if (wasClicked) {
-            //        $(canvas).css({ width: "", height: "" });
-            //        $(this).attr("class", "resize off");
-            //        $(this).children("span").attr("class", "icon-expand");
-            //    }
-            //    else {
-            //        $(canvas).css({ width: "100%" });
-
-            //        // fix for IE
-            //        var width = $(canvas).width();
-            //        $(canvas).css({ height: 0.611 * width });
-
-
-            //        $(this).attr("class", "resize on");
-            //        $(this).children("span").attr("class", "icon-contract");
-            //    }
-
-            //    wasClicked = !wasClicked;
-            //});
-
             $(".menu").on("click", function (e) {
                 e.preventDefault();
                 utils.toggleMenu();
@@ -58,6 +37,33 @@
 
             //----- enable audio on start -----
             audio.handleMuteButton()
+        },
+
+        lvlComplete: function () {
+            audio.bgMusic.pause();
+
+            var newBgMusic;
+
+            switch(game.lvl) {
+                case 0:
+                    audio.enterSound.play();
+                    newBgMusic = "inspiredBySparkMan/sparkBoy.mp3";
+                    break;
+                default:
+                    audio.exitSound.play();
+                    newBgMusic = "sweetAcoustic.mp3";
+                    break;
+            }
+
+            setTimeout(function () {
+                audio.bgMusic = new Audio("audio/" + newBgMusic);
+                audio.bgMusic.loop = true;
+                audio.bgMusic.volume = 0.45;
+
+                audio.isOn ?
+                    audio.bgMusic.play() :
+                    audio.bgMusic.pause();
+            }, 1000);
         },
 
         play: function (sound, stopPrev) {

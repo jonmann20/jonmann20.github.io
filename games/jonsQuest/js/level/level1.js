@@ -180,7 +180,7 @@ var lvl1 = (function () {
 
             ladder = GameItem();
             ladder.init(
-                GameObj(stairs.x - 67, stairs.y-1, 68, FULLH - stairs.y - game.padFloor , null),
+                GameObj(stairs.x - 37, stairs.y-1, 38, FULLH - stairs.y - game.padFloor , null),
                 0,
                 false,
                 true

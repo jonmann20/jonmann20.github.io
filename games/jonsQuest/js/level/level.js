@@ -79,6 +79,7 @@ var level = (function () {
         time: 0,
         hiddenItemsFound: 0,
         hiddenItems: 0,
+        isTransitioning: false,
         
 
         init: function () {
@@ -87,30 +88,40 @@ var level = (function () {
             level.reset();
         },
 
-        // called at end of level
-        complete: function () {
-            level.objs = [];
-            level.items = [];
-            level.curLvl = lvlComplete;
-            level.isCutscene = true;
-            level.time = game.actualTime;
-
-            // TODO: audio.lvlCompleted.play()
-        },
-
         // called before start of level
         reset: function () {
             level.hiddenItemsFound = 0;
 
             hero.x = 23;
             hero.y = canvas.height - hero.h;
+            hero.vX = hero.vY = 0;
             hero.isJumping = false;
-            hero.bulletArr.length = 0;		// TODO: cache num bullets
+            hero.bulletArr.length = 0;		// prevents leftover thrown shurikens
+        },
+
+        // called at end of level
+        complete: function () {
+            level.isTransitioning = true;
+            audio.lvlComplete();
+
+            Graphics.fadeCanvas(function () {
+                level.isTransitioning = false;
+
+                level.objs = [];
+                level.items = [];
+                level.curLvl = lvlComplete;
+                level.isCutscene = true;
+                level.time = game.actualTime;
+
+                // TODO: audio.lvlCompleted.play()
+            });
         },
 
         /******************** Update ********************/
         update: function () {
-            level.curLvl.update();
+            if (!level.isTransitioning) {
+                level.curLvl.update();
+            }
         },
 
         // fix positions relative to the "camera" view

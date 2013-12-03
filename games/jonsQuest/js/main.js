@@ -20,7 +20,7 @@ var Main = (function () {
         // dev enviroment
         if (location.host === "jon") {
             // skip start screen
-            //lastKeyDown = KeyCode.ENTER;
+            lastKeyDown = KeyCode.ENTER;
 
             // mute audio
             audio.handleMuteButton();

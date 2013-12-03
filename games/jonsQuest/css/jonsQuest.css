@@ -1,7 +1,10 @@
 header {
     position: absolute;
-    top: 5px;
+    top: 2%;
     left: 18px;
+}
+h1 {
+    margin-top: 0;
 }
 .menu {
     padding-left: 15px;
@@ -9,11 +12,12 @@ header {
 
 
 .canvasWrap {
+    background: #000;
     width: 960px;
     height: 540px;
     position: absolute;
     left: 50%;
-    top: 25px;
+    top: 10%;
     margin-left: -480px;  /* half w*/
     box-shadow: 0 0 10px 3px #222;
 }
@@ -23,6 +27,13 @@ header {
 .canvasWrap canvas {
     margin: 0 auto;
     background: #000;
+    transition: opacity 0.5s;
+}
+.preTransition{
+    opacity: 1;
+}
+.duringTransition {
+    opacity: 0.01;
 }
 
 

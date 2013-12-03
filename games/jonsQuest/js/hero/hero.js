@@ -124,8 +124,8 @@ var hero = (function () {
 		onGround: true,
 		isOnObj: true,
 		invincible: false,
-		invincibleTimer: 120,
-		invincibleTimer0: 120,  // TODO: should be const
+		invincibleTimer: 240,
+		invincibleTimer0: 240,  // TODO: should be const
 		health: 4,
 		maxHealth: 5,
 		medKits: 1,

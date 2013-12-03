@@ -2,18 +2,15 @@
 
 var lvlComplete = (function () {
 
-
     return {
-        init: function(){
-
-        },
 
         update: function () {
-            if (KeyCode.ENTER in keysDown) {
+            if (KeyCode.ENTER in keysDown || game.lvl === 0) {
                 lastKeyDown = KeyCode.EMPTY;
 
                 switch (++game.lvl) {
                     case 1:
+                        game.actualTime = 0;
                         lvl1.init();
                         level.curLvl = lvl1;
                         break;
