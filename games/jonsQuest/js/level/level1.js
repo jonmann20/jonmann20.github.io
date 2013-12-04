@@ -22,8 +22,8 @@ var lvl1 = (function () {
 
                     if (collided) {
                         if (response.overlapN.y === 1) {   // a is on top of b
-                            response.a.x = response.a.pos.x - response.overlapV.x;
-                            response.a.y = response.a.pos.y - response.overlapV.y;
+                            response.a.pos.x -= response.overlapV.x;
+                            response.a.pos.y -= response.overlapV.y;
 
                             response.a.isOnObj = true;
                             response.a.onObj = response.b;
@@ -52,6 +52,12 @@ var lvl1 = (function () {
                         r.a.onPlatform = true;
                         r.a.grabbable = false;
                         r.b.holdingItem = "crate";
+
+                        utils.repeatAction(70, 8, function () {
+                            ++r.a.pos.y;
+                            ++r.b.pos.y;
+                        });
+
                         audio.thud.play();
                     }
                     //else {
@@ -66,11 +72,11 @@ var lvl1 = (function () {
             }
             else {
                 if (hero.dir === Dir.RIGHT)
-                    crates[i].x = hero.x + 22;
+                    crates[i].pos.x = hero.pos.x + 22;
                 else
-                    crates[i].x = hero.x - 22;
+                    crates[i].pos.x = hero.pos.x - 22;
 
-                crates[i].y = hero.y;
+                crates[i].pos.y = hero.pos.y;
             }
 
             crates[i].updatePos();
@@ -96,16 +102,15 @@ var lvl1 = (function () {
                     ++numCratesOnScales;
                 }
             }
-
+            
             doLadder = (numCratesOnScales === 3);
             
             if (doLadder) {
                 var result = $.grep(level.objs, function(e){
-                    return e.collidable === false;
+                    return e.type === "ladder";
                 });
                 result[0].visible = true;
             }
-
         }
     }
 
@@ -144,33 +149,20 @@ var lvl1 = (function () {
             
             // platform + door
             level.objs.push(new SAT.Box(new SAT.Vector(stairs.x + stairs.w, stairs.y - stairs.h), 200, 50).toPolygon());
-            door = GameItem();
-            door.init(
-                GameObj(stairs.x + stairs.w + 155, stairs.y - stairs.h - 53, 25, 53, null)
-            );
+            door = new GameItem(new GameObj(stairs.x + stairs.w + 155, stairs.y - stairs.h - 53, 25, 53));
 
             // sack
-            sack = GameItem();
-            sack.init(
-                GameObj(680, 71, 20, 24, "img/sack.png"),
-                5
-            );
-
-            // cyborg
-            cyborg = Enemy();
-            cyborg.init(
-                GameObj(1700, FULLH - game.padFloor - 38 + 1, 28, 38, "img/cyborgBnW.png"), 
-                1
-            );
+            sack = new GameItem(new GameObj(680, 71, 20, 24, "img/sack.png"), 5);
             
+            // cyborg
+            cyborg = new Enemy(new GameObj(1700, FULLH - game.padFloor - 38 + 1, 28, 38, "img/cyborgBnW.png"), 1);
+            cyborg.type = "enemy";
+            cyborg.collidable = false;
 
             // hidden cash
-            hiddenCash = GameItem();
-            hiddenCash.init(
-                GameObj(140, 50, 22, 24, "img/cash.png"), 
-                10, 
-                false
-            );
+            hiddenCash = new GameItem(new GameObj(140, 50, 22, 24, "img/cash.png"), 10, false);
+            hiddenCash.type = "cash";
+            hiddenCash.collidable = false;  // TODO: should remove from level.objs after collected
 
             // add objects to the level
             level.objs.push(
@@ -180,41 +172,33 @@ var lvl1 = (function () {
                 door
             );
 
-            ladder = GameItem();
-            ladder.init(
-                GameObj(stairs.x - 37, stairs.y-1, 38, FULLH - stairs.y - game.padFloor , null),
-                0,
-                false,
-                true
-            );
-            ladder.collidable = false;      // TODO: make better api; allows ladder to not be in normal collision detection
+            ladder = new GameItem(new GameObj(stairs.x - 37, stairs.y - 1, 38, FULLH - stairs.y - game.padFloor), 0, false, true);
+            ladder.collidable = false;      // allows ladder to not be in normal collision detection; TODO: make better api
             ladder.type = "ladder";
             level.objs.push(ladder);
 
             // scales; TODO: shouldn't be GameItem??
             for (var i = 0; i < 3; ++i) {
-                scales[i] = new GameItem();
-                scales[i].init(
-                    GameObj(door.x + 350 + i*220, FULLH - game.padFloor - 110, 150, 40, null),
+                scales[i] = new GameItem(
+                    new GameObj(door.pos.x + 350 + i*220, FULLH - game.padFloor - 107, 150, 36),
                     0,
                     true,
                     true
                 );
-                scales[i].type = "scale";
+                scales[i].type = "scale";           // TODO: make better api
                 scales[i].holdingItem = "none";
                 level.objs.push(scales[i]);
-            }                        // crates            for (var i = 0; i < 3; ++i) {
-                crates[i] = GameItem();
-                crates[i].init(
-                    GameObj(700, FULLH - game.padFloor - 26, 24, 26, "img/crate.png"),
+            }            // crates            for (var i = 0; i < 3; ++i) {
+                crates[i] = new GameItem(
+                    new GameObj(700, FULLH - game.padFloor - 26, 24, 26, "img/crate.png"),
                     0,
                     true,
                     true
                 );
                 crates[i].item_t = "crate";     // TODO: make better api
             }
-            crates[1].x = scales[1].x + scales[1].w / 2 - crates[0].w/2;
-            crates[2].x = scales[2].x + scales[2].w / 2 - crates[0].w / 2;
+            crates[1].pos.x = scales[1].pos.x + scales[1].w / 2 - crates[0].w / 2;
+            crates[2].pos.x = scales[2].pos.x + scales[2].w / 2 - crates[0].w / 2;
 
             for (var i = 0; i < crates.length; ++i) {
                 level.items.push(crates[i]);
@@ -224,7 +208,6 @@ var lvl1 = (function () {
         update: function () {
             hiddenCash.updatePos();
             cyborg.update();
-
 
             // crates
             handleCrates();
@@ -274,7 +257,6 @@ var lvl1 = (function () {
                         hero.invincible = true;
                         --hero.health;
                     }
-                    
                 }
 
                 // bullets and cyborg
@@ -316,7 +298,7 @@ var lvl1 = (function () {
             if(!cyborg.deadOffScreen)
                 cyborg.draw();
 
-            Graphics.drawDoor(door.x, door.y, door.w, door.h);
+            Graphics.drawDoor(door.pos.x, door.pos.y, door.w, door.h);
 
             // crates
             for (var i = 0; i < crates.length; ++i) {
@@ -325,8 +307,8 @@ var lvl1 = (function () {
                 }
                 else {
                     if (hero.vX === 0) {
-                        crates[i].x = hero.x + 2;
-                        crates[i].y = hero.y + 11;
+                        crates[i].pos.x = hero.pos.x + 2;
+                        crates[i].pos.y = hero.pos.y + 11;
                     }
                 }
             }

@@ -1,7 +1,4 @@
-/// <reference path="heroInput.js" />
-/// <reference path="heroGraphics.js" />
-/// <reference path="heroInput.js" />
-/// <reference path="../physics/physics.js" />
+/// <reference path="../linker.js" />
 
 /*
     The hero object.
@@ -89,7 +86,7 @@ var hero = (function () {
 	/*********************** Render ***********************/
 	function drawHero(){
 		if(imgReady && hero.sx >= 0 && hero.sy >= 0){
-    		ctx.drawImage(img, hero.sx, hero.sy, hero.w, hero.h, hero.x, hero.y, hero.w, hero.h);
+		    ctx.drawImage(img, hero.sx, hero.sy, hero.w, hero.h, hero.pos.x, hero.pos.y, hero.w, hero.h);
     	}
 	}
 		
@@ -101,8 +98,6 @@ var hero = (function () {
 	}
 		
 	return {
-		x: 0,				// top left of sprite
-		y: 0,
 		sx: 0,				// sprite position
 		sy: 0,
 		lvlX: 0,			
@@ -110,8 +105,6 @@ var hero = (function () {
 		h: 38,
 		vX: 0,
 		vY: 0,
-		maxVx: 3.6,         // TODO: should be const
-		maxVy: 10,         // TODO: should be const
 		aX: 0.17,
 		aY: 0.5,
 		jumpMod: 4,
@@ -148,9 +141,9 @@ var hero = (function () {
 			img.onload = function () { imgReady = true; };
 			img.src = "../dungeon/web/img/sprites/player/player.png";
 			
-			// grab texturePacker's sprite coords; TODO: include on the page somehow??
+			// grab texturePacker's sprite coords
 			$.get("../dungeon/web/img/sprites/player/player.xml", function(xml){
-				var wrap = $(xml).find('sprite');
+				var wrap = $(xml).find("sprite");
 				
 				$(wrap).each(function(){
 					var name = $(this).attr('n'),
@@ -172,7 +165,7 @@ var hero = (function () {
 			graphics.init();
 
             // setup hero bounding box for collision detection
-			$.extend(hero, new SAT.Box(new SAT.Vector(hero.x, hero.y), hero.w, hero.h).toPolygon());
+			$.extend(hero, new SAT.Box(new SAT.Vector(0, 0), hero.w, hero.h).toPolygon());
 		},
 		
 		update: function () {

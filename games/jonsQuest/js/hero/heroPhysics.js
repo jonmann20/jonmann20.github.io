@@ -7,9 +7,9 @@ var HeroPhysicsComponent = function () {
 
     function bulletHandler() {
         for (var i = 0; i < hero.bulletArr.length; ++i) {
-            hero.bulletArr[i].x += hero.bulletArr[i].dirR ? bullet.speed : -bullet.speed;   // update position
+            hero.bulletArr[i].pos.x += hero.bulletArr[i].dirR ? bullet.speed : -bullet.speed;   // update position
 
-            if (hero.bulletArr[i].x > canvas.width || hero.bulletArr[i].x < 0) {		    // bullet and screen
+            if (hero.bulletArr[i].pos.x > canvas.width || hero.bulletArr[i].pos.x < 0) {		    // bullet and screen
                 hero.bulletArr.splice(i, 1); // remove ith item
             }
         }
@@ -18,24 +18,24 @@ var HeroPhysicsComponent = function () {
     function screenCollision() {
         hero.onGround = false;
 
-        if (hero.y < -hero.h) {                     // feet above top of screen
-            hero.y = -hero.h;
+        if (hero.pos.y < -hero.h) {                     // feet above top of screen
+            hero.pos.y = -hero.h;
             hero.vY = 0;
         }
-        else if (hero.y >= (canvas.height - game.padBot - hero.h)) { // bottom
-            hero.y = canvas.height - game.padBot - hero.h;
+        else if (hero.pos.y >= (canvas.height - game.padBot - hero.h)) { // bottom
+            hero.pos.y = canvas.height - game.padBot - hero.h;
             hero.isJumping = false;
             hero.onGround = true;
 
             hero.vY = 0;
         }
 
-        if (hero.x < 0) { 								// left
-            hero.x = 0;
+        if (hero.pos.x < 0) { 								// left
+            hero.pos.x = 0;
             hero.vX = 0;
         }
-        else if (hero.x > (canvas.width - hero.w)) { 	// right 
-            hero.x = canvas.width - hero.w;
+        else if (hero.pos.x > (canvas.width - hero.w)) { 	// right 
+            hero.pos.x = canvas.width - hero.w;
             hero.vX = 0;
         }
     }
@@ -57,7 +57,7 @@ var HeroPhysicsComponent = function () {
         
         Physics.lvlItemCollision(function (r, idx) {
             if (r.overlapN.y === 1) {
-                hero.y -= r.overlapV.y;
+                hero.pos.y -= r.overlapV.y;
                 hero.isOnObj = true;
                 hero.isJumping = false;
                 hero.vY = 0;    // (wrong location??)
@@ -86,12 +86,12 @@ var HeroPhysicsComponent = function () {
 
     return {
         updatePosition: function (){	
-            if (!hero.isJumping && hero.x !== (hero.x + hero.vX)) {
+            if (!hero.isJumping && hero.pos.x !== (hero.pos.x + hero.vX)) {
                 audio.step.play();
             }
             
-            if(((hero.dir == Dir.RIGHT && hero.x >= ((canvas.width/2) + 35)) ||
-               (hero.dir == Dir.LEFT && hero.x <= ((canvas.width/2) - 45))) &&
+            if(((hero.dir == Dir.RIGHT && hero.pos.x >= ((canvas.width/2) + 35)) ||
+               (hero.dir == Dir.LEFT && hero.pos.x <= ((canvas.width/2) - 45))) &&
                (hero.lvlX + hero.vX >= 0) &&
                (hero.lvlX + hero.vX <= level.curLvl.width - canvas.width)
             ){
@@ -99,11 +99,11 @@ var HeroPhysicsComponent = function () {
                 level.updateView();
             }
             else {
-                hero.x += hero.vX;
+                hero.pos.x += hero.vX;
             }
 
             if (!hero.onLadder) {
-                hero.y += hero.vY;
+                hero.pos.y += hero.vY;
             }
         },
 

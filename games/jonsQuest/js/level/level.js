@@ -5,23 +5,13 @@ var level = (function () {
     /********** Update **********/
     function updateObjs() {
         for (var i = 0; i < level.objs.length; ++i) {
-            if (typeof (level.objs[i].pos) !== "undefined") {       // TODO: update SAT api
-                level.objs[i].pos.x -= hero.vX;
-            }
-            else {
-                level.objs[i].x -= hero.vX;
-            }
+            level.objs[i].pos.x -= hero.vX;
         }
     }
 
     function updateItems() {
         for (var i = 0; i < level.items.length; ++i) {
-            //if (typeof (level.items[i].pos) !== "undefined") {
-            //    level.items[i].pos.x -= hero.vX;
-            //}
-            //else {
-                level.items[i].x -= hero.vX;
-            //}
+            level.items[i].pos.x -= hero.vX;
         }
     }
 
@@ -35,37 +25,33 @@ var level = (function () {
         ctx.fillRect(0, 0, FULLW, FULLH - game.padFloor - 1);
 
         for (var i = 0; i < level.objs.length; ++i) {
-            if (typeof (level.objs[i].pos) !== "undefined") {       // TODO: fix SAT api
+            // check if visible
+            if (typeof (level.objs[i].visible) !== "undefined" &&   // TODO: all objs should have visible property (fix api)
+                !level.objs[i].visible
+            ) {
+                continue;
+            }
 
-                // check if visible
-                if (typeof (level.objs[i].visible) !== "undefined" &&   // TODO: all objs should have visible property (fix SAT api)
-                    !level.objs[i].visible
-                ) {
-                    continue;
+            if (typeof (level.objs[i].type) !== "undefined") {
+                if (level.objs[i].type === "ladder") {           // ladder
+                    Graphics.drawLadder(level.objs[i]);
                 }
-
-                if (typeof (level.objs[i].type) !== "undefined") {    
-                    if (level.objs[i].type === "ladder") {           // ladder
-                        Graphics.drawLadder(level.objs[i]);
-                    }
-                    else if (level.objs[i].type === "scale") {      // scale
-                        Graphics.drawScale(level.objs[i]);
-                    }
+                else if (level.objs[i].type === "scale") {      // scale
+                    Graphics.drawScale(level.objs[i]);
                 }
-                else {
-                    Graphics.drawPlatform(
-                        level.objs[i].pos.x,
-                        level.objs[i].pos.y,
-                        level.objs[i].edges[0].x,
-                        level.objs[i].edges[1].y
-                    );
-                }
+            }
+            else {
+                Graphics.drawPlatform(
+                    level.objs[i].pos.x,
+                    level.objs[i].pos.y,
+                    level.objs[i].edges[0].x,
+                    level.objs[i].edges[1].y
+                );
+            }
 
 
-                if (typeof (level.objs[i].type) !== "undefined" && level.objs[i].type === "scale") {    // scale status
-                    Graphics.drawPlatformStatus(level.objs[i]);
-                }
-
+            if (typeof (level.objs[i].type) !== "undefined" && level.objs[i].type === "scale") {    // scale status
+                Graphics.drawPlatformStatus(level.objs[i]);
             }
         }
     }
@@ -91,9 +77,9 @@ var level = (function () {
         // called before start of level
         reset: function () {
             level.hiddenItemsFound = 0;
-
-            hero.x = 23;
-            hero.y = canvas.height - hero.h;
+            
+            hero.pos.x = 23;
+            hero.pos.y = canvas.height - hero.h;
             hero.vX = hero.vY = 0;
             hero.isJumping = false;
             hero.bulletArr.length = 0;		// prevents leftover thrown shurikens

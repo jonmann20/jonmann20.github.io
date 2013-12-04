@@ -24,8 +24,8 @@ var HeroGraphicsComponent = function () {
             
 		        Graphics.drawRotate(
             	    shuriken, 
-            	    hero.bulletArr[i].x + dirOffset,
-            	    hero.bulletArr[i].y + 20,
+            	    hero.bulletArr[i].pos.x + dirOffset,
+            	    hero.bulletArr[i].pos.y + 20,
         	 	    hero.bulletArr[i].deg
     	 	    );
 		    }

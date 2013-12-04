@@ -14,7 +14,6 @@ var Graphics = (function () {
         tickerStep: 0.01,
         fadeOut: false,
 
-
         fadeCanvas: function(callback){
             $(canvas).removeClass("preTransition");
             $(canvas).addClass("duringTransition");
@@ -76,7 +75,7 @@ var Graphics = (function () {
                 w = platform.edges[0].x,
                 h = platform.edges[1].y
             ;
-
+            
             // draw top border 1px above bounding box
             ctx.fillStyle = Color.BLACK;
             ctx.fillRect(x, y - 1, w, 1);
@@ -86,7 +85,7 @@ var Graphics = (function () {
             ctx.fillRect(x, y, w, h);
         },
 
-        drawPlatform: function (x,y,w,h) {
+        drawPlatform: function (x, y, w, h) {
             // draw top border 1px above bounding box
             ctx.fillStyle = Color.LIGHT_BROWN;
             ctx.fillRect(x, y-1, w, 1);
@@ -97,12 +96,11 @@ var Graphics = (function () {
         },
 
         drawPlatformStatus: function (platform) {
-
             var x = platform.pos.x,
                 y = platform.pos.y,
                 w = platform.w,
                 h = platform.h,
-                theShape = 28,
+                theShape = 26,
                 halfTheShape = theShape/2,
                 midX = x + w/2 - halfTheShape,
                 midY = y + h/2 - halfTheShape
@@ -112,7 +110,6 @@ var Graphics = (function () {
 
             if (platform.holdingItem === "crate") {
                 // draw check mark
-
                 ctx.strokeStyle = "green";
 
                 --midY;
@@ -127,7 +124,6 @@ var Graphics = (function () {
             }
             else {
                 // draw 'X'
-
                 ctx.strokeStyle = "red";
 
                 ctx.beginPath();
@@ -138,8 +134,6 @@ var Graphics = (function () {
                 ctx.stroke();
                 ctx.closePath();
             }
-
-            
         },
 
         drawDoor: function (x, y, w, h) {

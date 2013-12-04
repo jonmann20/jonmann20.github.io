@@ -7,6 +7,40 @@ var utils = (function () {
 
 
     return {
+        /*
+            extends an oldObj into a newObj
+            while keeping certain objects properties in sync
+        */
+        extend: function (newObj, oldObj) {
+            // merge-copy current oldObj into newObj
+            $.extend(newObj, oldObj);
+
+            // force newObj to get oldObj's imgReady property
+            var prop = "imgReady";
+            Object.defineProperty(newObj, prop, {
+                get: function () {
+                    return oldObj[prop];
+                },
+                //set: function (arg) {
+                //    oldObj[prop] = arg;
+                //},
+                //configurable: true
+            });
+
+        },
+
+        repeatAction: function (timeStep, numTimes, callback) {
+            var num = 0;
+            var theAnimation = setInterval(function () {
+                if (num++ > numTimes) {
+                    clearInterval(theAnimation);
+                }
+                else {
+                    callback();
+                }
+            }, timeStep);
+        },
+
         degToRad: function(deg){
             return deg * 0.0174532925199432957;
         },
@@ -34,6 +68,13 @@ var utils = (function () {
         },
 
         /**** Debug Printers ****/
+        // A method to print to the console less frequently then within the game loop.
+        printSlow: function(msg){
+            if (game.actualTime % 10 === 0) {
+                console.log(msg);
+            }
+        },
+
 		printMouse: function () {
 		    $("canvas").on("mousemove", function (e) {
 		        console.log(e.offsetX, e.offsetY);

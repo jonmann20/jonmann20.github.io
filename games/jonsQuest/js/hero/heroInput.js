@@ -8,6 +8,12 @@
 */
 var HeroInputComponent = function () {
 
+    var maxVx = 3.6,         // TODO: should be const
+        maxVy = 10         // TODO: should be const
+    ;
+
+
+
     return {
         init: function () {
             // global key vars
@@ -38,8 +44,10 @@ var HeroInputComponent = function () {
                         audio.play(audio.effort);
 
                         hero.bulletArr[hero.bulletArr.length] = {
-                            x: hero.x,
-                            y: hero.y,
+                            pos: {
+                                x: hero.pos.x,
+                                y: hero.pos.y
+                            },
                             w: bullet.w,
                             h: bullet.h,
                             dirR: (hero.dir == Dir.RIGHT),
@@ -80,8 +88,8 @@ var HeroInputComponent = function () {
             if (doGravity && !hero.onLadder) {
                 var fixVy = hero.vY + game.gravity*2;
 
-                if (fixVy > hero.maxVY) {
-                    hero.vY = hero.maxVy;
+                if (fixVy > maxVy) {
+                    hero.vY = maxVy;
                 }
                 else {
                     hero.vY = fixVy;
@@ -93,7 +101,7 @@ var HeroInputComponent = function () {
             var leftOrRight = false;
             //----- left (a)
             if(65 in keysDown){ 			
-                hero.vX = (Math.abs(hero.vX - hero.aX) > hero.maxVx) ? -hero.maxVx : (hero.vX - hero.aX);
+                hero.vX = (Math.abs(hero.vX - hero.aX) > maxVx) ? -maxVx : (hero.vX - hero.aX);
                 hero.dir = Dir.LEFT;
                 leftOrRight = true;
             }
@@ -101,7 +109,7 @@ var HeroInputComponent = function () {
 		
             //----- right (d)
             if (68 in keysDown) {
-                hero.vX = (Math.abs(hero.vX + hero.aX) > hero.maxVx) ? hero.maxVx : (hero.vX + hero.aX);
+                hero.vX = (Math.abs(hero.vX + hero.aX) > maxVx) ? maxVx : (hero.vX + hero.aX);
                 hero.dir = Dir.RIGHT;
                 leftOrRight = true;
             }
@@ -118,14 +126,14 @@ var HeroInputComponent = function () {
             //----- up (w)
             if (KeyCode.W in keysDown) {
                 if (hero.onLadder) {
-                    --hero.y;
+                    --hero.pos.y;
                 }
             }
 
             //----- down (s)
             if (KeyCode.S in keysDown) {
                 if (hero.onLadder) {
-                    ++hero.y;
+                    ++hero.pos.y;
                 }
             }
 

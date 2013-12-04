@@ -10,12 +10,12 @@ var Physics = (function () {
         // could be sped up by checking if a does NOT intersect with b (i.e. using OR)
         // uses simple Speculative Contacts
         isCollision: function (a, b, moe, isLvl) {
-            var aX = (typeof (isLvl) !== "undefined") ? a.x + a.lvlX : a.x;
+            var aX = (typeof (isLvl) !== "undefined") ? a.pos.x + a.lvlX : a.pos.x;
 
-            if ((aX + moe <= (b.x + b.w)) && // a is to the left of the right side of b
-				(b.x + moe <= (aX + a.w)) && // a is to the right of the left side of b
-				(a.y + moe <= (b.y + b.h)) && // a is higher than the bot of b
-				(b.y + moe <= (a.y + a.h)) 	  // a is lower than the top of b
+            if ((aX + moe <= (b.pos.x + b.w)) && // a is to the left of the right side of b
+				(b.pos.x + moe <= (aX + a.w)) && // a is to the right of the left side of b
+				(a.pos.y + moe <= (b.pos.y + b.h)) && // a is higher than the bot of b
+				(b.pos.y + moe <= (a.pos.y + a.h)) 	  // a is lower than the top of b
 			) {
                 return true;
             }
@@ -26,16 +26,10 @@ var Physics = (function () {
         // uses SAT and AABB
         // checks collision between a and the level objects
         lvlObjCollision: function (a, callback) {
-            if (typeof (a.pos) !== "undefined") {
-                a.pos.x = a.x;
-                a.pos.y = a.y;        // TODO: convert interface to x and y NOT pos.x/y
-            }
-
             var response = new SAT.Response();
             for (var i = 0; i < level.objs.length; ++i) {
 
-                if (typeof (level.objs[i].pos) !== "undefined"
-                    && typeof level.objs[i].collidable === "undefined"
+                if (typeof level.objs[i].collidable === "undefined"
                     //&& level.objs[i] !== a         // checks if object is in list (by reference)
                 ) {
 
@@ -44,8 +38,8 @@ var Physics = (function () {
 
                     // Respond to Level Object Collision
                     if (collided) {
-                        response.a.x = response.a.pos.x - response.overlapV.x;
-                        response.a.y = response.a.pos.y - response.overlapV.y;
+                        response.a.pos.x -= response.overlapV.x;
+                        response.a.pos.y -= response.overlapV.y;
                         
                         if (typeof (level.objs[i].item_t) !== "undefined") {
                             response.item_t = level.objs[i].item_t;
@@ -76,12 +70,6 @@ var Physics = (function () {
         },
 
         isSATcollision: function (a, b, callback) {
-            a.pos.x = a.x;
-            a.pos.y = a.y;
-
-            b.pos.x = b.x;
-            b.pos.y = b.y;
-
             var response = new SAT.Response();
             var collided = SAT.testPolygonPolygon(a, b, response);
 

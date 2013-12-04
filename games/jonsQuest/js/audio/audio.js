@@ -67,7 +67,7 @@
         },
 
         play: function (sound, stopPrev) {
-            stopPrev = (typeof (stopPrev) !== 'undefined') ? stopPrev : true;
+            stopPrev = (typeof (stopPrev) !== "undefined") ? stopPrev : true;
 
             if (sound.ended)
                 sound.play();

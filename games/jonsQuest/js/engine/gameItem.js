@@ -1,50 +1,34 @@
-var GameItem = function () {
+/*
+    GameItem extends GameObj
+    GameItem may extend SAT.Vector to be SAT.Polygon
 
-    var parentDraw = null;
+    @param(GameObj) gObj A game object.
+    @param(?number) val The value of the game item.
+    @param(?bool) visible Whether the game item is displayed or not.
+    @param(?bool) sat Whether to setup AABB.
+*/
+var GameItem = function (gObj, val, visible, sat) {
+    utils.extend(this, gObj);
+    
 
-    function _draw() {
-        return function () {
-            if (this.visible && !this.collected) {
-                parentDraw.apply(this);
-            }
+    this.val = typeof(val) !== "undefined" ? val : -1;
+    this.visible = typeof(visible) !== "undefined" ? visible : true;
+    
+    //if (typeof (sat) !== "undefined" && sat === true) {
+    //    $.extend(true, this, new SAT.Box(this.pos, this.w, this.h).toPolygon());
+    //}
 
-        };
-    }
+    //console.log(this);
 
+    this.collected = false;
+    this.holding = false;
 
-    return {
-        collected: false,
-        holding: false,
-        visible: true,
-        val: -1,
-
-        /*
-            Initializes a Game Item.
-         
-            @param {GameObj=} gObj A game object (super class).
-            @param {?number=} val The value of the game item, -1 by default.
-            @param {?bool=} visible A visibility flag, true by default.
-            @param {?bool=} sat A flag to add the SAT functionality to the game item, not enabled by default.
-            @constructor
-        */
-        init: function (gObj, val, visible, sat) {
-            $.extend(this, gObj);
-
-            if (typeof(val) !== "undefined") {
-                this.val = val;
-            }
-
-            if (typeof (visible) !== "undefined") {
-                this.visible = visible;
-            }
-
-            if (typeof (sat) !== "undefined" && sat === true) {
-                $.extend(this, new SAT.Box(new SAT.Vector(this.x, this.y), this.w, this.h).toPolygon());
-            }
-
-            parentDraw = this.draw;
-            this.draw = _draw();
+    // TODO: make private
+    var parentDraw = this.draw;
+    this.draw = function () {
+        //console.log(this.visible);
+        if (this.visible && !this.collected) {
+            parentDraw.apply(this);
         }
-
     };
 };

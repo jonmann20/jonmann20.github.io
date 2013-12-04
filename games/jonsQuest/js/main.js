@@ -1,3 +1,5 @@
+/// <reference path="linker.js" />
+
 var Main = (function () {
 
     function setCanvasGlobals() {
@@ -32,9 +34,9 @@ var Main = (function () {
             setCanvasGlobals();
             loadingScreen();
 
+            hero.init();
             audio.init();
             level.init();
-            hero.init();
             HUD.init();
 
             // wait for google font
