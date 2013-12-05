@@ -122,6 +122,34 @@ var lvl1 = (function () {
         init: function () {
             level.hiddenItems = 1;
 
+            // background
+            var i = 0,
+                x1offset = HALFW/1.2,
+                x2offset = HALFW/2.7,
+                x = 60 - x1offset,
+                fixY
+            ;
+
+            while (x < this.width) {
+                fixY = (++i % 2 == 0) ? 100 : 0;
+                x += x1offset;
+                level.bg[0].push(new GameObj(x, 60 + fixY, 0, 0, "img/cloud.png"));        // TODO: convert api to get w/h and auto look in /img
+            }
+
+            x = 0;
+            while (x < this.width) {
+                if (++i % 2 == 0)
+                    fixY = 70
+                else if (i % 3 == 0)
+                    fixY = 140
+                else
+                    fixY = 10
+                
+                x += x2offset;
+                level.bg[1].push(new GameObj(x, 100 + fixY, 0, 0, "img/cloud_small.png"));        // TODO: convert api to get w/h and auto look in /img
+            }
+
+
             // 3 initial platforms
             level.objs.push(
                 new SAT.Box(new SAT.Vector(200, 196), 267, 40).toPolygon(),
@@ -146,13 +174,15 @@ var lvl1 = (function () {
                 stairs.w += run;
                 stairs.h += rise;
             }
-            
+
             // platform + door
             level.objs.push(new SAT.Box(new SAT.Vector(stairs.x + stairs.w, stairs.y - stairs.h), 200, 50).toPolygon());
             door = new GameItem(new GameObj(stairs.x + stairs.w + 155, stairs.y - stairs.h - 53, 25, 53));
 
             // sack
             sack = new GameItem(new GameObj(680, 71, 20, 24, "img/sack.png"), 5);
+            sack.type = "sack";
+            sack.collidable = false;
             
             // cyborg
             cyborg = new Enemy(new GameObj(1700, FULLH - game.padFloor - 38 + 1, 28, 38, "img/cyborgBnW.png"), 1);

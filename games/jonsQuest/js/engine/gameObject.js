@@ -28,6 +28,8 @@ var GameObj = function (x, y, w, h, src) {
         var that = this;
         this.img.onload = function () {
             that.imgReady = true;
+            that.w = this.width;
+            that.h = this.height;
         };
 
         this.img.src = src;

@@ -17,13 +17,33 @@ var level = (function () {
 
 
     /********** Render **********/
-
-    // all of the collision rectangles in the level
-    function drawLvlObjs() {
-        //---- level background
+    // the parallax background
+    function drawLvlBg() {
+        // color background
         ctx.fillStyle = Color.LIGHT_GREEN;
         ctx.fillRect(0, 0, FULLW, FULLH - game.padFloor - 1);
 
+        // layer 1
+        for (var i = 0; i < level.bg[1].length; ++i) {
+            // update position
+            level.bg[1][i].pos.x -= hero.vX / 3;
+
+            // draw
+            level.bg[1][i].draw();
+        }
+
+        // layer 0
+        for (var i = 0; i < level.bg[0].length; ++i) {
+            // update position
+            level.bg[0][i].pos.x -= hero.vX/2;
+
+            // draw
+            level.bg[0][i].draw();
+        }
+    }
+
+    // all of the collision rectangles in the level
+    function drawLvlObjs() {
         for (var i = 0; i < level.objs.length; ++i) {
             // check if visible
             if (typeof (level.objs[i].visible) !== "undefined" &&   // TODO: all objs should have visible property (fix api)
@@ -58,6 +78,10 @@ var level = (function () {
 
 
     return {
+        bg: [   // parallax background
+            [], // backgorund obj's 1
+            []  // background obj's 2
+        ],
         objs: [],           // dynamically holds all of the objects for the level;
         items: [],          // dynamically holds all of the items for the level (movable items)
         curLvl: null,       // alias for the current level object e.g. lvl1
@@ -89,6 +113,10 @@ var level = (function () {
         complete: function () {
             level.isTransitioning = true;
             audio.lvlComplete();
+
+            // reset graphics timers (to fix blink text)
+            Graphics.ticker = 1;
+            Graphics.fadeOut = true;
 
             Graphics.fadeCanvas(function () {
                 level.isTransitioning = false;
@@ -123,6 +151,7 @@ var level = (function () {
             Graphics.drawPlatform(0, FULLH - game.padFloor, FULLW, game.padFloor);
 
             // current level
+            drawLvlBg();
             drawLvlObjs();
             level.curLvl.render();
         }

@@ -6,8 +6,9 @@
 var hero = (function () {
     var input = null,           // the hero input component
         graphics = null,        // the hero graphics component
-        imgReady = false,
-		img = null,
+        imgReady = false,       
+		img = null,             // TODO: convert to be of GameObj type
+        idleTime = 0,
 		showRun = true,
 		spriteArr = []
 	;
@@ -73,11 +74,23 @@ var hero = (function () {
 				pos = spriteArr["playerLeft"];
 		}
 		
+        // idle animation
+		if (hero.vX === 0 && hero.vY === 0)
+		    ++idleTime;
+		else
+		    idleTime = 0;
+
+		if (idleTime > 320) {
+		    pos = spriteArr["playerDown"];
+		}
+
+        // invincible
 		var inv = hero.invincibleTimer % 40;
 		
 		if(hero.invincible && (inv >= 0 && inv <= 16)){
 			pos = {x: -1, y: -1};
 		}
+
 		
 		hero.sx = pos.x;
 		hero.sy = pos.y;

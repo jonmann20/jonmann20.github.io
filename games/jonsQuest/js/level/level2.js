@@ -13,7 +13,7 @@
         render: function () {
             ctx.font = "18px 'Press Start 2P'";
             
-            var lvlTxt = "LEVEL 1 -- coming soon";
+            var lvlTxt = "LEVEL 2 -- COMING SOON";
             var lvlTxtW = ctx.measureText(lvlTxt).width;
             ctx.fillStyle = "#e1e1e1";
             ctx.fillText(lvlTxt, HALFW - lvlTxtW / 2, 150);
