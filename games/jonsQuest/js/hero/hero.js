@@ -28,9 +28,9 @@ var hero = (function () {
             audio.heroDeath.play();
             audio.bgMusic.muted = true;
 
-            alert("You died");
-            location.reload();
-            game.over = true;
+            //alert("You died");
+            //location.reload();
+            //game.over = true;
         }
     }
 
@@ -49,7 +49,7 @@ var hero = (function () {
 		}
 		else if(hero.dir == Dir.RIGHT){
 			if(hero.vX > 0){
-   				if(Math.abs(hero.vX) <= hero.aX*3.5)
+   				if(Math.abs(hero.vX) <= hero.aX*10)
    					pos = spriteArr["playerRight_Step"];
 				else if(showRun){
 					pos = spriteArr["playerRight_Run1"];
@@ -62,7 +62,7 @@ var hero = (function () {
 		}
 		else if(hero.dir == Dir.LEFT){ 
 			if(hero.vX < 0){
-				if(Math.abs(hero.vX) <= hero.aX*3.5)
+				if(Math.abs(hero.vX) <= hero.aX*10)
    					pos = spriteArr["playerLeft_Step"];
 				else if(showRun){
 					pos = spriteArr["playerLeft_Run1"];
@@ -80,8 +80,15 @@ var hero = (function () {
 		else
 		    idleTime = 0;
 
-		if (idleTime > 320) {
-		    pos = spriteArr["playerDown"];
+		if (idleTime > 210) {
+		    var foo = idleTime % 200;
+		    
+		    if (foo >= 0 && foo <= 50 || foo > 100 && foo <= 150)
+		        pos = spriteArr["playerDown"];
+		    else if (foo > 50  && foo <= 100)
+		        pos = spriteArr["playerDown_breatheIn"];
+		    else if (foo > 150 && foo <= 200)
+		        pos = spriteArr["playerDown_breatheOut"];
 		}
 
         // invincible

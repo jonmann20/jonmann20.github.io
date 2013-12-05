@@ -6,7 +6,9 @@
 var Graphics = (function () {
 
     var alpha = 1,
-        canvasTransition = null
+        canvasTransition = null,
+        projectX = 9,
+        projectY = 12
     ;
 
     return {
@@ -51,6 +53,31 @@ var Graphics = (function () {
             ctx.fillText(str, x - tmpW / 2, y);
         },
 
+        /*
+            Converts a rectangle into a 'skewed rectangle' polygon
+
+            @param(number) x
+            @param(number) y
+            @param(number) w
+            @param(number) h
+            @return (SAT.Polygon)
+        */
+        getSkewedRect: function (x, y, w, h) {
+            y += projectY / 2;
+
+            var poly = new SAT.Polygon(new SAT.Vector(x, y), [
+                new SAT.Vector(),
+                new SAT.Vector(w - projectX, 0),
+                new SAT.Vector(w, projectY),
+                new SAT.Vector(w, h),
+                new SAT.Vector(projectX, h),
+                new SAT.Vector(0, h - projectY)
+            ]);
+
+            //poly = new SAT.Box(new SAT.Vector(x, y), w, h).toPolygon();
+            return poly;
+        },
+
         drawLadder: function (platform) {
             var x = platform.pos.x,
                 y = platform.pos.y,
@@ -85,14 +112,30 @@ var Graphics = (function () {
             ctx.fillRect(x, y, w, h);
         },
 
-        drawPlatform: function (x, y, w, h) {
-            // draw top border 1px above bounding box
-            ctx.fillStyle = Color.LIGHT_BROWN;
-            ctx.fillRect(x, y-1, w, 1);
+        drawPlatform: function (poly) {
+            var y = poly.pos.y - projectY / 2;
 
-            // draw platform
+            // top
+            ctx.fillStyle = Color.LIGHT_BROWN;
+            ctx.beginPath();
+            ctx.moveTo(poly.pos.x, y );
+            ctx.lineTo(poly.pos.x + poly.points[1].x, y + poly.points[1].y);
+            ctx.lineTo(poly.pos.x + poly.points[2].x, y + poly.points[2].y);
+            ctx.lineTo(poly.pos.x + projectX, y + projectY);
+            ctx.closePath();
+            ctx.fill();
+
+            // body
             ctx.fillStyle = Color.DARK_BROWN;
-            ctx.fillRect(x, y, w, h);
+            ctx.beginPath();
+            ctx.moveTo(poly.pos.x + poly.points[2].x, y + poly.points[2].y);
+            ctx.lineTo(poly.pos.x + poly.points[3].x, y + poly.points[3].y);
+            ctx.lineTo(poly.pos.x + poly.points[4].x, y + poly.points[4].y);
+            ctx.lineTo(poly.pos.x + poly.points[5].x, y + poly.points[5].y);
+            ctx.lineTo(poly.pos.x + poly.points[0].x, y + poly.points[0].y);
+            ctx.lineTo(poly.pos.x + projectX, y + projectY);
+            ctx.closePath();
+            ctx.fill();
         },
 
         drawPlatformStatus: function (platform) {

@@ -61,12 +61,7 @@ var level = (function () {
                 }
             }
             else {
-                Graphics.drawPlatform(
-                    level.objs[i].pos.x,
-                    level.objs[i].pos.y,
-                    level.objs[i].edges[0].x,
-                    level.objs[i].edges[1].y
-                );
+                Graphics.drawPlatform(level.objs[i]);
             }
 
 
@@ -148,7 +143,10 @@ var level = (function () {
         /******************** Render ********************/
         render: function () {
             // floor
-            Graphics.drawPlatform(0, FULLH - game.padFloor, FULLW, game.padFloor);
+            ctx.fillStyle = Color.LIGHT_BROWN;
+            ctx.fillRect(0, FULLH - game.padFloor - 1, FULLW, 1);
+            ctx.fillStyle = Color.DARK_BROWN;
+            ctx.fillRect(0, FULLH - game.padFloor, FULLW, game.padFloor);
 
             // current level
             drawLvlBg();

@@ -161,10 +161,9 @@ var Color = Object.freeze({
 
 
 var bullet = {
-    color: "rgba(0, 182, 255, .85)",
     w: 19.5,
     h: 9,
-    speed: 3.3
+    speed: 3.4
 };
 
 // global functions

@@ -152,9 +152,9 @@ var lvl1 = (function () {
 
             // 3 initial platforms
             level.objs.push(
-                new SAT.Box(new SAT.Vector(200, 196), 267, 40).toPolygon(),
-                new SAT.Box(new SAT.Vector(562, 290), 300, 40).toPolygon(),
-                new SAT.Box(new SAT.Vector(600, 95), 200, 40).toPolygon()
+                Graphics.getSkewedRect(200, 196, 267, 40),
+                Graphics.getSkewedRect(562, 290, 300, 40),
+                Graphics.getSkewedRect(600, 95, 200, 40)
             );
 
             // stairs
@@ -170,17 +170,18 @@ var lvl1 = (function () {
             ;
 
             for (var i = 0; i < 15; ++i) {
-                level.objs.push(new SAT.Box(new SAT.Vector(stairs.x + run * i, stairs.y - rise * i), run+1, 50).toPolygon());
+                level.objs.push(Graphics.getSkewedRect(stairs.x + run * i, stairs.y - rise * i, run+1, 50));
                 stairs.w += run;
                 stairs.h += rise;
             }
 
             // platform + door
-            level.objs.push(new SAT.Box(new SAT.Vector(stairs.x + stairs.w, stairs.y - stairs.h), 200, 50).toPolygon());
+            level.objs.push(Graphics.getSkewedRect(stairs.x + stairs.w, stairs.y - stairs.h, 200, 50));
             door = new GameItem(new GameObj(stairs.x + stairs.w + 155, stairs.y - stairs.h - 53, 25, 53));
+            door.type = "door";
 
             // sack
-            sack = new GameItem(new GameObj(680, 71, 20, 24, "img/sack.png"), 5);
+            sack = new GameItem(new GameObj(680, 71 + 6, 20, 24, "img/sack.png"), 5);        // y dep on projectY /2
             sack.type = "sack";
             sack.collidable = false;
             
@@ -190,7 +191,7 @@ var lvl1 = (function () {
             cyborg.collidable = false;
 
             // hidden cash
-            hiddenCash = new GameItem(new GameObj(140, 50, 22, 24, "img/cash.png"), 10, false);
+            hiddenCash = new GameItem(new GameObj(120, 50, 22, 24, "img/cash.png"), 10, false);
             hiddenCash.type = "cash";
             hiddenCash.collidable = false;  // TODO: should remove from level.objs after collected
 

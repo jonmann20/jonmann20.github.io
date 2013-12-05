@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with TexturePacker http://www.codeandweb.com/texturepacker-->
-<!-- $TexturePacker:SmartUpdate:076a516eb7d21ca06e3396ed547cb1bd$ -->
+<!-- $TexturePacker:SmartUpdate:d3b12c22631b8d8f6cb0ee18afd62e8b:60c28ebe0745e336b0ec338f81c67645:6c45f23d1211d37495dbafcfd7f348f6$ -->
 <!--Format:
 n  => name of the sprite
 x  => sprite x pos in texture
@@ -13,16 +13,20 @@ oW => sprite's original width (only available if trimmed)
 oH => sprite's original height (only available if trimmed)
 r => 'y' only set if sprite is rotated
 -->
-<TextureAtlas imagePath="player.png" width="32" height="446">
+<TextureAtlas imagePath="player.png" width="32" height="628">
     <sprite n="playerDown.png" x="2" y="2" w="28" h="38"/>
-    <sprite n="playerLeft.png" x="2" y="42" w="28" h="38"/>
-    <sprite n="playerLeft_Run1.png" x="2" y="82" w="28" h="38"/>
-    <sprite n="playerLeft_Run2.png" x="2" y="122" w="28" h="38"/>
-    <sprite n="playerLeft_Step.png" x="2" y="162" w="28" h="38"/>
-    <sprite n="playerPicked.png" x="2" y="202" w="28" h="38"/>
-    <sprite n="playerRight.png" x="2" y="242" w="28" h="38"/>
-    <sprite n="playerRight_Run1.png" x="2" y="282" w="28" h="38"/>
-    <sprite n="playerRight_Run2.png" x="2" y="322" w="28" h="38"/>
-    <sprite n="playerRight_Step.png" x="2" y="362" w="28" h="38"/>
-    <sprite n="playerUp.png" x="2" y="402" w="28" h="38"/>
+    <sprite n="playerDown_breatheIn.png" x="2" y="42" w="28" h="38"/>
+    <sprite n="playerDown_breatheOut.png" x="2" y="82" w="28" h="38"/>
+    <sprite n="playerDown_flexL.png" x="2" y="122" w="28" h="38"/>
+    <sprite n="playerDown_flexR.png" x="2" y="162" w="28" h="38"/>
+    <sprite n="playerLeft.png" x="2" y="202" w="28" h="38"/>
+    <sprite n="playerLeft_Run1.png" x="2" y="242" w="28" h="38"/>
+    <sprite n="playerLeft_Run2.png" x="2" y="282" w="28" h="38"/>
+    <sprite n="playerLeft_Step.png" x="2" y="322" w="28" h="38"/>
+    <sprite n="playerPicked.png" x="2" y="362" w="28" h="38"/>
+    <sprite n="playerRight.png" x="2" y="402" w="28" h="38"/>
+    <sprite n="playerRight_Run1.png" x="2" y="442" w="28" h="38"/>
+    <sprite n="playerRight_Run2.png" x="2" y="482" w="28" h="38"/>
+    <sprite n="playerRight_Step.png" x="2" y="522" w="28" h="38"/>
+    <sprite n="playerUp.png" x="2" y="562" w="28" h="38"/>
 </TextureAtlas>
