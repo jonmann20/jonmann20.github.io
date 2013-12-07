@@ -2,10 +2,11 @@
 
 var game = (function () {
 	var	avgFPS = 0,
-		//updateTimePrev = 0,
         renderTimePrev = 0,
-        lag = 0,
-		fpsHistory = [0],
+        renderTimeBtw = 16,
+		fpsHistory = [60],
+        //updateTimePrev = 0,
+        //lag = 0,
         renderLoop,         // used to turn off game
         updateLoop          // used to turn off game
 	;
@@ -21,12 +22,13 @@ var game = (function () {
 	function render(renderTimeCur) {
         // timers
 	    if ((renderTimeCur - renderTimePrev) > 0) {
-	        game.renderTimeBtw = renderTimeCur - renderTimePrev;
+	        renderTimeBtw = renderTimeCur - renderTimePrev;
 	    }
 	    renderTimePrev = renderTimeCur;
 
 
 	    renderLoop = requestAnimFrame(render);
+
         
 	    // drawing
 	    level.render();
@@ -39,16 +41,14 @@ var game = (function () {
 	}
 	
 	function drawFPS(fps) {
-	    var actualFPS = (1000 / game.renderTimeBtw);
-
-	    if (actualFPS != "Infinity") {
-	        fpsHistory.push(actualFPS);
-	    }
+	    fpsHistory.push(1000 / renderTimeBtw);
 	    
     	if (game.totalTicks % 120 === 0) {
-    	    var tot = 0;
-            
-    	    for (var i in fpsHistory) {
+    	    var tot = 0,
+                i = fpsHistory.length
+    	    ;
+    	    
+    	    while (--i) {
         		tot += fpsHistory[i];
         	}
     	    
@@ -58,7 +58,10 @@ var game = (function () {
     	    else {
     	        avgFPS = 0;
     	    }
-        	fpsHistory = [];
+
+    	    while (fpsHistory.length > 0) {
+    	        fpsHistory.pop();
+    	    }
         }
     	
     	ctx.fillStyle = "#ddd";
@@ -74,16 +77,12 @@ var game = (function () {
 	    padBot: 119,	    // total padding
 	    padHUD: 80,
 	    padFloor: 39,
-	    lvl: 0,            // TODO: make startscreen level 0
-	    updateFPS: 1000 / 120,  // 1000 / 120 ==> 2x target rate of 60fps
-	    //updateTimeBtw: 0,
-	    renderTimeBtw: 0,
-	    totalTicks: 0,      // ticks are update iterations
+	    lvl: 0,                 // TODO: make startscreen level 0
+	    totalTicks: 0,          // ticks are update iterations
 	    actualTime: 0,
 
 
 	    start: function () {
-
             // update at fixed time interval
 	        updateLoop = setInterval(function () {
 	            ++game.totalTicks;
@@ -102,9 +101,8 @@ var game = (function () {
 	                update();
 	                //lag -= game.updateTimeBtw;
 	            //}
-	        }, game.updateFPS); 
-
-
+	        }, 8.3333); // 1000 / 120 ==> 2x target rate of 60fps
+	        
             // render w/vsync (let browser decide)
 	        render();
 	    },

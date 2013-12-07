@@ -28,9 +28,9 @@ var hero = (function () {
             audio.heroDeath.play();
             audio.bgMusic.muted = true;
 
-            //alert("You died");
-            //location.reload();
-            //game.over = true;
+            alert("You died");
+            location.reload();
+            game.over = true;
         }
     }
 
