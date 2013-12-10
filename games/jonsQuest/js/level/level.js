@@ -27,6 +27,7 @@ var level = (function () {
         for (var i = 0; i < level.bg[1].length; ++i) {
             // update position
             level.bg[1][i].pos.x -= hero.vX / 3;
+            //level.bg[1][i].pos.y += hero.vY / 10;
 
             // draw
             level.bg[1][i].draw();
@@ -36,6 +37,7 @@ var level = (function () {
         for (var i = 0; i < level.bg[0].length; ++i) {
             // update position
             level.bg[0][i].pos.x -= hero.vX/2;
+            //level.bg[0][i].pos.y += hero.vY / 8;
 
             // draw
             level.bg[0][i].draw();

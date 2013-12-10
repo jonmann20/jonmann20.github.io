@@ -19,14 +19,27 @@ var HeroInputComponent = function () {
             // global key vars
 	        keysDown = {};
             lastKeyDown = -1;
-	
+
+            $(document).on("click", ".resize", function () {
+                if ($(this).hasClass("off")) {
+                    $(this).removeClass("off").addClass("on");
+                    $(this).children("span").removeClass("icon-expand").addClass("icon-contract");
+                }
+                else if ($(this).hasClass("on")) {
+                    $(this).removeClass("on").addClass("off");
+                    $(this).children("span").removeClass("icon-contract").addClass("icon-expand");
+                }
+
+                utils.toggleFullScreen();
+            });
+
             addEventListener("keydown", function (e) {
 
                 if (e.keyCode == 32)
                     e.preventDefault(); 			//----- space bar (scrolling to bottom of page)
                 else if (e.keyCode == 77)			//----- mute/unmute (m)
                     audio.handleMuteButton();
-                else if(e.keyCode == 66)            //----- resize (b)
+                else if(e.keyCode == 70)            //----- resize (f)
                     $(".resize").trigger("click");
                 else if (e.keyCode == 75 &&			//----- jump (k);       TODO: move to check() function
                        (!hero.isJumping && ((lastKeyDown != 75) || !(75 in keysDown))) &&

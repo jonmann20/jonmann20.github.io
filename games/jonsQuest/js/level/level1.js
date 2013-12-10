@@ -152,9 +152,9 @@ var lvl1 = (function () {
 
             // 3 initial platforms
             level.objs.push(
-                Graphics.getSkewedRect(200, 196, 267, 40),
-                Graphics.getSkewedRect(562, 290, 300, 40),
-                Graphics.getSkewedRect(600, 95, 200, 40)
+                Graphics.getSkewedRect(200, 216, 267, 50),
+                Graphics.getSkewedRect(562, 310, 300, 50),
+                Graphics.getSkewedRect(590, 120, 220, 50)
             );
 
             // stairs
@@ -181,7 +181,7 @@ var lvl1 = (function () {
             door.type = "door";
 
             // sack
-            sack = new GameItem(new GameObj(680, 71 + 6, 20, 24, "img/sack.png"), 5);        // y dep on projectY /2
+            sack = new GameItem(new GameObj(680, 91 + 6, 20, 24, "img/sack.png"), 5);        // y dep on projectY /2
             sack.type = "sack";
             sack.collidable = false;
             
@@ -191,7 +191,7 @@ var lvl1 = (function () {
             cyborg.collidable = false;
 
             // hidden cash
-            hiddenCash = new GameItem(new GameObj(120, 50, 22, 24, "img/cash.png"), 10, false);
+            hiddenCash = new GameItem(new GameObj(113, 80, 22, 24, "img/cash.png"), 10, false);
             hiddenCash.type = "cash";
             hiddenCash.collidable = false;  // TODO: should remove from level.objs after collected
 

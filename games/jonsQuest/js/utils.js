@@ -114,11 +114,64 @@ var utils = (function () {
 		    else {
 		        cboxMenu = $.colorbox({
 		            html: $(".gameInstructions").html(),
-		            width: 290,
-		            height: 490
+		            width: 320,
+		            height: 530
 		        });
 		    }
-		}
+		},
+
+		toggleFullScreen: function () {
+
+
+		    // fill browser window
+		    if ($("body").hasClass("fullscreen")) {
+		        $(".canvasWrap").css({
+		            width: "",
+		            marginLeft: ""
+		        });
+
+		        $("body").removeClass("fullscreen");
+		    }
+		    else {
+		        $("body").addClass("fullscreen");
+
+		        var scaledW = $(window).height() * 1.777778;
+
+		        $(".canvasWrap").css({
+		            width: scaledW,
+		            marginLeft: -scaledW / 2
+		        });
+		    }
+
+
+
+            // fullscreen API
+            //if (!document.fullscreenElement &&    // alternative standard method
+            //    !document.mozFullScreenElement && !document.webkitFullscreenElement) {  // current working methods
+
+            //    if (canvas.requestFullscreen) {
+            //        canvas.requestFullscreen();
+            //    }
+            //    else if (canvas.mozRequestFullScreen) {
+            //        canvas.mozRequestFullScreen();
+            //    }
+            //    else if (canvas.webkitRequestFullscreen) {
+            //        canvas.webkitRequestFullscreen(); //Element.ALLOW_KEYBOARD_INPUT
+            //    }
+            //}
+            //else {
+            //    if (document.cancelFullScreen) {
+            //        document.cancelFullScreen();
+            //    }
+            //    else if (document.mozCancelFullScreen) {
+            //        document.mozCancelFullScreen();
+            //    }
+            //    else if (document.webkitCancelFullScreen) {
+            //        document.webkitCancelFullScreen();
+            //    }
+            //}
+        }
+
 	};
 })();
 

@@ -13,15 +13,15 @@ h1 {
 
 .canvasWrap {
     background: #000;
-    width: 960px;
-    height: 540px;
+    width: 992px;
+    height: 558px;
+    margin-left: -496px;  /* half w*/
     position: absolute;
     left: 50%;
     top: 10%;
-    margin-left: -480px;  /* half w*/
     box-shadow: 0 0 10px 3px #222;
 }
-.canvasWrap .lt960 {
+.canvasWrap .minW {
     display: none;
 }
 .canvasWrap canvas {
@@ -102,26 +102,17 @@ input[readonly] {
     margin-bottom: 18px;
 }
 
-@media screen and (max-width: 1272px) {
-    .canvasWrap {
-        left: auto;
-        right: 0;
-        margin-left: 0;
-    }
-}
-@media screen and (max-width: 1113px) {
+
+@media screen and (max-width: 1323px) {
     header {
         position: static;
         text-align: center;
     }
     .canvasWrap {
-        right: auto;
-        left: 50%;
         top: 95px;
-        margin-left: -480px
     }
 }
-@media screen and (max-width: 959px) {
+@media screen and (max-width: 991px) {
     .canvasWrap {
         position: static;
         margin: 20px auto;
@@ -129,10 +120,32 @@ input[readonly] {
         box-shadow: none;
         text-align: center;
     }
-    .canvasWrap .lt960 {
+    .canvasWrap .minW {
         display: block;
     }
     .canvasWrap canvas {
         display: none;
     }
 }
+
+.fullscreen {
+    overflow: hidden;
+    background: #000;
+}
+.fullscreen header {
+    display: none;
+}
+.fullscreen .canvasWrap {
+    top: 0;
+    box-shadow: none;
+}
+.fullscreen canvas {
+    width: 100%;
+}
+/*.canvasWrap:-webkit-full-screen {
+    width: 100%;
+    height: 100%;
+}
+canvas:-webkit-full-screen {
+    width: 100%;
+}*/
