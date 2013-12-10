@@ -75,6 +75,8 @@ var Graphics = (function () {
             ]);
 
             //poly = new SAT.Box(new SAT.Vector(x, y), w, h).toPolygon();
+            poly.type = JQObject.PLATFORM;  // allows not to be GameObj?????
+
             return poly;
         },
 
@@ -151,7 +153,7 @@ var Graphics = (function () {
 
             ctx.lineWidth = 3;
 
-            if (platform.holdingItem === "crate") {
+            if (platform.holdingItem === JQObject.CRATE) {
                 // draw check mark
                 ctx.strokeStyle = "green";
 

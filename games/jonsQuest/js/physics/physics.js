@@ -41,8 +41,8 @@ var Physics = (function () {
                         response.a.pos.x -= response.overlapV.x;
                         response.a.pos.y -= response.overlapV.y;
                         
-                        if (typeof (level.objs[i].item_t) !== "undefined") {
-                            response.item_t = level.objs[i].item_t;
+                        if (level.objs[i].type === JQObject.CRATE) {
+                            response.type = level.objs[i].type;
                         }
 
                         callback(response);

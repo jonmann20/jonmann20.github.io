@@ -41,6 +41,7 @@ module.exports = function(grunt) {
 	        		pth + "audio/audio.js",
 	        		pth + "graphics/graphics.js",
 	        		pth + "physics/physics.js",
+                    pth + "physics/objectPhysics.js",
 	        		pth + "engine/gameObject.js",
 	        		pth + "engine/gameItem.js",
                     pth + "engine/hud.js",

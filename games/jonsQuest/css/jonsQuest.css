@@ -13,9 +13,9 @@ h1 {
 
 .canvasWrap {
     background: #000;
-    width: 992px;
-    height: 558px;
-    margin-left: -496px;  /* half w*/
+    width: 1008px;
+    height: 567px;
+    margin-left: -504px;  /* half w*/
     position: absolute;
     left: 50%;
     top: 10%;

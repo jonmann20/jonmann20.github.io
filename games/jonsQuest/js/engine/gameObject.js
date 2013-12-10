@@ -1,8 +1,17 @@
 /*
     GameObj is the base class from which all objects in the game inherit from.
     Every GameObj has a SAT.Vector (pos);       TODO: make Vector not Polygon
+
+    @param(number) x The x position of the object.
+    @param(number) y The y position of the object.
+    @param(number) w The width of the object.
+    @param(number) h The height of the object.
+    @param(JQObject) type The type of the object.
+    @param(Image?) src The filename of the object sprite.  unused by default
+    
+    @constructor
 */
-var GameObj = function (x, y, w, h, src) {
+var GameObj = function (x, y, w, h, type, src) {
     this.initX = x;
     this.initY = y;
 
@@ -11,6 +20,7 @@ var GameObj = function (x, y, w, h, src) {
 
     this.w = w;
     this.h = h;
+    this.type = type;
 
     this.vY = 0;
 

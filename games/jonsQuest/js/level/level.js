@@ -15,6 +15,20 @@ var level = (function () {
         }
     }
 
+    function updateBg() {
+        // layer 1
+        for (var i = 0; i < level.bg[1].length; ++i) {
+            level.bg[1][i].pos.x -= hero.vX / 3;
+            //level.bg[1][i].pos.y += hero.vY / 10;
+        }
+
+        // layer 0
+        for (var i = 0; i < level.bg[0].length; ++i) {
+            level.bg[0][i].pos.x -= hero.vX / 2;
+            //level.bg[0][i].pos.y += hero.vY / 8;
+        }
+    }
+
 
     /********** Render **********/
     // the parallax background
@@ -25,21 +39,11 @@ var level = (function () {
 
         // layer 1
         for (var i = 0; i < level.bg[1].length; ++i) {
-            // update position
-            level.bg[1][i].pos.x -= hero.vX / 3;
-            //level.bg[1][i].pos.y += hero.vY / 10;
-
-            // draw
             level.bg[1][i].draw();
         }
 
         // layer 0
         for (var i = 0; i < level.bg[0].length; ++i) {
-            // update position
-            level.bg[0][i].pos.x -= hero.vX/2;
-            //level.bg[0][i].pos.y += hero.vY / 8;
-
-            // draw
             level.bg[0][i].draw();
         }
     }
@@ -54,21 +58,16 @@ var level = (function () {
                 continue;
             }
 
-            if (typeof (level.objs[i].type) !== "undefined") {
-                if (level.objs[i].type === "ladder") {           // ladder
-                    Graphics.drawLadder(level.objs[i]);
-                }
-                else if (level.objs[i].type === "scale") {      // scale
-                    Graphics.drawScale(level.objs[i]);
-                }
+            
+            if (level.objs[i].type === JQObject.LADDER) {           // ladder
+                Graphics.drawLadder(level.objs[i]);
             }
-            else {
-                Graphics.drawPlatform(level.objs[i]);
-            }
-
-
-            if (typeof (level.objs[i].type) !== "undefined" && level.objs[i].type === "scale") {    // scale status
+            else if (level.objs[i].type === JQObject.SCALE) {       // scale
+                Graphics.drawScale(level.objs[i]);
                 Graphics.drawPlatformStatus(level.objs[i]);
+            }
+            else if(level.objs[i].type === JQObject.PLATFORM) {
+                Graphics.drawPlatform(level.objs[i]);
             }
         }
     }
@@ -79,6 +78,7 @@ var level = (function () {
             [], // backgorund obj's 1
             []  // background obj's 2
         ],
+        crates: [],         // special handling of crate objects
         objs: [],           // dynamically holds all of the objects for the level;
         items: [],          // dynamically holds all of the items for the level (movable items)
         curLvl: null,       // alias for the current level object e.g. lvl1
@@ -131,6 +131,7 @@ var level = (function () {
         /******************** Update ********************/
         update: function () {
             if (!level.isTransitioning) {
+                Crate.update();
                 level.curLvl.update();
             }
         },
@@ -139,6 +140,7 @@ var level = (function () {
         updateView: function(){
             updateObjs();
             updateItems();
+            updateBg();
         },
 
 

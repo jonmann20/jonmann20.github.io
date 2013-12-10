@@ -35,10 +35,10 @@ var HUD = (function () {
     return {
         init: function () {
             // HUD icons
-            cash = new GameObj(548, FULLH + 33, 22, 24, "img/cash.png");
-            medKit = new GameObj(238, FULLH + 31, 25, 24, "img/medKit.png");
-            shuriken = new GameObj(447, FULLH + 32, 24, 24, "img/shuriken.png");
-            syringe = new GameObj(342, FULLH + 31, 25, 25, "img/syringe.png");
+            cash = new GameObj(548, FULLH + 33, 22, 24, JQObject.EMPTY, "img/cash.png");
+            medKit = new GameObj(238, FULLH + 31, 25, 24, JQObject.EMPTY, "img/medKit.png");
+            shuriken = new GameObj(447, FULLH + 32, 24, 24, JQObject.EMPTY, "img/shuriken.png");
+            syringe = new GameObj(342, FULLH + 31, 25, 25, JQObject.EMPTY, "img/syringe.png");
         },
 
         draw: function () {// TODO: break out static parts

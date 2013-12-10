@@ -212,6 +212,20 @@ var Color = Object.freeze({
     ORANGE: "#ff6a00"
 });
 
+var JQObject = Object.freeze({
+    EMPTY: 0,
+    CRATE: 1,
+    LADDER: 2,
+    SACK: 3,
+    ENEMY: 4,
+    CASH: 5,
+    DOOR: 6,
+    SCALE: 7,
+    SMALL_CLOUD: 8,
+    CLOUD: 9,
+    PLATFORM: 10
+});
+
 
 var bullet = {
     w: 19.5,
