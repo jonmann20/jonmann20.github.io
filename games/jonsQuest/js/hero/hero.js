@@ -9,7 +9,6 @@ var hero = (function () {
         imgReady = false,       
 		img = null,             // TODO: convert to be of GameObj type
         idleTime = 0,
-		showRun = true,
 		spriteArr = []
 	;
 	
@@ -34,11 +33,7 @@ var hero = (function () {
         }
     }
 
-	function getSpritePos(){
-	    if (game.totalTicks % 30 === 0) {
-	        showRun = !showRun;
-	    }
-
+    function getSpritePos() {
 		var pos = {x: 0, y: 0};
 		
 		if(hero.isCarrying && hero.vX === 0){
@@ -47,31 +42,33 @@ var hero = (function () {
 		else if (hero.onLadder) {               // TODO: check if holding crate (shouldn't be allowed on ladder)
 		    pos = spriteArr["playerUp"];
 		}
-		else if(hero.dir == Dir.RIGHT){
-			if(hero.vX > 0){
-   				if(Math.abs(hero.vX) <= hero.aX*10)
-   					pos = spriteArr["playerRight_Step"];
-				else if(showRun){
-					pos = spriteArr["playerRight_Run1"];
-				}
-				else 
-					pos = spriteArr["playerRight_Run2"];
+		else if (hero.dir === Dir.RIGHT || hero.dir === Dir.LEFT) {
+		    var dirR = (hero.dir === Dir.RIGHT);
+		    var theDir = "player" + (dirR ? "Right" : "Left");
+
+		    if (dirR && hero.vX > 0 ||  // right
+		        !dirR && hero.vX < 0    // left
+            ) {
+		        var runTimer = (game.totalTicks % 60);
+
+		        if(!hero.isOnObj && !hero.onGround){
+		            pos = spriteArr[theDir + "_Run1"];
+		        }
+                else if(Math.abs(hero.vX) <= hero.aX*10){
+		            pos = spriteArr[theDir + "_Step"];
+		        }
+		        else if(runTimer >= 0 && runTimer < 20) {
+		            pos = spriteArr[theDir + "_Run1"];
+		        }
+		        else if (runTimer >= 20 && runTimer < 40) {
+		            pos = spriteArr[theDir + "_Run2"];
+		        }
+		        else {
+		            pos = spriteArr[theDir + "_Run3"];
+		        }
 			}
 			else
-				pos = spriteArr["playerRight"];
-		}
-		else if(hero.dir == Dir.LEFT){ 
-			if(hero.vX < 0){
-				if(Math.abs(hero.vX) <= hero.aX*10)
-   					pos = spriteArr["playerLeft_Step"];
-				else if(showRun){
-					pos = spriteArr["playerLeft_Run1"];
-				}
-				else 
-					pos = spriteArr["playerLeft_Run2"];
-			}
-			else
-				pos = spriteArr["playerLeft"];
+				pos = spriteArr[theDir];
 		}
 		
         // idle animation
