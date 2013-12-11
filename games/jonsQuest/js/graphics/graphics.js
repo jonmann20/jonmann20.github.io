@@ -6,15 +6,16 @@
 var Graphics = (function () {
 
     var alpha = 1,
-        canvasTransition = null,
-        projectX = 9,
-        projectY = 12
+        canvasTransition = null
     ;
 
     return {
         ticker: 1,              // 1.0 --> 0.0 --> 1.0 --> ...
         tickerStep: 0.01,
         fadeOut: false,
+        projectX: 9,
+        projectY: 12,
+
 
         fadeCanvas: function(callback){
             $(canvas).removeClass("preTransition");
@@ -63,15 +64,15 @@ var Graphics = (function () {
             @return (SAT.Polygon)
         */
         getSkewedRect: function (x, y, w, h) {
-            y += projectY / 2;
+            y += Graphics.projectY / 2;
 
             var poly = new SAT.Polygon(new SAT.Vector(x, y), [
                 new SAT.Vector(),
-                new SAT.Vector(w - projectX, 0),
-                new SAT.Vector(w, projectY),
+                new SAT.Vector(w - Graphics.projectX, 0),
+                new SAT.Vector(w, Graphics.projectY),
                 new SAT.Vector(w, h),
-                new SAT.Vector(projectX, h),
-                new SAT.Vector(0, h - projectY)
+                new SAT.Vector(Graphics.projectX, h),
+                new SAT.Vector(0, h - Graphics.projectY)
             ]);
 
             //poly = new SAT.Box(new SAT.Vector(x, y), w, h).toPolygon();
@@ -115,7 +116,7 @@ var Graphics = (function () {
         },
 
         drawPlatform: function (poly) {
-            var y = poly.pos.y - projectY / 2;
+            var y = poly.pos.y - Graphics.projectY / 2;
 
             // top
             ctx.fillStyle = Color.LIGHT_BROWN;
@@ -123,7 +124,7 @@ var Graphics = (function () {
             ctx.moveTo(poly.pos.x, y );
             ctx.lineTo(poly.pos.x + poly.points[1].x, y + poly.points[1].y);
             ctx.lineTo(poly.pos.x + poly.points[2].x, y + poly.points[2].y);
-            ctx.lineTo(poly.pos.x + projectX, y + projectY);
+            ctx.lineTo(poly.pos.x + Graphics.projectX, y + Graphics.projectY);
             ctx.closePath();
             ctx.fill();
 
@@ -135,7 +136,7 @@ var Graphics = (function () {
             ctx.lineTo(poly.pos.x + poly.points[4].x, y + poly.points[4].y);
             ctx.lineTo(poly.pos.x + poly.points[5].x, y + poly.points[5].y);
             ctx.lineTo(poly.pos.x + poly.points[0].x, y + poly.points[0].y);
-            ctx.lineTo(poly.pos.x + projectX, y + projectY);
+            ctx.lineTo(poly.pos.x + Graphics.projectX, y + Graphics.projectY);
             ctx.closePath();
             ctx.fill();
         },

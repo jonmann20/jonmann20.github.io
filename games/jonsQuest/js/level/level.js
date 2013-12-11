@@ -38,7 +38,7 @@ var level = (function () {
         ctx.fillRect(0, 0, FULLW, FULLH - game.padFloor - 1);
 
         ctx.fillStyle = "#000";
-        ctx.fillRect(0, FULLH - game.padFloor - 1, FULLW, game.padFloor);
+        ctx.fillRect(0, FULLH - game.padFloor - 1, FULLW, game.padFloor + 1);
 
         // layer 1
         for (var i = 0; i < level.bg[1].length; ++i) {
@@ -103,7 +103,7 @@ var level = (function () {
             level.hiddenItemsFound = 0;
             
             hero.pos.x = 23;
-            hero.pos.y = FULLH - game.padFloor - hero.h;
+            hero.pos.y = FULLH - game.padFloor - hero.h + 4;    // TODO: find out '4' offset??
             hero.vX = hero.vY = 0;
             hero.isJumping = false;
             hero.bulletArr.length = 0;		// prevents leftover thrown shurikens
@@ -121,8 +121,14 @@ var level = (function () {
             Graphics.fadeCanvas(function () {
                 level.isTransitioning = false;
 
+                hero.lvlX = 0;
                 level.objs = [];
                 level.items = [];
+                level.crates = [];
+                level.bg = [
+                    [],
+                    []
+                ];
                 level.curLvl = lvlComplete;
                 level.isCutscene = true;
                 level.time = game.actualTime;

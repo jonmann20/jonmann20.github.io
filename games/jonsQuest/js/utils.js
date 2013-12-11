@@ -41,6 +41,15 @@ var utils = (function () {
             }, timeStep);
         },
 
+        deathSequence: function(){
+            audio.heroDeath.play();
+            audio.bgMusic.muted = true;
+
+            alert("You died");
+            location.reload();
+            game.over = true;
+        },
+
         degToRad: function(deg){
             return deg * 0.0174532925199432957;
         },

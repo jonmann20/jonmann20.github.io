@@ -46,7 +46,7 @@ var lvl1 = (function () {
 
             // floor
             // x/y dep on projectX/Y
-            var floor = new GameObj(0 - 9, FULLH - game.padFloor - 1, lvl1.width, game.padFloor, JQObject.FLOOR);
+            var floor = new GameObj(-Graphics.projectX, FULLH - game.padFloor - 1, lvl1.width + Graphics.projectX*2, game.padFloor + 1, JQObject.FLOOR);
             level.objs.push(floor);
 
             // background
@@ -107,11 +107,17 @@ var lvl1 = (function () {
             door = new GameItem(new GameObj(stairs.x + stairs.w + 155, stairs.y - stairs.h - 53, 25, 53, JQObject.DOOR));
 
             // sack
-            sack = new GameItem(new GameObj(680, 111 + 6, 20, 24, JQObject.SACK, "img/sack.png"), 5);        // y dep on projectY /2
+            sack = new GameItem(new GameObj(680, 111 + Graphics.projectY/2, 20, 24, JQObject.SACK, "img/sack.png"), 5);
             sack.collidable = false;
             
             // cyborg
-            cyborg = new Enemy(new GameObj(1700, FULLH - game.padFloor - 38 + 5, 28, 38, JQObject.ENEMY, "img/cyborgBnW.png"), 1);
+            cyborg = new Enemy(
+                new GameObj(1600, FULLH - game.padFloor - 38 + 5, 28, 38, JQObject.ENEMY, "img/cyborgBnW.png"),
+                1,
+                1087,
+                1600,
+                true
+            );
             cyborg.collidable = false;
 
             // hidden cash
@@ -142,7 +148,7 @@ var lvl1 = (function () {
                 level.objs.push(scales[i]);
             }            // crates            for (var i = 0; i < 3; ++i) {
                 level.crates[i] = new GameItem(
-                    new GameObj(700, FULLH - game.padFloor - 26 + 5, 24, 26, JQObject.CRATE, "img/crate.png"),
+                    new GameObj(446, FULLH - game.padFloor - 26 + 5, 24, 26, JQObject.CRATE, "img/crate.png"),
                     0,
                     true,
                     true
@@ -157,6 +163,9 @@ var lvl1 = (function () {
         },
 
         update: function () {
+
+            if (window.DEBUG) level.complete();
+
             hiddenCash.updatePos();
             cyborg.update();
 
@@ -238,12 +247,6 @@ var lvl1 = (function () {
         },
 
         render: function () {
-            // floor
-            //ctx.fillStyle = Color.LIGHT_BROWN;
-            //ctx.fillRect(0, FULLH - game.padFloor - 1, FULLW, 1);
-            //ctx.fillStyle = Color.DARK_BROWN;
-            //ctx.fillRect(0, FULLH - game.padFloor, FULLW, game.padFloor);
-
             //---- level objects/items
             if (!sack.collected)
                 sack.draw();

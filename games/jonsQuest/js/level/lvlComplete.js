@@ -5,7 +5,7 @@ var lvlComplete = (function () {
     return {
 
         update: function () {
-            if (KeyCode.ENTER in keysDown || game.lvl === 0) {
+            if (KeyCode.ENTER in keysDown || game.lvl === 0 || window.DEBUG) {
                 lastKeyDown = KeyCode.EMPTY;
 
                 switch (++game.lvl) {

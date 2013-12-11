@@ -24,12 +24,7 @@ var hero = (function () {
         }
         
         if (hero.health <= 0 && !game.over) {
-            audio.heroDeath.play();
-            audio.bgMusic.muted = true;
-
-            alert("You died");
-            location.reload();
-            game.over = true;
+            utils.deathSequence();
         }
     }
 

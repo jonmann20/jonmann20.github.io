@@ -21,7 +21,7 @@ var HeroPhysicsComponent = function () {
             hero.vY = 0;
         }
         else if (hero.pos.y >= FULLW) {
-            alert("died");
+            utils.deathSequence();
         }
 
         if (hero.pos.x < 0) { 						// left
