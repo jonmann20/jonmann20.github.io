@@ -9,33 +9,27 @@ var HeroPhysicsComponent = function () {
         for (var i = 0; i < hero.bulletArr.length; ++i) {
             hero.bulletArr[i].pos.x += hero.bulletArr[i].dirR ? bullet.speed : -bullet.speed;   // update position
 
-            if (hero.bulletArr[i].pos.x > canvas.width || hero.bulletArr[i].pos.x < 0) {		    // bullet and screen
+            if (hero.bulletArr[i].pos.x > FULLW || hero.bulletArr[i].pos.x < 0) {		    // bullet and screen
                 hero.bulletArr.splice(i, 1); // remove ith item
             }
         }
     }
 
     function screenCollision() {
-        hero.onGround = false;
-
-        if (hero.pos.y < -hero.h) {                     // feet above top of screen
+        if (hero.pos.y < -hero.h) {                 // feet above top of screen
             hero.pos.y = -hero.h;
             hero.vY = 0;
         }
-        else if (hero.pos.y >= (canvas.height - game.padBot - hero.h)) { // bottom
-            hero.pos.y = canvas.height - game.padBot - hero.h;
-            hero.isJumping = false;
-            hero.onGround = true;
-
-            hero.vY = 0;
+        else if (hero.pos.y >= FULLW) {
+            alert("died");
         }
 
-        if (hero.pos.x < 0) { 								// left
+        if (hero.pos.x < 0) { 						// left
             hero.pos.x = 0;
             hero.vX = 0;
         }
-        else if (hero.pos.x > (canvas.width - hero.w)) { 	// right 
-            hero.pos.x = canvas.width - hero.w;
+        else if (hero.pos.x > (FULLW - hero.w)) { 	// right 
+            hero.pos.x = FULLW - hero.w;
             hero.vX = 0;
         }
     }
@@ -90,7 +84,6 @@ var HeroPhysicsComponent = function () {
             }
 
             // TODO: buggy at edges, quickly changin direction incorrectly causes an updateView()
-
             
             if(((hero.dir === Dir.RIGHT && hero.pos.x >= (HALFW + 35)) ||
                (hero.dir === Dir.LEFT && hero.pos.x <= (HALFW - 45))) &&

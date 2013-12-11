@@ -1,9 +1,16 @@
-﻿var lvl2 = (function () {
+﻿/// <reference path="../linker.js" />
+
+var lvl2 = (function () {
 
 
     return {
-        init: function () {
+        width: 800,
 
+
+        init: function () {
+            var floor1 = new GameObj(0 - 9, FULLH - game.padFloor - 1, FULLW / 3, game.padFloor, JQObject.FLOOR);
+            var floor2 = new GameObj(0 - 9 + HALFW, FULLH - game.padFloor - 1, FULLW / 3, game.padFloor, JQObject.FLOOR);
+            level.objs.push(floor1, floor2);
         },
 
         update: function(){

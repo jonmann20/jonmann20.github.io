@@ -42,6 +42,8 @@ var Crate = (function () {
 
                 if (!crates[i].holding) {
                     Physics.lvlObjCollision(crates[i], function (r) {
+                        if (r.type === JQObject.FLOOR) return;
+
                         if (r.overlapN.y === 1) {    // crate on top of platform
                             r.a.vY = 0;
                             level.items.push(r.a);

@@ -51,7 +51,7 @@ var hero = (function () {
             ) {
 		        var runTimer = (game.totalTicks % 60);
 
-		        if(!hero.isOnObj && !hero.onGround){
+		        if(!hero.isOnObj){
 		            pos = spriteArr[theDir + "_Run1"];
 		        }
                 else if(Math.abs(hero.vX) <= hero.aX*10){
@@ -72,7 +72,7 @@ var hero = (function () {
 		}
 		
         // idle animation
-		if (hero.vX === 0 && hero.vY === 0)
+		if (!hero.onLadder && hero.vX === 0 && hero.vY === 0)
 		    ++idleTime;
 		else
 		    idleTime = 0;
@@ -80,7 +80,7 @@ var hero = (function () {
 		if (idleTime > 210) {
 		    var foo = idleTime % 200;
 		    
-		    if (foo >= 0 && foo <= 50 || foo > 100 && foo <= 150)
+		    if (foo >= 0 && foo <= 50 || foo > 100 && foo <= 150 || hero.isCarrying)
 		        pos = spriteArr["playerDown"];
 		    else if (foo > 50  && foo <= 100)
 		        pos = spriteArr["playerDown_breatheIn"];
@@ -131,7 +131,6 @@ var hero = (function () {
 		isCarrying: false,
         onLadder: false,
         curItem: null,          // the item in hand
-		onGround: true,
 		isOnObj: true,
 		invincible: false,
 		invincibleTimer: 240,

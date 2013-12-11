@@ -14,14 +14,7 @@ var lvl1 = (function () {
     function handle_crates_scale_ladder() {
         // all crates on scale
         if (doLadder) {
-            var collided = SAT.testPolygonPolygon(hero, ladder);
-
-            if (collided) {
-                hero.onLadder = true;
-            }
-            else {
-                hero.onLadder = false;
-            }
+            hero.onLadder = SAT.testPolygonPolygon(hero, ladder);
         }
         else {
             var numCratesOnScales = 0;
@@ -50,6 +43,11 @@ var lvl1 = (function () {
 
         init: function () {
             level.hiddenItems = 1;
+
+            // floor
+            // x/y dep on projectX/Y
+            var floor = new GameObj(0 - 9, FULLH - game.padFloor - 1, lvl1.width, game.padFloor, JQObject.FLOOR);
+            level.objs.push(floor);
 
             // background
             var i = 0,
@@ -113,7 +111,7 @@ var lvl1 = (function () {
             sack.collidable = false;
             
             // cyborg
-            cyborg = new Enemy(new GameObj(1700, FULLH - game.padFloor - 38 + 1, 28, 38, JQObject.ENEMY, "img/cyborgBnW.png"), 1);
+            cyborg = new Enemy(new GameObj(1700, FULLH - game.padFloor - 38 + 5, 28, 38, JQObject.ENEMY, "img/cyborgBnW.png"), 1);
             cyborg.collidable = false;
 
             // hidden cash
@@ -144,7 +142,7 @@ var lvl1 = (function () {
                 level.objs.push(scales[i]);
             }            // crates            for (var i = 0; i < 3; ++i) {
                 level.crates[i] = new GameItem(
-                    new GameObj(700, FULLH - game.padFloor - 26, 24, 26, JQObject.CRATE, "img/crate.png"),
+                    new GameObj(700, FULLH - game.padFloor - 26 + 5, 24, 26, JQObject.CRATE, "img/crate.png"),
                     0,
                     true,
                     true
@@ -240,6 +238,12 @@ var lvl1 = (function () {
         },
 
         render: function () {
+            // floor
+            //ctx.fillStyle = Color.LIGHT_BROWN;
+            //ctx.fillRect(0, FULLH - game.padFloor - 1, FULLW, 1);
+            //ctx.fillStyle = Color.DARK_BROWN;
+            //ctx.fillRect(0, FULLH - game.padFloor, FULLW, game.padFloor);
+
             //---- level objects/items
             if (!sack.collected)
                 sack.draw();

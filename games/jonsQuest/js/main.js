@@ -24,6 +24,9 @@ var Main = (function () {
             // skip start screen
             lastKeyDown = KeyCode.ENTER;
 
+            // skip level 1
+            //level.curLvl = lvl2;
+
             // mute audio
             audio.handleMuteButton();
         }

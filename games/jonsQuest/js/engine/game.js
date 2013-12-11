@@ -73,10 +73,8 @@ var game = (function () {
 	return {
         over: false,        // indicates the game is finished
 	    gravity: 0.07,
-	    //friction: 35,
-	    padBot: 119,	    // total padding
 	    padHUD: 80,
-	    padFloor: 39,
+	    padFloor: 32,
 	    lvl: 0,                 // TODO: make startscreen level 0
 	    totalTicks: 0,          // ticks are update iterations
 	    actualTime: 0,

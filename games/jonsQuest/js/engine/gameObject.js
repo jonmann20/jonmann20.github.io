@@ -1,3 +1,5 @@
+/// <reference path="../linker.js" />
+
 /*
     GameObj is the base class from which all objects in the game inherit from.
     Every GameObj has a SAT.Vector (pos);       TODO: make Vector not Polygon
@@ -16,7 +18,12 @@ var GameObj = function (x, y, w, h, type, src) {
     this.initY = y;
 
     //this.pos = new SAT.Vector(x, y);
-    $.extend(this, new SAT.Box(new SAT.Vector(x, y), w, h).toPolygon());
+    if (type === JQObject.FLOOR) {
+        $.extend(this, Graphics.getSkewedRect(x, y, w, h));
+    }
+    else {
+        $.extend(this, new SAT.Box(new SAT.Vector(x, y), w, h).toPolygon());
+    }
 
     this.w = w;
     this.h = h;
@@ -47,14 +54,14 @@ var GameObj = function (x, y, w, h, type, src) {
 };
 
 GameObj.prototype = {
-    updatePos: function () {
+    updatePos: function () {    // TODO: move to normal update location
         if (!this.isOnObj) {
-            if (this.pos.y < FULLH - game.padFloor - this.h) {
+            if (this.pos.y < FULLH - game.padFloor - this.h + 5) {      // +3 is projectY
                 this.pos.y += this.vY;
                 this.onGround = false;
             }
             else {
-                this.pos.y = FULLH - game.padFloor - this.h;
+                this.pos.y = FULLH - game.padFloor - this.h + 5;
                 this.onGround = true;
             }
         }

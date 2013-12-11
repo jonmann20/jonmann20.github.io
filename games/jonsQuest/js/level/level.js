@@ -37,6 +37,9 @@ var level = (function () {
         ctx.fillStyle = Color.LIGHT_GREEN;
         ctx.fillRect(0, 0, FULLW, FULLH - game.padFloor - 1);
 
+        ctx.fillStyle = "#000";
+        ctx.fillRect(0, FULLH - game.padFloor - 1, FULLW, game.padFloor);
+
         // layer 1
         for (var i = 0; i < level.bg[1].length; ++i) {
             level.bg[1][i].draw();
@@ -66,7 +69,7 @@ var level = (function () {
                 Graphics.drawScale(level.objs[i]);
                 Graphics.drawPlatformStatus(level.objs[i]);
             }
-            else if(level.objs[i].type === JQObject.PLATFORM) {
+            else if(level.objs[i].type === JQObject.PLATFORM || level.objs[i].type === JQObject.FLOOR) {
                 Graphics.drawPlatform(level.objs[i]);
             }
         }
@@ -100,7 +103,7 @@ var level = (function () {
             level.hiddenItemsFound = 0;
             
             hero.pos.x = 23;
-            hero.pos.y = canvas.height - hero.h;
+            hero.pos.y = FULLH - game.padFloor - hero.h;
             hero.vX = hero.vY = 0;
             hero.isJumping = false;
             hero.bulletArr.length = 0;		// prevents leftover thrown shurikens
@@ -146,13 +149,6 @@ var level = (function () {
 
         /******************** Render ********************/
         render: function () {
-            // floor
-            ctx.fillStyle = Color.LIGHT_BROWN;
-            ctx.fillRect(0, FULLH - game.padFloor - 1, FULLW, 1);
-            ctx.fillStyle = Color.DARK_BROWN;
-            ctx.fillRect(0, FULLH - game.padFloor, FULLW, game.padFloor);
-
-            // current level
             drawLvlBg();
             drawLvlObjs();
             level.curLvl.render();

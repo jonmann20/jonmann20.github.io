@@ -223,14 +223,30 @@ var JQObject = Object.freeze({
     SCALE: 7,
     SMALL_CLOUD: 8,
     CLOUD: 9,
-    PLATFORM: 10
+    PLATFORM: 10,
+    FLOOR: 11
+});
+
+var JQObject_names = Object.freeze({
+    0: "EMPTY",
+    1: "CRATE",
+    2: "LADDER",
+    3: "SACK",
+    4: "ENEMY",
+    5: "CASH",
+    6: "DOOR",
+    7: "SCALE",
+    8: "SMALL_CLOUD",
+    9: "CLOUD",
+    10: "PLATFORM",
+    11: "FLOOR"
 });
 
 
 var bullet = {
     w: 19.5,
     h: 9,
-    speed: 3.4
+    speed: 4.4
 };
 
 // global functions

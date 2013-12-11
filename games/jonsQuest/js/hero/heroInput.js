@@ -8,7 +8,7 @@
 */
 var HeroInputComponent = function () {
 
-    var maxVx = 2.7,         // TODO: should be const
+    var maxVx = 2.55,         // TODO: should be const
         maxVy = 10         // TODO: should be const
     ;
 
@@ -42,7 +42,7 @@ var HeroInputComponent = function () {
                     $(".resize").trigger("click");
                 else if (e.keyCode == 75 &&			//----- jump (k);       TODO: move to check() function
                        (!hero.isJumping && ((lastKeyDown != 75) || !(75 in keysDown))) &&
-                       (hero.isOnObj || hero.onGround)
+                       hero.isOnObj
                 ) {
                     audio.jump.play();
                     hero.vY = 0;
@@ -62,7 +62,7 @@ var HeroInputComponent = function () {
                             },
                             w: bullet.w,
                             h: bullet.h,
-                            dirR: (hero.dir == Dir.RIGHT),
+                            dirR: (hero.dir === Dir.RIGHT),
                             deg: 0
                         };
 
