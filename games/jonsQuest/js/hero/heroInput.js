@@ -8,10 +8,9 @@
 */
 var HeroInputComponent = function () {
 
-    var maxVx = 3.6,         // TODO: should be const
+    var maxVx = 2.7,         // TODO: should be const
         maxVy = 10         // TODO: should be const
     ;
-
 
 
     return {
@@ -113,7 +112,7 @@ var HeroInputComponent = function () {
             // --------- keys pressed --------
             var leftOrRight = false;
             //----- left (a)
-            if(65 in keysDown){ 			
+            if(65 in keysDown){
                 hero.vX = (Math.abs(hero.vX - hero.aX) > maxVx) ? -maxVx : (hero.vX - hero.aX);
                 hero.dir = Dir.LEFT;
                 leftOrRight = true;

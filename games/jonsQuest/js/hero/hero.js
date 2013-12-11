@@ -120,10 +120,10 @@ var hero = (function () {
 		lvlX: 0,			
 		w: 28,
 		h: 38,
-		vX: 0,
+		vX: 0,          // maxVx/y are in heroInput.js
 		vY: 0,
 		aX: 0.17,
-		aY: 0.5,
+		aY: 0.52,
 		jumpMod: 4,
 		jumpMod0: 4,            // TODO: should be const
 		dir: Dir.RIGHT,

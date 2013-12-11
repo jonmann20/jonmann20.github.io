@@ -88,11 +88,14 @@ var HeroPhysicsComponent = function () {
             if (!hero.isJumping && !hero.onLadder && hero.pos.x !== (hero.pos.x + hero.vX)) {
                 audio.step.play();
             }
+
+            // TODO: buggy at edges, quickly changin direction incorrectly causes an updateView()
+
             
-            if(((hero.dir == Dir.RIGHT && hero.pos.x >= ((canvas.width/2) + 35)) ||
-               (hero.dir == Dir.LEFT && hero.pos.x <= ((canvas.width/2) - 45))) &&
+            if(((hero.dir === Dir.RIGHT && hero.pos.x >= (HALFW + 35)) ||
+               (hero.dir === Dir.LEFT && hero.pos.x <= (HALFW - 45))) &&
                (hero.lvlX + hero.vX >= 0) &&
-               (hero.lvlX + hero.vX <= level.curLvl.width - canvas.width)
+               (hero.lvlX + hero.vX <= level.curLvl.width - FULLW)
             ){
                 hero.lvlX += hero.vX;
                 level.updateView();
