@@ -3,43 +3,44 @@
 /*
     GameObj is the base class from which all objects in the game inherit from.
     Every GameObj has a SAT.Vector (pos);       TODO: make Vector not Polygon
-
+    
+    @param(JQObject) type The type of the object.
     @param(number) x The x position of the object.
     @param(number) y The y position of the object.
-    @param(number) w The width of the object.
-    @param(number) h The height of the object.
-    @param(JQObject) type The type of the object.
+    @param(number?) w The width of the object.
+    @param(number?) h The height of the object.
     @param(Image?) src The filename of the object sprite.  unused by default
     
     @constructor
 */
-var GameObj = function (x, y, w, h, type, src) {
+var GameObj = function (type, x, y, w, h, src) {
+    this.type = type;
     this.initX = x;
     this.initY = y;
 
-    //this.pos = new SAT.Vector(x, y);
+    // set this.pos
     if (type === JQObject.FLOOR) {
         $.extend(this, Graphics.getSkewedRect(x, y, w, h));
+        this.type = JQObject.FLOOR; // TODO: fix api here
     }
     else {
         $.extend(this, new SAT.Box(new SAT.Vector(x, y), w, h).toPolygon());
     }
 
-    this.w = w;
-    this.h = h;
-    this.type = type;
-
     this.vY = 0;
-
-    this.onGround = false;
     this.isOnObj = false;
-    this.onObj = null;        // contains the object holding up the object (directly below)
+    this.onObj = null;         // contains the object holding up the object (directly below)
     this.grabbable = true;
+    this.imgReady = false;     // TODO: make private
 
-    // TODO: make private
-    this.imgReady = false;
+    if (typeof (src) === "undefined") {
+        this.w = w;
+        this.h = h;
+    }
+    else {
+        this.w = 0;
+        this.h = 0;
 
-    if (typeof (src) !== "undefined") {
         this.img = new Image();
 
         var that = this;
@@ -49,7 +50,7 @@ var GameObj = function (x, y, w, h, type, src) {
             that.h = this.height;
         };
 
-        this.img.src = src;
+        this.img.src = "img/" + src;
     }
 };
 
@@ -58,11 +59,12 @@ GameObj.prototype = {
         if (!this.isOnObj) {
             if (this.pos.y < FULLH - game.padFloor - this.h + 5) {      // +3 is projectY
                 this.pos.y += this.vY;
-                this.onGround = false;
+                this.isOnObj = false;
             }
             else {
-                this.pos.y = FULLH - game.padFloor - this.h + 5;
-                this.onGround = true;
+                this.pos.y = FULLH - game.padFloor - this.h;
+                this.isOnObj = true;
+                this.vY = 0;
             }
         }
     },

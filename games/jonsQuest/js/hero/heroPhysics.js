@@ -20,8 +20,9 @@ var HeroPhysicsComponent = function () {
             hero.pos.y = -hero.h;
             hero.vY = 0;
         }
-        else if (hero.pos.y >= FULLW) {
-            utils.deathSequence();
+        else if (hero.pos.y >= FULLH) {
+            if(!game.over)
+                utils.deathSequence();
         }
 
         if (hero.pos.x < 0) { 						// left
@@ -41,10 +42,10 @@ var HeroPhysicsComponent = function () {
             if (r.overlapN.y === 1) {                       // on top
                 hero.isOnObj = true;
                 hero.isJumping = false;
-                hero.vY = 0;    // (wrong location??)
+                hero.vY = 0;
             }
             else if (r.overlapN.y === -1) {                 // on bot
-                hero.vY = 0;    // (wrong location??)
+                hero.vY = 0;
             }
         });
         
@@ -53,7 +54,7 @@ var HeroPhysicsComponent = function () {
                 hero.pos.y -= r.overlapV.y;
                 hero.isOnObj = true;
                 hero.isJumping = false;
-                hero.vY = 0;    // (wrong location??)
+                hero.vY = 0;
             }
             else if (r.b.grabbable) {
 
@@ -61,7 +62,7 @@ var HeroPhysicsComponent = function () {
                 
                 r.b.holding = true;
                 r.b.vY = 6.5;
-                r.b.onGround = false;
+                r.b.isOnObj = false;
 
                 if (r.b.isOnObj) {
                     r.b.isOnObj = false;

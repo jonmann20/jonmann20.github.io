@@ -21,10 +21,10 @@ var Main = (function () {
     function debug() {
         // dev enviroment
         if (location.host === "jon") {
-            window.DEBUG = true;
+            //window.DEBUG = true;
 
             // skip start screen
-            lastKeyDown = KeyCode.ENTER;
+            //lastKeyDown = KeyCode.ENTER;
 
             // mute audio
             audio.handleMuteButton();

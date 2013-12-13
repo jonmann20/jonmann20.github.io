@@ -8,7 +8,7 @@
 */
 var HeroInputComponent = function () {
 
-    var maxVx = 2.3,       // TODO: should be const
+    var maxVx = 2.6,       // TODO: should be const
         maxVy = 10         // TODO: should be const
     ;
 

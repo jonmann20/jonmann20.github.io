@@ -45,8 +45,7 @@ var lvl1 = (function () {
             level.hiddenItems = 1;
 
             // floor
-            // x/y dep on projectX/Y
-            var floor = new GameObj(-Graphics.projectX, FULLH - game.padFloor - 1, lvl1.width + Graphics.projectX*2, game.padFloor + 1, JQObject.FLOOR);
+            var floor = new GameObj(JQObject.FLOOR, -Graphics.projectX, FULLH - game.padFloor - 1, lvl1.width + Graphics.projectX * 2, game.padFloor + 1);
             level.objs.push(floor);
 
             // background
@@ -60,7 +59,7 @@ var lvl1 = (function () {
             while (x < this.width) {
                 fixY = (++i % 2 == 0) ? 100 : 0;
                 x += x1offset;
-                level.bg[0].push(new GameObj(x, 60 + fixY, 0, 0, JQObject.CLOUD, "img/cloud.png"));        // TODO: convert api to get w/h and auto look in /img
+                level.bg[0].push(new GameObj(JQObject.CLOUD, x, 60 + fixY, 0, 0, "cloud.png"));        // TODO: convert api to get w/h
             }
 
             x = 0;
@@ -73,7 +72,7 @@ var lvl1 = (function () {
                     fixY = 10
                 
                 x += x2offset;
-                level.bg[1].push(new GameObj(x, 100 + fixY, 0, 0, JQObject.SMALL_CLOUD, "img/cloud_small.png"));        // TODO: convert api to get w/h and auto look in /img
+                level.bg[1].push(new GameObj(JQObject.SMALL_CLOUD, x, 100 + fixY, 0, 0, "cloud_small.png"));        // TODO: convert api to get w/h
             }
 
 
@@ -104,24 +103,25 @@ var lvl1 = (function () {
 
             // platform + door
             level.objs.push(Graphics.getSkewedRect(stairs.x + stairs.w, stairs.y - stairs.h, 200, 50));
-            door = new GameItem(new GameObj(stairs.x + stairs.w + 155, stairs.y - stairs.h - 53, 25, 53, JQObject.DOOR));
+            door = new GameItem(new GameObj(JQObject.DOOR, stairs.x + stairs.w + 155, stairs.y - stairs.h - 53, 25, 53));
 
             // sack
-            sack = new GameItem(new GameObj(680, 111 + Graphics.projectY/2, 20, 24, JQObject.SACK, "img/sack.png"), 5);
+            sack = new GameItem(new GameObj(JQObject.SACK, 680, 111 + Graphics.projectY / 2, 20, 24, "sack.png"), 5);
             sack.collidable = false;
             
             // cyborg
             cyborg = new Enemy(
-                new GameObj(1600, FULLH - game.padFloor - 38 + 5, 28, 38, JQObject.ENEMY, "img/cyborgBnW.png"),
+                new GameObj(JQObject.ENEMY, 1600, FULLH - game.padFloor - 38 + 5, 28, 38, "cyborgBnW.png"),
                 1,
                 1087,
                 1600,
+                JQEnemy.FOLLOW,
                 true
             );
             cyborg.collidable = false;
 
             // hidden cash
-            hiddenCash = new GameItem(new GameObj(113, 80, 22, 24, JQObject.CASH, "img/cash.png"), 10, false);
+            hiddenCash = new GameItem(new GameObj(JQObject.CASH, 113, 80, 22, 24, "cash.png"), 10, false);
             hiddenCash.collidable = false;  // TODO: should remove from level.objs after collected
 
             // add objects to the level
@@ -132,14 +132,14 @@ var lvl1 = (function () {
                 door
             );
 
-            ladder = new GameItem(new GameObj(stairs.x - 37, stairs.y - 1, 38, FULLH - stairs.y - game.padFloor, JQObject.LADDER), 0, false, true);
+            ladder = new GameItem(new GameObj(JQObject.LADDER, stairs.x - 37, stairs.y - 1, 38, FULLH - stairs.y - game.padFloor), 0, false, true);
             ladder.collidable = false;      // allows ladder to not be in normal collision detection; TODO: make better api
             level.objs.push(ladder);
 
             // scales; TODO: shouldn't be GameItem??
             for (var i = 0; i < 3; ++i) {
                 scales[i] = new GameItem(
-                    new GameObj(door.pos.x + 350 + i*220, FULLH - game.padFloor - 107, 150, 36, JQObject.SCALE),
+                    new GameObj(JQObject.SCALE, door.pos.x + 350 + i * 220, FULLH - game.padFloor - 107, 150, 36),
                     0,
                     true,
                     true
@@ -148,7 +148,7 @@ var lvl1 = (function () {
                 level.objs.push(scales[i]);
             }            // crates            for (var i = 0; i < 3; ++i) {
                 level.crates[i] = new GameItem(
-                    new GameObj(446, FULLH - game.padFloor - 26 + 5, 24, 26, JQObject.CRATE, "img/crate.png"),
+                    new GameObj(JQObject.CRATE, 446, FULLH - game.padFloor - 26 + 5, 24, 26, "crate.png"),
                     0,
                     true,
                     true
@@ -160,6 +160,16 @@ var lvl1 = (function () {
             for (var i = 0; i < level.crates.length; ++i) {
                 level.items.push(level.crates[i]);
             }
+        },
+
+        deinit: function(){
+            cyborg = null;
+            hiddenCash = null;
+            sack = null;
+            door = null;
+            scales = [];
+            ladder = null;
+            doLadder = false;
         },
 
         update: function () {
@@ -204,7 +214,7 @@ var lvl1 = (function () {
                 }
             }
 
-            // cyborg
+            // cyborg; TODO: should be a level []
             if (cyborg.health > 0) {
                 // hero and cyborg
                 if (Physics.isCollision(hero, cyborg, 0)) {

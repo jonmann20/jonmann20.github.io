@@ -9,18 +9,20 @@ var hero = (function () {
         imgReady = false,       
 		img = null,             // TODO: convert to be of GameObj type
         idleTime = 0,
-		spriteArr = []
+		spriteArr = [],
+		invincibleTimer = 170,
+        invincibleTimer0 = 170  // TODO: should be const
 	;
 	
 		
 	/*********************** Update ***********************/
     function checkHealth() {
         if (hero.invincible)
-            --hero.invincibleTimer;
+            --invincibleTimer;
 
-        if (hero.invincibleTimer <= 0) {
+        if (invincibleTimer <= 0) {
             hero.invincible = false;
-            hero.invincibleTimer = hero.invincibleTimer0;
+            invincibleTimer = invincibleTimer0;
         }
         
         if (hero.health <= 0 && !game.over) {
@@ -84,7 +86,7 @@ var hero = (function () {
 		}
 
         // invincible
-		var inv = hero.invincibleTimer % 40;
+		var inv = invincibleTimer % 40;
 		
 		if(hero.invincible && (inv >= 0 && inv <= 16)){
 			pos = {x: -1, y: -1};
@@ -128,10 +130,8 @@ var hero = (function () {
         curItem: null,          // the item in hand
 		isOnObj: true,
 		invincible: false,
-		invincibleTimer: 240,
-		invincibleTimer0: 240,  // TODO: should be const
-		health: 4,
-		maxHealth: 5,
+		health: 3,
+		maxHealth: 3,
 		medKits: 1,
 		healthLvl: 1,
 		mana: 0,
@@ -188,10 +188,10 @@ var hero = (function () {
 			getSpritePos();
 		},
 	
-		render: function(){
-			drawHero();
-			graphics.drawBullets();
-			drawAfterHero();
+		render: function () {
+		    drawHero();
+		    graphics.drawBullets();
+		    drawAfterHero();
 		}
 	};
 })();

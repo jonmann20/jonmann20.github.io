@@ -10,7 +10,6 @@ var lvlComplete = (function () {
 
                 switch (++game.lvl) {
                     case 1:
-                        game.actualTime = 0;
                         lvl1.init();
                         level.curLvl = lvl1;
                         break;
@@ -21,7 +20,7 @@ var lvlComplete = (function () {
                 }
 
                 level.isCutscene = false;
-                level.reset();
+                //level.reset();
             }
         },
 

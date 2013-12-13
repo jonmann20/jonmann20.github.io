@@ -100,13 +100,33 @@ var level = (function () {
 
         // called before start of level
         reset: function () {
+            // reset game stats
+            game.over = false;
+            game.actualTime = 0;
+
+            // reset level
             level.hiddenItemsFound = 0;
-            
+            hero.lvlX = 0;
+            level.objs = [];
+            level.items = [];
+            level.crates = [];
+            level.bg = [
+                [],
+                []
+            ];
+
+
+            // reset hero
             hero.pos.x = 23;
             hero.pos.y = FULLH - game.padFloor - hero.h + 4;    // TODO: find out '4' offset??
             hero.vX = hero.vY = 0;
             hero.isJumping = false;
             hero.bulletArr.length = 0;		// prevents leftover thrown shurikens
+            hero.invincible = false;
+            hero.isCarrying = false;
+            hero.curItem = null;
+            hero.dir = Dir.RIGHT;
+            hero.health = hero.maxHealth;
         },
 
         // called at end of level
@@ -121,14 +141,7 @@ var level = (function () {
             Graphics.fadeCanvas(function () {
                 level.isTransitioning = false;
 
-                hero.lvlX = 0;
-                level.objs = [];
-                level.items = [];
-                level.crates = [];
-                level.bg = [
-                    [],
-                    []
-                ];
+                level.reset();
                 level.curLvl = lvlComplete;
                 level.isCutscene = true;
                 level.time = game.actualTime;

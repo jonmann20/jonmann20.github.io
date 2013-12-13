@@ -1,21 +1,30 @@
 /// <reference path="../linker.js" />
 
+var JQEnemy = Object.freeze({
+    STILL: 0,
+    PATROL: 1,
+    FOLLOW: 2
+});
+
+
 /*
     Enemy extends GameObj
 
     @param(GameObj) gObj A game object (super class).
-    @param(number?) health The hp of the enemy, 0 by default.
+    @param(number) health The hp of the enemy.
     @param(number) leftXBound The left x coordinate boundary.
     @param(number) rightXBound The right x coordinate boundary.
+    @param(EnemyType) enemy_t The type of the enemy.
     @param(bool?) active Is the enemy allowed to move?
     @constructor
 */
-var Enemy = function (gObj, health, leftXBound, rightXBound, active) {
+var Enemy = function (gObj, health, leftXBound, rightXBound, enemy_t, active) {
     utils.extend(this, gObj);
 
     this.initHealth = this.health = health;
     this.leftXBound = leftXBound;
     this.rightXBound = rightXBound;
+    this.enemy_t = enemy_t;
     this.active = (typeof (active) !== "undefined") ? active : false;
     this.deadOffScreen = false;
 
@@ -25,7 +34,7 @@ var Enemy = function (gObj, health, leftXBound, rightXBound, active) {
     this.deadOnScreen = false;
     this.clearDir = true;		// true = right; false = left;
 
-
+    // draw
     function drawHealth(that) {
         var healthLen = (that.w / that.initHealth) * that.health;
 
@@ -52,6 +61,7 @@ var Enemy = function (gObj, health, leftXBound, rightXBound, active) {
 };
 
 Enemy.prototype = {
+
     update: function () {
         if (this.deadOnScreen) {
             this.pos.x += this.clearDir ? 2 : -2;
@@ -63,11 +73,13 @@ Enemy.prototype = {
             }
         }
         else if (this.active && game.totalTicks % 3 === 0) {
-            //if (this.pos.x < hero.pos.x)
-            //    ++this.pos.x;
-            //else if (this.pos.x > hero.pos.x)
-            //    --this.pos.x;
-            
+            this.movement();
+        }
+    },
+
+    // TODO: make private
+    movement: function() {
+        if (this.enemy_t === JQEnemy.PATROL) {
             if (this.pos.x + hero.lvlX <= this.leftXBound)
                 this.dir = Dir.RIGHT;
             else if (this.pos.x + hero.lvlX >= this.rightXBound)
@@ -80,8 +92,12 @@ Enemy.prototype = {
                 --this.pos.x;
             }
         }
-
-
+        else if (this.enemy_t === JQEnemy.FOLLOW) {
+            if (this.pos.x < hero.pos.x)
+                ++this.pos.x;
+            else if (this.pos.x > hero.pos.x)
+                --this.pos.x;
+        }
     },
 
     death: function () {

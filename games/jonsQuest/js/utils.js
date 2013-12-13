@@ -1,3 +1,5 @@
+/// <reference path="linker.js" />
+
 /*
     A place for generic math, set/get methods, and other small functions.
     Also used for global data structures, enums, and functions.
@@ -42,12 +44,23 @@ var utils = (function () {
         },
 
         deathSequence: function(){
-            audio.heroDeath.play();
-            audio.bgMusic.muted = true;
+            if (!game.over) {
+                game.over = true;
 
-            alert("You died");
-            location.reload();
-            game.over = true;
+                audio.heroDeath.play();
+                audio.bgMusic.muted = true;
+
+                setTimeout(function () {
+                    Graphics.fadeCanvas(function () {
+                        level.reset();
+                        level.curLvl.deinit();
+                        level.curLvl.init();
+
+                        if (audio.isOn)
+                            audio.bgMusic.muted = false;
+                    });
+                }, 3000);
+            }
         },
 
         degToRad: function(deg){

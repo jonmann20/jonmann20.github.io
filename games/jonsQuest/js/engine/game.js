@@ -12,7 +12,7 @@ var game = (function () {
 	;
 	
 	function update() {
-	    if (!level.isCutscene && !level.isTransitioning) {
+	    if (!level.isCutscene && !level.isTransitioning && !game.over) {
 	        hero.update();
 	    }
 
@@ -34,7 +34,9 @@ var game = (function () {
 	    level.render();
 
 	    if (!level.isCutscene) {
-	        hero.render();
+            if(!game.over)
+                hero.render();
+
 	        HUD.draw();
 	        drawFPS();
 	    }

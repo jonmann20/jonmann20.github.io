@@ -64,7 +64,7 @@ var Crate = (function () {
                     });
 
                     var idx = level.items.indexOf(crates[i]);
-                    if (idx < 0 && crates[i].onGround) {
+                    if (idx < 0 && crates[i].isOnObj) {
                         level.items.push(crates[i]);
                     }
                 }
