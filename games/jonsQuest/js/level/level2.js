@@ -35,7 +35,7 @@ var lvl2 = (function () {
                 floor2.pos.x + floor2.w - 28,
                 true
             );
-            enemy.collidable = false;
+            enemy.collidable = true;
             level.objs.push(enemy);
         },
 

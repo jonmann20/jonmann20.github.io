@@ -67,37 +67,24 @@ module.exports = function(grunt) {
 	    },
 
 	    watch: {
-	        //options: {
-	        //    livereload: true
-	        //},
+	        options: {
+	            livereload: true
+	        },
+
+	        masterJs: {
+	            files: ["<%= concat_sourcemap.masterJs.src %>"],
+	            tasks: ["concat_sourcemap:masterJs"]
+	        },
 
 	        pageJonsQuestJs: {
-	            files: ["games/jonsQuest/**/*.js"],
+	            files: ["<%= concat_sourcemap.pageJonsQuestJs.src %>"],
 	            tasks: ["concat_sourcemap:pageJonsQuestJs"]
+	        },
+
+	        css: {
+	            files: ["<%= concat_sourcemap.css.src %>"],
+	            tasks: ["concat_sourcemap:css"]
 	        }
-	        //css: {
-	        //    files: ["<%= concat_sourcemap.css.dest %>"],                //"css/*.css"
-	        //    tasks: ["cssmin"],
-	        //    options: {
-	        //        livereload: true
-	        //    }
-	        //},
-
-	        //masterJs: {
-	        //    files: ["<%= concat_sourcemap.masterJs.dest %>"],           //"js/*.js"
-	        //    tasks: ["uglify:masterJs"],
-	        //    options: {
-	        //        livereload: 80
-	        //    }
-	        //},
-
-	        //pageJonsQuestJs: {
-	        //    files: ["/games/jonsQuest/js/physics/physics.js"],    //"games/jonsQuest/**/*.js"
-	        //    tasks: ["uglify:pageJonsQuestJs"],
-	        //    options: {
-	        //        livereload: true
-	        //    }
-	        //}
 	    },
 
 	    uglify: {
@@ -118,7 +105,7 @@ module.exports = function(grunt) {
 	        "<%= concat_sourcemap.css.dest %>": "<%= concat_sourcemap.css.src %>"
 	    }
 
-        // TODO: imagemin, htmlmin + copy, bower??, browserify??
+        // TODO: imagemin, htmlmin + copy, bower (plugin manager - e.g. jQuery, sammy.js, ... )
 
 	});
 
@@ -127,16 +114,20 @@ module.exports = function(grunt) {
 	//grunt.loadTasks("tasks");
 
     // external tasks (plugins)
-	grunt.loadNpmTasks("grunt-contrib-clean");
-	grunt.loadNpmTasks("grunt-contrib-connect");
-    grunt.loadNpmTasks("grunt-contrib-watch");
-
-	grunt.loadNpmTasks("grunt-concat-sourcemap");
 	grunt.loadNpmTasks("grunt-contrib-uglify");
+	grunt.loadNpmTasks("grunt-contrib-connect");
 	grunt.loadNpmTasks("grunt-contrib-cssmin");
+	grunt.loadNpmTasks("grunt-contrib-clean");
+    grunt.loadNpmTasks("grunt-contrib-watch");
+	grunt.loadNpmTasks("grunt-concat-sourcemap");
   
     // task runner options
 	grunt.registerTask("default", ["concat_sourcemap", "connect", "watch"]);
 	grunt.registerTask("srv", ["connect", "watch"]);
 	grunt.registerTask("prd", ["uglify", "cssmin"]);
 };
+
+
+// NOTES:
+//
+// "gets/all_subDirectories/**/*.js"

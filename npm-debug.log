@@ -1,0 +1,814 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'C:\\Program Files\\nodejs\\\\node.exe',
+1 verbose cli   'C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'install',
+1 verbose cli   'grunt-contrib-cssmin@0.7.0',
+1 verbose cli   '--save' ]
+2 info using npm@1.3.17
+3 info using node@v0.10.23
+4 verbose node symlink C:\Program Files\nodejs\\node.exe
+5 verbose readDependencies using package.json deps
+6 verbose cache add [ 'grunt-contrib-cssmin@0.7.0', null ]
+7 verbose cache add name=undefined spec="grunt-contrib-cssmin@0.7.0" args=["grunt-contrib-cssmin@0.7.0",null]
+8 verbose parsed url { protocol: null,
+8 verbose parsed url   slashes: null,
+8 verbose parsed url   auth: null,
+8 verbose parsed url   host: null,
+8 verbose parsed url   port: null,
+8 verbose parsed url   hostname: null,
+8 verbose parsed url   hash: null,
+8 verbose parsed url   search: null,
+8 verbose parsed url   query: null,
+8 verbose parsed url   pathname: 'grunt-contrib-cssmin@0.7.0',
+8 verbose parsed url   path: 'grunt-contrib-cssmin@0.7.0',
+8 verbose parsed url   href: 'grunt-contrib-cssmin@0.7.0' }
+9 verbose cache add name="grunt-contrib-cssmin" spec="0.7.0" args=["grunt-contrib-cssmin","0.7.0"]
+10 verbose parsed url { protocol: null,
+10 verbose parsed url   slashes: null,
+10 verbose parsed url   auth: null,
+10 verbose parsed url   host: null,
+10 verbose parsed url   port: null,
+10 verbose parsed url   hostname: null,
+10 verbose parsed url   hash: null,
+10 verbose parsed url   search: null,
+10 verbose parsed url   query: null,
+10 verbose parsed url   pathname: '0.7.0',
+10 verbose parsed url   path: '0.7.0',
+10 verbose parsed url   href: '0.7.0' }
+11 verbose addNamed [ 'grunt-contrib-cssmin', '0.7.0' ]
+12 verbose addNamed [ '0.7.0', '0.7.0' ]
+13 silly lockFile e32996d4-grunt-contrib-cssmin-0-7-0 grunt-contrib-cssmin@0.7.0
+14 verbose lock grunt-contrib-cssmin@0.7.0 C:\Users\Jon\AppData\Roaming\npm-cache\e32996d4-grunt-contrib-cssmin-0-7-0.lock
+15 verbose url raw grunt-contrib-cssmin/0.7.0
+16 verbose url resolving [ 'https://registry.npmjs.org/',
+16 verbose url resolving   './grunt-contrib-cssmin/0.7.0' ]
+17 verbose url resolved https://registry.npmjs.org/grunt-contrib-cssmin/0.7.0
+18 info trying registry request attempt 1 at 21:58:09
+19 verbose etag "7LY4RNU57D035CCXMLV1BX44I"
+20 http GET https://registry.npmjs.org/grunt-contrib-cssmin/0.7.0
+21 http 304 https://registry.npmjs.org/grunt-contrib-cssmin/0.7.0
+22 silly registry.get cb [ 304,
+22 silly registry.get   { server: 'CouchDB/1.5.0 (Erlang OTP/R15B03)',
+22 silly registry.get     etag: '"7LY4RNU57D035CCXMLV1BX44I"',
+22 silly registry.get     date: 'Fri, 13 Dec 2013 02:58:07 GMT',
+22 silly registry.get     'content-length': '0' } ]
+23 verbose etag grunt-contrib-cssmin/0.7.0 from cache
+24 silly lockFile e32996d4-grunt-contrib-cssmin-0-7-0 grunt-contrib-cssmin@0.7.0
+25 silly lockFile e32996d4-grunt-contrib-cssmin-0-7-0 grunt-contrib-cssmin@0.7.0
+26 silly resolved [ { name: 'grunt-contrib-cssmin',
+26 silly resolved     description: 'Compress CSS files.',
+26 silly resolved     version: '0.7.0',
+26 silly resolved     homepage: 'https://github.com/gruntjs/grunt-contrib-cssmin',
+26 silly resolved     author: { name: 'Grunt Team', url: 'http://gruntjs.com/' },
+26 silly resolved     repository:
+26 silly resolved      { type: 'git',
+26 silly resolved        url: 'git://github.com/gruntjs/grunt-contrib-cssmin.git' },
+26 silly resolved     bugs: { url: 'https://github.com/gruntjs/grunt-contrib-cssmin/issues' },
+26 silly resolved     licenses: [ [Object] ],
+26 silly resolved     engines: { node: '>= 0.8.0' },
+26 silly resolved     scripts: { test: 'grunt test' },
+26 silly resolved     dependencies: { 'clean-css': '~2.0.0', 'grunt-lib-contrib': '~0.6.0' },
+26 silly resolved     devDependencies:
+26 silly resolved      { 'grunt-contrib-jshint': '~0.6.4',
+26 silly resolved        'grunt-contrib-nodeunit': '~0.2.1',
+26 silly resolved        'grunt-contrib-clean': '~0.5.0',
+26 silly resolved        'grunt-contrib-internal': '~0.4.6',
+26 silly resolved        grunt: '~0.4.1' },
+26 silly resolved     peerDependencies: { grunt: '~0.4.1' },
+26 silly resolved     keywords: [ 'gruntplugin' ],
+26 silly resolved     contributors: [ [Object], [Object], [Object], [Object], [Object], [Object] ],
+26 silly resolved     readme: '# grunt-contrib-cssmin v0.6.2 [![Build Status](https://travis-ci.org/gruntjs/grunt-contrib-cssmin.png?branch=master)](https://travis-ci.org/gruntjs/grunt-contrib-cssmin)\n\n> Compress CSS files.\n\n\n\n## Getting Started\nThis plugin requires Grunt `~0.4.0`\n\nIf you haven\'t used [Grunt](http://gruntjs.com/) before, be sure to check out the [Getting Started](http://gruntjs.com/getting-started) guide, as it explains how to create a [Gruntfile](http://gruntjs.com/sample-gruntfile) as well as install and use Grunt plugins. Once you\'re familiar with that process, you may install this plugin with this command:\n\n```shell\nnpm install grunt-contrib-cssmin --save-dev\n```\n\nOnce the plugin has been installed, it may be enabled inside your Gruntfile with this line of JavaScript:\n\n```js\ngrunt.loadNpmTasks(\'grunt-contrib-cssmin\');\n```\n\n*This plugin was designed to work with Grunt 0.4.x. If you\'re still using grunt v0.3.x it\'s strongly recommended that [you upgrade](http://gruntjs.com/upgrading-from-0.3-to-0.4), but in case you can\'t please use [v0.3.2](https://github.com/gruntjs/grunt-contrib-cssmin/tree/grunt-0.3-stable).*\n\n\n\n## Cssmin task\n_Run this task with the `grunt cssmin` command._\n\nTask targets, files and options may be specified according to the grunt [Configuring tasks](http://gruntjs.com/configuring-tasks) guide.\n\nFiles are compressed with [clean-css](https://github.com/GoalSmashers/clean-css).\n### Options\n\n#### banner\n\nType: `String`  \nDefault: `null`\n\nPrefix the compressed source with the given banner, with a linebreak inbetween.\n\n#### keepSpecialComments\n\nType: `String` `Number`  \nDefault: `\'*\'`\n\nTo keep or remove special comments, exposing the underlying option from [clean-css](https://github.com/GoalSmashers/clean-css).. `\'*\'` for keeping all (default), `1` for keeping first one, `0` for removing all.\n\n#### report\nChoices: `false`, `\'min\'`, `\'gzip\'`  \nDefault: `false`\n\nEither do not report anything, report only minification result, or report minification and gzip results.\nThis is useful to see exactly how well clean-css is performing but using `\'gzip\'` will make the task take 5-10x longer to complete.\n\nExample ouput using `\'gzip\'`:\n\n```\nOriginal: 198444 bytes.\nMinified: 101615 bytes.\nGzipped:  20084 bytes.\n```\n\n### Usage Examples\n\n#### Combine two files into one output file\n\n```js\ncssmin: {\n  combine: {\n    files: {\n      \'path/to/output.css\': [\'path/to/input_one.css\', \'path/to/input_two.css\']\n    }\n  }\n}\n```\n\n#### Add a banner\n```js\ncssmin: {\n  add_banner: {\n    options: {\n      banner: \'/* My minified css file */\'\n    },\n    files: {\n      \'path/to/output.css\': [\'path/to/**/*.css\']\n    }\n  }\n}\n```\n\n#### Minify all contents of a release directory and add a `.min.css` extension\n```js\ncssmin: {\n  minify: {\n    expand: true,\n    cwd: \'release/css/\',\n    src: [\'*.css\', \'!*.min.css\'],\n    dest: \'release/css/\',\n    ext: \'.min.css\'\n  }\n}\n```\n\n\n## Release History\n\n * 2013-09-14   v0.6.2   Support relative URLs via clean-css ~1.1.1.\n * 2013-05-25   v0.6.1   Support import in-lining vis clean-css ~1.0.4.\n * 2013-04-05   v0.6.0   Update clean-css dependency to ~1.0.0\n * 2013-03-14   v0.5.0   Support for \'report\' option (false by default)\n * 2013-03-10   v0.4.2   Add banner option Support clean-css keepSpecialComments\n * 2013-02-17   v0.4.1   Update clean-css dependency to ~0.10.0\n * 2013-02-15   v0.4.0   First official release for Grunt 0.4.0.\n * 2013-01-23   v0.4.0rc7   Updating grunt/gruntplugin dependencies to rc7. Changing in-development grunt/gruntplugin dependency versions from tilde version ranges to specific versions.\n * 2013-01-09   v0.4.0rc5   Updating to work with grunt v0.4.0rc5. Switching to this.files api.\n * 2012-11-01   v0.3.2   Update clean-css dep.\n * 2012-10-12   v0.3.1   Rename grunt-contrib-lib dep to grunt-lib-contrib.\n * 2012-09-23   v0.3.0   Options no longer accepted from global config key.\n * 2012-09-10   v0.2.0   Refactored from grunt-contrib into individual repo.\n\n---\n\nTask submitted by [Tim Branyen](http://goingslowly.com/)\n\n*This file was generated on Sat Oct 05 2013 19:35:29.*\n',
+26 silly resolved     readmeFilename: 'README.md',
+26 silly resolved     _id: 'grunt-contrib-cssmin@0.7.0',
+26 silly resolved     _from: 'grunt-contrib-cssmin@0.7.0' } ]
+27 info install grunt-contrib-cssmin@0.7.0 into C:\git\jonmann20.github.com
+28 info installOne grunt-contrib-cssmin@0.7.0
+29 info C:\git\jonmann20.github.com\node_modules\grunt-contrib-cssmin unbuild
+30 info preuninstall grunt-contrib-cssmin@0.6.2
+31 info uninstall grunt-contrib-cssmin@0.6.2
+32 verbose true,C:\git\jonmann20.github.com\node_modules,C:\git\jonmann20.github.com\node_modules unbuild grunt-contrib-cssmin@0.6.2
+33 info postuninstall grunt-contrib-cssmin@0.6.2
+34 verbose tar unpack C:\Users\Jon\AppData\Roaming\npm-cache\grunt-contrib-cssmin\0.7.0\package.tgz
+35 silly lockFile 621141df-ode-modules-grunt-contrib-cssmin tar://C:\git\jonmann20.github.com\node_modules\grunt-contrib-cssmin
+36 verbose lock tar://C:\git\jonmann20.github.com\node_modules\grunt-contrib-cssmin C:\Users\Jon\AppData\Roaming\npm-cache\621141df-ode-modules-grunt-contrib-cssmin.lock
+37 silly lockFile cf4ae4eb-contrib-cssmin-0-7-0-package-tgz tar://C:\Users\Jon\AppData\Roaming\npm-cache\grunt-contrib-cssmin\0.7.0\package.tgz
+38 verbose lock tar://C:\Users\Jon\AppData\Roaming\npm-cache\grunt-contrib-cssmin\0.7.0\package.tgz C:\Users\Jon\AppData\Roaming\npm-cache\cf4ae4eb-contrib-cssmin-0-7-0-package-tgz.lock
+39 silly gunzTarPerm modes [ '755', '644' ]
+40 silly gunzTarPerm extractEntry package.json
+41 silly gunzTarPerm modified mode [ 'package.json', 438, 420 ]
+42 silly gunzTarPerm extractEntry .npmignore
+43 silly gunzTarPerm modified mode [ '.npmignore', 438, 420 ]
+44 silly gunzTarPerm extractEntry README.md
+45 silly gunzTarPerm modified mode [ 'README.md', 438, 420 ]
+46 silly gunzTarPerm extractEntry Gruntfile.js
+47 silly gunzTarPerm modified mode [ 'Gruntfile.js', 438, 420 ]
+48 silly gunzTarPerm extractEntry CONTRIBUTING.md
+49 silly gunzTarPerm modified mode [ 'CONTRIBUTING.md', 438, 420 ]
+50 silly gunzTarPerm extractEntry AUTHORS
+51 silly gunzTarPerm modified mode [ 'AUTHORS', 438, 420 ]
+52 silly gunzTarPerm extractEntry CHANGELOG
+53 silly gunzTarPerm modified mode [ 'CHANGELOG', 438, 420 ]
+54 silly gunzTarPerm extractEntry .gitattributes
+55 silly gunzTarPerm modified mode [ '.gitattributes', 438, 420 ]
+56 silly gunzTarPerm extractEntry docs/cssmin-examples.md
+57 silly gunzTarPerm modified mode [ 'docs/cssmin-examples.md', 438, 420 ]
+58 silly gunzTarPerm extractEntry docs/cssmin-options.md
+59 silly gunzTarPerm modified mode [ 'docs/cssmin-options.md', 438, 420 ]
+60 silly gunzTarPerm extractEntry docs/cssmin-overview.md
+61 silly gunzTarPerm modified mode [ 'docs/cssmin-overview.md', 438, 420 ]
+62 silly gunzTarPerm extractEntry docs/overview.md
+63 silly gunzTarPerm modified mode [ 'docs/overview.md', 438, 420 ]
+64 silly gunzTarPerm extractEntry .jshintrc
+65 silly gunzTarPerm modified mode [ '.jshintrc', 438, 420 ]
+66 silly gunzTarPerm extractEntry LICENSE-MIT
+67 silly gunzTarPerm modified mode [ 'LICENSE-MIT', 438, 420 ]
+68 silly gunzTarPerm extractEntry .editorconfig
+69 silly gunzTarPerm modified mode [ '.editorconfig', 438, 420 ]
+70 silly gunzTarPerm extractEntry .travis.yml
+71 silly gunzTarPerm modified mode [ '.travis.yml', 438, 420 ]
+72 silly gunzTarPerm extractEntry tasks/cssmin.js
+73 silly gunzTarPerm modified mode [ 'tasks/cssmin.js', 438, 420 ]
+74 silly gunzTarPerm extractEntry test/cssmin_test.js
+75 silly gunzTarPerm modified mode [ 'test/cssmin_test.js', 438, 420 ]
+76 silly gunzTarPerm extractEntry test/expected/inline_import.css
+77 silly gunzTarPerm modified mode [ 'test/expected/inline_import.css', 438, 420 ]
+78 silly gunzTarPerm extractEntry test/expected/input_bannered.css
+79 silly gunzTarPerm modified mode [ 'test/expected/input_bannered.css', 438, 420 ]
+80 silly gunzTarPerm extractEntry test/expected/style.css
+81 silly gunzTarPerm modified mode [ 'test/expected/style.css', 438, 420 ]
+82 silly gunzTarPerm extractEntry test/expected/with-banner.css
+83 silly gunzTarPerm modified mode [ 'test/expected/with-banner.css', 438, 420 ]
+84 silly gunzTarPerm extractEntry test/fixtures/inner/input_inline_import.css
+85 silly gunzTarPerm modified mode [ 'test/fixtures/inner/input_inline_import.css', 438, 420 ]
+86 silly gunzTarPerm extractEntry test/fixtures/inner/input_inline_import2.css
+87 silly gunzTarPerm modified mode [ 'test/fixtures/inner/input_inline_import2.css', 438, 420 ]
+88 silly gunzTarPerm extractEntry test/fixtures/input_bannered.css
+89 silly gunzTarPerm modified mode [ 'test/fixtures/input_bannered.css', 438, 420 ]
+90 silly gunzTarPerm extractEntry test/fixtures/input_inline_import.css
+91 silly gunzTarPerm modified mode [ 'test/fixtures/input_inline_import.css', 438, 420 ]
+92 silly gunzTarPerm extractEntry test/fixtures/input_inline_import2.css
+93 silly gunzTarPerm modified mode [ 'test/fixtures/input_inline_import2.css', 438, 420 ]
+94 silly gunzTarPerm extractEntry test/fixtures/input_one.css
+95 silly gunzTarPerm modified mode [ 'test/fixtures/input_one.css', 438, 420 ]
+96 silly gunzTarPerm extractEntry test/fixtures/input_two.css
+97 silly gunzTarPerm modified mode [ 'test/fixtures/input_two.css', 438, 420 ]
+98 silly lockFile 621141df-ode-modules-grunt-contrib-cssmin tar://C:\git\jonmann20.github.com\node_modules\grunt-contrib-cssmin
+99 silly lockFile 621141df-ode-modules-grunt-contrib-cssmin tar://C:\git\jonmann20.github.com\node_modules\grunt-contrib-cssmin
+100 silly lockFile cf4ae4eb-contrib-cssmin-0-7-0-package-tgz tar://C:\Users\Jon\AppData\Roaming\npm-cache\grunt-contrib-cssmin\0.7.0\package.tgz
+101 silly lockFile cf4ae4eb-contrib-cssmin-0-7-0-package-tgz tar://C:\Users\Jon\AppData\Roaming\npm-cache\grunt-contrib-cssmin\0.7.0\package.tgz
+102 info preinstall grunt-contrib-cssmin@0.7.0
+103 verbose readDependencies using package.json deps
+104 verbose readDependencies using package.json deps
+105 verbose cache add [ 'clean-css@~2.0.0', null ]
+106 verbose cache add name=undefined spec="clean-css@~2.0.0" args=["clean-css@~2.0.0",null]
+107 verbose parsed url { protocol: null,
+107 verbose parsed url   slashes: null,
+107 verbose parsed url   auth: null,
+107 verbose parsed url   host: null,
+107 verbose parsed url   port: null,
+107 verbose parsed url   hostname: null,
+107 verbose parsed url   hash: null,
+107 verbose parsed url   search: null,
+107 verbose parsed url   query: null,
+107 verbose parsed url   pathname: 'clean-css@~2.0.0',
+107 verbose parsed url   path: 'clean-css@~2.0.0',
+107 verbose parsed url   href: 'clean-css@~2.0.0' }
+108 verbose cache add name="clean-css" spec="~2.0.0" args=["clean-css","~2.0.0"]
+109 verbose parsed url { protocol: null,
+109 verbose parsed url   slashes: null,
+109 verbose parsed url   auth: null,
+109 verbose parsed url   host: null,
+109 verbose parsed url   port: null,
+109 verbose parsed url   hostname: null,
+109 verbose parsed url   hash: null,
+109 verbose parsed url   search: null,
+109 verbose parsed url   query: null,
+109 verbose parsed url   pathname: '~2.0.0',
+109 verbose parsed url   path: '~2.0.0',
+109 verbose parsed url   href: '~2.0.0' }
+110 verbose addNamed [ 'clean-css', '~2.0.0' ]
+111 verbose addNamed [ null, '>=2.0.0-0 <2.1.0-0' ]
+112 silly lockFile 434cf0e0-clean-css-2-0-0 clean-css@~2.0.0
+113 verbose lock clean-css@~2.0.0 C:\Users\Jon\AppData\Roaming\npm-cache\434cf0e0-clean-css-2-0-0.lock
+114 verbose cache add [ 'grunt-lib-contrib@~0.6.0', null ]
+115 verbose cache add name=undefined spec="grunt-lib-contrib@~0.6.0" args=["grunt-lib-contrib@~0.6.0",null]
+116 verbose parsed url { protocol: null,
+116 verbose parsed url   slashes: null,
+116 verbose parsed url   auth: null,
+116 verbose parsed url   host: null,
+116 verbose parsed url   port: null,
+116 verbose parsed url   hostname: null,
+116 verbose parsed url   hash: null,
+116 verbose parsed url   search: null,
+116 verbose parsed url   query: null,
+116 verbose parsed url   pathname: 'grunt-lib-contrib@~0.6.0',
+116 verbose parsed url   path: 'grunt-lib-contrib@~0.6.0',
+116 verbose parsed url   href: 'grunt-lib-contrib@~0.6.0' }
+117 verbose cache add name="grunt-lib-contrib" spec="~0.6.0" args=["grunt-lib-contrib","~0.6.0"]
+118 verbose parsed url { protocol: null,
+118 verbose parsed url   slashes: null,
+118 verbose parsed url   auth: null,
+118 verbose parsed url   host: null,
+118 verbose parsed url   port: null,
+118 verbose parsed url   hostname: null,
+118 verbose parsed url   hash: null,
+118 verbose parsed url   search: null,
+118 verbose parsed url   query: null,
+118 verbose parsed url   pathname: '~0.6.0',
+118 verbose parsed url   path: '~0.6.0',
+118 verbose parsed url   href: '~0.6.0' }
+119 verbose addNamed [ 'grunt-lib-contrib', '~0.6.0' ]
+120 verbose addNamed [ null, '>=0.6.0-0 <0.7.0-0' ]
+121 silly lockFile 572493f7-grunt-lib-contrib-0-6-0 grunt-lib-contrib@~0.6.0
+122 verbose lock grunt-lib-contrib@~0.6.0 C:\Users\Jon\AppData\Roaming\npm-cache\572493f7-grunt-lib-contrib-0-6-0.lock
+123 silly addNameRange { name: 'clean-css',
+123 silly addNameRange   range: '>=2.0.0-0 <2.1.0-0',
+123 silly addNameRange   hasData: false }
+124 silly addNameRange { name: 'grunt-lib-contrib',
+124 silly addNameRange   range: '>=0.6.0-0 <0.7.0-0',
+124 silly addNameRange   hasData: false }
+125 verbose url raw grunt-lib-contrib
+126 verbose url resolving [ 'https://registry.npmjs.org/', './grunt-lib-contrib' ]
+127 verbose url resolved https://registry.npmjs.org/grunt-lib-contrib
+128 info trying registry request attempt 1 at 21:58:10
+129 verbose etag "CN79PDDBSQYTDP6QRQISOU9MM"
+130 http GET https://registry.npmjs.org/grunt-lib-contrib
+131 verbose url raw clean-css
+132 verbose url resolving [ 'https://registry.npmjs.org/', './clean-css' ]
+133 verbose url resolved https://registry.npmjs.org/clean-css
+134 info trying registry request attempt 1 at 21:58:10
+135 verbose etag "74HQ8CVCELJFS46KDCXGG1CCD"
+136 http GET https://registry.npmjs.org/clean-css
+137 http 304 https://registry.npmjs.org/grunt-lib-contrib
+138 silly registry.get cb [ 304,
+138 silly registry.get   { server: 'CouchDB/1.5.0 (Erlang OTP/R15B03)',
+138 silly registry.get     etag: '"CN79PDDBSQYTDP6QRQISOU9MM"',
+138 silly registry.get     date: 'Fri, 13 Dec 2013 02:58:08 GMT',
+138 silly registry.get     'content-length': '0' } ]
+139 verbose etag grunt-lib-contrib from cache
+140 silly addNameRange number 2 { name: 'grunt-lib-contrib',
+140 silly addNameRange   range: '>=0.6.0-0 <0.7.0-0',
+140 silly addNameRange   hasData: true }
+141 silly addNameRange versions [ 'grunt-lib-contrib',
+141 silly addNameRange   [ '0.3.0',
+141 silly addNameRange     '0.3.1',
+141 silly addNameRange     '0.4.0',
+141 silly addNameRange     '0.5.1',
+141 silly addNameRange     '0.5.2',
+141 silly addNameRange     '0.5.3',
+141 silly addNameRange     '0.6.0',
+141 silly addNameRange     '0.6.1' ] ]
+142 verbose addNamed [ 'grunt-lib-contrib', '0.6.1' ]
+143 verbose addNamed [ '0.6.1', '0.6.1' ]
+144 silly lockFile 0ef65a81-grunt-lib-contrib-0-6-1 grunt-lib-contrib@0.6.1
+145 verbose lock grunt-lib-contrib@0.6.1 C:\Users\Jon\AppData\Roaming\npm-cache\0ef65a81-grunt-lib-contrib-0-6-1.lock
+146 silly lockFile 0ef65a81-grunt-lib-contrib-0-6-1 grunt-lib-contrib@0.6.1
+147 silly lockFile 0ef65a81-grunt-lib-contrib-0-6-1 grunt-lib-contrib@0.6.1
+148 silly lockFile 572493f7-grunt-lib-contrib-0-6-0 grunt-lib-contrib@~0.6.0
+149 silly lockFile 572493f7-grunt-lib-contrib-0-6-0 grunt-lib-contrib@~0.6.0
+150 http 304 https://registry.npmjs.org/clean-css
+151 silly registry.get cb [ 304,
+151 silly registry.get   { server: 'CouchDB/1.5.0 (Erlang OTP/R15B03)',
+151 silly registry.get     etag: '"74HQ8CVCELJFS46KDCXGG1CCD"',
+151 silly registry.get     date: 'Fri, 13 Dec 2013 02:58:08 GMT',
+151 silly registry.get     'content-length': '0' } ]
+152 verbose etag clean-css from cache
+153 silly addNameRange number 2 { name: 'clean-css', range: '>=2.0.0-0 <2.1.0-0', hasData: true }
+154 silly addNameRange versions [ 'clean-css',
+154 silly addNameRange   [ '0.1.0',
+154 silly addNameRange     '0.2.0',
+154 silly addNameRange     '0.2.1',
+154 silly addNameRange     '0.2.2',
+154 silly addNameRange     '0.2.3',
+154 silly addNameRange     '0.2.4',
+154 silly addNameRange     '0.2.5',
+154 silly addNameRange     '0.2.6',
+154 silly addNameRange     '0.3.0',
+154 silly addNameRange     '0.3.1',
+154 silly addNameRange     '0.3.2',
+154 silly addNameRange     '0.3.3',
+154 silly addNameRange     '0.4.0',
+154 silly addNameRange     '0.4.1',
+154 silly addNameRange     '0.4.2',
+154 silly addNameRange     '0.5.0',
+154 silly addNameRange     '0.6.0',
+154 silly addNameRange     '0.7.0',
+154 silly addNameRange     '0.8.0',
+154 silly addNameRange     '0.8.1',
+154 silly addNameRange     '0.8.2',
+154 silly addNameRange     '0.8.3',
+154 silly addNameRange     '0.9.0',
+154 silly addNameRange     '0.9.1',
+154 silly addNameRange     '0.10.0',
+154 silly addNameRange     '0.10.1',
+154 silly addNameRange     '0.10.2',
+154 silly addNameRange     '1.0.0',
+154 silly addNameRange     '1.0.1',
+154 silly addNameRange     '1.0.2',
+154 silly addNameRange     '1.0.3',
+154 silly addNameRange     '1.0.4',
+154 silly addNameRange     '1.0.5',
+154 silly addNameRange     '1.0.6',
+154 silly addNameRange     '1.0.7',
+154 silly addNameRange     '1.0.8',
+154 silly addNameRange     '1.0.9',
+154 silly addNameRange     '1.0.10',
+154 silly addNameRange     '1.0.11',
+154 silly addNameRange     '1.0.12',
+154 silly addNameRange     '1.1.0',
+154 silly addNameRange     '1.1.1',
+154 silly addNameRange     '1.1.2',
+154 silly addNameRange     '1.1.3',
+154 silly addNameRange     '1.1.4',
+154 silly addNameRange     '1.1.5',
+154 silly addNameRange     '1.1.6',
+154 silly addNameRange     '1.1.7',
+154 silly addNameRange     '2.0.0',
+154 silly addNameRange     '2.0.1',
+154 silly addNameRange     '2.0.2' ] ]
+155 verbose addNamed [ 'clean-css', '2.0.2' ]
+156 verbose addNamed [ '2.0.2', '2.0.2' ]
+157 silly lockFile c153d1be-clean-css-2-0-2 clean-css@2.0.2
+158 verbose lock clean-css@2.0.2 C:\Users\Jon\AppData\Roaming\npm-cache\c153d1be-clean-css-2-0-2.lock
+159 silly lockFile c153d1be-clean-css-2-0-2 clean-css@2.0.2
+160 silly lockFile c153d1be-clean-css-2-0-2 clean-css@2.0.2
+161 silly lockFile 434cf0e0-clean-css-2-0-0 clean-css@~2.0.0
+162 silly lockFile 434cf0e0-clean-css-2-0-0 clean-css@~2.0.0
+163 silly resolved [ { name: 'grunt-lib-contrib',
+163 silly resolved     description: 'Common functionality shared across grunt-contrib tasks.',
+163 silly resolved     version: '0.6.1',
+163 silly resolved     homepage: 'http://github.com/gruntjs/grunt-lib-contrib',
+163 silly resolved     author: { name: 'Grunt Team', url: 'http://gruntjs.com/' },
+163 silly resolved     repository:
+163 silly resolved      { type: 'git',
+163 silly resolved        url: 'git://github.com/gruntjs/grunt-lib-contrib.git' },
+163 silly resolved     bugs: { url: 'https://github.com/gruntjs/grunt-lib-contrib/issues' },
+163 silly resolved     licenses: [ [Object] ],
+163 silly resolved     engines: { node: '>= 0.8.0' },
+163 silly resolved     scripts: { test: 'grunt test' },
+163 silly resolved     devDependencies:
+163 silly resolved      { 'grunt-contrib-jshint': '~0.1.1',
+163 silly resolved        'grunt-contrib-nodeunit': '~0.1.2',
+163 silly resolved        grunt: '~0.4.0' },
+163 silly resolved     main: 'lib/contrib',
+163 silly resolved     dependencies: { 'zlib-browserify': '0.0.1' },
+163 silly resolved     contributors: [ [Object], [Object], [Object], [Object] ],
+163 silly resolved     readme: '# grunt-lib-contrib [![Build Status](https://secure.travis-ci.org/gruntjs/grunt-lib-contrib.png?branch=master)](http://travis-ci.org/gruntjs/grunt-lib-contrib)\n\n> Common functionality shared across grunt-contrib tasks.\n\nThe purpose of grunt-lib-contrib is to explore solutions to common problems task writers encounter, and to ease the upgrade path for contrib tasks.\n\n**These APIs should be considered highly unstable. Depend on them at your own risk!**\n\n_Over time, some of the functionality provided here may be incorporated directly into grunt for mainstream use. Until then, you may require `grunt-lib-contrib` as a dependency in your projects, but be very careful to specify an exact version number instead of a range, as backwards-incompatible changes are likely to be introduced._\n\n### Helper Functions\n\n#### getNamespaceDeclaration(ns)\n\nThis helper is used to build JS namespace declarations.\n\n#### optsToArgs(options)\n\nConvert an object to an array of CLI arguments, which can be used with `child_process.spawn()`.\n\n```js\n// Example\n{\n  fooBar: \'a\',        // [\'--foo-bar\', \'a\']\n  fooBar: 1,          // [\'--foo-bar\', \'1\']\n  fooBar: true,       // [\'--foo-bar\']\n  fooBar: false,      //\n  fooBar: [\'a\', \'b\']  // [\'--foo-bar\', \'a\', \'--foo-bar\', \'b\']\n}\n```\n\n#### stripPath(pth, strip)\n\nStrip a path from a path. normalize both paths for best results.\n\n#### minMaxInfo(min, max, report)\n\nHelper for logging compressed, uncompressed and gzipped sizes of strings.\n\n#### report\nChoices: `false`, `\'min\'`, `\'gzip\'`\nDefault: `false`\n\nEither do not report anything, report only minification result, or report minification and gzip results.\n\n**Important** Including `\'gzip\'` results can make this task 5-10x slower depending on the size of the file.\n\n\n```js\nvar max = grunt.file.read(\'max.js\');\nvar min = minify(max);\nminMaxInfo(min, max, \'gzip\');\n```\n\nWould print:\n\n```\nOriginal: 495 bytes.\nMinified: 396 bytes.\nGzipped: 36 bytes.\n```\n\n--\n\n*Lib submitted by [Tyler Kellen](https://goingslowly.com/).*',
+163 silly resolved     readmeFilename: 'README.md',
+163 silly resolved     _id: 'grunt-lib-contrib@0.6.1',
+163 silly resolved     _from: 'grunt-lib-contrib@~0.6.0' },
+163 silly resolved   { name: 'clean-css',
+163 silly resolved     version: '2.0.2',
+163 silly resolved     author:
+163 silly resolved      { name: 'Jakub Pawlowicz',
+163 silly resolved        email: 'jakub@goalsmashers.com',
+163 silly resolved        url: 'http://twitter.com/GoalSmashers' },
+163 silly resolved     description: 'A well-tested CSS minifier',
+163 silly resolved     license: 'MIT',
+163 silly resolved     keywords: [ 'css', 'minifier' ],
+163 silly resolved     homepage: 'https://github.com/GoalSmashers/clean-css',
+163 silly resolved     repository:
+163 silly resolved      { type: 'git',
+163 silly resolved        url: 'https://github.com/GoalSmashers/clean-css.git' },
+163 silly resolved     bugs: { url: 'https://github.com/GoalSmashers/clean-css/issues' },
+163 silly resolved     bin: { cleancss: './bin/cleancss' },
+163 silly resolved     main: 'index.js',
+163 silly resolved     files: [ 'bin', 'lib', 'History.md', 'index.js', 'LICENSE' ],
+163 silly resolved     scripts:
+163 silly resolved      { bench: 'node ./test/bench.js',
+163 silly resolved        check: 'jshint .',
+163 silly resolved        prepublish: 'jshint .',
+163 silly resolved        test: 'vows' },
+163 silly resolved     dependencies: { commander: '2.0.x' },
+163 silly resolved     devDependencies: { jshint: '2.3.x', vows: '0.7.x' },
+163 silly resolved     jshintConfig:
+163 silly resolved      { browser: false,
+163 silly resolved        camelcase: true,
+163 silly resolved        curly: false,
+163 silly resolved        eqeqeq: false,
+163 silly resolved        eqnull: true,
+163 silly resolved        immed: true,
+163 silly resolved        latedef: true,
+163 silly resolved        multistr: true,
+163 silly resolved        noarg: true,
+163 silly resolved        node: true,
+163 silly resolved        plusplus: false,
+163 silly resolved        quotmark: 'single',
+163 silly resolved        strict: false,
+163 silly resolved        trailing: true,
+163 silly resolved        undef: true,
+163 silly resolved        unused: true },
+163 silly resolved     engines: { node: '>=0.8.0' },
+163 silly resolved     readme: '[![NPM version](https://badge.fury.io/js/clean-css.png)](https://badge.fury.io/js/clean-css)\n[![Build Status](https://secure.travis-ci.org/GoalSmashers/clean-css.png)](https://travis-ci.org/GoalSmashers/clean-css)\n[![Dependency Status](https://david-dm.org/GoalSmashers/clean-css.png)](https://david-dm.org/GoalSmashers/clean-css)\n[![devDependency Status](https://david-dm.org/GoalSmashers/clean-css/dev-status.png)](https://david-dm.org/GoalSmashers/clean-css#info=devDependencies)\n\n## What is clean-css?\n\nClean-css is a fast and efficient [node.js](http://nodejs.org/) library for minifying CSS files.\n\nAccording to [tests](https://github.com/GoalSmashers/css-minification-benchmark) it is one of the best available.\n\n\n## Usage\n\n### What are the requirements?\n\n```\nnode.js 0.8.0+ (tested on CentOS, Ubuntu, OS X 10.6+, and Windows 7+)\n```\n\n### How to install clean-css?\n\n```\nnpm install clean-css\n```\n\n### How to upgrade clean-css from 1.x to 2.x?\n\n#### Command-line interface (CLI)\n\n```\nnpm update clean-css\n```\n\nor point `package.json` to version 2.x. That\'s it!\n\n#### Node.js module\n\nUpdate `clean-css` as for CLI above.\nThen change your JavaScript code from:\n\n```js\nvar minimized = CleanCSS.process(source, options);\n```\n\ninto\n\n```js\nvar minimized = new CleanCSS(options).minify(source);\n```\n\nAnd you are done.\n\n### How to use clean-css CLI?\n\nClean-css accepts the following command line arguments (please make sure\nyou use `<source-file>` as the very last argument to avoid potential issues):\n\n```\ncleancss [options] <source-file>\n\n-h, --help                      Output usage information\n-v, --version                   Output the version number\n-b, --keep-line-breaks          Keep line breaks\n--s0                            Remove all special comments, i.e. /*! comment */\n--s1                            Remove all special comments but the first one\n-r, --root [root-path]          A root path to which resolve absolute @import rules\n                                and rebase relative URLs\n-o, --output [output-file]      Use [output-file] as output instead of STDOUT\n-s, --skip-import               Disable @import processing\n--skip-rebase                   Disable URLs rebasing\n--skip-advanced                 Disable advanced optimizations - selector & property merging,\n                                reduction, etc.\n--selectors-merge-mode [ie8|*]  Use `ie8` for compatibility mode, `*` for merge all (default)\n-d, --debug                     Shows debug information (minification time & compression efficiency)\n```\n\n#### Examples:\n\nTo minify a **public.css** file into **public-min.css** do:\n\n```\ncleancss -o public-min.css public.css\n```\n\nTo minify the same **public.css** into the standard output skip the `-o` parameter:\n\n```\ncleancss public.css\n```\n\nMore likely you would like to concatenate a couple of files.\nIf you are on a Unix-like system:\n\n```bash\ncat one.css two.css three.css | cleancss -o merged-and-minified.css\n```\n\nOn Windows:\n\n```bat\ntype one.css two.css three.css | cleancss -o merged-and-minified.css\n```\n\nOr even gzip the result at once:\n\n```bash\ncat one.css two.css three.css | cleancss | gzip -9 -c > merged-minified-and-gzipped.css.gz\n```\n\n### How to use clean-css programmatically?\n\n```js\nvar CleanCSS = require(\'clean-css\');\nvar source = \'a{font-weight:bold;}\';\nvar minimized = new CleanCSS().minify(source);\n```\n\nCleanCSS constructor accepts a hash as a parameter, i.e.,\n`new CleanCSS(options).minify(source)` with the following options available:\n\n* `keepSpecialComments` - `*` for keeping all (default), `1` for keeping first one only, `0` for removing all\n* `keepBreaks` - whether to keep line breaks (default is false)\n* `benchmark` - turns on benchmarking mode measuring time spent on cleaning up\n  (run `npm run bench` to see example)\n* `root` - path to resolve absolute `@import` rules and rebase relative URLs\n* `relativeTo` - path with which to resolve relative `@import` rules and URLs\n* `processImport` - whether to process `@import` rules\n* `noRebase` - whether to skip URLs rebasing\n* `noAdvanced` - set to true to disable advanced optimizations - selector & property merging, reduction, etc.\n* `selectorsMergeMode` - `ie8` for IE8 compatibility mode, `*` for merging all (default)\n* `debug` - set to true to get minification statistics under `stats` property (see `test/custom-test.js` for examples)\n\n### What are the clean-css\' dev commands?\n\nFirst clone the source, then run:\n\n* `npm run bench` for clean-css benchmarks (see [test/bench.js](https://github.com/GoalSmashers/clean-css/blob/master/test/bench.js) for details)\n* `npm run check` to check JS sources with [JSHint](https://github.com/jshint/jshint/)\n* `npm test` for the test suite\n\n## Tips & Tricks\n\n### How to preserve a comment block?\n\nUse the `/*!` notation instead of the standard one `/*`:\n\n```css\n/*!\n  Important comments included in minified output.\n*/\n```\n\n### How to rebase relative image URLs\n\nClean-css will handle it automatically for you (since version 1.1) in the following cases:\n\n* When using the CLI:\n  1. Use an output path via `-o`/`--output` to rebase URLs as relative to the output file.\n  2. Use a root path via `-r`/`--root` to rebase URLs as absolute from the given root path.\n  3. If you specify both then `-r`/`--root` takes precendence.\n* When using clean-css as a library:\n  1. Use a combination of `relativeTo` and `target` options for relative rebase (same as 1 in CLI).\n  2. Use a combination of `relativeTo` and `root` options for absolute rebase (same as 2 in CLI).\n  3. `root` takes precendence over `target` as in CLI.\n\n## Acknowledgments\n\n* Vincent Voyer ([@vvo](https://github.com/vvo)) for a patch with better\n  empty element regex and for inspiring us to do many performance improvements\n  in 0.4 release.\n* Isaac ([@facelessuser](https://github.com/facelessuser)) for pointing out\n  a flaw in clean-css\' stateless mode.\n* Jan Michael Alonzo ([@jmalonzo](https://github.com/jmalonzo)) for a patch\n  removing node.js\' old `sys` package.\n* [@XhmikosR](https://github.com/XhmikosR) for suggesting new features\n  (option to remove special comments and strip out URLs quotation) and\n  pointing out numerous improvements (JSHint, media queries).\n* Anthony Barre ([@abarre](https://github.com/abarre)) for improvements to\n  `@import` processing, namely introducing the `--skip-import` /\n  `processImport` options.\n* Simon Altschuler ([@altschuler](https://github.com/altschuler)) for fixing\n  `@import` processing inside comments.\n\n## License\n\nClean-css is released under the [MIT License](https://github.com/GoalSmashers/clean-css/blob/master/LICENSE).\n',
+163 silly resolved     readmeFilename: 'README.md',
+163 silly resolved     _id: 'clean-css@2.0.2',
+163 silly resolved     _from: 'clean-css@~2.0.0' } ]
+164 info install grunt-lib-contrib@0.6.1 into C:\git\jonmann20.github.com\node_modules\grunt-contrib-cssmin
+165 info install clean-css@2.0.2 into C:\git\jonmann20.github.com\node_modules\grunt-contrib-cssmin
+166 info installOne grunt-lib-contrib@0.6.1
+167 info installOne clean-css@2.0.2
+168 info C:\git\jonmann20.github.com\node_modules\grunt-contrib-cssmin\node_modules\grunt-lib-contrib unbuild
+169 info C:\git\jonmann20.github.com\node_modules\grunt-contrib-cssmin\node_modules\clean-css unbuild
+170 verbose tar unpack C:\Users\Jon\AppData\Roaming\npm-cache\grunt-lib-contrib\0.6.1\package.tgz
+171 silly lockFile a270fb91-n-node-modules-grunt-lib-contrib tar://C:\git\jonmann20.github.com\node_modules\grunt-contrib-cssmin\node_modules\grunt-lib-contrib
+172 verbose lock tar://C:\git\jonmann20.github.com\node_modules\grunt-contrib-cssmin\node_modules\grunt-lib-contrib C:\Users\Jon\AppData\Roaming\npm-cache\a270fb91-n-node-modules-grunt-lib-contrib.lock
+173 silly lockFile 4749d7ef-nt-lib-contrib-0-6-1-package-tgz tar://C:\Users\Jon\AppData\Roaming\npm-cache\grunt-lib-contrib\0.6.1\package.tgz
+174 verbose lock tar://C:\Users\Jon\AppData\Roaming\npm-cache\grunt-lib-contrib\0.6.1\package.tgz C:\Users\Jon\AppData\Roaming\npm-cache\4749d7ef-nt-lib-contrib-0-6-1-package-tgz.lock
+175 verbose tar unpack C:\Users\Jon\AppData\Roaming\npm-cache\clean-css\2.0.2\package.tgz
+176 silly lockFile f3a63bab-ib-cssmin-node-modules-clean-css tar://C:\git\jonmann20.github.com\node_modules\grunt-contrib-cssmin\node_modules\clean-css
+177 verbose lock tar://C:\git\jonmann20.github.com\node_modules\grunt-contrib-cssmin\node_modules\clean-css C:\Users\Jon\AppData\Roaming\npm-cache\f3a63bab-ib-cssmin-node-modules-clean-css.lock
+178 silly lockFile 0581cb40-ache-clean-css-2-0-2-package-tgz tar://C:\Users\Jon\AppData\Roaming\npm-cache\clean-css\2.0.2\package.tgz
+179 verbose lock tar://C:\Users\Jon\AppData\Roaming\npm-cache\clean-css\2.0.2\package.tgz C:\Users\Jon\AppData\Roaming\npm-cache\0581cb40-ache-clean-css-2-0-2-package-tgz.lock
+180 silly gunzTarPerm modes [ '755', '644' ]
+181 silly gunzTarPerm modes [ '755', '644' ]
+182 silly gunzTarPerm extractEntry package.json
+183 silly gunzTarPerm modified mode [ 'package.json', 438, 420 ]
+184 silly gunzTarPerm extractEntry package.json
+185 silly gunzTarPerm modified mode [ 'package.json', 438, 420 ]
+186 silly gunzTarPerm extractEntry .npmignore
+187 silly gunzTarPerm modified mode [ '.npmignore', 438, 420 ]
+188 silly gunzTarPerm extractEntry README.md
+189 silly gunzTarPerm modified mode [ 'README.md', 438, 420 ]
+190 silly gunzTarPerm extractEntry README.md
+191 silly gunzTarPerm modified mode [ 'README.md', 438, 420 ]
+192 silly gunzTarPerm extractEntry LICENSE
+193 silly gunzTarPerm modified mode [ 'LICENSE', 438, 420 ]
+194 silly gunzTarPerm extractEntry Gruntfile.js
+195 silly gunzTarPerm modified mode [ 'Gruntfile.js', 438, 420 ]
+196 silly gunzTarPerm extractEntry AUTHORS
+197 silly gunzTarPerm modified mode [ 'AUTHORS', 438, 420 ]
+198 silly gunzTarPerm extractEntry index.js
+199 silly gunzTarPerm modified mode [ 'index.js', 438, 420 ]
+200 silly gunzTarPerm extractEntry bin/cleancss
+201 silly gunzTarPerm modified mode [ 'bin/cleancss', 438, 420 ]
+202 silly gunzTarPerm extractEntry CHANGELOG
+203 silly gunzTarPerm modified mode [ 'CHANGELOG', 438, 420 ]
+204 silly gunzTarPerm extractEntry .jshintrc
+205 silly gunzTarPerm modified mode [ '.jshintrc', 438, 420 ]
+206 silly gunzTarPerm extractEntry History.md
+207 silly gunzTarPerm modified mode [ 'History.md', 438, 420 ]
+208 silly gunzTarPerm extractEntry lib/clean.js
+209 silly gunzTarPerm modified mode [ 'lib/clean.js', 438, 420 ]
+210 silly gunzTarPerm extractEntry lib/colors/hsl-to-hex.js
+211 silly gunzTarPerm modified mode [ 'lib/colors/hsl-to-hex.js', 438, 420 ]
+212 silly gunzTarPerm extractEntry lib/contrib.js
+213 silly gunzTarPerm modified mode [ 'lib/contrib.js', 438, 420 ]
+214 silly gunzTarPerm extractEntry LICENSE-MIT
+215 silly gunzTarPerm modified mode [ 'LICENSE-MIT', 438, 420 ]
+216 silly gunzTarPerm extractEntry .gitattributes
+217 silly gunzTarPerm modified mode [ '.gitattributes', 438, 420 ]
+218 silly gunzTarPerm extractEntry .travis.yml
+219 silly gunzTarPerm modified mode [ '.travis.yml', 438, 420 ]
+220 silly gunzTarPerm extractEntry test/lib_test.js
+221 silly gunzTarPerm modified mode [ 'test/lib_test.js', 438, 420 ]
+222 silly lockFile a270fb91-n-node-modules-grunt-lib-contrib tar://C:\git\jonmann20.github.com\node_modules\grunt-contrib-cssmin\node_modules\grunt-lib-contrib
+223 silly lockFile a270fb91-n-node-modules-grunt-lib-contrib tar://C:\git\jonmann20.github.com\node_modules\grunt-contrib-cssmin\node_modules\grunt-lib-contrib
+224 silly lockFile 4749d7ef-nt-lib-contrib-0-6-1-package-tgz tar://C:\Users\Jon\AppData\Roaming\npm-cache\grunt-lib-contrib\0.6.1\package.tgz
+225 silly lockFile 4749d7ef-nt-lib-contrib-0-6-1-package-tgz tar://C:\Users\Jon\AppData\Roaming\npm-cache\grunt-lib-contrib\0.6.1\package.tgz
+226 info preinstall grunt-lib-contrib@0.6.1
+227 verbose readDependencies using package.json deps
+228 silly gunzTarPerm extractEntry lib/colors/long-to-short-hex.js
+229 silly gunzTarPerm modified mode [ 'lib/colors/long-to-short-hex.js', 438, 420 ]
+230 silly gunzTarPerm extractEntry lib/colors/rgb-to-hex.js
+231 silly gunzTarPerm modified mode [ 'lib/colors/rgb-to-hex.js', 438, 420 ]
+232 verbose readDependencies using package.json deps
+233 silly gunzTarPerm extractEntry lib/colors/shortener.js
+234 silly gunzTarPerm modified mode [ 'lib/colors/shortener.js', 438, 420 ]
+235 silly gunzTarPerm extractEntry lib/images/url-rebase.js
+236 silly gunzTarPerm modified mode [ 'lib/images/url-rebase.js', 438, 420 ]
+237 verbose cache add [ 'zlib-browserify@0.0.1', null ]
+238 verbose cache add name=undefined spec="zlib-browserify@0.0.1" args=["zlib-browserify@0.0.1",null]
+239 verbose parsed url { protocol: null,
+239 verbose parsed url   slashes: null,
+239 verbose parsed url   auth: null,
+239 verbose parsed url   host: null,
+239 verbose parsed url   port: null,
+239 verbose parsed url   hostname: null,
+239 verbose parsed url   hash: null,
+239 verbose parsed url   search: null,
+239 verbose parsed url   query: null,
+239 verbose parsed url   pathname: 'zlib-browserify@0.0.1',
+239 verbose parsed url   path: 'zlib-browserify@0.0.1',
+239 verbose parsed url   href: 'zlib-browserify@0.0.1' }
+240 verbose cache add name="zlib-browserify" spec="0.0.1" args=["zlib-browserify","0.0.1"]
+241 verbose parsed url { protocol: null,
+241 verbose parsed url   slashes: null,
+241 verbose parsed url   auth: null,
+241 verbose parsed url   host: null,
+241 verbose parsed url   port: null,
+241 verbose parsed url   hostname: null,
+241 verbose parsed url   hash: null,
+241 verbose parsed url   search: null,
+241 verbose parsed url   query: null,
+241 verbose parsed url   pathname: '0.0.1',
+241 verbose parsed url   path: '0.0.1',
+241 verbose parsed url   href: '0.0.1' }
+242 verbose addNamed [ 'zlib-browserify', '0.0.1' ]
+243 verbose addNamed [ '0.0.1', '0.0.1' ]
+244 silly lockFile 84e77944-zlib-browserify-0-0-1 zlib-browserify@0.0.1
+245 verbose lock zlib-browserify@0.0.1 C:\Users\Jon\AppData\Roaming\npm-cache\84e77944-zlib-browserify-0-0-1.lock
+246 verbose url raw zlib-browserify/0.0.1
+247 verbose url resolving [ 'https://registry.npmjs.org/', './zlib-browserify/0.0.1' ]
+248 verbose url resolved https://registry.npmjs.org/zlib-browserify/0.0.1
+249 info trying registry request attempt 1 at 21:58:11
+250 verbose etag "9H8OZE70EVV8JDSBEMUL1YZA6"
+251 http GET https://registry.npmjs.org/zlib-browserify/0.0.1
+252 silly gunzTarPerm extractEntry lib/images/url-rewriter.js
+253 silly gunzTarPerm modified mode [ 'lib/images/url-rewriter.js', 438, 420 ]
+254 silly gunzTarPerm extractEntry lib/imports/inliner.js
+255 silly gunzTarPerm modified mode [ 'lib/imports/inliner.js', 438, 420 ]
+256 silly gunzTarPerm extractEntry lib/properties/optimizer.js
+257 silly gunzTarPerm modified mode [ 'lib/properties/optimizer.js', 438, 420 ]
+258 silly gunzTarPerm extractEntry lib/properties/shorthand-notations.js
+259 silly gunzTarPerm modified mode [ 'lib/properties/shorthand-notations.js', 438, 420 ]
+260 silly gunzTarPerm extractEntry lib/selectors/empty-removal.js
+261 silly gunzTarPerm modified mode [ 'lib/selectors/empty-removal.js', 438, 420 ]
+262 silly gunzTarPerm extractEntry lib/selectors/optimizer.js
+263 silly gunzTarPerm modified mode [ 'lib/selectors/optimizer.js', 438, 420 ]
+264 silly gunzTarPerm extractEntry lib/selectors/tokenizer.js
+265 silly gunzTarPerm modified mode [ 'lib/selectors/tokenizer.js', 438, 420 ]
+266 silly gunzTarPerm extractEntry lib/text/comments.js
+267 silly gunzTarPerm modified mode [ 'lib/text/comments.js', 438, 420 ]
+268 silly gunzTarPerm extractEntry lib/text/escape-store.js
+269 silly gunzTarPerm modified mode [ 'lib/text/escape-store.js', 438, 420 ]
+270 silly gunzTarPerm extractEntry lib/text/expressions.js
+271 silly gunzTarPerm modified mode [ 'lib/text/expressions.js', 438, 420 ]
+272 silly gunzTarPerm extractEntry lib/text/free.js
+273 silly gunzTarPerm modified mode [ 'lib/text/free.js', 438, 420 ]
+274 silly gunzTarPerm extractEntry lib/text/urls.js
+275 silly gunzTarPerm modified mode [ 'lib/text/urls.js', 438, 420 ]
+276 http 304 https://registry.npmjs.org/zlib-browserify/0.0.1
+277 silly registry.get cb [ 304,
+277 silly registry.get   { server: 'CouchDB/1.5.0 (Erlang OTP/R15B03)',
+277 silly registry.get     etag: '"9H8OZE70EVV8JDSBEMUL1YZA6"',
+277 silly registry.get     date: 'Fri, 13 Dec 2013 02:58:08 GMT',
+277 silly registry.get     'content-length': '0' } ]
+278 verbose etag zlib-browserify/0.0.1 from cache
+279 silly lockFile 84e77944-zlib-browserify-0-0-1 zlib-browserify@0.0.1
+280 silly lockFile 84e77944-zlib-browserify-0-0-1 zlib-browserify@0.0.1
+281 silly resolved [ { name: 'zlib-browserify',
+281 silly resolved     version: '0.0.1',
+281 silly resolved     description: 'Wrapper for zlib.js to allow for browserifyication',
+281 silly resolved     main: 'index.js',
+281 silly resolved     directories: { test: 'test' },
+281 silly resolved     dependencies: {},
+281 silly resolved     devDependencies: { tap: '~0.3.3' },
+281 silly resolved     scripts: { test: './node_modules/tap test/*.test.js' },
+281 silly resolved     repository:
+281 silly resolved      { type: 'git',
+281 silly resolved        url: 'git://github.com/brianloveswords/zlib-browserify.git' },
+281 silly resolved     keywords: [ 'zlib', 'browserify' ],
+281 silly resolved     author: { name: 'Brian J. Brennan' },
+281 silly resolved     license: 'MIT',
+281 silly resolved     gitHead: '4be9419f0e8e9dec9629c8a538b33a4efd7df17b',
+281 silly resolved     readmeFilename: 'readme.md',
+281 silly resolved     readme: 'Zlib in yo\' browser.\n',
+281 silly resolved     bugs: { url: 'https://github.com/brianloveswords/zlib-browserify/issues' },
+281 silly resolved     homepage: 'https://github.com/brianloveswords/zlib-browserify',
+281 silly resolved     _id: 'zlib-browserify@0.0.1',
+281 silly resolved     _from: 'zlib-browserify@0.0.1' } ]
+282 info install zlib-browserify@0.0.1 into C:\git\jonmann20.github.com\node_modules\grunt-contrib-cssmin\node_modules\grunt-lib-contrib
+283 info installOne zlib-browserify@0.0.1
+284 info C:\git\jonmann20.github.com\node_modules\grunt-contrib-cssmin\node_modules\grunt-lib-contrib\node_modules\zlib-browserify unbuild
+285 verbose tar unpack C:\Users\Jon\AppData\Roaming\npm-cache\zlib-browserify\0.0.1\package.tgz
+286 silly lockFile c6260928-rib-node-modules-zlib-browserify tar://C:\git\jonmann20.github.com\node_modules\grunt-contrib-cssmin\node_modules\grunt-lib-contrib\node_modules\zlib-browserify
+287 verbose lock tar://C:\git\jonmann20.github.com\node_modules\grunt-contrib-cssmin\node_modules\grunt-lib-contrib\node_modules\zlib-browserify C:\Users\Jon\AppData\Roaming\npm-cache\c6260928-rib-node-modules-zlib-browserify.lock
+288 silly lockFile d8e16b3e-lib-browserify-0-0-1-package-tgz tar://C:\Users\Jon\AppData\Roaming\npm-cache\zlib-browserify\0.0.1\package.tgz
+289 verbose lock tar://C:\Users\Jon\AppData\Roaming\npm-cache\zlib-browserify\0.0.1\package.tgz C:\Users\Jon\AppData\Roaming\npm-cache\d8e16b3e-lib-browserify-0-0-1-package-tgz.lock
+290 silly gunzTarPerm modes [ '755', '644' ]
+291 silly gunzTarPerm extractEntry package.json
+292 silly gunzTarPerm modified mode [ 'package.json', 438, 420 ]
+293 silly gunzTarPerm extractEntry .npmignore
+294 silly gunzTarPerm modified mode [ '.npmignore', 438, 420 ]
+295 silly gunzTarPerm extractEntry index.js
+296 silly gunzTarPerm modified mode [ 'index.js', 438, 420 ]
+297 silly gunzTarPerm extractEntry zlib.js
+298 silly gunzTarPerm modified mode [ 'zlib.js', 438, 420 ]
+299 silly gunzTarPerm extractEntry readme.md
+300 silly gunzTarPerm modified mode [ 'readme.md', 438, 420 ]
+301 silly gunzTarPerm extractEntry test/zlib.test.js
+302 silly gunzTarPerm modified mode [ 'test/zlib.test.js', 438, 420 ]
+303 silly lockFile f3a63bab-ib-cssmin-node-modules-clean-css tar://C:\git\jonmann20.github.com\node_modules\grunt-contrib-cssmin\node_modules\clean-css
+304 silly lockFile f3a63bab-ib-cssmin-node-modules-clean-css tar://C:\git\jonmann20.github.com\node_modules\grunt-contrib-cssmin\node_modules\clean-css
+305 silly lockFile 0581cb40-ache-clean-css-2-0-2-package-tgz tar://C:\Users\Jon\AppData\Roaming\npm-cache\clean-css\2.0.2\package.tgz
+306 silly lockFile 0581cb40-ache-clean-css-2-0-2-package-tgz tar://C:\Users\Jon\AppData\Roaming\npm-cache\clean-css\2.0.2\package.tgz
+307 silly lockFile c6260928-rib-node-modules-zlib-browserify tar://C:\git\jonmann20.github.com\node_modules\grunt-contrib-cssmin\node_modules\grunt-lib-contrib\node_modules\zlib-browserify
+308 silly lockFile c6260928-rib-node-modules-zlib-browserify tar://C:\git\jonmann20.github.com\node_modules\grunt-contrib-cssmin\node_modules\grunt-lib-contrib\node_modules\zlib-browserify
+309 info preinstall clean-css@2.0.2
+310 silly lockFile d8e16b3e-lib-browserify-0-0-1-package-tgz tar://C:\Users\Jon\AppData\Roaming\npm-cache\zlib-browserify\0.0.1\package.tgz
+311 silly lockFile d8e16b3e-lib-browserify-0-0-1-package-tgz tar://C:\Users\Jon\AppData\Roaming\npm-cache\zlib-browserify\0.0.1\package.tgz
+312 verbose readDependencies using package.json deps
+313 verbose readDependencies using package.json deps
+314 info preinstall zlib-browserify@0.0.1
+315 verbose readDependencies using package.json deps
+316 verbose readDependencies using package.json deps
+317 silly resolved []
+318 verbose about to build C:\git\jonmann20.github.com\node_modules\grunt-contrib-cssmin\node_modules\grunt-lib-contrib\node_modules\zlib-browserify
+319 info build C:\git\jonmann20.github.com\node_modules\grunt-contrib-cssmin\node_modules\grunt-lib-contrib\node_modules\zlib-browserify
+320 verbose linkStuff [ false,
+320 verbose linkStuff   false,
+320 verbose linkStuff   false,
+320 verbose linkStuff   'C:\\git\\jonmann20.github.com\\node_modules\\grunt-contrib-cssmin\\node_modules\\grunt-lib-contrib\\node_modules' ]
+321 info linkStuff zlib-browserify@0.0.1
+322 verbose linkBins zlib-browserify@0.0.1
+323 verbose linkMans zlib-browserify@0.0.1
+324 verbose rebuildBundles zlib-browserify@0.0.1
+325 verbose cache add [ 'commander@2.0.x', null ]
+326 verbose cache add name=undefined spec="commander@2.0.x" args=["commander@2.0.x",null]
+327 verbose parsed url { protocol: null,
+327 verbose parsed url   slashes: null,
+327 verbose parsed url   auth: null,
+327 verbose parsed url   host: null,
+327 verbose parsed url   port: null,
+327 verbose parsed url   hostname: null,
+327 verbose parsed url   hash: null,
+327 verbose parsed url   search: null,
+327 verbose parsed url   query: null,
+327 verbose parsed url   pathname: 'commander@2.0.x',
+327 verbose parsed url   path: 'commander@2.0.x',
+327 verbose parsed url   href: 'commander@2.0.x' }
+328 verbose cache add name="commander" spec="2.0.x" args=["commander","2.0.x"]
+329 verbose parsed url { protocol: null,
+329 verbose parsed url   slashes: null,
+329 verbose parsed url   auth: null,
+329 verbose parsed url   host: null,
+329 verbose parsed url   port: null,
+329 verbose parsed url   hostname: null,
+329 verbose parsed url   hash: null,
+329 verbose parsed url   search: null,
+329 verbose parsed url   query: null,
+329 verbose parsed url   pathname: '2.0.x',
+329 verbose parsed url   path: '2.0.x',
+329 verbose parsed url   href: '2.0.x' }
+330 verbose addNamed [ 'commander', '2.0.x' ]
+331 verbose addNamed [ null, '>=2.0.0-0 <2.1.0-0' ]
+332 silly lockFile f7c90c0d-commander-2-0-x commander@2.0.x
+333 verbose lock commander@2.0.x C:\Users\Jon\AppData\Roaming\npm-cache\f7c90c0d-commander-2-0-x.lock
+334 info install zlib-browserify@0.0.1
+335 silly addNameRange { name: 'commander',
+335 silly addNameRange   range: '>=2.0.0-0 <2.1.0-0',
+335 silly addNameRange   hasData: false }
+336 info postinstall zlib-browserify@0.0.1
+337 verbose about to build C:\git\jonmann20.github.com\node_modules\grunt-contrib-cssmin\node_modules\grunt-lib-contrib
+338 info build C:\git\jonmann20.github.com\node_modules\grunt-contrib-cssmin\node_modules\grunt-lib-contrib
+339 verbose linkStuff [ false,
+339 verbose linkStuff   false,
+339 verbose linkStuff   false,
+339 verbose linkStuff   'C:\\git\\jonmann20.github.com\\node_modules\\grunt-contrib-cssmin\\node_modules' ]
+340 info linkStuff grunt-lib-contrib@0.6.1
+341 verbose linkBins grunt-lib-contrib@0.6.1
+342 verbose linkMans grunt-lib-contrib@0.6.1
+343 verbose rebuildBundles grunt-lib-contrib@0.6.1
+344 verbose rebuildBundles [ 'zlib-browserify' ]
+345 info install grunt-lib-contrib@0.6.1
+346 verbose url raw commander
+347 verbose url resolving [ 'https://registry.npmjs.org/', './commander' ]
+348 verbose url resolved https://registry.npmjs.org/commander
+349 info trying registry request attempt 1 at 21:58:12
+350 verbose etag "7LJH07U8PHDEBNX5MC5AXLLVQ"
+351 http GET https://registry.npmjs.org/commander
+352 info postinstall grunt-lib-contrib@0.6.1
+353 http 304 https://registry.npmjs.org/commander
+354 silly registry.get cb [ 304,
+354 silly registry.get   { server: 'CouchDB/1.5.0 (Erlang OTP/R15B03)',
+354 silly registry.get     etag: '"7LJH07U8PHDEBNX5MC5AXLLVQ"',
+354 silly registry.get     date: 'Fri, 13 Dec 2013 02:58:09 GMT',
+354 silly registry.get     'content-length': '0' } ]
+355 verbose etag commander from cache
+356 silly addNameRange number 2 { name: 'commander', range: '>=2.0.0-0 <2.1.0-0', hasData: true }
+357 silly addNameRange versions [ 'commander',
+357 silly addNameRange   [ '0.0.1',
+357 silly addNameRange     '0.0.3',
+357 silly addNameRange     '0.0.4',
+357 silly addNameRange     '0.0.5',
+357 silly addNameRange     '0.1.0',
+357 silly addNameRange     '0.2.0',
+357 silly addNameRange     '0.2.1',
+357 silly addNameRange     '0.3.0',
+357 silly addNameRange     '0.3.1',
+357 silly addNameRange     '0.3.2',
+357 silly addNameRange     '0.3.3',
+357 silly addNameRange     '0.4.0',
+357 silly addNameRange     '0.4.1',
+357 silly addNameRange     '0.4.2',
+357 silly addNameRange     '0.4.3',
+357 silly addNameRange     '0.5.0',
+357 silly addNameRange     '0.5.1',
+357 silly addNameRange     '0.6.0',
+357 silly addNameRange     '0.6.1',
+357 silly addNameRange     '0.5.2',
+357 silly addNameRange     '1.0.0',
+357 silly addNameRange     '1.0.1',
+357 silly addNameRange     '1.0.2',
+357 silly addNameRange     '1.0.3',
+357 silly addNameRange     '1.0.4',
+357 silly addNameRange     '1.0.5',
+357 silly addNameRange     '1.1.0',
+357 silly addNameRange     '1.1.1',
+357 silly addNameRange     '1.2.0',
+357 silly addNameRange     '1.3.0',
+357 silly addNameRange     '1.3.1',
+357 silly addNameRange     '1.3.2',
+357 silly addNameRange     '2.0.0',
+357 silly addNameRange     '2.1.0' ] ]
+358 verbose addNamed [ 'commander', '2.0.0' ]
+359 verbose addNamed [ '2.0.0', '2.0.0' ]
+360 silly lockFile d5315eb7-commander-2-0-0 commander@2.0.0
+361 verbose lock commander@2.0.0 C:\Users\Jon\AppData\Roaming\npm-cache\d5315eb7-commander-2-0-0.lock
+362 silly lockFile d5315eb7-commander-2-0-0 commander@2.0.0
+363 silly lockFile d5315eb7-commander-2-0-0 commander@2.0.0
+364 silly lockFile f7c90c0d-commander-2-0-x commander@2.0.x
+365 silly lockFile f7c90c0d-commander-2-0-x commander@2.0.x
+366 silly resolved [ { name: 'commander',
+366 silly resolved     version: '2.0.0',
+366 silly resolved     description: 'the complete solution for node.js command-line programs',
+366 silly resolved     keywords: [ 'command', 'option', 'parser', 'prompt', 'stdin' ],
+366 silly resolved     author: { name: 'TJ Holowaychuk', email: 'tj@vision-media.ca' },
+366 silly resolved     repository:
+366 silly resolved      { type: 'git',
+366 silly resolved        url: 'https://github.com/visionmedia/commander.js.git' },
+366 silly resolved     devDependencies: { should: '>= 0.0.1' },
+366 silly resolved     scripts: { test: 'make test' },
+366 silly resolved     main: 'index',
+366 silly resolved     engines: { node: '>= 0.6.x' },
+366 silly resolved     readme: '# Commander.js\n\n  The complete solution for [node.js](http://nodejs.org) command-line interfaces, inspired by Ruby\'s [commander](https://github.com/visionmedia/commander).\n\n [![Build Status](https://secure.travis-ci.org/visionmedia/commander.js.png)](http://travis-ci.org/visionmedia/commander.js)\n\n## Installation\n\n    $ npm install commander\n\n## Option parsing\n\n Options with commander are defined with the `.option()` method, also serving as documentation for the options. The example below parses args and options from `process.argv`, leaving remaining args as the `program.args` array which were not consumed by options.\n\n```js\n#!/usr/bin/env node\n\n/**\n * Module dependencies.\n */\n\nvar program = require(\'commander\');\n\nprogram\n  .version(\'0.0.1\')\n  .option(\'-p, --peppers\', \'Add peppers\')\n  .option(\'-P, --pineapple\', \'Add pineapple\')\n  .option(\'-b, --bbq\', \'Add bbq sauce\')\n  .option(\'-c, --cheese [type]\', \'Add the specified type of cheese [marble]\', \'marble\')\n  .parse(process.argv);\n\nconsole.log(\'you ordered a pizza with:\');\nif (program.peppers) console.log(\'  - peppers\');\nif (program.pineapple) console.log(\'  - pineapple\');\nif (program.bbq) console.log(\'  - bbq\');\nconsole.log(\'  - %s cheese\', program.cheese);\n```\n\n Short flags may be passed as a single arg, for example `-abc` is equivalent to `-a -b -c`. Multi-word options such as "--template-engine" are camel-cased, becoming `program.templateEngine` etc.\n\n## Automated --help\n\n The help information is auto-generated based on the information commander already knows about your program, so the following `--help` info is for free:\n\n```  \n $ ./examples/pizza --help\n\n   Usage: pizza [options]\n\n   Options:\n\n     -V, --version        output the version number\n     -p, --peppers        Add peppers\n     -P, --pineapple      Add pineapple\n     -b, --bbq            Add bbq sauce\n     -c, --cheese <type>  Add the specified type of cheese [marble]\n     -h, --help           output usage information\n\n```\n\n## Coercion\n\n```js\nfunction range(val) {\n  return val.split(\'..\').map(Number);\n}\n\nfunction list(val) {\n  return val.split(\',\');\n}\n\nprogram\n  .version(\'0.0.1\')\n  .usage(\'[options] <file ...>\')\n  .option(\'-i, --integer <n>\', \'An integer argument\', parseInt)\n  .option(\'-f, --float <n>\', \'A float argument\', parseFloat)\n  .option(\'-r, --range <a>..<b>\', \'A range\', range)\n  .option(\'-l, --list <items>\', \'A list\', list)\n  .option(\'-o, --optional [value]\', \'An optional value\')\n  .parse(process.argv);\n\nconsole.log(\' int: %j\', program.integer);\nconsole.log(\' float: %j\', program.float);\nconsole.log(\' optional: %j\', program.optional);\nprogram.range = program.range || [];\nconsole.log(\' range: %j..%j\', program.range[0], program.range[1]);\nconsole.log(\' list: %j\', program.list);\nconsole.log(\' args: %j\', program.args);\n```\n\n## Custom help\n\n You can display arbitrary `-h, --help` information\n by listening for "--help". Commander will automatically\n exit once you are done so that the remainder of your program\n does not execute causing undesired behaviours, for example\n in the following executable "stuff" will not output when\n `--help` is used.\n\n```js\n#!/usr/bin/env node\n\n/**\n * Module dependencies.\n */\n\nvar program = require(\'../\');\n\nfunction list(val) {\n  return val.split(\',\').map(Number);\n}\n\nprogram\n  .version(\'0.0.1\')\n  .option(\'-f, --foo\', \'enable some foo\')\n  .option(\'-b, --bar\', \'enable some bar\')\n  .option(\'-B, --baz\', \'enable some baz\');\n\n// must be before .parse() since\n// node\'s emit() is immediate\n\nprogram.on(\'--help\', function(){\n  console.log(\'  Examples:\');\n  console.log(\'\');\n  console.log(\'    $ custom-help --help\');\n  console.log(\'    $ custom-help -h\');\n  console.log(\'\');\n});\n\nprogram.parse(process.argv);\n\nconsole.log(\'stuff\');\n```\n\nyielding the following help output:\n\n```\n\nUsage: custom-help [options]\n\nOptions:\n\n  -h, --help     output usage information\n  -V, --version  output the version number\n  -f, --foo      enable some foo\n  -b, --bar      enable some bar\n  -B, --baz      enable some baz\n\nExamples:\n\n  $ custom-help --help\n  $ custom-help -h\n\n```\n\n## .outputHelp()\n\n  Output help information without exiting.\n\n## .help()\n\n  Output help information and exit immediately.\n\n## Links\n\n - [API documentation](http://visionmedia.github.com/commander.js/)\n - [ascii tables](https://github.com/LearnBoost/cli-table)\n - [progress bars](https://github.com/visionmedia/node-progress)\n - [more progress bars](https://github.com/substack/node-multimeter)\n - [examples](https://github.com/visionmedia/commander.js/tree/master/examples)\n\n## License \n\n(The MIT License)\n\nCopyright (c) 2011 TJ Holowaychuk &lt;tj@vision-media.ca&gt;\n\nPermission is hereby granted, free of charge, to any person obtaining\na copy of this software and associated documentation files (the\n\'Software\'), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish,\ndistribute, sublicense, and/or sell copies of the Software, and to\npermit persons to whom the Software is furnished to do so, subject to\nthe following conditions:\n\nThe above copyright notice and this permission notice shall be\nincluded in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \'AS IS\', WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.\nIN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY\nCLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,\nTORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE\nSOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n',
+366 silly resolved     readmeFilename: 'Readme.md',
+366 silly resolved     bugs: { url: 'https://github.com/visionmedia/commander.js/issues' },
+366 silly resolved     homepage: 'https://github.com/visionmedia/commander.js',
+366 silly resolved     _id: 'commander@2.0.0',
+366 silly resolved     _from: 'commander@2.0.x' } ]
+367 info install commander@2.0.0 into C:\git\jonmann20.github.com\node_modules\grunt-contrib-cssmin\node_modules\clean-css
+368 info installOne commander@2.0.0
+369 info C:\git\jonmann20.github.com\node_modules\grunt-contrib-cssmin\node_modules\clean-css\node_modules\commander unbuild
+370 verbose tar unpack C:\Users\Jon\AppData\Roaming\npm-cache\commander\2.0.0\package.tgz
+371 silly lockFile 368ee3e0-clean-css-node-modules-commander tar://C:\git\jonmann20.github.com\node_modules\grunt-contrib-cssmin\node_modules\clean-css\node_modules\commander
+372 verbose lock tar://C:\git\jonmann20.github.com\node_modules\grunt-contrib-cssmin\node_modules\clean-css\node_modules\commander C:\Users\Jon\AppData\Roaming\npm-cache\368ee3e0-clean-css-node-modules-commander.lock
+373 silly lockFile 9ee064fe-ache-commander-2-0-0-package-tgz tar://C:\Users\Jon\AppData\Roaming\npm-cache\commander\2.0.0\package.tgz
+374 verbose lock tar://C:\Users\Jon\AppData\Roaming\npm-cache\commander\2.0.0\package.tgz C:\Users\Jon\AppData\Roaming\npm-cache\9ee064fe-ache-commander-2-0-0-package-tgz.lock
+375 silly gunzTarPerm modes [ '755', '644' ]
+376 silly gunzTarPerm extractEntry package.json
+377 silly gunzTarPerm modified mode [ 'package.json', 438, 420 ]
+378 silly gunzTarPerm extractEntry index.js
+379 silly gunzTarPerm modified mode [ 'index.js', 438, 420 ]
+380 silly gunzTarPerm extractEntry History.md
+381 silly gunzTarPerm modified mode [ 'History.md', 438, 420 ]
+382 silly gunzTarPerm extractEntry Readme.md
+383 silly gunzTarPerm modified mode [ 'Readme.md', 438, 420 ]
+384 silly lockFile 368ee3e0-clean-css-node-modules-commander tar://C:\git\jonmann20.github.com\node_modules\grunt-contrib-cssmin\node_modules\clean-css\node_modules\commander
+385 silly lockFile 368ee3e0-clean-css-node-modules-commander tar://C:\git\jonmann20.github.com\node_modules\grunt-contrib-cssmin\node_modules\clean-css\node_modules\commander
+386 silly lockFile 9ee064fe-ache-commander-2-0-0-package-tgz tar://C:\Users\Jon\AppData\Roaming\npm-cache\commander\2.0.0\package.tgz
+387 silly lockFile 9ee064fe-ache-commander-2-0-0-package-tgz tar://C:\Users\Jon\AppData\Roaming\npm-cache\commander\2.0.0\package.tgz
+388 info preinstall commander@2.0.0
+389 verbose readDependencies using package.json deps
+390 verbose readDependencies using package.json deps
+391 silly resolved []
+392 verbose about to build C:\git\jonmann20.github.com\node_modules\grunt-contrib-cssmin\node_modules\clean-css\node_modules\commander
+393 info build C:\git\jonmann20.github.com\node_modules\grunt-contrib-cssmin\node_modules\clean-css\node_modules\commander
+394 verbose linkStuff [ false,
+394 verbose linkStuff   false,
+394 verbose linkStuff   false,
+394 verbose linkStuff   'C:\\git\\jonmann20.github.com\\node_modules\\grunt-contrib-cssmin\\node_modules\\clean-css\\node_modules' ]
+395 info linkStuff commander@2.0.0
+396 verbose linkBins commander@2.0.0
+397 verbose linkMans commander@2.0.0
+398 verbose rebuildBundles commander@2.0.0
+399 info install commander@2.0.0
+400 info postinstall commander@2.0.0
+401 verbose about to build C:\git\jonmann20.github.com\node_modules\grunt-contrib-cssmin\node_modules\clean-css
+402 info build C:\git\jonmann20.github.com\node_modules\grunt-contrib-cssmin\node_modules\clean-css
+403 verbose linkStuff [ false,
+403 verbose linkStuff   false,
+403 verbose linkStuff   false,
+403 verbose linkStuff   'C:\\git\\jonmann20.github.com\\node_modules\\grunt-contrib-cssmin\\node_modules' ]
+404 info linkStuff clean-css@2.0.2
+405 verbose linkBins clean-css@2.0.2
+406 verbose link bins [ { cleancss: './bin/cleancss' },
+406 verbose link bins   'C:\\git\\jonmann20.github.com\\node_modules\\grunt-contrib-cssmin\\node_modules\\.bin',
+406 verbose link bins   false ]
+407 verbose linkMans clean-css@2.0.2
+408 verbose rebuildBundles clean-css@2.0.2
+409 verbose rebuildBundles [ 'commander' ]
+410 info install clean-css@2.0.2
+411 info postinstall clean-css@2.0.2
+412 verbose about to build C:\git\jonmann20.github.com\node_modules\grunt-contrib-cssmin
+413 info build C:\git\jonmann20.github.com\node_modules\grunt-contrib-cssmin
+414 verbose linkStuff [ false,
+414 verbose linkStuff   false,
+414 verbose linkStuff   false,
+414 verbose linkStuff   'C:\\git\\jonmann20.github.com\\node_modules' ]
+415 info linkStuff grunt-contrib-cssmin@0.7.0
+416 verbose linkBins grunt-contrib-cssmin@0.7.0
+417 verbose linkMans grunt-contrib-cssmin@0.7.0
+418 verbose rebuildBundles grunt-contrib-cssmin@0.7.0
+419 verbose rebuildBundles [ '.bin', 'clean-css', 'grunt-lib-contrib' ]
+420 info install grunt-contrib-cssmin@0.7.0
+421 info postinstall grunt-contrib-cssmin@0.7.0
+422 error peerinvalid The package grunt-contrib-cssmin does not satisfy its siblings' peerDependencies requirements!
+422 error peerinvalid Peer grunt-contrib@0.8.0 wants grunt-contrib-cssmin@~0.6.2
+423 error System Windows_NT 6.2.9200
+424 error command "C:\\Program Files\\nodejs\\\\node.exe" "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "install" "grunt-contrib-cssmin@0.7.0" "--save"
+425 error cwd C:\git\jonmann20.github.com
+426 error node -v v0.10.23
+427 error npm -v 1.3.17
+428 error code EPEERINVALID
+429 verbose exit [ 1, true ]
