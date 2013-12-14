@@ -1512,8 +1512,16 @@ var Physics = (function () {
 
             return false;
         },
-
+        
         // uses SAT and AABB
+        isSATcollision: function (a, b, callback) {
+            var response = new SAT.Response();
+            var collided = SAT.testPolygonPolygon(a, b, response);
+
+            if (collided)
+                callback(response);
+        },
+
         // checks collision between a and the level objects
         lvlObjCollision: function (a, callback) {
             var response = new SAT.Response();
@@ -1531,7 +1539,7 @@ var Physics = (function () {
                         response.a.pos.x -= response.overlapV.x;
                         response.a.pos.y -= response.overlapV.y;
                         
-                        response.type = level.objs[i].type;
+                        response.type = level.objs[i].type;     // TODO: r.b.type???
 
                         callback(response);
                         break;
@@ -1548,21 +1556,18 @@ var Physics = (function () {
 
         // checks collision between hero and the movable level items
         lvlItemCollision: function (callback) {
-            if (!hero.isCarrying && !(32 in keysDown)) {// spacebar
-                for (var i = 0; i < level.items.length; ++i) {
+            for (var i = 0; i < level.items.length; ++i) {
+                if (level.items[i].visible && !level.items[i].collected) {
+
+                    // TODO: check if player has left item before allowing re-pickup (instad of only checking spacebar) .. wait till hero no longer colliding??
+                    if (level.items[i].type === JQObject.CRATE && hero.isCarrying && !(32 in keysDown))
+                        continue;
+
                     Physics.isSATcollision(hero, level.items[i], function (r) {
                         callback(r, i);
                     });
                 }
             }
-        },
-
-        isSATcollision: function (a, b, callback) {
-            var response = new SAT.Response();
-            var collided = SAT.testPolygonPolygon(a, b, response);
-
-            if (collided)
-                callback(response);
         }
     };
 })();
@@ -1638,15 +1643,26 @@ var Crate = (function () {
                     }
                 }
                 else {
-                    if (hero.dir === Dir.RIGHT)
-                        crates[i].pos.x = hero.pos.x + 22;
-                    else
-                        crates[i].pos.x = hero.pos.x - 22;
-
-                    crates[i].pos.y = hero.pos.y;
+                    if (hero.vX === 0) {
+                        crates[i].pos.x = hero.pos.x + 2;
+                        crates[i].pos.y = hero.pos.y + 11;
+                    }
+                    else {
+                        crates[i].pos.x = hero.pos.x + ((hero.dir === Dir.RIGHT) ? 22 : -22);
+                        crates[i].pos.y = hero.pos.y + 5;
+                    }
                 }
 
-                crates[i].updatePos();
+                //crates[i].updatePos();
+            }
+        },
+
+        render: function(){
+            // crates
+            for (var i = 0; i < level.crates.length; ++i) {
+                if (!level.crates[i].holding) {
+                    level.crates[i].draw();
+                }
             }
         }
     };
@@ -1680,10 +1696,6 @@ var GameObj = function (type, x, y, w, h, src) {
         $.extend(this, new SAT.Box(new SAT.Vector(x, y), w, h).toPolygon());
     }
 
-    this.vY = 0;
-    this.isOnObj = false;
-    this.onObj = null;         // contains the object holding up the object (directly below)
-    this.grabbable = true;
     this.imgReady = false;     // TODO: make private
 
     if (typeof (src) === "undefined") {
@@ -1708,19 +1720,19 @@ var GameObj = function (type, x, y, w, h, src) {
 };
 
 GameObj.prototype = {
-    updatePos: function () {    // TODO: move to normal update location
-        if (!this.isOnObj) {
-            if (this.pos.y < FULLH - game.padFloor - this.h + 5) {      // +3 is projectY
-                this.pos.y += this.vY;
-                this.isOnObj = false;
-            }
-            else {
-                this.pos.y = FULLH - game.padFloor - this.h;
-                this.isOnObj = true;
-                this.vY = 0;
-            }
-        }
-    },
+    //updatePos: function () {    // TODO: move to normal update location
+    //    if (!this.isOnObj) {
+    //        if (this.pos.y < FULLH - game.padFloor - this.h) {      // +3 is projectY
+    //            this.pos.y += this.vY;
+    //            this.isOnObj = false;
+    //        }
+    //        else {
+    //            this.pos.y = FULLH - game.padFloor - this.h;
+    //            this.isOnObj = true;
+    //            this.vY = 0;
+    //        }
+    //    }
+    //},
 
     draw: function () {
         if (this.imgReady) {
@@ -1738,31 +1750,34 @@ GameObj.prototype = {
     GameItem may extend SAT.Vector to be SAT.Polygon
 
     @param(GameObj) gObj A game object.
+    @param(?bool) grabbable Whether the game item can be pickup up or not.
     @param(?number) val The value of the game item.
     @param(?bool) visible Whether the game item is displayed or not.
     @param(?bool) sat Whether to setup AABB.
 */
-var GameItem = function (gObj, val, visible, sat) {
+var GameItem = function (gObj, grabbable, val, visible, sat) {
     utils.extend(this, gObj);
     
+    this.grabbable = (typeof (grabbable) !== "undefined") ? grabbable : false;
+    this.val = (typeof(val) !== "undefined") ? val : -1;
+    this.visible = (typeof (visible) !== "undefined") ? visible : true;
 
-    this.val = typeof(val) !== "undefined" ? val : -1;
-    this.visible = typeof(visible) !== "undefined" ? visible : true;
-    
+    this.vY = 0;
+    this.isOnObj = false;
+    this.onObj = null;         // contains the object holding up the object (directly below)
+
+    this.holding = false;   // TODO: rename to isBeingCarried
+
+
     //if (typeof (sat) !== "undefined" && sat === true) {
     //    $.extend(true, this, new SAT.Box(this.pos, this.w, this.h).toPolygon());
     //}
 
-    //console.log(this);
-
-    this.collected = false;
-    this.holding = false;
 
     // TODO: make private
     var parentDraw = this.draw;
     this.draw = function () {
-        //console.log(this.visible);
-        if (this.visible && !this.collected) {
+        if (this.visible) {
             parentDraw.apply(this);
         }
     };
@@ -1966,37 +1981,59 @@ Enemy.prototype = {
 
 var level = (function () {
 
+    var maxVy = 10;
+
+
     /********** Update **********/
-    function updateObjs() {
+    function updateObjsView() {
         for (var i = 0; i < level.objs.length; ++i) {
             level.objs[i].pos.x -= hero.vX;
         }
     }
 
-    function updateItems() {
+    function updateItemsView() {
         for (var i = 0; i < level.items.length; ++i) {
             level.items[i].pos.x -= hero.vX;
         }
     }
 
-    function updateBg() {
+    function updateBgView() {
         // layer 1
         for (var i = 0; i < level.bg[1].length; ++i) {
             level.bg[1][i].pos.x -= hero.vX / 3;
-            //level.bg[1][i].pos.y += hero.vY / 10;
         }
 
         // layer 0
         for (var i = 0; i < level.bg[0].length; ++i) {
             level.bg[0][i].pos.x -= hero.vX / 2;
-            //level.bg[0][i].pos.y += hero.vY / 8;
+        }
+    }
+
+    function updateItems() {
+        for (var i = 0; i < level.items.length; ++i) {
+            if (level.items[i].visible && !level.items[i].isOnObj) {
+                // gravity/position
+                if (level.items[i].vY < maxVy)
+                    level.items[i].vY += game.gravity;
+                else
+                    level.items[i].vY = maxVy;
+
+                level.items[i].pos.y += level.items[i].vY;
+
+                // check collision
+                Physics.lvlObjCollision(level.items[i], function (r) {
+                    if (r.overlapN.y === 1) {                       // on top
+                        r.a.isOnObj = true;
+                    }
+                });
+            }
         }
     }
 
 
     /********** Render **********/
     // the parallax background
-    function drawLvlBg() {
+    function drawBg() {
         // color background
         ctx.fillStyle = Color.LIGHT_GREEN;
         ctx.fillRect(0, 0, FULLW, FULLH - game.padFloor - 1);
@@ -2016,7 +2053,7 @@ var level = (function () {
     }
 
     // all of the collision rectangles in the level
-    function drawLvlObjs() {
+    function drawObjs() {
         for (var i = 0; i < level.objs.length; ++i) {
             // check if visible
             if (typeof (level.objs[i].visible) !== "undefined" &&   // TODO: all objs should have visible property (fix api)
@@ -2024,7 +2061,6 @@ var level = (function () {
             ) {
                 continue;
             }
-
             
             if (level.objs[i].type === JQObject.LADDER) {           // ladder
                 Graphics.drawLadder(level.objs[i]);
@@ -2039,13 +2075,17 @@ var level = (function () {
         }
     }
 
+    function drawItems() {
+        for (var i = 0; i < level.items.length; ++i) {
+            level.items[i].draw();
+        }
+    }
 
     return {
         bg: [   // parallax background
             [], // backgorund obj's 1
             []  // background obj's 2
         ],
-        crates: [],         // special handling of crate objects
         objs: [],           // dynamically holds all of the objects for the level;
         items: [],          // dynamically holds all of the items for the level (movable items)
         curLvl: null,       // alias for the current level object e.g. lvl1
@@ -2078,7 +2118,6 @@ var level = (function () {
                 [],
                 []
             ];
-
 
             // reset hero
             hero.pos.x = 23;
@@ -2117,23 +2156,26 @@ var level = (function () {
         /******************** Update ********************/
         update: function () {
             if (!level.isTransitioning) {
-                Crate.update();
+                updateItems();
+
                 level.curLvl.update();
             }
         },
 
         // fix positions relative to the "camera" view
         updateView: function(){
-            updateObjs();
-            updateItems();
-            updateBg();
+            updateObjsView();
+            updateItemsView();
+            updateBgView();
         },
 
 
         /******************** Render ********************/
         render: function () {
-            drawLvlBg();
-            drawLvlObjs();
+            drawBg();
+            drawObjs();
+            drawItems();
+            
             level.curLvl.render();
         }
     };
@@ -2410,10 +2452,6 @@ var lvl1 = (function () {
             level.objs.push(Graphics.getSkewedRect(stairs.x + stairs.w, stairs.y - stairs.h, 200, 50));
             door = new GameItem(new GameObj(JQObject.DOOR, stairs.x + stairs.w + 155, stairs.y - stairs.h - 53, 25, 53));
 
-            // sack
-            sack = new GameItem(new GameObj(JQObject.SACK, 680, 111 + Graphics.projectY / 2, 20, 24, "sack.png"), 5);
-            sack.collidable = false;
-            
             // cyborg
             cyborg = new Enemy(
                 new GameObj(JQObject.ENEMY, 1600, FULLH - game.padFloor - 38 + 5, 28, 38, "cyborgBnW.png"),
@@ -2421,50 +2459,47 @@ var lvl1 = (function () {
                 1087,
                 1600,
                 JQEnemy.FOLLOW,
-                true
+                false
             );
             cyborg.collidable = false;
 
-            // hidden cash
-            hiddenCash = new GameItem(new GameObj(JQObject.CASH, 113, 80, 22, 24, "cash.png"), 10, false);
-            hiddenCash.collidable = false;  // TODO: should remove from level.objs after collected
-
             // add objects to the level
             level.objs.push(
-                sack,
-                cyborg,
-                hiddenCash,
-                door
+                cyborg
+                //door
             );
 
-            ladder = new GameItem(new GameObj(JQObject.LADDER, stairs.x - 37, stairs.y - 1, 38, FULLH - stairs.y - game.padFloor), 0, false, true);
-            ladder.collidable = false;      // allows ladder to not be in normal collision detection; TODO: make better api
-            level.objs.push(ladder);
+            ladder = new GameItem(new GameObj(JQObject.LADDER, stairs.x - 37, stairs.y - 1, 38, FULLH - stairs.y - game.padFloor), false, 0, false);
+            //ladder.collidable = false;      // allows ladder to not be in normal collision detection; TODO: make better api
+            //level.objs.push(ladder);
 
             // scales; TODO: shouldn't be GameItem??
             for (var i = 0; i < 3; ++i) {
                 scales[i] = new GameItem(
                     new GameObj(JQObject.SCALE, door.pos.x + 350 + i * 220, FULLH - game.padFloor - 107, 150, 36),
+                    false,
                     0,
-                    true,
                     true
                 );
                 scales[i].holdingItem = JQObject.EMPTY; // TODO: make better api
-                level.objs.push(scales[i]);
-            }            // crates            for (var i = 0; i < 3; ++i) {
+                //level.objs.push(scales[i]);
+            }            //--------------- Game Items ---------------\\            // sack
+            sack = new GameItem(new GameObj(JQObject.SACK, 680, 111 + Graphics.projectY / 2, 20, 24, "sack.png"), false, 5);
+            hiddenCash = new GameItem(new GameObj(JQObject.CASH, 113, 80, 22, 24, "cash.png"), false, 10, false);            // crates            for (var i = 0; i < 1; ++i) {
                 level.crates[i] = new GameItem(
                     new GameObj(JQObject.CRATE, 446, FULLH - game.padFloor - 26 + 5, 24, 26, "crate.png"),
-                    0,
                     true,
+                    0,
                     true
                 );
             }
-            level.crates[1].pos.x = scales[1].pos.x + scales[1].w / 2 - level.crates[0].w / 2;
-            level.crates[2].pos.x = scales[2].pos.x + scales[2].w / 2 - level.crates[0].w / 2;
+            //level.crates[1].pos.x = scales[1].pos.x + scales[1].w / 2 - level.crates[0].w / 2;
+            //level.crates[2].pos.x = scales[2].pos.x + scales[2].w / 2 - level.crates[0].w / 2;
 
             for (var i = 0; i < level.crates.length; ++i) {
                 level.items.push(level.crates[i]);
             }
+            level.items.push(sack, hiddenCash);
         },
 
         deinit: function(){
@@ -2478,23 +2513,13 @@ var lvl1 = (function () {
         },
 
         update: function () {
+            if (window.DEBUG) {
+                level.complete();
+            }
 
-            if (window.DEBUG) level.complete();
-
-            hiddenCash.updatePos();
             cyborg.update();
 
             handle_crates_scale_ladder();
-
-            // sack
-            if (!sack.collected) {
-                if (Physics.isCollision(hero, sack, 0)) {
-                    sack.collected = true;
-                    audio.itemPickedUp.play();
-
-                    hero.ammo += sack.val;
-                }
-            }
 
             // hidden cash
             if (!hiddenCash.visible) {
@@ -2502,24 +2527,12 @@ var lvl1 = (function () {
                     if (Physics.isCollision(hero.bulletArr[i], hiddenCash, -17)) {
                         hiddenCash.visible = true;
                         audio.discovery.play();
+                        ++level.hiddenItemsFound;
                     }
                 }
             }
-            else if (!hiddenCash.collected) {
 
-                if (hiddenCash.visible) {
-                    hiddenCash.vY += game.gravity;
-                }
-
-                if (Physics.isCollision(hero, hiddenCash, 0)) {
-                    hiddenCash.collected = true;
-                    audio.itemPickedUp.play();
-                    hero.cash += hiddenCash.val;
-                    ++level.hiddenItemsFound;
-                }
-            }
-
-            // cyborg; TODO: should be a level []
+            // cyborg; TODO: should be a level.enemies[]
             if (cyborg.health > 0) {
                 // hero and cyborg
                 if (Physics.isCollision(hero, cyborg, 0)) {
@@ -2562,30 +2575,10 @@ var lvl1 = (function () {
         },
 
         render: function () {
-            //---- level objects/items
-            if (!sack.collected)
-                sack.draw();
-
-            if(hiddenCash.visible)
-                hiddenCash.draw();
-
             if(!cyborg.deadOffScreen)
                 cyborg.draw();
 
             Graphics.drawDoor(door.pos.x, door.pos.y, door.w, door.h);
-
-            // crates
-            for (var i = 0; i < level.crates.length; ++i) {
-                if (!level.crates[i].holding) {
-                    level.crates[i].draw();
-                }
-                else {
-                    if (hero.vX === 0) {
-                        level.crates[i].pos.x = hero.pos.x + 2;
-                        level.crates[i].pos.y = hero.pos.y + 11;
-                    }
-                }
-            }
         }
     };
 
@@ -3055,29 +3048,48 @@ var HeroPhysicsComponent = function () {
             }
         });
         
-        Physics.lvlItemCollision(function (r, idx) {
-            if (r.overlapN.y === 1) {
-                hero.pos.y -= r.overlapV.y;
-                hero.isOnObj = true;
-                hero.isJumping = false;
-                hero.vY = 0;
+        if (hero.isCarrying) {
+            if (hero.vX === 0) {
+                hero.curItem.pos.x = hero.pos.x + 2;
+                hero.curItem.pos.y = hero.pos.y + 11;
             }
-            else if (r.b.grabbable) {
+            else {
+                hero.curItem.pos.x = hero.pos.x + ((hero.dir === Dir.RIGHT) ? 22 : -22);
+                hero.curItem.pos.y = hero.pos.y + 5;
+            }
+        }
 
-                // TODO: check if player has left item before allowing re-pickup (instad of only checking spacebar)
-                
-                r.b.holding = true;
-                r.b.vY = 6.5;
-                r.b.isOnObj = false;
-
-                if (r.b.isOnObj) {
-                    r.b.isOnObj = false;
-                    r.b.onObj.grabbable = true;
-                    r.b.onObj = null;
+        Physics.lvlItemCollision(function (r, idx) {
+            if (r.b.type === JQObject.CRATE) {      // TODO: make more generic
+                if (r.overlapN.y === 1) {           // on top
+                    hero.pos.y -= r.overlapV.y;
+                    hero.isOnObj = true;
+                    hero.isJumping = false;
+                    hero.vY = 0;
                 }
+                else if (r.b.grabbable) {
+                    r.b.holding = true;
+                    hero.curItem = r.b;
+                    hero.isCarrying = true;
 
-                hero.curItem = r.b;
-                hero.isCarrying = true;
+                    level.items.splice(idx, 1);
+
+                    //if (r.b.isOnObj) {
+                    //    r.b.isOnObj = false;
+                    //    r.b.onObj.grabbable = true;
+                    //    r.b.onObj = null;
+                    //}
+                }
+            }
+            else {
+                audio.itemPickedUp.play();
+
+                if (r.b.type === JQObject.SACK) {
+                    hero.ammo += r.b.val;
+                }
+                else if (r.b.type === JQObject.CASH) {
+                    hero.cash += r.b.val;
+                }
 
                 level.items.splice(idx, 1);
             }
@@ -3274,6 +3286,7 @@ var HeroInputComponent = function () {
                 if (hero.isCarrying) {
                     hero.isCarrying = false;
                     hero.curItem.holding = false;
+                    level.items.push(hero.curItem);
                     hero.curItem = null;
                 }
             }

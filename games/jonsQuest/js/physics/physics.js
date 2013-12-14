@@ -22,8 +22,16 @@ var Physics = (function () {
 
             return false;
         },
-
+        
         // uses SAT and AABB
+        isSATcollision: function (a, b, callback) {
+            var response = new SAT.Response();
+            var collided = SAT.testPolygonPolygon(a, b, response);
+
+            if (collided)
+                callback(response);
+        },
+
         // checks collision between a and the level objects
         lvlObjCollision: function (a, callback) {
             var response = new SAT.Response();
@@ -41,7 +49,7 @@ var Physics = (function () {
                         response.a.pos.x -= response.overlapV.x;
                         response.a.pos.y -= response.overlapV.y;
                         
-                        response.type = level.objs[i].type;
+                        response.type = level.objs[i].type;     // TODO: r.b.type???
 
                         callback(response);
                         break;
@@ -58,21 +66,18 @@ var Physics = (function () {
 
         // checks collision between hero and the movable level items
         lvlItemCollision: function (callback) {
-            if (!hero.isCarrying && !(32 in keysDown)) {// spacebar
-                for (var i = 0; i < level.items.length; ++i) {
+            for (var i = 0; i < level.items.length; ++i) {
+                if (level.items[i].visible && !level.items[i].collected) {
+
+                    // TODO: check if player has left item before allowing re-pickup (instad of only checking spacebar) .. wait till hero no longer colliding??
+                    if (level.items[i].type === JQObject.CRATE && hero.isCarrying && !(32 in keysDown))
+                        continue;
+
                     Physics.isSATcollision(hero, level.items[i], function (r) {
                         callback(r, i);
                     });
                 }
             }
-        },
-
-        isSATcollision: function (a, b, callback) {
-            var response = new SAT.Response();
-            var collided = SAT.testPolygonPolygon(a, b, response);
-
-            if (collided)
-                callback(response);
         }
     };
 })();

@@ -69,15 +69,26 @@ var Crate = (function () {
                     }
                 }
                 else {
-                    if (hero.dir === Dir.RIGHT)
-                        crates[i].pos.x = hero.pos.x + 22;
-                    else
-                        crates[i].pos.x = hero.pos.x - 22;
-
-                    crates[i].pos.y = hero.pos.y;
+                    if (hero.vX === 0) {
+                        crates[i].pos.x = hero.pos.x + 2;
+                        crates[i].pos.y = hero.pos.y + 11;
+                    }
+                    else {
+                        crates[i].pos.x = hero.pos.x + ((hero.dir === Dir.RIGHT) ? 22 : -22);
+                        crates[i].pos.y = hero.pos.y + 5;
+                    }
                 }
 
-                crates[i].updatePos();
+                //crates[i].updatePos();
+            }
+        },
+
+        render: function(){
+            // crates
+            for (var i = 0; i < level.crates.length; ++i) {
+                if (!level.crates[i].holding) {
+                    level.crates[i].draw();
+                }
             }
         }
     };

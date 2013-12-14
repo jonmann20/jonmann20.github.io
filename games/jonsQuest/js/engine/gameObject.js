@@ -27,10 +27,6 @@ var GameObj = function (type, x, y, w, h, src) {
         $.extend(this, new SAT.Box(new SAT.Vector(x, y), w, h).toPolygon());
     }
 
-    this.vY = 0;
-    this.isOnObj = false;
-    this.onObj = null;         // contains the object holding up the object (directly below)
-    this.grabbable = true;
     this.imgReady = false;     // TODO: make private
 
     if (typeof (src) === "undefined") {
@@ -55,19 +51,19 @@ var GameObj = function (type, x, y, w, h, src) {
 };
 
 GameObj.prototype = {
-    updatePos: function () {    // TODO: move to normal update location
-        if (!this.isOnObj) {
-            if (this.pos.y < FULLH - game.padFloor - this.h + 5) {      // +3 is projectY
-                this.pos.y += this.vY;
-                this.isOnObj = false;
-            }
-            else {
-                this.pos.y = FULLH - game.padFloor - this.h;
-                this.isOnObj = true;
-                this.vY = 0;
-            }
-        }
-    },
+    //updatePos: function () {    // TODO: move to normal update location
+    //    if (!this.isOnObj) {
+    //        if (this.pos.y < FULLH - game.padFloor - this.h) {      // +3 is projectY
+    //            this.pos.y += this.vY;
+    //            this.isOnObj = false;
+    //        }
+    //        else {
+    //            this.pos.y = FULLH - game.padFloor - this.h;
+    //            this.isOnObj = true;
+    //            this.vY = 0;
+    //        }
+    //    }
+    //},
 
     draw: function () {
         if (this.imgReady) {

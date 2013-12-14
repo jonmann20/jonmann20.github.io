@@ -155,6 +155,7 @@ var HeroInputComponent = function () {
                 if (hero.isCarrying) {
                     hero.isCarrying = false;
                     hero.curItem.holding = false;
+                    level.items.push(hero.curItem);
                     hero.curItem = null;
                 }
             }

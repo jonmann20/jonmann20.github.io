@@ -49,29 +49,48 @@ var HeroPhysicsComponent = function () {
             }
         });
         
-        Physics.lvlItemCollision(function (r, idx) {
-            if (r.overlapN.y === 1) {
-                hero.pos.y -= r.overlapV.y;
-                hero.isOnObj = true;
-                hero.isJumping = false;
-                hero.vY = 0;
+        if (hero.isCarrying) {
+            if (hero.vX === 0) {
+                hero.curItem.pos.x = hero.pos.x + 2;
+                hero.curItem.pos.y = hero.pos.y + 11;
             }
-            else if (r.b.grabbable) {
+            else {
+                hero.curItem.pos.x = hero.pos.x + ((hero.dir === Dir.RIGHT) ? 22 : -22);
+                hero.curItem.pos.y = hero.pos.y + 5;
+            }
+        }
 
-                // TODO: check if player has left item before allowing re-pickup (instad of only checking spacebar)
-                
-                r.b.holding = true;
-                r.b.vY = 6.5;
-                r.b.isOnObj = false;
-
-                if (r.b.isOnObj) {
-                    r.b.isOnObj = false;
-                    r.b.onObj.grabbable = true;
-                    r.b.onObj = null;
+        Physics.lvlItemCollision(function (r, idx) {
+            if (r.b.type === JQObject.CRATE) {      // TODO: make more generic
+                if (r.overlapN.y === 1) {           // on top
+                    hero.pos.y -= r.overlapV.y;
+                    hero.isOnObj = true;
+                    hero.isJumping = false;
+                    hero.vY = 0;
                 }
+                else if (r.b.grabbable) {
+                    r.b.holding = true;
+                    hero.curItem = r.b;
+                    hero.isCarrying = true;
 
-                hero.curItem = r.b;
-                hero.isCarrying = true;
+                    level.items.splice(idx, 1);
+
+                    //if (r.b.isOnObj) {
+                    //    r.b.isOnObj = false;
+                    //    r.b.onObj.grabbable = true;
+                    //    r.b.onObj = null;
+                    //}
+                }
+            }
+            else {
+                audio.itemPickedUp.play();
+
+                if (r.b.type === JQObject.SACK) {
+                    hero.ammo += r.b.val;
+                }
+                else if (r.b.type === JQObject.CASH) {
+                    hero.cash += r.b.val;
+                }
 
                 level.items.splice(idx, 1);
             }

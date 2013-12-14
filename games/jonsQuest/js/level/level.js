@@ -2,37 +2,59 @@
 
 var level = (function () {
 
+    var maxVy = 10;
+
+
     /********** Update **********/
-    function updateObjs() {
+    function updateObjsView() {
         for (var i = 0; i < level.objs.length; ++i) {
             level.objs[i].pos.x -= hero.vX;
         }
     }
 
-    function updateItems() {
+    function updateItemsView() {
         for (var i = 0; i < level.items.length; ++i) {
             level.items[i].pos.x -= hero.vX;
         }
     }
 
-    function updateBg() {
+    function updateBgView() {
         // layer 1
         for (var i = 0; i < level.bg[1].length; ++i) {
             level.bg[1][i].pos.x -= hero.vX / 3;
-            //level.bg[1][i].pos.y += hero.vY / 10;
         }
 
         // layer 0
         for (var i = 0; i < level.bg[0].length; ++i) {
             level.bg[0][i].pos.x -= hero.vX / 2;
-            //level.bg[0][i].pos.y += hero.vY / 8;
+        }
+    }
+
+    function updateItems() {
+        for (var i = 0; i < level.items.length; ++i) {
+            if (level.items[i].visible && !level.items[i].isOnObj) {
+                // gravity/position
+                if (level.items[i].vY < maxVy)
+                    level.items[i].vY += game.gravity;
+                else
+                    level.items[i].vY = maxVy;
+
+                level.items[i].pos.y += level.items[i].vY;
+
+                // check collision
+                Physics.lvlObjCollision(level.items[i], function (r) {
+                    if (r.overlapN.y === 1) {                       // on top
+                        r.a.isOnObj = true;
+                    }
+                });
+            }
         }
     }
 
 
     /********** Render **********/
     // the parallax background
-    function drawLvlBg() {
+    function drawBg() {
         // color background
         ctx.fillStyle = Color.LIGHT_GREEN;
         ctx.fillRect(0, 0, FULLW, FULLH - game.padFloor - 1);
@@ -52,7 +74,7 @@ var level = (function () {
     }
 
     // all of the collision rectangles in the level
-    function drawLvlObjs() {
+    function drawObjs() {
         for (var i = 0; i < level.objs.length; ++i) {
             // check if visible
             if (typeof (level.objs[i].visible) !== "undefined" &&   // TODO: all objs should have visible property (fix api)
@@ -60,7 +82,6 @@ var level = (function () {
             ) {
                 continue;
             }
-
             
             if (level.objs[i].type === JQObject.LADDER) {           // ladder
                 Graphics.drawLadder(level.objs[i]);
@@ -75,13 +96,17 @@ var level = (function () {
         }
     }
 
+    function drawItems() {
+        for (var i = 0; i < level.items.length; ++i) {
+            level.items[i].draw();
+        }
+    }
 
     return {
         bg: [   // parallax background
             [], // backgorund obj's 1
             []  // background obj's 2
         ],
-        crates: [],         // special handling of crate objects
         objs: [],           // dynamically holds all of the objects for the level;
         items: [],          // dynamically holds all of the items for the level (movable items)
         curLvl: null,       // alias for the current level object e.g. lvl1
@@ -114,7 +139,6 @@ var level = (function () {
                 [],
                 []
             ];
-
 
             // reset hero
             hero.pos.x = 23;
@@ -153,23 +177,26 @@ var level = (function () {
         /******************** Update ********************/
         update: function () {
             if (!level.isTransitioning) {
-                Crate.update();
+                updateItems();
+
                 level.curLvl.update();
             }
         },
 
         // fix positions relative to the "camera" view
         updateView: function(){
-            updateObjs();
-            updateItems();
-            updateBg();
+            updateObjsView();
+            updateItemsView();
+            updateBgView();
         },
 
 
         /******************** Render ********************/
         render: function () {
-            drawLvlBg();
-            drawLvlObjs();
+            drawBg();
+            drawObjs();
+            drawItems();
+            
             level.curLvl.render();
         }
     };
