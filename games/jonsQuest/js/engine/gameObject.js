@@ -1,5 +1,35 @@
 /// <reference path="../linker.js" />
 
+var JQObject = Object.freeze({
+    EMPTY: 0,
+    CRATE: 1,
+    LADDER: 2,
+    SACK: 3,
+    ENEMY: 4,
+    CASH: 5,
+    DOOR: 6,
+    SCALE: 7,
+    SMALL_CLOUD: 8,
+    CLOUD: 9,
+    PLATFORM: 10,
+    FLOOR: 11
+});
+
+var JQObject_names = Object.freeze({
+    0: "EMPTY",
+    1: "CRATE",
+    2: "LADDER",
+    3: "SACK",
+    4: "ENEMY",
+    5: "CASH",
+    6: "DOOR",
+    7: "SCALE",
+    8: "SMALL_CLOUD",
+    9: "CLOUD",
+    10: "PLATFORM",
+    11: "FLOOR"
+});
+
 /*
     GameObj is the base class from which all objects in the game inherit from.
     Every GameObj has a SAT.Vector (pos);       TODO: make Vector not Polygon
@@ -16,10 +46,10 @@
 var GameObj = function (type, x, y, w, h, src) {
     this.type = type;
 
-    // set this.pos
+    // this.pos
     if (type === JQObject.FLOOR) {
         $.extend(this, Graphics.getSkewedRect(x, y, w, h));
-        this.type = JQObject.FLOOR; // TODO: fix api here
+        this.type = JQObject.FLOOR; // TODO: fix api
     }
     else {
         $.extend(this, new SAT.Box(new SAT.Vector(x, y), w, h).toPolygon());

@@ -227,25 +227,6 @@ var Dir = Object.freeze({
     IN: 5
 });
 
-var Inv_e = Object.freeze({
-    NOT_HIT: 0,
-    HIT_WHITE: 1,
-    HIT_RED: 2
-});
-
-var KeyCode = Object.freeze({
-    ENTER: 13,
-    F: 70,
-    J: 74,
-    K: 75,
-    M: 77,
-    O: 79,
-    S: 83,
-    W: 87,
-    EMPTY: -1,
-    SPACEBAR: 32
-});
-
 var Color = Object.freeze({
     LIGHT_BROWN: "#c44525",
     DARK_BROWN: "#672819",
@@ -255,43 +236,6 @@ var Color = Object.freeze({
     GOLD: "#ddaa13",
     ORANGE: "#ff6a00"
 });
-
-var JQObject = Object.freeze({
-    EMPTY: 0,
-    CRATE: 1,
-    LADDER: 2,
-    SACK: 3,
-    ENEMY: 4,
-    CASH: 5,
-    DOOR: 6,
-    SCALE: 7,
-    SMALL_CLOUD: 8,
-    CLOUD: 9,
-    PLATFORM: 10,
-    FLOOR: 11
-});
-
-var JQObject_names = Object.freeze({
-    0: "EMPTY",
-    1: "CRATE",
-    2: "LADDER",
-    3: "SACK",
-    4: "ENEMY",
-    5: "CASH",
-    6: "DOOR",
-    7: "SCALE",
-    8: "SMALL_CLOUD",
-    9: "CLOUD",
-    10: "PLATFORM",
-    11: "FLOOR"
-});
-
-
-var bullet = {
-    w: 19.5,
-    h: 9,
-    speed: 4.4
-};
 
 // global functions
 window.requestAnimFrame = (function () {

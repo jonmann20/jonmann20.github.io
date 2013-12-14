@@ -43,7 +43,7 @@
             audio.bgMusic.pause();
 
             var newBgMusic;
-
+            
             switch(game.lvl) {
                 case 0:
                     audio.enterSound.play();

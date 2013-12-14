@@ -21,7 +21,7 @@ var Main = (function () {
     function debug() {
         // dev enviroment
         if (location.host === "jon") {
-            //window.DEBUG = true;
+            window.DEBUG = true;
 
             // speed up canvas transition
             $(canvas).css({"transition": "opacity 0.01s"});
@@ -30,7 +30,7 @@ var Main = (function () {
             lastKeyDown = KeyCode.ENTER;
 
             // mute audio
-            audio.handleMuteButton();
+            //audio.handleMuteButton();
         }
     }
 
@@ -56,7 +56,7 @@ var Main = (function () {
                 game.start();
 
 
-                //debug();
+                debug();
             });
         }
     }

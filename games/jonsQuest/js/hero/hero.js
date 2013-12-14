@@ -1,17 +1,22 @@
 /// <reference path="../linker.js" />
 
-/*
-    The hero object.
-*/
+var Shuriken = {
+    w: 19.5,
+    h: 9,
+    speed: 4.4
+};
+
+// The hero object.  TODO: convert to be of GameObj type
 var hero = (function () {
     var input = null,           // the hero input component
         graphics = null,        // the hero graphics component
-        imgReady = false,       
-		img = null,             // TODO: convert to be of GameObj type
+        physics = null,         // the hero physics component
+        imgReady = false,
+		img = null,
         idleTime = 0,
 		spriteArr = [],
 		invincibleTimer = 170,
-        invincibleTimer0 = 170  // TODO: should be const
+        invincibleTimer0 = 170
 	;
 	
 		
@@ -33,7 +38,7 @@ var hero = (function () {
     function getSpritePos() {
 		var pos = {x: 0, y: 0};
 		
-		if(hero.isCarrying && hero.vX === 0){
+		if (hero.isHolding && hero.vX === 0) {
 			pos = spriteArr["playerDown"];
 		}
 		else if (hero.onLadder) {               // TODO: check if holding crate (shouldn't be allowed on ladder)
@@ -82,7 +87,7 @@ var hero = (function () {
 		if (idleTime > 210) {
 		    var foo = idleTime % 200;
 		    
-		    if (foo >= 0 && foo <= 50 || foo > 100 && foo <= 150 || hero.isCarrying)    // TODO: check if throwing
+		    if (foo >= 0 && foo <= 50 || foo > 100 && foo <= 150 || hero.isHolding)
 		        pos = spriteArr["playerDown"];
 		    else if (foo > 50  && foo <= 100)
 		        pos = spriteArr["playerDown_breatheIn"];
@@ -111,7 +116,7 @@ var hero = (function () {
 		
     // used to draw things over the hero
 	function drawAfterHero() {
-	    if (hero.isCarrying){
+	    if (hero.isHolding) {
 	        hero.curItem.draw();
 	    }
 	}
@@ -122,19 +127,19 @@ var hero = (function () {
 		lvlX: 0,			
 		w: 28,
 		h: 38,
-		vX: 0,          // maxVx/y are in heroInput.js
+		vX: 0,              // maxVx/maxVy are in heroInput.js
 		vY: 0,
 		aX: 0.17,
 		aY: 0.52,
 		jumpMod: 4,
-		jumpMod0: 4,            // TODO: should be const
+		jumpMod0: 4,
 		dir: Dir.RIGHT,
-		isJumping: false,
-		isCarrying: false,
-        onLadder: false,
-        curItem: null,          // the item in hand
-		isOnObj: true,
+		onLadder: false,
 		invincible: false,
+		isJumping: false,
+		isHolding: false,
+		isOnObj: true,
+		curItem: null,      // the item in hand
 		health: 3,
 		maxHealth: 3,
 		medKits: 1,
@@ -149,7 +154,6 @@ var hero = (function () {
 		xp: 0,
 		xpNeeded: 50,
 		bulletArr: [],
-		physics: null,         // the hero physics component
 		
 
 		init: function(){
@@ -173,21 +177,17 @@ var hero = (function () {
 			});
 			
 			input = HeroInputComponent();
-			input.init();
-
-			hero.physics = HeroPhysicsComponent();
-
+			physics = HeroPhysicsComponent();
 			graphics = HeroGraphicsComponent();
-			graphics.init();
 
             // setup hero bounding box for collision detection
 			$.extend(hero, new SAT.Box(new SAT.Vector(0, 0), hero.w, hero.h).toPolygon());
 		},
 		
 		update: function () {
-		    input.check();                          // updates velocities
-			hero.physics.updatePosition();          // updates positions
-			hero.physics.checkCollision();          // fix positions
+		    input.check();                      // updates velocities
+			physics.updatePosition();          // updates positions
+			physics.checkCollision();          // fix positions
 			
 			checkHealth();
 			getSpritePos();

@@ -53,6 +53,7 @@ var level = (function () {
                         audio.thud.play();
                         r.a.vY = 0;
                         r.a.isOnObj = true;
+                        r.a.recentlyHeld = false;
 
                         if (r.b.type === JQObject.SCALE) {
                             r.a.grabbable = false;
@@ -63,8 +64,6 @@ var level = (function () {
                                 ++r.b.pos.y;
                             });
                         }
-
-                        //level.items.push(r.a);
                     }
 
                 });
@@ -74,8 +73,7 @@ var level = (function () {
                     r.a.isOnObj = true;
                     r.a.onObj = r.b;
                     r.b.grabbable = false;
-
-                    level.items.push(r.a);
+                    r.a.recentlyHeld = false;
                 });
             }
         }
@@ -98,11 +96,11 @@ var level = (function () {
                     }
                 }
 
-                // bullets and enemy
-                for (var i = 0; i < hero.bulletArr.length; ++i) {
+                // projectiles and enemy
+                for (var j = 0; j < hero.bulletArr.length; ++j) {
                     var wasCollision = false;
 
-                    if (Physics.isCollision(hero.bulletArr[i], level.enemies[i], 0)) {
+                    if (Physics.isCollision(hero.bulletArr[j], level.enemies[i], 0)) {
                         wasCollision = true;
                         audio.play(audio.thud, true);
                     }
@@ -110,7 +108,7 @@ var level = (function () {
                     if (wasCollision) {
                         level.enemies[i].active = true;
 
-                        hero.bulletArr.splice(i, 1); // remove ith item
+                        hero.bulletArr.splice(j, 1); // remove jth item
                         --level.enemies[i].health;
 
                         if (level.enemies[i].health <= 0) {
@@ -227,7 +225,7 @@ var level = (function () {
             hero.isJumping = false;
             hero.bulletArr.length = 0;		// prevents leftover thrown shurikens
             hero.invincible = false;
-            hero.isCarrying = false;
+            hero.isHolding = false;
             hero.curItem = null;
             hero.dir = Dir.RIGHT;
             hero.health = hero.maxHealth;

@@ -1,8 +1,6 @@
 ﻿/// <reference path="../linker.js" />
 
-/*
-    A library of generic physics functions.
-*/
+// A library of generic physics functions.
 var Physics = (function () {
 
 
@@ -36,7 +34,7 @@ var Physics = (function () {
 
         // Tests collision between gObj and level.objs[]
         // @param(GameObj) gObj A game object (or subclass).
-        // @param(function) callback A callback function. Called with a SAT.Response().
+        // @param(function) callback A callback function.  Called with a SAT.Response().
         testObjObjs: function (gObj, callback) {
             var response = new SAT.Response();
             for (var i = 0; i < level.objs.length; ++i) {
@@ -71,7 +69,7 @@ var Physics = (function () {
             var response = new SAT.Response();
 
             for (var i = 0; i < level.items.length; ++i) {
-                if (!level.items[i].holding){
+                if (!level.items[i].isBeingHeld) {
                         
                     if (level.items[i].type !== JQObject.CRATE)       // TODO: allow non-crates
                         continue;
@@ -94,16 +92,12 @@ var Physics = (function () {
         },
 
         // Tests collision between hero and the level.items[]
+        // @param(function) callback A callback function.  Called with a SAT.Response and the index of the item.
         testHeroItems: function (callback) {
             for (var i = 0; i < level.items.length; ++i) {
                 if (level.items[i].visible) {
-
-                    // TODO: check if player has left item before allowing re-pickup (instad of only checking spacebar) .. wait till hero no longer colliding??
-                    if (level.items[i].type === JQObject.CRATE && hero.isCarrying && !(keysDown[KeyCode.SPACEBAR]))
-                        continue;
-
                     Physics.isSATcollision(hero, level.items[i], function (r) {
-                        callback(r, i);
+                            callback(r, i);
                     });
                 }
             }
@@ -115,7 +109,7 @@ var Physics = (function () {
 
         //    for (var i = 0; i < level.items.length; ++i) {
         //        for (var j = 0; j < level.items.length; ++j) {
-        //            if (i !== j && !level.items[i].holding && !level.items[j].holding) {
+        //            if (i !== j && !level.items[i].isBeingHeld && !level.items[j].isBeingHeld) {
                         
         //                if (level.items[i].type !== JQObject.CRATE || level.items[j].type !== JQObject.CRATE)       // TODO: allow non-crates
         //                    continue;

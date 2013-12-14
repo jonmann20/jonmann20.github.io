@@ -33,9 +33,3 @@
 // Physics
 /// <reference path="/games/jonsQuest/js/physics/SAT.js" />
 /// <reference path="/games/jonsQuest/js/physics/physics.js" />
-/// <reference path="/games/jonsQuest/js/physics/objectPhysics.js" />
-
-
-
-
-

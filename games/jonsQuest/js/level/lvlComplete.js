@@ -3,7 +3,6 @@
 var lvlComplete = (function () {
 
     return {
-
         update: function () {
             if (keysDown[KeyCode.ENTER] || game.lvl === 0 || window.DEBUG) {
                 lastKeyDown = KeyCode.EMPTY;
@@ -20,12 +19,10 @@ var lvlComplete = (function () {
                 }
 
                 level.isCutscene = false;
-                //level.reset();
             }
         },
 
         render: function () {
-
             // background
             ctx.fillStyle = "#000";
             ctx.fillRect(0, 0, FULLW, canvas.height);
@@ -52,9 +49,8 @@ var lvlComplete = (function () {
             ctx.fillStyle = "#e1e1e1";
             ctx.fillText(hdnItems, HALFW - hdnItemsW / 2, 190);
 
-
             // cta
-            Graphics.blinkText(16, HALFW, HALFH + 120);     // TODO: not working
+            Graphics.blinkText(16, HALFW, HALFH + 120);
         }
     };
 })();

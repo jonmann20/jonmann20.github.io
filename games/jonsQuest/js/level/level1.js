@@ -46,7 +46,7 @@ var lvl1 = (function () {
         while (x < lvl1.width) {
             fixY = (++i % 2 == 0) ? 100 : 0;
             x += x1offset;
-            level.bg[0].push(new GameObj(JQObject.CLOUD, x, 60 + fixY, 0, 0, "cloud.png"));        // TODO: convert api to get w/h
+            level.bg[0].push(new GameObj(JQObject.CLOUD, x, 60 + fixY, 0, 0, "cloud.png"));        // TODO: fix api to get w/h
         }
 
         x = 0;
@@ -59,7 +59,7 @@ var lvl1 = (function () {
                 fixY = 10;
 
             x += x2offset;
-            level.bg[1].push(new GameObj(JQObject.SMALL_CLOUD, x, 100 + fixY, 0, 0, "cloud_small.png"));        // TODO: convert api to get w/h
+            level.bg[1].push(new GameObj(JQObject.SMALL_CLOUD, x, 100 + fixY, 0, 0, "cloud_small.png"));        // TODO: fix api to get w/h
         }
     }
 
@@ -68,9 +68,9 @@ var lvl1 = (function () {
         // floor + 3 initial platforms
         level.objs.push(
             new GameObj(JQObject.FLOOR, -Graphics.projectX, FULLH - game.padFloor - 1, lvl1.width + Graphics.projectX * 2, game.padFloor + 1),
-            Graphics.getSkewedRect(200, 216, 267, 50),
-            Graphics.getSkewedRect(562, 315, 300, 50),
-            Graphics.getSkewedRect(585, 135, 220, 50)
+            Graphics.getSkewedRect(200, 226, 267, 48),
+            Graphics.getSkewedRect(562, 325, 300, 48),
+            Graphics.getSkewedRect(585, 145, 220, 48)
         );
 
         // scales
@@ -121,8 +121,8 @@ var lvl1 = (function () {
             );
         }
         crate[1].pos.x = scalePos[0] - crate[0].w / 2;
-        crate[2].pos.x =  scalePos[1] - crate[0].w / 2;        // sack
-        var sack = new GameItem(new GameObj(JQObject.SACK, 680, 111 + Graphics.projectY / 2, 20, 24, "sack.png"), false, 5);
+        crate[2].pos.x = scalePos[1] - crate[0].w / 2;        // sack
+        var sack = new GameItem(new GameObj(JQObject.SACK, 680, 121 + Graphics.projectY / 2, 20, 24, "sack.png"), false, 5);
 
         // hidden cash; TODO: only add to level.items after visible???
         hiddenCash = new GameItem(new GameObj(JQObject.CASH, 113, 80, 22, 24, "cash.png"), false, 10, false);

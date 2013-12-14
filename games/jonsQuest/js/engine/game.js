@@ -77,8 +77,8 @@ var game = (function () {
 	    gravity: 0.07,
 	    padHUD: 80,
 	    padFloor: 32,
-	    lvl: 0,                 // TODO: make startscreen level 0
-	    totalTicks: 0,          // ticks are update iterations
+	    lvl: 0,
+	    totalTicks: 0,      // ticks are update iterations
 	    actualTime: 0,
 
 
@@ -91,15 +91,15 @@ var game = (function () {
 	            //var updateTimeCur = new Date().getTime();
 
 	            //if ((updateTimeCur - updateTimePrev) > 0) {
-	                //game.updateTimeBtw = updateTimeCur - updateTimePrev;
+	            //game.updateTimeBtw = updateTimeCur - updateTimePrev;
 	            //}
 
 	            //updateTimePrev = updateTimeCur;
 	            //lag += game.updateTimeBtw;
-	            
+
 	            //while (lag >= game.updateTimeBtw) {      // TODO: interpolate if needed
-	                update();
-	                //lag -= game.updateTimeBtw;
+	            update();
+	            //lag -= game.updateTimeBtw;
 	            //}
 	        }, 8.3333); // 1000 / 120 ==> 2x target rate of 60fps
 	        
