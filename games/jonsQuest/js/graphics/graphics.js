@@ -182,27 +182,28 @@ var Graphics = (function () {
             }
         },
 
-        drawDoor: function (x, y, w, h) {
+        // @param(GameObj) g A game object.
+        drawDoor: function (g) {
             // door
             ctx.fillStyle = Color.LIGHT_BROWN;
-            ctx.fillRect(x+2, y+2, w-2, h-2);
+            ctx.fillRect(g.pos.x + 2, g.pos.y + 2, g.w - 2, g.h - 2);
 
             ctx.fillStyle = Color.DARK_BROWN;
 
-            ctx.fillRect(x, y, 2, h);   // left frame
-            ctx.fillRect(x, y, w, 2);   // top frame
-            ctx.fillRect(x+w, y, 2, h);   // right frame
+            ctx.fillRect(g.pos.x, g.pos.y, 2, g.h);   // left frame
+            ctx.fillRect(g.pos.x, g.pos.y, g.w, 2);   // top frame
+            ctx.fillRect(g.pos.x + g.w, g.pos.y, 2, g.h);   // right frame
 
             // door handle
             ctx.beginPath();
-            ctx.arc(x + w - w / 3.2, y + h - h/3.4, 3, 0, 2 * Math.PI, false);
+            ctx.arc(g.pos.x + g.w - (g.w / 3.2), g.pos.y + g.h - (g.h / 3.4), 3, 0, 2 * Math.PI, false);
             ctx.fill();
             ctx.closePath();
 
             // door
             ctx.fillStyle = "#e1e1e1";
             ctx.font = "12px 'Press Start 2P'";
-            ctx.fillText("EXIT", x - 8, y - 5);
+            ctx.fillText("EXIT", g.pos.x - 8, g.pos.y - 5);
 
         },
 

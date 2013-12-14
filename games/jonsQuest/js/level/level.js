@@ -93,6 +93,9 @@ var level = (function () {
             else if(level.objs[i].type === JQObject.PLATFORM || level.objs[i].type === JQObject.FLOOR) {
                 Graphics.drawPlatform(level.objs[i]);
             }
+            else if (level.objs[i].type === JQObject.DOOR) {
+                Graphics.drawDoor(level.objs[i]);
+            }
         }
     }
 

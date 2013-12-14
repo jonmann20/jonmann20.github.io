@@ -24,7 +24,7 @@ var Main = (function () {
             //window.DEBUG = true;
 
             // skip start screen
-            //lastKeyDown = KeyCode.ENTER;
+            lastKeyDown = KeyCode.ENTER;
 
             // mute audio
             audio.handleMuteButton();

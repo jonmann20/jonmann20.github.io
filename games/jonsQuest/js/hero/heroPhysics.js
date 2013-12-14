@@ -69,6 +69,7 @@ var HeroPhysicsComponent = function () {
                     hero.vY = 0;
                 }
                 else if (r.b.grabbable) {
+                    r.b.isOnObj = false;
                     r.b.holding = true;
                     hero.curItem = r.b;
                     hero.isCarrying = true;

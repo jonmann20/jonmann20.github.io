@@ -37,6 +37,92 @@ var lvl1 = (function () {
         }
     }
 
+    function setBackground() {
+        var i = 0,
+            x1offset = HALFW / 1.2,
+            x2offset = HALFW / 2.7,
+            x = 60 - x1offset,
+            fixY
+        ;
+
+        while (x < lvl1.width) {
+            fixY = (++i % 2 == 0) ? 100 : 0;
+            x += x1offset;
+            level.bg[0].push(new GameObj(JQObject.CLOUD, x, 60 + fixY, 0, 0, "cloud.png"));        // TODO: convert api to get w/h
+        }
+
+        x = 0;
+        while (x < lvl1.width) {
+            if (++i % 2 == 0)
+                fixY = 70;
+            else if (i % 3 == 0)
+                fixY = 140;
+            else
+                fixY = 10;
+
+            x += x2offset;
+            level.bg[1].push(new GameObj(JQObject.SMALL_CLOUD, x, 100 + fixY, 0, 0, "cloud_small.png"));        // TODO: convert api to get w/h
+        }
+    }
+
+    function setExit() {
+        // stairs
+        var stairs = {
+                x: 1160,
+                y: 210,
+                w: 0,
+                h: 0
+            },
+            rise = 5,   // delta h between steps
+            run = 17    // delta w between steps
+        ;
+
+        for (var i = 0; i < 15; ++i) {
+            level.objs.push(Graphics.getSkewedRect(stairs.x + run * i, stairs.y - rise * i, run + 1, 50));
+            stairs.w += run;
+            stairs.h += rise;
+        }
+
+        // platform + door
+        level.objs.push(Graphics.getSkewedRect(stairs.x + stairs.w, stairs.y - stairs.h, 200, 50));
+        door = new GameObj(JQObject.DOOR, stairs.x + stairs.w + 155, stairs.y - stairs.h - 53 + Graphics.projectY/2, 25, 53);
+        level.objs.push(door);
+
+        ladder = new GameItem(new GameObj(JQObject.LADDER, stairs.x - 37, stairs.y - 1, 38, FULLH - stairs.y - game.padFloor), false, 0, false);
+        //ladder.collidable = false;      // allows ladder to not be in normal collision detection
+        //level.objs.push(ladder);
+    }
+
+    function setCyborg() {
+        cyborg = new Enemy(
+            new GameObj(JQObject.ENEMY, 1600, FULLH - game.padFloor - 38 + 5, 28, 38, "cyborgBnW.png"),
+            1,
+            1087,
+            1600,
+            JQEnemy.FOLLOW,
+            false
+        );
+        cyborg.collidable = false;  // TODO: fix api        level.objs.push(cyborg);
+    }
+
+    function setItems() {        // sack
+        sack = new GameItem(new GameObj(JQObject.SACK, 680, 111 + Graphics.projectY / 2, 20, 24, "sack.png"), false, 5);
+
+        // hidden cash
+        hiddenCash = new GameItem(new GameObj(JQObject.CASH, 113, 80, 22, 24, "cash.png"), false, 10, false);        // crates        for (var i = 0; i < 3; ++i) {
+            level.crates[i] = new GameItem(
+                new GameObj(JQObject.CRATE, 446, FULLH - game.padFloor - 26 + 5, 24, 26, "crate.png"),
+                true,
+                0,
+                true
+            );
+        }
+        level.crates[1].pos.x = scales[1].pos.x + scales[1].w / 2 - level.crates[0].w / 2;
+        level.crates[2].pos.x = scales[2].pos.x + scales[2].w / 2 - level.crates[0].w / 2;
+
+        level.items.push(sack, hiddenCash, level.crates[0], level.crates[1], level.crates[2]);
+    }
+
     return {
         width: 2700,
 
@@ -44,115 +130,22 @@ var lvl1 = (function () {
         init: function () {
             level.hiddenItems = 1;
 
-            // floor
-            var floor = new GameObj(JQObject.FLOOR, -Graphics.projectX, FULLH - game.padFloor - 1, lvl1.width + Graphics.projectX * 2, game.padFloor + 1);
-            level.objs.push(floor);
+            setBackground();
 
-            // background
-            var i = 0,
-                x1offset = HALFW/1.2,
-                x2offset = HALFW/2.7,
-                x = 60 - x1offset,
-                fixY
-            ;
-
-            while (x < this.width) {
-                fixY = (++i % 2 == 0) ? 100 : 0;
-                x += x1offset;
-                level.bg[0].push(new GameObj(JQObject.CLOUD, x, 60 + fixY, 0, 0, "cloud.png"));        // TODO: convert api to get w/h
-            }
-
-            x = 0;
-            while (x < this.width) {
-                if (++i % 2 == 0)
-                    fixY = 70
-                else if (i % 3 == 0)
-                    fixY = 140
-                else
-                    fixY = 10
-                
-                x += x2offset;
-                level.bg[1].push(new GameObj(JQObject.SMALL_CLOUD, x, 100 + fixY, 0, 0, "cloud_small.png"));        // TODO: convert api to get w/h
-            }
-
-
-            // 3 initial platforms
+            // floor + 3 initial platforms
             level.objs.push(
+                new GameObj(JQObject.FLOOR, -Graphics.projectX, FULLH - game.padFloor - 1, lvl1.width + Graphics.projectX * 2, game.padFloor + 1),
                 Graphics.getSkewedRect(200, 216, 267, 50),
                 Graphics.getSkewedRect(562, 315, 300, 50),
                 Graphics.getSkewedRect(585, 135, 220, 50)
             );
 
-            // stairs
-            var stairs = {
-                x: 1160,
-                y: 210,
-                w: 0,
-                h: 0
-            };
-
-            var rise = 5,   // delta h between steps
-                run = 17    // delta w between steps
-            ;
-
-            for (var i = 0; i < 15; ++i) {
-                level.objs.push(Graphics.getSkewedRect(stairs.x + run * i, stairs.y - rise * i, run+1, 50));
-                stairs.w += run;
-                stairs.h += rise;
-            }
-
-            // platform + door
-            level.objs.push(Graphics.getSkewedRect(stairs.x + stairs.w, stairs.y - stairs.h, 200, 50));
-            door = new GameItem(new GameObj(JQObject.DOOR, stairs.x + stairs.w + 155, stairs.y - stairs.h - 53, 25, 53));
-
-            // cyborg
-            cyborg = new Enemy(
-                new GameObj(JQObject.ENEMY, 1600, FULLH - game.padFloor - 38 + 5, 28, 38, "cyborgBnW.png"),
-                1,
-                1087,
-                1600,
-                JQEnemy.FOLLOW,
-                false
-            );
-            cyborg.collidable = false;
-
-            // add objects to the level
-            level.objs.push(
-                cyborg
-                //door
-            );
-
-            ladder = new GameItem(new GameObj(JQObject.LADDER, stairs.x - 37, stairs.y - 1, 38, FULLH - stairs.y - game.padFloor), false, 0, false);
-            //ladder.collidable = false;      // allows ladder to not be in normal collision detection; TODO: make better api
-            //level.objs.push(ladder);
-
-            // scales; TODO: shouldn't be GameItem??
+            // scales
             for (var i = 0; i < 3; ++i) {
-                scales[i] = new GameItem(
-                    new GameObj(JQObject.SCALE, door.pos.x + 350 + i * 220, FULLH - game.padFloor - 107, 150, 36),
-                    false,
-                    0,
-                    true
-                );
-                scales[i].holdingItem = JQObject.EMPTY; // TODO: make better api
-                //level.objs.push(scales[i]);
-            }            //--------------- Game Items ---------------\\            // sack
-            sack = new GameItem(new GameObj(JQObject.SACK, 680, 111 + Graphics.projectY / 2, 20, 24, "sack.png"), false, 5);
-            hiddenCash = new GameItem(new GameObj(JQObject.CASH, 113, 80, 22, 24, "cash.png"), false, 10, false);            // crates            for (var i = 0; i < 1; ++i) {
-                level.crates[i] = new GameItem(
-                    new GameObj(JQObject.CRATE, 446, FULLH - game.padFloor - 26 + 5, 24, 26, "crate.png"),
-                    true,
-                    0,
-                    true
-                );
-            }
-            //level.crates[1].pos.x = scales[1].pos.x + scales[1].w / 2 - level.crates[0].w / 2;
-            //level.crates[2].pos.x = scales[2].pos.x + scales[2].w / 2 - level.crates[0].w / 2;
-
-            for (var i = 0; i < level.crates.length; ++i) {
-                level.items.push(level.crates[i]);
-            }
-            level.items.push(sack, hiddenCash);
+                scales[i] = new GameObj(JQObject.SCALE, this.width - 330 - i * 230, FULLH - game.padFloor - 107, 150, 36);
+                scales[i].holdingItem = JQObject.EMPTY; // TODO: fix api
+                level.objs.push(scales[i]);
+            }                        setExit();            setCyborg();            setItems();
         },
 
         deinit: function(){
@@ -166,11 +159,10 @@ var lvl1 = (function () {
         },
 
         update: function () {
-            if (window.DEBUG) {
-                level.complete();
-            }
-
-            cyborg.update();
+            // TODO: move to better location
+            //if (window.DEBUG) {
+            //    level.complete();
+            //}
 
             handle_crates_scale_ladder();
 
@@ -186,6 +178,8 @@ var lvl1 = (function () {
             }
 
             // cyborg; TODO: should be a level.enemies[]
+            cyborg.update();
+
             if (cyborg.health > 0) {
                 // hero and cyborg
                 if (Physics.isCollision(hero, cyborg, 0)) {
@@ -222,7 +216,7 @@ var lvl1 = (function () {
             }
 
             // door
-            if (!game.over && Physics.isCollision(hero, door, 0)) {
+            if (!game.over && Physics.isCollision(hero, door, 0)) {     // TODO: why checking game.over???
                 level.complete();
             }
         },
@@ -230,8 +224,6 @@ var lvl1 = (function () {
         render: function () {
             if(!cyborg.deadOffScreen)
                 cyborg.draw();
-
-            Graphics.drawDoor(door.pos.x, door.pos.y, door.w, door.h);
         }
     };
 
