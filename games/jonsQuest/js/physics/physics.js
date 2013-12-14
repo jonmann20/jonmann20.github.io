@@ -99,7 +99,7 @@ var Physics = (function () {
                 if (level.items[i].visible) {
 
                     // TODO: check if player has left item before allowing re-pickup (instad of only checking spacebar) .. wait till hero no longer colliding??
-                    if (level.items[i].type === JQObject.CRATE && hero.isCarrying && !(32 in keysDown))
+                    if (level.items[i].type === JQObject.CRATE && hero.isCarrying && !(keysDown[KeyCode.SPACEBAR]))
                         continue;
 
                     Physics.isSATcollision(hero, level.items[i], function (r) {

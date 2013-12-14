@@ -56,6 +56,11 @@ var hero = (function () {
 		        }
 		        else if(runTimer >= 0 && runTimer < 20) {
 		            pos = spriteArr[theDir + "_Run1"];
+
+		            if (!hero.isJumping) {
+		                audio.step.play();
+		            }
+
 		        }
 		        else if (runTimer >= 20 && runTimer < 40) {
 		            pos = spriteArr[theDir + "_Run2"];
@@ -99,8 +104,8 @@ var hero = (function () {
 	
 	/*********************** Render ***********************/
 	function drawHero(){
-		if(imgReady && hero.sx >= 0 && hero.sy >= 0){
-		    ctx.drawImage(img, hero.sx, hero.sy, hero.w, hero.h, hero.pos.x, hero.pos.y, hero.w, hero.h);
+	    if (imgReady && hero.sx >= 0 && hero.sy >= 0) {
+		    ctx.drawImage(img, hero.sx, hero.sy, hero.w, hero.h, Math.round(hero.pos.x), Math.round(hero.pos.y), hero.w, hero.h);
     	}
 	}
 		

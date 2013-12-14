@@ -26,6 +26,7 @@ h1 {
 .canvasWrap canvas {
     margin: 0 auto;
     background: #000;
+    -webkit-transition: opacity 0.5s;
     transition: opacity 0.5s;
 }
 .preTransition{

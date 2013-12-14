@@ -89,6 +89,25 @@ var utils = (function () {
             };
         },
 
+        browser: function(){
+            var ua = navigator.userAgent,
+                     tem,
+                     M = ua.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*([\d\.]+)/i) || []
+            ;
+
+            if (/trident/i.test(M[1])) {
+                tem = /\brv[ :]+(\d+(\.\d+)?)/g.exec(ua) || [];
+                    return 'IE '+(tem[1] || '');
+            }
+
+            M = M[2]? [M[1], M[2]]:[navigator.appName, navigator.appVersion, '-?'];
+
+            if ((tem = ua.match(/version\/([\.\d]+)/i)) != null)
+                M[2] = tem[1];
+
+            return M.join(' ');
+        },
+
         /**** Debug Printers ****/
         // A method to print to the console less frequently then within the game loop.
         printSlow: function(msg){
@@ -216,12 +235,15 @@ var Inv_e = Object.freeze({
 
 var KeyCode = Object.freeze({
     ENTER: 13,
+    F: 70,
     J: 74,
     K: 75,
+    M: 77,
     O: 79,
     S: 83,
     W: 87,
-    EMPTY: -1
+    EMPTY: -1,
+    SPACEBAR: 32
 });
 
 var Color = Object.freeze({

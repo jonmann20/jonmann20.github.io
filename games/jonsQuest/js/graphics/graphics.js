@@ -17,18 +17,23 @@ var Graphics = (function () {
         projectY: 12,
 
 
-        fadeCanvas: function(callback){
-            $(canvas).removeClass("preTransition");
-            $(canvas).addClass("duringTransition");
-
-            canvasTransition = $(canvas).on("transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd", function () {
-                canvasTransition.off();
-
-                $(this).removeClass("duringTransition");
-                $(this).addClass("preTransition");
-
+        fadeCanvas: function (callback) {
+            if (utils.browser() === "MSIE 9.0") {
                 callback();
-            });
+            }
+            else {
+                $(canvas).removeClass("preTransition");
+                $(canvas).addClass("duringTransition");
+
+                canvasTransition = $(canvas).on("transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd", function () {
+                    canvasTransition.off();
+
+                    $(this).removeClass("duringTransition");
+                    $(this).addClass("preTransition");
+
+                    callback();
+                });
+            }
         },
 
         blinkText: function (fontSize, x, y, str) {

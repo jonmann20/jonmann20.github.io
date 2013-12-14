@@ -34,14 +34,14 @@ var HeroInputComponent = function () {
 
             addEventListener("keydown", function (e) {
 
-                if (e.keyCode == 32)
-                    e.preventDefault(); 			//----- space bar (scrolling to bottom of page)
-                else if (e.keyCode == 77)			//----- mute/unmute (m)
+                if (e.keyCode === KeyCode.SPACEBAR)
+                    e.preventDefault(); 			    // scrolling to bottom of page
+                else if (e.keyCode === KeyCode.M)	    // mute/unmute
                     audio.handleMuteButton();
-                else if(e.keyCode == 70)            //----- resize (f)
+                else if(e.keyCode === KeyCode.F)        // resize
                     $(".resize").trigger("click");
-                else if (e.keyCode == 75 &&			//----- jump (k);       TODO: move to check() function
-                       (!hero.isJumping && ((lastKeyDown != 75) || !(75 in keysDown))) &&
+                else if (e.keyCode === KeyCode.K &&		// jump; TODO: move to check() function
+                       (!hero.isJumping && ((lastKeyDown !== KeyCode.K) || !(keysDown[KeyCode.K]))) &&
                        hero.isOnObj
                 ) {
                     audio.jump.play();
@@ -49,8 +49,8 @@ var HeroInputComponent = function () {
                     hero.isJumping = true;
                     hero.isOnObj = false;
                 }
-                else if (e.keyCode == 74 &&		//----- shoot (j);          TODO: move to check() function
-                        ((lastKeyDown != 74) || !(74 in keysDown))
+                else if (e.keyCode === KeyCode.J &&		// shoot; TODO: move to check() function
+                        ((lastKeyDown != KeyCode.J) || !(keysDown[KeyCode.J]))
                 ) {
                     if (hero.ammo > 0 && !hero.isCarrying) {
                         audio.play(audio.effort);
@@ -69,7 +69,7 @@ var HeroInputComponent = function () {
                         --hero.ammo;
                     }
                 }
-                else if (e.keyCode == KeyCode.O) {      //----- options (o)
+                else if (e.keyCode == KeyCode.O) {      // options
                     utils.toggleMenu();
                 }
 
@@ -112,7 +112,7 @@ var HeroInputComponent = function () {
             // --------- keys pressed --------
             var leftOrRight = false;
             //----- left (a)
-            if(65 in keysDown){
+            if(keysDown[65]){
                 hero.vX = (Math.abs(hero.vX - hero.aX) > maxVx) ? -maxVx : (hero.vX - hero.aX);
                 hero.dir = Dir.LEFT;
                 leftOrRight = true;
@@ -120,7 +120,7 @@ var HeroInputComponent = function () {
 
 		
             //----- right (d)
-            if (68 in keysDown) {
+            if (keysDown[68]) {
                 hero.vX = (Math.abs(hero.vX + hero.aX) > maxVx) ? maxVx : (hero.vX + hero.aX);
                 hero.dir = Dir.RIGHT;
                 leftOrRight = true;
@@ -136,14 +136,14 @@ var HeroInputComponent = function () {
 	    
 
             //----- up (w)
-            if (KeyCode.W in keysDown) {
+            if (keysDown[KeyCode.W]) {
                 if (hero.onLadder) {
                     --hero.pos.y;
                 }
             }
 
             //----- down (s)
-            if (KeyCode.S in keysDown) {
+            if (keysDown[KeyCode.S]) {
                 if (hero.onLadder) {
                     ++hero.pos.y;
                 }
@@ -151,7 +151,7 @@ var HeroInputComponent = function () {
 
 	    
             //----- drop object (spacebar)
-            if (32 in keysDown) {
+            if (keysDown[32]) {
                 if (hero.isCarrying) {
                     hero.isCarrying = false;
                     hero.curItem.holding = false;
@@ -162,7 +162,7 @@ var HeroInputComponent = function () {
 
 		
             //----- heal (h)
-            if(72 in keysDown){
+            if(keysDown[72]){
                 if(hero.medKits > 0 && hero.health < hero.maxHealth){
                     ++hero.health;
                     --hero.medKits;
@@ -173,7 +173,7 @@ var HeroInputComponent = function () {
 		
 		
             //----- restore (r)
-            if(82 in keysDown && !(17 in keysDown)){	// 17 = ctrl
+            if(keysDown[82] && !(keysDown[17])){	// 17 = ctrl
                 if(hero.manaKits > 0 && hero.mana < hero.maxMana){
                     ++hero.mana;
                     --hero.manaKits;

@@ -104,10 +104,6 @@ var HeroPhysicsComponent = function () {
 
     return {
         updatePosition: function (){	
-            if (!hero.isJumping && !hero.onLadder && hero.pos.x !== (hero.pos.x + hero.vX)) {
-                audio.step.play();
-            }
-
             // TODO: buggy at edges, quickly changin direction incorrectly causes an updateView()
             
             if(((hero.dir === Dir.RIGHT && hero.pos.x >= (HALFW + 35)) ||
