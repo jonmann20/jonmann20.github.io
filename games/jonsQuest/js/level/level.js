@@ -29,6 +29,13 @@ var level = (function () {
         }
     }
 
+    function updateEnemiesView() {
+        for (var i = 0; i < level.enemies.length; ++i) {
+            level.enemies[i].pos.x -= hero.vX;
+        }
+    }
+
+
     function updateItems() {
         for (var i = 0; i < level.items.length; ++i) {
             if (level.items[i].visible && !level.items[i].isOnObj) {
@@ -42,9 +49,24 @@ var level = (function () {
 
                 // obj collision
                 Physics.testObjObjs(level.items[i], function (r) {
-                    if (r.overlapN.y === 1) {       // on top
+                    if (r.overlapN.y === 1) {    // on top of platform
+                        audio.thud.play();
+                        r.a.vY = 0;
                         r.a.isOnObj = true;
+
+                        if (r.b.type === JQObject.SCALE) {
+                            r.a.grabbable = false;
+                            r.b.holdingItem = JQObject.CRATE;
+
+                            utils.repeatAction(70, 8, function () {
+                                ++r.a.pos.y;
+                                ++r.b.pos.y;
+                            });
+                        }
+
+                        //level.items.push(r.a);
                     }
+
                 });
 
                 // item collision
@@ -59,6 +81,46 @@ var level = (function () {
         }
     }
 
+    function updateEnemies() {
+        for (var i = 0; i < level.enemies.length; ++i) {
+            level.enemies[i].update();
+
+            if (level.enemies[i].health > 0) {
+                // hero and enemy
+                if (Physics.isCollision(hero, level.enemies[i], 0)) {
+                    level.enemies[i].active = true;
+
+                    if (!hero.invincible) {
+                        audio.play(audio.heartbeat, true);
+
+                        hero.invincible = true;
+                        --hero.health;
+                    }
+                }
+
+                // bullets and enemy
+                for (var i = 0; i < hero.bulletArr.length; ++i) {
+                    var wasCollision = false;
+
+                    if (Physics.isCollision(hero.bulletArr[i], level.enemies[i], 0)) {
+                        wasCollision = true;
+                        audio.play(audio.thud, true);
+                    }
+
+                    if (wasCollision) {
+                        level.enemies[i].active = true;
+
+                        hero.bulletArr.splice(i, 1); // remove ith item
+                        --level.enemies[i].health;
+
+                        if (level.enemies[i].health <= 0) {
+                            level.enemies[i].death();
+                        }
+                    }
+                }
+            }
+        }
+    }
 
     /********** Render **********/
     // the parallax background
@@ -113,13 +175,23 @@ var level = (function () {
         }
     }
 
+    function drawEnemies() {
+        for (var i = 0; i < level.enemies.length; ++i) {
+            if (!level.enemies[i].deadOffScreen) {
+                level.enemies[i].draw();
+            }
+        }
+    }
+
+
     return {
         bg: [   // parallax background; TODO: make one array with variable depth (z dimension) and variable scroll speed per entry
             [], // backgorund obj's 1
             []  // background obj's 2
         ],
-        objs: [],           // dynamically holds all of the objects for the level;
-        items: [],          // dynamically holds all of the items for the level (movable items)
+        objs: [],           // dynamically holds all of the objects for the level
+        items: [],          // dynamically holds all of the items for the level
+        enemies: [],        // dynamically holds all of the enemies for the level
         curLvl: null,       // alias for the current level object e.g. lvl1
         isCutscene: false,
         time: 0,
@@ -143,13 +215,10 @@ var level = (function () {
             // reset level
             level.hiddenItemsFound = 0;
             hero.lvlX = 0;
+            level.bg = [[], []];
             level.objs = [];
             level.items = [];
-            level.crates = [];
-            level.bg = [
-                [],
-                []
-            ];
+            level.enemies = [];
 
             // reset hero
             hero.pos.x = 23;
@@ -189,6 +258,7 @@ var level = (function () {
         update: function () {
             if (!level.isTransitioning) {
                 updateItems();
+                updateEnemies();
 
                 level.curLvl.update();
             }
@@ -199,6 +269,7 @@ var level = (function () {
             updateObjsView();
             updateItemsView();
             updateBgView();
+            updateEnemiesView();
         },
 
 
@@ -207,6 +278,7 @@ var level = (function () {
             drawBg();
             drawObjs();
             drawItems();
+            drawEnemies();
             
             level.curLvl.render();
         }

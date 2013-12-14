@@ -59,7 +59,7 @@ var utils = (function () {
                         if (audio.isOn)
                             audio.bgMusic.muted = false;
                     });
-                }, 3000);
+                }, 2600);
             }
         },
 

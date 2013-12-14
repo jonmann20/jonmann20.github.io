@@ -21,7 +21,10 @@ var Main = (function () {
     function debug() {
         // dev enviroment
         if (location.host === "jon") {
-            //window.DEBUG = true;
+            window.DEBUG = true;
+
+            // speed up canvas transition
+            $(canvas).css({"transition": "opacity 0.01s"});
 
             // skip start screen
             lastKeyDown = KeyCode.ENTER;
@@ -44,19 +47,17 @@ var Main = (function () {
 
             // wait for google font
             $(document).on("fontLoaded", function () {
-
                 // game timer
                 setInterval(function () {
                     ++game.actualTime;
                 }, 1000);
 
                 // start the game
-                //startScreen.start();
                 game.start();
-            });
-                
 
-            debug();
+
+                debug();
+            });
         }
     }
 })();

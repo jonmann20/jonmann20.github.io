@@ -77,7 +77,7 @@ var hero = (function () {
 		if (idleTime > 210) {
 		    var foo = idleTime % 200;
 		    
-		    if (foo >= 0 && foo <= 50 || foo > 100 && foo <= 150 || hero.isCarrying)
+		    if (foo >= 0 && foo <= 50 || foo > 100 && foo <= 150 || hero.isCarrying)    // TODO: check if throwing
 		        pos = spriteArr["playerDown"];
 		    else if (foo > 50  && foo <= 100)
 		        pos = spriteArr["playerDown_breatheIn"];

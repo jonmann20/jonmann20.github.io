@@ -10,7 +10,6 @@ h1 {
     padding-left: 15px;
 }
 
-
 .canvasWrap {
     background: #000;
     width: 1008px;
@@ -35,7 +34,6 @@ h1 {
 .duringTransition {
     opacity: 0.01;
 }
-
 
 /* Colorboxes */
 .gameInstructions {
@@ -102,7 +100,6 @@ input[readonly] {
     margin-bottom: 18px;
 }
 
-
 @media screen and (max-width: 1323px) {
     header {
         position: static;
@@ -112,16 +109,17 @@ input[readonly] {
         top: 95px;
     }
 }
-@media screen and (max-width: 991px) {
+@media screen and (max-width: 1007px) {
     .canvasWrap {
         position: static;
         margin: 20px auto;
-        width: 234px;
+        width: 75%;
         box-shadow: none;
         text-align: center;
     }
     .canvasWrap .minW {
         display: block;
+        padding-top: 10%;
     }
     .canvasWrap canvas {
         display: none;

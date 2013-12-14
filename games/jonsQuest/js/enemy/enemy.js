@@ -11,20 +11,20 @@ var JQEnemy = Object.freeze({
     Enemy extends GameObj
 
     @param(GameObj) gObj A game object (super class).
+    @param(EnemyType) enemy_t The type of the enemy.
     @param(number) health The hp of the enemy.
     @param(number) leftXBound The left x coordinate boundary.
     @param(number) rightXBound The right x coordinate boundary.
-    @param(EnemyType) enemy_t The type of the enemy.
     @param(bool?) active Is the enemy allowed to move?
     @constructor
 */
-var Enemy = function (gObj, health, leftXBound, rightXBound, enemy_t, active) {
+var Enemy = function (gObj, enemy_t, health, leftXBound, rightXBound, active) {
     utils.extend(this, gObj);
 
     this.initHealth = this.health = health;
+    this.enemy_t = enemy_t;
     this.leftXBound = leftXBound;
     this.rightXBound = rightXBound;
-    this.enemy_t = enemy_t;
     this.active = (typeof (active) !== "undefined") ? active : false;
     this.deadOffScreen = false;
 

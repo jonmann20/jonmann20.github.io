@@ -35,7 +35,7 @@ var Physics = (function () {
         },
 
         // Tests collision between gObj and level.objs[]
-        // @param(GameObj) gObj A game object
+        // @param(GameObj) gObj A game object (or subclass).
         // @param(function) callback A callback function. Called with a SAT.Response().
         testObjObjs: function (gObj, callback) {
             var response = new SAT.Response();
