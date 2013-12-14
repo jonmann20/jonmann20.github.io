@@ -15,8 +15,6 @@
 */
 var GameObj = function (type, x, y, w, h, src) {
     this.type = type;
-    this.initX = x;
-    this.initY = y;
 
     // set this.pos
     if (type === JQObject.FLOOR) {
@@ -51,20 +49,6 @@ var GameObj = function (type, x, y, w, h, src) {
 };
 
 GameObj.prototype = {
-    //updatePos: function () {    // TODO: move to normal update location
-    //    if (!this.isOnObj) {
-    //        if (this.pos.y < FULLH - game.padFloor - this.h) {      // +3 is projectY
-    //            this.pos.y += this.vY;
-    //            this.isOnObj = false;
-    //        }
-    //        else {
-    //            this.pos.y = FULLH - game.padFloor - this.h;
-    //            this.isOnObj = true;
-    //            this.vY = 0;
-    //        }
-    //    }
-    //},
-
     draw: function () {
         if (this.imgReady) {
             ctx.drawImage(this.img, this.pos.x, this.pos.y);

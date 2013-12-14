@@ -7,8 +7,8 @@ var Physics = (function () {
 
 
     return {
-        // could be sped up by checking if a does NOT intersect with b (i.e. using OR)
-        // uses simple Speculative Contacts
+        // TODO: speed up by checking if a does NOT intersect with b (i.e. using OR)
+        // Uses simple Speculative Contacts
         isCollision: function (a, b, moe, isLvl) {
             var aX = (typeof (isLvl) !== "undefined") ? a.pos.x + a.lvlX : a.pos.x;
 
@@ -23,33 +23,34 @@ var Physics = (function () {
             return false;
         },
         
-        // uses SAT and AABB
+        // Checks for a collision between two polygons (uses SAT and AABB).
+        // @param(GameObj) a A game object.
+        // @param(GameObj) b A game object.
+        // @param(function) callback A function invoked with SAT.Response ONLY IF a collision occurred.
         isSATcollision: function (a, b, callback) {
-            var response = new SAT.Response();
-            var collided = SAT.testPolygonPolygon(a, b, response);
-
-            if (collided)
-                callback(response);
+            var r = new SAT.Response();
+            if (SAT.testPolygonPolygon(a, b, r)) {
+                callback(r);
+            }
         },
 
-        // checks collision between a and the level objects
-        lvlObjCollision: function (a, callback) {
+        // Tests collision between gObj and level.objs[]
+        // @param(GameObj) gObj A game object
+        // @param(function) callback A callback function. Called with a SAT.Response().
+        testObjObjs: function (gObj, callback) {
             var response = new SAT.Response();
             for (var i = 0; i < level.objs.length; ++i) {
-
                 if (typeof level.objs[i].collidable === "undefined"
-                    //&& level.objs[i] !== a         // checks if object is in list (by reference)
+                    //&& level.objs[i] !== gObj         // checks if object is in list (by reference)
                 ) {
 
                     // Check Level Object Collision
-                    var collided = SAT.testPolygonPolygon(a, level.objs[i], response);
+                    var collided = SAT.testPolygonPolygon(gObj, level.objs[i], response);
 
                     // Respond to Level Object Collision
                     if (collided) {
                         response.a.pos.x -= response.overlapV.x;
                         response.a.pos.y -= response.overlapV.y;
-                        
-                        response.type = level.objs[i].type;     // TODO: r.b.type???
 
                         callback(response);
                         break;
@@ -59,15 +60,43 @@ var Physics = (function () {
                 }
             }
 
-
             // idea to fix "hooking" around edges of platform
             // http://stackoverflow.com/a/1355695/353166
         },
 
-        // checks collision between hero and the movable level items
-        lvlItemCollision: function (callback) {
+        // Tests collision between item and level.items[]
+        // @param(GameItem) item A game item.
+        // @param(function) callback A callback function.  Called with a SAT.Response().
+        testItemItems: function (item, callback) {
+            var response = new SAT.Response();
+
             for (var i = 0; i < level.items.length; ++i) {
-                if (level.items[i].visible && !level.items[i].collected) {
+                if (!level.items[i].holding){
+                        
+                    if (level.items[i].type !== JQObject.CRATE)       // TODO: allow non-crates
+                        continue;
+
+                    var collided = SAT.testPolygonPolygon(item, level.items[i], response);
+                        
+                    if (collided) {
+                        if (response.overlapN.y === 1) {   // a is on top of b
+                            response.a.pos.x -= response.overlapV.x;
+                            response.a.pos.y -= response.overlapV.y;
+
+                            callback(response);
+                            break;
+                        }
+                    }
+
+                    response.clear();
+                }
+            }
+        },
+
+        // Tests collision between hero and the level.items[]
+        testHeroItems: function (callback) {
+            for (var i = 0; i < level.items.length; ++i) {
+                if (level.items[i].visible) {
 
                     // TODO: check if player has left item before allowing re-pickup (instad of only checking spacebar) .. wait till hero no longer colliding??
                     if (level.items[i].type === JQObject.CRATE && hero.isCarrying && !(32 in keysDown))
@@ -78,6 +107,38 @@ var Physics = (function () {
                     });
                 }
             }
-        }
+        },
+
+        // Tests collision between items
+        //testAllItems: function () {
+        //    var response = new SAT.Response();
+
+        //    for (var i = 0; i < level.items.length; ++i) {
+        //        for (var j = 0; j < level.items.length; ++j) {
+        //            if (i !== j && !level.items[i].holding && !level.items[j].holding) {
+                        
+        //                if (level.items[i].type !== JQObject.CRATE || level.items[j].type !== JQObject.CRATE)       // TODO: allow non-crates
+        //                    continue;
+
+        //                var collided = SAT.testPolygonPolygon(level.items[i], level.items[j], response);
+                        
+        //                if (collided) {
+        //                    if (response.overlapN.y === 1) {   // a is on top of b
+        //                        response.a.pos.x -= response.overlapV.x;
+        //                        response.a.pos.y -= response.overlapV.y;
+
+        //                        response.a.isOnObj = true;
+        //                        response.a.onObj = response.b;
+        //                        response.b.grabbable = false;
+
+        //                        level.items.push(response.a);
+        //                    }
+        //                }
+
+        //                response.clear();
+        //            }
+        //        }
+        //    }
+        //}
     };
 })();

@@ -2,8 +2,7 @@
 
 var level = (function () {
 
-    var maxVy = 10;
-
+    var maxVy = 10; // applys to GameObj's and GameItem's
 
     /********** Update **********/
     function updateObjsView() {
@@ -41,11 +40,20 @@ var level = (function () {
 
                 level.items[i].pos.y += level.items[i].vY;
 
-                // check collision
-                Physics.lvlObjCollision(level.items[i], function (r) {
-                    if (r.overlapN.y === 1) {                       // on top
+                // obj collision
+                Physics.testObjObjs(level.items[i], function (r) {
+                    if (r.overlapN.y === 1) {       // on top
                         r.a.isOnObj = true;
                     }
+                });
+
+                // item collision
+                Physics.testItemItems(level.items[i], function (r) {
+                    r.a.isOnObj = true;
+                    r.a.onObj = r.b;
+                    r.b.grabbable = false;
+
+                    level.items.push(r.a);
                 });
             }
         }
@@ -106,7 +114,7 @@ var level = (function () {
     }
 
     return {
-        bg: [   // parallax background
+        bg: [   // parallax background; TODO: make one array with variable depth (z dimension) and variable scroll speed per entry
             [], // backgorund obj's 1
             []  // background obj's 2
         ],

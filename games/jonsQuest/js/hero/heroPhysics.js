@@ -21,8 +21,9 @@ var HeroPhysicsComponent = function () {
             hero.vY = 0;
         }
         else if (hero.pos.y >= FULLH) {
-            if(!game.over)
+            if (!game.over) {
                 utils.deathSequence();
+            }
         }
 
         if (hero.pos.x < 0) { 						// left
@@ -38,7 +39,7 @@ var HeroPhysicsComponent = function () {
     function levelCollision() {
         hero.isOnObj = false;   // prevents jumping after walking off platform
 
-        Physics.lvlObjCollision(hero, function (r) {
+        Physics.testObjObjs(hero, function (r) {
             if (r.overlapN.y === 1) {                       // on top
                 hero.isOnObj = true;
                 hero.isJumping = false;
@@ -60,7 +61,7 @@ var HeroPhysicsComponent = function () {
             }
         }
 
-        Physics.lvlItemCollision(function (r, idx) {
+        Physics.testHeroItems(function (r, idx) {
             if (r.b.type === JQObject.CRATE) {      // TODO: make more generic
                 if (r.overlapN.y === 1) {           // on top
                     hero.pos.y -= r.overlapV.y;
@@ -69,18 +70,21 @@ var HeroPhysicsComponent = function () {
                     hero.vY = 0;
                 }
                 else if (r.b.grabbable) {
-                    r.b.isOnObj = false;
+                    if (r.b.isOnObj === true) {
+                        r.b.isOnObj = false;
+
+                        if (r.b.onObj !== null) {
+                            r.b.onObj.grabbable = true;
+                            r.b.onObj = null;
+                        }
+                    }
+
                     r.b.holding = true;
+
                     hero.curItem = r.b;
                     hero.isCarrying = true;
 
                     level.items.splice(idx, 1);
-
-                    //if (r.b.isOnObj) {
-                    //    r.b.isOnObj = false;
-                    //    r.b.onObj.grabbable = true;
-                    //    r.b.onObj = null;
-                    //}
                 }
             }
             else {

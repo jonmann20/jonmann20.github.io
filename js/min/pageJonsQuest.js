@@ -1498,8 +1498,8 @@ var Physics = (function () {
 
 
     return {
-        // could be sped up by checking if a does NOT intersect with b (i.e. using OR)
-        // uses simple Speculative Contacts
+        // TODO: speed up by checking if a does NOT intersect with b (i.e. using OR)
+        // Uses simple Speculative Contacts
         isCollision: function (a, b, moe, isLvl) {
             var aX = (typeof (isLvl) !== "undefined") ? a.pos.x + a.lvlX : a.pos.x;
 
@@ -1514,33 +1514,34 @@ var Physics = (function () {
             return false;
         },
         
-        // uses SAT and AABB
+        // Checks for a collision between two polygons (uses SAT and AABB).
+        // @param(GameObj) a A game object.
+        // @param(GameObj) b A game object.
+        // @param(function) callback A function invoked with SAT.Response ONLY IF a collision occurred.
         isSATcollision: function (a, b, callback) {
-            var response = new SAT.Response();
-            var collided = SAT.testPolygonPolygon(a, b, response);
-
-            if (collided)
-                callback(response);
+            var r = new SAT.Response();
+            if (SAT.testPolygonPolygon(a, b, r)) {
+                callback(r);
+            }
         },
 
-        // checks collision between a and the level objects
-        lvlObjCollision: function (a, callback) {
+        // Tests collision between gObj and level.objs[]
+        // @param(GameObj) gObj A game object
+        // @param(function) callback A callback function. Called with a SAT.Response().
+        testObjObjs: function (gObj, callback) {
             var response = new SAT.Response();
             for (var i = 0; i < level.objs.length; ++i) {
-
                 if (typeof level.objs[i].collidable === "undefined"
-                    //&& level.objs[i] !== a         // checks if object is in list (by reference)
+                    //&& level.objs[i] !== gObj         // checks if object is in list (by reference)
                 ) {
 
                     // Check Level Object Collision
-                    var collided = SAT.testPolygonPolygon(a, level.objs[i], response);
+                    var collided = SAT.testPolygonPolygon(gObj, level.objs[i], response);
 
                     // Respond to Level Object Collision
                     if (collided) {
                         response.a.pos.x -= response.overlapV.x;
                         response.a.pos.y -= response.overlapV.y;
-                        
-                        response.type = level.objs[i].type;     // TODO: r.b.type???
 
                         callback(response);
                         break;
@@ -1550,15 +1551,43 @@ var Physics = (function () {
                 }
             }
 
-
             // idea to fix "hooking" around edges of platform
             // http://stackoverflow.com/a/1355695/353166
         },
 
-        // checks collision between hero and the movable level items
-        lvlItemCollision: function (callback) {
+        // Tests collision between item and level.items[]
+        // @param(GameItem) item A game item.
+        // @param(function) callback A callback function.  Called with a SAT.Response().
+        testItemItems: function (item, callback) {
+            var response = new SAT.Response();
+
             for (var i = 0; i < level.items.length; ++i) {
-                if (level.items[i].visible && !level.items[i].collected) {
+                if (!level.items[i].holding){
+                        
+                    if (level.items[i].type !== JQObject.CRATE)       // TODO: allow non-crates
+                        continue;
+
+                    var collided = SAT.testPolygonPolygon(item, level.items[i], response);
+                        
+                    if (collided) {
+                        if (response.overlapN.y === 1) {   // a is on top of b
+                            response.a.pos.x -= response.overlapV.x;
+                            response.a.pos.y -= response.overlapV.y;
+
+                            callback(response);
+                            break;
+                        }
+                    }
+
+                    response.clear();
+                }
+            }
+        },
+
+        // Tests collision between hero and the level.items[]
+        testHeroItems: function (callback) {
+            for (var i = 0; i < level.items.length; ++i) {
+                if (level.items[i].visible) {
 
                     // TODO: check if player has left item before allowing re-pickup (instad of only checking spacebar) .. wait till hero no longer colliding??
                     if (level.items[i].type === JQObject.CRATE && hero.isCarrying && !(32 in keysDown))
@@ -1569,105 +1598,42 @@ var Physics = (function () {
                     });
                 }
             }
-        }
-    };
-})();
-
-/// <reference path="../linker.js" />
-
-// TODO: abstract to any item (not just crates)
-
-var Crate = (function () {
-
-    return {
-        update: function () {
-            // alias
-            var crates = level.crates;
-
-            // crates and crates
-            var response = new SAT.Response();
-            for (var i = 0; i < crates.length; ++i) {
-                for (var j = 0; j < crates.length; ++j) {
-                    if (i !== j && !crates[i].holding && !crates[j].holding) {
-                        var collided = SAT.testPolygonPolygon(crates[i], crates[j], response);
-
-                        if (collided) {
-                            if (response.overlapN.y === 1) {   // a is on top of b
-                                response.a.pos.x -= response.overlapV.x;
-                                response.a.pos.y -= response.overlapV.y;
-
-                                response.a.isOnObj = true;
-                                response.a.onObj = response.b;
-                                response.b.grabbable = false;
-
-                                level.items.push(response.a);
-                            }
-                            else {
-                                //response.a.isOnObj = false;
-                            }
-                        }
-
-                        response.clear();
-                    }
-                }
-            }
-
-            // crates and level; hero and crates
-            for (var i = 0; i < crates.length; ++i) {
-
-                if (!crates[i].holding) {
-                    Physics.lvlObjCollision(crates[i], function (r) {
-                        if (r.type === JQObject.FLOOR) return;
-
-                        if (r.overlapN.y === 1) {    // crate on top of platform
-                            r.a.vY = 0;
-                            level.items.push(r.a);
-                            r.a.onPlatform = true;
-                            r.a.grabbable = false;
-                            r.b.holdingItem = JQObject.CRATE;
-
-                            utils.repeatAction(70, 8, function () {
-                                ++r.a.pos.y;
-                                ++r.b.pos.y;
-                            });
-
-                            audio.thud.play();
-                        }
-                        //else {
-                        //    r.b.holdingItem = "none";
-                        //}
-                    });
-
-                    var idx = level.items.indexOf(crates[i]);
-                    if (idx < 0 && crates[i].isOnObj) {
-                        level.items.push(crates[i]);
-                    }
-                }
-                else {
-                    if (hero.vX === 0) {
-                        crates[i].pos.x = hero.pos.x + 2;
-                        crates[i].pos.y = hero.pos.y + 11;
-                    }
-                    else {
-                        crates[i].pos.x = hero.pos.x + ((hero.dir === Dir.RIGHT) ? 22 : -22);
-                        crates[i].pos.y = hero.pos.y + 5;
-                    }
-                }
-
-                //crates[i].updatePos();
-            }
         },
 
-        render: function(){
-            // crates
-            for (var i = 0; i < level.crates.length; ++i) {
-                if (!level.crates[i].holding) {
-                    level.crates[i].draw();
-                }
-            }
-        }
+        // Tests collision between items
+        //testAllItems: function () {
+        //    var response = new SAT.Response();
+
+        //    for (var i = 0; i < level.items.length; ++i) {
+        //        for (var j = 0; j < level.items.length; ++j) {
+        //            if (i !== j && !level.items[i].holding && !level.items[j].holding) {
+                        
+        //                if (level.items[i].type !== JQObject.CRATE || level.items[j].type !== JQObject.CRATE)       // TODO: allow non-crates
+        //                    continue;
+
+        //                var collided = SAT.testPolygonPolygon(level.items[i], level.items[j], response);
+                        
+        //                if (collided) {
+        //                    if (response.overlapN.y === 1) {   // a is on top of b
+        //                        response.a.pos.x -= response.overlapV.x;
+        //                        response.a.pos.y -= response.overlapV.y;
+
+        //                        response.a.isOnObj = true;
+        //                        response.a.onObj = response.b;
+        //                        response.b.grabbable = false;
+
+        //                        level.items.push(response.a);
+        //                    }
+        //                }
+
+        //                response.clear();
+        //            }
+        //        }
+        //    }
+        //}
     };
 })();
+
 /// <reference path="../linker.js" />
 
 /*
@@ -1685,8 +1651,6 @@ var Crate = (function () {
 */
 var GameObj = function (type, x, y, w, h, src) {
     this.type = type;
-    this.initX = x;
-    this.initY = y;
 
     // set this.pos
     if (type === JQObject.FLOOR) {
@@ -1721,20 +1685,6 @@ var GameObj = function (type, x, y, w, h, src) {
 };
 
 GameObj.prototype = {
-    //updatePos: function () {    // TODO: move to normal update location
-    //    if (!this.isOnObj) {
-    //        if (this.pos.y < FULLH - game.padFloor - this.h) {      // +3 is projectY
-    //            this.pos.y += this.vY;
-    //            this.isOnObj = false;
-    //        }
-    //        else {
-    //            this.pos.y = FULLH - game.padFloor - this.h;
-    //            this.isOnObj = true;
-    //            this.vY = 0;
-    //        }
-    //    }
-    //},
-
     draw: function () {
         if (this.imgReady) {
             ctx.drawImage(this.img, this.pos.x, this.pos.y);
@@ -1982,8 +1932,7 @@ Enemy.prototype = {
 
 var level = (function () {
 
-    var maxVy = 10;
-
+    var maxVy = 10; // applys to GameObj's and GameItem's
 
     /********** Update **********/
     function updateObjsView() {
@@ -2021,11 +1970,20 @@ var level = (function () {
 
                 level.items[i].pos.y += level.items[i].vY;
 
-                // check collision
-                Physics.lvlObjCollision(level.items[i], function (r) {
-                    if (r.overlapN.y === 1) {                       // on top
+                // obj collision
+                Physics.testObjObjs(level.items[i], function (r) {
+                    if (r.overlapN.y === 1) {       // on top
                         r.a.isOnObj = true;
                     }
+                });
+
+                // item collision
+                Physics.testItemItems(level.items[i], function (r) {
+                    r.a.isOnObj = true;
+                    r.a.onObj = r.b;
+                    r.b.grabbable = false;
+
+                    level.items.push(r.a);
                 });
             }
         }
@@ -2086,7 +2044,7 @@ var level = (function () {
     }
 
     return {
-        bg: [   // parallax background
+        bg: [   // parallax background; TODO: make one array with variable depth (z dimension) and variable scroll speed per entry
             [], // backgorund obj's 1
             []  // background obj's 2
         ],
@@ -2388,6 +2346,7 @@ var lvl1 = (function () {
         }
     }
 
+
     function setBackground() {
         var i = 0,
             x1offset = HALFW / 1.2,
@@ -2456,23 +2415,26 @@ var lvl1 = (function () {
         cyborg.collidable = false;  // TODO: fix api        level.objs.push(cyborg);
     }
 
-    function setItems() {        // sack
+    function setItems() {        // crates        var crate = [];        for (var i = 0; i < 3; ++i) {
+            crate.push(
+                new GameItem(
+                    new GameObj(JQObject.CRATE, 246, FULLH - game.padFloor - 26 + 5, 24, 26, "crate.png"),      // 446
+                    true,
+                    0,
+                    true
+                )
+            );
+        }
+        crate[1].pos.x = 300;//scales[1].pos.x + scales[1].w / 2 - crate[0].w / 2;
+        crate[2].pos.x = 350;//scales[2].pos.x + scales[2].w / 2 - crate[0].w / 2;        // sack
         sack = new GameItem(new GameObj(JQObject.SACK, 680, 111 + Graphics.projectY / 2, 20, 24, "sack.png"), false, 5);
 
         // hidden cash
-        hiddenCash = new GameItem(new GameObj(JQObject.CASH, 113, 80, 22, 24, "cash.png"), false, 10, false);        // crates        for (var i = 0; i < 3; ++i) {
-            level.crates[i] = new GameItem(
-                new GameObj(JQObject.CRATE, 446, FULLH - game.padFloor - 26 + 5, 24, 26, "crate.png"),
-                true,
-                0,
-                true
-            );
-        }
-        level.crates[1].pos.x = scales[1].pos.x + scales[1].w / 2 - level.crates[0].w / 2;
-        level.crates[2].pos.x = scales[2].pos.x + scales[2].w / 2 - level.crates[0].w / 2;
+        hiddenCash = new GameItem(new GameObj(JQObject.CASH, 113, 80, 22, 24, "cash.png"), false, 10, false);
 
-        level.items.push(sack, hiddenCash, level.crates[0], level.crates[1], level.crates[2]);
+        level.items.push(crate[0], crate[1], crate[2], sack, hiddenCash);
     }
+
 
     return {
         width: 2700,
@@ -3016,8 +2978,9 @@ var HeroPhysicsComponent = function () {
             hero.vY = 0;
         }
         else if (hero.pos.y >= FULLH) {
-            if(!game.over)
+            if (!game.over) {
                 utils.deathSequence();
+            }
         }
 
         if (hero.pos.x < 0) { 						// left
@@ -3033,7 +2996,7 @@ var HeroPhysicsComponent = function () {
     function levelCollision() {
         hero.isOnObj = false;   // prevents jumping after walking off platform
 
-        Physics.lvlObjCollision(hero, function (r) {
+        Physics.testObjObjs(hero, function (r) {
             if (r.overlapN.y === 1) {                       // on top
                 hero.isOnObj = true;
                 hero.isJumping = false;
@@ -3055,7 +3018,7 @@ var HeroPhysicsComponent = function () {
             }
         }
 
-        Physics.lvlItemCollision(function (r, idx) {
+        Physics.testHeroItems(function (r, idx) {
             if (r.b.type === JQObject.CRATE) {      // TODO: make more generic
                 if (r.overlapN.y === 1) {           // on top
                     hero.pos.y -= r.overlapV.y;
@@ -3064,18 +3027,21 @@ var HeroPhysicsComponent = function () {
                     hero.vY = 0;
                 }
                 else if (r.b.grabbable) {
-                    r.b.isOnObj = false;
+                    if (r.b.isOnObj === true) {
+                        r.b.isOnObj = false;
+
+                        if (r.b.onObj !== null) {
+                            r.b.onObj.grabbable = true;
+                            r.b.onObj = null;
+                        }
+                    }
+
                     r.b.holding = true;
+
                     hero.curItem = r.b;
                     hero.isCarrying = true;
 
                     level.items.splice(idx, 1);
-
-                    //if (r.b.isOnObj) {
-                    //    r.b.isOnObj = false;
-                    //    r.b.onObj.grabbable = true;
-                    //    r.b.onObj = null;
-                    //}
                 }
             }
             else {

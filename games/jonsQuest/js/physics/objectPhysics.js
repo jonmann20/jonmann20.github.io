@@ -1,7 +1,5 @@
 ﻿/// <reference path="../linker.js" />
 
-// TODO: abstract to any item (not just crates)
-
 var Crate = (function () {
 
     return {
@@ -9,40 +7,11 @@ var Crate = (function () {
             // alias
             var crates = level.crates;
 
-            // crates and crates
-            var response = new SAT.Response();
-            for (var i = 0; i < crates.length; ++i) {
-                for (var j = 0; j < crates.length; ++j) {
-                    if (i !== j && !crates[i].holding && !crates[j].holding) {
-                        var collided = SAT.testPolygonPolygon(crates[i], crates[j], response);
-
-                        if (collided) {
-                            if (response.overlapN.y === 1) {   // a is on top of b
-                                response.a.pos.x -= response.overlapV.x;
-                                response.a.pos.y -= response.overlapV.y;
-
-                                response.a.isOnObj = true;
-                                response.a.onObj = response.b;
-                                response.b.grabbable = false;
-
-                                level.items.push(response.a);
-                            }
-                            else {
-                                //response.a.isOnObj = false;
-                            }
-                        }
-
-                        response.clear();
-                    }
-                }
-            }
-
             // crates and level; hero and crates
             for (var i = 0; i < crates.length; ++i) {
-
                 if (!crates[i].holding) {
                     Physics.lvlObjCollision(crates[i], function (r) {
-                        if (r.type === JQObject.FLOOR) return;
+                        if (r.b.type === JQObject.FLOOR) return;
 
                         if (r.overlapN.y === 1) {    // crate on top of platform
                             r.a.vY = 0;
@@ -80,15 +49,6 @@ var Crate = (function () {
                 }
 
                 //crates[i].updatePos();
-            }
-        },
-
-        render: function(){
-            // crates
-            for (var i = 0; i < level.crates.length; ++i) {
-                if (!level.crates[i].holding) {
-                    level.crates[i].draw();
-                }
             }
         }
     };

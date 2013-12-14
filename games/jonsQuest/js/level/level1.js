@@ -37,6 +37,7 @@ var lvl1 = (function () {
         }
     }
 
+
     function setBackground() {
         var i = 0,
             x1offset = HALFW / 1.2,
@@ -105,23 +106,26 @@ var lvl1 = (function () {
         cyborg.collidable = false;  // TODO: fix api        level.objs.push(cyborg);
     }
 
-    function setItems() {        // sack
+    function setItems() {        // crates        var crate = [];        for (var i = 0; i < 3; ++i) {
+            crate.push(
+                new GameItem(
+                    new GameObj(JQObject.CRATE, 246, FULLH - game.padFloor - 26 + 5, 24, 26, "crate.png"),      // 446
+                    true,
+                    0,
+                    true
+                )
+            );
+        }
+        crate[1].pos.x = 300;//scales[1].pos.x + scales[1].w / 2 - crate[0].w / 2;
+        crate[2].pos.x = 350;//scales[2].pos.x + scales[2].w / 2 - crate[0].w / 2;        // sack
         sack = new GameItem(new GameObj(JQObject.SACK, 680, 111 + Graphics.projectY / 2, 20, 24, "sack.png"), false, 5);
 
         // hidden cash
-        hiddenCash = new GameItem(new GameObj(JQObject.CASH, 113, 80, 22, 24, "cash.png"), false, 10, false);        // crates        for (var i = 0; i < 3; ++i) {
-            level.crates[i] = new GameItem(
-                new GameObj(JQObject.CRATE, 446, FULLH - game.padFloor - 26 + 5, 24, 26, "crate.png"),
-                true,
-                0,
-                true
-            );
-        }
-        level.crates[1].pos.x = scales[1].pos.x + scales[1].w / 2 - level.crates[0].w / 2;
-        level.crates[2].pos.x = scales[2].pos.x + scales[2].w / 2 - level.crates[0].w / 2;
+        hiddenCash = new GameItem(new GameObj(JQObject.CASH, 113, 80, 22, 24, "cash.png"), false, 10, false);
 
-        level.items.push(sack, hiddenCash, level.crates[0], level.crates[1], level.crates[2]);
+        level.items.push(crate[0], crate[1], crate[2], sack, hiddenCash);
     }
+
 
     return {
         width: 2700,
