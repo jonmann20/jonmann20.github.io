@@ -20,14 +20,14 @@ var GameItem = function (gObj, grabbable, val, visible) {
 
     this.isBeingHeld = false;
 
-    // TODO: make private
-    this.parentDraw = gObj.draw;
+    // TODO: make private/prototype
+    var parentDraw = this.draw;
+    this.draw = function () {
+        if (this.visible) {
+            parentDraw.apply(this);
+        }
+    };
 };
 
-GameItem.prototype = {
-    draw: function () {
-        if (this.visible) {
-            this.parentDraw.apply(this);
-        }
-    }
-};
+//GameItem.prototype = {
+//};

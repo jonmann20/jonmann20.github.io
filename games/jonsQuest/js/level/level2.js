@@ -9,22 +9,38 @@ var lvl2 = (function () {
     function setObjs() {
         // floor
         var floor1 = new GameObj(
-            JQObject.FLOOR,
+            JQObject.EMPTY,
             -Graphics.projectX,
             FULLH - game.padFloor - 1,
-            FULLW / 3,
+            FULLW / 3 + 40,
             game.padFloor + 1
         );
 
         var floor2 = new GameObj(
-            JQObject.FLOOR,
+            JQObject.EMPTY,
             HALFW,
             FULLH - game.padFloor - 1,
-            FULLW / 3,
+            120,
             game.padFloor + 1
         );
 
-        level.objs.push(floor1, floor2);
+        var floorPlat = new GameObj(
+            JQObject.EMPTY,
+            floor2.pos.x + floor2.w,
+            floor2.pos.y - floor2.h,
+            300,
+            150
+        );
+
+        var floorTp = new GameObj(
+            JQObject.EMPTY,
+            floorPlat.pos.x + floor2.w,
+            floor2.pos.y - floor2.h*2.5,
+            100,
+            25
+        );
+
+        level.objs.push(floorPlat, floor1, floor2, floorTp);
 
         return [floor2.pos, floor2.w];
     }
@@ -35,7 +51,7 @@ var lvl2 = (function () {
             true
         );
 
-        level.items.push(crate);
+        //level.items.push(crate);
     }
 
     function setEnemies(f2) {
@@ -49,11 +65,11 @@ var lvl2 = (function () {
             true
         );
         enemy.collidable = true;        // TODO: fix api
-        level.enemies.push(enemy);
+        //level.enemies.push(enemy);
     }
 
     return {
-        width: 800,
+        width: 2700,
 
 
         init: function () {

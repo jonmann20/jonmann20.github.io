@@ -101,7 +101,7 @@ var lvl1 = (function () {
 
         // platform + door
         level.objs.push(Graphics.getSkewedRect(stairs.x + stairs.w, stairs.y - stairs.h, 200, 50));
-        door = new GameObj(JQObject.DOOR, stairs.x + stairs.w + 155, stairs.y - stairs.h - 53 + Graphics.projectY/2, 25, 53);
+        door = new GameObj(JQObject.DOOR, stairs.x + stairs.w + 155, stairs.y - stairs.h - 54 + Graphics.projectY / 2, 25, 53);
         level.objs.push(door);
 
         // TODO: move to setItems()

@@ -164,6 +164,10 @@ var level = (function () {
             else if (level.objs[i].type === JQObject.DOOR) {
                 Graphics.drawDoor(level.objs[i]);
             }
+            else {
+                ctx.fillStyle = Color.DARK_BROWN;
+                ctx.fillRect(level.objs[i].pos.x, level.objs[i].pos.y, level.objs[i].w, level.objs[i].h);
+            }
         }
     }
 
