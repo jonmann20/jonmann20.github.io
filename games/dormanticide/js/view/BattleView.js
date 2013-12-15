@@ -19,6 +19,16 @@ BattleView.prototype = (function () {
         curSlot: 0
     };
 
+    var Dir = Object.freeze({
+        RIGHT: 0,
+        LEFT: 1
+    });
+
+    var left = {
+        x: 30,
+        dir: Dir.RIGHT
+    };
+
     function drawDormantHUD(dormant, x, y) {
         ctx.fillStyle = "#000";
         ctx.fillText(dormant.name + "  L" + dormant.lvl, x + 40, y);
@@ -30,7 +40,7 @@ BattleView.prototype = (function () {
         ctx.fillStyle = "red";
         ctx.fillRect(x + 21, y + 13, dormant.hp * (100/dormant.initHP) - 1, 8);
     }
-    
+
     function drawHUD(dormant) {
         ctx.strokeStyle = "#000";
         ctx.strokeRect(20, 300, 500, 250);
@@ -63,6 +73,18 @@ BattleView.prototype = (function () {
         update: function () {
             switch(lastKeyUp){
                 case KeyCode.ENTER:
+                    left.dir = Dir.RIGHT;
+
+                    Graphics.repeatAction(6, 60, function () {
+                        if (left.dir === Dir.RIGHT && left.x > 60)
+                            left.dir = Dir.LEFT;
+
+                        if (left.dir === Dir.RIGHT)
+                            ++left.x;
+                        else
+                            --left.x;
+                    });
+
                     this.dormantR.hp -= (this.dormantL.atk * this.dormantL.actions[arrow.curSlot].multiplier) / this.dormantR.def;
                     lastKeyUp = KeyCode.EMPTY;
                     break;
@@ -79,6 +101,11 @@ BattleView.prototype = (function () {
                     }
                     break;
             }
+
+            if (this.dormantR.hp <= 0) {
+                alert("You Win");
+                location.reload();
+            }
         },
 
         render: function () {
@@ -88,12 +115,14 @@ BattleView.prototype = (function () {
 
             // left
             drawDormantHUD(this.dormantL, 10, 15);
+            this.dormantL.draw(left.x, 90);
             drawHUD(this.dormantL);
             drawActions(this.dormantL);
             drawActionArrow();
 
             // right
             drawDormantHUD(this.dormantR, canvas.width - 130, 15);
+            this.dormantR.draw(770, 90);
         }
     };
 })();

@@ -1,6 +1,8 @@
 ﻿var KeyCode = Object.freeze({
     ENTER: 13,
     CTRL: 17,
+    UP: 38,
+    DOWN: 40,
     A: 65,
     D: 68,
     F: 70,
@@ -20,13 +22,22 @@ function Input() {
     keysDown = {};
     lastKeyUp = KeyCode.EMPTY;
 
+    function fixKey(key) {
+        if (key === KeyCode.UP)
+            key = KeyCode.W;
+        else if (key === KeyCode.DOWN)
+            key = KeyCode.S;
+
+        return key;
+    }
+
     addEventListener("keydown", function (e) {
-        keysDown[e.keyCode] = true;
+        keysDown[fixKey(e.keyCode)] = true;
     }, true);
 
     addEventListener("keyup", function (e) {
-        lastKeyUp = e.keyCode;
-        delete keysDown[e.keyCode];
+        lastKeyUp = fixKey(e.keyCode);
+        delete keysDown[lastKeyUp];
     }, false);
 }
 

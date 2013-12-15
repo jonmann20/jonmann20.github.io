@@ -6,6 +6,9 @@
 /// <reference path="engine/GameEngine.js" />
 /// <reference path="engine/Input.js" />
 
+// Graphics
+/// <reference path="graphics/Graphics.js" />
+
 // Views
 /// <reference path="view/BattleView.js" />
 

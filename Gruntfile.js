@@ -64,6 +64,7 @@ module.exports = function(grunt) {
 	            src: [
                     "games/dormanticide/js/engine/GameEngine.js",
                     "games/dormanticide/js/engine/Input.js",
+                    "games/dormanticide/js/graphics/Graphics.js",
                     "games/dormanticide/js/view/BattleView.js",
                     "games/dormanticide/js/dormant/Dormant.js",
                     "games/dormanticide/js/dormant/FightAction.js",
