@@ -59,6 +59,18 @@ module.exports = function(grunt) {
 	            ]
 	        },
 
+	        pageDormanticide: {
+	            dest: "js/min/pageDormanticide.js",
+	            src: [
+                    "games/dormanticide/js/engine/GameEngine.js",
+                    "games/dormanticide/js/engine/Input.js",
+                    "games/dormanticide/js/view/BattleView.js",
+                    "games/dormanticide/js/dormant/Dormant.js",
+                    "games/dormanticide/js/dormant/FightAction.js",
+                    "games/dormanticide/js/main.js",
+                ]
+	        },
+
 	        css: {
 	            dest: "css/min/master.css",
 	            src: "css/*.css"
@@ -80,6 +92,11 @@ module.exports = function(grunt) {
 	            tasks: ["concat_sourcemap:pageJonsQuestJs"]
 	        },
 
+	        pageDormanticide: {
+	            files: ["<%= concat_sourcemap.pageDormanticide.src %>"],
+	            tasks: ["concat_sourcemap:pageDormanticide"]
+	        },
+
 	        css: {
 	            files: ["<%= concat_sourcemap.css.src %>"],
 	            tasks: ["concat_sourcemap:css"]
@@ -96,6 +113,12 @@ module.exports = function(grunt) {
 	        pageJonsQuestJs: {
 	            files: {
 	                "<%= concat_sourcemap.pageJonsQuestJs.dest %>": ["js/analytics.js", "js/clientSideLogging", "<%= concat_sourcemap.pageJonsQuestJs.src %>"]
+	            }
+	        },
+
+	        pageDormanticide: {
+	            files: {
+	                "<%= concat_sourcemap.pageDormanticide.dest %>": ["js/analytics.js", "js/clientSideLogging", "<%= concat_sourcemap.pageDormanticide.src %>"]
 	            }
 	        }
 	    },

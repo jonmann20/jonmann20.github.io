@@ -56,7 +56,7 @@ var Main = (function () {
                 game.start();
 
 
-                debug();
+                //debug();
             });
         }
     }
