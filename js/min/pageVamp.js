@@ -1,42 +1,27 @@
-/// <reference path="../linker.js" />
-
-var GameEngine = function () {
-
-    canvas = document.getElementsByTagName("canvas")[0];
-    ctx = canvas.getContext("2d");
-
-    input = new Input();
-
-    var actions = [FightAction.TACKLE, FightAction.DRAGONS_BREATH, null, null];
-
-    var malaise = new Dormant("malaise.png", "MALAISE", 12, 8, 27, actions);
-    var erabor = new Dormant("erabor.png", "ERABOR", 8, 12, 23, actions);
-    view = new BattleView("#ddd", malaise, erabor);
-
-
-
-
-    function update() {
-        //input.update();
-        view.update();
-    }
-
-    function render() {
-        requestAnimationFrame(render);
-        view.render();
-    }
-
+function GameSave() {
     return {
-        start: function () {
-            setInterval(update, 1000 / 60);
-            requestAnimationFrame(render);
+        load: function (slot) {
+            return localStorage["slot" + slot];
         },
 
-        stop: function () {
+        getList: function () {
+            return list = [
+                this.load(0),
+                this.load(1),
+                this.load(2)
+            ];
+        },
 
+        store: function (slot, data) {
+            localStorage["slot" + slot] = data;
+        },
+
+
+        update: function () {
+            // GameSaveView
         }
     };
-};
+}
 function GameEngine() {
     var wrap = document.createElement("div");
     wrap.className = "canvasWrap";
@@ -139,30 +124,6 @@ function GameInput() {
 //        }
 //    };
 //};
-function GameSave() {
-    return {
-        load: function (slot) {
-            return localStorage["slot" + slot];
-        },
-
-        getList: function () {
-            return list = [
-                this.load(0),
-                this.load(1),
-                this.load(2)
-            ];
-        },
-
-        store: function (slot, data) {
-            localStorage["slot" + slot] = data;
-        },
-
-
-        update: function () {
-            // GameSaveView
-        }
-    };
-}
 /// <reference path="commonLinker.js" />
 
 function GameView() {
@@ -970,217 +931,8 @@ var SAT = {};
         return true;
     };
 }(SAT));
-/// <reference path="/games/common/js/SAT.js" />
-/// <reference path="/games/common/js/GameInput.js" />
-/// <reference path="/games/common/js/GameEngine.js" />
-/// <reference path="/games/common/js/GameView.js" />
-
-var Graphics = (function () {
-    return {
-        /*
-            @param(number) timeStep The wait time between running the action (in ms).
-            @param(number) numTimes The number to times to run the action.
-            @param(function) callback The callback function.
-        */
-        repeatAction: function (timeStep, numTimes, callback) {
-            var num = 0;
-            var theAnimation = setInterval(function () {
-                if (num++ > numTimes) {
-                    clearInterval(theAnimation);
-                }
-                else {
-                    callback();
-                }
-            }, timeStep);
-        }
-    };
+(function Main() {
+    var game = new GameEngine();
+    game.start();
 })();
-/// <reference path="../linker.js" />
-
-/*
-    @param(string) bgColor The view background color.
-    @param(Dormant) dormantL The player's dormant.
-    @param(Dormant) dormantR The opponent's dormant.
-*/
-function BattleView(bgColor, dormantL, dormantR) {
-    this.bgColor = bgColor;
-    this.dormantL = dormantL;
-    this.dormantR = dormantR;
-}
-
-BattleView.prototype = (function () {
-
-    var arrow = {
-        x: 43,
-        y: 350,
-        curSlot: 0
-    };
-
-    var Dir = Object.freeze({
-        RIGHT: 0,
-        LEFT: 1
-    });
-
-    var left = {
-        x: 30,
-        dir: Dir.RIGHT
-    };
-
-    function drawDormantHUD(dormant, x, y) {
-        ctx.fillStyle = "#000";
-        ctx.fillText(dormant.name + "  L" + dormant.lvl, x + 40, y);
-        ctx.fillText("HP", x, y + 20);
-
-        ctx.strokeStyle = "#000";
-        ctx.strokeRect(x + 20, y + 12, 100, 10);
-
-        ctx.fillStyle = "red";
-        ctx.fillRect(x + 21, y + 13, dormant.hp * (100/dormant.initHP) - 1, 8);
-    }
-
-    function drawHUD(dormant) {
-        ctx.strokeStyle = "#000";
-        ctx.strokeRect(20, 300, 500, 250);
-
-        ctx.fillStyle = "#000";
-        ctx.fillText("ATK: " + dormant.atk, 460, 320);
-        ctx.fillText("DEF: " + dormant.def, 460, 340);
-    }
-
-    function drawActions(dormant) {
-        ctx.fillStyle = "#000";
-
-        for (var i = 0; i < 4; ++i) {
-            if (dormant.actions[i] === null) {
-                ctx.fillText("--", 80, 350 + i * 30);
-            }
-            else {
-                ctx.fillText(dormant.actions[i].name, 80, 350 + i * 30);
-            }
-        }
-    }
-
-    function drawActionArrow() {
-        ctx.fillStyle = "#000";
-        ctx.fillText(">>", arrow.x, arrow.y);
-    }
-
-
-    return {
-        update: function () {
-            switch(lastKeyUp){
-                case KeyCode.ENTER:
-                    left.dir = Dir.RIGHT;
-
-                    Graphics.repeatAction(6, 60, function () {
-                        if (left.dir === Dir.RIGHT && left.x > 60)
-                            left.dir = Dir.LEFT;
-
-                        if (left.dir === Dir.RIGHT)
-                            ++left.x;
-                        else
-                            --left.x;
-                    });
-
-                    this.dormantR.hp -= (this.dormantL.atk * this.dormantL.actions[arrow.curSlot].multiplier) / this.dormantR.def;
-                    lastKeyUp = KeyCode.EMPTY;
-                    break;
-                case KeyCode.W:
-                    if (arrow.curSlot !== 0 && this.dormantL.actions[arrow.curSlot - 1] !== null) {
-                        --arrow.curSlot;
-                        arrow.y -= 30;
-                    }
-                    break;
-                case KeyCode.S:
-                    if (arrow.curSlot !== 3 && this.dormantL.actions[arrow.curSlot + 1] !== null) {
-                        ++arrow.curSlot;
-                        arrow.y += 30;
-                    }
-                    break;
-            }
-
-            if (this.dormantR.hp <= 0) {
-                alert("You Win");
-                location.reload();
-            }
-        },
-
-        render: function () {
-            // background
-            ctx.fillStyle = this.bgColor;
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-            // left
-            drawDormantHUD(this.dormantL, 10, 15);
-            this.dormantL.draw(left.x, 90);
-            drawHUD(this.dormantL);
-            drawActions(this.dormantL);
-            drawActionArrow();
-
-            // right
-            drawDormantHUD(this.dormantR, canvas.width - 130, 15);
-            this.dormantR.draw(770, 90);
-        }
-    };
-})();
-/// <reference path="../linker.js" />
-
-/*
-    @param(string) name The name of the dormant.
-    @param(number) atk The attack strength of the dormant.
-    @param(number) def The defense strength of the dormant.
-    @param(number) hp The total available health points of the dormant.
-    @param(array) actions The fight actions of the dormant.
-    @param(?number) lvl The level of the dormant. (1 by default)
-*/
-function Dormant(src, name, atk, def, hp, actions, lvl) {
-    var that = this;
-
-    this.img = new Image();
-    this.imgReady = false;
-    this.img.onload = function () {
-        that.imgReady = true;
-    };
-    this.img.src = "img/" + src;
-
-    this.name = name;
-    this.atk = atk;
-    this.def = def;
-    this.initHP = this.hp = hp;
-    this.actions = actions;
-    this.lvl = (typeof (lvl) !== "undefined") ? lvl : 1;
-
-
-
-}
-
-Dormant.prototype = (function () {
-
-    return {
-        draw: function (x, y) {
-            if (this.imgReady) {
-                ctx.drawImage(this.img, x, y, this.img.width, this.img.height);
-            }
-        }
-    };
-})();
-
-var FightAction = Object.freeze({
-    TACKLE: {
-        name: "TACKLE",
-        multiplier: 1
-    },
-    HEAL: {
-        name: "HEAL",
-        multiplier: 1
-    },
-    DRAGONS_BREATH: {
-        name: "DRAGONS_BREATH",
-        multiplier: 5
-    }
-});
-/// <reference path="linker.js" />
-
-var game = new GameEngine();
-game.start();
-//# sourceMappingURL=pageDormanticide.js.map
+//# sourceMappingURL=pageVamp.js.map

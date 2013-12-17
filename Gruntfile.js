@@ -63,13 +63,25 @@ module.exports = function(grunt) {
 	            dest: "js/min/pageDormanticide.js",
 	            src: [
                     "games/dormanticide/js/engine/GameEngine.js",
-                    "games/dormanticide/js/engine/Input.js",
+                    "games/common/js/*.js",
                     "games/dormanticide/js/graphics/Graphics.js",
                     "games/dormanticide/js/view/BattleView.js",
                     "games/dormanticide/js/dormant/Dormant.js",
                     "games/dormanticide/js/dormant/FightAction.js",
                     "games/dormanticide/js/main.js",
                 ]
+	        },
+
+	        pageVamp: {
+	            dest: "js/min/pageVamp.js",
+	            src: [// TODO: make own package for common
+                    "games/common/js/GameSave.js",
+                    "games/common/js/GameEngine.js",
+                    "games/common/js/GameInput.js",
+                    "games/common/js/GameView.js",
+                    "games/common/js/SAT.js",
+                    "games/vamp/js/main.js"
+	            ]
 	        },
 
 	        css: {
@@ -98,6 +110,11 @@ module.exports = function(grunt) {
 	            tasks: ["concat_sourcemap:pageDormanticide"]
 	        },
 
+	        pageVamp: {
+	            files: ["<%= concat_sourcemap.pageVamp.src %>"],
+	            tasks: ["concat_sourcemap:pageVamp"]
+	        },
+
 	        css: {
 	            files: ["<%= concat_sourcemap.css.src %>"],
 	            tasks: ["concat_sourcemap:css"]
@@ -120,6 +137,12 @@ module.exports = function(grunt) {
 	        pageDormanticide: {
 	            files: {
 	                "<%= concat_sourcemap.pageDormanticide.dest %>": ["js/analytics.js", "js/clientSideLogging", "<%= concat_sourcemap.pageDormanticide.src %>"]
+	            }
+	        },
+
+	        pageDormanticide: {
+	            files: {
+	                "<%= concat_sourcemap.pageVamp.dest %>": ["js/analytics.js", "js/clientSideLogging", "<%= concat_sourcemap.pageVamp.src %>"]
 	            }
 	        }
 	    },
