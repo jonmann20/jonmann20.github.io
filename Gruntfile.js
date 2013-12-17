@@ -75,11 +75,13 @@ module.exports = function(grunt) {
 	        pageVamp: {
 	            dest: "js/min/pageVamp.js",
 	            src: [// TODO: make own package for common
-                    "games/common/js/GameSave.js",
                     "games/common/js/GameEngine.js",
+                    "games/common/js/GameSave.js",
                     "games/common/js/GameInput.js",
                     "games/common/js/GameView.js",
                     "games/common/js/SAT.js",
+                    "games/vamp/js/TitleView.js",
+                    "games/vamp/js/LevelView.js",
                     "games/vamp/js/main.js"
 	            ]
 	        },

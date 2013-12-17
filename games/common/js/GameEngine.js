@@ -10,7 +10,6 @@
     ctx = canvas.getContext("2d");
 
     input = new GameInput();
-    save = new GameSave();
     view = new GameView();
 
     function update() {
