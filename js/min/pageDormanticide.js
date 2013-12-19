@@ -35,23 +35,41 @@ function GameEngine() {
 GameEngine.prototype = (function() {
     var that,
         updateInterval,
-        renderRAF
+        renderRAF,
+        onUpdateSet = false,
+        onRenderSet = false
     ;
 
 
     function update() {
         that.view.update();
+
+        if(onUpdateSet)
+            that.onUpdate();
     }
 
     function render() {
         renderRAF = requestAnimationFrame(render);
         that.view.render();
+
+        if(onRenderSet)
+            that.onRender();
     }
 
 
     return {
         init: function(){
             that = this;
+        },
+
+        onUpdate: function(callback) {
+            onUpdateSet = true;
+            this.onUpdate = callback;
+        },
+
+        onRender: function(callback) {
+            onRenderSet = true;
+            this.onRender = callback;
         },
 
         start: function() {

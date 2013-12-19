@@ -35,23 +35,41 @@ function GameEngine() {
 GameEngine.prototype = (function() {
     var that,
         updateInterval,
-        renderRAF
+        renderRAF,
+        onUpdateSet = false,
+        onRenderSet = false
     ;
 
 
     function update() {
         that.view.update();
+
+        if(onUpdateSet)
+            that.onUpdate();
     }
 
     function render() {
         renderRAF = requestAnimationFrame(render);
         that.view.render();
+
+        if(onRenderSet)
+            that.onRender();
     }
 
 
     return {
         init: function(){
             that = this;
+        },
+
+        onUpdate: function(callback) {
+            onUpdateSet = true;
+            this.onUpdate = callback;
+        },
+
+        onRender: function(callback) {
+            onRenderSet = true;
+            this.onRender = callback;
         },
 
         start: function() {
@@ -337,19 +355,28 @@ TitleView.prototype = (function () {
 /// <reference path="../commonLinker.js" />
 
 function GameSaveView() {
+    this.privates = {};
+
     this.init();
 }
 
 GameSaveView.prototype = (function() {
-    var title = "Select a save slot";
-    var cta = "Press Delete to erase a save";
-
-    var storage = new GameSave();
-    var list = storage.getList();
-    var arrow;
+    var that,
+        title = "Select a save slot",
+        cta = "Press Delete to erase a save",
+        storage = new GameSave(),
+        list = storage.getList(),
+        arrow
+    ;
 
     return {
+        then: function(callback) {
+            this.privates.callback = callback;
+        },
+
         init: function() {
+            that = this;
+
             arrow = {
                 img: ">>",
                 slot: 0,
@@ -358,17 +385,13 @@ GameSaveView.prototype = (function() {
             };
         },
 
-        then: function(callback) {
-            this.then = callback;
-        },
-
         update: function() {
-            if(lastKeyUp === KeyCode.ESC) {
-                lastKeyUp = KeyCode.EMPTY;
-                this.then(KeyCode.ESC);
+            if(game.input.lastKeyDown === KeyCode.ESC) {
+                game.input.lastKeyDown = KeyCode.EMPTY;
+                this.privates.callback(KeyCode.ESC);
             }
-            else if(lastKeyUp === KeyCode.ENTER) {
-                lastKeyUp = KeyCode.EMPTY;
+            else if(game.input.lastKeyDown === KeyCode.ENTER) {
+                game.input.lastKeyDown = KeyCode.EMPTY;
 
                 var date = new Date();
                 var m = date.getMonth();
@@ -377,22 +400,22 @@ GameSaveView.prototype = (function() {
                 var t = date.toLocaleTimeString();
 
                 storage.save(arrow.slot, m + '/' + d + '/' + y + ' ' + t);
-                this.then(KeyCode.ENTER);
+                this.privates.callback(KeyCode.ENTER);
             }
-            else if(lastKeyUp === KeyCode.DELETE) {
-                lastKeyUp = KeyCode.EMPTY;
+            else if(game.input.lastKeyDown === KeyCode.DELETE) {
+                game.input.lastKeyDownp = KeyCode.EMPTY;
 
                 list = storage.erase(arrow.slot);
             }
-            else if(arrow.slot !== 2 && lastKeyUp === KeyCode.DOWN) {
-                lastKeyUp = KeyCode.EMPTY;
+            else if(arrow.slot !== 2 && game.input.lastKeyDown === KeyCode.DOWN) {
+                game.input.lastKeyDown = KeyCode.EMPTY;
 
                 ++arrow.slot;
                 arrow.x = canvas.width / 2 - ctx.measureText(list[arrow.slot]).width / 2 - 60;
                 arrow.y += 80;
             }
-            else if(arrow.slot !== 0 && lastKeyUp === KeyCode.UP) {
-                lastKeyUp = KeyCode.EMPTY;
+            else if(arrow.slot !== 0 && game.input.lastKeyDown === KeyCode.UP) {
+                game.input.lastKeyDown = KeyCode.EMPTY;
 
                 --arrow.slot;
                 arrow.x = canvas.width / 2 - ctx.measureText(list[arrow.slot]).width / 2 - 60;

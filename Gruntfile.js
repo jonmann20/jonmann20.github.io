@@ -39,7 +39,7 @@ module.exports = function(grunt) {
                     "games/common/js/GameSave.js",
                     "games/common/js/GameInput.js",
                     "games/common/js/GameUtils.js",
-                    //"games/common/js/physics/SAT.js",
+                    "games/common/js/physics/SAT.js",
                     "games/common/js/graphics/GameGraphics.js",
                     "games/common/js/view/GameView.js",
                     "games/common/js/view/TitleView.js",
@@ -90,7 +90,9 @@ module.exports = function(grunt) {
 	            dest: "js/min/pageVamp.js",
 	            src: [
                     "<%= concat_sourcemap.gamesCommonJs.src %>",
-                    "games/vamp/js/LevelView.js",
+                    "games/vamp/js/view/LevelView.js",
+                    "games/vamp/js/level/level1.js",
+                    "games/vamp/js/vamp.js",
                     "games/vamp/js/main.js"
 	            ]
 	        },
