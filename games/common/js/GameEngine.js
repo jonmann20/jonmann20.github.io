@@ -1,4 +1,12 @@
 ﻿function GameEngine() {
+    // back button
+    var backBtn = document.createElement("a");
+    backBtn.href = "/#games";
+    backBtn.innerText = "Back";
+    backBtn.className = "btnBack";
+    document.body.appendChild(backBtn);
+
+    // canvasWrap
     var wrap = document.createElement("div");
     wrap.className = "canvasWrap";
     canvas = document.createElement("canvas");

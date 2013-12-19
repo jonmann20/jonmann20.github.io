@@ -1,4 +1,7 @@
-﻿// Dormanti
+﻿// Common
+/// <reference path="../../common/js/commonLinker.js" />
+
+// Dormanti
 /// <reference path="dormant/Dormant.js" />
 /// <reference path="dormant/FightAction.js" />
 

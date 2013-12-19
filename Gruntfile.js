@@ -32,6 +32,17 @@ module.exports = function(grunt) {
 	            ]
 	        },
 
+	        gamesCommonJs: {
+	            dest: "js/min/gamesCommon.js",
+	            src: [
+                    "games/common/js/GameEngine.js",
+                    "games/common/js/GameSave.js",
+                    "games/common/js/GameInput.js",
+                    "games/common/js/GameGraphics.js",
+                    "games/common/js/GameView.js"
+	            ]
+	        },
+
 	        pageJonsQuestJs: {
 	            dest: "js/min/pageJonsQuest.js",
 	            src: [
@@ -62,24 +73,19 @@ module.exports = function(grunt) {
 	        pageDormanticide: {
 	            dest: "js/min/pageDormanticide.js",
 	            src: [
-                    "games/dormanticide/js/engine/GameEngine.js",
-                    "games/common/js/*.js",
+                    "<%= concat_sourcemap.gamesCommonJs.src %>",
                     "games/dormanticide/js/graphics/Graphics.js",
                     "games/dormanticide/js/view/BattleView.js",
                     "games/dormanticide/js/dormant/Dormant.js",
                     "games/dormanticide/js/dormant/FightAction.js",
-                    "games/dormanticide/js/main.js",
+                    "games/dormanticide/js/main.js"
                 ]
 	        },
 
 	        pageVamp: {
 	            dest: "js/min/pageVamp.js",
-	            src: [// TODO: make own package for common
-                    "games/common/js/GameEngine.js",
-                    "games/common/js/GameSave.js",
-                    "games/common/js/GameInput.js",
-                    "games/common/js/GameView.js",
-                    "games/common/js/SAT.js",
+	            src: [
+                    "<%= concat_sourcemap.gamesCommonJs.src %>",
                     "games/vamp/js/TitleView.js",
                     "games/vamp/js/LevelView.js",
                     "games/vamp/js/main.js"
@@ -101,6 +107,11 @@ module.exports = function(grunt) {
 	            files: ["<%= concat_sourcemap.masterJs.src %>"],
 	            tasks: ["concat_sourcemap:masterJs"]
 	        },
+
+	        //gamesCommonJs: {
+	        //    files: ["<%= concat_sourcemap.gamesCommonJs.src %>"],
+	        //    tasks: ["concat_sourcemap:gamesCommonJs", "concat_sourcemap:gamesCommonJs]
+	        //}
 
 	        pageJonsQuestJs: {
 	            files: ["<%= concat_sourcemap.pageJonsQuestJs.src %>"],

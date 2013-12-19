@@ -88,13 +88,13 @@ BattleView.prototype = (function () {
                     this.dormantR.hp -= (this.dormantL.atk * this.dormantL.actions[arrow.curSlot].multiplier) / this.dormantR.def;
                     lastKeyUp = KeyCode.EMPTY;
                     break;
-                case KeyCode.W:
+                case KeyCode.UP:
                     if (arrow.curSlot !== 0 && this.dormantL.actions[arrow.curSlot - 1] !== null) {
                         --arrow.curSlot;
                         arrow.y -= 30;
                     }
                     break;
-                case KeyCode.S:
+                case KeyCode.DOWN:
                     if (arrow.curSlot !== 3 && this.dormantL.actions[arrow.curSlot + 1] !== null) {
                         ++arrow.curSlot;
                         arrow.y += 30;
