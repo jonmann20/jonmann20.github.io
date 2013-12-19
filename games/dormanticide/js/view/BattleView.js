@@ -45,6 +45,7 @@ BattleView.prototype = (function () {
         ctx.strokeStyle = "#000";
         ctx.strokeRect(20, 300, 500, 250);
 
+        ctx.font = "12px Arial";
         ctx.fillStyle = "#000";
         ctx.fillText("ATK: " + dormant.atk, 460, 320);
         ctx.fillText("DEF: " + dormant.def, 460, 340);
@@ -70,6 +71,10 @@ BattleView.prototype = (function () {
 
 
     return {
+        then: function(callback){
+            this.then = callback;
+        },
+
         update: function () {
             switch(lastKeyUp){
                 case KeyCode.ENTER:

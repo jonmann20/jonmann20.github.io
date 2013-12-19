@@ -72,9 +72,7 @@ GameSave.prototype = (function () {
     };
 })();
 
-function GameSaveView(returnView, callback) {
-    this.returnView = returnView;
-    this.callback = callback;
+function GameSaveView() {
     this.init();
 }
 
@@ -87,18 +85,25 @@ GameSaveView.prototype = (function () {
     var arrow;
 
     return {
-        init: function(){
+        init: function () {
+            console.log("h");
             arrow = {
                 img: ">>",
                 slot: 0,
-                x: canvas.width / 2 - ctx.measureText(list[0]).width/2 - 60,
+                x: canvas.width / 2 - ctx.measureText(list[0]).width/2 - 60,    // TODO: make instance var??
                 y: 200
             };
         },
 
+        then: function(callback){
+            this.then = callback;
+        },
+
         update: function () {
-            
-            if (lastKeyUp === KeyCode.ENTER) {
+            if (lastKeyUp === KeyCode.ESC) {
+                this.then(lastKeyUp);
+            }
+            else if (lastKeyUp === KeyCode.ENTER) {
                 lastKeyUp = KeyCode.EMPTY;
 
                 var date = new Date();
@@ -108,7 +113,7 @@ GameSaveView.prototype = (function () {
                 var t = date.toLocaleTimeString();
 
                 storage.save(arrow.slot, m + '/' + d + '/' + y + ' ' + t);
-                this.callback();
+                this.then(KeyCode.ENTER);
             }
             else if (lastKeyUp === KeyCode.DELETE) {
                 lastKeyUp = KeyCode.EMPTY;
@@ -231,6 +236,9 @@ function GameGraphics() {
 
 /// <reference path="commonLinker.js" />
 
+/*
+    A generic view interface.
+*/
 function GameView() {
 
 }
@@ -249,6 +257,45 @@ GameView.prototype = (function () {
             //ctx.font = "36px Arial";
             //ctx.fillStyle = "#000";
             //ctx.fillText("hello", 10, 100);
+        }
+    };
+})();
+/// <reference path="linker.js" />
+
+/*
+    Implements GameView.
+
+    @param(string) title The name of the game.
+*/
+function TitleView(title) {
+    this.title = title;
+}
+
+TitleView.prototype = (function () {
+    var cta = "Press Enter";
+
+    return {
+        then: function(callback){
+            this.then = callback;
+        },
+
+        update: function () {
+            if (lastKeyUp === KeyCode.ENTER) {
+                lastKeyUp = KeyCode.EMPTY;
+                this.then();
+            }
+        },
+
+        render: function () {
+            ctx.fillStyle = "#000";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.font = "36px Arial"
+            ctx.fillStyle = "#fff";
+            ctx.fillText(this.title, canvas.width / 2 - ctx.measureText(this.title).width / 2, 100);
+
+            ctx.font = "24px Arial";
+            ctx.fillText(cta, canvas.width / 2 - ctx.measureText(cta).width / 2, canvas.height / 2);
         }
     };
 })();
@@ -319,6 +366,7 @@ BattleView.prototype = (function () {
         ctx.strokeStyle = "#000";
         ctx.strokeRect(20, 300, 500, 250);
 
+        ctx.font = "12px Arial";
         ctx.fillStyle = "#000";
         ctx.fillText("ATK: " + dormant.atk, 460, 320);
         ctx.fillText("DEF: " + dormant.def, 460, 340);
@@ -344,6 +392,10 @@ BattleView.prototype = (function () {
 
 
     return {
+        then: function(callback){
+            this.then = callback;
+        },
+
         update: function () {
             switch(lastKeyUp){
                 case KeyCode.ENTER:
@@ -466,5 +518,13 @@ var actions = [FightAction.TACKLE, FightAction.DRAGONS_BREATH, null, null];
 
 var malaise = new Dormant("malaise.png", "MALAISE", 12, 8, 27, actions);
 var erabor = new Dormant("erabor.png", "ERABOR", 8, 12, 23, actions);
-view = new BattleView("#ddd", malaise, erabor);
+
+var titleView = new TitleView("Dormanticide");
+titleView.then(function () {
+    view = battleView;
+});
+
+var battleView = new BattleView("#ddd", malaise, erabor);
+
+view = titleView;
 //# sourceMappingURL=pageDormanticide.js.map

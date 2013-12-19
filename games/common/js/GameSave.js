@@ -34,9 +34,7 @@ GameSave.prototype = (function () {
     };
 })();
 
-function GameSaveView(returnView, callback) {
-    this.returnView = returnView;
-    this.callback = callback;
+function GameSaveView() {
     this.init();
 }
 
@@ -49,18 +47,25 @@ GameSaveView.prototype = (function () {
     var arrow;
 
     return {
-        init: function(){
+        init: function () {
+            console.log("h");
             arrow = {
                 img: ">>",
                 slot: 0,
-                x: canvas.width / 2 - ctx.measureText(list[0]).width/2 - 60,
+                x: canvas.width / 2 - ctx.measureText(list[0]).width/2 - 60,    // TODO: make instance var??
                 y: 200
             };
         },
 
+        then: function(callback){
+            this.then = callback;
+        },
+
         update: function () {
-            
-            if (lastKeyUp === KeyCode.ENTER) {
+            if (lastKeyUp === KeyCode.ESC) {
+                this.then(lastKeyUp);
+            }
+            else if (lastKeyUp === KeyCode.ENTER) {
                 lastKeyUp = KeyCode.EMPTY;
 
                 var date = new Date();
@@ -70,7 +75,7 @@ GameSaveView.prototype = (function () {
                 var t = date.toLocaleTimeString();
 
                 storage.save(arrow.slot, m + '/' + d + '/' + y + ' ' + t);
-                this.callback();
+                this.then(KeyCode.ENTER);
             }
             else if (lastKeyUp === KeyCode.DELETE) {
                 lastKeyUp = KeyCode.EMPTY;

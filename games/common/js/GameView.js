@@ -1,5 +1,8 @@
 ﻿/// <reference path="commonLinker.js" />
 
+/*
+    A generic view interface.
+*/
 function GameView() {
 
 }

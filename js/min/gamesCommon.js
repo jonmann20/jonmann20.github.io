@@ -1,4 +1,12 @@
 function GameEngine() {
+    // back button
+    var backBtn = document.createElement("a");
+    backBtn.href = "/#games";
+    backBtn.innerText = "Back";
+    backBtn.className = "btnBack";
+    document.body.appendChild(backBtn);
+
+    // canvasWrap
     var wrap = document.createElement("div");
     wrap.className = "canvasWrap";
     canvas = document.createElement("canvas");
@@ -215,8 +223,17 @@ function GameInput() {
 //        }
 //    };
 //};
+function GameGraphics() {
+    return {
+
+    };
+}
+
 /// <reference path="commonLinker.js" />
 
+/*
+    A generic view interface.
+*/
 function GameView() {
 
 }
@@ -235,6 +252,52 @@ GameView.prototype = (function () {
             //ctx.font = "36px Arial";
             //ctx.fillStyle = "#000";
             //ctx.fillText("hello", 10, 100);
+        }
+    };
+})();
+/// <reference path="linker.js" />
+
+/*
+    Implements GameView.
+
+    @param(function) callback
+*/
+function TitleView(title, allowSave) {
+    this.title = title;
+    this.allowSave = (typeof(allowSave) !== "undefined") ? allowSave : false;
+}
+
+TitleView.prototype = (function () {
+    var cta = "Press Enter";
+
+    return {
+        then: function(callback){
+            this.then = callback;
+        },
+
+        update: function () {
+            if (lastKeyUp === KeyCode.ENTER) {
+                lastKeyUp = KeyCode.EMPTY;
+
+                if (this.allowSave) {
+                    //view = new GameSaveView(this, this.callback);
+                }
+                else {
+                    this.then();
+                }
+            }
+        },
+
+        render: function () {
+            ctx.fillStyle = "#000";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.font = "36px Arial"
+            ctx.fillStyle = "#fff";
+            ctx.fillText(this.title, canvas.width / 2 - ctx.measureText(this.title).width / 2, 100);
+
+            ctx.font = "24px Arial";
+            ctx.fillText(cta, canvas.width / 2 - ctx.measureText(cta).width / 2, canvas.height / 2);
         }
     };
 })();

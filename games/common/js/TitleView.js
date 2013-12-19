@@ -1,18 +1,26 @@
 ﻿/// <reference path="linker.js" />
 
-function TitleView(callback) {
-    this.callback = callback;
+/*
+    Implements GameView.
+
+    @param(string) title The name of the game.
+*/
+function TitleView(title) {
+    this.title = title;
 }
 
 TitleView.prototype = (function () {
-    var title = "Vamp: The Great and Powerful";
     var cta = "Press Enter";
 
     return {
+        then: function(callback){
+            this.then = callback;
+        },
+
         update: function () {
             if (lastKeyUp === KeyCode.ENTER) {
                 lastKeyUp = KeyCode.EMPTY;
-                view = new GameSaveView(this, this.callback);
+                this.then();
             }
         },
 
@@ -22,9 +30,9 @@ TitleView.prototype = (function () {
 
             ctx.font = "36px Arial"
             ctx.fillStyle = "#fff";
-            ctx.fillText(title, canvas.width / 2 - ctx.measureText(title).width / 2, 100);
+            ctx.fillText(this.title, canvas.width / 2 - ctx.measureText(this.title).width / 2, 100);
 
-            ctx.font = "24px Arial"
+            ctx.font = "24px Arial";
             ctx.fillText(cta, canvas.width / 2 - ctx.measureText(cta).width / 2, canvas.height / 2);
         }
     };
