@@ -1,11 +1,17 @@
-﻿function LevelView() {
-    this.privates = {};
+﻿/// <reference path="../commonLinker.js" />
+
+/*
+    A generic view interface.
+*/
+function GameView(gEngine) {
+    this.privates = {
+        bgColor: "#ccc"
+    };
 
     this.init();
 }
 
-LevelView.prototype = (function() {
-    var that;
+GameView.prototype = (function () {
 
     return {
         then: function(callback){
@@ -13,7 +19,7 @@ LevelView.prototype = (function() {
         },
 
         init: function(){
-            that = this;
+
         },
 
         update: function () {
@@ -21,7 +27,7 @@ LevelView.prototype = (function() {
         },
 
         render: function () {
-            ctx.fillStyle = "brown";
+            ctx.fillStyle = this.privates.bgColor;
             ctx.fillRect(0, 0, canvas.width, canvas.height);
         }
     };

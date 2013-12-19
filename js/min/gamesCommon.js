@@ -1,3 +1,8 @@
+/// <reference path="commonLinker.js" />
+
+/*
+    Declares two globals: canvas and ctx
+*/
 function GameEngine() {
     // back button
     var backBtn = document.createElement("a");
@@ -9,6 +14,8 @@ function GameEngine() {
     // canvasWrap
     var wrap = document.createElement("div");
     wrap.className = "canvasWrap";
+
+    // canvas
     canvas = document.createElement("canvas");
     canvas.setAttribute("width", 16*63);
     canvas.setAttribute("height", 9*63);
@@ -17,26 +24,49 @@ function GameEngine() {
 
     ctx = canvas.getContext("2d");
 
-    input = new GameInput();
-    view = new GameView();
+    this.input = new GameInput(this);
+    this.graphics = new GameGraphics(this);
+    this.utils = new GameUtils(this);
+    this.view = new GameView(this);
+
+    this.init();
+}
+
+GameEngine.prototype = (function() {
+    var that,
+        updateInterval,
+        renderRAF
+    ;
+
 
     function update() {
-        view.update();
+        that.view.update();
     }
 
     function render() {
-        requestAnimationFrame(render);
-        view.render();
+        renderRAF = requestAnimationFrame(render);
+        that.view.render();
     }
 
+
     return {
-        start: function () {
-            setInterval(update, 1000 / 60);
-            requestAnimationFrame(render);
+        init: function(){
+            that = this;
+        },
+
+        start: function() {
+            updateInterval = setInterval(update, 1000 / 60);
+            renderRAF = requestAnimationFrame(render);
+        },
+
+        stop: function() {
+            clearInterval(updateInterval);
+            cancelAnimationFrame(renderRAF);
         }
     };
-}
-/// <reference path="../../vamp/js/linker.js" />
+})();
+
+/// <reference path="commonLinker.js" />
 
 function GameSave() {
 
@@ -72,90 +102,64 @@ GameSave.prototype = (function () {
     };
 })();
 
-function GameSaveView(returnView, callback) {
-    this.returnView = returnView;
-    this.callback = callback;
-    this.init();
+/*
+    The input component of GameEngine.
+*/
+function GameInput() {
+    this.keysDown = {};
+    this.lastKeyUp = KeyCode.EMPTY;
+    this.lastKeyDown = KeyCode.EMPTY;
+
+    function fixKey(key) {
+        if (key === KeyCode.W)
+            key = KeyCode.UP;
+        else if (key === KeyCode.S)
+            key = KeyCode.DOWN;
+        else if (key === KeyCode.D)
+            key = KeyCode.RIGHT;
+        else if (key === KeyCode.A)
+            key = KeyCode.LEFT;
+
+        return key;
+    }
+
+    var that = this;
+
+    addEventListener("keydown", function (e) {
+        var key = fixKey(e.keyCode);
+
+        if (!that.keysDown[key]) {
+            that.lastKeyDown = key;
+            that.keysDown[key] = true;
+        }
+    });
+
+    addEventListener("keyup", function (e) {
+        that.lastKeyUp = fixKey(e.keyCode);
+        delete that.keysDown[that.lastKeyUp];
+    });
 }
 
-GameSaveView.prototype = (function () {
-    var title = "Select a save slot";
-    var cta = "Press Delete to erase a save";
-
-    var storage = new GameSave();
-    var list = storage.getList();
-    var arrow;
+GameInput.prototype = (function () {
 
     return {
-        init: function(){
-            arrow = {
-                img: ">>",
-                slot: 0,
-                x: canvas.width / 2 - ctx.measureText(list[0]).width/2 - 60,
-                y: 200
-            };
-        },
-
         update: function () {
-            
-            if (lastKeyUp === KeyCode.ENTER) {
-                lastKeyUp = KeyCode.EMPTY;
 
-                var date = new Date();
-                var m = date.getMonth();
-                var d = date.getDay();
-                var y = date.getYear();
-                var t = date.toLocaleTimeString();
-
-                storage.save(arrow.slot, m + '/' + d + '/' + y + ' ' + t);
-                this.callback();
-            }
-            else if (lastKeyUp === KeyCode.DELETE) {
-                lastKeyUp = KeyCode.EMPTY;
-
-                list = storage.erase(arrow.slot);
-            }
-            else if (arrow.slot !== 2 && lastKeyUp === KeyCode.DOWN) {
-                lastKeyUp = KeyCode.EMPTY;
-
-                ++arrow.slot;
-                arrow.x = canvas.width / 2 - ctx.measureText(list[arrow.slot]).width / 2 - 60;
-                arrow.y += 80;
-            }
-            else if (arrow.slot !== 0 && lastKeyUp === KeyCode.UP) {
-                lastKeyUp = KeyCode.EMPTY;
-
-                --arrow.slot;
-                arrow.x = canvas.width / 2 - ctx.measureText(list[arrow.slot]).width / 2 - 60;
-                arrow.y -= 80;
-            }
-        },
-
-        render: function () {
-            ctx.fillStyle = "#111";
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-            ctx.font = "36px Arial"
-            ctx.fillStyle = "#fff";
-            ctx.fillText(title, canvas.width / 2 - ctx.measureText(title).width / 2, 80);
-
-            ctx.font = "24px Arial"
-
-            for (var i = 0; i < list.length; ++i) {
-                ctx.fillText(list[i], canvas.width / 2 - ctx.measureText(list[i]).width/2, 200 + i * 80);
-            }
-
-            ctx.fillText(arrow.img, arrow.x, arrow.y);
         }
     };
 })();
+
+
+// global enums
 var KeyCode = Object.freeze({
     EMPTY: -1,
     ENTER: 13,
     CTRL: 17,
     ESC: 27,
     SPACEBAR: 32,
+    LEFT: 37,
     UP: 38,
+    RIGHT: 39,
     DOWN: 40,
     DELETE: 46,
     A: 65,
@@ -177,7 +181,9 @@ KeyCodeNames[13] = "ENTER";
 KeyCodeNames[17] = "CTRL";
 KeyCodeNames[27] = "ESC";
 KeyCodeNames[32] = "SPACEBAR";
+KeyCodeNames[37] = "LEFT";
 KeyCodeNames[38] = "UP";
+KeyCodeNames[39] = "RIGHT";
 KeyCodeNames[40] = "DOWN";
 KeyCodeNames[46] = "DELETE";
 KeyCodeNames[65] = "A";
@@ -191,100 +197,127 @@ KeyCodeNames[79] = "O";
 KeyCodeNames[82] = "R";
 KeyCodeNames[83] = "S";
 KeyCodeNames[87] = "W";
-
-function GameInput() {
-    keysDown = {};
-    lastKeyUp = KeyCode.EMPTY;
-
-    function fixKey(key) {
-        if (key === KeyCode.W)
-            key = KeyCode.UP;
-        else if (key === KeyCode.S)
-            key = KeyCode.DOWN;
-
-        return key;
-    }
-
-    addEventListener("keydown", function (e) {
-        keysDown[fixKey(e.keyCode)] = true;
-    }, true);
-
-    addEventListener("keyup", function (e) {
-        lastKeyUp = fixKey(e.keyCode);
-        delete keysDown[lastKeyUp];
-    }, false);
-}
-
-//Input.prototype = function () {
-
-//    return {
-//        update: function () {
-
-//        }
-//    };
-//};
-function GameGraphics() {
+/*
+    The utils component of GameEngine.
+*/
+function GameUtils(gEngine) {
     return {
-
+        /*
+            Resets the newView's private variables.
+            Changes the view.
+        */
+        switchView: function(newView) {
+            newView.init();
+            gEngine.view = newView;
+        }
     };
 }
 
-/// <reference path="commonLinker.js" />
+// global enums
+var Dir = Object.freeze({
+    RIGHT: 0,
+    LEFT: 1
+});
+/*
+    The graphics component of GameEngine.
+*/
+var GameGraphics = function(gEngine) {
+    return {
+        isAnimating: false,
+
+        /*
+            @param(number) timeStep The wait time between running the action (in ms).
+            @param(number) numTimes The number to times to run the action.
+            @param(function) callback The callback function.
+        */
+        repeatAction: function(timeStep, numTimes, callback) {
+            this.isAnimating = true;
+
+            var num = 0,
+                that = this
+            ;
+
+            var theAnimation = setInterval(function() {
+                if(num++ > numTimes) {
+                    clearInterval(theAnimation);
+                    that.isAnimating = false;
+                }
+                else {
+                    callback();
+                }
+            }, timeStep);
+        }
+    };
+};
+
+/// <reference path="../commonLinker.js" />
 
 /*
     A generic view interface.
 */
-function GameView() {
+function GameView(gEngine) {
+    this.privates = {
+        bgColor: "#ccc"
+    };
 
+    this.init();
 }
 
 GameView.prototype = (function () {
 
     return {
+        then: function(callback){
+            this.privates.callback = callback;
+        },
+
+        init: function(){
+
+        },
+
         update: function () {
 
         },
 
         render: function () {
-            ctx.fillStyle = "#ccc";
+            ctx.fillStyle = this.privates.bgColor;
             ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-            //ctx.font = "36px Arial";
-            //ctx.fillStyle = "#000";
-            //ctx.fillText("hello", 10, 100);
         }
     };
 })();
-/// <reference path="linker.js" />
+
+/// <reference path="../commonLinker.js" />
 
 /*
     Implements GameView.
 
-    @param(function) callback
+    @param(string) title The name of the game.
 */
-function TitleView(title, allowSave) {
-    this.title = title;
-    this.allowSave = (typeof(allowSave) !== "undefined") ? allowSave : false;
+function TitleView(title) {
+    this.privates = {
+        title: title
+    };
+
+    this.init();
 }
 
 TitleView.prototype = (function () {
-    var cta = "Press Enter";
+    var title,
+        cta = "Press Enter"
+    ;
 
     return {
         then: function(callback){
-            this.then = callback;
+            this.privates.callback = callback;
+        },
+
+        init: function(){
+            title = this.privates.title;
         },
 
         update: function () {
-            if (lastKeyUp === KeyCode.ENTER) {
-                lastKeyUp = KeyCode.EMPTY;
-
-                if (this.allowSave) {
-                    //view = new GameSaveView(this, this.callback);
-                }
-                else {
-                    this.then();
-                }
+            if (game.input.lastKeyDown === KeyCode.ENTER) {
+                game.input.lastKeyDown = KeyCode.EMPTY;
+                this.privates.callback();
             }
         },
 
@@ -294,10 +327,94 @@ TitleView.prototype = (function () {
 
             ctx.font = "36px Arial"
             ctx.fillStyle = "#fff";
-            ctx.fillText(this.title, canvas.width / 2 - ctx.measureText(this.title).width / 2, 100);
+            ctx.fillText(title, canvas.width / 2 - ctx.measureText(title).width / 2, 100);
 
             ctx.font = "24px Arial";
             ctx.fillText(cta, canvas.width / 2 - ctx.measureText(cta).width / 2, canvas.height / 2);
+        }
+    };
+})();
+/// <reference path="../commonLinker.js" />
+
+function GameSaveView() {
+    this.init();
+}
+
+GameSaveView.prototype = (function() {
+    var title = "Select a save slot";
+    var cta = "Press Delete to erase a save";
+
+    var storage = new GameSave();
+    var list = storage.getList();
+    var arrow;
+
+    return {
+        init: function() {
+            arrow = {
+                img: ">>",
+                slot: 0,
+                x: canvas.width / 2 - ctx.measureText(list[0]).width / 2 - 60,    // TODO: make instance var??
+                y: 200
+            };
+        },
+
+        then: function(callback) {
+            this.then = callback;
+        },
+
+        update: function() {
+            if(lastKeyUp === KeyCode.ESC) {
+                lastKeyUp = KeyCode.EMPTY;
+                this.then(KeyCode.ESC);
+            }
+            else if(lastKeyUp === KeyCode.ENTER) {
+                lastKeyUp = KeyCode.EMPTY;
+
+                var date = new Date();
+                var m = date.getMonth();
+                var d = date.getDay();
+                var y = date.getYear();
+                var t = date.toLocaleTimeString();
+
+                storage.save(arrow.slot, m + '/' + d + '/' + y + ' ' + t);
+                this.then(KeyCode.ENTER);
+            }
+            else if(lastKeyUp === KeyCode.DELETE) {
+                lastKeyUp = KeyCode.EMPTY;
+
+                list = storage.erase(arrow.slot);
+            }
+            else if(arrow.slot !== 2 && lastKeyUp === KeyCode.DOWN) {
+                lastKeyUp = KeyCode.EMPTY;
+
+                ++arrow.slot;
+                arrow.x = canvas.width / 2 - ctx.measureText(list[arrow.slot]).width / 2 - 60;
+                arrow.y += 80;
+            }
+            else if(arrow.slot !== 0 && lastKeyUp === KeyCode.UP) {
+                lastKeyUp = KeyCode.EMPTY;
+
+                --arrow.slot;
+                arrow.x = canvas.width / 2 - ctx.measureText(list[arrow.slot]).width / 2 - 60;
+                arrow.y -= 80;
+            }
+        },
+
+        render: function() {
+            ctx.fillStyle = "#111";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.font = "36px Arial"
+            ctx.fillStyle = "#fff";
+            ctx.fillText(title, canvas.width / 2 - ctx.measureText(title).width / 2, 80);
+
+            ctx.font = "24px Arial"
+
+            for(var i = 0; i < list.length; ++i) {
+                ctx.fillText(list[i], canvas.width / 2 - ctx.measureText(list[i]).width / 2, 200 + i * 80);
+            }
+
+            ctx.fillText(arrow.img, arrow.x, arrow.y);
         }
     };
 })();

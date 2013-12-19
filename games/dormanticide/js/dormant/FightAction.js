@@ -8,7 +8,7 @@
         multiplier: 1
     },
     DRAGONS_BREATH: {
-        name: "DRAGONS_BREATH",
+        name: "DRAGONS BREATH",
         multiplier: 5
     }
 });

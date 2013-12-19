@@ -24,9 +24,8 @@ function Dormant(src, name, atk, def, hp, actions, lvl) {
     this.initHP = this.hp = hp;
     this.actions = actions;
     this.lvl = (typeof (lvl) !== "undefined") ? lvl : 1;
-
-
-
+    this.xp = 0;
+    this.xpNeeded = 50;
 }
 
 Dormant.prototype = (function () {

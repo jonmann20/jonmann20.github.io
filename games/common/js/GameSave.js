@@ -1,4 +1,4 @@
-﻿/// <reference path="../../vamp/js/linker.js" />
+﻿/// <reference path="commonLinker.js" />
 
 function GameSave() {
 
@@ -30,89 +30,6 @@ GameSave.prototype = (function () {
         erase: function(slot){
             localStorage.removeItem("slot" + slot);
             return this.getList();
-        }
-    };
-})();
-
-function GameSaveView() {
-    this.init();
-}
-
-GameSaveView.prototype = (function () {
-    var title = "Select a save slot";
-    var cta = "Press Delete to erase a save";
-
-    var storage = new GameSave();
-    var list = storage.getList();
-    var arrow;
-
-    return {
-        init: function () {
-            console.log("h");
-            arrow = {
-                img: ">>",
-                slot: 0,
-                x: canvas.width / 2 - ctx.measureText(list[0]).width/2 - 60,    // TODO: make instance var??
-                y: 200
-            };
-        },
-
-        then: function(callback){
-            this.then = callback;
-        },
-
-        update: function () {
-            if (lastKeyUp === KeyCode.ESC) {
-                this.then(lastKeyUp);
-            }
-            else if (lastKeyUp === KeyCode.ENTER) {
-                lastKeyUp = KeyCode.EMPTY;
-
-                var date = new Date();
-                var m = date.getMonth();
-                var d = date.getDay();
-                var y = date.getYear();
-                var t = date.toLocaleTimeString();
-
-                storage.save(arrow.slot, m + '/' + d + '/' + y + ' ' + t);
-                this.then(KeyCode.ENTER);
-            }
-            else if (lastKeyUp === KeyCode.DELETE) {
-                lastKeyUp = KeyCode.EMPTY;
-
-                list = storage.erase(arrow.slot);
-            }
-            else if (arrow.slot !== 2 && lastKeyUp === KeyCode.DOWN) {
-                lastKeyUp = KeyCode.EMPTY;
-
-                ++arrow.slot;
-                arrow.x = canvas.width / 2 - ctx.measureText(list[arrow.slot]).width / 2 - 60;
-                arrow.y += 80;
-            }
-            else if (arrow.slot !== 0 && lastKeyUp === KeyCode.UP) {
-                lastKeyUp = KeyCode.EMPTY;
-
-                --arrow.slot;
-                arrow.x = canvas.width / 2 - ctx.measureText(list[arrow.slot]).width / 2 - 60;
-                arrow.y -= 80;
-            }
-        },
-
-        render: function () {
-            ctx.fillStyle = "#111";
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-            ctx.font = "36px Arial"
-            ctx.fillStyle = "#fff";
-            ctx.fillText(title, canvas.width / 2 - ctx.measureText(title).width / 2, 80);
-
-            ctx.font = "24px Arial"
-
-            for (var i = 0; i < list.length; ++i) {
-                ctx.fillText(list[i], canvas.width / 2 - ctx.measureText(list[i]).width/2, 200 + i * 80);
-            }
-
-            ctx.fillText(arrow.img, arrow.x, arrow.y);
         }
     };
 })();

@@ -1,23 +1,29 @@
-﻿(function Main() {
-    var game = new GameEngine();
+﻿/// <reference path="linker.js" />
+
+/*
+    The vamp game.
+    Declares game as a global.
+*/
+(function Main() {
+    game = new GameEngine();
     game.start();
 
     var titleView = new TitleView("Vamp: The Great and Powerful", true);
     titleView.then(function () {
-        view = saveView;
+        game.utils.switchView(saveView);
     });
 
     var saveView = new GameSaveView();
     saveView.then(function (key) {
         if (key === KeyCode.ESC) {
-            view = titleView;
+            game.utils.switchView(titleView);
         }
         else if (key === KeyCode.ENTER) {
-            view = lvlView;
+            game.utils.switchView(lvlView);
         }
     });
 
     var lvlView = new LevelView();
 
-    view = titleView;
+    game.view = titleView;
 })();

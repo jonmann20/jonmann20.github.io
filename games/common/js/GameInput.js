@@ -1,10 +1,61 @@
-﻿var KeyCode = Object.freeze({
+﻿/*
+    The input component of GameEngine.
+*/
+function GameInput() {
+    this.keysDown = {};
+    this.lastKeyUp = KeyCode.EMPTY;
+    this.lastKeyDown = KeyCode.EMPTY;
+
+    function fixKey(key) {
+        if (key === KeyCode.W)
+            key = KeyCode.UP;
+        else if (key === KeyCode.S)
+            key = KeyCode.DOWN;
+        else if (key === KeyCode.D)
+            key = KeyCode.RIGHT;
+        else if (key === KeyCode.A)
+            key = KeyCode.LEFT;
+
+        return key;
+    }
+
+    var that = this;
+
+    addEventListener("keydown", function (e) {
+        var key = fixKey(e.keyCode);
+
+        if (!that.keysDown[key]) {
+            that.lastKeyDown = key;
+            that.keysDown[key] = true;
+        }
+    });
+
+    addEventListener("keyup", function (e) {
+        that.lastKeyUp = fixKey(e.keyCode);
+        delete that.keysDown[that.lastKeyUp];
+    });
+}
+
+GameInput.prototype = (function () {
+
+    return {
+        update: function () {
+
+        }
+    };
+})();
+
+
+// global enums
+var KeyCode = Object.freeze({
     EMPTY: -1,
     ENTER: 13,
     CTRL: 17,
     ESC: 27,
     SPACEBAR: 32,
+    LEFT: 37,
     UP: 38,
+    RIGHT: 39,
     DOWN: 40,
     DELETE: 46,
     A: 65,
@@ -26,7 +77,9 @@ KeyCodeNames[13] = "ENTER";
 KeyCodeNames[17] = "CTRL";
 KeyCodeNames[27] = "ESC";
 KeyCodeNames[32] = "SPACEBAR";
+KeyCodeNames[37] = "LEFT";
 KeyCodeNames[38] = "UP";
+KeyCodeNames[39] = "RIGHT";
 KeyCodeNames[40] = "DOWN";
 KeyCodeNames[46] = "DELETE";
 KeyCodeNames[65] = "A";
@@ -40,35 +93,3 @@ KeyCodeNames[79] = "O";
 KeyCodeNames[82] = "R";
 KeyCodeNames[83] = "S";
 KeyCodeNames[87] = "W";
-
-function GameInput() {
-    keysDown = {};
-    lastKeyUp = KeyCode.EMPTY;
-
-    function fixKey(key) {
-        if (key === KeyCode.W)
-            key = KeyCode.UP;
-        else if (key === KeyCode.S)
-            key = KeyCode.DOWN;
-
-        return key;
-    }
-
-    addEventListener("keydown", function (e) {
-        keysDown[fixKey(e.keyCode)] = true;
-    }, true);
-
-    addEventListener("keyup", function (e) {
-        lastKeyUp = fixKey(e.keyCode);
-        delete keysDown[lastKeyUp];
-    }, false);
-}
-
-//Input.prototype = function () {
-
-//    return {
-//        update: function () {
-
-//        }
-//    };
-//};

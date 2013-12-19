@@ -1,133 +1,241 @@
 ﻿/// <reference path="../linker.js" />
 
 /*
+    Implements GameView.
+
     @param(string) bgColor The view background color.
     @param(Dormant) dormantL The player's dormant.
     @param(Dormant) dormantR The opponent's dormant.
 */
 function BattleView(bgColor, dormantL, dormantR) {
-    this.bgColor = bgColor;
-    this.dormantL = dormantL;
-    this.dormantR = dormantR;
+    this.privates = {
+        bgColor: bgColor,
+        dormantL: dormantL,
+        dormantR: dormantR
+    };
+
+    this.init();
 }
 
 BattleView.prototype = (function () {
 
-    var arrow = {
-        x: 43,
-        y: 350,
-        curSlot: 0
-    };
+    var that,
+        arrow = {
+            img: ">>"
+        },
+        left,
+        wasAttack,
+        wasAttackTimer,
+        fire,
+        theAttack,
+        dormantL,
+        dormantR
+    ;
 
-    var Dir = Object.freeze({
-        RIGHT: 0,
-        LEFT: 1
-    });
+    function checkInput(dormantL, dormantR) {
+        switch(game.input.lastKeyDown) {
+            case KeyCode.ENTER:
+                game.input.lastKeyDown = KeyCode.EMPTY;
 
-    var left = {
-        x: 30,
-        dir: Dir.RIGHT
-    };
+                theAttack.name = dormantL.actions[arrow.curSlot].name;
+                theAttack.atk = (dormantL.atk * dormantL.actions[arrow.curSlot].multiplier) / dormantR.def;
 
-    function drawDormantHUD(dormant, x, y) {
-        ctx.fillStyle = "#000";
-        ctx.fillText(dormant.name + "  L" + dormant.lvl, x + 40, y);
-        ctx.fillText("HP", x, y + 20);
+                return true;
+                break;
+            case KeyCode.UP:
+                game.input.lastKeyDown = KeyCode.EMPTY;
 
-        ctx.strokeStyle = "#000";
-        ctx.strokeRect(x + 20, y + 12, 100, 10);
+                if(arrow.curSlot !== 0 && dormantL.actions[arrow.curSlot - 1] !== null) {
+                    --arrow.curSlot;
+                    arrow.y -= 30;
+                }
+                break;
+            case KeyCode.DOWN:
+                game.input.lastKeyDown = KeyCode.EMPTY;
 
-        ctx.fillStyle = "red";
-        ctx.fillRect(x + 21, y + 13, dormant.hp * (100/dormant.initHP) - 1, 8);
+                if(arrow.curSlot !== 3 && dormantL.actions[arrow.curSlot + 1] !== null) {
+                    ++arrow.curSlot;
+                    arrow.y += 30;
+                }
+                break;
+        }
     }
 
-    function drawHUD(dormant) {
+    function runTackleAnimation() {
+        left.dir = Dir.RIGHT;
+
+        game.graphics.repeatAction(6, 60, function() {
+            if(left.dir === Dir.RIGHT && left.x > 60) {
+                left.dir = Dir.LEFT;
+            }
+
+            if(left.dir === Dir.RIGHT)
+                ++left.x;
+            else
+                --left.x;
+
+            dormantR.hp -= theAttack.atk / 60;
+        });
+    }
+
+    /****** Render *****/
+    function drawDormantHUD(dormant, x, y, drawXP) {
+        // name
+        var str = dormant.name + "  L" + dormant.lvl;
+
+        ctx.fillStyle = "#000";
+        ctx.fillText(str, x + ctx.measureText(str).width / 2, y);
+
+        // hp
+        ctx.fillText("HP", x, y + 20);
+        ctx.strokeStyle = "#000";
+        ctx.strokeRect(x + 21, y + 12, 100, 10);
+
+        ctx.fillStyle = "red";
+        ctx.fillRect(x + 22, y + 13, dormant.hp * (100 / dormant.initHP) - 1, 8);
+
+        // xp
+        if(drawXP) {
+            ctx.fillStyle = "#000";
+            ctx.fillText("XP", x, y + 40);
+            ctx.strokeStyle = "#000";
+            ctx.strokeRect(x + 21, y + 32, 100, 10);
+
+            ctx.fillStyle = "#777";
+            ctx.fillRect(x + 22, y + 33, dormant.xp * (100 / dormant.xpNeeded) - 1, 8);
+        }
+    }
+
+    function drawHUD() {
         ctx.strokeStyle = "#000";
         ctx.strokeRect(20, 300, 500, 250);
 
         ctx.font = "12px Arial";
         ctx.fillStyle = "#000";
-        ctx.fillText("ATK: " + dormant.atk, 460, 320);
-        ctx.fillText("DEF: " + dormant.def, 460, 340);
+        ctx.fillText("ATK: " + dormantL.atk, 460, 320);
+        ctx.fillText("DEF: " + dormantL.def, 460, 340);
+
+        drawActionList();
+        drawActionArrow();
     }
 
-    function drawActions(dormant) {
+    function drawActionList() {
         ctx.fillStyle = "#000";
 
         for (var i = 0; i < 4; ++i) {
-            if (dormant.actions[i] === null) {
+            if (dormantL.actions[i] === null) {
                 ctx.fillText("--", 80, 350 + i * 30);
             }
             else {
-                ctx.fillText(dormant.actions[i].name, 80, 350 + i * 30);
+                ctx.fillText(dormantL.actions[i].name, 80, 350 + i * 30);
             }
         }
     }
 
     function drawActionArrow() {
         ctx.fillStyle = "#000";
-        ctx.fillText(">>", arrow.x, arrow.y);
+        ctx.fillText(arrow.img, arrow.x, arrow.y);
     }
 
 
     return {
-        then: function(callback){
-            this.then = callback;
+        then: function(callback) {
+            this.privates.callback = callback;
         },
 
-        update: function () {
-            switch(lastKeyUp){
-                case KeyCode.ENTER:
-                    left.dir = Dir.RIGHT;
+        init: function() {
+            that = this;
+            arrow.x = 43;
+            arrow.y = 350;
+            arrow.curSlot = 0;
 
-                    Graphics.repeatAction(6, 60, function () {
-                        if (left.dir === Dir.RIGHT && left.x > 60)
-                            left.dir = Dir.LEFT;
+            left = {
+                x: 30,
+                dir: Dir.RIGHT
+            };
 
-                        if (left.dir === Dir.RIGHT)
-                            ++left.x;
-                        else
-                            --left.x;
-                    });
+            fire = {
+                x: 0,
+                y: 0
+            };
 
-                    this.dormantR.hp -= (this.dormantL.atk * this.dormantL.actions[arrow.curSlot].multiplier) / this.dormantR.def;
-                    lastKeyUp = KeyCode.EMPTY;
-                    break;
-                case KeyCode.UP:
-                    if (arrow.curSlot !== 0 && this.dormantL.actions[arrow.curSlot - 1] !== null) {
-                        --arrow.curSlot;
-                        arrow.y -= 30;
+            wasAttack = false;
+            wasAttackTimer = 60;
+            theAttack = {
+                name: "EMPTY",
+                atk: 0
+            };
+
+            dormantL = this.privates.dormantL;
+            dormantR = this.privates.dormantR;
+        },
+
+        update: function() {
+            if(wasAttack) {
+                dormantR.hp -= theAttack.atk / 60;
+            }
+            if(!game.graphics.isAnimating) {
+                var _wasAttack = checkInput(dormantL, dormantR);
+                if(_wasAttack) {
+                    if(theAttack.name === FightAction.TACKLE.name) {
+                        runTackleAnimation();
                     }
-                    break;
-                case KeyCode.DOWN:
-                    if (arrow.curSlot !== 3 && this.dormantL.actions[arrow.curSlot + 1] !== null) {
-                        ++arrow.curSlot;
-                        arrow.y += 30;
+                    else if(theAttack.name === FightAction.DRAGONS_BREATH.name) {
+                        wasAttack = true;
                     }
-                    break;
+                }
             }
 
-            if (this.dormantR.hp <= 0) {
-                alert("You Win");
-                location.reload();
+            if(dormantR.hp <= 0) {
+                dormantL.xp += 25;
+                this.privates.callback();
             }
         },
 
         render: function () {
             // background
-            ctx.fillStyle = this.bgColor;
+            ctx.fillStyle = this.privates.bgColor;
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
             // left
-            drawDormantHUD(this.dormantL, 10, 15);
-            this.dormantL.draw(left.x, 90);
-            drawHUD(this.dormantL);
-            drawActions(this.dormantL);
-            drawActionArrow();
+            drawDormantHUD(dormantL, 10, 15, true);
+            dormantL.draw(left.x, 90);
+            drawHUD();
 
             // right
-            drawDormantHUD(this.dormantR, canvas.width - 130, 15);
-            this.dormantR.draw(770, 90);
+            drawDormantHUD(dormantR, canvas.width - 130, 15, false);
+            dormantR.draw(770, 90);
+
+
+            // attack animation
+            if(wasAttack) {
+
+                var t = (wasAttackTimer % 40);
+                if(t >= 0 && t < 10) {
+                    fire.x = 0;
+                }
+                else if(t >= 10 && t < 20) {
+                    fire.x = 5;
+                }
+                else if(t >= 20 && t < 30) {
+                    fire.x = 0;
+                }
+                else if(t >= 30 && t < 40) {
+                    fire.x = -5;
+                }
+
+                ctx.fillStyle = "red";
+                ctx.fillRect(870 + fire.x, 242, 40, 12);
+                ctx.fillRect(880 + fire.x, 230, 30, 12);
+                ctx.fillRect(880 + fire.x, 218, 20, 12);
+
+
+                if(wasAttackTimer-- === 0) {
+                    wasAttack = false;
+                    wasAttackTimer = 60;
+                }
+            }
+
         }
     };
 })();

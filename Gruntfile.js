@@ -38,9 +38,12 @@ module.exports = function(grunt) {
                     "games/common/js/GameEngine.js",
                     "games/common/js/GameSave.js",
                     "games/common/js/GameInput.js",
-                    "games/common/js/GameGraphics.js",
-                    "games/common/js/GameView.js",
-                    "games/common/js/TitleView.js"
+                    "games/common/js/GameUtils.js",
+                    //"games/common/js/physics/SAT.js",
+                    "games/common/js/graphics/GameGraphics.js",
+                    "games/common/js/view/GameView.js",
+                    "games/common/js/view/TitleView.js",
+                    "games/common/js/view/GameSaveView.js"
 	            ]
 	        },
 
@@ -75,7 +78,7 @@ module.exports = function(grunt) {
 	            dest: "js/min/pageDormanticide.js",
 	            src: [
                     "<%= concat_sourcemap.gamesCommonJs.src %>",
-                    "games/dormanticide/js/graphics/Graphics.js",
+                    "games/dormanticide/js/view/OverworldView.js",
                     "games/dormanticide/js/view/BattleView.js",
                     "games/dormanticide/js/dormant/Dormant.js",
                     "games/dormanticide/js/dormant/FightAction.js",
