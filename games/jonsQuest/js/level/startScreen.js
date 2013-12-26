@@ -1,18 +1,19 @@
 /// <reference path="../linker.js" />
 
 // level '0'
-var startScreen = (function () {
+function StartScreen() {
+    this.width = FULLW;
 
+    level.isCutscene = true;
+}
+
+StartScreen.prototype = (function() {
     var copyTitle1 = "JON'S",
-		copyTitle2 = "QUEST",
-		copyLine = String.fromCharCode("169") + " 2013 JON WIEDMANN"
+        copyTitle2 = "QUEST",
+        copyLine = String.fromCharCode("169") + " 2013 JON WIEDMANN"
     ;
 
     return {
-        init: function(){
-            level.isCutscene = true;
-        },
-
         update: function(){
             if (lastKeyDown === KeyCode.ENTER) {
                 level.complete();
@@ -20,9 +21,6 @@ var startScreen = (function () {
         },
 
         render: function(){
-            ctx.fillStyle = "#000";
-            ctx.fillRect(0, 0, FULLW, FULLH + game.padHUD);
-
             //---- title
 
             // title 1

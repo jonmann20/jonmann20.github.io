@@ -31,6 +31,25 @@ var utils = (function () {
 
         },
 
+        speed2scale: function(speed){
+            return -0.5*speed + 2;
+        },
+
+        /*
+            Returns a random float between a and b.
+
+            @param(number) min The min floating point number.
+            @param(number) max The max floating point number.
+            @param(?number) precision The number of decimal precision places. (2 (hundredths place) by default)
+        */
+        randF: function(min, max, precision){
+            if(typeof (precision) === "undefined") {
+                precision = 2; // hundredths place
+            }
+
+            return parseFloat(Math.min(min + (Math.random() * (max - min)), max).toFixed(precision));
+        },
+
         repeatAction: function (timeStep, numTimes, callback) {
             var num = 0;
             var theAnimation = setInterval(function () {

@@ -4,6 +4,7 @@ var level = (function () {
 
     var maxVy = 10; // applys to GameObj's and GameItem's
 
+
     /********** Update **********/
     function updateObjsView() {
         for (var i = 0; i < level.objs.length; ++i) {
@@ -18,15 +19,15 @@ var level = (function () {
     }
 
     function updateBgView() {
-        // layer 1
-        for (var i = 0; i < level.bg[1].length; ++i) {
-            level.bg[1][i].pos.x -= hero.vX / 3;
+        // color layer
+        level.bgColor.gradX -= hero.vX;
+        level.bgColor.fillStyle = Graphics.getDoorBgGrad();
+
+        // objects
+        for(var i = 0; i < level.bg.length; ++i) {
+            level.bg[i].pos.x -= hero.vX / level.bg[i].speed;
         }
 
-        // layer 0
-        for (var i = 0; i < level.bg[0].length; ++i) {
-            level.bg[0][i].pos.x -= hero.vX / 2;
-        }
     }
 
     function updateEnemiesView() {
@@ -124,20 +125,16 @@ var level = (function () {
     // the parallax background
     function drawBg() {
         // color background
-        ctx.fillStyle = Color.LIGHT_GREEN;
-        ctx.fillRect(0, 0, FULLW, FULLH - game.padFloor - 1);
+        ctx.fillStyle = level.bgColor.fillStyle;
+        ctx.fillRect(0, 0, FULLW, level.bgColor.h);
 
-        ctx.fillStyle = "#000";
-        ctx.fillRect(0, FULLH - game.padFloor - 1, FULLW, game.padFloor + 1);
+        // background objects
+        for (var i = 0; i < level.bg.length; ++i) {
+            //level.bg[i].draw();
+            var t = level.bg[i];
+            var scale = utils.speed2scale(t.speed);
 
-        // layer 1
-        for (var i = 0; i < level.bg[1].length; ++i) {
-            level.bg[1][i].draw();
-        }
-
-        // layer 0
-        for (var i = 0; i < level.bg[0].length; ++i) {
-            level.bg[0][i].draw();
+            ctx.drawImage(t.img, t.pos.x, t.pos.y, t.w * scale, t.h * scale);
         }
     }
 
@@ -187,10 +184,8 @@ var level = (function () {
 
 
     return {
-        bg: [   // parallax background; TODO: make one array with variable depth (z dimension) and variable scroll speed per entry
-            [], // backgorund obj's 1
-            []  // background obj's 2
-        ],
+        bgColor: {},
+        bg: [],             // dynamically holds all of the background objects for the level
         objs: [],           // dynamically holds all of the objects for the level
         items: [],          // dynamically holds all of the items for the level
         enemies: [],        // dynamically holds all of the enemies for the level
@@ -202,10 +197,9 @@ var level = (function () {
         isTransitioning: false,
         
 
-        init: function () {
-            level.curLvl = startScreen;     // startScreen == level '0'
-            level.curLvl.init();
+        init: function() {
             level.reset();
+            level.curLvl = new StartScreen();     // level '0'
         },
 
         // called before start of level
@@ -217,7 +211,11 @@ var level = (function () {
             // reset level
             level.hiddenItemsFound = 0;
             hero.lvlX = 0;
-            level.bg = [[], []];
+            level.bgColor = {
+                fillStyle: "#000",
+                h: FULLH + game.padHUD
+            };
+            level.bg = [];
             level.objs = [];
             level.items = [];
             level.enemies = [];

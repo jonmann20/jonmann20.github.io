@@ -212,9 +212,27 @@ var Graphics = (function () {
             ctx.closePath();
 
             // label
-            ctx.fillStyle = "#e1e1e1";
+            ctx.fillStyle = Color.DARK_BROWN;
             ctx.font = "12px 'Press Start 2P'";
             ctx.fillText("EXIT", x - 8, y - 5);
+        },
+
+        getDoorBgGrad: function(){
+            var grad = ctx.createRadialGradient(
+                level.bgColor.gradX,
+                level.bgColor.gradY,
+                18,
+                level.bgColor.gradX,
+                level.bgColor.gradY,
+                530
+            );
+
+            grad.addColorStop(0, "rgb(205,165,0)");
+            //grad.addColorStop(0, "rgb(42,126,76)");
+            //grad.addColorStop(1, "rgb(22,106,56)");
+            grad.addColorStop(1, "#5FA7E7");
+
+            return grad;
         },
 
         drawEllipse: function (x, y, w, h) {

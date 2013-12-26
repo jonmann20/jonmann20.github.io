@@ -36,31 +36,30 @@ var lvl1 = (function () {
 
 
     function setBackground() {
-        var i = 0,
-            x1offset = HALFW / 1.2,
-            x2offset = HALFW / 2.7,
-            x = 60 - x1offset,
-            fixY
+        //---- color layer
+        level.bgColor.gradX = door.pos.x + door.w/2;
+        level.bgColor.gradY = door.pos.y + door.h/2;
+        level.bgColor.h = FULLH;
+
+        level.bgColor.fillStyle = Graphics.getDoorBgGrad();
+
+        //---- objects
+
+        var x = 0,
+            y = 0,
+            maxY = 180
         ;
 
-        while (x < lvl1.width) {
-            fixY = (++i % 2 == 0) ? 100 : 0;
-            x += x1offset;
-            level.bg[0].push(new GameObj(JQObject.CLOUD, x, 60 + fixY, 0, 0, "cloud.png"));        // TODO: fix api to get w/h
+        while(x < lvl1.width) {
+            var obj = new GameObj(JQObject.CLOUD, x, 10 + y, 0, 0, "cloud.png");
+            obj.speed = utils.randF(2, 3.3, 1);
+            level.bg.push(obj);
+
+            x += obj.w*utils.speed2scale(obj.speed) +  Math.floor((Math.random() * 70) + 35);
+            y = Math.floor(Math.random() * maxY);
         }
 
-        x = 0;
-        while (x < lvl1.width) {
-            if (++i % 2 == 0)
-                fixY = 70;
-            else if (i % 3 == 0)
-                fixY = 140;
-            else
-                fixY = 10;
 
-            x += x2offset;
-            level.bg[1].push(new GameObj(JQObject.SMALL_CLOUD, x, 100 + fixY, 0, 0, "cloud_small.png"));        // TODO: fix api to get w/h
-        }
     }
 
     function setObjs() {
@@ -149,9 +148,10 @@ var lvl1 = (function () {
 
         init: function () {
             level.hiddenItems = 1;
-
-            setBackground();            var scalePos = setObjs();            setItems(scalePos);
+            var scalePos = setObjs();            setItems(scalePos);
             setEnemies();
+
+            setBackground();
         },
 
         deinit: function(){
