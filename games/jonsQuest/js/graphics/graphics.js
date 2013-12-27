@@ -83,9 +83,6 @@ var Graphics = (function () {
                 new SAT.Vector(0, h - Graphics.projectY)
             ]);
 
-            //poly = new SAT.Box(new SAT.Vector(x, y), w, h).toPolygon();
-            poly.type = JQObject.PLATFORM;  // allows not to be GameObj?????
-
             return poly;
         },
 
@@ -145,7 +142,7 @@ var Graphics = (function () {
             // top
             ctx.fillStyle = Color.LIGHT_BROWN;
             ctx.beginPath();
-            ctx.moveTo(poly.pos.x, y );
+            ctx.moveTo(poly.pos.x, y);
             ctx.lineTo(poly.pos.x + poly.points[1].x, y + poly.points[1].y);
             ctx.lineTo(poly.pos.x + poly.points[2].x, y + poly.points[2].y);
             ctx.lineTo(poly.pos.x + Graphics.projectX, y + Graphics.projectY);

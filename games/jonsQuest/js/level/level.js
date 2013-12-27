@@ -153,7 +153,7 @@ var level = (function () {
                 Graphics.drawScale(level.objs[i]);
                 Graphics.drawPlatformStatus(level.objs[i]);
             }
-            else if(level.objs[i].type === JQObject.PLATFORM || level.objs[i].type === JQObject.FLOOR) {
+            else if(level.objs[i].type === JQObject.PLATFORM || level.objs[i].type === JQObject.STAIR) {
                 Graphics.drawPlatform(level.objs[i]);
             }
             else if (level.objs[i].type === JQObject.DOOR) {

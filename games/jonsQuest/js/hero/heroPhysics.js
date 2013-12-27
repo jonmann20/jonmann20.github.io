@@ -57,6 +57,12 @@ var HeroPhysicsComponent = function () {
             else if (r.overlapN.y === -1) {                 // on bot
                 hero.vY = 0;
             }
+
+            if(r.overlapN.x === 1) {
+                if(r.b.type === JQObject.STAIR) {       // stairs; TODO: fix this
+                    hero.pos.y -= 7;
+                }
+            }
         });
         
         if (hero.isHolding) {

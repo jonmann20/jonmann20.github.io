@@ -91,10 +91,12 @@ StartScreen.prototype = (function() {
             Graphics.blinkText(22, HALFW, HALFH + 81);
 
             //---- copyright
+            ctx.fillStyle = "#000";
+            ctx.fillRect(0, FULLH, FULLW, game.padHUD);
             ctx.font = "13px 'Press Start 2P'";
-            ctx.fillStyle = "#ddd";
+            ctx.fillStyle = "#c9c9c9";
 
-            ctx.fillText(copyLine, HALFW - ctx.measureText(copyLine).width / 2, FULLH + 44);
+            ctx.fillText(copyLine, HALFW - ctx.measureText(copyLine).width / 2, FULLH + 24);
         }
     };
 })();

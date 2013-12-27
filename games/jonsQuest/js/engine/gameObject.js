@@ -11,8 +11,8 @@ var JQObject = Object.freeze({
     SCALE: 7,
     CLOUD: 8,
     PLATFORM: 9,
-    FLOOR: 10,
-    SHURIKEN: 11
+    SHURIKEN: 10,
+    STAIR: 11
 });
 
 var JQObject_names = Object.freeze({
@@ -26,8 +26,8 @@ var JQObject_names = Object.freeze({
     7: "SCALE",
     8: "CLOUD",
     9: "PLATFORM",
-    10: "FLOOR",
-    11: "SHURIKEN"
+    10: "SHURIKEN",
+    11: "STAIR"
 });
 
 /*
@@ -47,9 +47,8 @@ var GameObj = function (type, x, y, w, h, src) {
     this.type = type;
 
     // this.pos
-    if (type === JQObject.FLOOR) {
+    if (this.type === JQObject.PLATFORM || this.type === JQObject.STAIR) {
         $.extend(this, Graphics.getSkewedRect(x, y, w, h));
-        this.type = JQObject.FLOOR; // TODO: fix api
     }
     else {
         $.extend(this, new SAT.Box(new SAT.Vector(x, y), w, h).toPolygon());

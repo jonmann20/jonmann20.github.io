@@ -13,7 +13,7 @@ var lvl2 = (function () {
     function setObjs() {
         // floor
         var floor1 = new GameObj(
-            JQObject.FLOOR,
+            JQObject.PLATFORM,
             -Graphics.projectX,
             FULLH - game.padFloor - 1,
             FULLW / 3 + 40,
@@ -21,7 +21,7 @@ var lvl2 = (function () {
         );
 
         var floor2 = new GameObj(
-            JQObject.FLOOR,
+            JQObject.PLATFORM,
             HALFW,
             FULLH - game.padFloor - 1,
             120,
@@ -29,7 +29,7 @@ var lvl2 = (function () {
         );
 
         var floorPlat = new GameObj(
-            JQObject.FLOOR,
+            JQObject.PLATFORM,
             floor2.pos.x + floor2.w - Graphics.projectX,
             floor2.pos.y - floor2.h - 30,
             900,
@@ -37,7 +37,7 @@ var lvl2 = (function () {
         );
 
         var colL = new GameObj(
-            JQObject.FLOOR,
+            JQObject.PLATFORM,
             floorPlat.pos.x + floor2.w,
             floorPlat.pos.y - 90 + Graphics.projectY,
             100,
@@ -45,7 +45,7 @@ var lvl2 = (function () {
         );
 
         var colR = new GameObj(
-            JQObject.FLOOR,
+            JQObject.PLATFORM,
             floorPlat.pos.x + floor2.w + 680,
             floorPlat.pos.y - 90 + Graphics.projectY,
             100,
@@ -53,7 +53,7 @@ var lvl2 = (function () {
         );
 
         var bridge = new GameObj(
-            JQObject.FLOOR,
+            JQObject.PLATFORM,
             colL.pos.x + 170,
             colL.pos.y - 125,
             443,
