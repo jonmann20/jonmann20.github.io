@@ -3,12 +3,23 @@
 // The physics component of hero.
 var HeroPhysicsComponent = function () {
 
+    /*
+        Updates projectiles position.
+
+        Tests for projectile collision against screen.
+        Tests for projectile collision against objects.
+    */
     function projectileHandler() {
         for (var i = 0; i < hero.bulletArr.length; ++i) {
             hero.bulletArr[i].pos.x += hero.bulletArr[i].dirR ? Shuriken.speed : -Shuriken.speed;   // update position
 
             if (hero.bulletArr[i].pos.x > FULLW || hero.bulletArr[i].pos.x < 0) {		    // projectile and screen
                 hero.bulletArr.splice(i, 1); // remove ith item
+            }
+            else {
+                Physics.testObjObjs(hero.bulletArr[i], function(){                  // projectile and objects
+                    hero.bulletArr.splice(i, 1);
+                });
             }
         }
     }
@@ -122,7 +133,7 @@ var HeroPhysicsComponent = function () {
         },
 
         checkCollision: function () {
-	        projectileHandler();	// projectiles and screen
+            projectileHandler();
             screenCollision();	    // hero and screen
             levelCollision();
         }

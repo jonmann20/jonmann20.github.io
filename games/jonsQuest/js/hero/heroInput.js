@@ -64,16 +64,11 @@ var HeroInputComponent = function () {
             if (hero.ammo > 0 && !hero.isHolding) {
                 audio.play(audio.effort);
 
-                hero.bulletArr[hero.bulletArr.length] = {
-                    pos: {
-                        x: hero.pos.x,
-                        y: hero.pos.y
-                    },
-                    w: Shuriken.w,
-                    h: Shuriken.h,
-                    dirR: (hero.dir === Dir.RIGHT),
-                    deg: 0
-                };
+                var projectile = new GameObj(JQObject.SHURIKEN, hero.pos.x, hero.pos.y, Shuriken.w, Shuriken.h);
+                projectile.dirR = (hero.dir === Dir.RIGHT);
+                projectile.deg = 0;
+
+                hero.bulletArr.push(projectile);
 
                 --hero.ammo;
             }

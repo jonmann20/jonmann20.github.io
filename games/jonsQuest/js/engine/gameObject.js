@@ -9,9 +9,10 @@ var JQObject = Object.freeze({
     CASH: 5,
     DOOR: 6,
     SCALE: 7,
-    CLOUD: 9,
-    PLATFORM: 10,
-    FLOOR: 11
+    CLOUD: 8,
+    PLATFORM: 9,
+    FLOOR: 10,
+    SHURIKEN: 11
 });
 
 var JQObject_names = Object.freeze({
@@ -23,10 +24,10 @@ var JQObject_names = Object.freeze({
     5: "CASH",
     6: "DOOR",
     7: "SCALE",
-    8: "SMALL_CLOUD",
-    9: "CLOUD",
-    10: "PLATFORM",
-    11: "FLOOR"
+    8: "CLOUD",
+    9: "PLATFORM",
+    10: "FLOOR",
+    11: "SHURIKEN"
 });
 
 /*

@@ -6,7 +6,10 @@
 var Graphics = (function () {
 
     var alpha = 1,
-        canvasTransition = null
+        canvasTransition = null,
+        swellN = 250,
+        swellTimer = swellN,
+        swellRadius = swellN
     ;
 
     return {
@@ -207,27 +210,40 @@ var Graphics = (function () {
 
             // door handle
             ctx.beginPath();
-            ctx.arc(x + w - (w / 3.2), y + h - (h / 3.4), 3, 0, 2 * Math.PI, false);
+            ctx.arc(x + w - (w / 3.2), y + h - (h / 3.4), 4, 0, 2 * Math.PI, false);
             ctx.fill();
             ctx.closePath();
 
             // label
+            ctx.font = "19px 'Press Start 2P'";
             ctx.fillStyle = Color.DARK_BROWN;
-            ctx.font = "12px 'Press Start 2P'";
-            ctx.fillText("EXIT", x - 8, y - 5);
+            ctx.fillText("EXIT", x - 15, y - 3);
+            ctx.fillStyle = Color.LIGHT_BROWN;
+            ctx.fillText("EXIT", x - 18, y - 5);
         },
 
         getDoorBgGrad: function(){
             var grad = ctx.createRadialGradient(
                 level.bgColor.gradX,
                 level.bgColor.gradY,
-                18,
+                14,
                 level.bgColor.gradX,
                 level.bgColor.gradY,
-                530
+                490 - swellRadius
             );
 
-            grad.addColorStop(0, "rgb(205,165,0)");
+            if(--swellTimer === -swellN) {
+                swellTimer = swellN;
+                swellRadius = swellN;
+            }
+            else if(swellTimer < 0) {
+                ++swellRadius;
+            }
+            else {
+                --swellRadius;
+            }
+
+            grad.addColorStop(0, "rgb(203,163,0)");
             //grad.addColorStop(0, "rgb(42,126,76)");
             //grad.addColorStop(1, "rgb(22,106,56)");
             grad.addColorStop(1, "#1F7DCF");

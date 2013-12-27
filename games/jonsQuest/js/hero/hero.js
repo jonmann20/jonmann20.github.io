@@ -1,8 +1,8 @@
 /// <reference path="../linker.js" />
 
 var Shuriken = {
-    w: 19.5,
-    h: 9,
+    w: 31,
+    h: 31,
     speed: 4.4
 };
 

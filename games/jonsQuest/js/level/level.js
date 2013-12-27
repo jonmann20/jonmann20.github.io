@@ -84,12 +84,14 @@ var level = (function () {
         for (var i = 0; i < level.enemies.length; ++i) {
             level.enemies[i].update();
 
-            if (level.enemies[i].health > 0) {
+            // TODO: move to hero??
+
+            if(level.enemies[i].health > 0) {
                 // hero and enemy
-                if (Physics.isCollision(hero, level.enemies[i], 0)) {
+                if(SAT.testPolygonPolygon(hero, level.enemies[i])) {
                     level.enemies[i].active = true;
-                    console.log("hit");
-                    if (!hero.invincible) {
+
+                    if(!hero.invincible) {
                         audio.play(audio.heartbeat, true);
 
                         hero.invincible = true;
@@ -99,14 +101,8 @@ var level = (function () {
 
                 // projectiles and enemy
                 for (var j = 0; j < hero.bulletArr.length; ++j) {
-                    var wasCollision = false;
-
-                    if (Physics.isCollision(hero.bulletArr[j], level.enemies[i], 0)) {
-                        wasCollision = true;
+                    if(SAT.testPolygonPolygon(hero.bulletArr[j], level.enemies[i])) {
                         audio.play(audio.thud, true);
-                    }
-
-                    if (wasCollision) {
                         level.enemies[i].active = true;
 
                         hero.bulletArr.splice(j, 1); // remove jth item

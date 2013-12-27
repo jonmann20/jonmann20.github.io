@@ -67,9 +67,9 @@ var lvl1 = (function () {
         // floor + 3 initial platforms
         level.objs.push(
             new GameObj(JQObject.FLOOR, -Graphics.projectX, FULLH - game.padFloor - 1, lvl1.width + Graphics.projectX * 2, game.padFloor + 1),
-            Graphics.getSkewedRect(200, 216, 267, 58),
-            Graphics.getSkewedRect(565, 320, 300, 58),
-            Graphics.getSkewedRect(595, 135, 220, 58)
+            Graphics.getSkewedRect(200, 206, 267, 62),
+            Graphics.getSkewedRect(575, 310, 300, 62),
+            Graphics.getSkewedRect(605, 125, 220, 62)
         );
 
         // scales
@@ -93,14 +93,14 @@ var lvl1 = (function () {
         ;
 
         for (var i = 0; i < 15; ++i) {
-            level.objs.push(Graphics.getSkewedRect(stairs.x + run * i, stairs.y - rise * i, run + 1, 58));
+            level.objs.push(Graphics.getSkewedRect(stairs.x + run * i, stairs.y - rise * i, run + 1, 62));
             stairs.w += run;
             stairs.h += rise;
         }
 
         // platform + door
-        level.objs.push(Graphics.getSkewedRect(stairs.x + stairs.w, stairs.y - stairs.h, 200, 58));
-        door = new GameObj(JQObject.DOOR, stairs.x + stairs.w + 153, stairs.y - stairs.h - 58 + Graphics.projectY / 2, 25, 59);
+        level.objs.push(Graphics.getSkewedRect(stairs.x + stairs.w, stairs.y - stairs.h, 200, 62));
+        door = new GameObj(JQObject.DOOR, stairs.x + stairs.w + 143, stairs.y - stairs.h - 62 + Graphics.projectY / 2, 33, 62);
         level.objs.push(door);
 
         // TODO: move to setItems()
