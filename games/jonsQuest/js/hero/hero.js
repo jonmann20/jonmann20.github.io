@@ -125,12 +125,12 @@ var hero = (function () {
 		sx: 0,				// sprite position
 		sy: 0,
 		lvlX: 0,			
-		w: 28,
-		h: 38,
+		w: 48,
+		h: 65,
 		vX: 0,              // maxVx/maxVy are in heroInput.js
 		vY: 0,
 		aX: 0.17,
-		aY: 0.52,
+		aY: 0.82,
 		jumpMod: 4,
 		jumpMod0: 4,
 		dir: Dir.RIGHT,
@@ -159,10 +159,10 @@ var hero = (function () {
 		init: function(){
 			img = new Image();
 			img.onload = function () { imgReady = true; };
-			img.src = "../dungeon/web/img/sprites/player/player.png";
+			img.src = "/games/common/img/sprites/player/player.png";
 			
 			// grab texturePacker's sprite coords
-			$.get("../dungeon/web/img/sprites/player/player.xml", function(xml){
+			$.get("/games/common/img/sprites/player/player.xml", function(xml){
 				var wrap = $(xml).find("sprite");
 				
 				$(wrap).each(function(){

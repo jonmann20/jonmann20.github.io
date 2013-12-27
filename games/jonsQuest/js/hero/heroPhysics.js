@@ -50,12 +50,12 @@ var HeroPhysicsComponent = function () {
         
         if (hero.isHolding) {
             if (hero.vX === 0) {
-                hero.curItem.pos.x = hero.pos.x + 2;
-                hero.curItem.pos.y = hero.pos.y + 11;
+                hero.curItem.pos.x = hero.pos.x + 7;
+                hero.curItem.pos.y = hero.pos.y + 20;
             }
             else {
-                hero.curItem.pos.x = hero.pos.x + ((hero.dir === Dir.RIGHT) ? 22 : -22);
-                hero.curItem.pos.y = hero.pos.y + 5;
+                hero.curItem.pos.x = hero.pos.x + ((hero.dir === Dir.RIGHT) ? 45 : -32);
+                hero.curItem.pos.y = hero.pos.y + 16;
             }
         }
 

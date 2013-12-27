@@ -67,15 +67,15 @@ var lvl1 = (function () {
         // floor + 3 initial platforms
         level.objs.push(
             new GameObj(JQObject.FLOOR, -Graphics.projectX, FULLH - game.padFloor - 1, lvl1.width + Graphics.projectX * 2, game.padFloor + 1),
-            Graphics.getSkewedRect(200, 226, 267, 48),
-            Graphics.getSkewedRect(562, 325, 300, 48),
-            Graphics.getSkewedRect(585, 145, 220, 48)
+            Graphics.getSkewedRect(200, 216, 267, 58),
+            Graphics.getSkewedRect(565, 320, 300, 58),
+            Graphics.getSkewedRect(595, 135, 220, 58)
         );
 
         // scales
         var scales = [];
         for (var i = 0; i < 3; ++i) {
-            scales[i] = new GameObj(JQObject.SCALE, lvl1.width - 330 - i * 230, FULLH - game.padFloor - 107, 150, 36);
+            scales[i] = new GameObj(JQObject.SCALE, lvl1.width - 330 - i * 230, FULLH - game.padFloor - 157, 150, 46);
             scales[i].holdingItem = JQObject.EMPTY; // TODO: fix api
             level.objs.push(scales[i]);
         }
@@ -93,14 +93,14 @@ var lvl1 = (function () {
         ;
 
         for (var i = 0; i < 15; ++i) {
-            level.objs.push(Graphics.getSkewedRect(stairs.x + run * i, stairs.y - rise * i, run + 1, 50));
+            level.objs.push(Graphics.getSkewedRect(stairs.x + run * i, stairs.y - rise * i, run + 1, 58));
             stairs.w += run;
             stairs.h += rise;
         }
 
         // platform + door
-        level.objs.push(Graphics.getSkewedRect(stairs.x + stairs.w, stairs.y - stairs.h, 200, 50));
-        door = new GameObj(JQObject.DOOR, stairs.x + stairs.w + 155, stairs.y - stairs.h - 54 + Graphics.projectY / 2, 25, 53);
+        level.objs.push(Graphics.getSkewedRect(stairs.x + stairs.w, stairs.y - stairs.h, 200, 58));
+        door = new GameObj(JQObject.DOOR, stairs.x + stairs.w + 153, stairs.y - stairs.h - 58 + Graphics.projectY / 2, 25, 59);
         level.objs.push(door);
 
         // TODO: move to setItems()
@@ -114,14 +114,14 @@ var lvl1 = (function () {
     function setItems(scalePos) {        // crates        var crate = [];        for (var i = 0; i < 3; ++i) {
             crate.push(
                 new GameItem(
-                    new GameObj(JQObject.CRATE, 446, FULLH - game.padFloor - 26 + 5, 24, 26, "crate.png"),
+                    new GameObj(JQObject.CRATE, 446, FULLH - game.padFloor - 26 + 5, 34, 37, "crate.png"),
                     true
                 )
             );
         }
         crate[1].pos.x = scalePos[0] - crate[0].w / 2;
         crate[2].pos.x = scalePos[1] - crate[0].w / 2;        // sack
-        var sack = new GameItem(new GameObj(JQObject.SACK, 680, 121 + Graphics.projectY / 2, 20, 24, "sack.png"), false, 5);
+        var sack = new GameItem(new GameObj(JQObject.SACK, 680, 111 + Graphics.projectY / 2, 30, 34, "sack.png"), false, 5);
 
         // hidden cash; TODO: only add to level.items after visible???
         hiddenCash = new GameItem(new GameObj(JQObject.CASH, 113, 80, 22, 24, "cash.png"), false, 10, false);
@@ -131,7 +131,7 @@ var lvl1 = (function () {
 
     function setEnemies() {
         var cyborg = new Enemy(
-            new GameObj(JQObject.ENEMY, 1600, FULLH - game.padFloor - 38 + 5, 28, 38, "cyborgBnW.png"),
+            new GameObj(JQObject.ENEMY, 1600, FULLH - game.padFloor - 76 + Graphics.projectY/2, 55, 76, "cyborgBnW.png"),
             JQEnemy.FOLLOW,
             1,
             1087,

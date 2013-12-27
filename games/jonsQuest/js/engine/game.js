@@ -67,16 +67,16 @@ var game = (function () {
         }
     	
     	ctx.fillStyle = "#ddd";
-    	ctx.font = "12px 'Press Start 2P'";
-	  	ctx.fillText(avgFPS + " FPS", FULLW - 84, FULLH + 65);
+    	ctx.font = "11px 'Press Start 2P'";
+	  	ctx.fillText(avgFPS + " FPS", FULLW - 77, FULLH + 50);
 	}
    	
 
 	return {
         over: false,        // indicates the game is finished
-	    gravity: 0.07,
-	    padHUD: 80,
-	    padFloor: 32,
+	    gravity: 0.13,
+	    padHUD: 58,
+	    padFloor: 16,
 	    lvl: 0,
 	    totalTicks: 0,      // ticks are update iterations
 	    actualTime: 0,

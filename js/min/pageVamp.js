@@ -1,1 +1,1448 @@
-function GameEngine(){var a=document.createElement("a");a.href="/#games",a.innerText="Back",a.className="btnBack",document.body.appendChild(a);var b=document.createElement("div");b.className="canvasWrap",canvas=document.createElement("canvas"),canvas.setAttribute("width",1008),canvas.setAttribute("height",567),b.appendChild(canvas),document.body.appendChild(b),ctx=canvas.getContext("2d"),this.input=new GameInput(this),this.graphics=new GameGraphics(this),this.utils=new GameUtils(this),this.view=new GameView(this),this.init()}function GameSave(){}function GameInput(){function a(a){return a===KeyCode.W?a=KeyCode.UP:a===KeyCode.S?a=KeyCode.DOWN:a===KeyCode.D?a=KeyCode.RIGHT:a===KeyCode.A&&(a=KeyCode.LEFT),a}this.keysDown={},this.lastKeyUp=KeyCode.EMPTY,this.lastKeyDown=KeyCode.EMPTY;var b=this;addEventListener("keydown",function(c){var d=a(c.keyCode);b.keysDown[d]||(b.lastKeyDown=d,b.keysDown[d]=!0)}),addEventListener("keyup",function(c){b.lastKeyUp=a(c.keyCode),delete b.keysDown[b.lastKeyUp]})}function GameUtils(a){return{switchView:function(b){b.init(),a.view=b}}}function GameView(){this.privates={bgColor:"#ccc"},this.init()}function TitleView(a){this.privates={title:a},this.init()}function GameSaveView(){this.privates={},this.init()}function LevelView(a,b){this.privates={},this.player=a,this.curLvl=b,this.init()}function Level1(){this.init()}function Vamp(){this.init()}!function(a,b,c,d,e,f,g){a.GoogleAnalyticsObject=e,a[e]=a[e]||function(){(a[e].q=a[e].q||[]).push(arguments)},a[e].l=1*new Date,f=b.createElement(c),g=b.getElementsByTagName(c)[0],f.async=1,f.src=d,g.parentNode.insertBefore(f,g)}(window,document,"script","//www.google-analytics.com/analytics.js","ga"),ga("create","UA-43015655-1","jonmann20.github.io"),ga("send","pageview"),GameEngine.prototype=function(){function a(){c.view.update(),f&&c.onUpdate()}function b(){e=requestAnimationFrame(b),c.view.render(),g&&c.onRender()}var c,d,e,f=!1,g=!1;return{init:function(){c=this},onUpdate:function(a){f=!0,this.onUpdate=a},onRender:function(a){g=!0,this.onRender=a},start:function(){d=setInterval(a,1e3/60),e=requestAnimationFrame(b)},stop:function(){clearInterval(d),cancelAnimationFrame(e)}}}(),GameSave.prototype=function(){return{load:function(a){return localStorage["slot"+a]},getList:function(){var a=this.load(0),b=this.load(1),c=this.load(2),d="---";return list=["undefined"!=typeof a?a:d,"undefined"!=typeof b?b:d,"undefined"!=typeof c?c:d]},save:function(a,b){localStorage["slot"+a]=b},erase:function(a){return localStorage.removeItem("slot"+a),this.getList()}}}(),GameInput.prototype=function(){return{update:function(){}}}();var KeyCode=Object.freeze({EMPTY:-1,ENTER:13,CTRL:17,ESC:27,SPACEBAR:32,LEFT:37,UP:38,RIGHT:39,DOWN:40,DELETE:46,A:65,D:68,F:70,H:72,J:74,K:75,M:77,O:79,R:82,S:83,W:87}),KeyCodeNames={};KeyCodeNames[-1]="EMPTY",KeyCodeNames[13]="ENTER",KeyCodeNames[17]="CTRL",KeyCodeNames[27]="ESC",KeyCodeNames[32]="SPACEBAR",KeyCodeNames[37]="LEFT",KeyCodeNames[38]="UP",KeyCodeNames[39]="RIGHT",KeyCodeNames[40]="DOWN",KeyCodeNames[46]="DELETE",KeyCodeNames[65]="A",KeyCodeNames[68]="D",KeyCodeNames[70]="F",KeyCodeNames[72]="H",KeyCodeNames[74]="J",KeyCodeNames[75]="K",KeyCodeNames[77]="M",KeyCodeNames[79]="O",KeyCodeNames[82]="R",KeyCodeNames[83]="S",KeyCodeNames[87]="W";var Dir=Object.freeze({RIGHT:0,LEFT:1}),SAT={};!function(a){"use strict";var b=function(a,b){this.x=a||0,this.y=b||0};a.Vector=b,b.prototype.copy=function(a){return this.x=a.x,this.y=a.y,this},b.prototype.perp=function(){var a=this.x;return this.x=this.y,this.y=-a,this},b.prototype.reverse=function(){return this.x=-this.x,this.y=-this.y,this},b.prototype.normalize=function(){var a=this.len();return a>0&&(this.x=this.x/a,this.y=this.y/a),this},b.prototype.add=function(a){return this.x+=a.x,this.y+=a.y,this},b.prototype.sub=function(a){return this.x-=a.x,this.y-=a.y,this},b.prototype.scale=function(a,b){return this.x*=a,this.y*=b||a,this},b.prototype.project=function(a){var b=this.dot(a)/a.len2();return this.x=b*a.x,this.y=b*a.y,this},b.prototype.projectN=function(a){var b=this.dot(a);return this.x=b*a.x,this.y=b*a.y,this},b.prototype.projectN=b.prototype.projectN,b.prototype.reflect=function(a){var b=this.x,c=this.y;return this.project(a).scale(2),this.x-=b,this.y-=c,this},b.prototype.reflectN=function(a){var b=this.x,c=this.y;return this.projectN(a).scale(2),this.x-=b,this.y-=c,this},b.prototype.dot=function(a){return this.x*a.x+this.y*a.y},b.prototype.len2=function(){return this.dot(this)},b.prototype.len=function(){return Math.sqrt(this.len2())};var c=function(a,c){this.pos=a||new b,this.points=c||[],this.recalc()};a.Polygon=c,c.prototype.recalc=function(){var a=this.points,c=a.length;this.edges=[],this.normals=[];for(var d=0;c>d;d++){var e=a[d],f=c-1>d?a[d+1]:a[0],g=(new b).copy(f).sub(e),h=(new b).copy(g).perp().normalize();this.edges.push(g),this.normals.push(h)}};var d=function(a,c,d){this.pos=a||new b,this.w=c||0,this.h=d||0};a.Box=d,d.prototype.toPolygon=function(){var a=this.pos,d=this.w,e=this.h;return new c(new b(a.x,a.y),[new b,new b(d,0),new b(d,e),new b(0,e)])};for(var e=[],f=0;10>f;++f)e.push(new b);for(var g=[],f=0;5>f;++f)g.push([]);var h=function(){this.a=null,this.b=null,this.overlapN=new b,this.overlapV=new b,this.clear()};a.Response=h,h.prototype.clear=function(){return this.aInB=!0,this.bInA=!0,this.overlap=Number.MAX_VALUE,this};var i=function(a,b,c){for(var d=Number.MAX_VALUE,e=-Number.MAX_VALUE,f=a.length,g=0;f>g;++g){var h=a[g].dot(b);d>h&&(d=h),h>e&&(e=h)}c[0]=d,c[1]=e},j=function(a,b,c,d,f,h){var j=g.pop(),k=g.pop(),l=e.pop().copy(b).sub(a),m=l.dot(f);if(i(c,f,j),i(d,f,k),k[0]+=m,k[1]+=m,j[0]>k[1]||k[0]>j[1])return e.push(l),g.push(j),g.push(k),!0;if(h){var n=0;if(j[0]<k[0])if(h.aInB=!1,j[1]<k[1])n=j[1]-k[0],h.bInA=!1;else{var o=j[1]-k[0],p=k[1]-j[0];n=p>o?o:-p}else if(h.bInA=!1,j[1]>k[1])n=j[0]-k[1],h.aInB=!1;else{var o=j[1]-k[0],p=k[1]-j[0];n=p>o?o:-p}var q=Math.abs(n);q<h.overlap&&(h.overlap=q,h.overlapN.copy(f),0>n&&h.overlapN.reverse())}return e.push(l),g.push(j),g.push(k),!1};a.testPolygonPolygon=function(a,b,c){for(var d=a.points,e=d.length,f=b.points,g=f.length,h=0;e>h;h++)if(j(a.pos,b.pos,d,f,a.normals[h],c))return!1;for(var h=0;g>h;h++)if(j(a.pos,b.pos,d,f,b.normals[h],c))return!1;return c&&(c.a=a,c.b=b,c.overlapV.copy(c.overlapN).scale(c.overlap)),!0}}(SAT);var GameGraphics=function(){return{isAnimating:!1,repeatAction:function(a,b,c){this.isAnimating=!0;var d=0,e=this,f=setInterval(function(){d++>b?(clearInterval(f),e.isAnimating=!1):c()},a)}}};GameView.prototype=function(){return{then:function(a){this.privates.callback=a},init:function(){},update:function(){},render:function(){ctx.fillStyle=this.privates.bgColor,ctx.fillRect(0,0,canvas.width,canvas.height)}}}(),TitleView.prototype=function(){var a,b="Press Enter";return{then:function(a){this.privates.callback=a},init:function(){a=this.privates.title},update:function(){game.input.lastKeyDown===KeyCode.ENTER&&(game.input.lastKeyDown=KeyCode.EMPTY,this.privates.callback())},render:function(){ctx.fillStyle="#000",ctx.fillRect(0,0,canvas.width,canvas.height),ctx.font="36px Arial",ctx.fillStyle="#fff",ctx.fillText(a,canvas.width/2-ctx.measureText(a).width/2,100),ctx.font="24px Arial",ctx.fillText(b,canvas.width/2-ctx.measureText(b).width/2,canvas.height/2)}}}(),GameSaveView.prototype=function(){var a,b,c="Select a save slot",d=new GameSave,e=d.getList();return{then:function(a){this.privates.callback=a},init:function(){a=this,b={img:">>",slot:0,x:canvas.width/2-ctx.measureText(e[0]).width/2-60,y:200}},update:function(){if(game.input.lastKeyDown===KeyCode.ESC)game.input.lastKeyDown=KeyCode.EMPTY,this.privates.callback(KeyCode.ESC);else if(game.input.lastKeyDown===KeyCode.ENTER){game.input.lastKeyDown=KeyCode.EMPTY;var a=new Date,c=a.getMonth(),f=a.getDay(),g=a.getYear(),h=a.toLocaleTimeString();d.save(b.slot,c+"/"+f+"/"+g+" "+h),this.privates.callback(KeyCode.ENTER)}else game.input.lastKeyDown===KeyCode.DELETE?(game.input.lastKeyDownp=KeyCode.EMPTY,e=d.erase(b.slot)):2!==b.slot&&game.input.lastKeyDown===KeyCode.DOWN?(game.input.lastKeyDown=KeyCode.EMPTY,++b.slot,b.x=canvas.width/2-ctx.measureText(e[b.slot]).width/2-60,b.y+=80):0!==b.slot&&game.input.lastKeyDown===KeyCode.UP&&(game.input.lastKeyDown=KeyCode.EMPTY,--b.slot,b.x=canvas.width/2-ctx.measureText(e[b.slot]).width/2-60,b.y-=80)},render:function(){ctx.fillStyle="#111",ctx.fillRect(0,0,canvas.width,canvas.height),ctx.font="36px Arial",ctx.fillStyle="#fff",ctx.fillText(c,canvas.width/2-ctx.measureText(c).width/2,80),ctx.font="24px Arial";for(var a=0;a<e.length;++a)ctx.fillText(e[a],canvas.width/2-ctx.measureText(e[a]).width/2,200+80*a);ctx.fillText(b.img,b.x,b.y)}}}(),LevelView.prototype=function(){function a(){if(b.player.invincible)return 0===b.player.invincibleTimer--&&(b.player.invincible=!1,b.player.invincibleTimer=120),void 0;for(var a=0;a<b.curLvl.projectiles.length;++a){var c=SAT.testPolygonPolygon(b.player,b.curLvl.projectiles[a]);if(c){--b.player.hp,b.player.invincible=!0;break}}}var b,c=!1,d=!1;return{then:function(a){this.privates.callback=a},init:function(){b=this},update:function(){this.curLvl.update(),this.player.update(),a()},onUpdate:function(a){c=!0,this.onUpdate=a},render:function(){this.curLvl.render(),this.player.render()},onRender:function(a){d=!0,this.onRender=a}}}(),Level1.prototype=function(){return{projectiles:[],init:function(){for(var a=0;10>a;++a){var b=new SAT.Box(new SAT.Vector(Math.floor(Math.random()*canvas.width+0),canvas.height),10,20).toPolygon();b.speed=.1*Math.floor(10*Math.random()+3),this.projectiles.push(b)}},update:function(){for(var a=0;a<this.projectiles.length;++a)this.projectiles[a].pos.y-=this.projectiles[a].speed},render:function(){ctx.fillStyle="#000",ctx.fillRect(0,0,canvas.width,canvas.height),ctx.fillStyle="silver";for(var a=0;a<this.projectiles.length;++a)ctx.fillRect(this.projectiles[a].pos.x,this.projectiles[a].pos.y,10,20)}}}(),Vamp.prototype=function(){var a=new Image,b=!1;a.onload=function(){b=!0},a.src="img/vamp.png";var c=4;return{w:40,h:40,hp:3,invincible:!1,invincibleTimer:120,init:function(){$.extend(this,new SAT.Box(new SAT.Vector(0,0),this.w,this.h).toPolygon())},update:function(){game.input.keysDown[KeyCode.RIGHT]?this.pos.x+=c:game.input.keysDown[KeyCode.LEFT]&&(this.pos.x-=c),game.input.keysDown[KeyCode.UP]?this.pos.y-=c:game.input.keysDown[KeyCode.DOWN]&&(this.pos.y+=c),this.hp<=0&&(alert("You died"),location.reload())},render:function(){var a=!0;if(this.invincible){var b=this.invincibleTimer%30;b>=0&&15>b&&(a=!1)}a&&(ctx.fillStyle="yellow",ctx.fillRect(this.pos.x,this.pos.y,this.w,this.h)),ctx.fillStyle="red";for(var c=0;c<this.hp;++c)ctx.fillRect(this.pos.x-10+20*c,this.pos.y-20,20,10)}}}(),function(){game=new GameEngine,game.start();var a=new TitleView("Vamp: The Great and Powerful",!0);a.then(function(){game.utils.switchView(b)});var b=new GameSaveView;b.then(function(b){b===KeyCode.ESC?game.utils.switchView(a):b===KeyCode.ENTER&&game.utils.switchView(e)});var c=new Vamp,d=new Level1,e=new LevelView(c,d);game.view=a}();
+/// <reference path="commonLinker.js" />
+
+/*
+    Declares two globals: canvas and ctx
+*/
+function GameEngine() {
+    // back button
+    var backBtn = document.createElement("a");
+    backBtn.href = "/#games";
+    backBtn.innerText = "Back";
+    backBtn.className = "btnBack";
+    document.body.appendChild(backBtn);
+
+    // canvasWrap
+    var wrap = document.createElement("div");
+    wrap.className = "canvasWrap";
+
+    // canvas
+    canvas = document.createElement("canvas");
+    canvas.setAttribute("width", 16*63);
+    canvas.setAttribute("height", 9*63);
+    wrap.appendChild(canvas);
+    document.body.appendChild(wrap);
+
+    ctx = canvas.getContext("2d");
+
+    this.input = new GameInput(this);
+    this.graphics = new GameGraphics(this);
+    this.utils = new GameUtils(this);
+    this.view = new GameView(this);
+
+    this.init();
+}
+
+GameEngine.prototype = (function() {
+    var that,
+        updateInterval,
+        renderRAF,
+        onUpdateSet = false,
+        onRenderSet = false
+    ;
+
+
+    function update() {
+        that.view.update();
+
+        if(onUpdateSet)
+            that.onUpdate();
+    }
+
+    function render() {
+        renderRAF = requestAnimationFrame(render);
+        that.view.render();
+
+        if(onRenderSet)
+            that.onRender();
+    }
+
+
+    return {
+        init: function(){
+            that = this;
+        },
+
+        onUpdate: function(callback) {
+            onUpdateSet = true;
+            this.onUpdate = callback;
+        },
+
+        onRender: function(callback) {
+            onRenderSet = true;
+            this.onRender = callback;
+        },
+
+        start: function() {
+            updateInterval = setInterval(update, 1000 / 60);
+            renderRAF = requestAnimationFrame(render);
+        },
+
+        stop: function() {
+            clearInterval(updateInterval);
+            cancelAnimationFrame(renderRAF);
+        }
+    };
+})();
+
+/// <reference path="commonLinker.js" />
+
+function GameSave() {
+
+}
+
+GameSave.prototype = (function () {
+    return {
+        load: function (slot) {
+            return localStorage["slot" + slot];
+        },
+
+        getList: function () {
+            var zero = this.load(0),
+                one = this.load(1),
+                two = this.load(2),
+                def = "---"
+            ;
+            return list = [
+                (typeof(zero) !== "undefined") ? zero : def,
+                (typeof (one) !== "undefined") ? one : def,
+                (typeof (two) !== "undefined") ? two : def
+            ];
+        },
+
+        save: function (slot, data) {
+            localStorage["slot" + slot] = data;
+        },
+
+        erase: function(slot){
+            localStorage.removeItem("slot" + slot);
+            return this.getList();
+        }
+    };
+})();
+
+/*
+    The input component of GameEngine.
+*/
+function GameInput() {
+    this.keysDown = {};
+    this.lastKeyUp = KeyCode.EMPTY;
+    this.lastKeyDown = KeyCode.EMPTY;
+
+    function fixKey(key) {
+        if (key === KeyCode.W)
+            key = KeyCode.UP;
+        else if (key === KeyCode.S)
+            key = KeyCode.DOWN;
+        else if (key === KeyCode.D)
+            key = KeyCode.RIGHT;
+        else if (key === KeyCode.A)
+            key = KeyCode.LEFT;
+
+        return key;
+    }
+
+    var that = this;
+
+    addEventListener("keydown", function (e) {
+        var key = fixKey(e.keyCode);
+
+        if (!that.keysDown[key]) {
+            that.lastKeyDown = key;
+            that.keysDown[key] = true;
+        }
+    });
+
+    addEventListener("keyup", function (e) {
+        that.lastKeyUp = fixKey(e.keyCode);
+        delete that.keysDown[that.lastKeyUp];
+    });
+}
+
+GameInput.prototype = (function () {
+
+    return {
+        update: function () {
+
+        }
+    };
+})();
+
+
+// global enums
+var KeyCode = Object.freeze({
+    EMPTY: -1,
+    ENTER: 13,
+    CTRL: 17,
+    ESC: 27,
+    SPACEBAR: 32,
+    LEFT: 37,
+    UP: 38,
+    RIGHT: 39,
+    DOWN: 40,
+    DELETE: 46,
+    A: 65,
+    D: 68,
+    F: 70,
+    H: 72,
+    J: 74,
+    K: 75,
+    M: 77,
+    O: 79,
+    R: 82,
+    S: 83,
+    W: 87
+});
+
+var KeyCodeNames = {};
+KeyCodeNames[-1] = "EMPTY";
+KeyCodeNames[13] = "ENTER";
+KeyCodeNames[17] = "CTRL";
+KeyCodeNames[27] = "ESC";
+KeyCodeNames[32] = "SPACEBAR";
+KeyCodeNames[37] = "LEFT";
+KeyCodeNames[38] = "UP";
+KeyCodeNames[39] = "RIGHT";
+KeyCodeNames[40] = "DOWN";
+KeyCodeNames[46] = "DELETE";
+KeyCodeNames[65] = "A";
+KeyCodeNames[68] = "D";
+KeyCodeNames[70] = "F";
+KeyCodeNames[72] = "H";
+KeyCodeNames[74] = "J";
+KeyCodeNames[75] = "K";
+KeyCodeNames[77] = "M";
+KeyCodeNames[79] = "O";
+KeyCodeNames[82] = "R";
+KeyCodeNames[83] = "S";
+KeyCodeNames[87] = "W";
+/*
+    The utils component of GameEngine.
+*/
+function GameUtils(gEngine) {
+    return {
+        /*
+            Resets the newView's private variables.
+            Changes the view.
+        */
+        switchView: function(newView) {
+            newView.init();
+            gEngine.view = newView;
+        }
+    };
+}
+
+// global enums
+var Dir = Object.freeze({
+    RIGHT: 0,
+    LEFT: 1
+});
+/*! 
+    Authored by Jim Riecken - released under the MIT License. 
+    Modified by Jon Wiedmann
+*/
+
+/*
+    A simple library for determining intersections of circles and
+    polygons using the Separating Axis Theorem.
+
+    jshint shadow:true, sub:true, forin:true, noarg:true, noempty:true, 
+    eqeqeq:true, bitwise:true, strict:true, undef:true, 
+    curly:true, browser:true 
+*/
+
+var SAT = {};
+(function(SAT) {
+    "use strict";
+  
+    /*
+        Represents a vector in two dimensions.
+     
+        @param {?number=} x The x position.
+        @param {?number=} y The y position.
+        @constructor
+    */
+    var Vector = function(x, y) {
+        this.x = x || 0;
+        this.y = y || 0;
+    };
+    SAT.Vector = Vector;
+
+    /*
+        Copy the values of another Vector into this one.
+    
+        @param {Vector} other The other Vector.
+        @return {Vector} This for chaining.
+    */
+    Vector.prototype.copy = function(other) {
+        this.x = other.x; 
+        this.y = other.y;
+
+        return this;
+    };
+    
+    /*
+        Rotate this vector by 90 degrees
+    
+        @return {Vector} This for chaining.
+    */
+    Vector.prototype.perp = function() {
+        var x = this.x;
+        this.x = this.y; 
+        this.y = -x;
+
+        return this;
+    };
+    
+    /*
+        Reverse this vector.
+    
+        @return {Vector} This for chaining.
+    */
+    Vector.prototype.reverse = function() {
+        this.x = -this.x; 
+        this.y = -this.y;
+
+        return this;
+    };
+  
+    /*
+        Normalize (make unit length) this vector.
+        
+        @return {Vector} This for chaining.
+    */
+    Vector.prototype.normalize = function() {
+        var d = this.len();
+
+        if(d > 0) {
+            this.x = this.x / d; 
+            this.y = this.y / d;
+        }
+
+        return this;
+    };
+  
+    /*
+        Add another vector to this one.
+    
+        @param {Vector} other The other Vector.
+        @return {Vector} This for chaining.
+    */
+    Vector.prototype.add = function(other) {
+        this.x += other.x; 
+        this.y += other.y;
+
+        return this;
+    };
+  
+    /*
+        Subtract another vector from this one.
+    
+        @param {Vector} other The other Vector.
+        @return {Vector} This for chaiing.
+    */
+    Vector.prototype.sub = function(other) {
+        this.x -= other.x;
+        this.y -= other.y;
+
+        return this;
+    };
+  
+    /*
+        Scale this vector.
+    
+        @param {number} x The scaling factor in the x direction.
+        @param {?number=} y The scaling factor in the y direction.  If this
+        is not specified, the x scaling factor will be used.
+        @return {Vector} This for chaining.
+    */
+    Vector.prototype.scale = function(x,y) {
+        this.x *= x; 
+        this.y *= y || x;
+
+        return this; 
+    };
+  
+    /*
+        Project this vector on to another vector.
+    
+        @param {Vector} other The vector to project onto.
+        @return {Vector} This for chaining.
+    */
+    Vector.prototype.project = function(other) {
+        var amt = this.dot(other) / other.len2();
+
+        this.x = amt * other.x; 
+        this.y = amt * other.y;
+
+        return this;
+    };
+  
+    /*
+        Project this vector onto a vector of unit length.
+    
+        @param {Vector} other The unit vector to project onto.
+        @return {Vector} This for chaining.
+    */
+    Vector.prototype.projectN = function(other) {
+    var amt = this.dot(other);
+    this.x = amt * other.x; 
+    this.y = amt * other.y;
+    return this;
+    };
+    Vector.prototype['projectN'] = Vector.prototype.projectN;
+  
+    /*
+        Reflect this vector on an arbitrary axis.
+    
+        @param {Vector} axis The vector representing the axis.
+        @return {Vector} This for chaining.
+    */
+    Vector.prototype.reflect = function(axis) {
+        var x = this.x;
+        var y = this.y;
+
+        this.project(axis).scale(2);
+
+        this.x -= x;
+        this.y -= y;
+
+        return this;
+    };
+  
+    /*
+        Reflect this vector on an arbitrary axis (represented by a unit vector)
+    
+        @param {Vector} axis The unit vector representing the axis.
+        @return {Vector} This for chaining.
+    */
+    Vector.prototype.reflectN = function(axis) {
+        var x = this.x;
+        var y = this.y;
+
+        this.projectN(axis).scale(2);
+
+        this.x -= x;
+        this.y -= y;
+
+        return this;
+    };
+  
+    /*
+        Get the dot product of this vector against another.
+     
+        @param {Vector}  other The vector to dot this one against.
+        @return {number} The dot product.
+    */
+    Vector.prototype.dot = function(other) {
+        return this.x * other.x + this.y * other.y;
+    };
+  
+    /*
+        Get the length^2 of this vector.
+    
+        @return {number} The length^2 of this vector.
+    */
+    Vector.prototype.len2 = function() {
+        return this.dot(this);
+    };
+  
+    /*
+        Get the length of this vector.
+    
+        @return {number} The length of this vector.
+    */
+    Vector.prototype.len = function() {
+        return Math.sqrt(this.len2());
+    };
+  
+
+    /*
+        A circle.
+    
+        @param {Vector=} pos A vector representing the position of the center of the circle
+        @param {?number=} r The radius of the circle
+        @constructor
+    */
+    //var Circle = function(pos, r) {
+    //    this.pos = pos || new Vector();
+    //    this.r = r || 0;
+    //};
+    //SAT.Circle = Circle;
+  
+
+    /*
+        A *convex* clockwise polygon.
+    
+        @param {Vector=} pos A vector representing the origin of the polygon. (all other
+            points are relative to this one)
+        @param {Array.<Vector>=} points An array of vectors representing the points in the polygon,
+            in clockwise order.
+        @constructor
+    */
+    var Polygon = function(pos, points) {
+        this.pos = pos || new Vector();
+        this.points = points || [];
+
+        this.recalc();
+    };
+    SAT.Polygon = Polygon;
+  
+    /*
+        Recalculate the edges and normals of the polygon.  This
+        MUST be called if the points array is modified at all and
+        the edges or normals are to be accessed.
+    */
+    Polygon.prototype.recalc = function() {
+        var points = this.points;
+        var len = points.length;
+
+        this.edges = []; 
+        this.normals = [];
+
+        for (var i = 0; i < len; i++) {
+            var p1 = points[i]; 
+            var p2 = i < len - 1 ? points[i + 1] : points[0];
+
+            var e = new Vector().copy(p2).sub(p1);
+            var n = new Vector().copy(e).perp().normalize();
+
+            this.edges.push(e);
+            this.normals.push(n);
+        }
+    };
+    
+  
+    /*
+        An axis-aligned box, with width and height.
+    
+        @param {Vector=} pos A vector representing the top-left of the box.
+        @param {?number=} w The width of the box.
+        @param {?number=} h The height of the box.
+        @constructor
+    */
+    var Box = function(pos, w, h) {
+        this.pos = pos || new Vector();
+        this.w = w || 0; 
+        this.h = h || 0;
+    };
+    SAT.Box = Box;
+
+    /*
+        Create a polygon that is the same as this box.
+    
+        @return {Polygon} A new Polygon that represents this box.
+    */
+    Box.prototype.toPolygon = function() {
+        var pos = this.pos;
+        var w = this.w;
+        var h = this.h;
+
+        return new Polygon(new Vector(pos.x, pos.y), [
+            new Vector(), new Vector(w, 0), 
+            new Vector(w,h), new Vector(0,h)
+        ]);
+    };
+  
+    /*
+        Pool of Vectors used in calculations.
+    
+        @type {Array.<Vector>}
+    */
+    var T_VECTORS = [];
+    for (var i = 0; i < 10; ++i) { T_VECTORS.push(new Vector()); }
+
+    /*
+        Pool of Arrays used in calculations.
+    
+        @type {Array.<Array.<*>>}
+    */
+    var T_ARRAYS = [];
+    for (var i = 0; i < 5; ++i) { T_ARRAYS.push([]); }
+
+    /*
+        An object representing the result of an intersection. Contain information about:
+            - The two objects participating in the intersection
+            - The vector representing the minimum change necessary to extract the first object
+              from the second one.
+            - Whether the first object is entirely inside the second, or vice versa.
+    
+        @constructor
+    */  
+    var Response = function() {
+        this.a = null;
+        this.b = null;
+
+        this.overlapN = new Vector(); // Unit vector in the direction of overlap
+        this.overlapV = new Vector(); // Subtract this from a's position to extract it from b
+
+        this.clear();
+    };
+    SAT.Response = Response;
+
+    /*
+        Set some values of the response back to their defaults.  Call this between tests if 
+        you are going to reuse a single Response object for multiple intersection tests (recommented)
+    
+        @return {Response} This for chaining
+    */
+    Response.prototype.clear = function() {
+        this.aInB = true; // Is a fully inside b?
+        this.bInA = true; // Is b fully inside a?
+        this.overlap = Number.MAX_VALUE; // Amount of overlap (magnitude of overlapV). Can be 0 (if a and b are touching)
+
+        return this;
+    };
+  
+    /*
+        Flattens the specified array of points onto a unit vector axis,
+        resulting in a one dimensional range of the minimum and 
+        maximum value on that axis.
+    
+        @param {Array.<Vector>} points The points to flatten.
+        @param {Vector} normal The unit vector axis to flatten on.
+        @param {Array.<number>} result An array.  After calling this function,
+            result[0] will be the minimum value,
+        result[1] will be the maximum value.
+    */
+    var flattenPointsOn = function(points, normal, result) {
+        var min = Number.MAX_VALUE;
+        var max = -Number.MAX_VALUE;
+        var len = points.length;
+
+        for (var i = 0; i < len; ++i ) {
+            // Get the magnitude of the projection of the point onto the normal
+            var dot = points[i].dot(normal);
+
+            if (dot < min) { min = dot; }
+            if (dot > max) { max = dot; }
+        }
+
+        result[0] = min;
+        result[1] = max;
+    };
+  
+    /*
+        Check whether two convex clockwise polygons are separated by the specified
+        axis (must be a unit vector).
+    
+        @param {Vector} aPos The position of the first polygon.
+        @param {Vector} bPos The position of the second polygon.
+        @param {Array.<Vector>} aPoints The points in the first polygon.
+        @param {Array.<Vector>} bPoints The points in the second polygon.
+        @param {Vector} axis The axis (unit sized) to test against.  The points of both polygons
+            will be projected onto this axis.
+        @param {Response=} response A Response object (optional) which will be populated
+            if the axis is not a separating axis.
+        @return {boolean} true if it is a separating axis, false otherwise.  If false,
+            and a response is passed in, information about how much overlap and
+            the direction of the overlap will be populated.
+    */
+    var isSeparatingAxis = function(aPos, bPos, aPoints, bPoints, axis, response) {
+        var rangeA = T_ARRAYS.pop();
+        var rangeB = T_ARRAYS.pop();
+
+        // Get the magnitude of the offset between the two polygons
+        var offsetV = T_VECTORS.pop().copy(bPos).sub(aPos);
+        var projectedOffset = offsetV.dot(axis);
+
+        // Project the polygons onto the axis.
+        flattenPointsOn(aPoints, axis, rangeA);
+        flattenPointsOn(bPoints, axis, rangeB);
+
+        // Move B's range to its position relative to A.
+        rangeB[0] += projectedOffset;
+        rangeB[1] += projectedOffset;
+
+        // Check if there is a gap. If there is, this is a separating axis and we can stop
+        if (rangeA[0] > rangeB[1] || rangeB[0] > rangeA[1]) {
+            T_VECTORS.push(offsetV); 
+            T_ARRAYS.push(rangeA); 
+            T_ARRAYS.push(rangeB);
+
+            return true;
+        }
+
+        // If we're calculating a response, calculate the overlap.
+        if (response) {
+            var overlap = 0;
+
+            // A starts further left than B
+            if (rangeA[0] < rangeB[0]) {
+                response.aInB = false;
+
+                // A ends before B does. We have to pull A out of B
+                if (rangeA[1] < rangeB[1]) { 
+                    overlap = rangeA[1] - rangeB[0];
+                    response.bInA = false;
+                }
+                else {  // B is fully inside A.  Pick the shortest way out.
+                    var option1 = rangeA[1] - rangeB[0];
+                    var option2 = rangeB[1] - rangeA[0];
+                    overlap = option1 < option2 ? option1 : -option2;
+                }
+            
+            }
+            else {  // B starts further left than A
+                response.bInA = false;
+
+                // B ends before A ends. We have to push A out of B
+                if (rangeA[1] > rangeB[1]) { 
+                    overlap = rangeA[0] - rangeB[1];
+                    response.aInB = false;
+                }
+                else {  // A is fully inside B.  Pick the shortest way out.
+                    var option1 = rangeA[1] - rangeB[0];
+                    var option2 = rangeB[1] - rangeA[0];
+
+                    overlap = option1 < option2 ? option1 : -option2;
+                }
+            }
+
+            // If this is the smallest amount of overlap we've seen so far, set it as the minimum overlap.
+            var absOverlap = Math.abs(overlap);
+            if (absOverlap < response.overlap) {
+                response.overlap = absOverlap;
+                response.overlapN.copy(axis);
+
+                if (overlap < 0) {
+                    response.overlapN.reverse();
+                }
+            }      
+        }
+
+        T_VECTORS.push(offsetV); 
+        T_ARRAYS.push(rangeA); 
+        T_ARRAYS.push(rangeB);
+
+        return false;
+    };
+  
+    /*
+        Calculates which Vornoi region a point is on a line segment.
+        It is assumed that both the line and the point are relative to (0, 0)
+    
+                 |       (0)      | 
+          (-1)  [0]--------------[1]  (1)
+                 |       (0)      | 
+     
+        @param {Vector} line The line segment.
+        @param {Vector} point The point.
+        @return {number} LEFT_VORNOI_REGION (-1) if it is the left region, 
+               MIDDLE_VORNOI_REGION (0) if it is the middle region, 
+               RIGHT_VORNOI_REGION (1) if it is the right region.
+    */
+    var vornoiRegion = function(line, point) {
+        var len2 = line.len2();
+        var dp = point.dot(line);
+
+        if (dp < 0) { return LEFT_VORNOI_REGION; }
+        else if (dp > len2) { return RIGHT_VORNOI_REGION; }
+        else { return MIDDLE_VORNOI_REGION; }
+    };
+
+    // @const
+    var LEFT_VORNOI_REGION = -1;
+
+    // @const
+    var MIDDLE_VORNOI_REGION = 0;
+    
+    // @const
+    var RIGHT_VORNOI_REGION = 1;
+  
+    /*
+        Check if two circles intersect.
+    
+        @param {Circle} a The first circle.
+        @param {Circle} b The second circle.
+        @param {Response=} response Response object (optional) that will be populated if
+            the circles intersect.
+        @return {boolean} true if the circles intersect, false if they don't. 
+    */
+    //SAT.testCircleCircle = function (a, b, response) {
+    //    var differenceV = T_VECTORS.pop().copy(b.pos).sub(a.pos);
+    //    var totalRadius = a.r + b.r;
+    //    var totalRadiusSq = totalRadius * totalRadius;
+    //    var distanceSq = differenceV.len2();
+
+    //    if (distanceSq > totalRadiusSq) {
+    //        // They do not intersect 
+    //        T_VECTORS.push(differenceV);
+    //        return false;
+    //    }
+
+    //    // They intersect.  If we're calculating a response, calculate the overlap.
+    //    if (response) {
+    //        var dist = Math.sqrt(distanceSq);
+    //        response.a = a;
+    //        response.b = b;
+    //        response.overlap = totalRadius - dist;
+    //        response.overlapN.copy(differenceV.normalize());
+    //        response.overlapV.copy(differenceV).scale(response.overlap);
+    //        response.aInB = a.r <= b.r && dist <= b.r - a.r;
+    //        response.bInA = b.r <= a.r && dist <= a.r - b.r;
+    //    }
+
+    //    T_VECTORS.push(differenceV);
+
+    //    return true;
+    //};
+  
+    /*
+        Check if a polygon and a circle intersect.
+    
+        @param {Polygon} polygon The polygon.
+        @param {Circle} circle The circle.
+        @param {Response=} response Response object (optional) that will be populated if
+            they interset.
+        @return {boolean} true if they intersect, false if they don't.
+    */
+    //var testPolygonCircle = function(polygon, circle, response) {
+    //    var circlePos = T_VECTORS.pop().copy(circle.pos).sub(polygon.pos);
+    //    var radius = circle.r;
+    //    var radius2 = radius * radius;
+    //    var points = polygon.points;
+    //    var len = points.length;
+    //    var edge = T_VECTORS.pop();
+    //    var point = T_VECTORS.pop();
+    
+    //    // For each edge in the polygon
+    //    for (var i = 0; i < len; ++i) {
+    //        var next = i === len - 1 ? 0 : i + 1;
+    //        var prev = i === 0 ? len - 1 : i - 1;
+    //        var overlap = 0;
+    //        var overlapN = null;
+      
+    //        // Get the edge
+    //        edge.copy(polygon.edges[i]);
+
+    //        // Calculate the center of the cirble relative to the starting point of the edge
+    //        point.copy(circlePos).sub(points[i]);
+      
+    //        // If the distance between the center of the circle and the point
+    //        // is bigger than the radius, the polygon is definitely not fully in
+    //        // the circle.
+    //        if (response && point.len2() > radius2) {
+    //            response.aInB = false;
+    //        }
+      
+    //        // Calculate which Vornoi region the center of the circle is in.
+    //        var region = vornoiRegion(edge, point);
+    //        if (region === LEFT_VORNOI_REGION) { 
+    //            // Need to make sure we're in the RIGHT_VORNOI_REGION of the previous edge.
+    //            edge.copy(polygon.edges[prev]);
+    //            // Calculate the center of the circle relative the starting point of the previous edge
+    //            var point2 = T_VECTORS.pop().copy(circlePos).sub(points[prev]);
+    //            region = vornoiRegion(edge, point2);
+    //            if (region === RIGHT_VORNOI_REGION) {
+    //                // It's in the region we want.  Check if the circle intersects the point.
+    //                var dist = point.len();
+    //                if (dist > radius) {
+    //                    // No intersection
+    //                    T_VECTORS.push(circlePos); 
+    //                    T_VECTORS.push(edge);
+    //                    T_VECTORS.push(point); 
+    //                    T_VECTORS.push(point2);
+
+    //                    return false;
+    //                }
+    //                else if (response) {
+    //                    // It intersects, calculate the overlap
+    //                    response.bInA = false;
+    //                    overlapN = point.normalize();
+    //                    overlap = radius - dist;
+    //                }
+    //            }
+
+    //            T_VECTORS.push(point2);
+    //        }
+    //        else if (region === RIGHT_VORNOI_REGION) {
+    //            // Need to make sure we're in the left region on the next edge
+    //            edge.copy(polygon.edges[next]);
+
+    //            // Calculate the center of the circle relative to the starting point of the next edge
+    //            point.copy(circlePos).sub(points[next]);
+    //            region = vornoiRegion(edge, point);
+
+    //            if (region === LEFT_VORNOI_REGION) {
+    //                // It's in the region we want.  Check if the circle intersects the point.
+    //                var dist = point.len();
+    //                if (dist > radius) {
+    //                    // No intersection
+    //                    T_VECTORS.push(circlePos); 
+    //                    T_VECTORS.push(edge); 
+    //                    T_VECTORS.push(point);
+
+    //                    return false;              
+    //                }
+    //                else if (response) {
+    //                    // It intersects, calculate the overlap
+    //                    response.bInA = false;
+    //                    overlapN = point.normalize();
+    //                    overlap = radius - dist;
+    //                }
+    //            }
+                
+    //        }
+    //        else {  // MIDDLE_VORNOI_REGION
+    //            // Need to check if the circle is intersecting the edge,
+    //            // Change the edge into its "edge normal".
+    //            var normal = edge.perp().normalize();
+
+    //            // Find the perpendicular distance between the center of the 
+    //            // circle and the edge.
+    //            var dist = point.dot(normal);
+    //            var distAbs = Math.abs(dist);
+
+    //            // If the circle is on the outside of the edge, there is no intersection
+    //            if (dist > 0 && distAbs > radius) {
+    //                T_VECTORS.push(circlePos); 
+    //                T_VECTORS.push(normal); 
+    //                T_VECTORS.push(point);
+
+    //                return false;
+    //            }
+    //            else if (response) {
+    //                // It intersects, calculate the overlap.
+    //                overlapN = normal;
+    //                overlap = radius - dist;
+
+    //                // If the center of the circle is on the outside of the edge, or part of the
+    //                // circle is on the outside, the circle is not fully inside the polygon.
+    //                if (dist >= 0 || overlap < 2 * radius) {
+    //                    response.bInA = false;
+    //                }
+    //            }
+    //        }
+      
+    //        // If this is the smallest overlap we've seen, keep it. 
+    //        // (overlapN may be null if the circle was in the wrong Vornoi region)
+    //        if (overlapN && response && Math.abs(overlap) < Math.abs(response.overlap)) {
+    //            response.overlap = overlap;
+    //            response.overlapN.copy(overlapN);
+    //        }
+    //    }
+    
+    //    // Calculate the final overlap vector - based on the smallest overlap.
+    //    if (response) {
+    //        response.a = polygon;
+    //        response.b = circle;
+    //        response.overlapV.copy(response.overlapN).scale(response.overlap);
+    //    }
+
+    //    T_VECTORS.push(circlePos); 
+    //    T_VECTORS.push(edge); 
+    //    T_VECTORS.push(point);
+
+    //    return true;
+    //};
+    //SAT.testPolygonCircle = testPolygonCircle;
+  
+    /*
+        Check if a circle and a polygon intersect.
+    
+        NOTE: This runs slightly slower than polygonCircle as it just
+            runs polygonCircle and reverses everything at the end.
+    
+        @param {Circle} circle The circle.
+        @param {Polygon} polygon The polygon.
+        @param {Response=} response Response object (optional) that will be populated if
+            they interset.
+        @return {boolean} true if they intersect, false if they don't.
+    */
+    //SAT.testCirclePolygon = function (circle, polygon, response) {
+    //    var result = testPolygonCircle(polygon, circle, response);
+
+    //    if (result && response) {
+    //        // Swap A and B in the response.
+    //        var a = response.a;
+    //        var aInB = response.aInB;
+    //        response.overlapN.reverse();
+    //        response.overlapV.reverse();
+    //        response.a = response.b;
+    //        response.b = a;
+    //        response.aInB = response.bInA;
+    //        response.bInA = aInB;
+    //    }
+
+    //    return result;
+    //};
+  
+    /*
+        Checks whether two convex, clockwise polygons intersect.
+    
+        @param {Polygon} a The first polygon.
+        @param {Polygon} b The second polygon.
+        @param {Response=} response Response object (optional) that will be populated if
+        they interset.
+        @return {boolean} true if they intersect, false if they don't.
+    */
+    SAT.testPolygonPolygon = function (a, b, response) {
+        var aPoints = a.points;
+        var aLen = aPoints.length;
+        var bPoints = b.points;
+        var bLen = bPoints.length;
+
+        // If any of the edge normals of A is a separating axis, no intersection.
+        for (var i = 0; i < aLen; i++) {
+            if (isSeparatingAxis(a.pos, b.pos, aPoints, bPoints, a.normals[i], response)) {
+                return false;
+            }
+        }
+
+        // If any of the edge normals of B is a separating axis, no intersection.
+        for (var i = 0; i < bLen; i++) {
+            if (isSeparatingAxis(a.pos, b.pos, aPoints, bPoints, b.normals[i], response)) {
+                return false;
+            }
+        }
+
+        // Since none of the edge normals of A or B are a separating axis, there is an intersection
+        // and we've already calculated the smallest overlap (in isSeparatingAxis).  Calculate the
+        // final overlap vector.
+        if (response) {
+            response.a = a;
+            response.b = b;
+            response.overlapV.copy(response.overlapN).scale(response.overlap);
+        }
+
+        return true;
+    };
+}(SAT));
+/*
+    The graphics component of GameEngine.
+*/
+var GameGraphics = function(gEngine) {
+    return {
+        isAnimating: false,
+
+        /*
+            @param(number) timeStep The wait time between running the action (in ms).
+            @param(number) numTimes The number to times to run the action.
+            @param(function) callback The callback function.
+        */
+        repeatAction: function(timeStep, numTimes, callback) {
+            this.isAnimating = true;
+
+            var num = 0,
+                that = this
+            ;
+
+            var theAnimation = setInterval(function() {
+                if(num++ > numTimes) {
+                    clearInterval(theAnimation);
+                    that.isAnimating = false;
+                }
+                else {
+                    callback();
+                }
+            }, timeStep);
+        }
+    };
+};
+
+/// <reference path="../commonLinker.js" />
+
+/*
+    A generic view interface.
+*/
+function GameView(gEngine) {
+    this.privates = {
+        bgColor: "#ccc"
+    };
+
+    this.init();
+}
+
+GameView.prototype = (function () {
+
+    return {
+        then: function(callback){
+            this.privates.callback = callback;
+        },
+
+        init: function(){
+
+        },
+
+        update: function () {
+
+        },
+
+        render: function () {
+            ctx.fillStyle = this.privates.bgColor;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+        }
+    };
+})();
+
+/// <reference path="../commonLinker.js" />
+
+/*
+    Implements GameView.
+
+    @param(string) title The name of the game.
+*/
+function TitleView(title) {
+    this.privates = {
+        title: title
+    };
+
+    this.init();
+}
+
+TitleView.prototype = (function () {
+    var title,
+        cta = "Press Enter"
+    ;
+
+    return {
+        then: function(callback){
+            this.privates.callback = callback;
+        },
+
+        init: function(){
+            title = this.privates.title;
+        },
+
+        update: function () {
+            if (game.input.lastKeyDown === KeyCode.ENTER) {
+                game.input.lastKeyDown = KeyCode.EMPTY;
+                this.privates.callback();
+            }
+        },
+
+        render: function () {
+            ctx.fillStyle = "#000";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.font = "36px Arial"
+            ctx.fillStyle = "#fff";
+            ctx.fillText(title, canvas.width / 2 - ctx.measureText(title).width / 2, 100);
+
+            ctx.font = "24px Arial";
+            ctx.fillText(cta, canvas.width / 2 - ctx.measureText(cta).width / 2, canvas.height / 2);
+        }
+    };
+})();
+/// <reference path="../commonLinker.js" />
+
+function GameSaveView() {
+    this.privates = {};
+
+    this.init();
+}
+
+GameSaveView.prototype = (function() {
+    var that,
+        title = "Select a save slot",
+        cta = "Press Delete to erase a save",
+        storage = new GameSave(),
+        list = storage.getList(),
+        arrow
+    ;
+
+    return {
+        then: function(callback) {
+            this.privates.callback = callback;
+        },
+
+        init: function() {
+            that = this;
+
+            arrow = {
+                img: ">>",
+                slot: 0,
+                x: canvas.width / 2 - ctx.measureText(list[0]).width / 2 - 60,    // TODO: make instance var??
+                y: 200
+            };
+        },
+
+        update: function() {
+            if(game.input.lastKeyDown === KeyCode.ESC) {
+                game.input.lastKeyDown = KeyCode.EMPTY;
+                this.privates.callback(KeyCode.ESC);
+            }
+            else if(game.input.lastKeyDown === KeyCode.ENTER) {
+                game.input.lastKeyDown = KeyCode.EMPTY;
+
+                var date = new Date();
+                var m = date.getMonth();
+                var d = date.getDay();
+                var y = date.getYear();
+                var t = date.toLocaleTimeString();
+
+                storage.save(arrow.slot, m + '/' + d + '/' + y + ' ' + t);
+                this.privates.callback(KeyCode.ENTER);
+            }
+            else if(game.input.lastKeyDown === KeyCode.DELETE) {
+                game.input.lastKeyDownp = KeyCode.EMPTY;
+
+                list = storage.erase(arrow.slot);
+            }
+            else if(arrow.slot !== 2 && game.input.lastKeyDown === KeyCode.DOWN) {
+                game.input.lastKeyDown = KeyCode.EMPTY;
+
+                ++arrow.slot;
+                arrow.x = canvas.width / 2 - ctx.measureText(list[arrow.slot]).width / 2 - 60;
+                arrow.y += 80;
+            }
+            else if(arrow.slot !== 0 && game.input.lastKeyDown === KeyCode.UP) {
+                game.input.lastKeyDown = KeyCode.EMPTY;
+
+                --arrow.slot;
+                arrow.x = canvas.width / 2 - ctx.measureText(list[arrow.slot]).width / 2 - 60;
+                arrow.y -= 80;
+            }
+        },
+
+        render: function() {
+            ctx.fillStyle = "#111";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.font = "36px Arial"
+            ctx.fillStyle = "#fff";
+            ctx.fillText(title, canvas.width / 2 - ctx.measureText(title).width / 2, 80);
+
+            ctx.font = "24px Arial"
+
+            for(var i = 0; i < list.length; ++i) {
+                ctx.fillText(list[i], canvas.width / 2 - ctx.measureText(list[i]).width / 2, 200 + i * 80);
+            }
+
+            ctx.fillText(arrow.img, arrow.x, arrow.y);
+        }
+    };
+})();
+/// <reference path="../linker.js" />
+
+function LevelView(player, curLvl) {
+    this.privates = {};
+    this.player = player;
+    this.curLvl = curLvl;
+
+    this.init();
+}
+
+LevelView.prototype = (function() {
+    var that,
+        onUpdateSet = false,
+        onRenderSet = false
+    ;
+
+
+    function checkCollision() {
+        if(that.player.invincible) {
+            if(that.player.invincibleTimer-- === 0) {
+                that.player.invincible = false;
+                that.player.invincibleTimer = 120;
+            }
+
+            return;
+        }
+
+        for(var i = 0; i < that.curLvl.projectiles.length; ++i){
+            var collided = SAT.testPolygonPolygon(that.player, that.curLvl.projectiles[i]);
+            if(collided) {
+                --that.player.hp;
+                that.player.invincible = true;
+                break;
+            }
+        }
+    }
+
+
+    return {
+        then: function(callback){
+            this.privates.callback = callback;
+        },
+
+        init: function(){
+            that = this;
+        },
+
+        update: function() {
+            this.curLvl.update();
+            this.player.update();
+
+            //if(onUpdateSet)
+            //    this.onUpdate();
+
+            checkCollision();
+        },
+
+        onUpdate: function(callback) {
+            onUpdateSet = true;
+            this.onUpdate = callback;
+        },
+
+        render: function () {
+            this.curLvl.render();
+            this.player.render();
+
+            //if(onRenderSet)
+            //    this.onRender();
+        },
+
+        onRender: function(callback) {
+            onRenderSet = true;
+            this.onRender = callback;
+        }
+    };
+})();
+/// <reference path="../linker.js" />
+
+function Level1() {
+    
+    this.init();
+}
+
+Level1.prototype = (function() {
+
+
+    return {
+        projectiles: [],
+
+
+        init: function() {
+            for(var i = 0; i < 10; ++i) {
+                var projectile = new SAT.Box(new SAT.Vector(
+                    Math.floor((Math.random() * canvas.width) + 0),      // random number between 0 and canvas.width
+                    canvas.height
+                ), 10, 20).toPolygon();
+
+                projectile.speed = Math.floor((Math.random() * 10) + 3) * 0.1;
+
+                this.projectiles.push(projectile);
+            }
+        },
+
+        update: function(){
+            for(var i = 0; i < this.projectiles.length; ++i) {
+                this.projectiles[i].pos.y -= this.projectiles[i].speed;
+            }
+        },
+
+        render: function() {
+            // background
+            ctx.fillStyle = "#000";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // projectiles
+
+            ctx.fillStyle = "silver";
+            for(var i = 0; i < this.projectiles.length; ++i){
+                ctx.fillRect(this.projectiles[i].pos.x, this.projectiles[i].pos.y, 10, 20);
+            }
+        }
+    };
+})();
+/// <reference path="linker.js" />
+
+function Vamp() {
+    this.init();
+}
+
+Vamp.prototype = (function() {
+    var img = new Image(),
+        imgReady = false
+    ;
+    img.onload = function() {
+        imgReady = true;
+    };
+    img.src = "img/vamp.png";
+
+    var speed = 4;
+
+    return {
+        w: 40,
+        h: 40,
+        hp: 3,
+        invincible: false,
+        invincibleTimer: 120,
+
+        init: function(){
+            $.extend(this, new SAT.Box(new SAT.Vector(0, 0), this.w, this.h).toPolygon());
+        },
+
+        update: function() {
+            // horizontal
+            if(game.input.keysDown[KeyCode.RIGHT]){
+                this.pos.x += speed;
+            }
+            else if(game.input.keysDown[KeyCode.LEFT]) {
+                this.pos.x -= speed;
+            }
+
+            // vertical
+            if(game.input.keysDown[KeyCode.UP]) {
+                this.pos.y -= speed;
+            }
+            else if(game.input.keysDown[KeyCode.DOWN]) {
+                this.pos.y += speed;
+            }
+
+            if(this.hp <= 0) {
+                alert("You died");
+                location.reload();
+            }
+        },
+
+        render: function() {
+            // body
+            var doDraw = true;
+            if(this.invincible) {
+                var t = this.invincibleTimer % 30;
+                if(t >= 0 && t < 15)
+                    doDraw = false;
+            }
+
+            if(doDraw) {
+                ctx.fillStyle = "yellow";
+                ctx.fillRect(this.pos.x, this.pos.y, this.w, this.h);
+            }
+
+            // health
+            ctx.fillStyle = "red";
+            for(var i = 0; i < this.hp; ++i) {
+                ctx.fillRect(this.pos.x - 10 + i*20, this.pos.y - 20, 20, 10);
+            }
+        }
+    };
+})();
+
+/// <reference path="linker.js" />
+
+/*
+    The vamp game.
+    Declares game as a global.
+*/
+(function Main() {
+    game = new GameEngine();
+    game.start();
+
+
+    var titleView = new TitleView("Vamp: The Great and Powerful", true);
+    titleView.then(function () {
+        game.utils.switchView(saveView);
+    });
+
+    var saveView = new GameSaveView();
+    saveView.then(function (key) {
+        if (key === KeyCode.ESC) {
+            game.utils.switchView(titleView);
+        }
+        else if (key === KeyCode.ENTER) {
+            game.utils.switchView(lvlView);
+        }
+    });
+
+
+    var vamp = new Vamp();
+    var lvl1 = new Level1();
+
+    var lvlView = new LevelView(vamp, lvl1);
+
+    game.view = titleView;
+})();
+
+//# sourceMappingURL=pageVamp.js.map

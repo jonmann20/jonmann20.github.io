@@ -95,6 +95,7 @@ var HeroInputComponent = function () {
         check: function () {
             var doGravity = false;
 
+            // jumping
             if (hero.isJumping) {
                 if (hero.jumpMod > 0) {
                     hero.vY -= hero.aY * hero.jumpMod--;

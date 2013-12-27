@@ -88,7 +88,7 @@ var level = (function () {
                 // hero and enemy
                 if (Physics.isCollision(hero, level.enemies[i], 0)) {
                     level.enemies[i].active = true;
-
+                    console.log("hit");
                     if (!hero.invincible) {
                         audio.play(audio.heartbeat, true);
 

@@ -13,8 +13,8 @@ var Graphics = (function () {
         ticker: 1,              // 1.0 --> 0.0 --> 1.0 --> ...
         tickerStep: 0.01,
         fadeOut: false,
-        projectX: 9,
-        projectY: 12,
+        projectX: 8,
+        projectY: 11,
 
 
         fadeCanvas: function (callback) {
@@ -230,7 +230,7 @@ var Graphics = (function () {
             grad.addColorStop(0, "rgb(205,165,0)");
             //grad.addColorStop(0, "rgb(42,126,76)");
             //grad.addColorStop(1, "rgb(22,106,56)");
-            grad.addColorStop(1, "#5FA7E7");
+            grad.addColorStop(1, "#1F7DCF");
 
             return grad;
         },
