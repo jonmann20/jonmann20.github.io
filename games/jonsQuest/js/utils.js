@@ -243,7 +243,9 @@ var Dir = Object.freeze({
     BOT: 2,
     LEFT: 3,
     RIGHT: 4,
-    IN: 5
+    IN: 5,
+    UP: 6,
+    DOWN: 7
 });
 
 var Color = Object.freeze({

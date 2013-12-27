@@ -2,6 +2,8 @@
 
 var lvl2 = (function () {
 
+    var elevator = [];
+
     function setBackground() {
         level.bgColor.gradX = 0;
         level.bgColor.gradY = 0;
@@ -68,6 +70,14 @@ var lvl2 = (function () {
             colR,
             bridge
         );
+
+        // elevators
+        for(var i = 0; i < 3; ++i) {
+            elevator[i] = new GameObj(JQObject.PLATFORM, colR.pos.x + 200 + i * 300, colR.pos.y - i*50, 200, 40);
+            elevator[i].dir = Dir.DOWN;
+            level.objs.push(elevator[i]);
+        }
+
     }
 
     function setItems() {
@@ -115,8 +125,18 @@ var lvl2 = (function () {
             
         },
 
-        update: function(){
-            
+        update: function() {
+            // elevators
+            for(var i = 0; i < elevator.length; ++i) {
+                if(elevator[i].dir === Dir.UP && elevator[i].pos.y < 100) {
+                    elevator[i].dir = Dir.DOWN;
+                }
+                else if(elevator[i].dir === Dir.DOWN && elevator[i].pos.y > 400) {
+                    elevator[i].dir = Dir.UP;
+                }
+
+                elevator[i].pos.y += (elevator[i].dir === Dir.DOWN) ? 1 : -1;
+            }
         },
 
         render: function() {
