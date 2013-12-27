@@ -48,7 +48,7 @@ var HeroPhysicsComponent = function () {
     function levelCollision() {
         hero.isOnObj = false;   // prevents jumping after walking off platform
 
-        Physics.testObjObjs(hero, function (r) {
+        Physics.testObjObjs(hero, function(r) {
             if (r.overlapN.y === 1) {                       // on top
                 hero.isOnObj = true;
                 hero.isJumping = false;

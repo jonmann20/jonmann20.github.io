@@ -13,7 +13,6 @@ var hero = (function () {
         physics = null,         // the hero physics component
         imgReady = false,
 		img = null,
-        idleTime = 0,
 		spriteArr = [],
 		invincibleTimer = 170,
         invincibleTimer0 = 170
@@ -51,7 +50,7 @@ var hero = (function () {
 		    if (dirR && hero.vX > 0 ||  // right
 		        !dirR && hero.vX < 0    // left
             ) {
-		        var runTimer = (game.totalTicks % 60);
+		        var runTimer = (game.totalTicks % 48);
 
 		        if(!hero.isOnObj){
 		            pos = spriteArr[theDir + "_Run1"];
@@ -59,7 +58,7 @@ var hero = (function () {
                 else if(Math.abs(hero.vX) <= hero.aX*10){
 		            pos = spriteArr[theDir + "_Step"];
 		        }
-		        else if(runTimer >= 0 && runTimer < 20) {
+		        else if(runTimer >= 0 && runTimer < 16) {
 		            pos = spriteArr[theDir + "_Run1"];
 
 		            if (!hero.isJumping) {
@@ -67,7 +66,7 @@ var hero = (function () {
 		            }
 
 		        }
-		        else if (runTimer >= 20 && runTimer < 40) {
+		        else if (runTimer >= 16 && runTimer < 32) {
 		            pos = spriteArr[theDir + "_Run2"];
 		        }
 		        else {
@@ -79,13 +78,15 @@ var hero = (function () {
 		}
 		
         // idle animation
-		if (!hero.onLadder && hero.vX === 0 && hero.vY === 0)
-		    ++idleTime;
-		else
-		    idleTime = 0;
+		if(!hero.onLadder && hero.vX === 0 && hero.vY === 0) {
+		    ++hero.idleTime;
+		}
+		else {
+		    hero.idleTime = 0;
+		}
 
-		if (idleTime > 210) {
-		    var foo = idleTime % 200;
+		if (hero.idleTime > 210) {
+		    var foo = hero.idleTime % 200;
 		    
 		    if (foo >= 0 && foo <= 50 || foo > 100 && foo <= 150 || hero.isHolding)
 		        pos = spriteArr["playerDown"];
@@ -133,6 +134,7 @@ var hero = (function () {
 		aY: 0.82,
 		jumpMod: 4,
 		jumpMod0: 4,
+        idleTime: 0,
 		dir: Dir.RIGHT,
 		onLadder: false,
 		invincible: false,

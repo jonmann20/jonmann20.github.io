@@ -89,6 +89,22 @@ var Graphics = (function () {
             return poly;
         },
 
+        setClouds: function(){
+            var x = 0,
+                y = 0,
+                maxY = 180
+            ;
+
+            while(x < lvl1.width) {
+                var obj = new GameObj(JQObject.CLOUD, x, 10 + y, 0, 0, "cloud.png");
+                obj.speed = utils.randF(2, 3.3, 1);
+                level.bg.push(obj);
+
+                x += obj.w * utils.speed2scale(obj.speed) + Math.floor((Math.random() * 70) + 35);
+                y = Math.floor(Math.random() * maxY);
+            }
+        },
+
         drawLadder: function (platform) {
             var x = platform.pos.x,
                 y = platform.pos.y,

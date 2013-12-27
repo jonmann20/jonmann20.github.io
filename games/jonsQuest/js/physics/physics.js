@@ -51,7 +51,6 @@ var Physics = (function () {
                         response.a.pos.y -= response.overlapV.y;
 
                         callback(response);
-                        break;
                     }
 
                     response.clear();

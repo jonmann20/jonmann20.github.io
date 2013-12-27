@@ -3,13 +3,17 @@
 var lvl2 = (function () {
 
     function setBackground() {
+        level.bgColor.gradX = 0;
+        level.bgColor.gradY = 0;
 
+        level.bgColor.fillStyle = Graphics.getDoorBgGrad();
+        Graphics.setClouds();
     }
 
     function setObjs() {
         // floor
         var floor1 = new GameObj(
-            JQObject.EMPTY,
+            JQObject.FLOOR,
             -Graphics.projectX,
             FULLH - game.padFloor - 1,
             FULLW / 3 + 40,
@@ -17,7 +21,7 @@ var lvl2 = (function () {
         );
 
         var floor2 = new GameObj(
-            JQObject.EMPTY,
+            JQObject.FLOOR,
             HALFW,
             FULLH - game.padFloor - 1,
             120,
@@ -25,47 +29,73 @@ var lvl2 = (function () {
         );
 
         var floorPlat = new GameObj(
-            JQObject.EMPTY,
-            floor2.pos.x + floor2.w,
-            floor2.pos.y - floor2.h,
-            300,
-            150
+            JQObject.FLOOR,
+            floor2.pos.x + floor2.w - Graphics.projectX,
+            floor2.pos.y - floor2.h - 30,
+            900,
+            180
         );
 
-        var floorTp = new GameObj(
-            JQObject.EMPTY,
+        var colL = new GameObj(
+            JQObject.FLOOR,
             floorPlat.pos.x + floor2.w,
-            floor2.pos.y - floor2.h*2.5,
+            floorPlat.pos.y - 90 + Graphics.projectY,
             100,
-            25
+            85
         );
 
-        level.objs.push(floorPlat, floor1, floor2, floorTp);
+        var colR = new GameObj(
+            JQObject.FLOOR,
+            floorPlat.pos.x + floor2.w + 680,
+            floorPlat.pos.y - 90 + Graphics.projectY,
+            100,
+            85
+        );
 
-        return [floor2.pos, floor2.w];
+        var bridge = new GameObj(
+            JQObject.FLOOR,
+            colL.pos.x + 170,
+            colL.pos.y - 125,
+            443,
+            50
+        );
+
+        level.objs.push(
+            floorPlat,
+            floor1,
+            floor2,
+            colL,
+            colR,
+            bridge
+        );
     }
 
     function setItems() {
-        var crate = new GameItem(
-            new GameObj(JQObject.CRATE, 206, FULLH - game.padFloor - 26 + 5, 24, 26, "crate.png"),
-            true
+        //var crate = new GameItem(
+        //    new GameObj(JQObject.CRATE, 206, FULLH - game.padFloor - 26 + 5, 24, 26, "crate.png"),
+        //    true
+        //);
+
+        var sack = new GameItem(
+            new GameObj(JQObject.SACK, 1200, 302, 30, 36, "sack.png"),
+            true,
+            5
         );
 
-        //level.items.push(crate);
+        level.items.push(sack);
     }
 
     function setEnemies(f2) {
-        // enemy
         var enemy = new Enemy(
-            new GameObj(JQObject.ENEMY, f2[0].x, f2[0].y - 38, 28, 38, "cyborgBnW.png"),
+            new GameObj(JQObject.ENEMY, 834, 391 - Graphics.projectY, 55, 76, "cyborgBnW.png"),
             JQEnemy.PATROL,
             1,
-            f2[0].x,
-            f2[0].x + f2[1] - 28,
+            834,
+            1369,
             true
         );
         enemy.collidable = true;        // TODO: fix api
-        //level.enemies.push(enemy);
+        level.enemies.push(enemy);
     }
 
     return {
@@ -76,9 +106,9 @@ var lvl2 = (function () {
             level.hiddenItems = 0;
 
             setBackground();
-            var _floor2 = setObjs();
+            setObjs();
             setItems();
-            setEnemies(_floor2);
+            setEnemies();
         },
 
         deinit: function(){
@@ -89,12 +119,14 @@ var lvl2 = (function () {
             
         },
 
-        render: function () {
-            ctx.font = "18px 'Press Start 2P'";
-            var lvlTxt = "LEVEL 2 -- COMING SOON";
-            var lvlTxtW = ctx.measureText(lvlTxt).width;
-            ctx.fillStyle = "#e1e1e1";
-            ctx.fillText(lvlTxt, HALFW - lvlTxtW / 2, 150);
+        render: function() {
+            if(!window.DEBUG) {
+                ctx.font = "18px 'Press Start 2P'";
+                var lvlTxt = "LEVEL 2 -- COMING SOON";
+                var lvlTxtW = ctx.measureText(lvlTxt).width;
+                ctx.fillStyle = "#e1e1e1";
+                ctx.fillText(lvlTxt, HALFW - lvlTxtW / 2, 150);
+            }
         }
     };
 })();

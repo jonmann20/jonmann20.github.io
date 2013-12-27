@@ -39,27 +39,11 @@ var lvl1 = (function () {
         //---- color layer
         level.bgColor.gradX = door.pos.x + door.w/2;
         level.bgColor.gradY = door.pos.y + door.h/2;
-        level.bgColor.h = FULLH;
 
         level.bgColor.fillStyle = Graphics.getDoorBgGrad();
 
         //---- objects
-
-        var x = 0,
-            y = 0,
-            maxY = 180
-        ;
-
-        while(x < lvl1.width) {
-            var obj = new GameObj(JQObject.CLOUD, x, 10 + y, 0, 0, "cloud.png");
-            obj.speed = utils.randF(2, 3.3, 1);
-            level.bg.push(obj);
-
-            x += obj.w*utils.speed2scale(obj.speed) +  Math.floor((Math.random() * 70) + 35);
-            y = Math.floor(Math.random() * maxY);
-        }
-
-
+        Graphics.setClouds();
     }
 
     function setObjs() {

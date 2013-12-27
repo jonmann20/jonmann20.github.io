@@ -121,8 +121,10 @@ var level = (function () {
     // the parallax background
     function drawBg() {
         // color background
+        ctx.fillStyle = "#000";
+        ctx.fillRect(0, FULLH - game.padFloor, FULLW, game.padFloor);
         ctx.fillStyle = level.bgColor.fillStyle;
-        ctx.fillRect(0, 0, FULLW, level.bgColor.h);
+        ctx.fillRect(0, 0, FULLW, FULLH - game.padFloor);
 
         // background objects
         for (var i = 0; i < level.bg.length; ++i) {
@@ -208,8 +210,7 @@ var level = (function () {
             level.hiddenItemsFound = 0;
             hero.lvlX = 0;
             level.bgColor = {
-                fillStyle: "#000",
-                h: FULLH + game.padHUD
+                fillStyle: "#000"
             };
             level.bg = [];
             level.objs = [];

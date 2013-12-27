@@ -21,7 +21,7 @@ var KeyCode = Object.freeze({
 // The input component of hero.
 var HeroInputComponent = function () {
 
-    var maxVx = 2.6,
+    var maxVx = 3,
         maxVy = 10
     ;
 
@@ -71,6 +71,7 @@ var HeroInputComponent = function () {
                 hero.bulletArr.push(projectile);
 
                 --hero.ammo;
+                hero.idleTime = 0;
             }
         }
         else if (e.keyCode == KeyCode.O) {      // options
