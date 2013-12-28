@@ -6,41 +6,54 @@ function GameInput() {
     this.lastKeyUp = KeyCode.EMPTY;
     this.lastKeyDown = KeyCode.EMPTY;
 
+    this.init();
+}
+
+GameInput.prototype = (function () {
+
+    var that;
+
     function fixKey(key) {
-        if (key === KeyCode.W)
+        if(key === KeyCode.W)
             key = KeyCode.UP;
-        else if (key === KeyCode.S)
+        else if(key === KeyCode.S)
             key = KeyCode.DOWN;
-        else if (key === KeyCode.D)
+        else if(key === KeyCode.D)
             key = KeyCode.RIGHT;
-        else if (key === KeyCode.A)
+        else if(key === KeyCode.A)
             key = KeyCode.LEFT;
 
         return key;
     }
 
-    var that = this;
-
-    addEventListener("keydown", function (e) {
+    addEventListener("keydown", function(e) {
         var key = fixKey(e.keyCode);
 
-        if (!that.keysDown[key]) {
+        if(!that.keysDown[key]) {
             that.lastKeyDown = key;
             that.keysDown[key] = true;
         }
+        
+        that.onKeyDown(key);
     });
 
-    addEventListener("keyup", function (e) {
+    addEventListener("keyup", function(e) {
         that.lastKeyUp = fixKey(e.keyCode);
         delete that.keysDown[that.lastKeyUp];
     });
-}
 
-GameInput.prototype = (function () {
 
     return {
+        init: function(){
+            that = this;
+        },
+
         update: function () {
 
+        },
+
+        onKeyDown: function(callback) {
+            this.onKeyDown = callback;
         }
     };
 })();

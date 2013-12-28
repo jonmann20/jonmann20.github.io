@@ -50,7 +50,7 @@ var hero = (function () {
 		    if (dirR && hero.vX > 0 ||  // right
 		        !dirR && hero.vX < 0    // left
             ) {
-		        var runTimer = (game.totalTicks % 48);
+		        var runTimer = (game.totalTicks % 96);
 
 		        if(!hero.isOnObj){
 		            pos = spriteArr[theDir + "_Run1"];
@@ -58,19 +58,21 @@ var hero = (function () {
                 else if(Math.abs(hero.vX) <= hero.aX*10){
 		            pos = spriteArr[theDir + "_Step"];
 		        }
-		        else if(runTimer >= 0 && runTimer < 16) {
+		        else if(runTimer >= 0 && runTimer < 24) {
 		            pos = spriteArr[theDir + "_Run1"];
 
 		            if (!hero.isJumping) {
 		                audio.step.play();
 		            }
-
 		        }
-		        else if (runTimer >= 16 && runTimer < 32) {
+		        else if (runTimer >= 24 && runTimer < 48) {
 		            pos = spriteArr[theDir + "_Run2"];
 		        }
-		        else {
+		        else if(runTimer >= 48 && runTimer < 72){
 		            pos = spriteArr[theDir + "_Run3"];
+		        }
+		        else {
+		            pos = spriteArr[theDir + "_Run2"];
 		        }
 			}
 			else
