@@ -5,7 +5,8 @@ var lvl1 = (function () {
     var hiddenCash,
 		door,
         ladder,
-        doLadder = false
+        doLadder = false,
+        scaleBg
     ;
 
     function handle_crates_scale_ladder() {
@@ -51,15 +52,19 @@ var lvl1 = (function () {
         // floor + 3 initial platforms
         level.objs.push(
             new GameObj(JQObject.PLATFORM, -Graphics.projectX, FULLH - game.padFloor - 1, lvl1.width + Graphics.projectX * 2, game.padFloor + 1),
-            new GameObj(JQObject.PLATFORM,200, 206, 267, 62),
+            new GameObj(JQObject.PLATFORM, 200, 206, 267, 62),
             new GameObj(JQObject.PLATFORM, 575, 310, 300, 62),
             new GameObj(JQObject.PLATFORM, 605, 125, 220, 62)
         );
 
         // scales
+        scaleBg = new GameObj(JQObject.EMPTY, 1950, 160, 519, 337, "scales.png");
+        scaleBg.collidable = false;
+        level.objs.push(scaleBg);
+
         var scales = [];
         for (var i = 0; i < 3; ++i) {
-            scales[i] = new GameObj(JQObject.SCALE, lvl1.width - 330 - i * 230, FULLH - game.padFloor - 157, 150, 46);
+            scales[i] = new GameObj(JQObject.SCALE, lvl1.width - 330 - i * 230, FULLH - game.padFloor - 137, 150, 46);
             scales[i].holdingItem = JQObject.EMPTY; // TODO: fix api
             level.objs.push(scales[i]);
         }
@@ -72,11 +77,11 @@ var lvl1 = (function () {
                 w: 0,
                 h: 0
             },
-            rise = 5,   // delta h between steps
-            run = 17    // delta w between steps
+            rise = 3,   // delta h between steps
+            run = 13    // delta w between steps
         ;
 
-        for(var i = 0; i < 15; ++i) {
+        for(var i = 0; i < 23; ++i) {
             var stair = new GameObj(JQObject.STAIR, stairs.x + run * i, stairs.y - rise * i, run + 1, 62);
             level.objs.push(stair);
             stairs.w += run;
@@ -172,7 +177,7 @@ var lvl1 = (function () {
         },
 
         render: function () {
-
+           
         }
     };
 

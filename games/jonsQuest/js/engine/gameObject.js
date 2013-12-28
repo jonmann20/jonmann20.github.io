@@ -72,7 +72,7 @@ var GameObj = function (type, x, y, w, h, src) {
             that.w = this.width;
             that.h = this.height;
         };
-
+        
         this.img.src = "img/" + src;
     }
 };
