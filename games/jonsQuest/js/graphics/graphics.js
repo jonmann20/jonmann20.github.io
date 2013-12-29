@@ -309,7 +309,7 @@ var Graphics = (function () {
 
             ctx.lineWidth = 3;
 
-            if (platform.holdingItem === JQObject.CRATE) {
+            if (platform.holdingItem !== null && platform.holdingItem.type === JQObject.CRATE) {
                 // draw check mark
                 ctx.strokeStyle = "green";
 

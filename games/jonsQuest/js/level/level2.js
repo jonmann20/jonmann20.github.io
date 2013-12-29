@@ -101,6 +101,11 @@ var lvl2 = (function () {
             hillArr2[i].type = JQObject.HILL;
             level.objs.push(hillArr2[i]);
         }
+
+        //var hill = new SAT.Polygon(new SAT.Vector(aPlat.pos.x + 400, floor1.pos.y + 6, 280, 70), [
+            
+        //]);
+
     }
 
     function setItems() {
@@ -132,7 +137,7 @@ var lvl2 = (function () {
     }
 
     return {
-        width: 4700,
+        width: 3700,
 
 
         init: function () {
@@ -165,13 +170,7 @@ var lvl2 = (function () {
         },
 
         render: function() {
-            if(!window.DEBUG) {
-                ctx.font = "18px 'Press Start 2P'";
-                var lvlTxt = "LEVEL 2 -- COMING SOON";
-                var lvlTxtW = ctx.measureText(lvlTxt).width;
-                ctx.fillStyle = "#e1e1e1";
-                ctx.fillText(lvlTxt, HALFW - lvlTxtW / 2, 150);
-            }
+
         }
     };
 })();

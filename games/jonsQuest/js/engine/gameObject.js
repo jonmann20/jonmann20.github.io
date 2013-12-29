@@ -15,7 +15,8 @@ var JQObject = Object.freeze({
     SLOPE: 11,
     POLY: 12,
     HILL: 13,
-    ELEVATOR: 14
+    ELEVATOR: 14,
+    SCALEBG: 15
 });
 
 var JQObject_names = Object.freeze({
@@ -33,7 +34,8 @@ var JQObject_names = Object.freeze({
     11: "SLOPE",
     12: "POLY",
     13: "HILL",
-    14: "ELEVATOR"
+    14: "ELEVATOR",
+    15: "SCALEBG"
 });
 
 /*
@@ -94,7 +96,13 @@ GameObj.prototype = {
             ctx.drawImage(this.img, this.pos.x, this.pos.y);
         }
         else {
-            ctx.fillStyle = "red";
+            if(this.type === JQObject.SCALEBG) {
+                ctx.fillStyle = Color.LIGHT_BROWN;
+            }
+            else {
+                ctx.fillStyle = "red";
+            }
+
             ctx.fillRect(this.pos.x, this.pos.y, this.w, this.h);
         }
     }

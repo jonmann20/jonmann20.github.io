@@ -9,6 +9,11 @@ var level = (function () {
     function updateObjsView() {
         for (var i = 0; i < level.objs.length; ++i) {
             level.objs[i].pos.x -= hero.vX;
+
+            if(level.objs[i].type === JQObject.SCALEBG) {
+                level.objs[i].x2 -= hero.vX;
+            }
+
         }
     }
 
@@ -50,6 +55,8 @@ var level = (function () {
 
                 // obj collision
                 Physics.testObjObjs(level.items[i], function(r) {
+                    // a is level.items[i]
+                    // b is in level.objs
 
                     r.a.pos.x -= r.overlapV.x;
                     r.a.pos.y -= r.overlapV.y;
@@ -60,13 +67,40 @@ var level = (function () {
                         r.a.isOnObj = true;
                         r.a.recentlyHeld = false;
 
-                        if (r.b.type === JQObject.SCALE) {
+                        if(r.b.type === JQObject.SCALE && r.b.holdingItem === null) {
                             r.a.grabbable = false;
-                            r.b.holdingItem = JQObject.CRATE;
+                            r.b.holdingItem = r.a;
 
-                            utils.repeatAction(70, 8, function () {
-                                ++r.a.pos.y;
-                                ++r.b.pos.y;
+                            utils.repeatAction(42, 14, function () {
+                                if(r.b.side === Dir.LEFT) {
+                                    ++r.a.pos.y;
+                                    ++r.b.pos.y;
+
+                                    ++r.b.hBar.pos.y;
+
+                                    --r.b.otherSide.pos.y;
+                                    --r.b.hBar.y2;
+
+                                    if(r.b.otherSide.holdingItem !== null) {
+                                        --r.b.otherSide.holdingItem.pos.y;
+                                        // TODO: chain of crates on top
+                                    }
+                                }
+                                else {
+                                    ++r.a.pos.y;
+                                    ++r.b.pos.y;
+
+                                    ++r.b.hBar.y2;
+
+                                    --r.b.hBar.pos.y;
+                                    --r.b.otherSide.pos.y;
+
+                                    if(r.b.otherSide.holdingItem !== null) {
+                                        --r.b.otherSide.holdingItem.pos.y;
+                                        // TODO: chain of crates on top
+                                    }
+                                }
+
                             });
                         }
                     }
@@ -252,7 +286,6 @@ var level = (function () {
             Graphics.fadeCanvas(function () {
                 level.isTransitioning = false;
 
-                level.reset();
                 level.curLvl = lvlComplete;
                 level.isCutscene = true;
                 level.time = game.actualTime;
