@@ -86,6 +86,19 @@ var Graphics = (function () {
             return poly;
         },
 
+        getStairPoly: function(x, y, w, h){
+            var poly = new SAT.Polygon(new SAT.Vector(x, y), [
+                new SAT.Vector(),
+                new SAT.Vector(w - Graphics.projectY, -h),
+                new SAT.Vector(w, -h + Graphics.projectY),
+                new SAT.Vector(w, 0),
+                new SAT.Vector(Graphics.projectX, h),
+                new SAT.Vector(0, h - Graphics.projectY)
+            ]);
+
+            return poly;
+        },
+
         setClouds: function(){
             var x = 0,
                 y = 0,
@@ -134,6 +147,127 @@ var Graphics = (function () {
             // draw platform
             ctx.fillStyle = Color.DARK_BROWN;
             ctx.fillRect(x, y, w, h);
+        },
+
+        drawPoly: function(poly) {
+            var y = poly.pos.y; //- Graphics.projectY / 2;
+
+            ctx.fillStyle = "orange";
+            ctx.beginPath();
+            ctx.moveTo(poly.pos.x, y);
+
+            for(var i = 1; i < poly.points.length; ++i) {
+                ctx.lineTo(poly.pos.x + poly.points[i].x, y + poly.points[i].y);
+            }
+
+            ctx.closePath();
+            ctx.fill();
+        },
+
+        drawHill: function(poly) {
+            //var x = 112,
+            //    y = 497.5,
+            //    w = 300,
+            //    h = 100,
+            //    xw = x + w,
+            //    yh = y - h + 30
+            //;
+
+            //ctx.fillStyle = Color.LIGHT_BROWN;
+            //ctx.beginPath();
+            //ctx.moveTo(x, y);
+            //ctx.bezierCurveTo(x, yh, xw, yh, xw, y);
+            //ctx.closePath();
+            //ctx.fill();
+
+            //Graphics.drawPoly(poly);
+            //if(typeof (poly.tag) !== "undefined" && poly.tag === 1) {
+            //    ctx.fillStyle = Color.LIGHT_BROWN;
+            //    ctx.beginPath();
+            //    ctx.moveTo(poly.pos.x - Graphics.projectX, poly.pos.y);
+            //    ctx.lineTo(poly.pos.x, poly.pos.y);
+            //    ctx.lineTo(poly.pos.x, poly.pos.y + Graphics.projectY);
+            //    ctx.closePath();
+            //    ctx.fill();
+            //}
+
+            var repeatZ = function(z) {
+
+                var y = poly.pos.y - Graphics.projectY + z;
+
+                if(z === game.padFloor - 4)
+                    ctx.fillStyle = Color.DARK_BROWN;
+                else
+                    ctx.fillStyle = Color.LIGHT_BROWN;
+
+                var fixX = Math.round(poly.pos.x);
+
+                ctx.beginPath();
+                ctx.moveTo(fixX, y);
+
+                for(var i = 1; i < poly.points.length; ++i) {
+                    fixX = Math.round(poly.pos.x + poly.points[i].x);
+                    ctx.lineTo(fixX, y + poly.points[i].y);
+                }
+
+                ctx.closePath();
+                ctx.fill();
+            }
+
+            for(var i = 0; i < game.padFloor - 3; ++i) {
+                repeatZ(i);
+            }
+
+        },
+
+
+        // h must be a triangular number?
+        getHill: function(x, y, w, h) {
+
+            var objs = [],
+                totalH = 0,
+                prevH = 0,
+                nextH
+            ;
+
+
+            var tmp = Math.sqrt(h);
+            nextH = tmp;
+            //console.log(tmp);
+            var dtW = w / (tmp*2);
+
+
+            // left half
+            for(var i = 0; i < tmp; ++i) {
+                objs.push(new SAT.Polygon(new SAT.Vector(x + i*dtW, y - prevH), [
+                    new SAT.Vector(),
+                    new SAT.Vector(dtW, -nextH),
+                    new SAT.Vector(dtW, totalH),
+                    new SAT.Vector(0, totalH)
+                ]));
+                
+                prevH += nextH;
+                totalH += nextH--;
+            }
+            
+            // right half
+            x += tmp * dtW;
+            nextH = 0;
+            prevH = -totalH;
+
+            for(var i = 0; i < tmp; ++i) {
+                objs.push(new SAT.Polygon(new SAT.Vector(x + i*dtW, y + prevH), [
+                    new SAT.Vector(),
+                    new SAT.Vector(dtW, nextH),
+                    new SAT.Vector(dtW, totalH),
+                    new SAT.Vector(0, totalH)
+                ]));
+
+                prevH += nextH;
+                totalH -= nextH++;
+            }
+
+            return objs;
         },
 
         drawPlatform: function (poly) {
@@ -278,8 +412,8 @@ var Graphics = (function () {
             ctx.moveTo(x, ym);
             ctx.bezierCurveTo(x, ym - oy, xm - ox, y, xm, y);
             ctx.bezierCurveTo(xm + ox, y, xe, ym - oy, xe, ym);
-            ctx.bezierCurveTo(xe, ym + oy, xm + ox, ye, xm, ye);
-            ctx.bezierCurveTo(xm - ox, ye, x, ym + oy, x, ym);
+            //ctx.bezierCurveTo(xe, ym + oy, xm + ox, ye, xm, ye);
+            //ctx.bezierCurveTo(xm - ox, ye, x, ym + oy, x, ym);
             ctx.closePath();
             ctx.fill();
         },

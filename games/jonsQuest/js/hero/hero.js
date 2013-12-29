@@ -61,7 +61,7 @@ var hero = (function () {
 		        else if(runTimer >= 0 && runTimer < 24) {
 		            pos = spriteArr[theDir + "_Run1"];
 
-		            if (!hero.isJumping) {
+		            if(!hero.isJumping) {
 		                audio.step.play();
 		            }
 		        }
@@ -70,6 +70,10 @@ var hero = (function () {
 		        }
 		        else if(runTimer >= 48 && runTimer < 72){
 		            pos = spriteArr[theDir + "_Run3"];
+
+		            if(!hero.isJumping) {
+		                audio.step.play();
+		            }
 		        }
 		        else {
 		            pos = spriteArr[theDir + "_Run2"];
@@ -201,6 +205,13 @@ var hero = (function () {
 		    drawHero();
 		    graphics.drawBullets();
 		    drawAfterHero();
+		},
+
+		landed: function(y) {
+		    hero.isOnObj = true;
+		    hero.isJumping = false;
+		    hero.vY = 0;
+		    hero.pos.y -= y;
 		}
 	};
 })();

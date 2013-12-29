@@ -12,7 +12,10 @@ var JQObject = Object.freeze({
     CLOUD: 8,
     PLATFORM: 9,
     SHURIKEN: 10,
-    STAIR: 11
+    SLOPE: 11,
+    POLY: 12,
+    HILL: 13,
+    ELEVATOR: 14
 });
 
 var JQObject_names = Object.freeze({
@@ -27,7 +30,10 @@ var JQObject_names = Object.freeze({
     8: "CLOUD",
     9: "PLATFORM",
     10: "SHURIKEN",
-    11: "STAIR"
+    11: "SLOPE",
+    12: "POLY",
+    13: "HILL",
+    14: "ELEVATOR"
 });
 
 /*
@@ -44,16 +50,21 @@ var JQObject_names = Object.freeze({
     @constructor
 */
 var GameObj = function (type, x, y, w, h, src) {
-    this.type = type;
-
     // this.pos
-    if (this.type === JQObject.PLATFORM || this.type === JQObject.STAIR) {
+    if (type === JQObject.PLATFORM || type === JQObject.ELEVATOR) {
         $.extend(this, Graphics.getSkewedRect(x, y, w, h));
+    }
+    else if(type === JQObject.SLOPE) {
+        $.extend(this, Graphics.getStairPoly(x, y, w, h));
+    }
+    else if(type === JQObject.POLY) {
+        // custom polygon
     }
     else {
         $.extend(this, new SAT.Box(new SAT.Vector(x, y), w, h).toPolygon());
     }
 
+    this.type = type;
     this.imgReady = false;     // TODO: make private
 
     if (typeof (src) === "undefined") {

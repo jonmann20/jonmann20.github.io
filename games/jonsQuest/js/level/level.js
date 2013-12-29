@@ -49,7 +49,11 @@ var level = (function () {
                 level.items[i].pos.y += level.items[i].vY;
 
                 // obj collision
-                Physics.testObjObjs(level.items[i], function (r) {
+                Physics.testObjObjs(level.items[i], function(r) {
+
+                    r.a.pos.x -= r.overlapV.x;
+                    r.a.pos.y -= r.overlapV.y;
+
                     if (r.overlapN.y === 1) {    // on top of platform
                         audio.thud.play();
                         r.a.vY = 0;
@@ -139,28 +143,35 @@ var level = (function () {
     // all of the collision rectangles in the level
     function drawObjs() {
         for (var i = 0; i < level.objs.length; ++i) {
-            // check if visible
-            if (typeof (level.objs[i].visible) !== "undefined" &&   // TODO: all objs should have visible property (fix api)
-                !level.objs[i].visible
-            ) {
+            var obj = level.objs[i];
+
+            // check if visible; TODO: all objs should have visible property (fix api)
+            if (typeof (obj.visible) !== "undefined" && !obj.visible) {
                 continue;
             }
             
-            if (level.objs[i].type === JQObject.LADDER) {           // ladder
-                Graphics.drawLadder(level.objs[i]);
+
+            if(obj.type === JQObject.LADDER) {           // ladder
+                Graphics.drawLadder(obj);
             }
-            else if (level.objs[i].type === JQObject.SCALE) {       // scale
-                Graphics.drawScale(level.objs[i]);
-                Graphics.drawPlatformStatus(level.objs[i]);
+            else if(obj.type === JQObject.SCALE) {       // scale
+                Graphics.drawScale(obj);
+                Graphics.drawPlatformStatus(obj);
             }
-            else if(level.objs[i].type === JQObject.PLATFORM || level.objs[i].type === JQObject.STAIR) {
-                Graphics.drawPlatform(level.objs[i]);
+            else if(obj.type === JQObject.PLATFORM || obj.type === JQObject.SLOPE || obj.type === JQObject.ELEVATOR) {
+                Graphics.drawPlatform(obj);
             }
-            else if (level.objs[i].type === JQObject.DOOR) {
-                Graphics.drawDoor(level.objs[i]);
+            else if(obj.type === JQObject.DOOR) {
+                Graphics.drawDoor(obj);
+            }
+            else if(obj.type === JQObject.POLY) {
+                Graphics.drawPoly(obj);
+            }
+            else if(obj.type === JQObject.HILL) {
+                Graphics.drawHill(obj);
             }
             else {
-                level.objs[i].draw();
+                obj.draw();
             }
         }
     }

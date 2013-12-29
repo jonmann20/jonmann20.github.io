@@ -86,6 +86,26 @@ var utils = (function () {
             return deg * 0.0174532925199432957;
         },
 
+        revFactorial: function(n){
+            var count = 2;
+            var result = n;
+
+            while(result !== 1) {
+                console.log(result + '/' + count + '=');
+                result /= count;
+
+                if(result === 0) {
+                    return -1;
+                }
+                else if(result === 1) {
+                    return count;
+                }
+                else {
+                    ++count;
+                }
+            }
+        },
+
         getTimeObj: function (t) {
             if (t === 0) {
                 return { min: "00", sec: "00" };

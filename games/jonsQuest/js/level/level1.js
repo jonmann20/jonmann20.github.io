@@ -70,31 +70,14 @@ var lvl1 = (function () {
         }
 
 
-        // stairs
-        var stairs = {
-                x: 1160,
-                y: 210,
-                w: 0,
-                h: 0
-            },
-            rise = 3,   // delta h between steps
-            run = 13    // delta w between steps
-        ;
-
-        for(var i = 0; i < 23; ++i) {
-            var stair = new GameObj(JQObject.STAIR, stairs.x + run * i, stairs.y - rise * i, run + 1, 62);
-            level.objs.push(stair);
-            stairs.w += run;
-            stairs.h += rise;
-        }
-
-        // platform + door
-        level.objs.push(new GameObj(JQObject.PLATFORM, stairs.x + stairs.w, stairs.y - stairs.h, 200, 62));
-        door = new GameObj(JQObject.DOOR, stairs.x + stairs.w + 143, stairs.y - stairs.h - 62 + Graphics.projectY / 2, 33, 62);
-        level.objs.push(door);
+        // stairs, platform, and door
+        var stairs = new GameObj(JQObject.SLOPE, 1243, 208, 252, 62);
+        var doorPlat = new GameObj(JQObject.PLATFORM, stairs.pos.x + stairs.w - 11, stairs.pos.y - stairs.h - 5, 200, 62);
+        door = new GameObj(JQObject.DOOR, doorPlat.pos.x + doorPlat.w - 63, doorPlat.pos.y - 62 - Graphics.projectY / 2, 33, 62);
+        level.objs.push(doorPlat, stairs, door);
 
         // TODO: move to setItems()
-        ladder = new GameItem(new GameObj(JQObject.LADDER, stairs.x - 37, stairs.y - 1, 38, FULLH - stairs.y - game.padFloor), false, 0, false);
+        ladder = new GameItem(new GameObj(JQObject.LADDER, stairs.pos.x - 37, stairs.pos.y - 1, 38, FULLH - stairs.pos.y - game.padFloor), false, 0, false);
         ladder.collidable = false;      // allows ladder to not be in normal collision detection
         level.objs.push(ladder);
 
@@ -121,7 +104,7 @@ var lvl1 = (function () {
 
     function setEnemies() {
         var cyborg = new Enemy(
-            new GameObj(JQObject.ENEMY, 1600, FULLH - game.padFloor - 76 + Graphics.projectY/2, 55, 76, "cyborgBnW.png"),
+            new GameObj(JQObject.ENEMY, 1600, FULLH - game.padFloor - 55 + Graphics.projectY/2, 40, 55, "cyborgBnW.png"),
             JQEnemy.FOLLOW,
             1,
             1087,

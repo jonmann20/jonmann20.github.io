@@ -5,13 +5,25 @@ var game = (function () {
         renderTimePrev = 0,
         renderTimeBtw = 16,
 		fpsHistory = [60],
-        //updateTimePrev = 0,
+        updateFpsHistory = [120],
+        updateTimePrev = 0,
+        updateTimeBtw = 8,
         //lag = 0,
-        renderLoop,         // used to turn off game
-        updateLoop          // used to turn off game
+        renderLoop,
+        updateLoop
 	;
 	
 	function update() {
+//	    var updateTimeCur = new Date().getTime();
+
+//	    // timers
+//	    if((updateTimeCur - updateTimePrev) > 0) {
+//	        updateTimeBtw = updateTimeCur - updateTimePrev;
+////	        console.log(updateTimeBtw);
+//	    }
+//	    updateTimePrev = updateTimeCur;
+
+
 	    if (!level.isCutscene && !level.isTransitioning && !game.over) {
 	        hero.update();
 	    }

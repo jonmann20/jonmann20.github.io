@@ -49,18 +49,49 @@ var HeroPhysicsComponent = function () {
         hero.isOnObj = false;   // prevents jumping after walking off platform
 
         Physics.testObjObjs(hero, function(r) {
-            if (r.overlapN.y === 1) {                       // on top
-                hero.isOnObj = true;
-                hero.isJumping = false;
-                hero.vY = 0;
-            }
-            else if (r.overlapN.y === -1) {                 // on bot
-                hero.vY = 0;
-            }
+            // alias the collision direction
+            var dir = {
+                x: Dir.NONE,
+                y: Dir.NONE
+            };
 
-            if(r.overlapN.x === 1) {
-                if(r.b.type === JQObject.STAIR) {       // stairs; TODO: fix this
-                    hero.pos.y -= 7;
+            if(r.overlapN.y === 1)
+                dir.y = Dir.TOP;
+            else if(r.overlapN.y === -1)
+                dir.y = Dir.BOT;
+
+            if(r.overlapN.x === 1)
+                dir.x = Dir.LEFT;
+            else if(r.overlapN.y === -1)
+                dir.x = Dir.RIGHT;
+
+
+            // check object type
+            if(r.b.type === JQObject.SLOPE || r.b.type === JQObject.POLY || r.b.type === JQObject.HILL) {
+                //r.a.pos.x -= r.overlapV.x;
+
+                if(hero.vY >= 0) { // prevents hooking on edge
+                    hero.landed(r.overlapV.y);
+                }
+            }
+            else if(r.b.type === JQObject.ELEVATOR) {
+                if(dir.y === Dir.TOP && hero.vY >= 0) {
+                    hero.isOnObj = true;
+                    hero.isJumping = false;
+                    hero.vY = (r.b.vY > 0) ? r.b.vY : 0;
+
+                    r.a.pos.y -= r.overlapV.y;
+                }
+            }
+            else {
+                r.a.pos.x -= r.overlapV.x;
+
+                if(dir.y === Dir.TOP && hero.vY >= 0) {  // prevents hooking on edge
+                    hero.landed(r.overlapV.y);
+                }
+                else if(dir.y === Dir.BOT && hero.vY <= 0) {  // prevents hooking on edge
+                    hero.vY = 0;
+                    r.a.pos.y -= r.overlapV.y;
                 }
             }
         });

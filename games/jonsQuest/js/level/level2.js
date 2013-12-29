@@ -17,17 +17,17 @@ var lvl2 = (function () {
         var floor1 = new GameObj(
             JQObject.PLATFORM,
             -Graphics.projectX,
-            FULLH - game.padFloor - 1,
+            FULLH - game.padFloor,
             FULLW / 3 + 40,
-            game.padFloor + 1
+            game.padFloor
         );
 
         var floor2 = new GameObj(
             JQObject.PLATFORM,
             HALFW,
-            FULLH - game.padFloor - 1,
+            FULLH - game.padFloor,
             120,
-            game.padFloor + 1
+            game.padFloor
         );
 
         var floorPlat = new GameObj(
@@ -57,9 +57,9 @@ var lvl2 = (function () {
         var bridge = new GameObj(
             JQObject.PLATFORM,
             colL.pos.x + 170,
-            colL.pos.y - 125,
+            colL.pos.y - 135,
             443,
-            50
+            30
         );
 
         level.objs.push(
@@ -73,11 +73,34 @@ var lvl2 = (function () {
 
         // elevators
         for(var i = 0; i < 3; ++i) {
-            elevator[i] = new GameObj(JQObject.PLATFORM, colR.pos.x + 200 + i * 300, colR.pos.y - i*50, 200, 40);
+            elevator[i] = new GameObj(JQObject.ELEVATOR, colR.pos.x + 200 + i * 300, colR.pos.y - i*50, 200, 40);
             elevator[i].dir = Dir.DOWN;
             level.objs.push(elevator[i]);
         }
 
+
+        var hillArr = Graphics.getHill(bridge.pos.x + 140, bridge.pos.y + 6, 180, 40);
+        for(var i = 0; i < hillArr.length; ++i) {
+            hillArr[i].type = JQObject.HILL;
+            level.objs.push(hillArr[i]);
+        }
+
+
+        // after elevators
+        var aPlat = new GameObj(
+            JQObject.PLATFORM,
+            elevator[2].pos.x + 270,
+            FULLH - game.padFloor,
+            943,
+            game.padFloor
+        );
+        level.objs.push(aPlat);
+
+        var hillArr2 = Graphics.getHill(aPlat.pos.x + 400, floor1.pos.y + 6, 280, 70);
+        for(var i = 0; i < hillArr.length; ++i) {
+            hillArr2[i].type = JQObject.HILL;
+            level.objs.push(hillArr2[i]);
+        }
     }
 
     function setItems() {
@@ -97,7 +120,7 @@ var lvl2 = (function () {
 
     function setEnemies(f2) {
         var enemy = new Enemy(
-            new GameObj(JQObject.ENEMY, 834, 391 - Graphics.projectY, 55, 76, "cyborgBnW.png"),
+            new GameObj(JQObject.ENEMY, 834, 404, 40, 55, "cyborgBnW.png"),
             JQEnemy.PATROL,
             1,
             834,
@@ -109,7 +132,7 @@ var lvl2 = (function () {
     }
 
     return {
-        width: 2700,
+        width: 4700,
 
 
         init: function () {
@@ -135,8 +158,10 @@ var lvl2 = (function () {
                     elevator[i].dir = Dir.UP;
                 }
 
-                elevator[i].pos.y += (elevator[i].dir === Dir.DOWN) ? 1 : -1;
+                elevator[i].vY = (elevator[i].dir === Dir.DOWN) ? 1 : -1;   // used by hero
+                elevator[i].pos.y += elevator[i].vY;
             }
+
         },
 
         render: function() {

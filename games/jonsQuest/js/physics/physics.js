@@ -37,23 +37,37 @@ var Physics = (function () {
         // @param(function) callback A callback function.  Called with a SAT.Response().
         testObjObjs: function (gObj, callback) {
             var response = new SAT.Response();
-            for (var i = 0; i < level.objs.length; ++i) {
-                if (typeof level.objs[i].collidable === "undefined"
+
+            for(var i = 0; i < level.objs.length; ++i) {
+
+                var obj = level.objs[i];
+
+                if (typeof(obj.collidable) === "undefined"
                     //&& level.objs[i] !== gObj         // checks if object is in list (by reference)
                 ) {
 
-                    // Check Level Object Collision
-                    var collided = SAT.testPolygonPolygon(gObj, level.objs[i], response);
+                    //var n = 1;
+                    //if(obj.type === JQObject.HILL) {
+                    //    n = obj.length;
+                    //}
 
-                    // Respond to Level Object Collision
-                    if (collided) {
-                        response.a.pos.x -= response.overlapV.x;
-                        response.a.pos.y -= response.overlapV.y;
+                    //var innerObj = obj;
+                    //for(var j = 0; j < n; ++j) {
+                    //    if(n > 1) {
+                    //        innerObj = obj[j];
+                    //    }
 
-                        callback(response);
-                    }
+                        // Check Level Object Collision
+                        var collided = SAT.testPolygonPolygon(gObj, obj, response);
 
-                    response.clear();
+                        // Respond to Level Object Collision
+                        if(collided) {
+                            callback(response);
+                        }
+
+                        response.clear();
+                    //}
+                    
                 }
             }
 
