@@ -48,16 +48,21 @@ var JQObject_names = Object.freeze({
     @param(number?) w The width of the object.
     @param(number?) h The height of the object.
     @param(Image?) src The filename of the object sprite.  unused by default
-    
+    @param(Dir) dir The slope direction. TODO: move to own class
+
     @constructor
 */
-var GameObj = function (type, x, y, w, h, src) {
+var GameObj = function (type, x, y, w, h, src, dir) {
     // this.pos
     if (type === JQObject.PLATFORM || type === JQObject.ELEVATOR) {
         $.extend(this, Graphics.getSkewedRect(x, y, w, h));
     }
     else if(type === JQObject.SLOPE) {
-        $.extend(this, Graphics.getStairPoly(x, y, w, h));
+        this.dir = dir;
+        $.extend(this, Graphics.getStairPoly(x, y, w, h, dir));
+    }
+    else if(type === JQObject.HILL) {
+        $.extend(this, Graphics.getHill(x, y, w, h));
     }
     else if(type === JQObject.POLY) {
         // custom polygon
@@ -69,7 +74,7 @@ var GameObj = function (type, x, y, w, h, src) {
     this.type = type;
     this.imgReady = false;     // TODO: make private
 
-    if (typeof (src) === "undefined") {
+    if (typeof (src) === "undefined" || src === null) {
         this.w = w;
         this.h = h;
     }

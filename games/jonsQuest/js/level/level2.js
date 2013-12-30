@@ -2,70 +2,80 @@
 
 var lvl2 = (function () {
 
-    var elevator = [];
+    var floor1,
+        hill,
+        floorPlat,
+        colL,
+        colR,
+        bridge,
+        elevator = [],
+        wall,
+        slope,
+        door
+    ;
+
 
     function setBackground() {
-        level.bgColor.gradX = 0;
-        level.bgColor.gradY = 0;
+        level.bgColor.gradX = door.pos.x;
+        level.bgColor.gradY = door.pos.y;
 
         level.bgColor.fillStyle = Graphics.getDoorBgGrad();
         Graphics.setClouds();
     }
 
     function setObjs() {
-        // floor
-        var floor1 = new GameObj(
+        floor1 = new GameObj(
             JQObject.PLATFORM,
             -Graphics.projectX,
             FULLH - game.padFloor,
-            FULLW / 3 + 40,
+            FULLW - 250,
             game.padFloor
         );
 
-        var floor2 = new GameObj(
-            JQObject.PLATFORM,
-            HALFW,
+        hill = new GameObj(
+            JQObject.HILL,
+            200,
             FULLH - game.padFloor,
-            120,
-            game.padFloor
+            320,
+            60
         );
 
-        var floorPlat = new GameObj(
+        floorPlat = new GameObj(
             JQObject.PLATFORM,
-            floor2.pos.x + floor2.w - Graphics.projectX,
-            floor2.pos.y - floor2.h - 30,
-            900,
+            floor1.pos.x + floor1.w - Graphics.projectX,
+            floor1.pos.y - floor1.h - 30,
+            1000,
             180
         );
 
-        var colL = new GameObj(
+        colL = new GameObj(
             JQObject.PLATFORM,
-            floorPlat.pos.x + floor2.w,
+            floorPlat.pos.x + 240,
             floorPlat.pos.y - 90 + Graphics.projectY,
             100,
             85
         );
 
-        var colR = new GameObj(
+        colR = new GameObj(
             JQObject.PLATFORM,
-            floorPlat.pos.x + floor2.w + 680,
+            floorPlat.pos.x + floorPlat.w - 100,
             floorPlat.pos.y - 90 + Graphics.projectY,
             100,
             85
         );
 
-        var bridge = new GameObj(
+        bridge = new GameObj(
             JQObject.PLATFORM,
-            colL.pos.x + 170,
-            colL.pos.y - 135,
-            443,
+            colL.pos.x + 140,
+            colL.pos.y - 137,
+            480,
             30
         );
 
         level.objs.push(
             floorPlat,
             floor1,
-            floor2,
+            hill,
             colL,
             colR,
             bridge
@@ -73,49 +83,28 @@ var lvl2 = (function () {
 
         // elevators
         for(var i = 0; i < 3; ++i) {
-            elevator[i] = new GameObj(JQObject.ELEVATOR, colR.pos.x + 200 + i * 300, colR.pos.y - i*50, 200, 40);
+            elevator[i] = new GameObj(JQObject.ELEVATOR, colR.pos.x + 237 + i * 300, colR.pos.y - i*80, 115, 26);
             elevator[i].dir = Dir.DOWN;
             level.objs.push(elevator[i]);
         }
 
+        wall = new GameObj(JQObject.PLATFORM, elevator[2].pos.x + elevator[2].w + 120, 190, 100, FULLH - 190);
+        slope = new GameObj(JQObject.SLOPE, wall.pos.x + wall.w - Graphics.projectX, wall.pos.y, 500, FULLH - 190, null, Dir.DOWN_RIGHT);
+        
+        var platty = new GameObj(JQObject.PLATFORM, slope.pos.x + slope.w - Graphics.projectX - 1, FULLH - game.padFloor, 600, game.padFloor);
+        var hilly = new GameObj(JQObject.HILL, platty.pos.x + platty.w - 205, FULLH - game.padFloor, 200, 30);
 
-        var hillArr = Graphics.getHill(bridge.pos.x + 140, bridge.pos.y + 6, 180, 40);
-        for(var i = 0; i < hillArr.length; ++i) {
-            hillArr[i].type = JQObject.HILL;
-            level.objs.push(hillArr[i]);
-        }
+        var platty2 = new GameObj(JQObject.PLATFORM, platty.pos.x + platty.w + 150, FULLH - game.padFloor, 500, game.padFloor);
 
+        door = new GameObj(JQObject.DOOR, platty2.pos.x + 300, FULLH - game.padFloor - 100, 40, 100);
 
-        // after elevators
-        var aPlat = new GameObj(
-            JQObject.PLATFORM,
-            elevator[2].pos.x + 270,
-            FULLH - game.padFloor,
-            943,
-            game.padFloor
-        );
-        level.objs.push(aPlat);
-
-        var hillArr2 = Graphics.getHill(aPlat.pos.x + 400, floor1.pos.y + 6, 280, 70);
-        for(var i = 0; i < hillArr.length; ++i) {
-            hillArr2[i].type = JQObject.HILL;
-            level.objs.push(hillArr2[i]);
-        }
-
-        //var hill = new SAT.Polygon(new SAT.Vector(aPlat.pos.x + 400, floor1.pos.y + 6, 280, 70), [
-            
-        //]);
+        level.objs.push(platty, slope, wall, hilly, platty2, door);
 
     }
 
     function setItems() {
-        //var crate = new GameItem(
-        //    new GameObj(JQObject.CRATE, 206, FULLH - game.padFloor - 26 + 5, 24, 26, "crate.png"),
-        //    true
-        //);
-
         var sack = new GameItem(
-            new GameObj(JQObject.SACK, 1200, 302, 30, 36, "sack.png"),
+            new GameObj(JQObject.SACK, colL.pos.x + 300, 302, 30, 36, "sack.png"),
             true,
             5
         );
@@ -123,13 +112,13 @@ var lvl2 = (function () {
         level.items.push(sack);
     }
 
-    function setEnemies(f2) {
+    function setEnemies() {
         var enemy = new Enemy(
-            new GameObj(JQObject.ENEMY, 834, 404, 40, 55, "cyborgBnW.png"),
+            new GameObj(JQObject.ENEMY, colL.pos.x + colL.w, 404, 40, 55, "cyborgBnW.png"),
             JQEnemy.PATROL,
             1,
-            834,
-            1369,
+            colL.pos.x + colL.w,
+            colR.pos.x - 55/2,
             true
         );
         enemy.collidable = true;        // TODO: fix api
@@ -137,16 +126,17 @@ var lvl2 = (function () {
     }
 
     return {
-        width: 3700,
+        width: 4500,
 
 
         init: function () {
             level.hiddenItems = 0;
 
-            setBackground();
             setObjs();
             setItems();
             setEnemies();
+
+            setBackground();
         },
 
         deinit: function(){
@@ -165,6 +155,10 @@ var lvl2 = (function () {
 
                 elevator[i].vY = (elevator[i].dir === Dir.DOWN) ? 1 : -1;   // used by hero
                 elevator[i].pos.y += elevator[i].vY;
+            }
+
+            if(SAT.testPolygonPolygon(hero, door)) {
+                level.complete();
             }
 
         },

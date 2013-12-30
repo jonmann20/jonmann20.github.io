@@ -65,6 +65,7 @@ module.exports = function(grunt) {
                     pth + "level/startScreen.js",
 	        		pth + "level/level1.js",
                     pth + "level/level2.js",        // TODO load new levels/assets dynamically?
+                    pth + "level/level3.js",
 	        		pth + "engine/game.js",
 	        		pth + "hero/hero.js",
 	        		pth + "hero/heroGraphics.js",

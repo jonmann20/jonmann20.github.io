@@ -86,15 +86,28 @@ var Graphics = (function () {
             return poly;
         },
 
-        getStairPoly: function(x, y, w, h){
-            var poly = new SAT.Polygon(new SAT.Vector(x, y), [
-                new SAT.Vector(),
-                new SAT.Vector(w - Graphics.projectY, -h),
-                new SAT.Vector(w, -h + Graphics.projectY),
-                new SAT.Vector(w, 0),
-                new SAT.Vector(Graphics.projectX, h),
-                new SAT.Vector(0, h - Graphics.projectY)
-            ]);
+        getStairPoly: function(x, y, w, h, dir) {
+            var poly;
+            if(dir === Dir.UP_RIGHT) {
+                poly = new SAT.Polygon(new SAT.Vector(x, y), [
+                    new SAT.Vector(),
+                    new SAT.Vector(w - Graphics.projectX, -h),
+                    new SAT.Vector(w, -h + Graphics.projectY),
+                    new SAT.Vector(w, 0),
+                    new SAT.Vector(Graphics.projectX, h),
+                    new SAT.Vector(0, h - Graphics.projectY)
+                ]);
+            }
+            else {
+                poly = new SAT.Polygon(new SAT.Vector(x, y), [
+                    new SAT.Vector(),
+                    new SAT.Vector(w - Graphics.projectX, h - Graphics.projectY - 5),
+                    new SAT.Vector(w, h - 4),
+                    new SAT.Vector(0, h),
+                    new SAT.Vector(Graphics.projectX, h),
+                    new SAT.Vector(0, h - Graphics.projectY)
+                ]);
+            }
 
             return poly;
         },
@@ -149,15 +162,26 @@ var Graphics = (function () {
             ctx.fillRect(x, y, w, h);
         },
 
-        drawPoly: function(poly) {
-            var y = poly.pos.y; //- Graphics.projectY / 2;
+        /*
+            @param(SAT.Polygon) poly An SAT.Polygon.
+            @param(?Color) fillStyle The fill style of the polygon
+            @param(?number, ?number) trans A translated x and y dimension.
+        */
+        drawPoly: function(poly, fillStyle, trans) {
+            var y = poly.pos.y - Graphics.projectY;
+            var x = poly.pos.x;
 
-            ctx.fillStyle = "orange";
+            if(typeof (trans) !== "undefined") {
+                x += trans.x;
+                y += trans.y;
+            }
+
+            ctx.fillStyle = (typeof(fillStyle) !== "undefined") ? fillStyle : "orange";
             ctx.beginPath();
-            ctx.moveTo(poly.pos.x, y);
+            ctx.moveTo(x, y);
 
             for(var i = 1; i < poly.points.length; ++i) {
-                ctx.lineTo(poly.pos.x + poly.points[i].x, y + poly.points[i].y);
+                ctx.lineTo(x + poly.points[i].x, y + poly.points[i].y);
             }
 
             ctx.closePath();
@@ -165,109 +189,35 @@ var Graphics = (function () {
         },
 
         drawHill: function(poly) {
-            //var x = 112,
-            //    y = 497.5,
-            //    w = 300,
-            //    h = 100,
-            //    xw = x + w,
-            //    yh = y - h + 30
-            //;
-
-            //ctx.fillStyle = Color.LIGHT_BROWN;
-            //ctx.beginPath();
-            //ctx.moveTo(x, y);
-            //ctx.bezierCurveTo(x, yh, xw, yh, xw, y);
-            //ctx.closePath();
-            //ctx.fill();
-
-            //Graphics.drawPoly(poly);
-            //if(typeof (poly.tag) !== "undefined" && poly.tag === 1) {
-            //    ctx.fillStyle = Color.LIGHT_BROWN;
-            //    ctx.beginPath();
-            //    ctx.moveTo(poly.pos.x - Graphics.projectX, poly.pos.y);
-            //    ctx.lineTo(poly.pos.x, poly.pos.y);
-            //    ctx.lineTo(poly.pos.x, poly.pos.y + Graphics.projectY);
-            //    ctx.closePath();
-            //    ctx.fill();
-            //}
-
-            var repeatZ = function(z) {
-
-                var y = poly.pos.y - Graphics.projectY + z;
-
-                if(z === game.padFloor - 4)
-                    ctx.fillStyle = Color.DARK_BROWN;
-                else
-                    ctx.fillStyle = Color.LIGHT_BROWN;
-
-                var fixX = Math.round(poly.pos.x);
-
-                ctx.beginPath();
-                ctx.moveTo(fixX, y);
-
-                for(var i = 1; i < poly.points.length; ++i) {
-                    fixX = Math.round(poly.pos.x + poly.points[i].x);
-                    ctx.lineTo(fixX, y + poly.points[i].y);
-                }
-
-                ctx.closePath();
-                ctx.fill();
+            for(var i = 0; i < game.padFloor - 15; ++i) {
+                Graphics.drawPoly(poly, Color.LIGHT_BROWN, { x: 0, y: i });
             }
-
-            for(var i = 0; i < game.padFloor - 3; ++i) {
-                repeatZ(i);
-            }
-
+            Graphics.drawPoly(poly, Color.DARK_BROWN, { x: Graphics.projectX, y: game.padFloor});
+            //Graphics.drawPoly(poly, Color.DARK_BROWN, { x: 10, y: game.padFloor -2 });
         },
 
-
-        // h must be a triangular number?
         getHill: function(x, y, w, h) {
+            var arr = [new SAT.V()];
 
-            var objs = [],
-                totalH = 0,
-                prevH = 0,
-                nextH
+            x += w / 2;
+            y += Graphics.projectY;
+
+            var a = w / 2,  // the horizontal radius
+                b = h / 2,  // the vertical radius
+                t = 180,    // the angle between the horizontal radius and a vector to any point on the curve (in degrees)
+                xx,
+                yy
             ;
 
-
-            var tmp = Math.sqrt(h);
-            nextH = tmp;
-            //console.log(tmp);
-            var dtW = w / (tmp*2);
-
-
-            // left half
-            for(var i = 0; i < tmp; ++i) {
-                objs.push(new SAT.Polygon(new SAT.Vector(x + i*dtW, y - prevH), [
-                    new SAT.Vector(),
-                    new SAT.Vector(dtW, -nextH),
-                    new SAT.Vector(dtW, totalH),
-                    new SAT.Vector(0, totalH)
-                ]));
-                
-                prevH += nextH;
-                totalH += nextH--;
-            }
-            
-            // right half
-            x += tmp * dtW;
-            nextH = 0;
-            prevH = -totalH;
-
-            for(var i = 0; i < tmp; ++i) {
-                objs.push(new SAT.Polygon(new SAT.Vector(x + i*dtW, y + prevH), [
-                    new SAT.Vector(),
-                    new SAT.Vector(dtW, nextH),
-                    new SAT.Vector(dtW, totalH),
-                    new SAT.Vector(0, totalH)
-                ]));
-
-                prevH += nextH;
-                totalH -= nextH++;
+            while(t !== 360) {
+                xx = a * Math.cos(utils.degToRad(t));
+                yy = b * Math.sin(utils.degToRad(t++));
+                arr.push(new SAT.V(xx, yy));
             }
 
-            return objs;
+            arr.push(new SAT.V(w/2));
+
+            return new SAT.Polygon(new SAT.V(x, y), arr);
         },
 
         drawPlatform: function (poly) {
@@ -412,8 +362,8 @@ var Graphics = (function () {
             ctx.moveTo(x, ym);
             ctx.bezierCurveTo(x, ym - oy, xm - ox, y, xm, y);
             ctx.bezierCurveTo(xm + ox, y, xe, ym - oy, xe, ym);
-            //ctx.bezierCurveTo(xe, ym + oy, xm + ox, ye, xm, ye);
-            //ctx.bezierCurveTo(xm - ox, ye, x, ym + oy, x, ym);
+            ctx.bezierCurveTo(xe, ym + oy, xm + ox, ye, xm, ye);
+            ctx.bezierCurveTo(xm - ox, ye, x, ym + oy, x, ym);
             ctx.closePath();
             ctx.fill();
         },

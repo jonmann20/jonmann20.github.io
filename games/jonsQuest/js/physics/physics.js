@@ -39,35 +39,21 @@ var Physics = (function () {
             var response = new SAT.Response();
 
             for(var i = 0; i < level.objs.length; ++i) {
-
                 var obj = level.objs[i];
 
                 if (typeof(obj.collidable) === "undefined"
-                    //&& level.objs[i] !== gObj         // checks if object is in list (by reference)
+                    //&& obj !== gObj         // checks if object is in list (by reference)
                 ) {
 
-                    //var n = 1;
-                    //if(obj.type === JQObject.HILL) {
-                    //    n = obj.length;
-                    //}
+                    // Check Level Object Collision
+                    var collided = SAT.testPolygonPolygon(gObj, obj, response);
 
-                    //var innerObj = obj;
-                    //for(var j = 0; j < n; ++j) {
-                    //    if(n > 1) {
-                    //        innerObj = obj[j];
-                    //    }
+                    // Respond to Level Object Collision
+                    if(collided) {
+                        callback(response);
+                    }
 
-                        // Check Level Object Collision
-                        var collided = SAT.testPolygonPolygon(gObj, obj, response);
-
-                        // Respond to Level Object Collision
-                        if(collided) {
-                            callback(response);
-                        }
-
-                        response.clear();
-                    //}
-                    
+                    response.clear();
                 }
             }
 

@@ -93,7 +93,7 @@ var lvl1 = (function () {
 
 
         // stairs, platform, and door
-        var stairs = new GameObj(JQObject.SLOPE, 2143, 208, 252, 62);
+        var stairs = new GameObj(JQObject.SLOPE, 2143, 208, 252, 62, null, Dir.UP_RIGHT);
         var doorPlat = new GameObj(JQObject.PLATFORM, stairs.pos.x + stairs.w - 11, stairs.pos.y - stairs.h - 5, 200, 62);
         door = new GameObj(JQObject.DOOR, doorPlat.pos.x + doorPlat.w - 63, doorPlat.pos.y - 62 - Graphics.projectY / 2, 33, 62);
         level.objs.push(doorPlat, stairs, door);
