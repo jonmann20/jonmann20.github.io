@@ -51,8 +51,6 @@ var level = (function () {
                 else
                     level.items[i].vY = maxVy;
 
-                level.items[i].pos.y += level.items[i].vY;
-
                 // obj collision
                 Physics.testObjObjs(level.items[i], function(r) {
                     // a is level.items[i]
@@ -63,8 +61,10 @@ var level = (function () {
 
                     if (r.overlapN.y === 1) {    // on top of platform
                         audio.thud.play();
-                        r.a.vY = 0;
+
+                        r.a.vY = (r.b.type === JQObject.ELEVATOR) ? r.b.vY : 0;
                         r.a.isOnObj = true;
+                        r.a.onObj = r.b;
                         r.a.recentlyHeld = false;
 
                         if(r.b.type === JQObject.SCALE && r.b.holdingItem === null) {
@@ -115,6 +115,12 @@ var level = (function () {
                     r.a.recentlyHeld = false;
                 });
             }
+
+            if(typeof (level.items[i].onObj) !== "undefined" && level.items[i].onObj !== null) {
+                level.items[i].vY = (level.items[i].onObj.type === JQObject.ELEVATOR) ? level.items[i].onObj.vY : 0;
+            }
+
+            level.items[i].pos.y += level.items[i].vY;
         }
     }
 
@@ -266,6 +272,7 @@ var level = (function () {
             hero.pos.y = FULLH - game.padFloor - hero.h + 4;    // TODO: find out '4' offset??
             hero.vX = hero.vY = 0;
             hero.isJumping = false;
+            hero.ammo = 20;
             hero.bulletArr.length = 0;		// prevents leftover thrown shurikens
             hero.invincible = false;
             hero.isHolding = false;

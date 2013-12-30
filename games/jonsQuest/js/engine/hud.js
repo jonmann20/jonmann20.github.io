@@ -74,6 +74,9 @@ var HUD = (function () {
             ctx.fillText(hero.cash, 515, FULLH + 37);
             cash.draw();
 
+            // lives
+            ctx.fillText("LIVES x" + hero.lives, 700, FULLH + 37);
+
             // time
             var time = utils.getTimeObj(game.actualTime);
             ctx.fillText(time.min + ':' + time.sec, FULLW - 78, FULLH + 24);

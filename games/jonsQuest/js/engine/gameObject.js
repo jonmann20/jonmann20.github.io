@@ -16,7 +16,8 @@ var JQObject = Object.freeze({
     POLY: 12,
     HILL: 13,
     ELEVATOR: 14,
-    SCALEBG: 15
+    SCALEBG: 15,
+    FIREBALL: 16
 });
 
 var JQObject_names = Object.freeze({
@@ -35,7 +36,8 @@ var JQObject_names = Object.freeze({
     12: "POLY",
     13: "HILL",
     14: "ELEVATOR",
-    15: "SCALEBG"
+    15: "SCALEBG",
+    16: "FIREBALL"
 });
 
 /*
@@ -53,12 +55,13 @@ var JQObject_names = Object.freeze({
     @constructor
 */
 var GameObj = function (type, x, y, w, h, src, dir) {
+    this.dir = dir;
+
     // this.pos
     if (type === JQObject.PLATFORM || type === JQObject.ELEVATOR) {
         $.extend(this, Graphics.getSkewedRect(x, y, w, h));
     }
     else if(type === JQObject.SLOPE) {
-        this.dir = dir;
         $.extend(this, Graphics.getStairPoly(x, y, w, h, dir));
     }
     else if(type === JQObject.HILL) {
@@ -79,8 +82,8 @@ var GameObj = function (type, x, y, w, h, src, dir) {
         this.h = h;
     }
     else {
-        this.w = 0;
-        this.h = 0;
+        this.w = w; // TODO: fix
+        this.h = h;
 
         this.img = new Image();
 
@@ -103,6 +106,9 @@ GameObj.prototype = {
         else {
             if(this.type === JQObject.SCALEBG) {
                 ctx.fillStyle = Color.LIGHT_BROWN;
+            }
+            else if(this.type === JQObject.FIREBALL) {
+                ctx.fillStyle = "orange";
             }
             else {
                 ctx.fillStyle = "red";

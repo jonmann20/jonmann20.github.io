@@ -70,7 +70,16 @@ var utils = (function () {
                 audio.bgMusic.muted = true;
 
                 setTimeout(function () {
-                    Graphics.fadeCanvas(function () {
+                    Graphics.fadeCanvas(function() {
+                        if((hero.lives - 1) < 0) {
+                            alert("You Lose");
+                            location.reload();
+                        }
+                        else {
+                            --hero.lives;
+                        }
+
+
                         level.reset();
                         level.curLvl.deinit();
                         level.curLvl.init();

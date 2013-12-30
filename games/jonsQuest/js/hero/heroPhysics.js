@@ -25,8 +25,8 @@ var HeroPhysicsComponent = function () {
     }
 
     function screenCollision() {
-        if (hero.pos.y < -hero.h) {                 // feet above top of screen
-            hero.pos.y = -hero.h;
+        if (hero.pos.y < -hero.h*2) {                 // feet 2x above top of screen
+            hero.pos.y = -hero.h*2;
             hero.vY = 0;
         }
         else if (hero.pos.y >= FULLH + hero.h*2) {  // 2x below bottom of screen
@@ -113,7 +113,14 @@ var HeroPhysicsComponent = function () {
                     hero.pos.y -= r.overlapV.y;
                     hero.isOnObj = true;
                     hero.isJumping = false;
+
                     hero.vY = 0;
+
+                    if(typeof (r.b.onObj) !== "undefined" && r.b.onObj !== null) {  // hero on crate on elevator
+                        if(r.b.onObj.type === JQObject.ELEVATOR) {
+                            hero.vY = r.b.vY;
+                        }
+                    }
                 }
                 else if (!hero.isHolding && r.b.grabbable && !r.b.recentlyHeld) {
                     if (r.b.isOnObj === true) {
@@ -158,6 +165,12 @@ var HeroPhysicsComponent = function () {
                (hero.lvlX + hero.vX <= level.curLvl.width - FULLW)
             ){
                 hero.lvlX += hero.vX;
+
+                // updateProjectileView
+                for(var i = 0; i < hero.bulletArr.length; ++i) {
+                    hero.bulletArr[i].pos.x -= hero.vX;
+                }
+
                 level.updateView();
             }
             else {

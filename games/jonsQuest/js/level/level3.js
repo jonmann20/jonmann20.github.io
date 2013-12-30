@@ -1,16 +1,24 @@
-﻿function Level3() {
+﻿/// <reference path="../linker.js" />
+
+function Level3() {
     this.init();
 }
 
 Level3.prototype = (function() {
+
+    function setObjects(){
+        var floor = new GameObj(JQObject.FLOOR, -Graphics.projectX, FULLH - game.padFloor, 1000, game.padFloor);
+        level.objs.push(floor);
+    }
+
     return {
-        width: 3400,
+        width: 2400,
 
 
         init: function() {
             level.hiddenItems = 0;
 
-            //setObjs();
+            setObjects();
             //setItems();
             //setEnemies();
 

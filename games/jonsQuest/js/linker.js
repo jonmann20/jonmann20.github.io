@@ -24,6 +24,7 @@
 /// <reference path="/games/jonsQuest/js/level/lvlComplete.js" />
 /// <reference path="/games/jonsQuest/js/level/level0.js" />
 /// <reference path="/games/jonsQuest/js/level/level1.js" />
+/// <reference path="/games/jonsQuest/js/level/level3.js" />
 /// <reference path="/games/jonsQuest/js/level/startScreen.js" />
 
 // Other

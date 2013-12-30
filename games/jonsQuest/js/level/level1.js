@@ -6,35 +6,8 @@ var lvl1 = (function () {
 		door,
         ladder,
         doLadder = false,
-        scales = [],
-        vBar,
-        hBar
+        theScale = {}
     ;
-
-    function handleScale() {
-        var numCratesOnScales = 0;
-
-        for (var i = 0; i < level.objs.length; ++i) {
-            if (level.objs[i].type === JQObject.SCALE &&
-                typeof (level.objs[i].holdingItem) !== "undefined" && level.objs[i].holdingItem !== null &&
-                level.objs[i].holdingItem.type === JQObject.CRATE
-            ) {
-                ++numCratesOnScales;
-            }
-        }
-
-        doLadder = (numCratesOnScales === 2);
-
-        if(doLadder) {
-            audio.discovery.play();
-
-            var result = $.grep(level.objs, function (e) {
-                return e.type === JQObject.LADDER;
-            });
-            result[0].visible = true;
-        }
-    }
-
 
     function setBackground() {
         //---- color layer
@@ -57,39 +30,8 @@ var lvl1 = (function () {
         );
 
         // scales
-        for(var i = 0; i < 2; ++i) {
-            scales[i] = new GameObj(JQObject.SCALE, 1500 + i * 300, FULLH - game.padFloor - 137, 150, 46);
-            scales[i].holdingItem = null;//JQObject.EMPTY; // TODO: fix api
-        }
-
-        vBar = new GameObj(JQObject.SCALEBG, 
-            scales[0].pos.x + scales[0].w + 70, 
-            HALFH - game.padFloor,
-            10,
-            HALFH
-        );
-        vBar.collidable = false;
-
-        hBar = new GameObj(JQObject.SCALEBG,
-            scales[0].pos.x + scales[0].w / 2,
-            HALFH,
-            300,
-            10
-        );
-        hBar.x2 = hBar.pos.x + hBar.w;
-        hBar.y2 = hBar.pos.y;
-        hBar.collidable = false;
-        hBar.visible = false;
-
-        scales[0].hBar = hBar;
-        scales[0].side = Dir.LEFT;
-        scales[0].otherSide = scales[1];
-
-        scales[1].hBar = hBar;
-        scales[1].side = Dir.RIGHT;
-        scales[1].otherSide = scales[0];
-
-        level.objs.push(vBar, hBar, scales[0], scales[1]);
+        theScale = Graphics.getScale(1500, FULLH - game.padFloor - 137);
+        level.objs.push(theScale.vBar, theScale.hBar, theScale[Dir.LEFT], theScale[Dir.RIGHT]);
 
 
         // stairs, platform, and door
@@ -113,8 +55,8 @@ var lvl1 = (function () {
                 )
             );
         }
-        crate[1].pos.x = scales[0].pos.x + scales[0].w / 2 - crate[0].w / 2;
-        crate[2].pos.x = scales[1].pos.x + scales[1].w / 2 - crate[0].w / 2;        // sack
+        crate[1].pos.x = theScale[Dir.LEFT].pos.x + theScale[Dir.LEFT].w / 2 - crate[0].w / 2;
+        crate[2].pos.x = theScale[Dir.RIGHT].pos.x + theScale[Dir.RIGHT].w / 2 - crate[0].w / 2;        // sack
         var sack = new GameItem(new GameObj(JQObject.SACK, 680, 111 + Graphics.projectY / 2, 30, 34, "sack.png"), false, 5);
 
         // hidden cash; TODO: only add to level.items after visible???
@@ -133,26 +75,6 @@ var lvl1 = (function () {
             false
         );
         cyborg.collidable = false;  // TODO: fix api        level.enemies.push(cyborg);
-    }
-
-    function drawScaleChains(x, y, scale) {
-        ctx.beginPath();
-        ctx.moveTo(x, y);
-        ctx.lineTo(scale.pos.x, scale.pos.y);
-        ctx.stroke();
-        ctx.closePath();
-
-        ctx.beginPath();
-        ctx.moveTo(x, y);
-        ctx.lineTo(scale.pos.x + scale.w / 2, scale.pos.y);
-        ctx.stroke();
-        ctx.closePath();
-
-        ctx.beginPath();
-        ctx.moveTo(x, y);
-        ctx.lineTo(scale.pos.x + scale.w, scale.pos.y);
-        ctx.stroke();
-        ctx.closePath();
     }
 
 
@@ -185,7 +107,7 @@ var lvl1 = (function () {
                 hero.onLadder = SAT.testPolygonPolygon(hero, ladder);
             }
             else {
-                handleScale();
+                doLadder = Physics.handleScale();
             }
 
             // hidden cash
@@ -203,29 +125,10 @@ var lvl1 = (function () {
             if (!game.over && Physics.isCollision(hero, door, 0)) {     // TODO: why checking game.over???
                 level.complete();
             }
-
-            //hBar.x2 -= hero.vX;
         },
 
-        render: function () {
-            ctx.fillStyle = "#000";
-            ctx.fillRect(vBar.x, vBar.y, vBar.w, vBar.h);   // vBar
-
-            ctx.strokeStyle = "#000";
-            ctx.lineWidth = 10;
-
-            // hBar
-            ctx.beginPath();
-            ctx.moveTo(hBar.pos.x, hBar.pos.y);
-            ctx.lineTo(hBar.x2, hBar.y2);
-            ctx.stroke();
-            ctx.closePath();
-            
-            // left scale
-            drawScaleChains(hBar.pos.x, hBar.pos.y, scales[0]);
-
-            // right scale
-            drawScaleChains(hBar.x2, hBar.y2, scales[1]);
+        render: function() {
+            Graphics.drawScaleBg(theScale);
         }
     };
 

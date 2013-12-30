@@ -146,6 +146,46 @@ var Graphics = (function () {
             }
         },
 
+        getScale: function(x, y) {
+            var theScale = {};
+
+            for(var i = 0; i < 2; ++i) {
+                var dir = (i === 0) ? Dir.LEFT : Dir.RIGHT;
+
+                theScale[dir] = new GameObj(JQObject.SCALE, x + i * 300, y, 150, 46);
+                theScale[dir].holdingItem = null; // TODO: fix api
+            }
+
+            theScale.vBar = new GameObj(JQObject.SCALEBG,
+                theScale[Dir.LEFT].pos.x + theScale[Dir.LEFT].w + 70,
+                HALFH - game.padFloor,
+                10,
+                HALFH
+            );
+            theScale.vBar.collidable = false;
+
+            theScale.hBar = new GameObj(JQObject.SCALEBG,
+                theScale[Dir.LEFT].pos.x + theScale[Dir.LEFT].w / 2,
+                HALFH,
+                300,
+                10
+            );
+            theScale.hBar.x2 = theScale.hBar.pos.x + theScale.hBar.w;
+            theScale.hBar.y2 = theScale.hBar.pos.y;
+            theScale.hBar.collidable = false;
+            theScale.hBar.visible = false;
+
+            theScale[Dir.LEFT].hBar = theScale.hBar;
+            theScale[Dir.LEFT].side = Dir.LEFT;
+            theScale[Dir.LEFT].otherSide = theScale[Dir.RIGHT];
+
+            theScale[Dir.RIGHT].hBar = theScale.hBar;
+            theScale[Dir.RIGHT].side = Dir.RIGHT;
+            theScale[Dir.RIGHT].otherSide = theScale[Dir.LEFT];
+
+            return theScale;
+        },
+
         drawScale: function (platform) {
             var x = platform.pos.x,
                 y = platform.pos.y,
@@ -160,6 +200,44 @@ var Graphics = (function () {
             // draw platform
             ctx.fillStyle = Color.DARK_BROWN;
             ctx.fillRect(x, y, w, h);
+        },
+
+        drawScaleChains:function(x, y, scale) {
+            ctx.beginPath();
+            ctx.moveTo(x, y);
+            ctx.lineTo(scale.pos.x, scale.pos.y);
+            ctx.stroke();
+            ctx.closePath();
+
+            ctx.beginPath();
+            ctx.moveTo(x, y);
+            ctx.lineTo(scale.pos.x + scale.w / 2, scale.pos.y);
+            ctx.stroke();
+            ctx.closePath();
+
+            ctx.beginPath();
+            ctx.moveTo(x, y);
+            ctx.lineTo(scale.pos.x + scale.w, scale.pos.y);
+            ctx.stroke();
+            ctx.closePath();
+        },
+
+        drawScaleBg: function(theScale){
+            ctx.strokeStyle = "#000";
+            ctx.lineWidth = 10;
+
+            // hBar
+            ctx.beginPath();
+            ctx.moveTo(theScale.hBar.pos.x, theScale.hBar.pos.y);
+            ctx.lineTo(theScale.hBar.x2, theScale.hBar.y2);
+            ctx.stroke();
+            ctx.closePath();
+            
+            // left scale chains
+            Graphics.drawScaleChains(theScale.hBar.pos.x, theScale.hBar.pos.y, theScale[Dir.LEFT]);
+
+            // right scale chains
+            Graphics.drawScaleChains(theScale.hBar.x2, theScale.hBar.y2, theScale[Dir.RIGHT]);
         },
 
         /*

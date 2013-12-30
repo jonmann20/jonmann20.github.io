@@ -148,6 +148,7 @@ var hero = (function () {
 		isHolding: false,
 		isOnObj: true,
 		curItem: null,      // the item in hand
+        lives: 3,
 		health: 3,
 		maxHealth: 3,
 		medKits: 1,
@@ -196,7 +197,7 @@ var hero = (function () {
 		    input.check();                      // updates velocities
 			physics.updatePosition();          // updates positions
 			physics.checkCollision();          // fix positions
-			
+
 			checkHealth();
 			getSpritePos();
 		},

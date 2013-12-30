@@ -102,6 +102,33 @@ var Physics = (function () {
             }
         },
 
+
+    handleScale: function() {
+            var numCratesOnScales = 0;
+
+            for(var i = 0; i < level.objs.length; ++i) {
+                if(level.objs[i].type === JQObject.SCALE &&
+                    typeof (level.objs[i].holdingItem) !== "undefined" && level.objs[i].holdingItem !== null &&
+                    level.objs[i].holdingItem.type === JQObject.CRATE
+                ) {
+                    ++numCratesOnScales;
+                }
+            }
+
+            var doLadder = (numCratesOnScales === 2);
+
+            if(doLadder) {
+                audio.discovery.play();
+
+                var result = $.grep(level.objs, function(e) {
+                    return e.type === JQObject.LADDER;
+                });
+                result[0].visible = true;
+            }
+
+            return doLadder;
+        },
+
         // Tests collision between items
         //testAllItems: function () {
         //    var response = new SAT.Response();

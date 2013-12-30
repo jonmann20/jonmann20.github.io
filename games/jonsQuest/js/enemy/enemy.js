@@ -21,6 +21,9 @@ var JQEnemy = Object.freeze({
 var Enemy = function (gObj, enemy_t, health, leftXBound, rightXBound, active) {
     utils.extend(this, gObj);
 
+    this.initX = this.pos.x;
+    this.initY = this.pos.y;
+
     this.initHealth = this.health = health;
     this.enemy_t = enemy_t;
     this.leftXBound = leftXBound;
@@ -32,21 +35,24 @@ var Enemy = function (gObj, enemy_t, health, leftXBound, rightXBound, active) {
     this.dir = Dir.RIGHT;
     this.alive = true;
     this.deadOnScreen = false;
-    this.clearDir = true;		// true = right; false = left;
+    this.clearDir = Dir.RIGHT;
 
+    
+    var that = this;
+    
     // draw
-    function drawHealth(that) {
+    function drawHealth() {
         var healthLen = (that.w / that.initHealth) * that.health;
 
         ctx.fillStyle = "red";
-        ctx.fillRect(that.x, that.y - 12, healthLen, 4);
+        ctx.fillRect(that.pos.x, that.pos.y - 12, healthLen, 4);
     }
 
     var parentDraw = this.draw;
     this.draw = function () {
         if (this.alive || this.deadOnScreen) {
             if (this.initHealth > 1) {
-                drawHealth(this);
+                drawHealth();
             }
 
             ctx.save();
@@ -64,12 +70,18 @@ Enemy.prototype = {
 
     update: function () {
         if (this.deadOnScreen) {
-            this.pos.x += this.clearDir ? 2 : -2;
-            this.pos.y -= 9;
-
-            if (this.pos.x < 0 || this.pos.x > FULLW) {
+            if(this.enemy_t === JQEnemy.STILL) {
                 this.deadOnScreen = false;
                 this.deadOffScreen = true;
+            }
+            else {
+                this.pos.x += (this.clearDir === Dir.RIGHT) ? 2 : -2;
+                this.pos.y -= 9;
+
+                if(this.pos.x < 0 || this.pos.x > FULLW) {
+                    this.deadOnScreen = false;
+                    this.deadOffScreen = true;
+                }
             }
         }
         else if (this.active && game.totalTicks % 3 === 0) {
@@ -101,11 +113,18 @@ Enemy.prototype = {
     },
 
     death: function () {
-        this.clearDir = (hero.dir == Dir.RIGHT);
+        this.clearDir = hero.dir;
 
         audio.enemyDeath.play();
         hero.xp += 15;
         this.alive = false;
         this.deadOnScreen = true;
+    },
+
+    revive: function() {
+        this.health = this.initHealth;
+        this.deadOffScreen = false;
+        this.deadOnScreen = false;
+        this.alive = true;
     }
 };
