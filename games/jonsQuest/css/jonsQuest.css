@@ -1,3 +1,6 @@
+body {
+    background: rgb(37, 30, 34);
+}
 header {
     position: absolute;
     top: 2%;

@@ -1,7 +1,10 @@
 ﻿/*#region **** override browser elts ****/
 body {
-    background: rgb(37, 30, 34);
-    color: #e1e1e1;
+    /*background: rgb(37, 30, 34);*/
+    background-image: url(/img/jonBig.jpg);
+    background-position: 51% 0%;
+    background-repeat: repeat;
+    color: #d2d2d2;
     margin: 0;
 }
 input,
@@ -189,9 +192,17 @@ br.clr {
 	-ms-user-select: none;
 	user-select: none;
 }
+
+.txtBg, .colL, .colR > div {
+	background: rgba(51, 51, 51, 0.7);
+	padding: 1px 5px 0 15px;
+	border-radius: 10px;
+	box-shadow: 4px 3px 18px rgba(0, 0, 0, 0.4);
+}
+
 .bigBtn {
 	display: block;
-	margin-top: 30px;
+	margin-top: 10px;
 	width: 150px;
 	padding: 9px 14px;
 	border-radius: 10px;

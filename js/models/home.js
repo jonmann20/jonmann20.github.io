@@ -10,10 +10,6 @@
                         twttr.widgets.load();
                     //}
                 });
-
-                jw.Utils.require("/js/plugins/jquery.cycle.lite.js", function (alreadyCreated) {
-                    $("#slideshow").cycle();
-                });
             }).swap();
 
             document.title = "Jon Wiedmann";
