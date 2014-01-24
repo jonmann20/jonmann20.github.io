@@ -1,8 +1,9 @@
 ﻿/*#region **** override browser elts ****/
 body {
+    background-color: #000;
     background-image: url(/img/jonBig.jpg);
     background-position: 51% 0%;
-    background-repeat: repeat;
+    background-repeat: repeat-y;
     color: #d2d2d2;
     margin: 0;
 }
