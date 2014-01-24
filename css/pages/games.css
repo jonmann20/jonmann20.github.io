@@ -6,6 +6,10 @@
 	margin-left: -30px;	
 }
 #divJonsQuest img,
-#divDungeon img {
+#divDungeon img,
+#divSeparate img {
 	box-shadow: none;
+}
+#divSeparate img {
+    width: 38px;
 }

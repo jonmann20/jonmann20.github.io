@@ -90,6 +90,7 @@ header nav a:hover span,
 header nav:first-child {
 	border-radius: 43px 0;	
 	text-indent: 9px;
+    padding-bottom: 20px;
 }
 header nav:first-child span {
 	float: none;
@@ -170,15 +171,16 @@ header nav ul #cube {
 	margin-top: 40px;
 	overflow: hidden;
 	padding-left: 4px;
+    min-height: 155px;
 }
 .colL {
 	float: left;
-	width: 38%;
+	width: 37%;
 	min-width: 121px;
 }
 .colR {
 	float: right;
-	width: 59%;
+	width: 58%;
 	padding-bottom: 13px;
 }
 .colR > div {
@@ -307,7 +309,7 @@ footer .footR {
 }
 @media screen and (max-width: 1182px) {
   	.colL {
-  		width: 100% !important;
+  		width: 96% !important;
 	}
 	.colR {
 		float: left;
@@ -327,7 +329,7 @@ footer .footR {
   		margin-bottom: 15px;
   	}
 }
-@media screen and (max-width: 1140px) {
+@media screen and (max-width: 1170px) {
     footer div {
         width: 96%;
     }
@@ -337,7 +339,7 @@ footer .footR {
 }
 @media screen and (max-width: 745px) { /* vertical footer */
     footer {
-        height: 366px;
+        height: 372px;
     }
     footer a {
 		display: block;
