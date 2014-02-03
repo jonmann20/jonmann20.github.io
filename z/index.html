@@ -1,136 +1,154 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-		<title>Zelda Reservanted</title>
-		<script type='text/javascript' src='https://ssl-webplayer.unity3d.com/download_webplayer-3.x/3.0/uo/jquery.min.js'></script>
-		<script type="text/javascript">
-		<!--
-		var unityObjectUrl = "http://webplayer.unity3d.com/download_webplayer-3.x/3.0/uo/UnityObject2.js";
-		if (document.location.protocol == 'https:')
-			unityObjectUrl = unityObjectUrl.replace("http://", "https://ssl-");
-		document.write('<script type="text\/javascript" src="' + unityObjectUrl + '"><\/script>');
-		-->
-		</script>
-		<script type="text/javascript">
-		<!--
-			var config = {
-				width: 896, 
-				height: 840,
-				params: { enableDebugging:"0" }
-				
-			};
-			var u = new UnityObject2(config);
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>Zelda Reservanted</title>
+	<script type='text/javascript' src='https://ssl-webplayer.unity3d.com/download_webplayer-3.x/3.0/uo/jquery.min.js'></script>
+	<script type="text/javascript">
+	<!--
+	var unityObjectUrl = "http://webplayer.unity3d.com/download_webplayer-3.x/3.0/uo/UnityObject2.js";
+	if (document.location.protocol == 'https:')
+		unityObjectUrl = unityObjectUrl.replace("http://", "https://ssl-");
+	document.write('<script type="text\/javascript" src="' + unityObjectUrl + '"><\/script>');
+	-->
+	</script>
+	<script type="text/javascript">
+	<!--
+		var config = {
+			width: 768, 
+			height: 720,
+			params: { enableDebugging:"0" }
+			
+		};
+		var u = new UnityObject2(config);
 
-			jQuery(function() {
+		jQuery(function() {
 
-				var $missingScreen = jQuery("#unityPlayer").find(".missing");
-				var $brokenScreen = jQuery("#unityPlayer").find(".broken");
-				$missingScreen.hide();
-				$brokenScreen.hide();
-				
-				u.observeProgress(function (progress) {
-					switch(progress.pluginStatus) {
-						case "broken":
-							$brokenScreen.find("a").click(function (e) {
-								e.stopPropagation();
-								e.preventDefault();
-								u.installPlugin();
-								return false;
-							});
-							$brokenScreen.show();
-						break;
-						case "missing":
-							$missingScreen.find("a").click(function (e) {
-								e.stopPropagation();
-								e.preventDefault();
-								u.installPlugin();
-								return false;
-							});
-							$missingScreen.show();
-						break;
-						case "installed":
-							$missingScreen.remove();
-						break;
-						case "first":
-						break;
-					}
-				});
-				u.initPlugin(jQuery("#unityPlayer")[0], "inde.unity3d");
+			var $missingScreen = jQuery("#unityPlayer").find(".missing");
+			var $brokenScreen = jQuery("#unityPlayer").find(".broken");
+			$missingScreen.hide();
+			$brokenScreen.hide();
+			
+			u.observeProgress(function (progress) {
+				switch(progress.pluginStatus) {
+					case "broken":
+						$brokenScreen.find("a").click(function (e) {
+							e.stopPropagation();
+							e.preventDefault();
+							u.installPlugin();
+							return false;
+						});
+						$brokenScreen.show();
+					break;
+					case "missing":
+						$missingScreen.find("a").click(function (e) {
+							e.stopPropagation();
+							e.preventDefault();
+							u.installPlugin();
+							return false;
+						});
+						$missingScreen.show();
+					break;
+					case "installed":
+						$missingScreen.remove();
+					break;
+					case "first":
+					break;
+				}
 			});
-		-->
-		</script>
-		<style type="text/css">
-		<!--
-		body {
-			font-family: Helvetica, Verdana, Arial, sans-serif;
-			background-color: white;
-			color: black;
-			text-align: center;
-		}
-		a:link, a:visited {
-			color: #000;
-		}
-		a:active, a:hover {
-			color: #666;
-		}
-		p.header {
-			font-size: small;
-		}
-		p.header span {
-			font-weight: bold;
-		}
-		p.footer {
-			font-size: x-small;
-		}
-		div.content {
-			margin: auto;
-			width: 896px;
-		}
-		div.broken,
-		div.missing {
-			margin: auto;
-			position: relative;
-			top: 50%;
-			width: 193px;
-		}
-		div.broken a,
-		div.missing a {
-			height: 63px;
-			position: relative;
-			top: -31px;
-		}
-		div.broken img,
-		div.missing img {
-			border-width: 0px;
-		}
-		div.broken {
-			display: none;
-		}
-		div#unityPlayer {
-			cursor: default;
-            height: 840px;
-            width: 896px;
-		}
-		-->
-		</style>
-	</head>
-	<body>
-		<p class="header">The Legend of Zelda: Reservanted</p>
-		<div class="content">
-			<div id="unityPlayer">
-				<div class="missing">
-					<a href="http://unity3d.com/webplayer/" title="Unity Web Player. Install now!">
-						<img alt="Unity Web Player. Install now!" src="http://webplayer.unity3d.com/installation/getunity.png" width="193" height="63" />
-					</a>
-				</div>
-				<div class="broken">
-					<a href="http://unity3d.com/webplayer/" title="Unity Web Player. Install now! Restart your browser after install.">
-						<img alt="Unity Web Player. Install now! Restart your browser after install." src="http://webplayer.unity3d.com/installation/getunityrestart.png" width="193" height="63" />
-					</a>
-				</div>
+			u.initPlugin(jQuery("#unityPlayer")[0], "inde.unity3d");
+		});
+	-->
+	</script>
+	<style>
+	<!--
+	body {
+		font-family: Helvetica, Verdana, Arial, sans-serif;
+		background-color: #ccc;
+	}
+	div.content {
+		margin: 0 0 0 7%;
+		width: 768px;
+	}
+	div.broken,
+	div.missing {
+		margin: auto;
+		position: relative;
+		top: 50%;
+		width: 193px;
+	}
+	div.broken a,
+	div.missing a {
+		height: 63px;
+		position: relative;
+		top: -31px;
+	}
+	div.broken img,
+	div.missing img {
+		border-width: 0px;
+	}
+	div.broken {
+		display: none;
+	}
+	div#unityPlayer {
+		cursor: default;
+		height: 720px;
+		width: 768px;
+	}
+	-->
+	
+	h1 {
+		margin-bottom: 10px;
+		font-size: 1.5em;
+	}
+	.right {
+		position: absolute;
+		right: 40px;
+		top: 25%;
+	}
+	
+	.right ul {
+		margin-top: 0;
+	}
+	.small {
+		font-size: x-small;
+	}
+	</style>
+</head>
+<body>
+	<div class="content">
+		<div id="unityPlayer">
+			<div class="missing">
+				<a href="http://unity3d.com/webplayer/" title="Unity Web Player. Install now!">
+					<img alt="Unity Web Player. Install now!" src="http://webplayer.unity3d.com/installation/getunity.png" width="193" height="63" />
+				</a>
+			</div>
+			<div class="broken">
+				<a href="http://unity3d.com/webplayer/" title="Unity Web Player. Install now! Restart your browser after install.">
+					<img alt="Unity Web Player. Install now! Restart your browser after install." src="http://webplayer.unity3d.com/installation/getunityrestart.png" width="193" height="63" />
+				</a>
 			</div>
 		</div>
-		<p class="footer">&laquo; created with <a href="http://unity3d.com/unity/" title="Go to unity3d.com">Unity</a> &raquo;</p>
-	</body>
+	</div>
+	
+	<div class="right">
+		<h1>The Legend of Zelda</h1>
+		<p class="small">May take awhile to load (try hitting F12)</p>
+		
+		<h1>Controls</h1>
+		<ul>
+			<li>WASD or keys movement</li>
+			<li>J or Z attack  (NES a)</li>
+			<li>K or X special attack (NES b)</li>
+			<li>Enter (NES start)</li>
+			<li>Spacebar (NES select)</li>
+		</ul>
+		
+		<h1>Credits</h1>
+		<ul>
+			<li>Austin Yarger: <a href="mailto:ayarger@umich.edu" target="_blank">ayarger@umich.edu</a></li>
+			<li>Jon Wiedmann: <a href="mailto:jonwied@umich.edu" target="_blank">jonwied@umich.edu</a></li>
+		</ul>
+	</div>
+</body>
 </html>
