@@ -13,3 +13,7 @@
 #divSeparate img {
     width: 38px;
 }
+#divSeparate .bigImg {
+    width: 375px;
+    margin-top: 14px;
+}
