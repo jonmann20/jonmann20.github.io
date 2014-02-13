@@ -150,8 +150,8 @@ header nav ul #cube {
 .nav2 .playgroundNav li:nth-child(2) a,
 .nav3 .playgroundNav li:nth-child(3) a,
 .nav4 .playgroundNav li:nth-child(4) a,
-.nav5 .playgroundNav li:nth-child(5) a,
-.nav6 .playgroundNav li:nth-child(6) a {
+.nav6 .playgroundNav li:nth-child(5) a/*,
+.nav6 .playgroundNav li:nth-child(6) a*/ {
 	color: #ff6a00 !important;
 	-webkit-text-stroke: 1px #ff6a00;
 	text-stroke: 1px #ff6a00;
