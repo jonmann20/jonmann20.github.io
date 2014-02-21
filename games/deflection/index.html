@@ -15,8 +15,8 @@
 	<script type="text/javascript">
 	    <!--
 		    var config = {
-			    width: 816, 
-			    height: 459,
+			    width: 1008, 
+			    height: 567,
 			    params: { enableDebugging:"0" }
 			
 		    };
@@ -63,23 +63,29 @@
 	<style>
 	    body {
 		    font-family: Helvetica, Verdana, Arial, sans-serif;
-		    background-color: #f2f2f2;
+		    background-color: #333;
             font-size: 0.88em;
+            color: #e1e1e1;
 	    }
+        a {
+            color: #aaa;
+        }
         .wrap {
             width: 1100px;
             margin: 15px auto 0;
         }
 	    .content {
-		    width: 816px;
+		    width: 1008px;
             float: left;
-            box-shadow: 0 5px 18px #999;
+            box-shadow: 0 5px 18px #111;
             background: #fff;
 	    }
         .right {
-			width: 256px;
-            float: right;
-			margin-right: -10px;
+            clear: both;
+            float: none;
+            margin: 0 auto;
+            width: 310px;
+            padding-top: 12px;
         }
 
 	    .broken,
@@ -104,13 +110,13 @@
 	    }
         #unityPlayer {
             cursor: default;
-            width: 816px;
-            height: 459px;
+            width: 1008px;
+            height: 567px;
         }
 
 
 	    h1, h2, h3 {
-            color: #333;
+            color: #e1e1e1;
 	    }
 	    h1 {
 		    margin-bottom: 10px;
@@ -122,7 +128,6 @@
         }
 	    .right ul {
 		    margin-top: 0;
-			padding-left: 10px;
 	    }
         .right ul span {
             display: inline-block;
@@ -143,19 +148,6 @@
         }
         .disclaimer {
             width: 320px;
-        }
-
-        @media (max-width: 1125px){
-            .wrap {
-                width: 816px;
-            }
-            .right {
-                clear: both;
-                float: none;
-                margin: 0 auto;
-                width: 310px;
-                padding-top: 12px;
-            }
         }
 	</style>
 </head>
