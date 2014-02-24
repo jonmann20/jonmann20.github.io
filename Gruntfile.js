@@ -10,8 +10,8 @@ module.exports = function(grunt) {
 	        server: {
 	            options: {
 	                hostname: "jon",
-	                port: 80
-	                //open: true
+	                port: 80,
+	                open: true
 	            }
 	        }
 	    },
