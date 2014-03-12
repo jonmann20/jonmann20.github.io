@@ -31,6 +31,7 @@ header {
 	float: left;
 	margin-right: 55px;
 	margin-bottom: 40px;
+    position: fixed;
 }
 header nav {
 	font-family: "Open Sans Condensed", "Verdana", sans-serif;
@@ -170,13 +171,17 @@ header nav ul #cube {
 .main {
 	margin-top: 40px;
 	overflow: hidden;
-	padding-left: 4px;
+	padding-left: 215px;
     min-height: 155px;
 }
 .colL {
 	float: left;
 	width: 37%;
 	min-width: 121px;
+    margin-bottom: 15px; /* for box shadow */
+}
+.colL ul {
+    font-size: 1.15em;
 }
 .colR {
 	float: right;
@@ -193,6 +198,11 @@ header nav ul #cube {
 
 /*#region ************** Footer **************/
 footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+.outFooter {
 	position: relative;
 	bottom: -24px;
     margin-top: -94px;
@@ -203,8 +213,8 @@ footer {
     background: rgb(58, 57, 58);
     border-top: 1px solid rgb(70, 69, 70);
 }
-footer:before,
-footer:after {
+.outFooter:before,
+.outFooter:after {
     content: "";
     position: absolute;
     top: -10px;
@@ -214,11 +224,11 @@ footer:after {
     height: 100%;
     z-index: -1;
 }
-footer:before { /* bottom of stack */
+.outFooter:before { /* bottom of stack */
     background: rgba(50, 49, 50, 0.45);
     top: -20px;
 }
-footer div {
+.inFooter {
 	width: 70%;
 	margin: 0 auto;
 }
@@ -309,7 +319,8 @@ footer .footR {
 }
 @media screen and (max-width: 1182px) {
   	.colL {
-  		width: 96% !important;
+  		width: 95% !important;
+          margin-bottom: 0;
 	}
 	.colR {
 		float: left;
@@ -330,7 +341,7 @@ footer .footR {
   	}
 }
 @media screen and (max-width: 1170px) {
-    footer div {
+    .inFooter {
         width: 96%;
     }
     footer a {
@@ -338,12 +349,21 @@ footer .footR {
 	}
 }
 @media screen and (max-width: 745px) { /* vertical footer */
+    header {
+        position: static;
+    }
     footer {
+        position: static; /* broken for body height > 100%*/
+    }
+    .outFooter {
         height: 372px;
+    }
+    .inFooter {
+        margin-top: -4px;
     }
     footer a {
 		display: block;
-		margin-bottom: 10px !important;
+		margin-bottom: 8px !important;
         font-size: 24px;
         text-align: right;
 	}
@@ -364,6 +384,7 @@ footer .footR {
 	}
 	footer .footContact {
 		margin-right: 0 !important;
+        margin-bottom: 25px !important;
 	}
 }
 @media screen and (max-width: 610px) {
