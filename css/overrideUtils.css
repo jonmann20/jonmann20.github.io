@@ -1,13 +1,13 @@
 ﻿/*#region **** override browser elts ****/
 body {
-    background-color: #000;
+    background-color: #bbb;
     background-image: url(/img/jonBig.jpg);
-    background-position-x: 51% !important;
+    background-position-x: 51% !important; /* doesn't work in firfox */
     background-repeat: repeat-y;
+    background-attachment: fixed;
+    
     color: #d2d2d2;
     margin: 0;
-    position: relative;
-    background-attachment: fixed;
 }
 input,
 textarea {
@@ -195,11 +195,17 @@ br.clr {
 	user-select: none;
 }
 
-.txtBg, .colL, .colR > div {
+.txtBg, .colL, 
+.colR > div,
+.twitter-timeline,
+.music .colR iframe {
 	background: rgba(51, 51, 51, 0.7);
-	padding: 1px 5px 0 15px;
+	padding: 1px 15px 5px 15px;
 	border-radius: 10px;
 	box-shadow: 4px 3px 18px rgba(0, 0, 0, 0.4);
+}
+.twitter-timeline, .music .colR iframe {
+    padding: 0;
 }
 
 .bigBtn {

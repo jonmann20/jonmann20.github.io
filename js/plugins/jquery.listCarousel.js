@@ -1,6 +1,5 @@
 ;(function($){
 	$.fn.listCarousel = function(options) {
-		
 		function fixFirstLetter(str, lower){
 			if(typeof(lower) !== "undefined")
 				return str.charAt(0).toLowerCase() + str.slice(1);
@@ -24,12 +23,13 @@
 		        $(this).append(" <span class='icon-link'></span>");
 
 		        $("#div" + active).fadeOut(options.speedOut);
-		        $("#div" + overID).fadeIn(options.speedIn);
+		        var div = $("#div" + overID).fadeIn(options.speedIn);
+
+		        jw.Main.fixColRHeight(div.height());
 
 		        active = overID;
 		    }
 		});
-
 	}
 	
 	$.fn.listCarousel.defaultOptions = {

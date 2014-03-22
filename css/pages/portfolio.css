@@ -1,18 +1,15 @@
 ﻿.bigBtn {
     margin-bottom: 20px;
 }
-#divEnlighten {
-    margin-bottom: 120px;
-}
 .whtImg {
     float: left;
     margin-right: 15px;
 }
 .whtEle {
-    margin-top: 50px;
+    margin-top: 70px;
 }
 .bigBtn {
-    width: 200px;
+    width: 240px;
 }
 .visit {
     float: left;
@@ -20,4 +17,6 @@
 }
 .enlSite {
     margin-top: 25px;
+    float: left;
+    clear: both;
 }

@@ -12,6 +12,35 @@
 
             jw.Routing.init();
             $(".dateYear").text(jw.Utils.getYear());
+
+
+            $(window).on("resize", function () {
+                var h = $(".colR > div:visible").height();
+                jw.Main.fixColRHeight(h);
+            });
+
+            $("header a").on("click", function () {
+                $(".main").height("auto");
+            });
+        },
+
+        fixColRHeight: function (h) {
+            var height = h + 120;
+
+            if($(window).width() <= 800){
+                height = 0;
+            }
+            else if ($(window).width() <= 1265) {
+                height += $(".colL").height() + 38; // colR margin-top + height
+            }
+            //console.log(height);
+
+            if(height == 0) {
+                $(".main").height("auto");
+            }
+            else {
+                $(".main").height(height);
+            }
         }
     }
 })();
@@ -22,9 +51,4 @@ $(function () {
     $("body").stellar({
         responsive: true
     });
-
-    //$(window).scroll(function(){
-    //    var scrolled = $(window).scrolltop();
-    //    $("body").css("top", -(scrolled * 0.06) + "px");
-    //});
 });

@@ -1,12 +1,4 @@
 /*#region ************** Global **************/
-html, 
-body {
-	height: 100%;
-    position: relative;
-    z-index: 0;
-    /*background: rgb(37, 30, 34);*/
-	/*background: radial-gradient(closest-side at 50% 36% , rgb(51, 51, 61), rgb(37, 30, 34));*/
-}
 body {
 	line-height: 1.25; 
 	font-size: 87.5%;
@@ -14,23 +6,17 @@ body {
 	color: #eaeaea;
 }
 .page {
-	position: relative;
 	max-width: 1520px; 
-	min-height: 100%;
 	margin: 0 auto;
 }
 .inner {
 	margin: 0 auto;
 	width: 88%;
-	min-height: 66em;
 }
 /*#endregion*/
 
 /*#region ************** Header **************/
 header {
-	float: left;
-	margin-right: 55px;
-	margin-bottom: 40px;
     position: fixed;
 }
 header nav {
@@ -42,7 +28,6 @@ header nav {
 	padding: 10px;
 	min-width: 165px;
 	border-radius: 0 43px;
-    position: relative;
     box-shadow: 0 0 8px 0 rgba(0,0,0,0.4);
 }
 header nav a,
@@ -151,8 +136,7 @@ header nav ul #cube {
 .nav2 .playgroundNav li:nth-child(2) a,
 .nav3 .playgroundNav li:nth-child(3) a,
 .nav4 .playgroundNav li:nth-child(4) a,
-.nav6 .playgroundNav li:nth-child(5) a/*,
-.nav6 .playgroundNav li:nth-child(6) a*/ {
+.nav6 .playgroundNav li:nth-child(5) a {
 	color: #ff6a00 !important;
 	-webkit-text-stroke: 1px #ff6a00;
 	text-stroke: 1px #ff6a00;
@@ -170,15 +154,13 @@ header nav ul #cube {
 /*#region *************** Main ***************/
 .main {
 	margin-top: 40px;
-	overflow: hidden;
 	padding-left: 215px;
-    min-height: 155px;
 }
 .colL {
 	float: left;
 	width: 37%;
 	min-width: 121px;
-    margin-bottom: 15px; /* for box shadow */
+    margin-bottom: 120px;
 }
 .colL ul {
     font-size: 1.15em;
@@ -202,6 +184,10 @@ footer {
     bottom: 0;
     width: 100%;
 }
+footer::before {
+    display: block;
+    height: 120px;
+}
 .outFooter {
 	position: relative;
 	bottom: -24px;
@@ -219,7 +205,7 @@ footer {
     position: absolute;
     top: -10px;
     left: 0;
-    background: rgb(50, 49, 50);
+    background: rgba(50, 49, 50, 0.78);
     width: 100%;
     height: 100%;
     z-index: -1;
@@ -311,16 +297,25 @@ footer .footR {
 /*#endregion*/
 
 /*#region ************ Responsive ************/
-@media screen and (max-width: 1325px) {
-	.home .colR {width: 56%;}
+@media screen and (max-width: 1350px) {
+    .inner {
+        width: 97%;
+	}
+    .main {
+        padding-left: 207px;
+    }
 }
 @media screen and (max-width: 1265px) {
-	.inner {width: 96%;}
-}
-@media screen and (max-width: 1182px) {
+	.inner {
+        width: 65%;
+	}
+    .main {
+        padding-left: 215px;
+    }
   	.colL {
-  		width: 95% !important;
-          margin-bottom: 0;
+  		width: 100% !important;
+        margin-bottom: 0;
+        max-width: 528px;
 	}
 	.colR {
 		float: left;
@@ -339,21 +334,49 @@ footer .footR {
   		width: 100%;
   		margin-bottom: 15px;
   	}
-}
-@media screen and (max-width: 1170px) {
-    .inFooter {
-        width: 96%;
-    }
     footer a {
 		margin: 0 !important;
 	}
+    .inFooter {
+        width: 96%;
+    }
 }
-@media screen and (max-width: 745px) { /* vertical footer */
+@media screen and (max-width: 1145px) {
+    .inner {width: 75%;}
+}
+@media screen and (max-width: 1065px) {
+    .inner {width: 85%;}
+}
+@media screen and (max-width: 920px) {
+    .inner {width: 95%;}
+     .main {padding-left: 207px;}
+}
+@media screen and (max-width: 800px) { /* vertical footer */
+    .inner {
+        width: 98%;
+    }
     header {
         position: static;
+        width: 100%;
+		float: none;
+		margin-top: 15px;
+    }
+    header nav {
+		width: 80%;
+		margin: 0 auto;
+	}
+	header nav a {
+		text-align: center;
+	}
+	header nav a span {
+		display: none;
+	}
+    .hdrNav2 {
+        margin-top: 22px;
     }
     footer {
-        position: static; /* broken for body height > 100%*/
+        position: static;
+        margin-top: 0;
     }
     .outFooter {
         height: 372px;
@@ -386,36 +409,27 @@ footer .footR {
 		margin-right: 0 !important;
         margin-bottom: 25px !important;
 	}
-}
-@media screen and (max-width: 610px) {
-	header { 
-		width: 100%;
-		float: none;
-		margin-top: 15px;
-	}
-	header nav {
-		width: 80%;
-		margin: 0 auto;
-	}
-	header nav a {
-		text-align: center;
-	}
-	header nav a span {
-		display: none;
-	}
-    .hdrNav2 {margin-top: 22px;}
+
 	.main {
 		text-align: center;
 		overflow: visible;
         padding-left: 0;
-        margin-top: 25px;
+        margin: 25px auto 0;
+        width: 77%;
+        padding-right: 28px;
 	}
+    .colL {
+        display: none;
+        max-width: 100%;
+    }
+    .home .colL, .music .colL {
+        display: block;
+    }
+    .home .colR {
+        padding-left: 2.5%;
+    }
 	.colL, .colR {
         float: none !important;
-		max-width: 100% !important;
-		width: 80% !important;
-        margin: 20px auto;
-        padding-bottom: 13px !important;
 	}
 	.music .colR {
 		border-top: 0;
@@ -424,8 +438,12 @@ footer .footR {
 		display: block;
 		width: 100%;
 		position: static;
-		margin-bottom: 45px;
+		margin-bottom: 20px;
+        max-width: 100%;
 	}
+    .absHover .colR > div:last-child {
+        margin-bottom: 100px;
+    }
 	#divDefault {
 		display: none !important;
 	}
@@ -439,13 +457,16 @@ footer .footR {
 	.bigBtn {
 		margin: 30px auto 0;
 	}
-    footer {
-        margin-top: 0;
+    .enlSite {
+        float: none !important;
     }
 }
 /*#endregion*/
 
 /*#region ************** Music ***************/
+.music .colR {
+    margin-bottom: 120px;
+}
 .bass .colR p {
 	margin-bottom: 10px;
 }
