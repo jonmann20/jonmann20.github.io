@@ -1,22 +1,24 @@
 part of dungeon;
 
-class Level_1{
-  GameObj wise;
-  Enemy fish;
-  Dialog dialog;
-  bool underground, transitionOver;
+class Level_1 {
+	GameObj wise;
+	Enemy fish;
+	Dialog dialog;
+	bool underground, transitionOver;
   
-  Level_1(){
-    dialog = new Dialog();
-    wise = new GameObj(HALFW, HALFH - 35, 30, 43, 'wiseMan.png');
-    fish = new Enemy(5, 'fishCard.png', 'Fish', HALFW, 90, 71, 40, 'fish.png');
+	String instr;
+  
+	Level_1(){
+    	dialog = new Dialog();
+    	wise = new GameObj(HALFW, HALFH - 35, 30, 43, 'wiseMan.png');
+    	fish = new Enemy(5, 'fishCard.png', 'Fish', HALFW, 90, 71, 40, 'fish.png');
     
-    underground = transitionOver = false;
-    p.movLocked = true;
-  }
+    	underground = transitionOver = false;
+    	p.movLocked = true;
+	}
   
   /**************** Update ****************/
-  void update(){
+  void Update(){
     if(level.isCutscene)
       updateCutscene();
     else if(fish.captured){
@@ -70,55 +72,56 @@ class Level_1{
     }
   }
   
-  /**************** Render ****************/
-  void render(){
-    level.drawBg();
+	/**************** Render ****************/
+	void Render(){
+    	level.drawBg();
     
-    if(level.isCutscene)
-      drawCutscene();
-    else{
-      if(!transitionOver){
-        stairs.drawD(FULLW - 60, 70);
-      }
-      else{// underground
-        if(util.flashText(11, 'FIGHT')){ // done flashing text; TODO: hide item's during text flash
-          p.movLocked = false;
-          drawUnderground();
-        }
-      }// end underground
-      
-    }// end !isCutscene
-  }
+		if(level.isCutscene){
+			drawCutscene();
+		}
+		else {
+			if(!transitionOver){
+		    	stairs.drawD(FULLW - 60, 70);
+		  	}
+		  	else {// underground
+				if(util.flashText(11, 'FIGHT')){ // done flashing text; TODO: hide item's during text flash
+		      		p.movLocked = false;
+		      		drawUnderground();
+		    	}
+		  	}// end underground 
+		}// end !isCutscene
+	}
   
-  void drawInstruction(String str){
-    ctx.font = "8px 'Press Start 2P'";
-    ctx.fillStyle = '#ccc';
-    ctx.fillText(str, 10, FULLH - 10);
-  }
+	void OnGUI(){
+		if(instr != null){
+			ctx.font = "8px 'Press Start 2P'";
+			ctx.fillStyle = "#ccc";
+			ctx.fillText(instr, 10, FULLH - 10);
+		}
+	}
   
-  void drawUnderground(){
-    if(!fish.captured){
-      fish.draw();
-      fish.drawHealth();
+	void drawUnderground(){
+		if(!fish.captured){
+			fish.draw();
+			fish.drawHealth();
       
-      if(fish.health > 0){
-        drawInstruction('USE SPACEBAR');
-        fish.animate = true;
-      }
-      else{
-        drawInstruction('USE SHIFT');
-        fish.animate = false;
-      }
-    }
-    else if(fish.health <= 0){
-      
-      if(fish.captured){
-        fish.drawCard();
-        
-        p.health = p.maxHealth;
-      }
-    }
-  }
+			if(fish.health > 0){
+				instr = "USE SPACEBAR";
+				fish.animate = true;
+	      	}
+	      	else{
+	        	instr = "USE SHIFT";
+	        	fish.animate = false;
+	      	}
+    	}
+    	else if(fish.health <= 0){  
+      		if(fish.captured){
+        		fish.drawCard();
+    
+	        	p.health = p.maxHealth;
+    		}
+    	}
+	}
   
   void canvasTransition(){
     p.movLocked = true;

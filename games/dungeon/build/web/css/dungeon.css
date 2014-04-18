@@ -1,0 +1,27 @@
+﻿html {
+	background: #000;
+	height: auto;
+}
+.dungeon {
+	background: #000;
+	font-family: 'Press Start 2P', cursive;
+}
+.dungeon .canvasWrap {
+  	margin: 0 auto;
+  	/*transition: all 3s ease-in-out;
+  	-webkit-transform: scale(0);*/
+}
+.dungeon .cWrapTransition{
+  	/*-webkit-transform: scale(1);*/
+}
+.dungeon canvas{
+  	width: 100%;
+  	height: 100%;
+    transition: opacity 0.5s;
+}
+.dungeon .preTransition{
+    opacity: 1;
+}
+.dungeon .duringTransition {
+    opacity: 0.01;
+}

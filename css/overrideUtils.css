@@ -194,6 +194,9 @@ br.clr {
 	-ms-user-select: none;
 	user-select: none;
 }
+.noBullet {
+    list-style-type: none;
+}
 
 .txtBg, .colL, 
 .colR > div,
