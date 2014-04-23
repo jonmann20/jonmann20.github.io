@@ -19,7 +19,9 @@ part "levels/arena.dart";
 part "hud.dart";
 
 // globals
-var cWrap, canvasListener, canvas, ctx;
+var cWrap, canvasListener;
+CanvasElement canvas;
+CanvasRenderingContext2D ctx;
 Keyboard key;
 Utils util;
 Game game;

@@ -52,7 +52,7 @@ class Level {
 	        	level1.Update();
 	        	break;
 	      	case 2:
-	        	arena.update();
+	        	arena.Update();
 	        	break;
     	}
   	}
@@ -63,7 +63,7 @@ class Level {
         		level1.Render();
         		break;
       		case 2:
-        		arena.render();
+        		arena.Render();
         		break;
     	}
   	}

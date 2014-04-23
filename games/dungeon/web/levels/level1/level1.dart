@@ -10,45 +10,44 @@ class Level_1 {
   
 	Level_1(){
     	dialog = new Dialog();
-    	wise = new GameObj(HALFW, HALFH - 35, 30, 43, 'wiseMan.png');
-    	fish = new Enemy(5, 'fishCard.png', 'Fish', HALFW, 90, 71, 40, 'fish.png');
+    	wise = new GameObj(HALFW, HALFH - 35, 30, 43, "wiseMan.png");
+    	fish = new Enemy(5, "fishCard.png", "Fish", HALFW, 90, 71, 40, "fish.png");
     
     	underground = transitionOver = false;
     	p.movLocked = true;
 	}
   
-  /**************** Update ****************/
-  void Update(){
-    if(level.isCutscene)
-      updateCutscene();
-    else if(fish.captured){
-    
-    }
-    else if(!underground){
-      if(util.checkCollision(p, stairs, 12)){
-        underground = true;
-        canvasTransition();
-      }
-    }
-    else if(underground){
-      if(fish.health > 0){
-        if(util.checkCollision(p, fish, 3)){
-          if(!p.invincible){
-            p.hit();
-          }
-        }
-      }
-      else{// fish is dead
-          if(key.lastKeyUp == KeyCode.SHIFT){
-            key.resetKeys();
-            fish.captured = true;
-          }
-      }
-      
-      fish.update();
-    }
-       
-  }
+	void Update(){
+		if(level.isCutscene){
+	    	updateCutscene();
+	    }
+	    else if(fish.captured){
+	    
+	    }
+	    else if(!underground){
+	    	if(util.checkCollision(p, stairs, 12)){
+	        	underground = true;
+	        	canvasTransition();
+	      	}
+	    }
+	    else if(underground){
+	    	if(fish.health > 0){
+	        	if(util.checkCollision(p, fish, 3)){
+	          		if(!p.invincible){
+	            		p.hit();
+	          		}
+	        	}
+	      	}
+	      	else {// fish is dead
+	     		if(key.lastKeyUp == KeyCode.SHIFT){
+	        		key.resetKeys();
+	            	fish.captured = true;
+	        	}
+	      	}
+	      
+	      	fish.update();
+	    }    
+	}
   
   void updateCutscene(){
     if(key.lastKeyDown == KeyCode.ENTER){
@@ -84,7 +83,7 @@ class Level_1 {
 		    	stairs.drawD(FULLW - 60, 70);
 		  	}
 		  	else {// underground
-				if(util.flashText(11, 'FIGHT')){ // done flashing text; TODO: hide item's during text flash
+				if(util.flashTxt(11, "FIGHT")){ // done flashing text; TODO: hide item's during text flash
 		      		p.movLocked = false;
 		      		drawUnderground();
 		    	}
@@ -149,10 +148,10 @@ class Level_1 {
     // draw dialog/device
     if(p.movLocked){ 
       if(!p.device.usable)
-        util.blinkText(10, wise.x + 160, wise.y + 25);
+        util.blinkTxt(10, wise.x + 160, wise.y + 25);
       else{
         p.device.drawD(p.x+p.w/2-p.device.w/2, p.y-p.device.h-4, p.device.imgU);
-        util.blinkText(10, p.x + 160, p.y + 25);
+        util.blinkTxt(10, p.x + 160, p.y + 25);
       }
     }
     else if(!p.device.usable){
@@ -167,12 +166,12 @@ class Level_1 {
     ctx.font = "11px 'Press Start 2P'";
     dialog.dialogW = ctx.measureText(dialog.dialog[dialog.dialogLine]).width;
     
-    ctx.fillStyle = '#000';                                                   // dialog box
+    ctx.fillStyle = "#000";                                                   // dialog box
     ctx.fillRect(wise.x + 24, wise.y - 48, dialog.dialogW + 7, 42);
-    ctx.fillStyle = '#e1e1e1';
+    ctx.fillStyle = "#e1e1e1";
     ctx.fillRect(wise.x + 20, wise.y - 53.5, dialog.dialogW + 7, 42);
     
-    ctx.fillStyle = '#000';                                                   // dialog
+    ctx.fillStyle = "#000";                                                   // dialog
     ctx.fillText(dialog.dialog[dialog.dialogLine], wise.x + 24, wise.y - 25);
   }
 }

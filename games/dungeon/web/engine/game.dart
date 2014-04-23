@@ -20,8 +20,8 @@ class Game {
 		dt = oldTime = fps = curLvl = 0;
 
 		resizeGame();
-		window.onResize.listen((e){resizeGame();});
-		window.onDeviceOrientation.listen((e){resizeGame();});
+		window.onResize.listen((e) => resizeGame());
+		window.onDeviceOrientation.listen((e) => resizeGame());
 
 		key = new Keyboard();
 		util = new Utils();
@@ -34,8 +34,9 @@ class Game {
 		p.y = overworld.lvlArr[overworld.ovrCurLvl].y + overworld.fixY;
 
 		lvlSelected = DEBUG_LVL;
-		if(DEBUG_LVL)
+		if(DEBUG_LVL){
 			overworld.initLevel();
+		}
 
 		new StartScreen();
   	}
@@ -46,7 +47,7 @@ class Game {
 
 	*/
 	void resizeGame(){
-		num maxScaleFactor = 70; // 60 ==> 540p
+		num maxScaleFactor = 64; // 60 ==> 540p
 		num scaledW = maxScaleFactor*16,
 		    scaledH = maxScaleFactor*9;
 
@@ -84,7 +85,6 @@ class Game {
 		window.requestAnimationFrame(gameLoop);
 	}
 
-	/**************** Update **************/
 	void Update(){
 		if(!lvlSelected || curLvl == 0){
 			overworld.Update();
@@ -95,7 +95,6 @@ class Game {
 		}
 	}
 
-	/**************** Render **************/
 	void Render(){
 		if(!lvlSelected || curLvl == 0){
 			overworld.Render();
@@ -118,9 +117,10 @@ class Game {
 		dt = (t-old)/1000;
 
 		if(t.toInt() % 12 == 0){
-		  fps = (1~/dt);
-		  fpsHolder.text = "Dungeon: $fps fps";
+			fps = (1~/dt);
+			fpsHolder.text = "Dungeon: $fps fps";
 		}
+		
 		oldTime = t;
 	}
 }
