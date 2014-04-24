@@ -63,7 +63,7 @@
     <style>
         body {
             font-family: Helvetica, Verdana, Arial, sans-serif;
-            background-color: #b2b2b2;
+            background-color: #ccc;
             font-size: 0.88em;
         }
         .wrap {
@@ -80,7 +80,7 @@
             clear: both;
             float: none;
             margin: 0 auto;
-            width: 330px;
+            width: 550px;
             padding-top: 12px;
         }
         .right ul {
@@ -94,9 +94,9 @@
         }
         .broken,
         .missing {
-            margin: auto;
+            margin: 0 auto;
             position: relative;
-            top: 50%;
+            top: -190px;
             width: 193px;
         }
         .broken a,
@@ -148,6 +148,20 @@
         .disclaimer {
             width: 320px;
         }
+
+
+        /* controls */
+        table {
+            border: 1px solid #999;
+        }
+        .tHeader {
+            background: #bbb;
+        }
+        td {
+            border: 1px solid #999;
+            width: 400px;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -179,20 +193,78 @@
             <h1>Defend Thy Castle</h1>
 
             <h2>Controls</h2>
-            <ul class="contr">
-                <li><span>Left Stick:</span>WASD</li>
-                <li><span>Right Stick:</span>mouse</li>
-                <li><span>X:</span>spacebar</li>
-                <li><span>square:</span>r</li>
-                <li><span>triangle:</span>backspace</li>
-                <li><span>R3/circle:</span>???</li>
-                <li><span>R1:</span>left click</li>
-                <li><span>L1:</span>right click</li>
-                <li><span>L2:</span>toggle inventory left</li>
-                <li><span>R2:</span>toggle inventory right</li>
-                <li><span>SELECT</span>tab</li>
-                <li><span>START:</span>Enter</li>
-            </ul>
+            <table>
+                <tr class="tHeader">
+                    <td>Action</td>
+                    <td>GamePad</td>
+                    <td>Keyboard/Mouse</td>
+                </tr>
+                <tr>
+                    <td>Movement</td>
+                    <td>Left Analog Stick</td>
+                    <td>WASD</td>
+                </tr>
+                <tr>
+                    <td>Camera</td>
+                    <td>Right Analog Stick</td>
+                    <td>Mouse</td>
+                </tr>
+                <tr>
+                    <td>Jump</td>
+                    <td>X</td>
+                    <td>Spacebar</td>
+                </tr>
+                <tr>
+                    <td>Action</td>
+                    <td>Square</td>
+                    <td>R</td>
+                </tr>
+                <tr>
+                    <td>Melee</td>
+                    <td>R3/Circle</td>
+                    <td>Left Shift</td>
+                </tr>
+                <tr>
+                    <td>Fire</td>
+                    <td>R1</td>
+                    <td>Left click</td>
+                </tr>
+                <tr>
+                    <td>Use Inventory Item</td>
+                    <td>L1/Triangle</td>
+                    <td>Right click</td>
+                </tr>
+                <tr>
+                    <td>Toggle inventory left</td>
+                    <td>L2</td>
+                    <td>Q</td>
+                </tr>
+                <tr>
+                    <td>Toggle inventory right</td>
+                    <td>R2</td>
+                    <td>E</td>
+                </tr>
+                <tr>
+                    <td>Highlight inventory left</td>
+                    <td>Dpad left</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>Highlight inventory center</td>
+                    <td>Dpad down</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>Highlight inventory right</td>
+                    <td>Dpad right</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>Show Leaderboard</td>
+                    <td>Select/Start</td>
+                    <td>Tab/Enter</td>
+                </tr>
+            </table>
 
             <h3>Credits</h3>
             <ul>
