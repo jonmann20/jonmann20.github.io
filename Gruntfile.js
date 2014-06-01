@@ -1,7 +1,5 @@
 module.exports = function(grunt) {
 
-	var pth = "games/jonsQuest/js/";
-
 	// configure tasks
 	grunt.initConfig({
 	    clean: ["css/min", "js/min"],
@@ -45,34 +43,6 @@ module.exports = function(grunt) {
                     "games/common/js/view/GameView.js",
                     "games/common/js/view/TitleView.js",
                     "games/common/js/view/GameSaveView.js"
-	            ]
-	        },
-
-	        pageJonsQuestJs: {
-	            dest: "js/min/pageJonsQuest.js",
-	            src: [
-                    "js/plugins/jquery.colorbox-min.js",
-                    pth + "physics/SAT.js",
-	                pth + "utils.js",
-	        		pth + "audio/audio.js",
-	        		pth + "graphics/graphics.js",
-	        		pth + "physics/physics.js",
-	        		pth + "engine/gameObject.js",
-	        		pth + "engine/gameItem.js",
-                    pth + "engine/hud.js",
-	        		pth + "enemy/enemy.js",
-	        		pth + "level/level.js",
-                    pth + "level/lvlComplete.js",
-                    pth + "level/startScreen.js",
-	        		pth + "level/level1.js",
-                    pth + "level/level2.js",        // TODO load new levels/assets dynamically?
-                    pth + "level/level3.js",
-	        		pth + "engine/game.js",
-	        		pth + "hero/hero.js",
-	        		pth + "hero/heroGraphics.js",
-	        		pth + "hero/heroPhysics.js",
-	        		pth + "hero/heroInput.js",
-	        		pth + "main.js"
 	            ]
 	        },
 
@@ -120,11 +90,6 @@ module.exports = function(grunt) {
 	        //    tasks: ["concat_sourcemap:gamesCommonJs", "concat_sourcemap:gamesCommonJs]
 	        //}
 
-	        pageJonsQuestJs: {
-	            files: ["<%= concat_sourcemap.pageJonsQuestJs.src %>"],
-	            tasks: ["concat_sourcemap:pageJonsQuestJs"]
-	        },
-
 	        pageDormanticide: {
 	            files: ["<%= concat_sourcemap.pageDormanticide.src %>"],
 	            tasks: ["concat_sourcemap:pageDormanticide"]
@@ -145,12 +110,6 @@ module.exports = function(grunt) {
 	        masterJs: {
 	            files: {
 	                "<%= concat_sourcemap.masterJs.dest %>": ["js/analytics.js", "js/clientSideLogging", "<%= concat_sourcemap.masterJs.src %>"]
-	            }
-	        },
-
-	        pageJonsQuestJs: {
-	            files: {
-	                "<%= concat_sourcemap.pageJonsQuestJs.dest %>": ["js/analytics.js", "js/clientSideLogging", "<%= concat_sourcemap.pageJonsQuestJs.src %>"]
 	            }
 	        },
 
