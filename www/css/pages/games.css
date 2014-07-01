@@ -1,0 +1,19 @@
+﻿.games .techUsed {
+	margin-top: 26px;
+    margin-bottom: 22px;
+}
+.games .techUsed .lh {
+	margin-left: -30px;	
+}
+#divJonsQuest img,
+#divDungeon img,
+#divSeparate img {
+	box-shadow: none;
+}
+#divSeparate img {
+    width: 38px;
+}
+#divSeparate .bigImg {
+    width: 375px;
+    margin-top: 14px;
+}

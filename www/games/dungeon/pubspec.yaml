@@ -1,0 +1,10 @@
+name: Dungeon
+version: 0.0.0
+author: Jon Wiedmann
+description: A top down RPG.
+homepage: http://jonmann20.github.io/games/dungeon
+dependencies:
+  browser: any
+transformers:
+- $dart2js:
+    minify: true

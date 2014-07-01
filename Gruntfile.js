@@ -10,6 +10,7 @@ module.exports = function(grunt) {
 	                hostname: "jon",
 	                port: 80,
 	                open: true
+                    //base: "www"
 	            }
 	        }
 	    },
@@ -128,10 +129,58 @@ module.exports = function(grunt) {
 
 	    cssmin: {
 	        "<%= concat_sourcemap.css.dest %>": "<%= concat_sourcemap.css.src %>"
+	    },
+
+	    copy: {
+	        everything: {
+	            files: [{
+	                expand: true,
+                    cwd: "www",
+                    src: ["**"],
+                    dest: "./"
+	            }]
+	        }
+	    },
+
+	    htmlmin: {
+	        options: {
+	            removeComments: true,
+	            collapseWhitespace: true,
+	            removeAttributeQuotes: true,
+	            removeEmptyAttributes: true,
+	            minifyJS: true,
+                minifyCSS: true
+	        },
+
+	        allHtml: {
+	            files: [{
+                    expand: true,
+                    cwd: "www/",
+	                src: ["**/*.html"],
+                    dest: "./"
+	            }]
+	        }
+	    },
+
+	    imagemin: {
+	        allImages: {
+	            options: {
+                    optimizationLevel: 3,
+	            },
+
+	            files: [{
+	                expand: true,
+	                cwd: "www/img",
+	                src: ["**/*.{png,jpg,gif,ico}"],
+                    dest: "./img"
+	            }]
+	        }
+
+            // TODO: game images
+
 	    }
 
-        // TODO: imagemin, htmlmin + copy, bower (plugin manager - e.g. jQuery, sammy.js, ... )
-
+        // TODO: bower (plugin manager - e.g. jQuery, sammy.js, ...)
 	});
 
 
@@ -144,15 +193,13 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks("grunt-contrib-cssmin");
 	grunt.loadNpmTasks("grunt-contrib-clean");
     grunt.loadNpmTasks("grunt-contrib-watch");
-	grunt.loadNpmTasks("grunt-concat-sourcemap");
+    grunt.loadNpmTasks("grunt-concat-sourcemap");       // grunt-contrib-concat + sourcemaps almost implemented: https://github.com/gruntjs/grunt-contrib-concat/pull/59
+    grunt.loadNpmTasks("grunt-contrib-htmlmin");
+    grunt.loadNpmTasks("grunt-contrib-copy");
+    grunt.loadNpmTasks("grunt-contrib-imagemin");
   
     // task runner options
-	grunt.registerTask("default", ["concat_sourcemap", "connect", "watch"]);
+	grunt.registerTask("default", ["concat_sourcemap", "copy", "htmlmin", "imagemin", "connect", "watch"]);
 	grunt.registerTask("srv", ["connect", "watch"]);
-	grunt.registerTask("prd", ["uglify", "cssmin"]);
+	grunt.registerTask("prd", ["uglify", "cssmin", "copy", "htmlmin", "imagemin"]);
 };
-
-
-// NOTES:
-//
-// "gets/all_subDirectories/**/*.js"
