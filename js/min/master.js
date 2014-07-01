@@ -2180,7 +2180,7 @@ jw.Utils = (function ($, undefined) {
             $("meta[name=robots]").remove();
 
             // if page not playground inner
-            $(".dPlaygroundNav").hide();
+            $(".dPlaygroundNav").slideUp();
         }
     };
 })(jQuery);
@@ -2466,7 +2466,7 @@ jw.PlaygroundModel = (function ($, undefined) {
 
 
             if (page !== "index") {
-                $(".dPlaygroundNav").show();
+                $(".dPlaygroundNav").slideDown();
 
                 that.load("/playground/playgroundNav.html", function (data) {
                     $(".dPlaygroundNav").html(data);

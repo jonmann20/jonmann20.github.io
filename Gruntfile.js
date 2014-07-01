@@ -163,11 +163,11 @@ module.exports = function(grunt) {
 	    },
 
 	    imagemin: {
-	        allImages: {
-	            options: {
-                    optimizationLevel: 3,
-	            },
+	        options: {
+	            optimizationLevel: 0,
+	        },
 
+	        allImages: {
 	            files: [{
 	                expand: true,
 	                cwd: "www/img",
@@ -177,7 +177,6 @@ module.exports = function(grunt) {
 	        }
 
             // TODO: game images
-
 	    }
 
         // TODO: bower (plugin manager - e.g. jQuery, sammy.js, ...)
