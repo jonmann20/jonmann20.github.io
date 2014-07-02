@@ -10,7 +10,7 @@
 		options = $.extend({}, $.fn.listCarousel.defaultOptions, options);
 		var overID,
             active = fixFirstLetter(options.active);
-		
+
 		$(this).find("a:not(.bigBtn)").on("click", function (e) {    
 		    overID = fixFirstLetter($(this).attr("id"));
 
@@ -19,7 +19,7 @@
 
 		        var fixedActive = fixFirstLetter(active, true);
 
-		        $('#' + fixedActive).children(".icon-link").remove();
+		        $(".main").find('#' + fixedActive).children(".icon-link").remove();
 		        $(this).append(" <span class='icon-link'></span>");
 
 		        $("#div" + active).fadeOut(options.speedOut);

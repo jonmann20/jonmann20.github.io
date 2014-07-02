@@ -2,15 +2,23 @@ module.exports = function(grunt) {
 
 	// configure tasks
 	grunt.initConfig({
-	    clean: ["css/min", "js/min"],
+	    clean: ["www/css/min", "www/js/min"],
 
 	    connect: {
-	        server: {
+	        dev: {
 	            options: {
 	                hostname: "jon",
 	                port: 80,
-	                open: true
-                    //base: "www"
+	                open: false,
+	                base: "www"
+	            }
+	        },
+	        qa: {
+	            options: {
+	                hostname: "jon",
+	                port: 80,
+	                open: false,
+                    keepalive: true
 	            }
 	        }
 	    },
@@ -21,34 +29,36 @@ module.exports = function(grunt) {
 	        },
 
 	        masterJs: {
-	            dest: "js/min/master.js",
+                //cwd: "www",
 	            src: [
-	        		"js/plugins/sammy.js",
-                    "js/plugins/jquery.stellar.min.js",
-	        		"js/utils.js",
-	        		"js/models/*.js",
-	        		"js/routing.js",
-	        		"js/main.js"
-	            ]
+	        		"www/js/plugins/sammy.js",
+                    "www/js/plugins/jquery.stellar.min.js",
+	        		"www/js/utils.js",
+	        		"www/js/models/*.js",
+	        		"www/js/routing.js",
+	        		"www/js/main.js"
+	            ],
+	            dest: "www/js/min/master.js"
 	        },
 
 	        gamesCommonJs: {
-	            dest: "js/min/gamesCommon.js",
+	            cwd: "www/games/common/js",
 	            src: [
-                    "games/common/js/GameEngine.js",
-                    "games/common/js/GameSave.js",
-                    "games/common/js/GameInput.js",
-                    "games/common/js/GameUtils.js",
-                    "games/common/js/physics/SAT.js",
-                    "games/common/js/graphics/GameGraphics.js",
-                    "games/common/js/view/GameView.js",
-                    "games/common/js/view/TitleView.js",
-                    "games/common/js/view/GameSaveView.js"
-	            ]
+                    "GameEngine.js",
+                    "GameSave.js",
+                    "GameInput.js",
+                    "GameUtils.js",
+                    "physics/SAT.js",
+                    "graphics/GameGraphics.js",
+                    "view/GameView.js",
+                    "view/TitleView.js",
+                    "view/GameSaveView.js"
+	            ],
+	            dest: "www/js/min/gamesCommon.js"
 	        },
 
 	        pageDormanticide: {
-	            dest: "js/min/pageDormanticide.js",
+	            cwd: "www",
 	            src: [
                     "<%= concat_sourcemap.gamesCommonJs.src %>",
                     "games/dormanticide/js/view/OverworldView.js",
@@ -56,23 +66,25 @@ module.exports = function(grunt) {
                     "games/dormanticide/js/dormant/Dormant.js",
                     "games/dormanticide/js/dormant/FightAction.js",
                     "games/dormanticide/js/main.js"
-                ]
+	            ],
+	            dest: "www/js/min/pageDormanticide.js",
 	        },
 
 	        pageVamp: {
-	            dest: "js/min/pageVamp.js",
+	            cwd: "www",
 	            src: [
                     "<%= concat_sourcemap.gamesCommonJs.src %>",
                     "games/vamp/js/view/LevelView.js",
                     "games/vamp/js/level/level1.js",
                     "games/vamp/js/vamp.js",
                     "games/vamp/js/main.js"
-	            ]
+	            ],
+	            dest: "www/js/min/pageVamp.js",
 	        },
 
 	        css: {
-	            dest: "css/min/master.css",
-	            src: "css/*.css"
+	            src: "www/css/*.css",
+	            dest: "www/css/min/master.css"
 	        }
 	    },
 
@@ -110,19 +122,19 @@ module.exports = function(grunt) {
 	    uglify: {
 	        masterJs: {
 	            files: {
-	                "<%= concat_sourcemap.masterJs.dest %>": ["js/analytics.js", "js/clientSideLogging", "<%= concat_sourcemap.masterJs.src %>"]
+	                "<%= concat_sourcemap.masterJs.dest %>": ["www/js/analytics.js", "www/js/clientSideLogging", "<%= concat_sourcemap.masterJs.src %>"]
 	            }
 	        },
 
 	        pageDormanticide: {
 	            files: {
-	                "<%= concat_sourcemap.pageDormanticide.dest %>": ["js/analytics.js", "js/clientSideLogging", "<%= concat_sourcemap.pageDormanticide.src %>"]
+	                "<%= concat_sourcemap.pageDormanticide.dest %>": ["www/js/analytics.js", "www/js/clientSideLogging", "<%= concat_sourcemap.pageDormanticide.src %>"]
 	            }
 	        },
 
 	        pageDormanticide: {
 	            files: {
-	                "<%= concat_sourcemap.pageVamp.dest %>": ["js/analytics.js", "js/clientSideLogging", "<%= concat_sourcemap.pageVamp.src %>"]
+	                "<%= concat_sourcemap.pageVamp.dest %>": ["www/js/analytics.js", "www/js/clientSideLogging", "<%= concat_sourcemap.pageVamp.src %>"]
 	            }
 	        }
 	    },
@@ -155,7 +167,7 @@ module.exports = function(grunt) {
 	        allHtml: {
 	            files: [{
                     expand: true,
-                    cwd: "www/",
+                    cwd: "www",
 	                src: ["**/*.html"],
                     dest: "./"
 	            }]
@@ -164,7 +176,7 @@ module.exports = function(grunt) {
 
 	    imagemin: {
 	        options: {
-	            optimizationLevel: 0,
+	            optimizationLevel: 3,
 	        },
 
 	        allImages: {
@@ -197,8 +209,9 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks("grunt-contrib-copy");
     grunt.loadNpmTasks("grunt-contrib-imagemin");
   
-    // task runner options
-	grunt.registerTask("default", ["concat_sourcemap", "copy", "htmlmin", "imagemin", "connect", "watch"]);
-	grunt.registerTask("srv", ["connect", "watch"]);
-	grunt.registerTask("prd", ["uglify", "cssmin", "copy", "htmlmin", "imagemin"]);
+    grunt.registerTask("default", ["concat_sourcemap", "connect:dev", "watch"]);
+	grunt.registerTask("qa", ["uglify", "cssmin", "copy", "htmlmin", "imagemin", "connect:qa"]);
+	grunt.registerTask("build", ["uglify", "cssmin", "copy", "htmlmin", "imagemin"]);
+
+	grunt.registerTask("clean", ["clean"]);
 };

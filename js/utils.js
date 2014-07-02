@@ -57,7 +57,14 @@
             $("meta[name=robots]").remove();
 
             // if page not playground inner
-            $(".dPlaygroundNav").hide();
+            var h = window.location.hash;
+            if (typeof (h) === "undefined" || h.indexOf("#playground/") !== 0) {  // startsWith
+                var pNav = $(".dPlaygroundNav");
+
+                if (pNav.is(":visible")) {
+                    pNav.slideUp();
+                }
+            }
         }
     };
 })(jQuery);

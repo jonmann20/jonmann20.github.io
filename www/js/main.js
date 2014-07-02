@@ -11,8 +11,8 @@
             declareGlobals();
 
             jw.Routing.init();
-            $(".dateYear").text(jw.Utils.getYear());
 
+            $(".dateYear").text(jw.Utils.getYear());
 
             $(window).on("resize", function () {
                 var h = $(".colR > div:visible").height();

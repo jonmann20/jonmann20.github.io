@@ -7,7 +7,7 @@
             if (page === "index") {
                 that.load("/playground/index.html", function (data) {
                     that.load("/playground/playgroundNav.html", function (data) {
-                        $(".playgroundNav").html(data);
+                        $(".colL div.playgroundNav").html(data);
 
                         $(".colL ul").listCarousel();
                     });
@@ -59,7 +59,7 @@
                 jw.head.append("<meta name='description' content='A canvas example showcasing a bouncing object.' />" +
                                "<meta name='keywords' content='canvas, html5' />"
                 );
-                jw.body.addClass("playground playInner nav6");
+                jw.body.addClass("playground playInner nav5");
             }
             else if (page === "ustream") {
                 that.load("/playground/USTREAM-demo.html", function (data) {
@@ -90,11 +90,15 @@
 
 
             if (page !== "index") {
-                $(".dPlaygroundNav").show();
+                var pNav = $(".dPlaygroundNav");
 
-                that.load("/playground/playgroundNav.html", function (data) {
-                    $(".dPlaygroundNav").html(data);
-                });
+                if (!pNav.is(":visible")) {
+                    console.log("slideDown");
+
+                    that.load("/playground/playgroundNav.html", function (data) {
+                        pNav.html(data).slideDown();
+                    });
+                }
             }
         }
     };

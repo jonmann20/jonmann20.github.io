@@ -117,7 +117,7 @@ jw.Routing = (function ($, undefined) {
             jw.PlaygroundModel.render(this, "ustream");
             jw.Routing.lastPg = "ustream";
         });
-        
+
         //----- Portfolio
         this.route("get", "#portfolio", function () {
             jw.PortfolioModel.render(this, "index");
