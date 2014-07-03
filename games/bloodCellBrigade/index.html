@@ -1,1 +1,214 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns=http://www.w3.org/1999/xhtml><head><meta http-equiv=Content-Type content="text/html; charset=utf-8"><title>Blood Cell Brigade | Games</title><script type=text/javascript src=https://ssl-webplayer.unity3d.com/download_webplayer-3.x/3.0/uo/jquery.min.js></script><script type=text/javascript>var unityObjectUrl="http://webplayer.unity3d.com/download_webplayer-3.x/3.0/uo/UnityObject2.js";"https:"==document.location.protocol&&(unityObjectUrl=unityObjectUrl.replace("http://","https://ssl-")),document.write('<script type="text/javascript" src="'+unityObjectUrl+'"><\/script>');</script><script type=text/javascript>var config={width:1008,height:567,params:{enableDebugging:"0"}};config.params.disableContextMenu=!0;var u=new UnityObject2(config);jQuery(function(){var e=jQuery("#unityPlayer").find(".missing"),n=jQuery("#unityPlayer").find(".broken");e.hide(),n.hide(),u.observeProgress(function(i){switch(i.pluginStatus){case"broken":n.find("a").click(function(e){return e.stopPropagation(),e.preventDefault(),u.installPlugin(),!1}),n.show();break;case"missing":e.find("a").click(function(e){return e.stopPropagation(),e.preventDefault(),u.installPlugin(),!1}),e.show();break;case"installed":e.remove();break;case"first":}}),u.initPlugin(jQuery("#unityPlayer")[0],"bloodCellBrigade.unity3d")});</script><style>body{font-family:Helvetica,Verdana,Arial,sans-serif;background-color:#333;font-size:.88em;color:#e1e1e1}a{color:#aaa}.wrap{width:1100px;margin:15px auto 0}.content{width:1008px;float:left;box-shadow:0 5px 18px #111;background:#fff}.right{clear:both;float:none;margin:0 auto;width:510px;padding-top:12px}.broken,.missing{margin:auto;position:relative;top:50%;width:193px}.broken a,.missing a{height:63px;position:relative;top:-31px}.broken img,.missing img{border-width:0}.broken{display:none}#unityPlayer{cursor:default;width:1008px;height:567px}h1,h2,h3{color:#e1e1e1}h1{margin-bottom:10px;font-size:1.44em}h2,h3{font-size:1.23em;margin-bottom:7px}.right ul{margin-top:0}.right ul span{display:inline-block;width:88px;margin-right:5px}.contr span{font-size:.9em}.loading{text-align:center;font-size:2.5em;padding-top:300px;color:#444}.small{font-size:.35em}.disclaimer{width:320px}</style></head><body><a href=/#games>Back</a><div class=wrap><div class=content><div id=unityPlayer><div class=loading>Loading...<p class=small>(May take awhile)</p></div><div class=missing><a href="http://unity3d.com/webplayer/" title="Unity Web Player. Install now!"><img alt="Unity Web Player. Install now!" src=http://webplayer.unity3d.com/installation/getunity.png width=193 height=63></a></div><div class=broken><a href="http://unity3d.com/webplayer/" title="Unity Web Player. Install now! Restart your browser after install."><img alt="Unity Web Player. Install now! Restart your browser after install." src=http://webplayer.unity3d.com/installation/getunityrestart.png width=193 height=63></a></div></div></div><div class=right><h1>Blood Cell Brigade</h1><h2>Controls</h2><ul class=contr><li><span>Left Click:</span>move to point</li><li><span>Right Click:</span>shoot antibody</li></ul><h3>Credits</h3><ul><li>Audio: <a href="http://www.youtube.com/watch?v=LDvKwSVuUGA" target=_blank>SNES Donkey Kong Country Aquatic Ambiance</a></li><li><a href=mailto:jonwiedmann@gmail.com>jonwiedmann@gmail.com</a> Jon Wiedmann (jonmann20)</li><li><a href=mailto:ayarger@umich.edu>ayarger@umich.edu</a> Austin Yarger (ayarger)</li><li><a href=mailto:ndeden@umich.edu>ndeden@umich.edu</a> Nicholas Dedenbach (Ryouza)</li><li><a href=mailto:nmgregor@umich.edu>nmgregor@umich.edu</a> Nickie Gregor (nickieg)</li><li><a href=mailto:hlai@umich.edu>hlai@umich.edu</a> Helen Lai (esrevni)</li><li><a href=mailto:sovresat@umich.edu>sovresat@umich.edu</a> Sarah Ovresat (sovv)</li></ul></div></div></body></html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>Blood Cell Brigade | Games</title>
+	<script type="text/javascript" src="https://ssl-webplayer.unity3d.com/download_webplayer-3.x/3.0/uo/jquery.min.js"></script>
+	<script type="text/javascript">
+	    <!--
+	    var unityObjectUrl = "http://webplayer.unity3d.com/download_webplayer-3.x/3.0/uo/UnityObject2.js";
+	    if (document.location.protocol == 'https:')
+		    unityObjectUrl = unityObjectUrl.replace("http://", "https://ssl-");
+	    document.write('<script type="text\/javascript" src="' + unityObjectUrl + '"><\/script>');
+	    -->
+	</script>
+	<script type="text/javascript">
+	    <!--
+		    var config = {
+			    width: 1008, 
+			    height: 567,
+			    params: { enableDebugging:"0" }
+			
+		    };
+		    config.params["disableContextMenu"] = true;
+		    var u = new UnityObject2(config);
+
+		    jQuery(function() {
+
+			    var $missingScreen = jQuery("#unityPlayer").find(".missing");
+			    var $brokenScreen = jQuery("#unityPlayer").find(".broken");
+			    $missingScreen.hide();
+			    $brokenScreen.hide();
+			
+			    u.observeProgress(function (progress) {
+				    switch(progress.pluginStatus) {
+					    case "broken":
+						    $brokenScreen.find("a").click(function (e) {
+							    e.stopPropagation();
+							    e.preventDefault();
+							    u.installPlugin();
+							    return false;
+						    });
+						    $brokenScreen.show();
+					    break;
+					    case "missing":
+						    $missingScreen.find("a").click(function (e) {
+							    e.stopPropagation();
+							    e.preventDefault();
+							    u.installPlugin();
+							    return false;
+						    });
+						    $missingScreen.show();
+					    break;
+					    case "installed":
+						    $missingScreen.remove();
+					    break;
+					    case "first":
+					    break;
+				    }
+			    });
+			    u.initPlugin(jQuery("#unityPlayer")[0], "bloodCellBrigade.unity3d");
+		    });
+	    -->
+	</script>
+	<style>
+	    body {
+		    font-family: Helvetica, Verdana, Arial, sans-serif;
+		    background-color: #333;
+            font-size: 0.88em;
+            color: #e1e1e1;
+	    }
+        a {
+            color: #aaa;
+        }
+        .wrap {
+            width: 1100px;
+            margin: 15px auto 0;
+        }
+	    .content {
+		    width: 1008px;
+            float: left;
+            box-shadow: 0 5px 18px #111;
+            background: #fff;
+	    }
+        .right {
+            clear: both;
+            float: none;
+            margin: 0 auto;
+            width: 510px;
+            padding-top: 12px;
+        }
+
+	    .broken,
+	    .missing {
+		    margin: auto;
+		    position: relative;
+		    top: 50%;
+		    width: 193px;
+	    }
+	    .broken a,
+	    .missing a {
+		    height: 63px;
+		    position: relative;
+		    top: -31px;
+	    }
+	    .broken img,
+	    .missing img {
+		    border-width: 0px;
+	    }
+	    .broken {
+		    display: none;
+	    }
+        #unityPlayer {
+            cursor: default;
+            width: 1008px;
+            height: 567px;
+        }
+
+
+	    h1, h2, h3 {
+            color: #e1e1e1;
+	    }
+	    h1 {
+		    margin-bottom: 10px;
+		    font-size: 1.44em;
+	    }
+        h2, h3 {
+            font-size: 1.23em;
+            margin-bottom: 7px;
+        }
+	    .right ul {
+		    margin-top: 0;
+	    }
+        .right ul span {
+            display: inline-block;
+            width: 88px;
+            margin-right: 5px;
+        }
+        .contr span {
+            font-size: 0.9em;
+        }
+        .loading {
+            text-align: center;
+            font-size: 2.5em;
+            padding-top: 300px;
+            color: #444;
+        }
+        .small {
+            font-size: 0.35em;
+        }
+        .disclaimer {
+            width: 320px;
+        }
+	</style>
+</head>
+<body>
+    <a href="/#games">Back</a>
+    
+    <div class="wrap">
+        <div class="content">
+            <div id="unityPlayer">
+
+                <div class="loading">
+                    Loading...
+                
+                    <p class="small">(May take awhile)</p>
+                </div>
+
+                <div class="missing">
+                    <a href="http://unity3d.com/webplayer/" title="Unity Web Player. Install now!">
+                        <img alt="Unity Web Player. Install now!" src="http://webplayer.unity3d.com/installation/getunity.png" width="193" height="63" />
+                    </a>
+                </div>
+                <div class="broken">
+                    <a href="http://unity3d.com/webplayer/" title="Unity Web Player. Install now! Restart your browser after install.">
+                        <img alt="Unity Web Player. Install now! Restart your browser after install." src="http://webplayer.unity3d.com/installation/getunityrestart.png" width="193" height="63" />
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="right">
+            <h1>Blood Cell Brigade</h1>
+
+            <h2>Controls</h2>
+            <ul class="contr">
+                <li><span>Left Click:</span>move to point</li>
+                <li><span>Right Click:</span>shoot antibody</li>
+            </ul>
+
+            <h3>Credits</h3>
+            <ul>
+                <li>Audio: <a href="http://www.youtube.com/watch?v=LDvKwSVuUGA" target="_blank">SNES Donkey Kong Country Aquatic Ambiance</a></li>
+                <li>
+                    <a href="mailto:jonwiedmann@gmail.com">jonwiedmann@gmail.com</a> Jon Wiedmann (jonmann20)
+                </li>
+                <li>
+                    <a href="mailto:ayarger@umich.edu">ayarger@umich.edu</a> Austin Yarger (ayarger)
+                </li>
+                <li>
+                    <a href="mailto:ndeden@umich.edu">ndeden@umich.edu</a> Nicholas Dedenbach (Ryouza)
+                </li>
+                <li>
+                    <a href="mailto:nmgregor@umich.edu">nmgregor@umich.edu</a> Nickie Gregor (nickieg)
+                </li>
+                <li>
+                    <a href="mailto:hlai@umich.edu">hlai@umich.edu</a> Helen Lai (esrevni)
+                </li>
+                <li>
+                    <a href="mailto:sovresat@umich.edu">sovresat@umich.edu</a> Sarah Ovresat (sovv)
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

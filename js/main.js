@@ -3,6 +3,7 @@
     function declareGlobals() {
         jw.head = $("head");
         jw.body = $("body");
+        jw.listeners = [];
     }
 
 
@@ -29,11 +30,19 @@
 
             if($(window).width() <= 800){
                 height = 0;
+                //jw.parallax.off();
             }
-            else if ($(window).width() <= 1265) {
-                height += $(".colL").height() + 38; // colR margin-top + height
+            else {
+                if ($(window).width() <= 1265) {
+                    height += $(".colL").height() + 38; // colR margin-top + height
+                }
+
+
+                //jw.parallax.off();
+                //jw.parallax = $(window).stellar({
+                //    responsive: true
+                //});
             }
-            //console.log(height);
 
             if(height == 0) {
                 $(".main").height("auto");
@@ -48,7 +57,7 @@
 $(function () {
     jw.Main.init();
 
-    $("body").stellar({
+    jw.parallax = $(window).stellar({
         responsive: true
     });
 });

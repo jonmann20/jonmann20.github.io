@@ -6,11 +6,8 @@
 
             if (page === "index") {
                 that.load("/playground/index.html", function (data) {
-                    that.load("/playground/playgroundNav.html", function (data) {
-                        $(".colL div.playgroundNav").html(data);
-
-                        $(".colL ul").listCarousel();
-                    });
+                    var clickListener = $(".colL ul").listCarousel();
+                    jw.listeners.push(clickListener);
                 }).swap();
 
                 document.title = "Playground";
@@ -93,11 +90,7 @@
                 var pNav = $(".dPlaygroundNav");
 
                 if (!pNav.is(":visible")) {
-                    console.log("slideDown");
-
-                    that.load("/playground/playgroundNav.html", function (data) {
-                        pNav.html(data).slideDown();
-                    });
+                    pNav.slideDown();
                 }
             }
         }

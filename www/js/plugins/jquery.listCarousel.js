@@ -11,7 +11,7 @@
 		var overID,
             active = fixFirstLetter(options.active);
 
-		$(this).find("a:not(.bigBtn)").on("click", function (e) {    
+		return $(this).find("a:not(.bigBtn)").on("click", function (e) {    
 		    overID = fixFirstLetter($(this).attr("id"));
 
 		    if (active != overID) {

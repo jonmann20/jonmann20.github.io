@@ -469,6 +469,35 @@ footer .footR {
 }
 /*#endregion*/
 
+/*#region ************** Home ****************/
+.home .colR {
+    margin-bottom: 110px;
+    width: 56%;
+}
+/*#endregion*/
+
+/*#region ************** Home ****************/
+.games .techUsed {
+	margin-top: 26px;
+    margin-bottom: 22px;
+}
+.games .techUsed .lh {
+	margin-left: -30px;	
+}
+#divJonsQuest img,
+#divDungeon img,
+#divSeparate img {
+	box-shadow: none;
+}
+#divSeparate img {
+    width: 38px;
+}
+#divSeparate .bigImg {
+    width: 375px;
+    margin-top: 14px;
+}
+/*#endregion*/
+
 /*#region ************** Music ***************/
 .music .colR {
     margin-bottom: 120px;
@@ -478,9 +507,6 @@ footer .footR {
 }
 .mandolin audio {
 	margin: 15px 0;
-}
-.rates h3 span {
-	font-size: .9em;
 }
 /*#endregion*/
 
@@ -568,5 +594,28 @@ footer .footR {
 .nav6 .rangeInputs {
 	float: left;
 	margin-top: 28px;
+}
+/*#endregion*/
+
+/*#region ************ Portfolio ************/
+.portfolio .bigBtn {
+    margin-bottom: 20px;
+	width: 240px;
+}
+.whtImg {
+    float: left;
+    margin-right: 15px;
+}
+.whtEle {
+    margin-top: 70px;
+}
+.visit {
+    float: left;
+    margin-top: 25px;
+}
+.enlSite {
+    margin-top: 25px;
+    float: left;
+    clear: both;
 }
 /*#endregion*/

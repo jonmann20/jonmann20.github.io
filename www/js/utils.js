@@ -41,6 +41,12 @@
         resetModel: function () {
             _main.empty();
 
+            for (var i = 0; i < jw.listeners.length; ++i) {
+                jw.listeners[i].off();
+            }
+            jw.listeners = [];
+
+
             if (jw.Routing.lastPg === "ballPit") {
                 jw.BallPit.deInit();
             }

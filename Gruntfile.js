@@ -42,17 +42,17 @@ module.exports = function(grunt) {
 	        },
 
 	        gamesCommonJs: {
-	            cwd: "www/games/common/js",
+	            cwd: "www",
 	            src: [
-                    "GameEngine.js",
-                    "GameSave.js",
-                    "GameInput.js",
-                    "GameUtils.js",
-                    "physics/SAT.js",
-                    "graphics/GameGraphics.js",
-                    "view/GameView.js",
-                    "view/TitleView.js",
-                    "view/GameSaveView.js"
+                    "games/common/js/GameEngine.js",
+                    "games/common/js/GameSave.js",
+                    "games/common/js/GameInput.js",
+                    "games/common/js/GameUtils.js",
+                    "games/common/js/physics/SAT.js",
+                    "games/common/js/graphics/GameGraphics.js",
+                    "games/common/js/view/GameView.js",
+                    "games/common/js/view/TitleView.js",
+                    "games/common/js/view/GameSaveView.js"
 	            ],
 	            dest: "www/js/min/gamesCommon.js"
 	        },
@@ -189,6 +189,21 @@ module.exports = function(grunt) {
 	        }
 
             // TODO: game images
+	    },
+
+	    includereplace: {
+	        options: {
+                includesDir: "www"
+	        },
+
+	        allImports: {
+                files: [{
+                    expand: true,
+                    cwd: "www",
+	                src: ["**/*.html"],
+	                dest: "./"
+                }]
+	        }
 	    }
 
         // TODO: bower (plugin manager - e.g. jQuery, sammy.js, ...)
@@ -208,8 +223,10 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks("grunt-contrib-htmlmin");
     grunt.loadNpmTasks("grunt-contrib-copy");
     grunt.loadNpmTasks("grunt-contrib-imagemin");
+    grunt.loadNpmTasks("grunt-include-replace");
   
-    grunt.registerTask("default", ["concat_sourcemap", "connect:dev", "watch"]);
+    //grunt.registerTask("default", ["concat_sourcemap", "connect:dev", "watch"]);
+    grunt.registerTask("default", ["concat_sourcemap", "copy", "includereplace", "connect:qa"]);
 	grunt.registerTask("qa", ["uglify", "cssmin", "copy", "htmlmin", "imagemin", "connect:qa"]);
 	grunt.registerTask("build", ["uglify", "cssmin", "copy", "htmlmin", "imagemin"]);
 
