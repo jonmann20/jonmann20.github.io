@@ -227,8 +227,8 @@ module.exports = function(grunt) {
   
     //grunt.registerTask("default", ["concat_sourcemap", "connect:dev", "watch"]);
     grunt.registerTask("default", ["concat_sourcemap", "copy", "includereplace", "connect:qa"]);
-	grunt.registerTask("qa", ["uglify", "cssmin", "copy", "htmlmin", "imagemin", "connect:qa"]);
-	grunt.registerTask("build", ["uglify", "cssmin", "copy", "htmlmin", "imagemin"]);
+    grunt.registerTask("qa", ["uglify", "cssmin", "copy", "htmlmin", "includereplace", "imagemin", "connect:qa"]);
+    grunt.registerTask("build", ["uglify", "cssmin", "copy", "htmlmin", "includereplace", "imagemin"]);
 
 	grunt.registerTask("clean", ["clean"]);
 };

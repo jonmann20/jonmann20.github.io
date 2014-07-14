@@ -23,12 +23,12 @@ header nav {
 	font-family: "Open Sans Condensed", "Verdana", sans-serif;
 	font-size: 2.1em;
 	text-align: center;
-	background: rgba(51, 51, 51, 0.7);
+	background: rgba(51, 51, 51, 0.85);
 	margin-top: 35px;
 	padding: 10px;
 	min-width: 165px;
-	border-radius: 0 43px;
-    box-shadow: 0 0 8px 0 rgba(0,0,0,0.4);
+	border-radius: 0 36px;
+	box-shadow: 0 1px 7px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.15);
 }
 header nav a,
 header nav a:visited {
@@ -43,13 +43,13 @@ header nav a:visited {
 	transition: 0;
 }
 header nav a:hover,
-.backNav a:hover span {
+.backNav a:hover i {
 	text-shadow: 0 0 6px rgba(140, 177, 24, 1);
 }
 header nav a:active {
     background: transparent;
 }
-header nav a span {
+header nav a i {
 	font-size: 0.6em;
 	-webkit-text-stroke: 0;
 	text-stroke: 0;
@@ -58,7 +58,7 @@ header nav a span {
 	margin-left: 15px;
 	padding-top: 10px;
 }
-header nav a:hover span,
+header nav a:hover i,
 .home nav .icon-home,
 .games nav .icon-controllernes,
 .music nav .icon-music,
@@ -78,7 +78,7 @@ header nav:first-child {
 	text-indent: 9px;
     padding-bottom: 20px;
 }
-header nav:first-child span {
+header nav:first-child i {
 	float: none;
 	margin-left: 0;
 	padding-top: 0;
@@ -92,7 +92,7 @@ header nav:first-child a {
 
 /* Second Nav */
 .hdrNav2 {
-	margin-top: 42px;
+	margin-top: 30px;
 	padding-top: 5px;
 }
 .hdrNav2 ul a {
@@ -194,22 +194,21 @@ footer::before {
     display: block;
     height: 120px;
 }
-.outFooter {
+.outFooter {/* height: 68px; */
 	position: relative;
-	bottom: -24px;
+	bottom: -26px;
     margin-top: -94px;
 	width: 100%;
-	height: 29px;
-	padding: 20px 0;
+	height: 28px;
+	padding: 20px 0 19px;
     font-size: 127%;
-    background: rgb(58, 57, 58);
+    background: rgba(58, 57, 58, 0.6);
     border-top: 1px solid rgb(70, 69, 70);
 }
 .outFooter:before,
 .outFooter:after {
     content: "";
     position: absolute;
-    top: -10px;
     left: 0;
     background: rgba(50, 49, 50, 0.78);
     width: 100%;
@@ -219,6 +218,11 @@ footer::before {
 .outFooter:before { /* bottom of stack */
     background: rgba(50, 49, 50, 0.45);
     top: -20px;
+	height: 88px;
+}
+.outFooter:after {
+	top: -10px;
+	height: 78px;
 }
 .inFooter {
 	width: 70%;
@@ -233,7 +237,7 @@ footer .footL {
 	float: left;
 }
 footer .footL a {
-	margin: 0 0.3em;
+	margin: 0 0.18em;
 }
 footer .name {
 	display: inline-block;
@@ -243,15 +247,15 @@ footer .icon-youtube-sign {
 	font-size: 1.254em;
 	vertical-align: -2px;
 }
-footer .footAbout .name,
-footer .footContact .name {
+footer .footAbout .name {
     text-indent: 0;
 }
 footer .footContact {
-	margin-right: 1.3em !important;
+	/*margin-right: 1.3em !important;*/
 }
 footer .footR {
 	float: right;
+	color: #aaa;
 }
 /*#endregion*/
 
@@ -542,7 +546,11 @@ footer .footR {
 }
 .playground .uWrap > div {
 	position: absolute;
-} 
+}
+.img-inline {
+	float: left;
+	padding-right: 15px;
+}
 .uWrap .list ul {
 	width: 203px;
 	list-style-type: none;

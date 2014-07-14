@@ -6,7 +6,7 @@
 
             if (page === "index") {
                 that.load("/playground/index.html", function (data) {
-                    var clickListener = $(".colL ul").listCarousel();
+                    var clickListener = $(".main .colL ul").listCarousel();
                     jw.listeners.push(clickListener);
                 }).swap();
 

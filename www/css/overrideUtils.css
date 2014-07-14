@@ -26,11 +26,6 @@ input[type=color]:hover,
 button:hover{
 	cursor: pointer;
 }
-img {
-	max-width: 100%;
-	border-radius: 4px;
-	box-shadow: 4px 3px 18px rgba(0, 0, 0, 0.4);
-}
 h1,h2,h3,h4,h5,h6 {
 	margin: .4em 0 .6em 0;
 	font-size: 1.62em; 
@@ -184,9 +179,6 @@ br.clr {
 .opaque {
 	opacity: 1;
 }
-.noShadow {
-	box-shadow: none;
-}
 .noselect {
 	-webkit-touch-callout: none;
 	-webkit-user-select: none;
@@ -202,10 +194,10 @@ br.clr {
 .colR > div,
 .twitter-timeline-rendered,
 .music .colR iframe {
-	background: rgba(51, 51, 51, 0.7);
+	background: rgba(51, 51, 51, 0.85);
 	padding: 1px 15px 5px 15px;
-	border-radius: 10px;
-	box-shadow: 4px 3px 18px rgba(0, 0, 0, 0.4);
+	border-radius: 2px;
+	box-shadow: 0 1px 7px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.15);
 }
 .twitter-timeline, .music .colR iframe {
     padding: 0;

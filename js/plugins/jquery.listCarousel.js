@@ -12,6 +12,12 @@
             active = fixFirstLetter(options.active);
 
 		return $(this).find("a:not(.bigBtn)").on("click", function (e) {    
+		    var check = $(this).parent().parent().parent().hasClass("dPlaygroundNav");
+		    if (check) {
+                // TODO: fix left unbiding
+		        return;
+		    }
+
 		    overID = fixFirstLetter($(this).attr("id"));
 
 		    if (active != overID) {
