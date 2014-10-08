@@ -8,7 +8,7 @@ module.exports = function(grunt) {
 	        dev: {
 	            options: {
 	                hostname: "jon",
-	                port: 80,
+	                port: 88,
 	                open: false,
 	                base: "www"
 	            }
@@ -16,7 +16,7 @@ module.exports = function(grunt) {
 	        qa: {
 	            options: {
 	                hostname: "jon",
-	                port: 80,
+	                port: 88,
 	                open: false,
                     keepalive: true
 	            }
