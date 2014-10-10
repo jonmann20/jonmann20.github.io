@@ -6,7 +6,6 @@
         jw.listeners = [];
     }
 
-
     return {
         init: function () {
             declareGlobals();

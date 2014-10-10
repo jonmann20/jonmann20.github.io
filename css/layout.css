@@ -155,6 +155,47 @@ header nav ul #cube {
 	display: none;
 }
 
+
+.hdrNav2 a i {
+	display: inline-block;
+
+	-webkit-animation: vWave 0.3s linear;
+	animation: vWave 0.3s linear;
+}
+.hdrNav2 a:nth-of-type(1) i {
+	-webkit-animation-delay: 0.15s;
+	animation-delay: 0.15s;
+}
+.hdrNav2 a:nth-of-type(2) i {
+	-webkit-animation-delay: 0.19s;
+	animation-delay: 0.19s;
+}
+.hdrNav2 a:nth-of-type(3) i {
+	-webkit-animation-delay: 0.23s;
+	animation-delay: 0.23s;
+}
+.hdrNav2 a:nth-of-type(4) i {
+	-webkit-animation-delay: 0.27s;
+	animation-delay: 0.27s;
+}
+.hdrNav2 a:nth-of-type(5) i {
+	-webkit-animation-delay: 0.31s;
+	animation-delay: 0.31s;
+}
+.hdrNav2 a:nth-of-type(6) i {
+	-webkit-animation-delay: 0.35s;
+	animation-delay: 0.35s;
+}
+.hdrNav2 a:nth-of-type(7) i {
+	-webkit-animation-delay: 0.39s;
+	animation-delay: 0.39s;
+}
+.hdrNav2 a:nth-of-type(8) i {
+	-webkit-animation-delay: 0.43s;
+	animation-delay: 0.43s;
+}
+
+
 /*#endregion*/
 
 /*#region *************** Main ***************/
@@ -229,9 +270,44 @@ footer::before {
 	margin: 0 auto;
 }
 footer a {
-	transition: 0;
     font-size: 1.25em;
 	vertical-align: -2px;
+	display: inline-block;
+
+	-webkit-animation: wave 0.3s linear;
+	animation: wave 0.3s linear;
+}
+footer a:nth-of-type(1) {
+	-webkit-animation-delay: 0.15s;
+	animation-delay: 0.15s;
+}
+footer a:nth-of-type(2) {
+	-webkit-animation-delay: 0.19s;
+	animation-delay: 0.19s;
+}
+footer a:nth-of-type(3) {
+	-webkit-animation-delay: 0.23s;
+	animation-delay: 0.23s;
+}
+footer a:nth-of-type(4) {
+	-webkit-animation-delay: 0.27s;
+	animation-delay: 0.27s;
+}
+footer a:nth-of-type(5) {
+	-webkit-animation-delay: 0.31s;
+	animation-delay: 0.31s;
+}
+footer a:nth-of-type(6) {
+	-webkit-animation-delay: 0.35s;
+	animation-delay: 0.35s;
+}
+footer a:nth-of-type(7) {
+	-webkit-animation-delay: 0.39s;
+	animation-delay: 0.39s;
+}
+footer a:nth-of-type(8) {
+	-webkit-animation-delay: 0.43s;
+	animation-delay: 0.43s;
 }
 footer .footL {
 	float: left;
@@ -257,6 +333,31 @@ footer .footR {
 	float: right;
 	color: #aaa;
 }
+
+
+@-webkit-keyframes wave {
+    0%   {transform: translateY(0);}
+    50%  {transform: translateY(-10px);}
+    100% {transform: translateY(0);}
+}
+@keyframes wave {
+    0%   {transform: translateY(0);}
+    50%  {transform: translateY(-10px);}
+    100% {transform: translateY(0);}
+}
+
+@-webkit-keyframes vWave {
+    0%   {transform: translateX(0);}
+    50%  {transform: translateX(10px);}
+    100% {transform: translateX(0);}
+}
+@keyframes vWave {
+    0%   {transform: translateX(0);}
+    50%  {transform: translateX(10px);}
+    100% {transform: translateX(0);}
+}
+
+
 /*#endregion*/
 
 /*#region ********** Page Templates **********/
