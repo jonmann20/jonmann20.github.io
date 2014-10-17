@@ -79,7 +79,19 @@ module.exports = function(grunt) {
 	        },
 
 	        masterCss: {
-	            src: "assets/css/*.css",
+	            src: [
+                    "assets/css/normalize.css",
+                    "assets/css/base.css",
+                    "assets/css/layout.css",
+
+                    "assets/css/state/home.css",
+                    "assets/css/state/games.css",
+                    "assets/css/state/music.css",
+                    "assets/css/state/playground.css",
+                    "assets/css/state/portfolio.css",
+
+                    "assets/css/state/responsive.css"
+                ],
 	            dest: "assets/master.css"
 	        }
 	    },
@@ -112,6 +124,11 @@ module.exports = function(grunt) {
 	        sass: {    // TODO: other css files
 	            files: ["src/scss/**/*.scss"],
 	            tasks: ["sass", "concat:masterCss"] // TODO: copy
+	        },
+
+	        html: {
+	            files: ["src/**/*.html"],
+                tasks: ["includereplace"]
 	        }
 	    },
 
@@ -175,7 +192,7 @@ module.exports = function(grunt) {
 	        all: {
 	            files: [{
                     expand: true,
-	                src: ["**/*.html", "!src/**"],
+	                src: ["**/*.html", "!src/**", "!node_modules/**"],
                     dest: "./"
 	            }]
 	        }
@@ -234,5 +251,4 @@ module.exports = function(grunt) {
     grunt.registerTask("srv", ["connect:qa"]);
 
     grunt.registerTask("cleanA", ["clean:all"]);
-    grunt.registerTask("cleanB", ["clean:build"]);
 };

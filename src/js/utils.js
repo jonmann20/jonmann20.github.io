@@ -64,7 +64,7 @@
 
             // if page not playground inner
             var h = window.location.hash;
-            if (typeof (h) === "undefined" || h.indexOf("#playground/") !== 0) {  // startsWith
+            if (typeof (h) === "undefined" || h.indexOf("#playground") !== 0) {  // startsWith
                 var pNav = $(".dPlaygroundNav");
 
                 if (pNav.is(":visible")) {

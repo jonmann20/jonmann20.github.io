@@ -5,19 +5,16 @@
             jw.Utils.resetModel();
 
             if (page === "index") {
-                that.load("/playground/index.html", function (data) {
-                    var clickListener = $(".main .colL ul").listCarousel();
-                    jw.listeners.push(clickListener);
-                }).swap();
+                that.load("/playground/index.html", function(data) {}).swap();
 
                 document.title = "Playground";
-                jw.head.append("<meta name='description' content='A canvas example showcasing a ball pit.' />" +
+                jw.head.append("<meta name='description' content='An playground area for web tech demos.' />" +
                                "<meta name='keywords' content='canvas, html5' />"
                 );
-                jw.body.addClass("absHover playground");
+                jw.body.addClass("playground playInner");
             }
             else if (page === "ballPit") {
-                that.load("/playground/ballPit.html", function (data) {
+                that.load("/playground/ballPit.html", function(data) {
                     jw.Utils.require("/js/ballPit.js", function () {
                         jw.BallPit.init();
                     });
@@ -85,13 +82,9 @@
                 jw.body.addClass("playground playInner bDancingCube nav1");
             }
 
-
-            if (page !== "index") {
-                var pNav = $(".dPlaygroundNav");
-
-                if (!pNav.is(":visible")) {
-                    pNav.slideDown();
-                }
+            var pNav = $(".dPlaygroundNav");
+            if(!pNav.is(":visible")) {
+                pNav.slideDown();
             }
         }
     };

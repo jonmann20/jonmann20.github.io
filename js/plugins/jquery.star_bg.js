@@ -26,7 +26,7 @@
         });
 
         function initPoints() {
-            for (i = 0; i < numPoints; i++) {
+            for(i=0; i < numPoints; ++i) {
                 var point = [(Math.random() * 400) - 200, (Math.random() * 400) - 200, (Math.random() * 400) - 200];
                 points.push(point);
             }
@@ -54,7 +54,7 @@
             ctx.fillStyle = w_b;
             ctx.fillRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
 
-            for (i = 0; i < numPoints; i++) {
+            for(i=0; i < numPoints; ++i) {
                 var point3d = points[i];
 
                 var z3d = point3d[2];
@@ -82,5 +82,4 @@
         window.cancelAnimationFrame($.fn.star_bg.animLoop);
         $.fn.star_bg.boundMouse.off();
     }
-
 })(jQuery);

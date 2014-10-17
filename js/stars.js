@@ -1,7 +1,7 @@
-﻿jw.StarryBg = (function ($, undefined) {
-
+﻿jw.StarryBg = (function() {
     var w, 
         color,
+        inputColor,
         inputRadio
     ;
 
@@ -26,29 +26,24 @@
             inputColor = $("input[type=color]").on("change", function () {
                 color = $(this).val();
 
-                $("canvas").remove();
-                $(".canvasWrap").append($("<canvas id='html5_star'>unsupported browser</canvas>"));
-
+                $.fn.star_bg.destroy();
                 initStar(w, color);
             });
 
             inputRadio = $("input[type=radio]").on("click", function () {
                 color = $("input[type=radio]:checked").val();
 
-                $("canvas").remove();
-                $(".canvasWrap").append($("<canvas id='html5_star'>unsupported browser</canvas>"));
-
+                $.fn.star_bg.destroy();
                 initStar(w, color);
             });
 
-
             initStar(w, color);
         },
+
         deInit: function () {
             $.fn.star_bg.destroy();
-
             inputColor.off();
             inputRadio.off();
         }
     };
-})(jQuery);
+})();

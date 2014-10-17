@@ -1,5 +1,0 @@
-﻿Playground
-==========
-
-Random tech demos.
-------------------

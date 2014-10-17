@@ -1,4 +1,4 @@
-jw.Bounce = (function ($, undefined) {
+jw.Bounce = (function() {
     var canvas,
 		ctx,
 		obj,
@@ -8,7 +8,6 @@ jw.Bounce = (function ($, undefined) {
 		dt,
         animLoop
     ;
-
 
     /* 
 		Kinematic equations:
@@ -21,12 +20,10 @@ jw.Bounce = (function ($, undefined) {
 		
 		position:
 		d(t) = 1/2 * a * dt^2 + v0*dt + d0
-		
 	*/
 
 
     /*************** Update ***************/
-
     function getPosX() {
         return (0.5 * obj.aX * (dt * dt)) + (obj.vX * dt) + obj.x;
     }
@@ -86,7 +83,6 @@ jw.Bounce = (function ($, undefined) {
 
 
     /*************** Render ***************/
-
     function drawObj() {
         ctx.fillStyle = obj.color;
         ctx.beginPath();
@@ -96,13 +92,13 @@ jw.Bounce = (function ($, undefined) {
 
     function render() {
         // background
-        ctx.fillStyle = '#002E62';
+        ctx.fillStyle = "#002E62";
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
         // floor
-        ctx.fillStyle = '#804000';
+        ctx.fillStyle = "#804000";
         ctx.fillRect(0, canvas.height - 30, canvas.width, 30);
-        ctx.fillStyle = '#987654';
+        ctx.fillStyle = "#987654";
         ctx.fillRect(0, canvas.height - 31, canvas.width, 1);
 
         drawObj();
@@ -141,10 +137,11 @@ jw.Bounce = (function ($, undefined) {
         });
     }
 
+
     return {
         init: function () {
             obj = {
-                color: '#FBCF32',
+                color: "#FBCF32",
                 w: 40,
                 h: 40,
                 r: 20,
@@ -164,15 +161,14 @@ jw.Bounce = (function ($, undefined) {
             canvas.height = canvas.width / 2;
 
             clickEvents();
-
             setup();
-
             animLoop = requestAnimFrame(loop);
         },
-        deInit: function () {
+
+        deInit: function() {
+            // TODO: not working when going to other page (e.g. About then back)
             window.cancelAnimationFrame(animLoop);
             $(".bigBtn").off();
         }
     };
-
-})(jQuery);
+})();

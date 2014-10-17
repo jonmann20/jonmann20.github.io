@@ -1,6 +1,6 @@
-jw.Routing = (function ($, undefined) {
+jw.Routing = (function() {
     var app = $.sammy(".main", function () {
-        //----- Home
+        // Home
         this.route("get",'/', function () {
             jw.HomeModel.render(this);
             jw.Routing.lastPg = "home";
@@ -11,37 +11,37 @@ jw.Routing = (function ($, undefined) {
             jw.Routing.lastPg = "home";
         });
 
-        //----- About
+        // About
         this.route("get", "#about", function () {
             jw.AboutModel.render(this);
             jw.Routing.lastPg = "about";
         });
 
-        //----- Contact
+        // Contact
         this.route("get", "#contact", function () {
             jw.ContactModel.render(this);
             jw.Routing.lastPg = "contact";
         });
 
-        //----- Favorites
-        this.route("get", "#favorites", function () {
-            jw.FavoritesModel.render(this);
-            jw.Routing.lastPg = "favorites";
-        });
+        //// Favorites
+        //this.route("get", "#favorites", function () {
+        //    jw.FavoritesModel.render(this);
+        //    jw.Routing.lastPg = "favorites";
+        //});
 
-        //----- Blog
-        this.route("get", "#blog", function () {
-            jw.BlogModel.render(this);
-            jw.Routing.lastPg = "blog";
-        });
+        //// Blog
+        //this.route("get", "#blog", function () {
+        //    jw.BlogModel.render(this);
+        //    jw.Routing.lastPg = "blog";
+        //});
 
-        //----- Games
+        // Games
         this.route("get", "#games", function () {
             jw.GamesModel.render(this, "index");
             jw.Routing.lastPg = "games/index";
         });
 
-        //----- Music
+        // Music
         this.route("get", "#music", function () {
             jw.MusicModel.render(this, "index");
             jw.Routing.lastPg = "music/index";
@@ -87,7 +87,7 @@ jw.Routing = (function ($, undefined) {
             jw.Routing.lastPg = "music/voice";
         });
         
-        //----- Playground
+        // Playground
         this.route("get", "#playground", function () {
             jw.PlaygroundModel.render(this, "index");
             jw.Routing.lastPg = "playground/index";
@@ -118,7 +118,7 @@ jw.Routing = (function ($, undefined) {
             jw.Routing.lastPg = "ustream";
         });
 
-        //----- Portfolio
+        // Portfolio
         this.route("get", "#portfolio", function () {
             jw.PortfolioModel.render(this, "index");
             jw.Routing.lastPg = "portfolio/index";
@@ -129,8 +129,8 @@ jw.Routing = (function ($, undefined) {
         lastPg: null,
 
 
-        init: function () {
+        init: function() {
             app.run();
         }
     };
-})(jQuery);
+})();
