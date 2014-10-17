@@ -3,6 +3,7 @@
 	width: 7.7%;
 	font-size: 2.1em;
 }
+
 article {
 	background: rgba(17, 17, 17, 0.58);
 	padding: 20px;
@@ -10,20 +11,20 @@ article {
 	box-shadow: 4px 3px 18px rgba(0, 0, 0, 0.4);
 	margin: 30px 60px;
 	padding-bottom: 30px;
-}
-article section:first-child {
-	text-align: center;
-}
-article h1,
-article h2,
-article h3 {
-	color: hsl(0, 70%, 56%);
-	text-shadow: none;
-}
-article h2,
-article h3 {
-	font-size: 0.6rem;
-	margin-bottom: 20px;
-	margin: 0;
-	color: #bbb;
+
+    section:first-child {
+        text-align: center;
+    }
+
+    h1, h2, h3 {
+    	color: hsl(0, 70%, 56%);
+	    text-shadow: none;
+    }
+
+    h2, h3 {
+    	font-size: 0.6rem;
+	    margin-bottom: 20px;
+	    margin: 0;
+	    color: #bbb;
+    }
 }

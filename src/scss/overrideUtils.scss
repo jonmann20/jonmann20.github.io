@@ -23,7 +23,7 @@ button {
 }
 input[type=submit]:hover,
 input[type=color]:hover,
-button:hover{
+button:hover {
 	cursor: pointer;
 }
 h1,h2,h3,h4,h5,h6 {
@@ -37,17 +37,20 @@ a {
 	color: hsla(200, 60%, 60%, 0.8);
 	text-decoration: none;
 	outline: none;
-}
-a:hover {
-	color: hsla(200, 60%, 60%, 1);
-	text-shadow: #61b0d7 0 0 6px;
-}
-a:visited, 
-a:active {
-	color: #5dafd7;
-}
-a:focus {
-    outline: 0;
+
+    &:hover {
+    	color: hsla(200, 60%, 60%, 1);
+	    text-shadow: #61b0d7 0 0 6px;
+    }
+
+    &:visited,
+    &:active {
+        color: #5dafd7;
+    }
+
+    &:focus {
+        outline: 0;
+    }
 }
 /*#endregion*/
 
@@ -215,20 +218,23 @@ br.clr {
 	background: rgba(107, 107, 107, 0.64);
 	box-shadow: 0 3px 0 rgba(54, 54, 54, 0.94);
 	opacity: 1;
-}
-.bigBtn span {
-	padding-right: 10px;
-	vertical-align: -1px;
-}
-.bigBtn:hover,
-.bigBtn:focus {
-	background: rgb(204, 85, 0);
-	box-shadow: 0 3px 0 rgb(102, 43, 0);
-}
-.bigBtn:active {
-	box-shadow: none;
-	margin-top: 11px;
-	transition: all 0.05s;
+
+    span {
+    	padding-right: 10px;
+	    vertical-align: -1px;
+    }
+
+    &:hover,
+    &:focus {
+    	background: rgb(204, 85, 0);
+	    box-shadow: 0 3px 0 rgb(102, 43, 0);
+    }
+
+    &:active {
+    	box-shadow: none;
+	    margin-top: 11px;
+	    transition: all 0.05s;
+    }
 }
 .colL .bigBtn {
 	margin-left: -20px;

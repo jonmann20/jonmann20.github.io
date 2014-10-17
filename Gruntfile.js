@@ -1,244 +1,239 @@
 module.exports = function(grunt) {
 	grunt.initConfig({
 	    clean: {
-            all: ["audio"],
-            //all: ["audio", "blog", "font", "games", "img", "js", "music", "playground", "portfolio", "*.html", "assets"],
-            dev: ["assets/css"]
-        }
+	        all: [".sass-cache", "assets", "audio", "blog", "font", "games", "img", "js", "music", "playground", "portfolio", "scss", "*.html"]
+        },
 
-	    //connect: {
-	    //    dev: {
-	    //        options: {
-	    //            hostname: "jon",
-	    //            port: 88,
-	    //            open: false,
-	    //            base: "src"
-	    //        }
-	    //    },
-	    //    qa: {
-	    //        options: {
-	    //            hostname: "jon",
-	    //            port: 88,
-	    //            open: false,
-        //            keepalive: true
-	    //        }
-	    //    }
-	    //},
+	    connect: {
+	        dev: {
+	            options: {
+	                hostname: "jon",
+	                port: 88,
+	                open: false//,base: "src"
+	            }
+	        },
 
-	    //concat: {
-	    //    options: {
-        //        sourceMap: true
-	    //    },
+	        qa: {
+	            options: {
+	                hostname: "jon",
+	                port: 88,
+	                open: true,
+                    keepalive: true
+	            }
+	        }
+	    },
 
-	    //    //masterJs: {
-        //    //    //cwd: "src",
-	    //    //    src: [
-	    //    //		"src/js/plugins/sammy.js",
-        //    //        "src/js/plugins/jquery.stellar.min.js",
-	    //    //		"src/js/utils.js",
-	    //    //		"src/js/models/*.js",
-	    //    //		"src/js/routing.js",
-	    //    //		"src/js/main.js"
-	    //    //    ],
-	    //    //    dest: "src/js/min/master.js"
-	    //    //},
+	    concat: {
+	        options: {
+                sourceMap: true
+	        },
 
-	    //    //gamesCommonJs: {
-	    //    //    cwd: "src",
-	    //    //    src: [
-        //    //        "games/common/js/GameEngine.js",
-        //    //        "games/common/js/GameSave.js",
-        //    //        "games/common/js/GameInput.js",
-        //    //        "games/common/js/GameUtils.js",
-        //    //        "games/common/js/physics/SAT.js",
-        //    //        "games/common/js/graphics/GameGraphics.js",
-        //    //        "games/common/js/view/GameView.js",
-        //    //        "games/common/js/view/TitleView.js",
-        //    //        "games/common/js/view/GameSaveView.js"
-	    //    //    ],
-	    //    //    dest: "src/js/min/gamesCommon.js"
-	    //    //},
+	        masterJs: {
+	            src: [
+	        		"src/js/plugins/sammy.js",
+                    "src/js/plugins/jquery.stellar.min.js",
+	        		"src/js/utils.js",
+	        		"src/js/models/*.js",
+	        		"src/js/routing.js",
+	        		"src/js/main.js"
+	            ],
+	            dest: "assets/master.js"
+	        },
 
-	    //    //pageDormanticide: {
-	    //    //    cwd: "src",
-	    //    //    src: [
-        //    //        "<%= concat_sourcemap.gamesCommonJs.src %>",
-        //    //        "games/dormanticide/js/view/OverworldView.js",
-        //    //        "games/dormanticide/js/view/BattleView.js",
-        //    //        "games/dormanticide/js/dormant/Dormant.js",
-        //    //        "games/dormanticide/js/dormant/FightAction.js",
-        //    //        "games/dormanticide/js/main.js"
-	    //    //    ],
-	    //    //    dest: "src/js/min/pageDormanticide.js",
-	    //    //},
+	        gamesCommonJs: {
+	            src: [
+                    "src/games/common/js/GameEngine.js",
+                    "src/games/common/js/GameSave.js",
+                    "src/games/common/js/GameInput.js",
+                    "src/games/common/js/GameUtils.js",
+                    "src/games/common/js/physics/SAT.js",
+                    "src/games/common/js/graphics/GameGraphics.js",
+                    "src/games/common/js/view/GameView.js",
+                    "src/games/common/js/view/TitleView.js",
+                    "src/games/common/js/view/GameSaveView.js"
+	            ],
+	            dest: "assets/gamesCommon.js"
+	        },
 
-	    //    //pageVamp: {
-	    //    //    cwd: "src",
-	    //    //    src: [
-        //    //        "<%= concat_sourcemap.gamesCommonJs.src %>",
-        //    //        "games/vamp/js/view/LevelView.js",
-        //    //        "games/vamp/js/level/level1.js",
-        //    //        "games/vamp/js/vamp.js",
-        //    //        "games/vamp/js/main.js"
-	    //    //    ],
-	    //    //    dest: "src/js/min/pageVamp.js",
-	    //    //},
+	        pageDormanticide: {
+	            src: [
+                    "<%= concat.gamesCommonJs.src %>",
+                    "src/games/dormanticide/js/view/OverworldView.js",
+                    "src/games/dormanticide/js/view/BattleView.js",
+                    "src/games/dormanticide/js/dormant/Dormant.js",
+                    "src/games/dormanticide/js/dormant/FightAction.js",
+                    "src/games/dormanticide/js/main.js"
+	            ],
+	            dest: "assets/pageDormanticide.js",
+	        },
 
-	    //    masterCss: {
-	    //        src: "assets/css/*.css",
-	    //        dest: "assets/master.css"
-	    //    }
-	    //},
+	        pageVamp: {
+	            src: [
+                    "<%= concat.gamesCommonJs.src %>",
+                    "src/games/vamp/js/view/LevelView.js",
+                    "src/games/vamp/js/level/level1.js",
+                    "src/games/vamp/js/vamp.js",
+                    "src/games/vamp/js/main.js"
+	            ],
+	            dest: "assets/pageVamp.js",
+	        },
 
-	    //watch: {
-	    //    options: {
-	    //        livereload: true
-	    //    },
+	        masterCss: {
+	            src: "assets/css/*.css",
+	            dest: "assets/master.css"
+	        }
+	    },
 
-	    //    masterJs: {
-	    //        files: ["<%= concat_sourcemap.masterJs.src %>"],
-	    //        tasks: ["concat_sourcemap:masterJs"]
-	    //    },
+	    watch: {
+	        options: {
+	            livereload: true
+	        },
 
-	    //    //gamesCommonJs: {
-	    //    //    files: ["<%= concat_sourcemap.gamesCommonJs.src %>"],
-	    //    //    tasks: ["concat_sourcemap:gamesCommonJs", "concat_sourcemap:gamesCommonJs]
-	    //    //}
+	        masterJs: {
+	            files: ["<%= concat.masterJs.src %>"],
+	            tasks: ["concat:masterJs"]
+	        },
 
-	    //    pageDormanticide: {
-	    //        files: ["<%= concat_sourcemap.pageDormanticide.src %>"],
-	    //        tasks: ["concat_sourcemap:pageDormanticide"]
-	    //    },
+	        //gamesCommonJs: {
+	        //    files: ["<%= concat_sourcemap.gamesCommonJs.src %>"],
+	        //    tasks: ["concat_sourcemap:gamesCommonJs", "concat_sourcemap:gamesCommonJs]
+	        //}
 
-	    //    pageVamp: {
-	    //        files: ["<%= concat_sourcemap.pageVamp.src %>"],
-	    //        tasks: ["concat_sourcemap:pageVamp"]
-	    //    },
+	        pageDormanticide: {
+	            files: ["<%= concat.pageDormanticide.src %>"],
+	            tasks: ["concat:pageDormanticide"]
+	        },
 
-	    //    masterCss: {
-	    //        files: ["<%= concat.masterCss.src %>"],
-	    //        tasks: ["concat:masterCss"]
-	    //    }
-	    //},
+	        pageVamp: {
+	            files: ["<%= concat.pageVamp.src %>"],
+	            tasks: ["concat:pageVamp"]
+	        },
 
-	    //uglify: {
-	    //    masterJs: {
-	    //        files: {
-	    //            "<%= concat_sourcemap.masterJs.dest %>": ["src/js/analytics.js", "src/js/clientSideLogging", "<%= concat_sourcemap.masterJs.src %>"]
-	    //        }
-	    //    },
+	        sass: {    // TODO: other css files
+	            files: ["src/scss/**/*.scss"],
+	            tasks: ["sass", "concat:masterCss"] // TODO: copy
+	        }
+	    },
 
-	    //    pageDormanticide: {
-	    //        files: {
-	    //            "<%= concat_sourcemap.pageDormanticide.dest %>": ["src/js/analytics.js", "src/js/clientSideLogging", "<%= concat_sourcemap.pageDormanticide.src %>"]
-	    //        }
-	    //    },
+	    uglify: {
+	        masterJs: {
+	            files: {
+	                "<%= concat.masterJs.dest %>": ["src/js/analytics.js", "src/js/clientSideLogging", "<%= concat.masterJs.src %>"]
+	            }
+	        },
 
-	    //    pageDormanticide: {
-	    //        files: {
-	    //            "<%= concat_sourcemap.pageVamp.dest %>": ["src/js/analytics.js", "src/js/clientSideLogging", "<%= concat_sourcemap.pageVamp.src %>"]
-	    //        }
-	    //    }
-	    //},
+	        pageDormanticide: {
+	            files: {
+	                "<%= concat.pageDormanticide.dest %>": ["src/js/analytics.js", "src/js/clientSideLogging", "<%= concat.pageDormanticide.src %>"]
+	            }
+	        },
 
-	    //sass: {
-	    //    all: {
-	    //        files: [{
-	    //            expand: true,
-	    //            cwd: "src/scss",
-	    //            src: ["**/*.scss", "!vars.scss"],
-	    //            dest: "assets/css",
-	    //            ext: ".css"
-	    //        }]
-	    //    }
-	    //},
+	        pageDormanticide: {
+	            files: {
+	                "<%= concat.pageVamp.dest %>": ["src/js/analytics.js", "src/js/clientSideLogging", "<%= concat.pageVamp.src %>"]
+	            }
+	        }
+	    },
 
-	    //cssmin: {
-	    //    "<%= concat.masterCss.dest %>": "<%= concat.masterCss.src %>"
-	    //},
+	    sass: {
+	        all: {
+	            files: [{
+	                expand: true,
+	                cwd: "src/scss",
+	                src: ["**/*.scss", "!vars.scss"],
+	                dest: "assets/css",
+	                ext: ".css"
+	            }]
+	        }
+	    },
 
-	    //copy: {
-	    //    allButScss: {
-	    //        files: [{
-	    //            expand: true,
-        //            cwd: "src",
-        //            src: ["**", "!scss"],
-        //            dest: "./"
-	    //        }]
-	    //    }
-	    //},
+	    cssmin: {
+	        "<%= concat.masterCss.dest %>": "<%= concat.masterCss.src %>"
+	    },
 
-	    //htmlmin: {
-	    //    options: {
-	    //        removeComments: true,
-	    //        collapseWhitespace: true,
-	    //        removeAttributeQuotes: true,
-	    //        removeEmptyAttributes: true,
-	    //        minifyJS: true,
-        //        minifyCSS: true
-	    //    },
+	    copy: {
+	        allBut_Html_Scss: {
+	            files: [{
+	                expand: true,
+                    cwd: "src",
+                    src: ["**", "!**/*.html", "!scss/**"],
+                    dest: "./"
+	            }]
+	        }
+	    },
 
-	    //    allHtml: {
-	    //        files: [{
-        //            expand: true,
-        //            cwd: "src",
-	    //            src: ["**/*.html"],
-        //            dest: "./"
-	    //        }]
-	    //    }
-	    //},
+	    htmlmin: {
+	        options: {
+	            removeComments: true,
+	            collapseWhitespace: true,
+	            removeAttributeQuotes: true,
+	            removeEmptyAttributes: true,
+	            minifyJS: true,
+                minifyCSS: true
+	        },
 
-	    //imagemin: {
-	    //    options: {
-	    //        optimizationLevel: 3,
-	    //    },
+	        all: {
+	            files: [{
+                    expand: true,
+                    cwd: "src",
+	                src: ["**/*.html"],
+                    dest: "./"
+	            }]
+	        }
+	    },
 
-	    //    allImages: {
-	    //        files: [{
-	    //            expand: true,
-	    //            cwd: "src/img",
-	    //            src: ["**/*.{png,jpg,gif,ico}"],
-        //            dest: "./img"
-	    //        }]
-	    //    }
+	    imagemin: {
+	        options: {
+	            optimizationLevel: 3,
+	        },
 
-        //    // TODO: game images
-	    //},
+	        all: {
+	            files: [{
+	                expand: true,
+	                cwd: "src/img",
+	                src: ["**/*.{png,jpg,gif,ico}"],
+                    dest: "./img"
+	            }]
+	        }
 
-	    //includereplace: {
-	    //    options: {
-        //        includesDir: "src"
-	    //    },
+            // TODO: game images
+	    },
 
-	    //    allImports: {
-        //        files: [{
-        //            expand: true,
-        //            cwd: "src",
-	    //            src: ["**/*.html"],
-	    //            dest: "./"
-        //        }]
-	    //    }
-	    //}
+	    includereplace: {
+	        options: {
+                includesDir: "src"
+	        },
+
+	        all: {
+                files: [{
+                    expand: true,
+                    cwd: "src",
+	                src: ["**/*.html"],
+	                dest: "./"
+                }]
+	        }
+	    }
 
         // TODO: bower (plugin manager - e.g. jQuery, sammy.js, ...)
 	});
 
 	grunt.loadNpmTasks("grunt-contrib-clean");
-    //grunt.loadNpmTasks("grunt-contrib-concat");
-	//grunt.loadNpmTasks("grunt-contrib-connect");
-    //grunt.loadNpmTasks("grunt-contrib-copy");
-	//grunt.loadNpmTasks("grunt-contrib-cssmin");
-    //grunt.loadNpmTasks("grunt-contrib-htmlmin");
-    //grunt.loadNpmTasks("grunt-contrib-imagemin");
-    //grunt.loadNpmTasks("grunt-include-replace");
-    //grunt.loadNpmTasks("grunt-contrib-sass");
-	//grunt.loadNpmTasks("grunt-contrib-uglify");
-    //grunt.loadNpmTasks("grunt-contrib-watch");
+    grunt.loadNpmTasks("grunt-contrib-concat");
+	grunt.loadNpmTasks("grunt-contrib-connect");
+    grunt.loadNpmTasks("grunt-contrib-copy");
+	grunt.loadNpmTasks("grunt-contrib-cssmin");
+    grunt.loadNpmTasks("grunt-contrib-htmlmin");
+    grunt.loadNpmTasks("grunt-contrib-imagemin");
+    grunt.loadNpmTasks("grunt-include-replace");        // TODO: use assemble instead
+    grunt.loadNpmTasks("grunt-contrib-sass");
+	grunt.loadNpmTasks("grunt-contrib-uglify");
+    grunt.loadNpmTasks("grunt-contrib-watch");
   
-    //grunt.registerTask("default", ["sass", "concat", "copy", "clean:dev"]);
-    //grunt.registerTask("default", ["sass", "concat", "copy", "includereplace", "connect:dev", "watch"]);
-    //grunt.registerTask("prd", ["sass", "concat", "uglify", "cssmin", "copy", "htmlmin", "includereplace", "imagemin"]);
-    //grunt.registerTask("srv", ["connect:qa"]);
+    // TODO: base dev in src (avoid copy)
+    grunt.registerTask("default", ["sass", "concat", "copy", "includereplace", "connect:dev", "watch"]);
+    grunt.registerTask("prd", ["clean:all", "sass", "concat", "uglify", "cssmin", "copy", "htmlmin", "includereplace", "imagemin", "clean:build"]);
+    grunt.registerTask("srv", ["connect:qa"]);
 
-	grunt.registerTask("clean", ["clean:all"]);
+    grunt.registerTask("cleanA", ["clean:all"]);
+    grunt.registerTask("cleanB", ["clean:build"]);
 };

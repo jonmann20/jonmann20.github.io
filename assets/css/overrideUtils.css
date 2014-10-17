@@ -37,17 +37,13 @@ a {
   color: rgba(92, 173, 214, 0.8);
   text-decoration: none;
   outline: none; }
-
-a:hover {
-  color: #5cadd6;
-  text-shadow: #61b0d7 0 0 6px; }
-
-a:visited,
-a:active {
-  color: #5dafd7; }
-
-a:focus {
-  outline: 0; }
+  a:hover {
+    color: #5cadd6;
+    text-shadow: #61b0d7 0 0 6px; }
+  a:visited, a:active {
+    color: #5dafd7; }
+  a:focus {
+    outline: 0; }
 
 /*#endregion*/
 /*#region Fonts */
@@ -208,20 +204,16 @@ br.clr {
   background: rgba(107, 107, 107, 0.64);
   box-shadow: 0 3px 0 rgba(54, 54, 54, 0.94);
   opacity: 1; }
-
-.bigBtn span {
-  padding-right: 10px;
-  vertical-align: -1px; }
-
-.bigBtn:hover,
-.bigBtn:focus {
-  background: #cc5500;
-  box-shadow: 0 3px 0 #662b00; }
-
-.bigBtn:active {
-  box-shadow: none;
-  margin-top: 11px;
-  transition: all 0.05s; }
+  .bigBtn span {
+    padding-right: 10px;
+    vertical-align: -1px; }
+  .bigBtn:hover, .bigBtn:focus {
+    background: #cc5500;
+    box-shadow: 0 3px 0 #662b00; }
+  .bigBtn:active {
+    box-shadow: none;
+    margin-top: 11px;
+    transition: all 0.05s; }
 
 .colL .bigBtn {
   margin-left: -20px;

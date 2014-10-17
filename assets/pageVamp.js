@@ -1276,4 +1276,236 @@ GameSaveView.prototype = (function() {
         }
     };
 })();
-//# sourceMappingURL=gamesCommon.js.map
+/// <reference path="../linker.js" />
+
+function LevelView(player, curLvl) {
+    this.privates = {};
+    this.player = player;
+    this.curLvl = curLvl;
+
+    this.init();
+}
+
+LevelView.prototype = (function() {
+    var that,
+        onUpdateSet = false,
+        onRenderSet = false
+    ;
+
+
+    function checkCollision() {
+        if(that.player.invincible) {
+            if(that.player.invincibleTimer-- === 0) {
+                that.player.invincible = false;
+                that.player.invincibleTimer = 120;
+            }
+
+            return;
+        }
+
+        for(var i = 0; i < that.curLvl.projectiles.length; ++i){
+            var collided = SAT.testPolygonPolygon(that.player, that.curLvl.projectiles[i]);
+            if(collided) {
+                --that.player.hp;
+                that.player.invincible = true;
+                break;
+            }
+        }
+    }
+
+
+    return {
+        then: function(callback){
+            this.privates.callback = callback;
+        },
+
+        init: function(){
+            that = this;
+        },
+
+        update: function() {
+            this.curLvl.update();
+            this.player.update();
+
+            //if(onUpdateSet)
+            //    this.onUpdate();
+
+            checkCollision();
+        },
+
+        onUpdate: function(callback) {
+            onUpdateSet = true;
+            this.onUpdate = callback;
+        },
+
+        render: function () {
+            this.curLvl.render();
+            this.player.render();
+
+            //if(onRenderSet)
+            //    this.onRender();
+        },
+
+        onRender: function(callback) {
+            onRenderSet = true;
+            this.onRender = callback;
+        }
+    };
+})();
+/// <reference path="../linker.js" />
+
+function Level1() {
+    
+    this.init();
+}
+
+Level1.prototype = (function() {
+
+
+    return {
+        projectiles: [],
+
+
+        init: function() {
+            for(var i = 0; i < 10; ++i) {
+                var projectile = new SAT.Box(new SAT.Vector(
+                    Math.floor((Math.random() * canvas.width) + 0),      // random number between 0 and canvas.width
+                    canvas.height
+                ), 10, 20).toPolygon();
+
+                projectile.speed = Math.floor((Math.random() * 10) + 3) * 0.1;
+
+                this.projectiles.push(projectile);
+            }
+        },
+
+        update: function(){
+            for(var i = 0; i < this.projectiles.length; ++i) {
+                this.projectiles[i].pos.y -= this.projectiles[i].speed;
+            }
+        },
+
+        render: function() {
+            // background
+            ctx.fillStyle = "#000";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // projectiles
+
+            ctx.fillStyle = "silver";
+            for(var i = 0; i < this.projectiles.length; ++i){
+                ctx.fillRect(this.projectiles[i].pos.x, this.projectiles[i].pos.y, 10, 20);
+            }
+        }
+    };
+})();
+/// <reference path="linker.js" />
+
+function Vamp() {
+    this.init();
+}
+
+Vamp.prototype = (function() {
+    var img = new Image(),
+        imgReady = false
+    ;
+    img.onload = function() {
+        imgReady = true;
+    };
+    img.src = "img/vamp.png";
+
+    var speed = 4;
+
+    return {
+        w: 40,
+        h: 40,
+        hp: 3,
+        invincible: false,
+        invincibleTimer: 120,
+
+        init: function(){
+            $.extend(this, new SAT.Box(new SAT.Vector(0, 0), this.w, this.h).toPolygon());
+        },
+
+        update: function() {
+            // horizontal
+            if(game.input.keysDown[KeyCode.RIGHT]){
+                this.pos.x += speed;
+            }
+            else if(game.input.keysDown[KeyCode.LEFT]) {
+                this.pos.x -= speed;
+            }
+
+            // vertical
+            if(game.input.keysDown[KeyCode.UP]) {
+                this.pos.y -= speed;
+            }
+            else if(game.input.keysDown[KeyCode.DOWN]) {
+                this.pos.y += speed;
+            }
+
+            if(this.hp <= 0) {
+                alert("You died");
+                location.reload();
+            }
+        },
+
+        render: function() {
+            // body
+            var doDraw = true;
+            if(this.invincible) {
+                var t = this.invincibleTimer % 30;
+                if(t >= 0 && t < 15)
+                    doDraw = false;
+            }
+
+            if(doDraw) {
+                ctx.fillStyle = "yellow";
+                ctx.fillRect(this.pos.x, this.pos.y, this.w, this.h);
+            }
+
+            // health
+            ctx.fillStyle = "red";
+            for(var i = 0; i < this.hp; ++i) {
+                ctx.fillRect(this.pos.x - 10 + i*20, this.pos.y - 20, 20, 10);
+            }
+        }
+    };
+})();
+
+/// <reference path="linker.js" />
+
+/*
+    The vamp game.
+    Declares game as a global.
+*/
+(function Main() {
+    game = new GameEngine();
+    game.start();
+
+
+    var titleView = new TitleView("Vamp: The Great and Powerful", true);
+    titleView.then(function () {
+        game.utils.switchView(saveView);
+    });
+
+    var saveView = new GameSaveView();
+    saveView.then(function (key) {
+        if (key === KeyCode.ESC) {
+            game.utils.switchView(titleView);
+        }
+        else if (key === KeyCode.ENTER) {
+            game.utils.switchView(lvlView);
+        }
+    });
+
+
+    var vamp = new Vamp();
+    var lvl1 = new Level1();
+
+    var lvlView = new LevelView(vamp, lvl1);
+
+    game.view = titleView;
+})();
+
+//# sourceMappingURL=pageVamp.js.map
