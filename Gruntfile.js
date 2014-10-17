@@ -31,7 +31,6 @@ module.exports = function(grunt) {
 	        masterJs: {
 	            src: [
 	        		"src/js/plugins/sammy.js",
-                    "src/js/plugins/jquery.stellar.min.js",
 	        		"src/js/utils.js",
 	        		"src/js/models/*.js",
 	        		"src/js/routing.js",

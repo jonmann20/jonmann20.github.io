@@ -101,7 +101,7 @@
 
   .outFooter {
     height: 320px;
-    background: rgba(51, 51, 51, 0.72); }
+    background: rgba(51, 51, 51, 0.71); }
     .outFooter::before, .outFooter::after {
       display: none; }
 
@@ -115,6 +115,8 @@
     margin: 25px auto 0;
     width: 89%;
     padding-right: 28px; }
+    .main img {
+      max-width: 100%; }
 
   .colL {
     display: none;
@@ -174,7 +176,4 @@
     margin-top: 85px; }
 
   .dPlaygroundNav a {
-    margin-right: auto !important; }
-
-  .portfolio img {
-    max-width: 100%; } }
+    margin-right: auto !important; } }

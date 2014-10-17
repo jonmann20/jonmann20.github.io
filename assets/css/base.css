@@ -187,7 +187,7 @@ br.clr {
 .colR > div,
 .twitter-timeline-rendered,
 .music .colR iframe {
-  background: rgba(51, 51, 51, 0.72);
+  background: rgba(51, 51, 51, 0.71);
   padding: 1px 15px 5px 15px;
   border-radius: 2px;
   box-shadow: 0 1px 7px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.15); }
