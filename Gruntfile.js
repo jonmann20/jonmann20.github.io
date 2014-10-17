@@ -175,8 +175,7 @@ module.exports = function(grunt) {
 	        all: {
 	            files: [{
                     expand: true,
-                    cwd: "src",
-	                src: ["**/*.html"],
+	                src: ["**/*.html", "!src/**"],
                     dest: "./"
 	            }]
 	        }
@@ -190,9 +189,9 @@ module.exports = function(grunt) {
 	        all: {
 	            files: [{
 	                expand: true,
-	                cwd: "src/img",
+	                cwd: "img",
 	                src: ["**/*.{png,jpg,gif,ico}"],
-                    dest: "./img"
+                    dest: "img"
 	            }]
 	        }
 
@@ -231,7 +230,7 @@ module.exports = function(grunt) {
   
     // TODO: base dev in src (avoid copy)
     grunt.registerTask("default", ["sass", "concat", "copy", "includereplace", "connect:dev", "watch"]);
-    grunt.registerTask("prd", ["clean:all", "sass", "concat", "uglify", "cssmin", "copy", "htmlmin", "includereplace", "imagemin", "clean:build"]);
+    grunt.registerTask("prd", ["clean:all", "sass", "concat", "uglify", "cssmin", "copy", "imagemin", "includereplace", "htmlmin"]);
     grunt.registerTask("srv", ["connect:qa"]);
 
     grunt.registerTask("cleanA", ["clean:all"]);
