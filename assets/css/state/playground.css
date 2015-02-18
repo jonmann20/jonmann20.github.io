@@ -16,6 +16,11 @@
 .playground .rangeInputs label {
   display: block;
   margin-bottom: 5px; }
+.playground .rangeInputs input {
+  cursor: ew-resize; }
+  .playground .rangeInputs input:focus {
+    box-shadow: none;
+    outline-color: transparent; }
 .playground .txtBg:first-child {
   margin-bottom: 20px; }
 
@@ -82,3 +87,5 @@
 .nav6 .rangeInputs {
   float: left;
   margin-top: 28px; }
+
+/*# sourceMappingURL=playground.css.map */
