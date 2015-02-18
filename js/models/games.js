@@ -5,7 +5,7 @@
 
             if (page === "index") {
                 that.load("/games/index.html", function (data) {
-                    jw.Utils.require("/js/plugins/jquery.hoverIntent.min.js", function () { });
+                    jw.Utils.require("/js/plugins/jquery.hoverIntent.js", function () { });
 
                     jw.Utils.require("/js/plugins/jquery.listCarousel.js", function () {
                         $("ul").listCarousel();

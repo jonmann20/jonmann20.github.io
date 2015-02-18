@@ -116,19 +116,19 @@ jw.BallPit = (function ($, undefined) {
             canvas.height = canvas.width / 2;
 
             // set up modifications 
-            $(".numBalls").on("change", function () {
+            $(".numBalls").on("input", function () {
                 var num = $(this).val();
                 $(".litNumBalls").text(num);
                 fixArr(num);
             });
 
-            $(".sizeBalls").on("change", function () {
+            $(".sizeBalls").on("input", function () {
                 var num = $(this).val();
                 $(".litSizeBalls").text(num);
                 radius = num;
             });
 
-            $(".speedBalls").on("change", function () {
+            $(".speedBalls").on("input", function () {
                 var num = $(this).val();
                 updateUserSpeed($(".litSpeedBalls").text(), num);
                 $(".litSpeedBalls").text(num);

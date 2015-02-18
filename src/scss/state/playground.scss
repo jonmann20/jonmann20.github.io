@@ -27,6 +27,15 @@
         	display: block;
 	        margin-bottom: 5px;
         }
+
+        input {
+            cursor: ew-resize;
+
+            &:focus {
+                box-shadow: none;
+                outline-color: transparent;
+            }
+        }
     }
 
     .txtBg {

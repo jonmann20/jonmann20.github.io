@@ -53,7 +53,6 @@ a {
   src: url("/font/icomoon.svg#icomoon") format("svg"), url("/font/icomoon.eot?#iefix") format("embedded-opentype"), url("/font/icomoon.ttf") format("truetype"), url("/font/icomoon.woff") format("woff");
   font-weight: normal;
   font-style: normal; }
-
 [class*="icon-"] {
   font-family: "icomoon";
   speak: none;
@@ -223,3 +222,5 @@ br.clr {
   text-align: center; }
 
 /*#endregion*/
+
+/*# sourceMappingURL=base.css.map */

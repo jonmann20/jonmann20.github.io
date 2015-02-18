@@ -7,7 +7,7 @@
         "//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js": false,
         "//platform.twitter.com/widgets.js": false,
         "/js/plugins/jquery.cycle.lite.js": false,
-        "/js/plugins/jquery.hoverIntent.min.js": false,
+        "/js/plugins/jquery.hoverIntent.js": false,
         "/js/plugins/jquery.listCarousel.js": false,
         "/js/plugins/jquery.star_bg.js": false,
         "/js/stars.js": false,

@@ -246,23 +246,17 @@ footer {
 @-webkit-keyframes wave {
   0% {
     transform: translateY(0); }
-
   50% {
     transform: translateY(-10px); }
-
   100% {
     transform: translateY(0); } }
-
 @keyframes wave {
   0% {
     transform: translateY(0); }
-
   50% {
     transform: translateY(-10px); }
-
   100% {
     transform: translateY(0); } }
-
 /*#endregion*/
 /*#region ********** Page Templates **********/
 .pageFullW .page {
@@ -297,3 +291,5 @@ footer {
   display: block; }
 
 /*#endregion*/
+
+/*# sourceMappingURL=layout.css.map */

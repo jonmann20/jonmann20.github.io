@@ -70,31 +70,24 @@
 @-webkit-keyframes spinningH {
   0% {
     -webkit-transform: rotateX(0deg) rotateY(0deg); }
-
   25% {
     -webkit-transform: rotateX(180deg) rotateY(180deg); }
-
   50% {
     -webkit-transform: rotateX(90deg) rotateY(0deg); }
-
   75% {
     -webkit-transform: rotateX(270deg) rotateY(270deg); }
-
   100% {
     -webkit-transform: rotateX(360deg) rotateY(360deg); } }
-
 @keyframes spinningH {
   0% {
     transform: rotateX(0deg) rotateY(0deg); }
-
   25% {
     transform: rotateX(180deg) rotateY(180deg); }
-
   50% {
     transform: rotateX(90deg) rotateY(0deg); }
-
   75% {
     transform: rotateX(270deg) rotateY(270deg); }
-
   100% {
     transform: rotateX(360deg) rotateY(360deg); } }
+
+/*# sourceMappingURL=bCube.css.map */
