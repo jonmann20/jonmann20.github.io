@@ -3,6 +3,10 @@ jonmann20.github.com
 
 My personal website.
 
+Setup
+-----
+* `npm install`
+
 Develop
 -------
 * Develop in `src` on `dev` branch
