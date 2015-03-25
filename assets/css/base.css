@@ -34,14 +34,14 @@ h1, h2, h3, h4, h5, h6 {
   text-shadow: 0 2px 3px #111; }
 
 a {
-  color: rgba(92, 173, 214, 0.8);
+  color: #5cadd6;
   text-decoration: none;
   outline: none; }
   a:hover {
-    color: #5cadd6;
-    text-shadow: #61b0d7 0 0 6px; }
+    color: #70b8db;
+    text-shadow: #70b8db 0 0 6px; }
   a:visited, a:active {
-    color: #5dafd7; }
+    color: #47a3d1; }
   a:focus {
     outline: 0; }
 
@@ -186,7 +186,7 @@ br.clr {
 .colR > div,
 .twitter-timeline-rendered,
 .music .colR iframe {
-  background: rgba(51, 51, 51, 0.71);
+  background: rgba(51, 51, 51, 0.67);
   padding: 1px 15px 5px 15px;
   border-radius: 2px;
   box-shadow: 0 1px 7px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.15); }

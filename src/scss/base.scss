@@ -36,18 +36,18 @@ h1,h2,h3,h4,h5,h6 {
 	text-shadow: 0 2px 3px #111;
 }
 a {
-	color: hsla(200, 60%, 60%, 0.8);
+	color: hsl(200, 60%, 60%);
 	text-decoration: none;
 	outline: none;
 
     &:hover {
-    	color: hsla(200, 60%, 60%, 1);
-	    text-shadow: #61b0d7 0 0 6px;
+    	color: hsl(200, 60%, 65%);
+	    text-shadow: hsl(200, 60%, 65%) 0 0 6px;
     }
 
     &:visited,
     &:active {
-        color: #5dafd7;
+        color: hsl(200, 60%, 55%);
     }
 
     &:focus {

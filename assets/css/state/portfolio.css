@@ -1,6 +1,7 @@
 .portfolio .bigBtn {
   margin-bottom: 20px;
-  width: 240px; }
+  max-width: 275px;
+  width: auto; }
 
 .whtImg {
   float: left;
