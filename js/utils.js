@@ -13,8 +13,7 @@
         "/js/stars.js": false,
         "/js/ballPit.js": false,
         "/js/bouncingObj.js": false,
-        "/js/computerGraphics/web/computergraphics.dart.js": false,
-        "/js/ustream.js": false
+        "/js/computerGraphics/web/computergraphics.dart.js": false
     };
 
     return {

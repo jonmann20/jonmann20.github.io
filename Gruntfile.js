@@ -7,16 +7,16 @@ module.exports = function(grunt) {
 	    connect: {
 	        dev: {
 	            options: {
-	                hostname: "jon",
-	                port: 88,
+	                hostname: "jonw",
+	                port: 1612,
 	                open: false//,base: "src"
 	            }
 	        },
 
 	        qa: {
 	            options: {
-	                hostname: "jon",
-	                port: 88,
+	                hostname: "jonw",
+	                port: 1612,
 	                open: true,
                     keepalive: true
 	            }

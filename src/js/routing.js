@@ -113,11 +113,6 @@ jw.Routing = (function() {
             jw.Routing.lastPg = "stars";
         });
 
-        this.route("get", "#playground/USTREAM-demo", function () {
-            jw.PlaygroundModel.render(this, "ustream");
-            jw.Routing.lastPg = "ustream";
-        });
-
         // Portfolio
         this.route("get", "#portfolio", function () {
             jw.PortfolioModel.render(this, "index");

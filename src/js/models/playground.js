@@ -55,19 +55,6 @@
                 );
                 jw.body.addClass("playground playInner nav5");
             }
-            else if (page === "ustream") {
-                that.load("/playground/USTREAM-demo.html", function (data) {
-                    jw.Utils.require("/js/ustream.js", function () {
-                        jw.Ustream.init();
-                    });
-                }).swap();
-
-                document.title = "USTREAM demo | Playground";
-                jw.head.append("<meta name='description' content='A USTREAM api demo.' />" +
-                               "<meta name='keywords' content='USTREAM' />"
-                );
-                jw.body.addClass("playground playInner uStreamPage nav5");
-            }
             else if (page === "bCube") {
                 that.load("/playground/breakdancing-cube.html", function (data) {
                     $("#cube").on("click", function (e) {
