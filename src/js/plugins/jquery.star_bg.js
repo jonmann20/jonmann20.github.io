@@ -70,7 +70,7 @@
 
         function loop() {
             render();
-            $.fn.star_bg.animLoop = requestAnimFrame(loop);
+            $.fn.star_bg.animLoop = requestAnimationFrame(loop);
         }
 
         // start program

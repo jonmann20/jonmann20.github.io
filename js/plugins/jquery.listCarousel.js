@@ -11,16 +11,16 @@
 		var overID,
             active = fixFirstLetter(options.active);
 
-		return $(this).find("a:not(.bigBtn)").on("click", function (e) {    
+		return $(this).find("a:not(.bigBtn)").on("click", function(e) {    
 		    var check = $(this).parent().parent().parent().hasClass("dPlaygroundNav");
-		    if (check) {
+		    if(check) {
                 // TODO: fix left unbiding
 		        return;
 		    }
 
 		    overID = fixFirstLetter($(this).attr("id"));
 
-		    if (active != overID) {
+		    if(active != overID) {
 		        e.preventDefault();
 
 		        var fixedActive = fixFirstLetter(active, true);
@@ -30,7 +30,6 @@
 
 		        $("#div" + active).fadeOut(options.speedOut);
 		        var div = $("#div" + overID).fadeIn(options.speedIn);
-
 		        jw.Main.fixColRHeight(div.height());
 
 		        active = overID;
@@ -43,5 +42,4 @@
         speedIn: 450,
 		active: "default"
 	}
-	
 })(jQuery);

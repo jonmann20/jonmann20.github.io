@@ -1,4 +1,4 @@
-﻿jw.ContactModel = (function ($, undefined) {
+﻿jw.ContactModel = (function() {
     return {
         render: function (that) {
             jw.Utils.resetModel();
@@ -9,4 +9,4 @@
             jw.body.addClass("contact");
         }
     };
-})(jQuery);
+})();

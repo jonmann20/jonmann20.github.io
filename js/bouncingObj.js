@@ -116,7 +116,7 @@ jw.Bounce = (function() {
         update();
         render();
         
-        animLoop = requestAnimFrame(loop);
+        animLoop = requestAnimationFrame(loop);
     }
 
 
@@ -162,12 +162,12 @@ jw.Bounce = (function() {
 
             clickEvents();
             setup();
-            animLoop = requestAnimFrame(loop);
+            animLoop = requestAnimationFrame(loop);
         },
 
         deInit: function() {
             // TODO: not working when going to other page (e.g. About then back)
-            window.cancelAnimationFrame(animLoop);
+            cancelAnimationFrame(animLoop);
             $(".bigBtn").off();
         }
     };

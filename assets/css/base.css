@@ -1,9 +1,11 @@
 /*#region **** override browser elts ****/
+* {
+  box-sizing: border-box; }
+
 body {
   background-color: #bbb;
   background-image: url(/img/jonBig.jpg);
   background-position-x: 51% !important;
-  /* doesn't work in firfox */
   background-repeat: repeat-y;
   background-attachment: fixed;
   color: #d2d2d2;
@@ -195,9 +197,8 @@ br.clr {
   padding: 0; }
 
 .bigBtn {
-  display: block;
+  display: inline-block;
   margin-top: 10px;
-  width: 150px;
   padding: 9px 14px;
   border-radius: 10px;
   font-weight: bold;

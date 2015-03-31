@@ -1,4 +1,7 @@
 /*#region ************** Global **************/
+html {
+  min-width: 315px; }
+
 body {
   line-height: 1.25;
   font-size: 87.5%;
@@ -7,11 +10,8 @@ body {
 
 .page {
   max-width: 1520px;
-  margin: 0 auto; }
-
-.inner {
   margin: 0 auto;
-  width: 88%; }
+  padding: 0 6%; }
 
 /*#endregion*/
 /*#region ************** Header **************/
@@ -27,6 +27,20 @@ header {
     min-width: 165px;
     border-radius: 0 36px;
     box-shadow: 0 1px 7px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.15); }
+    header nav:first-child {
+      border-radius: 43px 0;
+      text-indent: 9px;
+      padding-bottom: 20px;
+      margin-top: 0; }
+      header nav:first-child a {
+        text-align: center;
+        line-height: 1.1 !important;
+        margin-bottom: 0;
+        margin-right: 0; }
+      header nav:first-child i {
+        float: none;
+        margin-left: 0;
+        padding-top: 0; }
     header nav a:active {
       background: transparent; }
     header nav a i {
@@ -83,20 +97,6 @@ header nav a:hover i,
   -webkit-text-stroke: 0;
   text-stroke: 0; }
 
-header nav:first-child {
-  border-radius: 43px 0;
-  text-indent: 9px;
-  padding-bottom: 20px; }
-  header nav:first-child a {
-    text-align: center;
-    line-height: 1.1 !important;
-    margin-bottom: 0;
-    margin-right: 0; }
-  header nav:first-child i {
-    float: none;
-    margin-left: 0;
-    padding-top: 0; }
-
 .hdrNav2 {
   margin-top: 30px;
   padding-top: 5px; }
@@ -141,8 +141,7 @@ header nav:first-child {
 .colL {
   float: left;
   width: 37%;
-  min-width: 121px;
-  margin-bottom: 120px; }
+  min-width: 121px; }
   .colL ul {
     font-size: 1.15em; }
 
@@ -150,6 +149,8 @@ header nav:first-child {
   float: right;
   width: 58%;
   padding-bottom: 13px; }
+  .colR img {
+    max-width: 100%; }
   .colR.noHdr {
     margin-top: 51px; }
   .colR > div {
@@ -170,33 +171,7 @@ footer {
   footer a {
     font-size: 1.25em;
     vertical-align: -2px;
-    display: inline-block;
-    -webkit-animation: wave 0.3s linear;
-    animation: wave 0.3s linear; }
-    footer a:nth-of-type(1) {
-      -webkit-animation-delay: 0.15s;
-      animation-delay: 0.15s; }
-    footer a:nth-of-type(2) {
-      -webkit-animation-delay: 0.19s;
-      animation-delay: 0.19s; }
-    footer a:nth-of-type(3) {
-      -webkit-animation-delay: 0.23s;
-      animation-delay: 0.23s; }
-    footer a:nth-of-type(4) {
-      -webkit-animation-delay: 0.27s;
-      animation-delay: 0.27s; }
-    footer a:nth-of-type(5) {
-      -webkit-animation-delay: 0.31s;
-      animation-delay: 0.31s; }
-    footer a:nth-of-type(6) {
-      -webkit-animation-delay: 0.35s;
-      animation-delay: 0.35s; }
-    footer a:nth-of-type(7) {
-      -webkit-animation-delay: 0.39s;
-      animation-delay: 0.39s; }
-    footer a:nth-of-type(8) {
-      -webkit-animation-delay: 0.43s;
-      animation-delay: 0.43s; }
+    display: inline-block; }
   footer .footL {
     float: left; }
     footer .footL a {
@@ -219,7 +194,7 @@ footer {
   margin-top: -94px;
   width: 100%;
   height: 28px;
-  padding: 20px 0 19px;
+  padding: 20px 0 47px;
   font-size: 127%;
   background: rgba(58, 57, 58, 0.6);
   border-top: 1px solid #464546; }
@@ -243,26 +218,10 @@ footer {
   width: 70%;
   margin: 0 auto; }
 
-@-webkit-keyframes wave {
-  0% {
-    transform: translateY(0); }
-  50% {
-    transform: translateY(-10px); }
-  100% {
-    transform: translateY(0); } }
-@keyframes wave {
-  0% {
-    transform: translateY(0); }
-  50% {
-    transform: translateY(-10px); }
-  100% {
-    transform: translateY(0); } }
 /*#endregion*/
 /*#region ********** Page Templates **********/
 .pageFullW .page {
   max-width: 98%; }
-.pageFullW .inner {
-  width: 99.1%; }
 .pageFullW header {
   margin-right: 0; }
   .pageFullW header nav:first-child {
@@ -279,14 +238,13 @@ footer {
 .pageFullW canvas {
   box-shadow: 0 0 26px -2px #000; }
 
-.absHover .colR div > p {
-  margin-bottom: 12px;
-  width: 80%; }
 .absHover .colR > div {
   position: absolute;
   display: none;
   width: 44%;
-  max-width: 838px; }
+  max-width: 728px; }
+.absHover .colR div > p {
+  margin-bottom: 12px; }
 .absHover .colR #divDefualt {
   display: block; }
 

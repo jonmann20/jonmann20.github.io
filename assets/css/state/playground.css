@@ -62,15 +62,6 @@
 .iframeWrap {
   margin-top: -480px; }
 
-.floatingSun canvas:hover {
-  cursor: -webkit-grab;
-  cursor: -moz-grab;
-  cursor: grab; }
-.floatingSun canvas:active {
-  cursor: -webkit-grabbing;
-  cursor: -moz-grabbing;
-  cursor: grabbing; }
-
 .nav2 label {
   cursor: pointer; }
 .nav2 input:focus {

@@ -134,19 +134,19 @@ module.exports = function(grunt) {
 	    uglify: {
 	        masterJs: {
 	            files: {
-	                "<%= concat.masterJs.dest %>": ["src/js/analytics.js", "src/js/clientSideLogging", "<%= concat.masterJs.src %>"]
+	                "<%= concat.masterJs.dest %>": ["src/js/analytics.js", "src/js/clientSideLogging.js", "<%= concat.masterJs.src %>"]
 	            }
 	        },
 
 	        pageDormanticide: {
 	            files: {
-	                "<%= concat.pageDormanticide.dest %>": ["src/js/analytics.js", "src/js/clientSideLogging", "<%= concat.pageDormanticide.src %>"]
+	                "<%= concat.pageDormanticide.dest %>": ["src/js/analytics.js", "src/js/clientSideLogging.js", "<%= concat.pageDormanticide.src %>"]
 	            }
 	        },
 
-	        pageDormanticide: {
+	        pageVamp: {
 	            files: {
-	                "<%= concat.pageVamp.dest %>": ["src/js/analytics.js", "src/js/clientSideLogging", "<%= concat.pageVamp.src %>"]
+	                "<%= concat.pageVamp.dest %>": ["src/js/analytics.js", "src/js/clientSideLogging.js", "<%= concat.pageVamp.src %>"]
 	            }
 	        }
 	    },
@@ -227,6 +227,10 @@ module.exports = function(grunt) {
 	                dest: "./"
                 }]
 	        }
+	    },
+
+	    jshint: {
+	    	all: ["Gruntfile.js", "src/js/**/*.js", "!src/js/analytics.js",  "!src/js/plugins/**"]
 	    }
 
         // TODO: bower (plugin manager - e.g. jQuery, sammy.js, ...)
@@ -239,6 +243,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks("grunt-contrib-cssmin");
     grunt.loadNpmTasks("grunt-contrib-htmlmin");
     grunt.loadNpmTasks("grunt-contrib-imagemin");
+    grunt.loadNpmTasks("grunt-contrib-jshint");
     grunt.loadNpmTasks("grunt-include-replace");        // TODO: use assemble instead
     grunt.loadNpmTasks("grunt-contrib-sass");
 	grunt.loadNpmTasks("grunt-contrib-uglify");

@@ -1,6 +1,10 @@
 @import "vars";
 
 /*#region ************** Global **************/
+html {
+	min-width: 315px;
+}
+
 body {
 	line-height: 1.25; 
 	font-size: 87.5%;
@@ -11,69 +15,85 @@ body {
 .page {
 	max-width: 1520px; 
 	margin: 0 auto;
-}
-
-.inner {
-	margin: 0 auto;
-	width: 88%;
+	padding: 0 6%;
 }
 /*#endregion*/
 
 /*#region ************** Header **************/
 header {
-    position: fixed;
+	position: fixed;
 
-    nav {
-	    font-family: "Open Sans Condensed", "Verdana", sans-serif;
-	    font-size: 2.1em;
-	    text-align: center;
-	    background: $cardBg;
-	    margin-top: 35px;
-	    padding: 10px;
-	    min-width: 165px;
-	    border-radius: 0 36px;
-	    box-shadow: 0 1px 7px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.15);
+	nav {
+		font-family: "Open Sans Condensed", "Verdana", sans-serif;
+		font-size: 2.1em;
+		text-align: center;
+		background: $cardBg;
+		margin-top: 35px;
+		padding: 10px;
+		min-width: 165px;
+		border-radius: 0 36px;
+		box-shadow: 0 1px 7px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.15);
 
-        a {
-            &:active {
-                background: transparent;
-            }
+		&:first-child {
+			border-radius: 43px 0;	
+			text-indent: 9px;
+			padding-bottom: 20px;
+			margin-top: 0;
 
-            i {
-                font-size: 0.6em;
-	            -webkit-text-stroke: 0;
-	            text-stroke: 0;
-	            display: block;
-	            float: right;
-	            margin-left: 15px;
-	            padding-top: 10px;
-            }
-        }
+			a {
+				text-align: center;
+				line-height: 1.1 !important;
+				margin-bottom: 0;
+				margin-right: 0;
+			}
 
-        ul { // Playground Nav
-	        list-style-type: none;
-	        font-size: 58%;
-	        width: 90%;
-	        margin: 10px auto 4px auto;
-	        background: rgba(31, 31, 27, 0.6);
-	        padding: 10px 0;
-	        border-radius: 1px;
+			i {
+				float: none;
+				margin-left: 0;
+				padding-top: 0;
+			}
+		}
 
-            a {
-                margin-right: 0 !important;
+		a {
+			&:active {
+				background: transparent;
+			}
 
-                &:active {
-                    margin-bottom: 4px;
-                }
-            }
+			i {
+				font-size: 0.6em;
+				-webkit-text-stroke: 0;
+				text-stroke: 0;
+				display: block;
+				float: right;
+				margin-left: 15px;
+				padding-top: 10px;
+			}
+		}
 
-            #cube {
-                margin: inherit;
-	            width: inherit;
-	            height: inherit;
-            }
-        }
-    }
+		ul { // Playground Nav
+			list-style-type: none;
+			font-size: 58%;
+			width: 90%;
+			margin: 10px auto 4px auto;
+			background: rgba(31, 31, 27, 0.6);
+			padding: 10px 0;
+			border-radius: 1px;
+
+			a {
+				margin-right: 0 !important;
+
+				&:active {
+					margin-bottom: 4px;
+				}
+			}
+
+			#cube {
+				margin: inherit;
+				width: inherit;
+				height: inherit;
+			}
+		}
+	}
 }
 header nav a,
 header nav a:visited {      // TODO: combine with above?
@@ -101,30 +121,8 @@ header nav a:hover i,
 .contact nav .icon-phone {
 	color: hsla(0, 70%, 56%, 1) !important;
 	text-shadow: 0 3px 3px #000;
-    -webkit-text-stroke: 0;
+	-webkit-text-stroke: 0;
 	text-stroke: 0;
-}
-
-// First Nav
-header nav:first-child {
-	border-radius: 43px 0;	
-	text-indent: 9px;
-    padding-bottom: 20px;
-
-    a {
-    	text-align: center;
-	    line-height: 1.1 !important;
-	    margin-bottom: 0;
-	    margin-right: 0;
-    }
-
-    i {
-    	float: none;
-	    margin-left: 0;
-	    padding-top: 0;
-    }
-
-    
 }
 
 // Second Nav
@@ -132,25 +130,25 @@ header nav:first-child {
 	margin-top: 30px;
 	padding-top: 5px;
 
-    ul a {
-    	margin-bottom: 4px;
-	    text-align: center;
-    }
-        
-    .icon-controllernes {
-	    font-size: 0.72em;
-    }
+	ul a {
+		margin-bottom: 4px;
+		text-align: center;
+	}
+		
+	.icon-controllernes {
+		font-size: 0.72em;
+	}
 }
 
 // Back Nav
 .backNav {
-    a:hover span {
-	    color: #8cb118 !important
-    }
-    
-    span {
-	    display: inline;
-    }
+	a:hover span {
+		color: #8cb118 !important
+	}
+	
+	span {
+		display: inline;
+	}
 }
 
 .nav1 .playgroundNav li:nth-child(1) a,
@@ -186,219 +184,168 @@ header nav:first-child {
 	float: left;
 	width: 37%;
 	min-width: 121px;
-    margin-bottom: 120px;
 
-    ul {
-        font-size: 1.15em;
-    }
+	ul {
+		font-size: 1.15em;
+	}
 }
 .colR {
 	float: right;
 	width: 58%;
 	padding-bottom: 13px;
 
-    &.noHdr {
-        margin-top: 51px;
-    }
+	img {
+		max-width: 100%;
+	}
 
-    > div {
-        padding-bottom: 13px !important;
-    }
+	&.noHdr {
+		margin-top: 51px;
+	}
+
+	> div {
+		padding-bottom: 13px !important;
+	}
 }
 #divDefault {
-    display: block;
+	display: block;
 }
 /*#endregion*/
 
 /*#region ************** Footer **************/
 footer {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
+	position: fixed;
+	bottom: 0;
+	width: 100%;
 
-    &::before {
-        display: block;
-        height: 120px;
-    }
+	&::before {
+		display: block;
+		height: 120px;
+	}
 
-    a {
-        font-size: 1.25em;
-	    vertical-align: -2px;
-	    display: inline-block;
+	a {
+		font-size: 1.25em;
+		vertical-align: -2px;
+		display: inline-block;
+	}
 
-	    -webkit-animation: wave 0.3s linear;
-	    animation: wave 0.3s linear;
+	.footL {
+		float: left;
 
+		a {
+			margin: 0 0.18em;
+		}
+	}
 
-        &:nth-of-type(1) {
-	        -webkit-animation-delay: 0.15s;
-	        animation-delay: 0.15s;
-        }
-        &:nth-of-type(2) {
-	        -webkit-animation-delay: 0.19s;
-	        animation-delay: 0.19s;
-        }
-        &:nth-of-type(3) {
-	        -webkit-animation-delay: 0.23s;
-	        animation-delay: 0.23s;
-        }
-        &:nth-of-type(4) {
-	        -webkit-animation-delay: 0.27s;
-	        animation-delay: 0.27s;
-        }
-        &:nth-of-type(5) {
-	        -webkit-animation-delay: 0.31s;
-	        animation-delay: 0.31s;
-        }
-        &:nth-of-type(6) {
-	        -webkit-animation-delay: 0.35s;
-	        animation-delay: 0.35s;
-        }
-        &:nth-of-type(7) {
-	        -webkit-animation-delay: 0.39s;
-	        animation-delay: 0.39s;
-        }
-        &:nth-of-type(8) {
-	        -webkit-animation-delay: 0.43s;
-	        animation-delay: 0.43s;
-        }
+	.name {
+		display: inline-block;
+		text-indent: -999em;
+	}
 
-    }
+	.footAbout .name {  // TODO: combine with above?
+		text-indent: 0;
+	}
 
-    .footL {
-        float: left;
+	.icon-youtube-sign {
+		font-size: 1.254em;
+		vertical-align: -2px;
+	}
+	
+	.footContact {
+		// margin-right: 1.3em !important;
+	}
 
-        a {
-            margin: 0 0.18em;
-        }
-    }
-
-    .name {
-        display: inline-block;
-	    text-indent: -999em;
-    }
-
-    .footAbout .name {  // TODO: combine with above?
-        text-indent: 0;
-    }
-
-    .icon-youtube-sign {
-        font-size: 1.254em;
-	    vertical-align: -2px;
-    }
-    
-    .footContact {
-        // margin-right: 1.3em !important;
-    }
-
-    .footR {
-        float: right;
-	    color: #aaa;
-    }
+	.footR {
+		float: right;
+		color: #aaa;
+	}
 }
-.outFooter {    // height: 68px;
+.outFooter {
 	position: relative;
 	bottom: -26px;
-    margin-top: -94px;
+	margin-top: -94px;
 	width: 100%;
 	height: 28px;
-	padding: 20px 0 19px;
-    font-size: 127%;
-    background: rgba(58, 57, 58, 0.6);
-    border-top: 1px solid rgb(70, 69, 70);
+	padding: 20px 0 47px;
+	font-size: 127%;
+	background: rgba(58, 57, 58, 0.6);
+	border-top: 1px solid rgb(70, 69, 70);
 
-    &::before,
-    &::after {
-        content: "";
-        position: absolute;
-        left: 0;
-        background: rgba(50, 49, 50, 0.78);
-        width: 100%;
-        height: 100%;
-        z-index: -1;
-    }
+	&::before,
+	&::after {
+		content: "";
+		position: absolute;
+		left: 0;
+		background: rgba(50, 49, 50, 0.78);
+		width: 100%;
+		height: 100%;
+		z-index: -1;
+	}
 
-    &::before { // bottom of stack
-        background: rgba(50, 49, 50, 0.45);
-        top: -20px;
-	    height: 88px;
-    }
+	&::before { // bottom of stack
+		background: rgba(50, 49, 50, 0.45);
+		top: -20px;
+		height: 88px;
+	}
 
-    &::after {
-        top: -10px;
-	    height: 78px;
-    }
+	&::after {
+		top: -10px;
+		height: 78px;
+	}
 }
 .inFooter {
 	width: 70%;
 	margin: 0 auto;
 }
-
-@-webkit-keyframes wave {
-    0%   {transform: translateY(0);}
-    50%  {transform: translateY(-10px);}
-    100% {transform: translateY(0);}
-}
-@keyframes wave {
-    0%   {transform: translateY(0);}
-    50%  {transform: translateY(-10px);}
-    100% {transform: translateY(0);}
-}
 /*#endregion*/
 
 /*#region ********** Page Templates **********/
 .pageFullW {
-    .page {
-        max-width: 98%;
-    }
+	.page {
+		max-width: 98%;
+	}
 
-    .inner {
-        width: 99.1%;
-    }
+	header {
+	   margin-right: 0;
 
-    header {
-       margin-right: 0;
+	   nav:first-child {
+			text-indent: -8px;
+			margin: 18px 0 20px 0;
+			padding: 4px 0 6px 0;
+			border-radius: 25px 0;
+			width: 105px;
+	   }
+	}
 
-       nav:first-child {
-           	text-indent: -8px;
-	        margin: 18px 0 20px 0;
-	        padding: 4px 0 6px 0;
-	        border-radius: 25px 0;
-	        width: 105px;
-       }
-    }
+	.main {
+		margin: 0 auto inherit auto;
+		padding: 3px 26px 26px 28px;
 
-    .main {
-    	margin: 0 auto inherit auto;
-	    padding: 3px 26px 26px 28px;
+		.titleHeader {
+			margin-top: 8px;
+		}
+	}
 
-        .titleHeader {
-            margin-top: 8px;
-        }
-    }
-
-    canvas {
-        box-shadow: 0 0 26px -2px #000;
-    }
+	canvas {
+		box-shadow: 0 0 26px -2px #000;
+	}
 }
 
 .absHover {
-    .colR {
-        div > p {
-    	    margin-bottom: 12px;
-	        width: 80%;
-        }
+	.colR {
+		> div {
+			position: absolute;
+			display: none;
+			width: 44%;
+			max-width: 728px;
+		}
 
-        > div {
-            position: absolute;
-	        display: none;
-	        width: 44%;
-	        max-width: 838px;
-        }
+		div > p {
+			margin-bottom: 12px;
+		}
 
-        #divDefualt {
-            display: block;
-        }
-    }
+		#divDefualt {
+			display: block;
+		}
+	}
 }
 /*#endregion*/

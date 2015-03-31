@@ -102,22 +102,6 @@
 	
 }
 
-.floatingSun {
-    canvas {
-        &:hover {
-	        cursor: -webkit-grab; 
-	        cursor: -moz-grab;
-	        cursor: grab;
-        }
-
-        &:active {
-        	cursor: -webkit-grabbing; 
-	        cursor: -moz-grabbing;
-	        cursor: grabbing;
-        }
-    }
-}
-
 // Starry Background
 .nav2 {
     label {

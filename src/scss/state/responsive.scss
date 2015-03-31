@@ -1,187 +1,164 @@
 ﻿@import "../vars";
 
 @media screen and (max-width: 1350px) {
-    .inner {
-        width: 97%;
+	.main {
+		padding-left: 207px;
 	}
-    .main {
-        padding-left: 207px;
-    }
 }
 
 @media screen and (max-width: 1265px) {
-	.inner {
-        width: 65%;
+	.main {
+		padding-left: 215px;
 	}
-    .main {
-        padding-left: 215px;
-    }
-  	.colL {
-  		width: 100% !important;
-        margin-bottom: 0;
-        max-width: 528px;
+	.colL {
+		width: 100% !important;
+		margin-bottom: 0;
+		max-width: 528px;
 	}
 	.colR {
 		float: left;
 		width: 100% !important;
 		margin-top: 25px;
 	}
-  	.home .colR {   // TODO: combine with above?
-  		float: left;
-  		width: 75%;
-  	}
-  	.absHover .colR {
-        > div {
-  		    width: 100%;
-  		    max-width: 528px;
-        }
+	.absHover .colR {
+		> div {
+			width: 100%;
+			max-width: 528px;
+		}
 
-        div p {
-      		width: 100%;
-  		    margin-bottom: 15px;
-        }
-  	}
-    footer a {
+		div p {
+			width: 100%;
+			margin-bottom: 15px;
+		}
+	}
+	footer a {
 		margin: 0 !important;
 	}
-    .inFooter {
-        width: 96%;
-    }
-}
-
-@media screen and (max-width: 1145px) {
-    .inner {width: 75%;}
-}
-
-@media screen and (max-width: 1065px) {
-    .inner {width: 85%;}
+	.inFooter {
+		width: 96%;
+	}
 }
 
 @media screen and (max-width: 920px) {
-    .inner {width: 95%;}
-    .main {padding-left: 207px;}
+	.main {padding-left: 207px;}
 }
 
 @media screen and (max-width: 800px) { // vertical footer
-    .inner {
-        width: 98%;
-    }
+	.page {
+		padding: 0;
+	}
 
-    header {
-        position: static;
-        width: 100%;
+	header {
+		position: static;
+		width: 100%;
 		float: none;
 		margin-top: 15px;
 
-        nav {
-            border-radius: 2px !important;
-            width: 90%;
-		    margin: 0 auto;
+		nav {
+			border-radius: 2px !important;
+			width: 90%;
+			margin: 0 auto;
 
-            &:first-child a {
-                margin-right: auto;
-                max-width: 150px;
-            }
+			&:first-child  {
+				padding: 10px;
+			}
 
-            a {
-                text-align: center;
-                max-width: 140px;
-                margin: 4px auto;
+			a {
+				text-align: center;
+				width: 100%;
+				line-height: 1.35;
 
-                span {
-                    display: none;
-                }
-            }
-        }
-    }
+				span {
+					display: none;
+				}
 
-    .hdrNav2 {
-        margin-top: 22px;
-    }
+				i {
+					display: none;
+				}
+			}
+		}
+	}
 
-    footer {
-        position: static;
-        margin-top: 0;
+	.hdrNav2 {
+		margin-top: 22px;
+	}
 
-        a {
-            display: block;
-		    margin-bottom: 8px !important;
-            font-size: 24px;
-            text-align: right;
-        }
+	footer {
+		position: static;
+		margin-top: 0;
 
-        .footL {
-            float: none;
-		    width: 192px;
-		    margin: 0 auto;
-		    display: block;
-            padding-bottom: 30px;
-        }
+		a {
+			display: block;
+			margin-bottom: 8px !important;
+			font-size: 24px;
+			text-align: right;
+		}
 
-        .footR {
-            display: none;
-        }
+		.footL {
+			float: none;
+			width: 192px;
+			margin: 0 auto;
+			display: block;
+			padding-bottom: 30px;
+		}
 
-        .name {
-            text-indent: 0;
-            width: 139px;
-            padding-right: 6px;
-        }
+		.footR {
+			display: none;
+		}
 
-        .footContact {
-    		margin-right: 0 !important;
-            margin-bottom: 25px !important;
-        }
-    }
+		.name {
+			text-indent: 0;
+			width: 139px;
+			padding-right: 6px;
+		}
 
-    .outFooter {
-        height: 320px;
-        background: $cardBg;
+		.footContact {
+			margin-right: 0 !important;
+			margin-bottom: 25px !important;
+		}
+	}
 
-        &::before,
-        &::after {
-            display: none;
-        }
-    }
+	.outFooter {
+		height: 375px;
+		background: $cardBg;
+		line-height: 1.4;
 
-    .inFooter {
-        margin-top: -4px;
-    }
+		&::before,
+		&::after {
+			display: none;
+		}
+	}
+
+	.inFooter {
+		margin-top: -4px;
+	}
 
 	.main {
 		text-align: center;
 		overflow: visible;
-        padding-left: 0;
-        margin: 25px auto 0;
-        width: 89%;
-        padding-right: 28px;
-
-        img {
-            max-width: 100%;
-        }
+		padding-left: 0;
+		margin: 25px auto 0;
+		width: 90%;
+		min-height: 740px;
+		
+		img {
+			max-width: 100%;
+		}
 	}
-
-    .colL {
-        display: none;
-        max-width: 100%;
-    }
-
-    .home .colL,
-    .music .colL {
-        display: block;
-    }
-
-    .home .colR {
-        padding-left: 2.5%;
-    }
 
 	.colL,
-    .colR {
-        float: none !important;
+	.colR {
+		float: none !important;
 	}
 
-	.music .colR {
-		border-top: 0;
+	.colL {
+		display: none;
+		max-width: 100%;
+	}
+
+	.home .colL,
+	.music .colL {
+		display: block;
 	}
 
 	.absHover .colR > div {
@@ -189,18 +166,18 @@
 		width: 100%;
 		position: static;
 		margin-bottom: 20px;
-        max-width: 100%;
+		max-width: 100%;
 
-        &:last-child {
-            margin-bottom: 100px;
-        }
+		&:last-child {
+			margin-bottom: 100px;
+		}
 	}
 
 	.absHover .colR div > p {
 		width: 100%;
 	}
 
-    #divDefault {
+	#divDefault {
 		display: none !important;
 	}
 
@@ -213,41 +190,41 @@
 		margin: 30px auto 0;
 	}
 
-    .enlSite {
-        float: none !important;
-    }
+	.enlSite {
+		float: none !important;
+	}
 
-    .about {
-        .colL {
-            display: block;
-        }
+	.about {
+		.colL {
+			display: block;
+		}
 
-        .colR {
-            margin-bottom: 85px;
-        }
-    }
+		.colR {
+			margin-bottom: 85px;
+		}
+	}
 
-    .playground {
-        .colL{
-            display: block;
-        }
+	.playground {
+		.colL{
+			display: block;
+		}
 
-        .iframeWrap {
-            display: none;
-        }
+		.iframeWrap {
+			display: none;
+		}
 
-        .container {
-            margin: 110px 0 140px 0;
-        }
+		.container {
+			margin: 110px 0 140px 0;
+		}
 
-        footer {
-            margin-top: 85px;
-        }
-    }
+		footer {
+			margin-top: 85px;
+		}
+	}
 
-    .dPlaygroundNav {
-        a {
-            margin-right: auto !important;
-        }
-    }
+	.dPlaygroundNav {
+		a {
+			margin-right: auto !important;
+		}
+	}
 }

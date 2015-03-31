@@ -1,28 +1,29 @@
 {
-    "name": "jonw.me",
-    "version": "0.0.1",
-    "description": "My personal website",
-    "dependencies": {
-        "grunt": "^0.4.5",
-        "grunt-contrib-clean": "^0.6.0",
-        "grunt-contrib-concat": "^0.5.1",
-        "grunt-contrib-connect": "^0.9.0",
-        "grunt-contrib-copy": "^0.8.0",
-        "grunt-contrib-cssmin": "^0.12.2",
-        "grunt-contrib-htmlmin": "^0.4.0",
-        "grunt-contrib-imagemin": "^0.9.4",
-        "grunt-include-replace": "^3.0.0",
-        "grunt-contrib-sass": "^0.9.2",
-        "grunt-contrib-uglify": "^0.8.0",
-        "grunt-contrib-watch": "^0.6.1"
-    },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/jonmann20/jonmann20.github.com.git"
-    },
-    "author": "Jon Wiedmann",
-    "license": "MIT",
-    "bugs": {
-        "url": "https://github.com/jonmann20/jonmann20.github.com/issues"
-    }
+	"name": "jonw.me",
+	"version": "0.0.1",
+	"description": "My personal website",
+	"dependencies": {
+		"grunt": "^0.4.5",
+		"grunt-contrib-clean": "^0.6.0",
+		"grunt-contrib-concat": "^0.5.1",
+		"grunt-contrib-connect": "^0.9.0",
+		"grunt-contrib-copy": "^0.8.0",
+		"grunt-contrib-cssmin": "^0.12.2",
+		"grunt-contrib-htmlmin": "^0.4.0",
+		"grunt-contrib-imagemin": "^0.9.4",
+		"grunt-contrib-jshint": "^0.11.1",
+		"grunt-include-replace": "^3.0.0",
+		"grunt-contrib-sass": "^0.9.2",
+		"grunt-contrib-uglify": "^0.8.0",
+		"grunt-contrib-watch": "^0.6.1"
+	},
+	"repository": {
+	"type": "git",
+		"url": "https://github.com/jonmann20/jonmann20.github.com.git"
+	},
+	"author": "Jon Wiedmann",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/jonmann20/jonmann20.github.com/issues"
+	}
 }
