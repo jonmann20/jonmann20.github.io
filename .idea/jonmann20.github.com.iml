@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="WEB_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/games/dungeon/build" />
+      <excludeFolder url="file://$MODULE_DIR$/games/dungeon/web/archive/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/games/dungeon/web/audio/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/games/dungeon/web/css/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/games/dungeon/web/enemies/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/games/dungeon/web/engine/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/games/dungeon/web/font/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/games/dungeon/web/img/archive/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/games/dungeon/web/img/items/device/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/games/dungeon/web/img/items/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/games/dungeon/web/img/items/sword/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/games/dungeon/web/img/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/games/dungeon/web/img/player/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/games/dungeon/web/img/sprites/items/device/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/games/dungeon/web/img/sprites/items/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/games/dungeon/web/img/sprites/items/sword/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/games/dungeon/web/img/sprites/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/games/dungeon/web/img/sprites/player/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/games/dungeon/web/levels/level1/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/games/dungeon/web/levels/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/games/dungeon/web/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/games/dungeon/web/player/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/src/games/dungeon/build" />
+      <excludeFolder url="file://$MODULE_DIR$/src/games/dungeon/web/archive/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/src/games/dungeon/web/audio/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/src/games/dungeon/web/css/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/src/games/dungeon/web/enemies/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/src/games/dungeon/web/engine/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/src/games/dungeon/web/font/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/src/games/dungeon/web/img/archive/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/src/games/dungeon/web/img/items/device/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/src/games/dungeon/web/img/items/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/src/games/dungeon/web/img/items/sword/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/src/games/dungeon/web/img/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/src/games/dungeon/web/img/player/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/src/games/dungeon/web/img/sprites/items/device/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/src/games/dungeon/web/img/sprites/items/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/src/games/dungeon/web/img/sprites/items/sword/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/src/games/dungeon/web/img/sprites/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/src/games/dungeon/web/img/sprites/player/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/src/games/dungeon/web/levels/level1/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/src/games/dungeon/web/levels/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/src/games/dungeon/web/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/src/games/dungeon/web/player/packages" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="jonmann20.github.com node_modules" level="project" />
+  </component>
+</module>
