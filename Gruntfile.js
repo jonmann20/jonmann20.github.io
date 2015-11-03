@@ -7,8 +7,8 @@ module.exports = function(grunt) {
 		connect: {
 			dev: {
 				options: {
-					hostname: "jonw",
-					port: 1612,
+					//hostname: "jonw",
+					port: 5000,
 					open: false//,base: "src"
 				}
 			},
@@ -248,7 +248,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks("grunt-contrib-sass");
 	grunt.loadNpmTasks("grunt-contrib-uglify");
 	grunt.loadNpmTasks("grunt-contrib-watch");
-  
+
 	// TODO: base dev in src (avoid copy)
 	grunt.registerTask("default", ["sass", "concat", "copy", "includereplace", "connect:dev", "watch"]);
 	grunt.registerTask("prd", ["clean:all", "sass", "concat", "uglify", "cssmin", "copy", "imagemin", "includereplace", "htmlmin"]);

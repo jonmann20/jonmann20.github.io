@@ -16,11 +16,11 @@
 	-webkit-perspective-origin: 50% 50%;
 	-ms-perspective-origin: 50% 50%;
 	perspective-origin: 50% 50%;
- 	
+
  	font-size: 2.25em;
 	margin: 65px 0 290px 360px;
 	display: block;
-	
+
 	-webkit-box-reflect: below 165px linear-gradient(to bottom, transparent, transparent 42%, rgba(255,255,255,0.5));
  }
 
@@ -30,10 +30,10 @@
 }
 
 #cube {
-    position: relative;
+	position: relative;
 	margin: 0 auto;
-	height: 144px;
-	width: 144px;
+	height: 160px;
+	width: 160px;
 	-webkit-transform-style: preserve-3d;
 	transform-style: preserve-3d;
 
@@ -44,7 +44,7 @@
 	    padding: 10px;
 	    opacity: 0.87;
 	    background-position: center center;
-	    background-color: rgba(20, 20, 20, .7);
+	    background-color: rgba(20, 20, 20, 0.7);
 
         span {
         	padding-top: 52px;

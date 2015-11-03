@@ -3,11 +3,7 @@
   box-sizing: border-box; }
 
 body {
-  background-color: #bbb;
-  background-image: url(/img/jonBig.jpg);
-  background-position-x: 51% !important;
-  background-repeat: repeat-y;
-  background-attachment: fixed;
+  background-color: #1e1e1e;
   color: #d2d2d2;
   margin: 0; }
 
@@ -29,7 +25,7 @@ button:hover {
   cursor: pointer; }
 
 h1, h2, h3, h4, h5, h6 {
-  margin: .4em 0 .6em 0;
+  margin: .4em 0 .6em;
   font-size: 1.62em;
   letter-spacing: -0.03em;
   color: #ff6a00;
@@ -189,7 +185,7 @@ br.clr {
 .twitter-timeline-rendered,
 .music .colR iframe {
   background: rgba(51, 51, 51, 0.67);
-  padding: 1px 15px 5px 15px;
+  padding: 1px 15px 5px;
   border-radius: 2px;
   box-shadow: 0 1px 7px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.15); }
 

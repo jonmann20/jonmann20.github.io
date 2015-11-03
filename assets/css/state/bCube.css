@@ -25,8 +25,8 @@
 #cube {
   position: relative;
   margin: 0 auto;
-  height: 144px;
-  width: 144px;
+  height: 160px;
+  width: 160px;
   -webkit-transform-style: preserve-3d;
   transform-style: preserve-3d; }
   #cube > div {

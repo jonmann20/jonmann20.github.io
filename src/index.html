@@ -21,12 +21,38 @@
 	</script>
 </head>
 <body>
+	<aside>
+		<a href="#about">
+			About <i class="icon-user" title="About"></i>
+		</a>
+		<!--<a href="#blog">
+			<span class="icon-folder-open"></span> Blog
+		</a>-->
+		<a href="#games">
+			Games <i class="icon-controllernes"></i>
+		</a>
+		<a href="#music">
+			Music <i class="icon-music"></i>
+		</a>
+		<a href="#playground">
+			Playground <i class="icon-beaker"></i>
+		</a>
+
+		<div class="dPlaygroundNav">
+			@@include("playground/playgroundNav.html")
+		</div>
+
+		<a href="#portfolio">
+			Portfolio <i class="icon-briefcase"></i>
+		</a>
+	</aside>
 	<div class="page">
 		<header>
 			<nav>
 				<a href="#home">
 					<i class="icon-home"></i> Jon Wiedmann
 				</a>
+				<a href="#" class="menu icon-folder-open"></a>
 			</nav>
 			<nav class="hdrNav2">
 				<a href="#about">
@@ -54,10 +80,10 @@
 				</a>
 			</nav>
 		</header>
-		
+
 		<section class="main"></section>
 	</div>
-	
+
 	<footer>
 		<div class="outFooter">
 			<div class="inFooter">
@@ -93,7 +119,7 @@
 			</div>
 		</div>
 	</footer>
-	
+
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 	<script src="/assets/master.js"></script>
 </body>

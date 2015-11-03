@@ -1,43 +1,45 @@
-﻿@import "vars";
+﻿@import 'vars';
 
 /*#region **** override browser elts ****/
 * {
 	box-sizing: border-box;
 }
+
 body {
-    background-color: #bbb;
-    background-image: url(/img/jonBig.jpg);
-    background-position-x: 51% !important; // doesn't work in firfox
-    background-repeat: repeat-y;
-    background-attachment: fixed;
-    
+    background-color: #1e1e1e;
     color: #d2d2d2;
     margin: 0;
 }
+
 input,
 textarea {
     outline-color: #888;
 }
+
 input:focus,
 textarea:focus {
     box-shadow: 2px 2px 16px 2px rgba(0, 0, 0, 0.45);
 }
+
 input[type=submit],
 button {
 	transition: all .35s ease-out;
 }
+
 input[type=submit]:hover,
 input[type=color]:hover,
 button:hover {
 	cursor: pointer;
 }
+
 h1,h2,h3,h4,h5,h6 {
-	margin: .4em 0 .6em 0;
-	font-size: 1.62em; 
+	margin: .4em 0 .6em;
+	font-size: 1.62em;
 	letter-spacing: -0.03em;
 	color: #ff6a00;
 	text-shadow: 0 2px 3px #111;
 }
+
 a {
 	color: hsl(200, 60%, 60%);
 	text-decoration: none;
@@ -70,6 +72,7 @@ a {
 	font-weight: normal;
 	font-style: normal;
 }
+
 [class*="icon-"] {
 	font-family: "icomoon";
 	speak: none;
@@ -81,6 +84,7 @@ a {
 	-webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
+
 .icon-uniF000:before {
 	content: "\f000";
 }
@@ -159,34 +163,41 @@ a {
 /*#endregion*/
 
 /*#region ************ Utilities *************/
-.clr:before, 
+.clr:before,
 .clr:after {
-	content: " "; 
+	content: " ";
 	display: table;
 }
-.clr:after, 
+
+.clr:after,
 .clrB {
 	clear: both;
 }
+
 br.clr {
 	display: none;
 }
+
 .lh {
 	list-style-type: none;
 	font-weight: 700;
 	margin: 12px 0 8px 0;
 	padding-left: 0;
 }
+
 .noHeaderR {
 	margin-top: .55em;
 }
+
 .subHead {
 	font-size: 1.15em;
 	margin: .5em 0 .3em 0;
 }
+
 .opaque {
 	opacity: 1;
 }
+
 .noselect {
 	-webkit-touch-callout: none;
 	-webkit-user-select: none;
@@ -194,6 +205,7 @@ br.clr {
 	-ms-user-select: none;
 	user-select: none;
 }
+
 .noBullet {
     list-style-type: none;
 }
@@ -202,15 +214,16 @@ br.clr {
     display: inline-block;
 }
 
-.txtBg, .colL, 
+.txtBg, .colL,
 .colR > div,
 .twitter-timeline-rendered,
 .music .colR iframe {
 	background: $cardBg;
-	padding: 1px 15px 5px 15px;
+	padding: 1px 15px 5px;
 	border-radius: 2px;
 	box-shadow: 0 1px 7px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.15);
 }
+
 .twitter-timeline, .music .colR iframe {
     padding: 0;
 }
@@ -244,6 +257,7 @@ br.clr {
 	    transition: all 0.05s;
     }
 }
+
 .colL .bigBtn {
 	margin-left: -20px;
 	text-align: center;

@@ -1,4 +1,4 @@
-﻿@import "../vars";
+﻿@import '../vars';
 
 @media screen and (max-width: 1350px) {
 	.main {
@@ -10,16 +10,19 @@
 	.main {
 		padding-left: 215px;
 	}
+
 	.colL {
 		width: 100% !important;
 		margin-bottom: 0;
 		max-width: 528px;
 	}
+
 	.colR {
 		float: left;
 		width: 100% !important;
 		margin-top: 25px;
 	}
+
 	.absHover .colR {
 		> div {
 			width: 100%;
@@ -31,16 +34,26 @@
 			margin-bottom: 15px;
 		}
 	}
+
 	footer a {
 		margin: 0 !important;
 	}
+
 	.inFooter {
 		width: 96%;
 	}
 }
 
 @media screen and (max-width: 920px) {
-	.main {padding-left: 207px;}
+	.main {
+		padding-left: 207px;
+	}
+}
+
+@media screen and (min-width: 801px) {
+	.menu {
+		display: none;
+	}
 }
 
 @media screen and (max-width: 800px) { // vertical footer
@@ -49,31 +62,32 @@
 	}
 
 	header {
-		position: static;
+		position: fixed;
+		top: 0;
+		z-index: 99999;
 		width: 100%;
 		float: none;
-		margin-top: 15px;
+		background: #555;
 
 		nav {
+			text-align: left;
 			border-radius: 2px !important;
-			width: 90%;
-			margin: 0 auto;
 
-			&:first-child  {
+			&:first-child {
 				padding: 10px;
 			}
 
 			a {
-				text-align: center;
 				width: 100%;
 				line-height: 1.35;
+				display: inline;
 
 				span {
 					display: none;
 				}
 
 				i {
-					display: none;
+					display: inline;
 				}
 			}
 		}
@@ -81,6 +95,7 @@
 
 	.hdrNav2 {
 		margin-top: 22px;
+		display: none;
 	}
 
 	footer {
@@ -137,10 +152,10 @@
 		text-align: center;
 		overflow: visible;
 		padding-left: 0;
-		margin: 25px auto 0;
+		margin: 80px auto 0;
 		width: 90%;
 		min-height: 740px;
-		
+
 		img {
 			max-width: 100%;
 		}
@@ -205,7 +220,7 @@
 	}
 
 	.playground {
-		.colL{
+		.colL {
 			display: block;
 		}
 
@@ -214,7 +229,7 @@
 		}
 
 		.container {
-			margin: 110px 0 140px 0;
+			margin: 110px 0 140px;
 		}
 
 		footer {

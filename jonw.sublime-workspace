@@ -117,17 +117,6 @@
 			]
 		]
 	},
-	"buffers":
-	[
-		{
-			"file": "/home/jon/git/jonmann20.github.com/Gruntfile.js",
-			"settings":
-			{
-				"buffer_size": 5775,
-				"line_ending": "Unix"
-			}
-		}
-	],
 	"build_system": "",
 	"build_system_choices":
 	[
@@ -184,12 +173,6 @@
 		"side_bar_visible": false,
 		"status_bar_visible": false
 	},
-	"expanded_folders":
-	[
-		"/home/jon/git/jonmann20.github.com",
-		"/home/jon/git/jonmann20.github.com/src",
-		"/home/jon/git/jonmann20.github.com/src/scss"
-	],
 	"file_history":
 	[
 		"/home/jon/Documents/Sublime/jonw.sublime-project",
@@ -410,44 +393,6 @@
 		"whole_word": false,
 		"wrap": true
 	},
-	"groups":
-	[
-		{
-			"selected": 0,
-			"sheets":
-			[
-				{
-					"buffer": 0,
-					"file": "/home/jon/git/jonmann20.github.com/Gruntfile.js",
-					"semi_transient": true,
-					"settings":
-					{
-						"buffer_size": 5775,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								4253,
-								4253
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 3060.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				}
-			]
-		}
-	],
 	"incremental_find":
 	{
 		"height": 26.0
@@ -488,7 +433,6 @@
 		"height": 0.0
 	},
 	"pinned_build_system": "",
-	"project": "jonw.sublime-project",
 	"replace":
 	{
 		"height": 48.0
@@ -601,7 +545,6 @@
 		],
 		"width": 0.0
 	},
-	"selected_group": 0,
 	"settings":
 	{
 	},
