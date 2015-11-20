@@ -29,16 +29,26 @@ jw.Main = (function() {
 
 			$('.menu').on('click', function(e) {
 				e.preventDefault();
+				var hadClass = false;
 
-				$('aside').addClass('active');
-				var listener = $(document).on('click', function() {
-					console.log($(this));
-					if($(this).hasClass('.menu')) {
-						console.log('.men');
+				if($('aside').hasClass('active')) {
+					hadClass = true;
+				}
+				else {
+					$('aside').addClass('active');
+				}
+
+				console.log($('aside'));
+
+				var listener = $(document).on('click', function(e) {
+					if($(e.target).hasClass('menu') && !hadClass) {
+						console.log('hadCLass');
 					}
-					console.log('on/off');
-					$('aside').removeClass('active');
-					listener.off();
+					else {
+						console.log('remove');
+						$('aside').removeClass('active');
+						listener.off();
+					}
 				});
 			});
 		},
