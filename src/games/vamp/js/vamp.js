@@ -1,4 +1,4 @@
-﻿/// <reference path="linker.js" />
+/// <reference path="linker.js" />
 
 function Vamp() {
     this.init();

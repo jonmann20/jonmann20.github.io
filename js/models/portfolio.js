@@ -1,4 +1,4 @@
-﻿jw.PortfolioModel = (function ($, undefined) {
+jw.PortfolioModel = (function ($, undefined) {
 	return {
 		render: function (that, page) {
 			jw.Utils.resetModel();

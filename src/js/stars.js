@@ -1,4 +1,4 @@
-﻿jw.StarryBg = (function() {
+jw.StarryBg = (function() {
 	var w, 
 		color,
 		inputColor,

@@ -1,4 +1,4 @@
-﻿function tplView() {
+function tplView() {
     this.privates = {
 
     };

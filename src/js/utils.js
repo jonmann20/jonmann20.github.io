@@ -1,4 +1,4 @@
-﻿jw.Utils = (function() {
+jw.Utils = (function() {
     var _main = $(".main");
 
     var jsSrcHash = {

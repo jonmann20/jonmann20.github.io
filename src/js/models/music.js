@@ -1,4 +1,4 @@
-﻿jw.MusicModel = (function ($, undefined) {
+jw.MusicModel = (function ($, undefined) {
 
     var year = jw.Utils.getYear();
 

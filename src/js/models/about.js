@@ -1,4 +1,4 @@
-﻿jw.AboutModel = (function ($, undefined) {
+jw.AboutModel = (function ($, undefined) {
     return {
         render: function (that) {
             jw.Utils.resetModel();

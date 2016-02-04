@@ -1,4 +1,4 @@
-﻿// Common
+// Common
 /// <reference path="../../common/js/commonLinker.js" />
 
 // Dormanti

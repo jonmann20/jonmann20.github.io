@@ -1,4 +1,4 @@
-﻿/*
+/*
     The utils component of GameEngine.
 */
 function GameUtils(gEngine) {

@@ -1,4 +1,4 @@
-﻿/// <reference path="../commonLinker.js" />
+/// <reference path="../commonLinker.js" />
 
 /*
     Implements GameView.

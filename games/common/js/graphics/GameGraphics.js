@@ -1,4 +1,4 @@
-﻿/*
+/*
     The graphics component of GameEngine.
 */
 var GameGraphics = function(gEngine) {

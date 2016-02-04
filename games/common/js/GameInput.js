@@ -1,4 +1,4 @@
-﻿/*
+/*
     The input component of GameEngine.
 */
 function GameInput() {

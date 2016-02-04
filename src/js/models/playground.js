@@ -1,4 +1,4 @@
-﻿jw.PlaygroundModel = (function ($, undefined) {
+jw.PlaygroundModel = (function ($, undefined) {
 
     return {
         render: function (that, page) {

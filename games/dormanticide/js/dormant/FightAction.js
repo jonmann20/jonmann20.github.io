@@ -1,4 +1,4 @@
-﻿var FightAction = Object.freeze({
+var FightAction = Object.freeze({
     TACKLE: {
         name: "TACKLE",
         multiplier: 1

@@ -1,4 +1,4 @@
-﻿/// <reference path="../linker.js" />
+/// <reference path="../linker.js" />
 
 /*
     @param(string) name The name of the dormant.

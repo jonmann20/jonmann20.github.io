@@ -1,4 +1,4 @@
-﻿// Physics
+// Physics
 /// <reference path="/games/common/js/physics/SAT.js" />
 
 // Graphics

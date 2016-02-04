@@ -1,4 +1,4 @@
-﻿jw.HomeModel = (function ($, undefined) {
+jw.HomeModel = (function ($, undefined) {
 
     return {
         render: function (that) {

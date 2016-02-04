@@ -1,4 +1,4 @@
-﻿jw.ContactModel = (function() {
+jw.ContactModel = (function() {
     return {
         render: function (that) {
             jw.Utils.resetModel();

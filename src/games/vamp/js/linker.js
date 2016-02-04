@@ -1,4 +1,4 @@
-﻿// Common
+// Common
 /// <reference path="/games/common/js/commonLinker.js" />
 
 // View

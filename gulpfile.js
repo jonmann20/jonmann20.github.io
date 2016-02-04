@@ -1,6 +1,5 @@
 'use strict';
 
-
 let argv = require('yargs').argv;
 let concat = require('gulp-concat');
 let gulp = require('gulp');
@@ -11,7 +10,6 @@ let sourcemaps = require('gulp-sourcemaps');
 const isDev = argv._.length === 0;
 
 let scssSrc = ['src/scss/**/*.scss', '!vars.scss'];
-
 
 require('./gulpTasks/scss')(gulp, isDev, iff, concat, liveReload, sourcemaps, scssSrc);
 
@@ -38,29 +36,33 @@ gulp.task('concat:masterJs', () => {
 			]).
 			pipe(gulp.dest('assets/master.js'));
 });
+
 gulp.task('concat:gamesCommonJs', () => {
 	return gulp.src(gamesCommonJs).
 			pipe(gulp.dest('assets/gamesCommon.js'));
 });
+
 gulp.task('concat:pageDormanticide', () => {
-	return gulp.src(gamesCommonJs.concat([
+	/*return gulp.src(gamesCommonJs.concat([
 				'src/games/dormanticide/js/view/OverworldView.js',
 				'src/games/dormanticide/js/view/BattleView.js',
 				'src/games/dormanticide/js/dormant/Dormant.js',
 				'src/games/dormanticide/js/dormant/FightAction.js',
 				'src/games/dormanticide/js/main.js'
 			]).
-			pipe(gulp.dest('assets/pageDormanticide.js'));
+			pipe(gulp.dest('assets/pageDormanticide.js'));*/
 });
+
 gulp.task('concat:pageVamp', () => {
-	return gulp.src(gamesCommonJs.concat([
+	/*return gulp.src(gamesCommonJs.concat([
 				'src/games/vamp/js/view/LevelView.js',
 				'src/games/vamp/js/level/level1.js',
 				'src/games/vamp/js/vamp.js',
 				'src/games/vamp/js/main.js'
 			]).
-			pipe(gulp.dest('assets/pageVamp.js'));
+			pipe(gulp.dest('assets/pageVamp.js'));*/
 });
+
 gulp.task('concat:masterCss', () => {
 	return gulp.src([
 				'assets/css/normalize.css',
@@ -76,7 +78,7 @@ gulp.task('concat:masterCss', () => {
 			pipe(gulp.dest('assets/master.css'));
 });
 
-gulp.task('concat', ['concat:masterJs', 'concat:gamesCommonJs', 'concat:pageDormanticide', 'concat:pageVamp', 'concat:masterCss'];
+gulp.task('concat', ['concat:masterJs', 'concat:gamesCommonJs', 'concat:pageDormanticide', 'concat:pageVamp', 'concat:masterCss']);
 
 gulp.task('copy', () => {
 	return gulp.src(['**', '!**/*.html', '!scss/**']).
@@ -97,4 +99,3 @@ gulp.task('default', [
 //gulp.task('srv', []);
 
 //gulp.task('test', [/*'jasmine',*/'jshint', 'scsslint']);
-

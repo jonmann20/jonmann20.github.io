@@ -1,4 +1,4 @@
-﻿jw.GamesModel = (function() {
+jw.GamesModel = (function() {
 	return {
 		render: function(that, page) {
 			jw.Utils.resetModel();
