@@ -2683,5 +2683,3 @@ jw.Main = (function() {
 $(function() {
 	jw.Main.init();
 });
-
-//# sourceMappingURL=master.js.map

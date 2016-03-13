@@ -1276,4 +1276,3 @@ GameSaveView.prototype = (function() {
         }
     };
 })();
-//# sourceMappingURL=gamesCommon.js.map
