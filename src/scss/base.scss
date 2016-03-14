@@ -210,18 +210,19 @@ br.clr {
     list-style-type: none;
 }
 
-.txtBg {
+.card {
     display: inline-block;
 }
 
-.txtBg, .colL,
+.card,
+.card, .colL,
 .colR > div,
 .twitter-timeline-rendered,
 .music .colR iframe {
 	background: $cardBg;
 	padding: 1px 15px 5px;
 	border-radius: 2px;
-	box-shadow: 0 1px 7px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.15);
+	box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.3);
 }
 
 .twitter-timeline, .music .colR iframe {

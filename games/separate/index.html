@@ -4,23 +4,21 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<title>Divide & Conquer</title>
 
-	<script type="text/javascript" src='https://ssl-webplayer.unity3d.com/download_webplayer-3.x/3.0/uo/jquery.min.js'></script>
-	<script type="text/javascript">
-	    
-        var unityObjectUrl = "http://webplayer.unity3d.com/download_webplayer-3.x/3.0/uo/UnityObject2.js";
+	<script src='https://ssl-webplayer.unity3d.com/download_webplayer-3.x/3.0/uo/jquery.min.js'></script>
+	<script>
+		var unityObjectUrl = "http://webplayer.unity3d.com/download_webplayer-3.x/3.0/uo/UnityObject2.js";
 
-        if (document.location.protocol == "https:") {
-            unityObjectUrl = unityObjectUrl.replace("http://", "https://ssl-");
-        }
-	    document.write('<script type="text\/javascript" src="' + unityObjectUrl + '"><\/script>');
-	    
+		if(document.location.protocol == "https:") {
+			unityObjectUrl = unityObjectUrl.replace("http://", "https://ssl-");
+		}
+		document.write('<script type="text\/javascript" src="' + unityObjectUrl + '"><\/script>');
 	</script>
-	<script type="text/javascript">
+	<script>
 		var config = {
-			width: 960, 
+			width: 960,
 			height: 600,
 			params: { enableDebugging:"0" }
-				
+
 		};
 		var u = new UnityObject2(config);
 
@@ -30,7 +28,7 @@
 			var $brokenScreen = jQuery("#unityPlayer").find(".broken");
 			$missingScreen.hide();
 			$brokenScreen.hide();
-				
+
 			u.observeProgress(function (progress) {
 				switch(progress.pluginStatus) {
 					case "broken":
@@ -61,70 +59,76 @@
 			u.initPlugin(jQuery("#unityPlayer")[0], "separate.unity3d");
 		});
 	</script>
-	<style type="text/css">
-        body {
-            font-family: "Open Sans", Verdana, Calibri, Helvetica, Arial, sans-serif;
-            background-color: rgb(37, 30, 34);
-            color: #d2d2d2;
-            text-align: center;
-        }
+	<style>
+		body {
+			font-family: 'Open Sans', Verdana, sans-serif;
+			background-color: rgb(37, 30, 34);
+			color: #d2d2d2;
+			text-align: center;
+		}
 
-        a {
-            color: hsla(200, 60%, 60%, 0.8);
-            text-decoration: none;
-            outline: none;
-        }
-        a:link, a:visited {
-            color: #5dafd7;
-        }
-        a:active, a:hover {
-            color: hsla(200, 60%, 60%, 1);
-            text-shadow: #61b0d7 0 0 6px;
-        }
-        h1 {
-            margin: .4em 0 .6em 0;
-            font-size: 1.62em;
-            letter-spacing: -0.03em;
-            color: #ff6a00;
-            text-shadow: 0 2px 3px #111;
-        }
+		a {
+			color: hsla(200, 60%, 60%, 0.8);
+			text-decoration: none;
+			outline: none;
+		}
+		a:link, a:visited {
+			color: #5dafd7;
+		}
+		a:active, a:hover {
+			color: hsla(200, 60%, 60%, 1);
+			text-shadow: #61b0d7 0 0 6px;
+		}
+		h1 {
+			margin: .4em 0 .6em 0;
+			font-size: 1.62em;
+			letter-spacing: -0.03em;
+			color: #ff6a00;
+			text-shadow: 0 2px 3px #111;
+		}
 
-	    div.content {
-		    margin: auto;
-		    width: 960px;
-	    }
-	    div.broken,
-	    div.missing {
-		    margin: auto;
-		    position: relative;
-		    top: 50%;
-		    width: 193px;
-	    }
-	    div.broken a,
-	    div.missing a {
-		    height: 63px;
-		    position: relative;
-		    top: -31px;
-	    }
-	    div.broken img,
-	    div.missing img {
-		    border-width: 0px;
-	    }
-	    div.broken {
-		    display: none;
-	    }
-	    div#unityPlayer {
-		    cursor: default;
-		    height: 600px;
-		    width: 960px;
-	    }
+		div.content {
+			margin: auto;
+			width: 960px;
+		}
+		div.broken,
+		div.missing {
+			margin: auto;
+			position: relative;
+			top: 50%;
+			width: 193px;
+		}
+		div.broken a,
+		div.missing a {
+			height: 63px;
+			position: relative;
+			top: -31px;
+		}
+		div.broken img,
+		div.missing img {
+			border-width: 0px;
+		}
+		div.broken {
+			display: none;
+		}
+		div#unityPlayer {
+			cursor: default;
+			height: 600px;
+			width: 960px;
+		}
 	</style>
 </head>
 <body>
-	<h1>Divide & Conquer</h1>
+	<h1>Divide &amp; Conquer</h1>
 
 	<div class="content">
 		<div id="unityPlayer">
+			<div class="loading">
+				<!-- Loading...
+
+				<p class="small">(May take awhile)</p> -->
+				Under Construction...
+			</div>
 			<div class="missing">
 				<a href="http://unity3d.com/webplayer/" title="Unity Web Player. Install now!">
 					<img alt="Unity Web Player. Install now!" src="http://webplayer.unity3d.com/installation/getunity.png" width="193" height="63" />
@@ -138,12 +142,12 @@
 		</div>
 	</div>
 	<footer>
-        <p>
-            &laquo; created with <a href="http://unity3d.com/unity/" title="Go to unity3d.com">Unity</a> &raquo;
-        </p>
-        <p>
-            <a href="/#games">Back</a>
-        </p>
-    </footer>
+		<p>
+			&laquo; created with <a href="http://unity3d.com/unity/" title="Go to unity3d.com">Unity</a> &raquo;
+		</p>
+		<p>
+			<a href="/#games">Back</a>
+		</p>
+	</footer>
 </body>
 </html>

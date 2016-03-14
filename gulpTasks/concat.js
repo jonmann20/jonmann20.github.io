@@ -34,29 +34,29 @@ module.exports = (gulp, concat) => {
 		});
 
 		gulp.task('concat:pageDormanticide', () => {
-			/*return gulp.src(gamesCommonJs.concat([
+			return gulp.src(gamesCommonJs.concat([
 				'src/games/dormanticide/js/view/OverworldView.js',
 				'src/games/dormanticide/js/view/BattleView.js',
 				'src/games/dormanticide/js/dormant/Dormant.js',
 				'src/games/dormanticide/js/dormant/FightAction.js',
 				'src/games/dormanticide/js/main.js'
-			]).
+			])).
 			pipe(concat('pageDormanticide.js')).
-			pipe(gulp.dest('assets'));*/
+			pipe(gulp.dest('assets'));
 		});
 
 		gulp.task('concat:pageVamp', () => {
-			/*return gulp.src(gamesCommonJs.concat([
+			return gulp.src(gamesCommonJs.concat([
 				'src/games/vamp/js/view/LevelView.js',
 				'src/games/vamp/js/level/level1.js',
 				'src/games/vamp/js/vamp.js',
 				'src/games/vamp/js/main.js'
-			]).
+			])).
 			pipe(concat('pageVamp.js')).
-			pipe(gulp.dest('assets'));*/
+			pipe(gulp.dest('assets'));
 		});
 
-		gulp.task('concat:masterCss', () => {
+		gulp.task('concat:masterCss', ['scss'], () => {
 			return gulp.src([
 				'assets/css/normalize.css',
 				'assets/css/base.css',

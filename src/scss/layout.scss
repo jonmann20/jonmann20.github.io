@@ -8,7 +8,7 @@ html {
 body {
 	line-height: 1.25;
 	font-size: 87.5%;
-	font-family: 'Open Sans', Verdana, Calibri, Helvetica, Arial, sans-serif;
+	font-family: 'Open Sans', Verdana, sans-serif;
 	color: #eaeaea;
 }
 
@@ -29,7 +29,7 @@ aside {
 	position: fixed;
 	left: 0;
 	top: 0;
-	background: #555;
+	background: #333;
 	z-index: 999;
 
 	&.active {
@@ -66,15 +66,11 @@ header {
 		font-family: 'Open Sans Condensed', 'Verdana', sans-serif;
 		font-size: 2.1em;
 		text-align: center;
-		//background: $cardBg;
 		margin-top: 35px;
 		padding: 10px;
 		min-width: 165px;
-		border-radius: 0 36px;
-		//box-shadow: 0 1px 7px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.15);
 
 		&:first-child {
-			border-radius: 43px 0;
 			text-indent: 9px;
 			padding-bottom: 20px;
 			margin-top: 0;
@@ -114,7 +110,6 @@ header {
 			font-size: 58%;
 			width: 90%;
 			margin: 10px auto 4px;
-			//background: rgba(31, 31, 27, 0.6);
 			padding: 10px 0;
 			border-radius: 1px;
 
@@ -139,8 +134,8 @@ header nav a,
 header nav a:visited {      // TODO: combine with above?
 	text-align: right;
 	color: rgba(140, 177, 24, 0.84) !important;
-	-webkit-text-stroke: 1px rgba(140, 177, 24, 0.84);
-	text-stroke: 1px rgba(140, 177, 24, 0.93);
+	-webkit-text-stroke: 1px rgb(140, 177, 24);
+	text-stroke: 1px rgb(140, 177, 24);
 	text-shadow: 0 3px 3px #000;
 	display: block;
 	margin-right: 18px;
@@ -294,10 +289,6 @@ footer {
 	.icon-youtube-sign {
 		font-size: 1.254em;
 		vertical-align: -2px;
-	}
-
-	.footContact {
-		// margin-right: 1.3em !important;
 	}
 
 	.footR {

@@ -15,10 +15,10 @@
 	<script type="text/javascript">
 	    <!--
 		    var config = {
-			    width: 1008, 
+			    width: 1008,
 			    height: 567,
 			    params: { enableDebugging:"0" }
-			
+
 		    };
 		    var u = new UnityObject2(config);
 
@@ -28,7 +28,7 @@
 			    var $brokenScreen = jQuery("#unityPlayer").find(".broken");
 			    $missingScreen.hide();
 			    $brokenScreen.hide();
-			
+
 			    u.observeProgress(function (progress) {
 				    switch(progress.pluginStatus) {
 					    case "broken":
@@ -153,15 +153,16 @@
 </head>
 <body>
     <a href="/#games">Back</a>
-    
+
     <div class="wrap">
         <div class="content">
             <div id="unityPlayer">
 
                 <div class="loading">
-                    Loading...
-                
-                    <p class="small">(May take awhile)</p>
+                    <!-- Loading...
+
+                    <p class="small">(May take awhile)</p> -->
+                    Under Construction...
                 </div>
 
                 <div class="missing">

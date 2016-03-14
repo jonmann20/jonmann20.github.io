@@ -15,6 +15,8 @@ module.exports = (gulp) => {
 				'!.gitignore',
 				'!CNAME',
 				'!gulpfile.js',
+				'!jonw.sublime-project',
+				'!jonw.sublime-workspace',
 				'!license.txt',
 				'!notes.md',
 				'!package.json',

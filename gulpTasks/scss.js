@@ -9,6 +9,7 @@ module.exports = (gulp, isDev, iff, concat, liveReload, sourcemaps, scssSrc) => 
 			return gulp.src(scssSrc).
 				pipe(iff(isDev, sourcemaps.init())).
 				pipe(scss()).
+				//pipe(concat('master.css')).
 				pipe(iff(!isDev, minifyCss())).
 				pipe(iff(isDev, sourcemaps.write())).
 				pipe(gulp.dest('assets/css')).
