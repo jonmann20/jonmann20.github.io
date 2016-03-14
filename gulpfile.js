@@ -13,15 +13,17 @@ let scssSrc = ['src/scss/**/*.scss', '!vars.scss'];
 
 require('./gulpTasks/del')(gulp);
 require('./gulpTasks/concat')(gulp, concat);
+require('./gulpTasks/connect')(gulp);
 require('./gulpTasks/copy')(gulp);
+require('./gulpTasks/include')(gulp);
 require('./gulpTasks/scss')(gulp, isDev, iff, concat, liveReload, sourcemaps, scssSrc);
 
 gulp.task('default', [
 	'scss',
 	'concat',
 	'copy',
-	//includereplace
-	//'nodemon', //connect:dev
+	'include',
+	'connect'
 	//'watch'
 ]);
 
