@@ -5,7 +5,7 @@ module.exports = (gulp, isDev, iff, liveReload) => {
 
 	return (() => {
 		gulp.task('include', () => {
-			gulp.src(['src/**/*.html']).
+			return gulp.src(['src/**/*.html']).
 				pipe(fileInclude({
 					prefix: '@@',
 					basepath: '@file'

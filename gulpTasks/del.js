@@ -5,7 +5,7 @@ module.exports = (gulp) => {
 
 	return (() => {
 		gulp.task('clean', () => {
-			del([
+			return del([
 				'**',
 				'!.git/**',
 				'!gulpTasks/**',

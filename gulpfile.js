@@ -12,23 +12,33 @@ const isDev = argv._.length === 0;
 let scssSrc = ['src/scss/**/*.scss', '!vars.scss'];
 
 require('./gulpTasks/del')(gulp);
-require('./gulpTasks/concat')(gulp, concat);
-require('./gulpTasks/connect')(gulp);
+require('./gulpTasks/scss')(gulp, isDev, iff, concat, liveReload, sourcemaps, scssSrc);
+require('./gulpTasks/js')(gulp, concat);
 require('./gulpTasks/copy')(gulp);
 require('./gulpTasks/include')(gulp, isDev, iff, liveReload);
-require('./gulpTasks/scss')(gulp, isDev, iff, concat, liveReload, sourcemaps, scssSrc);
+require('./gulpTasks/connect')(gulp);
 require('./gulpTasks/watch')(gulp, liveReload, /*jsAll, jsPageMeet,*/ scssSrc);
 
-gulp.task('default', [
-	'scss',
-	'concat',
-	'copy',
-	'include',
-	'connect',
-	'watch' // NOTE: keep dependencies up to date
-]);
+gulp.task('default', gulp.series(
+	gulp.parallel(
+		'scss',
+		'js',
+		'copy',
+		'include'
+	),
+	gulp.parallel(
+		'connect',
+		'watch' // NOTE: keep dependencies up to date
+	)
+));
 
-//gulp.task('prd', []);
-//gulp.task('srv', []);
+gulp.task('prd', gulp.parallel(
+	'scss',
+	'js',
+	'copy',
+	'include'
+));
+
+gulp.task('srv', gulp.series('connect'));
 
 //gulp.task('test', [/*'jasmine',*/'jshint', 'scsslint']);
