@@ -37,13 +37,23 @@ aside {
 	}
 
 	a {
+		font-family: 'Open Sans Condensed', 'Verdana', sans-serif;
 		display: block;
 		font-size: 1.75em;
 		padding: 10px 0 10px 20px;
+		text-align: left !important;
 
 		i {
 			float: left;
 			padding-right: 20px;
+		}
+	}
+
+	.playgroundNav {
+		margin-left: 25px;
+
+		a {
+			font-size: 1.2em;
 		}
 	}
 }
@@ -59,7 +69,7 @@ header {
 		top: 13px;
 		text-align: right !important;
 		width: 39px;
-		font-size: 0.8 !important;
+		font-size: 0.65 !important;
 	}
 
 	nav {
@@ -131,7 +141,9 @@ header {
 }
 
 header nav a,
-header nav a:visited {      // TODO: combine with above?
+aside a,
+header nav a:visited,
+aside a:visited {      // TODO: combine with above?
 	text-align: right;
 	color: rgba(140, 177, 24, 0.84) !important;
 	-webkit-text-stroke: 1px rgb(140, 177, 24);
@@ -140,7 +152,7 @@ header nav a:visited {      // TODO: combine with above?
 	display: block;
 	margin-right: 18px;
 	line-height: 1.2;
-	transition: 0;
+	transition: none;
 }
 
 header nav a:hover,
@@ -151,11 +163,17 @@ header nav a:hover,
 header nav a:hover i,
 .home nav .icon-home,
 .games nav .icon-controllernes,
+.games aside .icon-controllernes,
 .music nav .icon-music,
+.music aside .icon-music,
 .playground nav .icon-beaker,
+.playground aside .icon-beaker,
 .portfolio nav .icon-briefcase,
+.portfolio aside .icon-briefcase,
 .about nav .icon-user,
-.contact nav .icon-phone {
+.about aside .icon-user,
+.contact nav .icon-phone,
+.contact aside .icon-phone {
 	color: hsla(0, 70%, 56%, 1) !important;
 	text-shadow: 0 3px 3px #000;
 	-webkit-text-stroke: 0;

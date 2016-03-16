@@ -21,27 +21,14 @@ jw.Main = (() => {
 
 			$('.menu').on('click', e => {
 				e.preventDefault();
-				let hadClass = false;
+				$('aside').addClass('active');
 
-				if($('aside').hasClass('active')) {
-					hadClass = true;
-				}
-				else {
-					$('aside').addClass('active');
-				}
-
-				console.log($('aside'));
-
-				var listener = $(document).on('click', function(e) {
-					if($(e.target).hasClass('menu') && !hadClass) {
-						console.log('hadCLass');
-					}
-					else {
-						console.log('remove');
+				setTimeout(() => {
+					let listener = $('body').on('click', e => {
 						$('aside').removeClass('active');
 						listener.off();
-					}
-				});
+					});
+				}, 0);
 			});
 		},
 
@@ -65,6 +52,4 @@ jw.Main = (() => {
 	};
 })();
 
-$(() => {
-	jw.Main.init();
-});
+$(() => jw.Main.init());

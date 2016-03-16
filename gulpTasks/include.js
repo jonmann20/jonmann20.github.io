@@ -1,7 +1,8 @@
 'use strict';
 
 module.exports = (gulp, isDev, iff, liveReload) => {
-	var fileInclude = require('gulp-file-include');
+	let fileInclude = require('gulp-file-include');
+	let htmlmin = require('gulp-htmlmin');
 
 	return (() => {
 		gulp.task('include', () => {
@@ -10,6 +11,14 @@ module.exports = (gulp, isDev, iff, liveReload) => {
 					prefix: '@@',
 					basepath: '@file'
 				})).
+				pipe(iff(!isDev, htmlmin({
+					removeComments: true,
+					collapseWhitespace: true,
+					removeAttributeQuotes: true,
+					removeEmptyAttributes: true,
+					minifyJS: true,
+					minifyCSS: true
+				}))).
 				pipe(gulp.dest('./')).
 				pipe(iff(isDev, liveReload()));
 		});
