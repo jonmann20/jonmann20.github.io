@@ -1,12 +1,8 @@
-/// <reference path="../linker.js" />
-
+'use strict';
+/* globals game, canvas, ctx, KeyCode, Dir, FightAction */
 /*
-    Implements GameView.
-
-    @param(string) bgColor The view background color.
-    @param(Dormant) dormantL The player's dormant.
-    @param(Dormant) dormantR The opponent's dormant.
-*/
+ *  Implements GameView.
+ */
 function BattleView(bgColor, dormantL, dormantR) {
     this.privates = {
         bgColor: bgColor,
@@ -17,11 +13,10 @@ function BattleView(bgColor, dormantL, dormantR) {
     this.init();
 }
 
-BattleView.prototype = (function () {
-
-    var that,
+BattleView.prototype = (function() {
+    let that,
         arrow = {
-            img: ">>"
+            img: '>>'
         },
         left,
         wasAttack,
@@ -41,7 +36,6 @@ BattleView.prototype = (function () {
                 theAttack.atk = (dormantL.atk * dormantL.actions[arrow.curSlot].multiplier) / dormantR.def;
 
                 return true;
-                break;
             case KeyCode.UP:
                 game.input.lastKeyDown = KeyCode.EMPTY;
 
@@ -69,10 +63,12 @@ BattleView.prototype = (function () {
                 left.dir = Dir.LEFT;
             }
 
-            if(left.dir === Dir.RIGHT)
+            if(left.dir === Dir.RIGHT) {
                 ++left.x;
-            else
+            }
+            else {
                 --left.x;
+            }
 
             dormantR.hp -= theAttack.atk / 60;
         });
@@ -81,13 +77,13 @@ BattleView.prototype = (function () {
     /****** Render *****/
     function drawDormantHUD(dormant, x, y, drawXP) {
         // name
-        var str = dormant.name + "  L" + dormant.lvl;
+        let str = dormant.name + ' L' + dormant.lvl;
 
         ctx.fillStyle = "#000";
         ctx.fillText(str, x + ctx.measureText(str).width / 2, y);
 
         // hp
-        ctx.fillText("HP", x, y + 20);
+        ctx.fillText('HP', x, y + 20);
         ctx.strokeStyle = "#000";
         ctx.strokeRect(x + 21, y + 12, 100, 10);
 
@@ -120,11 +116,11 @@ BattleView.prototype = (function () {
     }
 
     function drawActionList() {
-        ctx.fillStyle = "#000";
+        ctx.fillStyle = '#000';
 
-        for (var i = 0; i < 4; ++i) {
+        for(var i=0; i < 4; ++i) {
             if (dormantL.actions[i] === null) {
-                ctx.fillText("--", 80, 350 + i * 30);
+                ctx.fillText('--', 80, 350 + i * 30);
             }
             else {
                 ctx.fillText(dormantL.actions[i].name, 80, 350 + i * 30);
@@ -133,7 +129,7 @@ BattleView.prototype = (function () {
     }
 
     function drawActionArrow() {
-        ctx.fillStyle = "#000";
+        ctx.fillStyle = '#000';
         ctx.fillText(arrow.img, arrow.x, arrow.y);
     }
 
@@ -162,7 +158,7 @@ BattleView.prototype = (function () {
             wasAttack = false;
             wasAttackTimer = 60;
             theAttack = {
-                name: "EMPTY",
+                name: 'EMPTY',
                 atk: 0
             };
 
@@ -206,11 +202,10 @@ BattleView.prototype = (function () {
             drawDormantHUD(dormantR, canvas.width - 130, 15, false);
             dormantR.draw(770, 90);
 
-
             // attack animation
             if(wasAttack) {
+                let t = (wasAttackTimer % 40);
 
-                var t = (wasAttackTimer % 40);
                 if(t >= 0 && t < 10) {
                     fire.x = 0;
                 }
@@ -224,7 +219,7 @@ BattleView.prototype = (function () {
                     fire.x = -5;
                 }
 
-                ctx.fillStyle = "red";
+                ctx.fillStyle = 'red';
                 ctx.fillRect(870 + fire.x, 242, 40, 12);
                 ctx.fillRect(880 + fire.x, 230, 30, 12);
                 ctx.fillRect(880 + fire.x, 218, 20, 12);

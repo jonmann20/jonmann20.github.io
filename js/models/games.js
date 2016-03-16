@@ -1,21 +1,23 @@
-jw.GamesModel = (function() {
+'use strict';
+
+jw.GamesModel = (() => {
 	return {
-		render: function(that, page) {
+		render: (that, page) => {
 			jw.Utils.resetModel();
 
-			if(page === "index") {
-				that.load("/games/index.html", function (data) {
-					jw.Utils.require("/js/plugins/jquery.listCarousel.js", function () {
-						$("ul").listCarousel();
+			if(page === 'index') {
+				that.load('/games/index.html', data => {
+					jw.Utils.require('/js/plugins/jquery.listCarousel.js', () => {
+						$('ul').listCarousel();
 					});
-				}).swap(function() {
-					setTimeout(function() {
-						jw.Main.fixColRHeight($("#divDefault").height());
+				}).swap(() => {
+					setTimeout(() => {
+						jw.Main.fixColRHeight($('#divDefault').height());
 					}, 10);
 				});
 
-				document.title = "Games";
-				jw.body.addClass("absHover games");
+				document.title = 'Games';
+				jw.body.addClass('absHover games');
 			}
 		}
 	};

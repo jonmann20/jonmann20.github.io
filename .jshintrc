@@ -1,0 +1,14 @@
+{
+	"multistr": true,
+	"esnext": true,
+	"globalstrict": true,
+	"node": true,
+	"globals": {
+		"$": true,
+		"jw": true,
+		"ga": true,
+		"twttr": true
+	},
+	"browser": true,
+	"devel": true
+}

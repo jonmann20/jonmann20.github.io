@@ -1,3 +1,5 @@
+'use strict';
+
 jw.Routing = (function() {
     var app = $.sammy(".main", function () {
         // Home
@@ -86,7 +88,7 @@ jw.Routing = (function() {
             jw.MusicModel.render(this, "voice");
             jw.Routing.lastPg = "music/voice";
         });
-        
+
         // Playground
         this.route("get", "#playground", function () {
             jw.PlaygroundModel.render(this, "index");

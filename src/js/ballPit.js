@@ -1,3 +1,5 @@
+'use strict';
+
 jw.BallPit = (function() {
     var canvas,
         ctx,
@@ -37,7 +39,7 @@ jw.BallPit = (function() {
         ctx.fillStyle = "#0098ff";
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-        // draw balls 
+        // draw balls
         ctx.fillStyle = "#e1e1e1";
         for(var i in ballArr) {
             ctx.beginPath();
@@ -49,11 +51,11 @@ jw.BallPit = (function() {
             ctx.closePath();
         }
     }
-    
+
     function runSim() {
         update();
         render();
-        
+
         animLoop = requestAnimationFrame(runSim);
     }
 
@@ -114,7 +116,7 @@ jw.BallPit = (function() {
             canvas.width = $(".main").width() / 1.5;
             canvas.height = canvas.width / 2;
 
-            // set up modifications 
+            // set up modifications
             $(".numBalls").on("input", function () {
                 var num = $(this).val();
                 $(".litNumBalls").text(num);

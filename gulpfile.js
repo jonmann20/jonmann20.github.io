@@ -13,11 +13,11 @@ let scssSrc = ['src/scss/**/*.scss', '!vars.scss'];
 
 require('./gulpTasks/del')(gulp);
 require('./gulpTasks/scss')(gulp, isDev, iff, concat, liveReload, sourcemaps, scssSrc);
-require('./gulpTasks/js')(gulp, concat);
+require('./gulpTasks/js')(gulp, isDev, iff, concat, liveReload, sourcemaps);
 require('./gulpTasks/copy')(gulp);
 require('./gulpTasks/include')(gulp, isDev, iff, liveReload);
 require('./gulpTasks/connect')(gulp);
-require('./gulpTasks/watch')(gulp, liveReload, /*jsAll, jsPageMeet,*/ scssSrc);
+require('./gulpTasks/watch')(gulp, liveReload, scssSrc/*, jsAll, jsPageMeet, ...*/ );
 
 gulp.task('default', gulp.series(
 	gulp.parallel(

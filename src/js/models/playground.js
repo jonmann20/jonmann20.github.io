@@ -1,4 +1,6 @@
-jw.PlaygroundModel = (function ($, undefined) {
+'use strict';
+
+jw.PlaygroundModel = (function() {
 
     return {
         render: function (that, page) {
@@ -75,4 +77,4 @@ jw.PlaygroundModel = (function ($, undefined) {
             }
         }
     };
-})(jQuery);
+})();

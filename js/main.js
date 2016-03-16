@@ -1,35 +1,27 @@
-//'use strict';
-/* globals jw, $, document */
+'use strict';
 /*
  * Main
  */
-jw.Main = (function() {
-
-	function declareGlobals() {
-		jw.head = $('head');
-		jw.body = $('body');
-		jw.listeners = [];
-	}
-
+jw.Main = (() => {
 	return {
-		init: function() {
-			declareGlobals();
+		init: () => {
+			jw.head = $('head');
+			jw.body = $('body');
+			jw.listeners = [];
 
 			jw.Routing.init();
 			document.getElementById('dateYear').textContent = jw.Utils.getYear();
 
-			$(window).on('resize', function() {
-				var h = $('.colR > div:visible').height();
+			$(window).on('resize', () => {
+				let h = $('.colR > div:visible').height();
 				jw.Main.fixColRHeight(h);
 			});
 
-			$('header a').on('click', function() {
-				$('.main').height('auto');
-			});
+			$('header a').on('click', () => $('.main').height('auto'));
 
-			$('.menu').on('click', function(e) {
+			$('.menu').on('click', e => {
 				e.preventDefault();
-				var hadClass = false;
+				let hadClass = false;
 
 				if($('aside').hasClass('active')) {
 					hadClass = true;
@@ -54,7 +46,7 @@ jw.Main = (function() {
 		},
 
 		// 158: padding + footer height
-		fixColRHeight: function(h) {
+		fixColRHeight: h => {
 			if(window.innerWidth <= 800){
 				$('.main').height('auto');
 			}
@@ -73,6 +65,6 @@ jw.Main = (function() {
 	};
 })();
 
-$(function() {
+$(() => {
 	jw.Main.init();
 });

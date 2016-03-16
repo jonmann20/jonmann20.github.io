@@ -1,13 +1,15 @@
 'use strict';
 
-module.exports = (gulp, concat) => {
-	// TODO: sourcemap concat
+module.exports = (gulp, isDev, iff, concat, liveReload, sourcemaps) => {
+	let babel = require('gulp-babel');
+	let uglify = require('gulp-uglify');
+
 	let gamesCommonJs = [
 		'src/games/common/js/GameEngine.js',
 		'src/games/common/js/GameSave.js',
 		'src/games/common/js/GameInput.js',
 		'src/games/common/js/GameUtils.js',
-		'src/games/common/js/physics/SAT.js',
+		'src/games/common/js/physics/SAT.js', // NOTE: babel causes error; have to ignore transpile
 		'src/games/common/js/graphics/GameGraphics.js',
 		'src/games/common/js/view/GameView.js',
 		'src/games/common/js/view/TitleView.js',
@@ -23,14 +25,13 @@ module.exports = (gulp, concat) => {
 				'src/js/routing.js',
 				'src/js/main.js'
 			]).
+			pipe(iff(isDev, sourcemaps.init())).
+			pipe(babel({presets: ['es2015']})).
 			pipe(concat('master.js')).
-			pipe(gulp.dest('assets'));
-		});
-
-		gulp.task('js:gamesCommon', () => {
-			return gulp.src(gamesCommonJs).
-				pipe(concat('gamesCommon.js')).
-				pipe(gulp.dest('assets'));
+			pipe(iff(!isDev, uglify())).
+			pipe(iff(isDev, sourcemaps.write())).
+			pipe(gulp.dest('assets')).
+			pipe(iff(isDev, liveReload()));
 		});
 
 		gulp.task('js:pageDormanticide', () => {
@@ -41,8 +42,16 @@ module.exports = (gulp, concat) => {
 				'src/games/dormanticide/js/dormant/FightAction.js',
 				'src/games/dormanticide/js/main.js'
 			])).
+			pipe(iff(isDev, sourcemaps.init())).
+			pipe(babel({
+				presets: ['es2015'],
+				ignore: ['src/games/common/js/physics/SAT.js']
+			})).
 			pipe(concat('pageDormanticide.js')).
-			pipe(gulp.dest('assets'));
+			pipe(iff(!isDev, uglify())).
+			pipe(iff(isDev, sourcemaps.write())).
+			pipe(gulp.dest('assets')).
+			pipe(iff(isDev, liveReload()));
 		});
 
 		gulp.task('js:pageVamp', () => {
@@ -52,13 +61,20 @@ module.exports = (gulp, concat) => {
 				'src/games/vamp/js/vamp.js',
 				'src/games/vamp/js/main.js'
 			])).
+			pipe(iff(isDev, sourcemaps.init())).
+			pipe(babel({
+				presets: ['es2015'],
+				ignore: ['src/games/common/js/physics/SAT.js']
+			})).
 			pipe(concat('pageVamp.js')).
-			pipe(gulp.dest('assets'));
+			pipe(iff(!isDev, uglify())).
+			pipe(iff(isDev, sourcemaps.write())).
+			pipe(gulp.dest('assets')).
+			pipe(iff(isDev, liveReload()));
 		});
 
 		gulp.task('js', gulp.parallel(
 			'js:master',
-			'js:gamesCommon',
 			'js:pageDormanticide',
 			'js:pageVamp'
 		));

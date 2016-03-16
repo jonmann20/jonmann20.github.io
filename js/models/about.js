@@ -1,12 +1,14 @@
-jw.AboutModel = (function ($, undefined) {
+'use strict';
+
+jw.AboutModel = (() => {
     return {
-        render: function (that) {
+        render: that => {
             jw.Utils.resetModel();
 
-            that.load("/about.html").swap();
+            that.load('/about.html').swap();
 
-            document.title = "About";
-            jw.body.addClass("about");
+            document.title = 'About';
+            jw.body.addClass('about');
         }
     };
-})(jQuery);
+})();

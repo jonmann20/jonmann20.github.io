@@ -583,9 +583,21 @@
 	},
 	"file_history":
 	[
-		"/home/jon/git/jonw/gulpfile.js",
-		"/home/jon/git/jonw/gulpTasks/include.js",
+		"/home/jon/git/jonw/src/js/.jshintrc",
+		"/home/jon/git/jonw/gulpTasks/del.js",
+		"/home/jon/git/jonw/src/js/ballPit.js",
+		"/home/jon/git/jonw/src/js/main.js",
 		"/home/jon/git/jonw/gulpTasks/watch.js",
+		"/home/jon/git/jonw/gulpfile.js",
+		"/home/jon/git/jonw/gulpTasks/scss.js",
+		"/home/jon/git/jonw/gulpTasks/connect.js",
+		"/home/jon/git/jonw/favorites.html",
+		"/home/jon/git/jonw/src/favorites.html",
+		"/home/jon/git/jonw/assets/master.css",
+		"/home/jon/git/jonw/gulpTasks/js.js",
+		"/home/jon/git/jonw/gulpTasks/include.js",
+		"/home/jon/git/jonw/params.json",
+		"/home/jon/git/jonw/package.json",
 		"/home/jon/git/jonw/src/home.html",
 		"/home/jon/git/jonw/src/games/bloodCellBrigade/index.html",
 		"/home/jon/git/jonw/src/games/deflection/index.html",
@@ -605,15 +617,11 @@
 		"/home/jon/git/jonw/src/playground/stars.html",
 		"/home/jon/git/jonw/src/scss/base.scss",
 		"/home/jon/git/jonw/src/scss/state/playground.scss",
-		"/home/jon/git/jonw/gulpTasks/scss.js",
 		"/home/jon/git/jonw/jonw.sublime-project",
 		"/home/jon/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
-		"/home/jon/git/jonw/gulpTasks/connect.js",
 		"/home/jon/git/jonw/src/scss/state/responsive.scss",
-		"/home/jon/git/jonw/package.json",
 		"/home/jon/git/jonw/src/scss/vars.scss",
 		"/home/jon/git/jonw/gulpTasks/copy.js",
-		"/home/jon/git/jonw/assets/master.css",
 		"/home/jon/git/jonw/assets/css/base.css",
 		"/home/jon/git/jonw/assets/css/state/responsive.css",
 		"/home/jon/git/jonw/src/index.html",
@@ -702,15 +710,7 @@
 		"/home/jon/git/homewardhc/app/controllers/registrations_controller.rb",
 		"/home/jon/git/homewardhc/app/models/client.rb",
 		"/home/jon/git/homewardhc/spec/models/survey_result_spec.rb",
-		"/home/jon/git/homewardhc/spec/models/question_spec.rb",
-		"/home/jon/git/homewardhc/spec/models/reminder_spec.rb",
-		"/home/jon/git/homewardhc/spec/models/message_spec.rb",
-		"/home/jon/git/homewardhc/spec/models/patient_spec.rb",
-		"/home/jon/git/homewardhc/spec/models/client_spec.rb",
-		"/home/jon/git/homewardhc/app/models/dd_auth_attempt.rb",
-		"/home/jon/git/homewardhc/spec/models/dd_auth_attempt_spec.rb",
-		"/home/jon/git/homewardhc/spec/models/emr_spec.rb",
-		"/home/jon/git/homewardhc/spec/models/facility_spec.rb"
+		"/home/jon/git/homewardhc/spec/models/question_spec.rb"
 	],
 	"find":
 	{
@@ -755,6 +755,8 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"declare",
+			"assets/",
 			"class=\"loading\"",
 			"Defend Thy",
 			".home",
@@ -880,9 +882,7 @@
 			"view:switch",
 			"switchTab",
 			".impact-wrapper",
-			".impact-wrapper article",
-			"impact-reports",
-			"icon-rightArrow"
+			".impact-wrapper article"
 		],
 		"highlight": true,
 		"in_selection": false,

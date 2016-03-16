@@ -1,12 +1,14 @@
-jw.ContactModel = (function() {
+'use strict';
+
+jw.ContactModel = (() => {
     return {
-        render: function (that) {
+        render: that => {
             jw.Utils.resetModel();
 
-            that.load("/contact.html").swap();
+            that.load('/contact.html').swap();
 
-            document.title = "Contact Me";
-            jw.body.addClass("contact");
+            document.title = 'Contact Me';
+            jw.body.addClass('contact');
         }
     };
 })();

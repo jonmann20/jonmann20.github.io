@@ -13,6 +13,7 @@ module.exports = (gulp) => {
 				'!.sass-cache/**',
 				'!src/**',
 				'!.gitignore',
+				'!.jshintrc',
 				'!CNAME',
 				'!gulpfile.js',
 				'!jonw.sublime-project',

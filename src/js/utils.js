@@ -1,24 +1,26 @@
-jw.Utils = (function() {
-    var _main = $(".main");
+'use strict';
 
-    var jsSrcHash = {
+jw.Utils = (() => {
+    let _main = $('.main');
+
+    let jsSrcHash = {
         // src: id
-        "//platform.twitter.com/widgets.js": false,
-        "/js/plugins/jquery.cycle.lite.js": false,
-        "/js/plugins/jquery.listCarousel.js": false,
-        "/js/plugins/jquery.star_bg.js": false,
-        "/js/stars.js": false,
-        "/js/ballPit.js": false,
-        "/js/bouncingObj.js": false
+        'https://platform.twitter.com/widgets.js': false,
+        '/js/plugins/jquery.cycle.lite.js': false,
+        '/js/plugins/jquery.listCarousel.js': false,
+        '/js/plugins/jquery.star_bg.js': false,
+        '/js/stars.js': false,
+        '/js/ballPit.js': false,
+        '/js/bouncingObj.js': false
     };
 
     return {
-        require: function (src, callback) { // callback(cached)
-            if (!jsSrcHash[src]) {
+        require: (src, callback) => { // callback(cached)
+            if(!jsSrcHash[src]) {
                 $.ajax({
                     url: src,
-                    dataType: "script",
-                    success: function (data) {
+                    dataType: 'script',
+                    success: (data) => {
                         jsSrcHash[src] = true;
                         callback(false);
                     }
@@ -29,15 +31,15 @@ jw.Utils = (function() {
             }
         },
 
-        getYear: function() {
+        getYear: () => {
             return new Date().getFullYear();
         },
 
-        resetModel: function() {
+        resetModel: () => {
             _main.empty();
 
-            for(var i=0; i < jw.listeners.length; ++i) {
-                jw.listeners[i].off();
+            for(let listener of jw.listeners) {
+                listener.off();
             }
             jw.listeners = [];
 
@@ -53,13 +55,13 @@ jw.Utils = (function() {
             }
 
             jw.body.removeClass();
-            document.title = "";
+            document.title = '';
             $("meta[name=description], meta[name=keywords], meta[name=robots]").remove();
 
             // if page not playground inner
-            var h = window.location.hash;
+            let h = window.location.hash;
             if(typeof(h) === "undefined" || h.indexOf("#playground") !== 0) {  // startsWith
-                var pNav = $(".dPlaygroundNav");
+                let pNav = $(".dPlaygroundNav");
 
                 if(pNav.is(":visible")) {
                     pNav.slideUp();

@@ -1,3 +1,5 @@
+'use strict';
+
 jw.Bounce = (function() {
     var canvas,
 		ctx,
@@ -9,15 +11,15 @@ jw.Bounce = (function() {
         animLoop
     ;
 
-    /* 
+    /*
 		Kinematic equations:
-		
+
 		acceleration:
 		a(t) = a0 - gravity
-		
+
 		velocity:
 		v(t) = v0 + a*dt
-		
+
 		position:
 		d(t) = 1/2 * a * dt^2 + v0*dt + d0
 	*/
@@ -115,7 +117,7 @@ jw.Bounce = (function() {
 
         update();
         render();
-        
+
         animLoop = requestAnimationFrame(loop);
     }
 

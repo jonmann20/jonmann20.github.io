@@ -1,5 +1,7 @@
+'use strict';
+
 jw.StarryBg = (function() {
-	var w, 
+	var w,
 		color,
 		inputColor,
 		inputRadio
