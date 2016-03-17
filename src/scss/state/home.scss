@@ -1,4 +1,8 @@
 .home .noBullet {
 	padding-left: 35px;
 	line-height: 1.6;
+
+	&::before {
+		padding-right: 5px;
+	}
 }

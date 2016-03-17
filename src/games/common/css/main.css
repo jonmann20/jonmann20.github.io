@@ -1,12 +1,10 @@
-body {
-    background: #251e22;
-}
 .btnBack {
-    position: absolute;
-    top: 8px;
-    left: 8px;
+	position: absolute;
+	top: 8px;
+	left: 8px;
 }
+
 .canvasWrap {
-    width: 1008px;
-    margin: 3% auto 0;
+	width: 1008px;
+	margin: 3% auto 0;
 }
