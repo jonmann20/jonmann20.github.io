@@ -5,18 +5,14 @@
 	box-sizing: border-box;
 }
 
-html {
-	background: radial-gradient(ellipse at center, #45484d 0%, #000 100%) no-repeat center center fixed;
+body {
+    padding-top: 40px;
+    background: radial-gradient(ellipse at center, #45484d 0%, #000 100%) no-repeat center center fixed;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
 	background-size: cover;
 	height: 100%;
-}
-
-body {
-    padding-top: 40px;
-    background: #000;
 }
 
 input,
