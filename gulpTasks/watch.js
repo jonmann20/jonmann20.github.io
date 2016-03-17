@@ -16,7 +16,8 @@ module.exports = (gulp, liveReload, /*jsAll, jsPageMeet,*/ scssSrc) => {
 			gulp.watch('src/**/*.js', gulp.series('js'/*, 'jasmine:client'*/));
 			gulp.watch(scssSrc, gulp.series('scss'/*, 'scsslint'*/));
 
-			liveReload.listen();
+			// NOTE: done automatically by gulp-live-server??
+			//liveReload.listen();
 		});
 	})();
 };

@@ -20,6 +20,7 @@ module.exports = (gulp, isDev, iff, concat, liveReload, sourcemaps, scssSrc) => 
 					'assets/css/normalize.css',
 					'assets/css/base.css',
 					'assets/css/layout.css',
+					'assets/css/state/home.css',
 					'assets/css/state/games.css',
 					'assets/css/state/music.css',
 					'assets/css/state/playground.css',

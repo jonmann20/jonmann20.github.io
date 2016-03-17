@@ -34,14 +34,6 @@
 			margin-bottom: 15px;
 		}
 	}
-
-	footer a {
-		margin: 0 !important;
-	}
-
-	.inFooter {
-		width: 96%;
-	}
 }
 
 @media screen and (max-width: 920px) {
@@ -56,7 +48,7 @@
 	}
 }
 
-@media screen and (max-width: 800px) { // vertical footer
+@media screen and (max-width: 800px) {
 	.page {
 		padding: 0;
 	}
@@ -67,8 +59,7 @@
 		z-index: 99999;
 		width: 100%;
 		float: none;
-		background: #333;
-		box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.3);
+		background: $mobile-nav-bg;
 
 		nav {
 			text-align: left;
@@ -99,61 +90,11 @@
 		display: none;
 	}
 
-	footer {
-		position: static;
-		margin-top: 0;
-
-		a {
-			display: block;
-			margin-bottom: 8px !important;
-			font-size: 1.25em;
-			text-align: right;
-		}
-
-		.footL {
-			float: none;
-			width: 192px;
-			margin: 0 auto;
-			display: block;
-			padding-bottom: 30px;
-		}
-
-		.footR {
-			display: none;
-		}
-
-		.name {
-			text-indent: 0;
-			width: 139px;
-			padding-right: 6px;
-		}
-
-		.footContact {
-			margin-right: 0 !important;
-			margin-bottom: 25px !important;
-		}
-	}
-
-	.outFooter {
-		height: 375px;
-		background: $cardBg;
-		line-height: 1.4;
-
-		&::before,
-		&::after {
-			display: none;
-		}
-	}
-
-	.inFooter {
-		margin-top: -4px;
-	}
-
 	.main {
 		text-align: center;
 		overflow: visible;
 		padding-left: 0;
-		margin: 80px auto 0;
+		margin: 40px auto 0;
 		width: 90%;
 		min-height: 740px;
 
@@ -172,9 +113,21 @@
 		max-width: 100%;
 	}
 
-	.home .colL,
-	.music .colL {
-		display: block;
+	.colR {
+		margin-top: 0;
+	}
+
+	.home,
+	.music,
+	.about,
+	.playground {
+		.colL {
+			display: block;
+		}
+
+		.colR {
+			margin-top: 25px;
+		}
 	}
 
 	.absHover .colR > div {
@@ -210,31 +163,25 @@
 		float: none !important;
 	}
 
-	.about {
-		.colL {
-			display: block;
+	.home {
+		.noBullet {
+			padding-left: 0;
 		}
+	}
 
+	.about {
 		.colR {
 			margin-bottom: 85px;
 		}
 	}
 
 	.playground {
-		.colL {
-			display: block;
-		}
-
 		.iframeWrap {
 			display: none;
 		}
 
 		.container {
 			margin: 110px 0 140px;
-		}
-
-		footer {
-			margin-top: 85px;
 		}
 	}
 

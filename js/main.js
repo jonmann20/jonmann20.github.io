@@ -10,7 +10,6 @@ jw.Main = (() => {
 			jw.listeners = [];
 
 			jw.Routing.init();
-			document.getElementById('dateYear').textContent = jw.Utils.getYear();
 
 			$(window).on('resize', () => {
 				let h = $('.colR > div:visible').height();

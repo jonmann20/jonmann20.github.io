@@ -16,7 +16,7 @@ require('./gulpTasks/scss')(gulp, isDev, iff, concat, liveReload, sourcemaps, sc
 require('./gulpTasks/js')(gulp, isDev, iff, concat, liveReload, sourcemaps);
 require('./gulpTasks/copy')(gulp);
 require('./gulpTasks/include')(gulp, isDev, iff, liveReload);
-require('./gulpTasks/connect')(gulp);
+require('./gulpTasks/server')(gulp);
 require('./gulpTasks/watch')(gulp, liveReload, scssSrc/*, jsAll, jsPageMeet, ...*/ );
 
 gulp.task('default', gulp.series(
@@ -27,7 +27,7 @@ gulp.task('default', gulp.series(
 		'include'
 	),
 	gulp.parallel(
-		'connect',
+		'server',
 		'watch' // NOTE: keep dependencies up to date
 	)
 ));
@@ -39,6 +39,6 @@ gulp.task('prd', gulp.parallel(
 	'include'
 ));
 
-gulp.task('srv', gulp.series('connect'));
+gulp.task('srv', gulp.series('server'));
 
 //gulp.task('test', [/*'jasmine',*/'jshint', 'scsslint']);

@@ -1,48 +1,48 @@
 .playground {
-    input[type=color] {
-	    position: relative;
-        top: 6px;
-	    margin: -12px 0 0 1px;
-        padding-bottom: 7px;
-	    width: 30px;
-	    height: 29px;
-	    border: 0;
-	    background-color: transparent;
-    }
+	input[type=color] {
+		position: relative;
+		top: 2px;
+		margin: -12px 0 0 1px;
+		padding-bottom: 7px;
+		width: 30px;
+		height: 29px;
+		border: 0;
+		background-color: transparent;
+	}
 
-    .ballPit {
-        canvas,
-        .rangeInputs {
-        	float: left;
-	        margin-right: 35px;
-        }
-    }
+	.ballPit {
+		canvas,
+		.rangeInputs {
+			float: left;
+			margin-right: 35px;
+		}
+	}
 
-    .rangeInputs {
-        > div {
-            margin: 0 0 30px 0;
-        }
+	.rangeInputs {
+		> div {
+			margin: 0 0 30px;
+		}
 
-        label {
-        	display: block;
-	        margin-bottom: 5px;
-        }
+		label {
+			display: block;
+			margin-bottom: 5px;
+		}
 
-        input {
-            cursor: ew-resize;
+		input {
+			cursor: ew-resize;
 
-            &:focus {
-                box-shadow: none;
-                outline-color: transparent;
-            }
-        }
-    }
+			&:focus {
+				box-shadow: none;
+				outline-color: transparent;
+			}
+		}
+	}
 
-    .card {
-        &:first-child {
-            margin-bottom: 20px;
-        }
-    }
+	.card {
+		&:first-child {
+			margin-bottom: 20px;
+		}
+	}
 }
 
 .colorPicker input[type=radio] {
@@ -56,45 +56,45 @@
 }
 
 .uWrap {
-    background: url("/img/playground/Meeting_Room.jpg");
+	background: url('/img/playground/Meeting_Room.jpg');
 	width: 1024px;
 	height: 685px;
 
-    > div {
-        position: absolute;
-    }
+	> div {
+		position: absolute;
+	}
 
-    .list {
-        ul {
-	        width: 203px;
-	        list-style-type: none;
-	        padding: 0 0 0 2px;
-	        margin-left: 0;
-	        box-shadow: 4px 3px 18px rgba(0, 0, 0, 0.8);
-	        background-color: rgba(19, 19, 19, .7);
-        }
+	.list {
+		ul {
+			width: 203px;
+			list-style-type: none;
+			padding: 0 0 0 2px;
+			margin-left: 0;
+			box-shadow: 4px 3px 18px rgba(0, 0, 0, 0.8);
+			background-color: rgba(19, 19, 19, 0.7);
+		}
 
-        li {
-            cursor: move;
-	        margin: 2px 0 10px;
-	        padding: 2px;
-	        font-size: 119%;
-	        text-shadow: 1px 1px 11px #000, 1px 1px 12px #000;
+		li {
+			cursor: move;
+			margin: 2px 0 10px;
+			padding: 2px;
+			font-size: 119%;
+			text-shadow: 1px 1px 11px #000, 1px 1px 12px #000;
 
-            &:first-child {
-                margin-top: 0;
-            }
+			&:first-child {
+				margin-top: 0;
+			}
 
-            &:hover {
-            	color: #61b0d7;
-	            text-shadow: 1px 1px 11px #001eff, 1px 1px 12px #001eff;
-            }
+			&:hover {
+				color: #61b0d7;
+				text-shadow: 1px 1px 11px #001eff, 1px 1px 12px #001eff;
+			}
 
-            .vid {
-                display: none;
-            }
-        }
-    }
+			.vid {
+				display: none;
+			}
+		}
+	}
 }
 
 .iframeWrap {
@@ -104,37 +104,37 @@
 
 // Starry Background
 .nav2 {
-    label {
-        cursor: pointer;
-    }
+	label {
+		cursor: pointer;
+	}
 
-    input {
-        &:focus {
-            box-shadow: none;
-            outline-color: transparent;
-        }
-    }
+	input {
+		&:focus {
+			box-shadow: none;
+			outline-color: transparent;
+		}
+	}
 
-    .card {
-        &:last-child {
-            margin-top: 10px;
-        }
-    }
+	.card {
+		&:last-child {
+			margin-top: 10px;
+		}
+	}
 }
 
 // Bouncing Object
 .nav6 {
-    .main {
-	    padding-bottom: 5px;
-    }
+	.main {
+		padding-bottom: 5px;
+	}
 
-    .bigBtn {
-	    float: left;
-	    margin-right: 45px;
-    }
+	.bigBtn {
+		float: left;
+		margin-right: 45px;
+	}
 
-    .rangeInputs {
-	    float: left;
-	    margin-top: 28px;
-    }
+	.rangeInputs {
+		float: left;
+		margin-top: 28px;
+	}
 }

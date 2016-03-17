@@ -4,8 +4,24 @@
 		{
 			"path": ".",
 			"folder_exclude_patterns": [
-				"assets"
+				"assets",
+				"audio",
+				"blog",
+				"font",
+				"games",
+				"img",
+				"js",
+				"music",
+				"playground",
+				"portfolio",
+				"src"
 			],
+			"file_exclude_patterns": [
+				"*.html"
+			]
+		},
+		{
+			"path": "./src"
 		}
 	]
 }

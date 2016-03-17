@@ -4,7 +4,7 @@ module.exports = (gulp) => {
 	let del = require('del');
 
 	return (() => {
-		gulp.task('clean', () => {
+		gulp.task('del', () => {
 			return del([
 				'**',
 				'!.git/**',
@@ -22,7 +22,8 @@ module.exports = (gulp) => {
 				'!notes.md',
 				'!package.json',
 				'!params.json',
-				'!readme.md'
+				'!readme.md',
+				'!server.js'
 			]);
 		});
 	})();
