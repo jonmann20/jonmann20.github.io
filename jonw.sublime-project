@@ -17,7 +17,8 @@
 				"src"
 			],
 			"file_exclude_patterns": [
-				"*.html"
+				"*.html",
+				"manifest.json"
 			]
 		},
 		{

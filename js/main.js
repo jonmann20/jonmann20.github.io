@@ -18,16 +18,27 @@ jw.Main = (() => {
 
 			$('header a').on('click', () => $('.main').height('auto'));
 
+			let listener, hasClass = false;
+			function hide() {
+				$('aside').removeClass('active');
+				hasClass = false;
+				listener.off();
+			}
+
 			$('.menu').on('click', e => {
 				e.preventDefault();
-				$('aside').addClass('active');
 
-				setTimeout(() => {
-					let listener = $('body').on('click', e => {
-						$('aside').removeClass('active');
-						listener.off();
-					});
-				}, 0);
+				if(!hasClass) {
+					$('aside').addClass('active');
+					hasClass = true;
+
+					setTimeout(() => {
+						listener = $('body').on('click', hide);
+					}, 0);
+				}
+				else {
+					hide();
+				}
 			});
 		},
 
