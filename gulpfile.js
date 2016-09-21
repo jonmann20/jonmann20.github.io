@@ -9,7 +9,7 @@ let sourcemaps = require('gulp-sourcemaps');
 
 const isDev = argv._.length === 0;
 
-let scssSrc = ['src/scss/**/*.scss', '!vars.scss'];
+let scssSrc = ['src/scss/**/*.scss', '!vars.scss', '!blog.scss'];
 
 require('./gulp_tasks/del')(gulp);
 require('./gulp_tasks/scss')(gulp, isDev, iff, concat, liveReload, sourcemaps, scssSrc);

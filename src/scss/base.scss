@@ -221,12 +221,17 @@ br.clr {
 .card,
 .card, .colL,
 .colR > div,
+.colR > img,
 .twitter-timeline-rendered,
 .music .colR iframe {
 	background: $cardBg;
-	padding: 1px 15px 5px;
+	padding: 3px 15px 5px;
 	border-radius: 2px;
-	box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.3);
+	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
+.colR > img {
+	padding: 0;
 }
 
 .twitter-timeline, .music .colR iframe {

@@ -5,20 +5,20 @@ My personal website.
 
 Setup
 -----
-* `npm install`
+* `npm i`
 
 Develop
 -------
-* Develop in `src` on `dev` branch
-* `grunt`
+* Develop in `src`
+* `gulp`
     * compiles to `./`
 
 Test
 ----
-* `grunt prd`
-* `grunt srv`
+* `gulp prd`
+* `gulp srv`
 
 Deploy
 ------
-* `grunt prd`
-* push to `master` branch
+* `gulp prd`
+* push to `master` on GitHub
