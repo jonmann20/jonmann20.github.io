@@ -11,13 +11,13 @@ const isDev = argv._.length === 0;
 
 let scssSrc = ['src/scss/**/*.scss', '!vars.scss'];
 
-require('./gulpTasks/del')(gulp);
-require('./gulpTasks/scss')(gulp, isDev, iff, concat, liveReload, sourcemaps, scssSrc);
-require('./gulpTasks/js')(gulp, isDev, iff, concat, liveReload, sourcemaps);
-require('./gulpTasks/copy')(gulp);
-require('./gulpTasks/include')(gulp, isDev, iff, liveReload);
-require('./gulpTasks/server')(gulp);
-require('./gulpTasks/watch')(gulp, liveReload, scssSrc/*, jsAll, jsPageMeet, ...*/ );
+require('./gulp_tasks/del')(gulp);
+require('./gulp_tasks/scss')(gulp, isDev, iff, concat, liveReload, sourcemaps, scssSrc);
+require('./gulp_tasks/js')(gulp, isDev, iff, concat, liveReload, sourcemaps);
+require('./gulp_tasks/copy')(gulp);
+require('./gulp_tasks/include')(gulp, isDev, iff, liveReload);
+require('./gulp_tasks/server')(gulp);
+require('./gulp_tasks/watch')(gulp, liveReload, scssSrc/*, jsAll, jsPageMeet, ...*/ );
 
 gulp.task('default', gulp.series(
 	gulp.parallel(

@@ -25,12 +25,6 @@ jw.Routing = (() => {
 			jw.Routing.lastPg = 'contact';
 		});
 
-		//// Favorites
-		//this.route('get', '#favorites', function() {
-		//    jw.FavoritesModel.render(this);
-		//    jw.Routing.lastPg = 'favorites';
-		//});
-
 		//// Blog
 		//this.route('get', '#blog', function() {
 		//    jw.BlogModel.render(this);
@@ -41,52 +35,6 @@ jw.Routing = (() => {
 		this.route('get', '#games', function () {
 			jw.GamesModel.render(this, 'index');
 			jw.Routing.lastPg = 'games/index';
-		});
-
-		// Music
-		this.route('get', '#music', function() {
-			jw.MusicModel.render(this, 'index');
-			jw.Routing.lastPg = 'music/index';
-		});
-
-		this.route('get', '#music/bass', function() {
-			jw.MusicModel.render(this, 'bass');
-			jw.Routing.lastPg = 'music/bass';
-		});
-
-		this.route('get', '#music/chiptunes', function() {
-			jw.MusicModel.render(this, 'chiptunes');
-			jw.Routing.lastPg = 'music/chiptunes';
-		});
-
-		this.route('get', '#music/guitar', function() {
-			jw.MusicModel.render(this, 'guitar');
-			jw.Routing.lastPg = 'music/guitar';
-		});
-
-		this.route('get', '#music/mandolin', function() {
-			jw.MusicModel.render(this, 'mandolin');
-			jw.Routing.lastPg = 'music/mandolin';
-		});
-
-		this.route('get', '#music/piano', function() {
-			jw.MusicModel.render(this, 'piano');
-			jw.Routing.lastPg = 'music/piano';
-		});
-
-		this.route('get', '#music/trumpet', function() {
-			jw.MusicModel.render(this, 'trumpet');
-			jw.Routing.lastPg = 'music/trumpet';
-		});
-
-		this.route('get', '#music/rates', function() {
-			jw.MusicModel.render(this, 'rates');
-			jw.Routing.lastPg = 'music/rates';
-		});
-
-		this.route('get', '#music/voice', function() {
-			jw.MusicModel.render(this, 'voice');
-			jw.Routing.lastPg = 'music/voice';
 		});
 
 		// Playground
