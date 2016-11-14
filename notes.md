@@ -1,27 +1,11 @@
-grunt
-=====
-
 open server in background
--------------------------
+=========================
 windows:  
-`START grunt`
+`START gulp`
 
 *nix:  
-`grunt &`
+`gulp &`
 
-
-install new plugin
-------------------
-npm install {{name}} --save
-
-
-
-
-[2d-hero art](http://opengameart.org/content/2d-hero)
-
-
-How To
-======
 
 Add a page
 ----------
@@ -30,3 +14,6 @@ Add a page
 2. Add model, add to index (master)
 3. Add requires to utils hash
 4. Add html with css
+
+
+[2d-hero art](http://opengameart.org/content/2d-hero)

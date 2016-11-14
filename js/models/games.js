@@ -3,11 +3,11 @@
 jw.GamesModel = (() => {
 	return {
 		render: (that, page) => {
-			jw.Utils.resetModel();
+			jw.Util.resetModel();
 
 			if(page === 'index') {
 				that.load('/games/index.html', data => {
-					jw.Utils.require('/js/plugins/jquery.listCarousel.js', () => {
+					jw.Util.require('/js/plugins/jquery.listCarousel.js', () => {
 						$('ul').listCarousel();
 					});
 				}).swap(() => {
@@ -17,7 +17,7 @@ jw.GamesModel = (() => {
 				});
 
 				document.title = 'Games';
-				jw.body.addClass('absHover games');
+				document.body.classList.add('absHover', 'games');
 			}
 		}
 	};

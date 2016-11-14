@@ -20,7 +20,7 @@ module.exports = (gulp, isDev, iff, concat, liveReload, sourcemaps) => {
 		gulp.task('js:master', () => {
 			return gulp.src([
 				'src/js/plugins/sammy.js',
-				'src/js/utils.js',
+				'src/js/util.js',
 				'src/js/models/*.js',
 				'src/js/routing.js',
 				'src/js/main.js'

@@ -3,15 +3,14 @@
 jw.AboutModel = (() => {
     return {
         render: that => {
-            jw.Utils.resetModel();
+            jw.Util.resetModel();
 
             that.load('/about.html', () => {
-
-            document.getElementById('dateYear').textContent = jw.Utils.getYear();
+                document.getElementById('dateYear').textContent = jw.Util.getYear();
             }).swap();
 
             document.title = 'About';
-            jw.body.addClass('about');
+            document.body.classList.add('about');
         }
     };
 })();

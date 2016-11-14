@@ -3,76 +3,59 @@
 jw.PlaygroundModel = (function() {
 
     return {
-        render: function (that, page) {
-            jw.Utils.resetModel();
+        render: function(that, page) {
+            jw.Util.resetModel();
 
-            if (page === "index") {
-                that.load("/playground/index.html", function(data) {}).swap();
+            if(page === 'index') {
+                that.load('/playground/index.html', function(data) {}).swap();
 
-                document.title = "Playground";
-                jw.head.append("<meta name='description' content='An playground area for web tech demos.' />" +
-                               "<meta name='keywords' content='canvas, html5' />"
-                );
-                jw.body.addClass("playground playInner");
+                document.title = 'Playground';
+                jw.Util.addMeta('description', 'An playground area for web tech demos.');
+                jw.Util.addMeta('keywords', 'canvas, html5');
+                document.body.classList.add('playground', 'playInner');
             }
-            else if (page === "ballPit") {
-                that.load("/playground/ballPit.html", function(data) {
-                    jw.Utils.require("/js/ballPit.js", function () {
+            else if(page === 'ballPit') {
+                that.load('/playground/ballPit.html', function(data) {
+                    jw.Util.require('/js/ballPit.js', function() {
                         jw.BallPit.init();
                     });
                 }).swap();
 
-                document.title = "Ball Pit | Playground";
-                jw.head.append("<meta name='description' content='A canvas example showcasing a ball pit.' />" +
-                               "<meta name='keywords' content='canvas, html5' />"
-                );
-                jw.body.addClass("playground playInner nav3");
+                document.title = 'Ball Pit | Playground';
+                jw.Util.addMeta('description', 'A canvas example showcasing a ball pit.');
+                jw.Util.addMeta('keywords', 'canvas, html5');
+                document.body.classList.add('playground', 'playInner', 'nav3');
             }
-            else if (page === "stars") {
-                that.load("/playground/stars.html", function (data) {
+            else if(page === 'stars') {
+                that.load('/playground/stars.html', function(data) {
                     // TODO: load these async
-                    jw.Utils.require("/js/plugins/jquery.star_bg.js", function () {
-                        jw.Utils.require("/js/stars.js", function (cached) {
+                    jw.Util.require('/js/plugins/jquery.star_bg.js', function() {
+                        jw.Util.require('/js/stars.js', function(cached) {
                             jw.StarryBg.init();
                         });
                     });
                 }).swap();
 
-                document.title = "Starry Background | Playground";
-                jw.head.append("<meta name='description' content='A canvas example showcasing a starry background.' />" +
-                               "<meta name='keywords' content='canvas, html5' />"
-                );
-                jw.body.addClass("playground playInner nav2");
+                document.title = 'Starry Background | Playground';
+                jw.Util.addMeta('description', 'A canvas example showcasing a starry background.');
+                jw.Util.addMeta('keywords', 'canvas, html5');
+                document.body.classList.add('playground', 'playInner', 'nav2');
             }
-            else if (page === "bObj") {
-                that.load("/playground/bouncing-object.html", function (data) {
-                    jw.Utils.require("/js/bouncingObj.js", function () {
-                        jw.Bounce.init();
-                    });
-                }).swap();
-
-                document.title = "Bouncing Object | Playground";
-                jw.head.append("<meta name='description' content='A canvas example showcasing a bouncing object.' />" +
-                               "<meta name='keywords' content='canvas, html5' />"
-                );
-                jw.body.addClass("playground playInner nav5");
-            }
-            else if (page === "bCube") {
-                that.load("/playground/breakdancing-cube.html", function (data) {
-                    $("#cube").on("click", function (e) {
+            else if(page === 'bCube') {
+                that.load('/playground/breakdancing-cube.html', function(data) {
+                    document.getElementById('cube').addEventListener('click', function(e) {
                         e.preventDefault();
                     });
                 }).swap();
 
-                document.title = "Breakdancing Cube | Playground";
-                jw.head.append("<meta name='description' content='Pure CSS3 animation demo.' />" +
-                               "<meta name='keywords' content='CSS3, HTML5' />"
-                );
-                jw.body.addClass("playground playInner bDancingCube nav1");
+                document.title = 'Breakdancing Cube | Playground';
+                jw.Util.addMeta('description', 'Pure CSS3 animation demo.');
+                jw.Util.addMeta('keywords', 'CSS3, HTML5');
+                document.body.classList.add('playground', 'playInner', 'bDancingCube', 'nav1');
             }
 
-            var pNav = $(".dPlaygroundNav");
-            if(!pNav.is(":visible")) {
+            var pNav = $('.dPlaygroundNav');
+            if(!pNav.is(':visible')) {
                 pNav.slideDown();
             }
         }

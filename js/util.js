@@ -1,7 +1,7 @@
 'use strict';
 
-jw.Utils = (() => {
-    let _main = $('.main');
+jw.Util = (() => {
+    let _main = document.querySelector('.main');
 
     let jsSrcHash = {
         // src: id
@@ -10,8 +10,7 @@ jw.Utils = (() => {
         '/js/plugins/jquery.listCarousel.js': false,
         '/js/plugins/jquery.star_bg.js': false,
         '/js/stars.js': false,
-        '/js/ballPit.js': false,
-        '/js/bouncingObj.js': false
+        '/js/ballPit.js': false
     };
 
     return {
@@ -36,7 +35,7 @@ jw.Utils = (() => {
         },
 
         resetModel: () => {
-            _main.empty();
+            _main.innerHTML = '';
 
             for(let listener of jw.listeners) {
                 listener.off();
@@ -44,29 +43,46 @@ jw.Utils = (() => {
             jw.listeners = [];
 
 
-            if(jw.Routing.lastPg === "ballPit") {
+            if(jw.Routing.lastPg === 'ballPit') {
                 jw.BallPit.deInit();
             }
-            else if(jw.Routing.lastPg === "stars") {
+            else if(jw.Routing.lastPg === 'stars') {
                 jw.StarryBg.deInit();
             }
-            else if(jw.Routing.lastPg === "bObj") {
-                jw.Bounce.deInit();
-            }
 
-            jw.body.removeClass();
+            document.body.className = '';
             document.title = '';
-            $("meta[name=description], meta[name=keywords], meta[name=robots]").remove();
-
+            
+            const description = document.head.querySelector('meta[name=description]');
+            const keywords = document.head.querySelector('meta[name=keywords]');
+            const robots = document.head.querySelector('meta[name=robots]');
+            if(description) {
+                document.head.removeChild(description);
+            }
+            
+            if(keywords) {
+                document.head.removeChild(keywords);
+            }
+            
+            if(robots) {
+                document.head.removeChild(robots);
+            }
+            
             // if page not playground inner
             let h = window.location.hash;
-            if(typeof(h) === "undefined" || h.indexOf("#playground") !== 0) {  // startsWith
-                let pNav = $(".dPlaygroundNav");
-
-                if(pNav.is(":visible")) {
+            if(typeof(h) === 'undefined' || h.indexOf('#playground') !== 0) {  // startsWith
+                let pNav = $('.dPlaygroundNav');
+                if(pNav.is(':visible')) {
                     pNav.slideUp();
                 }
             }
+        },
+        
+        addMeta: (name, content) => {
+            let meta = document.createElement('meta');
+            meta.setAttribute('name', name);
+            meta.setAttribute('content', content);
+            document.head.appendChild(meta);
         }
     };
 })();

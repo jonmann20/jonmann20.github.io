@@ -53,11 +53,6 @@ jw.Routing = (() => {
 			jw.Routing.lastPg = 'bCube';
 		});
 
-		this.route('get', '#playground/bouncing-object', function() {
-			jw.PlaygroundModel.render(this, 'bObj');
-			jw.Routing.lastPg = 'bObj';
-		});
-
 		this.route('get', '#playground/starry-background', function() {
 			jw.PlaygroundModel.render(this, 'stars');
 			jw.Routing.lastPg = 'stars';
