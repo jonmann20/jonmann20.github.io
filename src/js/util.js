@@ -1,88 +1,83 @@
 'use strict';
 
-jw.Util = (() => {
-    let _main = document.querySelector('.main');
+class Util {
+    constructor() {
+        this.main = document.querySelector('.main');
+        this.jsSrcHash = {
+            // src: id
+            'https://platform.twitter.com/widgets.js': false,
+            '/js/plugins/jquery.cycle.lite.js': false,
+            '/js/plugins/jquery.listCarousel.js': false,
+            '/js/plugins/jquery.star_bg.js': false,
+            '/js/stars.js': false,
+            '/js/ballPit.js': false
+        };
+    }
 
-    let jsSrcHash = {
-        // src: id
-        'https://platform.twitter.com/widgets.js': false,
-        '/js/plugins/jquery.cycle.lite.js': false,
-        '/js/plugins/jquery.listCarousel.js': false,
-        '/js/plugins/jquery.star_bg.js': false,
-        '/js/stars.js': false,
-        '/js/ballPit.js': false
-    };
-
-    return {
-        require: (src, callback) => { // callback(cached)
-            if(!jsSrcHash[src]) {
-                $.ajax({
-                    url: src,
-                    dataType: 'script',
-                    success: (data) => {
-                        jsSrcHash[src] = true;
-                        callback(false);
-                    }
-                });
-            }
-            else {
-                callback(true);
-            }
-        },
-
-        getYear: () => {
-            return new Date().getFullYear();
-        },
-
-        resetModel: () => {
-            _main.innerHTML = '';
-
-            for(let listener of jw.listeners) {
-                listener.off();
-            }
-            jw.listeners = [];
-
-
-            if(jw.Routing.lastPg === 'ballPit') {
-                jw.BallPit.deInit();
-            }
-            else if(jw.Routing.lastPg === 'stars') {
-                jw.StarryBg.deInit();
-            }
-
-            document.body.className = '';
-            document.title = '';
-            
-            const description = document.head.querySelector('meta[name=description]');
-            const keywords = document.head.querySelector('meta[name=keywords]');
-            const robots = document.head.querySelector('meta[name=robots]');
-            if(description) {
-                document.head.removeChild(description);
-            }
-            
-            if(keywords) {
-                document.head.removeChild(keywords);
-            }
-            
-            if(robots) {
-                document.head.removeChild(robots);
-            }
-            
-            // if page not playground inner
-            let h = window.location.hash;
-            if(typeof(h) === 'undefined' || h.indexOf('#playground') !== 0) {  // startsWith
-                let pNav = $('.dPlaygroundNav');
-                if(pNav.is(':visible')) {
-                    pNav.slideUp();
+    require(src, callback) { // callback(cached)
+        if(!this.jsSrcHash[src]) {
+            $.ajax({
+                url: src,
+                dataType: 'script',
+                success: (data) => {
+                    this.jsSrcHash[src] = true;
+                    callback(false);
                 }
-            }
-        },
-        
-        addMeta: (name, content) => {
-            let meta = document.createElement('meta');
-            meta.setAttribute('name', name);
-            meta.setAttribute('content', content);
-            document.head.appendChild(meta);
+            });
         }
-    };
-})();
+        else {
+            callback(true);
+        }
+    }
+
+    getYear() {
+        return new Date().getFullYear();
+    }
+
+    resetModel() {
+        this.main.innerHTML = '';
+
+        if(jw.Routing.lastPg === 'ballPit') {
+            jw.BallPit.deInit();
+        }
+        else if(jw.Routing.lastPg === 'stars') {
+            jw.StarryBg.deInit();
+        }
+
+        document.body.className = '';
+        document.title = '';
+        
+        const description = document.head.querySelector('meta[name=description]');
+        const keywords = document.head.querySelector('meta[name=keywords]');
+        const robots = document.head.querySelector('meta[name=robots]');
+        if(description) {
+            document.head.removeChild(description);
+        }
+        
+        if(keywords) {
+            document.head.removeChild(keywords);
+        }
+        
+        if(robots) {
+            document.head.removeChild(robots);
+        }
+        
+        // if page not playground inner
+        let h = window.location.hash;
+        if(typeof(h) === 'undefined' || h.indexOf('#playground') !== 0) {  // startsWith
+            let pNav = $('.dPlaygroundNav');
+            if(pNav.is(':visible')) {
+                pNav.slideUp();
+            }
+        }
+    }
+    
+    addMeta(name, content) {
+        let meta = document.createElement('meta');
+        meta.setAttribute('name', name);
+        meta.setAttribute('content', content);
+        document.head.appendChild(meta);
+    }
+}
+
+jw.Util = new Util();

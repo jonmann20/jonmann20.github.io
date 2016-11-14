@@ -1,16 +1,16 @@
 'use strict';
 
-jw.AboutModel = (() => {
-    return {
-        render: that => {
-            jw.Util.resetModel();
+class AboutModel {
+    render(that) {
+        jw.Util.resetModel();
 
-            that.load('/about.html', () => {
-                document.getElementById('dateYear').textContent = jw.Util.getYear();
-            }).swap();
+        that.load('/about.html', () => {
+            document.getElementById('dateYear').textContent = jw.Util.getYear();
+        }).swap();
 
-            document.title = 'About';
-            document.body.classList.add('about');
-        }
-    };
-})();
+        document.title = 'About';
+        document.body.classList.add('about');
+    }
+}
+
+jw.AboutModel = new AboutModel();
