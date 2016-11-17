@@ -17,3 +17,7 @@ Add a page
 
 
 [2d-hero art](http://opengameart.org/content/2d-hero)
+
+Filtering Search:
+================
+src/**, -games, -plugins, -assets, -node_modules

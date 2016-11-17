@@ -20,10 +20,13 @@ class PlaygroundModel {
                 break;
         }
 
-        let pNav = $('.dPlaygroundNav');
-        if(!pNav.is(':visible')) {
-            pNav.slideDown();
-        }
+        let pNavs = document.querySelectorAll('.dPlaygroundNav');
+        pNavs.forEach(pNav => {
+            if(!pNav.classList.contains('visible')) {
+                pNav.classList.add('visible');
+                $(pNav).slideDown();
+            }    
+        });
     }
     
     renderIndex() {
@@ -37,7 +40,9 @@ class PlaygroundModel {
     
     renderBallPit() {
         this.ctx.load('/playground/ballPit.html', data => {
-            jw.Util.require('/js/ballPit.js', () => jw.BallPit.init());
+            jw.Util.require('/assets/ballPit.js', () => {
+                jw.BallPit = new BallPit();
+            });
         }).swap();
 
         document.title = 'Ball Pit | Playground';
@@ -48,9 +53,8 @@ class PlaygroundModel {
     
     renderStars() {
         this.ctx.load('/playground/stars.html', data => {
-            // TODO: load these async
-            jw.Util.require('/js/plugins/jquery.star_bg.js', () => {
-                jw.Util.require('/js/stars.js', cached => jw.StarryBg.init());
+            jw.Util.require('/assets/stars.js', cached => {
+                jw.StarryBg = new StarryBg();
             });
         }).swap();
 

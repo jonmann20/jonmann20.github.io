@@ -8,9 +8,8 @@ class Util {
             'https://platform.twitter.com/widgets.js': false,
             '/js/plugins/jquery.cycle.lite.js': false,
             '/js/plugins/jquery.listCarousel.js': false,
-            '/js/plugins/jquery.star_bg.js': false,
-            '/js/stars.js': false,
-            '/js/ballPit.js': false
+            '/assets/stars.js': false,
+            '/assets/ballPit.js': false
         };
     }
 
@@ -19,7 +18,7 @@ class Util {
             $.ajax({
                 url: src,
                 dataType: 'script',
-                success: (data) => {
+                success: data => {
                     this.jsSrcHash[src] = true;
                     callback(false);
                 }
@@ -38,10 +37,12 @@ class Util {
         this.main.innerHTML = '';
 
         if(jw.Routing.lastPg === 'ballPit') {
-            jw.BallPit.deInit();
+            jw.BallPit.destroy();
+            delete jw.BallPit;
         }
         else if(jw.Routing.lastPg === 'stars') {
-            jw.StarryBg.deInit();
+            jw.StarryBg.destroy();
+            delete jw.StarryBg;
         }
 
         document.body.className = '';
@@ -65,10 +66,13 @@ class Util {
         // if page not playground inner
         let h = window.location.hash;
         if(typeof(h) === 'undefined' || h.indexOf('#playground') !== 0) {  // startsWith
-            let pNav = $('.dPlaygroundNav');
-            if(pNav.is(':visible')) {
-                pNav.slideUp();
-            }
+            let pNavs = document.querySelectorAll('.dPlaygroundNav');
+            pNavs.forEach(pNav => {
+                if(pNav.classList.contains('visible')) {
+                    pNav.classList.remove('visible');
+                    $(pNav).slideUp();
+                }    
+            });
         }
     }
     

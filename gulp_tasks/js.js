@@ -1,8 +1,8 @@
 'use strict';
 
 module.exports = (gulp, isDev, iff, concat, liveReload, sourcemaps) => {
-	let babel = require('gulp-babel');
-	let uglify = require('gulp-uglify');
+	const babel = require('gulp-babel');
+	const uglify = require('gulp-uglify');
 
 	let gamesCommonJs = [
 		'src/games/common/js/GameEngine.js',
@@ -73,10 +73,21 @@ module.exports = (gulp, isDev, iff, concat, liveReload, sourcemaps) => {
 			pipe(iff(isDev, liveReload()));
 		});
 
+		gulp.task('js:other', () => {
+			return gulp.src(['src/js/ballPit.js', 'src/js/stars.js']).
+			pipe(iff(isDev, sourcemaps.init())).
+			pipe(babel({presets: ['es2015']})).
+			pipe(iff(!isDev, uglify())).
+			pipe(iff(isDev, sourcemaps.write())).
+			pipe(gulp.dest('assets')).
+			pipe(iff(isDev, liveReload()));
+		});
+
 		gulp.task('js', gulp.parallel(
 			'js:master',
 			'js:pageDormanticide',
-			'js:pageVamp'
+			'js:pageVamp',
+			'js:other'
 		));
 	})();
 };

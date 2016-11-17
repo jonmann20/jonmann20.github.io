@@ -1,79 +1,124 @@
 'use strict';
 
-jw.BallPit = (function() {
-    var canvas,
-        ctx,
-        radius,
-        ballArr,
-        animLoop
-    ;
+class BallPit {
+    constructor() {
+        this.canvas = document.querySelector('canvas');
+        this.ctx = this.canvas.getContext('2d');
+        this.radius = 3.5;
+        this.balls = [];
 
-    function update() {
-        // update position
-        for(var i in ballArr) {
-            ballArr[i].x += ballArr[i].velocity.x;
-            ballArr[i].y += ballArr[i].velocity.y;
+        this.canvas.width = $('.main').width() / 1.5;
+        this.canvas.height = this.canvas.width / 2;
+
+        // set up modifications
+        this.boundOnNumBalls = (e) => this.onNumBalls(e.target.value);
+        this.boundOnSizeBalls = (e) => this.onSizeBalls(e.target.value);
+        this.boundOnSpeedBalls = (e) => this.onSpeedBalls(e.target.value);
+        
+        document.querySelector('.numBalls').addEventListener('input', this.boundOnNumBalls);
+        document.querySelector('.sizeBalls').addEventListener('input', this.boundOnSizeBalls);
+        document.querySelector('.speedBalls').addEventListener('input', this.boundOnSpeedBalls);
+
+        // initialize the array of balls
+        for(let i=0; i < 20; ++i) {
+            this.balls.push({
+                x: Math.floor(Math.random() * (this.canvas.width + 1)),
+                y: Math.floor(Math.random() * (this.canvas.height + 1)),
+                velocity: {
+                    x: Math.floor(Math.random() * (-3)),  // [-2, 2]
+                    y: Math.floor(Math.random() * 7) - 3  // [-3, 3]
+                }
+            });
         }
 
-        // detect collisions
-        var b;
-        for(i=0; i < ballArr.length; ++i) {
-            b = ballArr[i];
+        this.runSim();
+    }
+    
+    destroy() {
+        window.cancelAnimationFrame(this.animLoop);
+        
+        const numBalls = document.querySelector('.numBalls');
+        const sizeBalls = document.querySelector('.sizeBalls');
+        const speedBalls = document.querySelector('.speedBalls');
+        
+        if(numBalls) {
+            numBalls.removeEventListener('input', this.boundOnNumBalls);
+        }
+        
+        if(sizeBalls) {
+           sizeBalls.removeEventListener('input', this.boundOnSizeBalls);
+        }
+        
+        if(speedBalls) {
+            speedBalls.removeEventListener('input', this.boundOnSpeedBalls);
+        }
+    }
+    
+    update() {
+        for(let ball of this.balls) {
+            // update position
+            ball.x += ball.velocity.x;
+            ball.y += ball.velocity.y;
+            
+            // detect collisions
+            if(ball.x < 0 && ball.velocity.x < 0) {
+                ball.velocity.x = -ball.velocity.x;
+            }
 
-            if(b.x < 0 && b.velocity.x < 0)
-                b.velocity.x = -b.velocity.x;
+            if(ball.y >= this.canvas.height && ball.velocity.y > 0) {
+                ball.velocity.y = -ball.velocity.y;
+            }
 
-            if(b.y >= canvas.height && b.velocity.y > 0)
-                b.velocity.y = -b.velocity.y;
+            if(ball.x >= this.canvas.width && ball.velocity.x > 0) {
+                ball.velocity.x = -ball.velocity.x;
+            }
 
-            if(b.x >= canvas.width && b.velocity.x > 0)
-                b.velocity.x = -b.velocity.x;
-
-            if(b.y < 0 && b.velocity.y < 0)
-                b.velocity.y = -b.velocity.y;
+            if(ball.y < 0 && ball.velocity.y < 0) {
+                ball.velocity.y = -ball.velocity.y;
+            }
         }
     }
 
-    function render() {
+    render() {
         // draw background
-        ctx.fillStyle = '#0098ff';
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        this.ctx.fillStyle = '#0098ff';
+        this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
         // draw balls
-        ctx.fillStyle = '#e1e1e1';
-        for(var i in ballArr) {
-            ctx.beginPath();
-            ctx.arc(ballArr[i].x, ballArr[i].y, radius, 0, 2 * Math.PI, false);
-            ctx.fill();
-            ctx.lineWidth = radius / 15;
-            ctx.strokeStyle = '#19a2ff';
-            ctx.stroke();
-            ctx.closePath();
+        this.ctx.fillStyle = '#e1e1e1';
+        for(let ball of this.balls) {
+            this.ctx.beginPath();
+            this.ctx.arc(ball.x, ball.y, this.radius, 0, 2 * Math.PI, false);
+            this.ctx.fill();
+            this.ctx.lineWidth = this.radius / 15;
+            this.ctx.strokeStyle = '#19a2ff';
+            this.ctx.stroke();
+            this.ctx.closePath();
         }
     }
 
-    function runSim() {
-        update();
-        render();
+    runSim() {
+        this.update();
+        this.render();
 
-        animLoop = requestAnimationFrame(runSim);
+        this.animLoop = requestAnimationFrame(() => this.runSim());
     }
 
-    function fixArr(num) {
-        var i=0, diff = ballArr.length - num;
+    fixArr(num) {
+        let i=0, diff = this.balls.length - num;
 
         if(diff > 0) {
             for(; i < diff; ++i) {
-                ballArr.pop();
+                this.balls.pop();
             }
         }
         else if(diff < 0) {
             diff = -diff;
 
             for(; i < diff; ++i) {
-                var ball = {						// (max   - min + 1)  + min
-                    x: Math.floor(Math.random() * (canvas.width - 0 + 1)) + 0,  // [0, canvas.width]
-                    y: Math.floor(Math.random() * (canvas.height + 1)), 		// [0, canvas.height]
+                let ball = {						// (max   - min + 1)  + min
+                    x: Math.floor(Math.random() * (this.canvas.width - 0 + 1)) + 0,  // [0, canvas.width]
+                    y: Math.floor(Math.random() * (this.canvas.height + 1)), 		// [0, canvas.height]
                     velocity: {
                         x: Math.floor(Math.random() * (2 - (-2) + 1)) + (-2),  // [-2, 2]
                         y: Math.floor(Math.random() * (3 - (-3) + 1)) + (-3)   // [-3, 3]
@@ -86,91 +131,35 @@ jw.BallPit = (function() {
                 if (ball.velocity.y === 0)
                     ball.velocity.y = 1;
 
-                ballArr.push(ball);
+                this.balls.push(ball);
             }
         }
     }
 
-    function updateUserSpeed(oldSpeed, newSpeed) {
-        var b, originalVx, originalVy;
+    updateUserSpeed(oldSpeed, newSpeed) {
+        let originalVx, originalVy;
 
-        for(var i=0; i < ballArr.length; ++i) {
-            b = ballArr[i];
+        for(let ball of this.balls) {
+            originalVx = ball.velocity.x / oldSpeed;
+            originalVy = ball.velocity.y / oldSpeed;
 
-            originalVx = b.velocity.x / oldSpeed;
-            originalVy = b.velocity.y / oldSpeed;
-
-            b.velocity.x = originalVx * newSpeed;
-            b.velocity.y = originalVy * newSpeed;
+            ball.velocity.x = originalVx * newSpeed;
+            ball.velocity.y = originalVy * newSpeed;
         }
     }
 
-    function onNumBalls() {
-        var num = this.value;
+    onNumBalls(num) {
         document.querySelector('.litNumBalls').textContent = num;
-        fixArr(num);
+        this.fixArr(num);
     }
     
-    function onSizeBalls() {
-        var num = this.value;
+    onSizeBalls(num) {
         document.querySelector('.litSizeBalls').textContent = num;
-        radius = num;
+        this.radius = num;
     }
     
-    function onSpeedBalls() {
-        var num = this.value;
-        updateUserSpeed(document.querySelector('.litSpeedBalls').textContent, num);
+    onSpeedBalls(num) {
+        this.updateUserSpeed(document.querySelector('.litSpeedBalls').textContent, num);
         document.querySelector('.litSpeedBalls').textContent = num;
     }
-
-    return {
-        init: function() {
-            canvas = document.querySelector('canvas');
-            ctx = canvas.getContext('2d');
-            radius = 3.5;
-            ballArr = [];
-
-            canvas.width = $('.main').width() / 1.5;
-            canvas.height = canvas.width / 2;
-
-            // set up modifications
-            document.querySelector('.numBalls').addEventListener('input', onNumBalls);
-            document.querySelector('.sizeBalls').addEventListener('input', onSizeBalls);
-            document.querySelector('.speedBalls').addEventListener('input', onSpeedBalls);
-
-            // initialize the array of balls
-            for(var i=0; i < 20; ++i) {
-                ballArr.push({
-                    x: Math.floor(Math.random() * (canvas.width + 1)),
-                    y: Math.floor(Math.random() * (canvas.height + 1)),
-                    velocity: {
-                        x: Math.floor(Math.random() * (-3)),  // [-2, 2]
-                        y: Math.floor(Math.random() * 7) - 3  // [-3, 3]
-                    }
-                });
-            }
-
-            runSim();
-        },
-        
-        deInit: function() {
-            window.cancelAnimationFrame(animLoop);
-            
-            const numBalls = document.querySelector('.numBalls');
-            const sizeBalls = document.querySelector('.sizeBalls');
-            const speedBalls = document.querySelector('.speedBalls');
-            
-            if(numBalls) {
-                numBalls.removeEventListener('input', onNumBalls);
-            }
-            
-            if(sizeBalls) {
-               sizeBalls.removeEventListener('input', onSizeBalls);
-            }
-            
-            if(speedBalls) {
-                speedBalls.removeEventListener('input', onSpeedBalls);
-            }
-        }
-    };
-})();
+}

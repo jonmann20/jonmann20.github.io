@@ -5,7 +5,7 @@ class Main {
 		jw.Routing = new Routing();
 		jw.Routing.run();
 		
-		window.addEventListener('resize', this.onWindowResize);
+		window.addEventListener('resize', () => this.onWindowResize);
 		//setTimeout(() => this.onWindowResize, 0);
 
 		document.querySelector('header a').addEventListener('click', () => {
