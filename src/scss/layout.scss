@@ -14,7 +14,6 @@ body {
 
 .page {
 	height: 100%;
-	//overflow: auto;
 	max-width: 1520px;
 	margin: 0 auto;
 	padding: 0 6%;
@@ -51,7 +50,7 @@ aside {
 		}
 	}
 
-	.playgroundNav {
+	.playground-nav {
 		margin-left: 25px;
 
 		a {
@@ -208,27 +207,27 @@ header nav a:hover i,
 	}
 }
 
-.nav1 .playgroundNav li:nth-child(1) a,
-.nav2 .playgroundNav li:nth-child(2) a,
-.nav3 .playgroundNav li:nth-child(3) a,
-.nav4 .playgroundNav li:nth-child(4) a,
-.nav5 .playgroundNav li:nth-child(5) a,
-.nav6 .playgroundNav li:nth-child(6) a {
+.nav1 .playground-nav li:nth-child(1) a,
+.nav2 .playground-nav li:nth-child(2) a,
+.nav3 .playground-nav li:nth-child(3) a,
+.nav4 .playground-nav li:nth-child(4) a,
+.nav5 .playground-nav li:nth-child(5) a,
+.nav6 .playground-nav li:nth-child(6) a {
 	color: #ff6a00 !important;
 	-webkit-text-stroke: 1px #ff6a00;
 	text-stroke: 1px #ff6a00;
 }
 
-.nav1 .playgroundNav li:nth-child(1) a:hover,
-.nav2 .playgroundNav li:nth-child(2) a:hover,
-.nav3 .playgroundNav li:nth-child(3) a:hover,
-.nav4 .playgroundNav li:nth-child(4) a:hover,
-.nav5 .playgroundNav li:nth-child(5) a:hover,
-.nav6 .playgroundNav li:nth-child(6) a:hover {
+.nav1 .playground-nav li:nth-child(1) a:hover,
+.nav2 .playground-nav li:nth-child(2) a:hover,
+.nav3 .playground-nav li:nth-child(3) a:hover,
+.nav4 .playground-nav li:nth-child(4) a:hover,
+.nav5 .playground-nav li:nth-child(5) a:hover,
+.nav6 .playground-nav li:nth-child(6) a:hover {
 	text-shadow: #ff6a00 0 0 18px;
 }
 
-.hdrNav2 .dPlaygroundNav {
+.hdrNav2 .playground-nav-wrap {
 	height: 0;
 	opacity: 0;
 	visibility: hidden;
@@ -244,7 +243,7 @@ header nav a:hover i,
 /*#endregion*/
 
 /*#region *************** Main ***************/
-.main {
+main {
 	padding-left: 215px;
 	height: 100%;
 }
@@ -283,38 +282,7 @@ header nav a:hover i,
 /*#endregion*/
 
 /*#region ********** Page Templates **********/
-.pageFullW {
-	.page {
-		max-width: 98%;
-	}
-
-	header {
-		margin-right: 0;
-
-		nav:first-child {
-			text-indent: -8px;
-			margin: 18px 0 20px;
-			padding: 4px 0 6px;
-			border-radius: 25px 0;
-			width: 105px;
-		}
-	}
-
-	.main {
-		margin: 0 auto inherit;
-		padding: 3px 26px 26px 28px;
-
-		.titleHeader {
-			margin-top: 8px;
-		}
-	}
-
-	canvas {
-		box-shadow: 0 0 26px -2px #000;
-	}
-}
-
-.absHover {
+.carousel-list-page {
 	.colR {
 		> div {
 			opacity: 0;
@@ -337,14 +305,14 @@ header nav a:hover i,
 	}
 }
 
-#html5_star,
-.ballPit canvas {
+#starry-canvas,
+.ball-pit canvas {
 	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 	margin: 10px 0;
 	border-radius: 2px;
 }
 
-.rangeInputs {
+.range-inputs {
 	margin-top: 10px;
 }
 /*#endregion*/

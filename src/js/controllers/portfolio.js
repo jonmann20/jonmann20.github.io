@@ -2,16 +2,14 @@
 
 class PortfolioController {
 	index() {
-		jw.Router.grab('/portfolio/index.html', data => {
-			jw.Router.swap(data);
-			
-			jw.Util.require('/assets/list-carousel.js', () => {
+		jw.Router.load('/portfolio/index.html', succeeded => {
+			jw.Util.require('/assets/listCarousel.js', () => {
 				new ListCarousel(document.querySelector('.colL ul'));
 			});
 		});
 
 		document.title = 'Portfolio';
-		document.body.classList.add('portfolio', 'absHover');
+		document.body.classList.add('portfolio', 'carousel-list-page');
 	}
 }
 

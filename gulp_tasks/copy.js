@@ -15,7 +15,7 @@ module.exports = (gulp) => {
 					'!src/js/router.js',
 					'!src/js/ballPit.js',
 					'!src/js/stars.js',
-					'!src/js/list-carousel.js'
+					'!src/js/listCarousel.js'
 				]).
 				pipe(gulp.dest('./'));
 		});

@@ -2,14 +2,12 @@
 
 class PlaygroundController {
     index() {
-        let pNav = document.querySelector('.hdrNav2 .dPlaygroundNav');
+        let pNav = document.querySelector('.hdrNav2 .playground-nav-wrap');
         if(!pNav.classList.contains('visible')) {
             pNav.classList.add('visible');
         }
         
-        jw.Router.grab('/playground/index.html', data => {
-            jw.Router.swap(data);
-        });
+        jw.Router.load('/playground/index.html');
     
         document.title = 'Playground';
         jw.Util.addMeta('description', 'An playground area for web tech demos.');
@@ -18,9 +16,7 @@ class PlaygroundController {
     }
     
     ballPit() {
-        jw.Router.grab('/playground/ballPit.html', data => {
-            jw.Router.swap(data);
-            
+        jw.Router.load('/playground/ballPit.html', succeeded => {
             jw.Util.require('/assets/ballPit.js', () => {
                 jw.BallPit = new BallPit();
             });
@@ -33,9 +29,7 @@ class PlaygroundController {
     }
     
     starryBackground() {
-        jw.Router.grab('/playground/stars.html', data => {
-            jw.Router.swap(data);
-            
+        jw.Router.load('/playground/stars.html', succeeded => {
             jw.Util.require('/assets/stars.js', cached => {
                 jw.StarryBg = new StarryBg();
             });
@@ -48,13 +42,7 @@ class PlaygroundController {
     }
     
     breakdancingCube() {
-        jw.Router.grab('/playground/breakdancing-cube.html', data => {
-            jw.Router.swap(data);
-            
-            document.getElementById('cube').addEventListener('click', e =>
-                e.preventDefault()
-            );
-        });
+        jw.Router.load('/playground/breakdancing-cube.html');
 
         document.title = 'Breakdancing Cube | Playground';
         jw.Util.addMeta('description', 'Pure CSS3 animation demo.');

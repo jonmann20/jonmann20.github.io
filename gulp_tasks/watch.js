@@ -1,14 +1,13 @@
 'use strict';
 
-module.exports = (gulp, liveReload, /*jsAll, jsPageMeet,*/ scssSrc) => {
-	let del = require('del');
+module.exports = (gulp, liveReload, scssSrc) => {
+	const del = require('del');
 
 	return (() => {
 		// NOTE: keep dependencies up to date with 'default' task
 		gulp.task('watch', () => {
 			//gulp.watch('clientSrc/fonts/**/*.{eot,svg,ttf,woff}', ['copy:fonts']);
 			//gulp.watch('clientSrc/img/**/*.{png,jpg,gif,ico,svg}', ['copy:img']);
-			//gulp.watch(jsPageMeet, ['jsPageMeet', 'jshint', 'jscs']);  // TODO: jasmine:client
 
 			 // TODO: break down into smaller tasks
 

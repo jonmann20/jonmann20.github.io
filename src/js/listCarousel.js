@@ -1,17 +1,18 @@
 class ListCarousel {
 	constructor(list) {
-		let active = 'default';
-		
-		let span = document.createElement('span');
+		let id,
+			active = 'default',
+			span = document.createElement('span'),
+			links = Array.from(list.querySelectorAll('a'));
+			
 		span.classList.add('icon-link');
 		span.style.paddingLeft = '3px';
 		
-		let id, links = list.querySelectorAll('a');
 		links.forEach(link => {
 			link.addEventListener('click', e => {
 				id = e.target.id;
 				
-				if(active !== id && id) {
+				if(id && active !== id) {
 					e.preventDefault();
 					
 					link.appendChild(span);

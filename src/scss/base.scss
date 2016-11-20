@@ -33,7 +33,12 @@ button:hover {
 	cursor: pointer;
 }
 
-h1,h2,h3,h4,h5,h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
 	margin: .4em 0 .6em;
 	font-size: 1.62em;
 	letter-spacing: -0.03em;
@@ -170,8 +175,7 @@ a {
 	display: table;
 }
 
-.clr:after,
-.clrB {
+.clr:after {
 	clear: both;
 }
 
@@ -188,15 +192,6 @@ br.clr {
 
 .noHeaderR {
 	margin-top: .55em;
-}
-
-.subHead {
-	font-size: 1.15em;
-	margin: .5em 0 .3em 0;
-}
-
-.opaque {
-	opacity: 1;
 }
 
 .noselect {
@@ -221,17 +216,15 @@ br.clr {
 .colR > img,
 .twitter-timeline-rendered,
 .music .colR iframe {
-	background: $cardBg;
+	background: $card-bg;
 	padding: 3px 15px 5px;
 	border-radius: 2px;
 	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }
 
-.colR > img {
-	padding: 0;
-}
-
-.twitter-timeline, .music .colR iframe {
+.colR > img,
+.twitter-timeline,
+.music .colR iframe {
     padding: 0;
 }
 
@@ -247,10 +240,10 @@ br.clr {
 	box-shadow: 0 3px 0 rgba(54, 54, 54, 0.94);
 	opacity: 1;
 
-    span {
-    	padding-right: 10px;
-	    vertical-align: -1px;
-    }
+	.colL & {
+		margin-left: -20px;
+		text-align: center;
+	}
 
     &:hover,
     &:focus {
@@ -263,10 +256,10 @@ br.clr {
 	    margin-top: 11px;
 	    transition: all 0.05s;
     }
-}
-
-.colL .bigBtn {
-	margin-left: -20px;
-	text-align: center;
+    
+    span {
+    	padding-right: 10px;
+	    vertical-align: -1px;
+    }
 }
 /*#endregion*/

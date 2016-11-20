@@ -1,8 +1,8 @@
 'use strict';
 
 module.exports = (gulp, isDev, iff, liveReload) => {
-	let fileInclude = require('gulp-file-include');
-	let htmlmin = require('gulp-htmlmin');
+	const fileInclude = require('gulp-file-include');
+	const htmlmin = require('gulp-htmlmin');
 
 	return (() => {
 		gulp.task('include', () => {

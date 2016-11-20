@@ -2,9 +2,7 @@
 
 class HomeController {
     index() {
-        jw.Router.grab('/home.html', data => {
-            jw.Router.swap(data);
-            
+        jw.Router.load('/home.html', succeeded => {
             jw.Util.require('https://platform.twitter.com/widgets.js', alreadyCreated => {
                 twttr.widgets.load();
             });

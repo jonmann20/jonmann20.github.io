@@ -1,4 +1,9 @@
 .playground {
+	h3 {
+		font-size: 1.15em;
+		margin: 0.5em 0 0.3em;
+	}
+	
 	input[type=color] {
 		position: relative;
 		top: 2px;
@@ -10,15 +15,15 @@
 		background-color: transparent;
 	}
 
-	.ballPit {
+	.ball-pit {
 		canvas,
-		.rangeInputs {
+		.range-inputs {
 			float: left;
 			margin-right: 35px;
 		}
 	}
 
-	.rangeInputs {
+	.range-inputs {
 		> div {
 			margin: 0 0 30px;
 		}
@@ -62,51 +67,8 @@
 	padding-right: 15px;
 }
 
-.uWrap {
-	background: url('/img/playground/Meeting_Room.jpg');
-	width: 1024px;
-	height: 685px;
-
-	> div {
-		position: absolute;
-	}
-
-	.list {
-		ul {
-			width: 203px;
-			list-style-type: none;
-			padding: 0 0 0 2px;
-			margin-left: 0;
-			box-shadow: 4px 3px 18px rgba(0, 0, 0, 0.8);
-			background-color: rgba(19, 19, 19, 0.7);
-		}
-
-		li {
-			cursor: move;
-			margin: 2px 0 10px;
-			padding: 2px;
-			font-size: 119%;
-			text-shadow: 1px 1px 11px #000, 1px 1px 12px #000;
-
-			&:first-child {
-				margin-top: 0;
-			}
-
-			&:hover {
-				color: #61b0d7;
-				text-shadow: 1px 1px 11px #001eff, 1px 1px 12px #001eff;
-			}
-
-			.vid {
-				display: none;
-			}
-		}
-	}
-}
-
-.iframeWrap {
+.iframe-wrap {
 	margin-top: -480px;
-
 }
 
 // Starry Background

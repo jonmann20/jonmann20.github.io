@@ -2,8 +2,7 @@
 
 class AboutController {
     index() {
-        jw.Router.grab('/about.html', data => {
-            jw.Router.swap(data);
+        jw.Router.load('/about.html', succeeded => {
             document.getElementById('dateYear').textContent = jw.Util.getYear();
         });
 

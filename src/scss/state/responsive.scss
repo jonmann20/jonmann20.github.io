@@ -1,13 +1,13 @@
 @import '../vars';
 
 @media screen and (max-width: 1350px) {
-	.main {
+	main {
 		padding-left: 207px;
 	}
 }
 
 @media screen and (max-width: 1265px) {
-	.main {
+	main {
 		padding-left: 215px;
 	}
 
@@ -23,7 +23,7 @@
 		margin-top: 25px;
 	}
 
-	.absHover .colR {
+	.carousel-list-page .colR {
 		> div {
 			width: 100%;
 			max-width: 528px;
@@ -38,7 +38,7 @@
 }
 
 @media screen and (max-width: 920px) {
-	.main {
+	main {
 		padding-left: 207px;
 	}
 }
@@ -91,7 +91,7 @@
 		display: none;
 	}
 
-	.main {
+	main {
 		text-align: center;
 		overflow: visible;
 		padding-left: 0;
@@ -131,21 +131,23 @@
 		}
 	}
 
-	.absHover .colR > div {
-		opacity: 1;
-		visibility: visible;
-		width: 100%;
-		position: static;
-		margin-bottom: 20px;
-		max-width: 100%;
-
-		&:last-child {
-			margin-bottom: 100px;
+	.carousel-list-page {
+		.colR > div {
+			opacity: 1;
+			visibility: visible;
+			width: 100%;
+			position: static;
+			margin-bottom: 20px;
+			max-width: 100%;
+	
+			&:last-child {
+				margin-bottom: 100px;
+			}
+			
+			p {
+				width: 100%;
+			}
 		}
-	}
-
-	.absHover .colR div > p {
-		width: 100%;
 	}
 
 	#divDefault {
@@ -178,7 +180,7 @@
 	}
 
 	.playground {
-		.iframeWrap {
+		.iframe-wrap {
 			display: none;
 		}
 
@@ -187,7 +189,7 @@
 		}
 	}
 
-	.dPlaygroundNav {
+	.playground-nav-wrap {
 		a {
 			margin-right: auto !important;
 		}

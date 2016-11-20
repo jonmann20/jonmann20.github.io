@@ -1,11 +1,11 @@
 @import '../vars';
 
-.bDancingCube .main {
+.bDancingCube main {
 	min-height: 38em;
 }
 
-.iframeWrap iframe {
-	background: $cardBg;
+.iframe-wrap iframe {
+	background: $card-bg;
 	padding: 15px;
 	border-radius: 2px;
 	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);

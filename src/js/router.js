@@ -3,63 +3,72 @@
 class Router {
 	constructor() {
 		this.lastPg = null;
-		this.root = document.querySelector('.main');
+		this.root = document.querySelector('main');
 		
 		onhashchange = e => this.route(location.hash);
 	}
 	
 	route(slug) {
-		jw.Util.resetController();
+		this.resetController();
 		
 		switch(slug) {
 			case '#home':
 				jw.HomeController.index();
-				jw.Router.lastPg = 'home';
+				this.lastPg = 'home';
 				break;
 			case '#about':
 				jw.AboutController.index();
-				jw.Router.lastPg = 'about';
+				this.lastPg = 'about';
 				break;
 			case '#games':
 				jw.GamesController.index();
-				jw.Router.lastPg = 'games';
+				this.lastPg = 'games';
 				break;
 			case '#portfolio':
 				jw.PortfolioController.index();
-				jw.Router.lastPg = 'portfolio';
+				this.lastPg = 'portfolio';
 				break;
 			case '#playground':
 				jw.PlaygroundController.index();
-				jw.Router.lastPg = 'playground';
+				this.lastPg = 'playground';
 				break;
 			case '#playground/ballPit':
 				jw.PlaygroundController.ballPit();
-				jw.Router.lastPg = 'playground/ballPit';
+				this.lastPg = 'playground/ballPit';
 				break;
 			case '#playground/breakdancing-cube':
 				jw.PlaygroundController.breakdancingCube();
-				jw.Router.lastPg = 'playground/breakdancing-cube';
+				this.lastPg = 'playground/breakdancing-cube';
 				break;
 			case '#playground/starry-background':
 				jw.PlaygroundController.starryBackground();
-				jw.Router.lastPg = 'playground/starry-background';
+				this.lastPg = 'playground/starry-background';
 				break;
 			default:
 				jw.HomeController.index();
-				jw.Router.lastPg = '/';
+				this.lastPg = '/';
 				break;
 		}
 	}
 	
-	grab(url, callback) {
+	load(url, callback) {
+		let that = this;
+		
         let r = new XMLHttpRequest();
         r.onreadystatechange = function() {
             if(this.readyState === 4) {
             	if(this.status === 200) {
-					callback(this.responseText);
+            		// swap page
+            		that.root.innerHTML = this.responseText;
+					
+					if(callback) {
+						callback(true);
+					}
             	}
             	else {
-            		callback();
+            		if(callback) {
+            			callback(false);
+            		}
             	}
             }
         };
@@ -71,7 +80,39 @@ class Router {
 		this.route(location.hash);
 	}
 	
-	swap(data) {
-		this.root.innerHTML = data;
-	}
+    resetController() {
+    	this.root.innerHTML = '';
+        document.body.className = '';
+        document.title = '';
+        
+        function rmMeta(query) {
+        	const tag = document.head.querySelector(query);
+        	if(tag) {
+        		document.head.removeChild(tag);
+        	}
+        }
+        
+        rmMeta('meta[name=description]');
+        rmMeta('meta[name=keywords]');
+        
+        switch(this.lastPg) {
+			case 'ballPit':
+				jw.BallPit.destroy();
+				delete jw.BallPit;
+				break;
+			case 'stars':
+				jw.StarryBg.destroy();
+				delete jw.StarryBg;
+				break;
+    	}
+        
+        // if page is not playground inner
+        let h = window.location.hash;
+        if(typeof(h) === 'undefined' || h.indexOf('#playground') !== 0) {  // startsWith
+            let pNav = document.querySelector('.hdrNav2 .playground-nav-wrap');
+            if(pNav.classList.contains('visible')) {
+                pNav.classList.remove('visible');
+            }
+        }
+    }
 }

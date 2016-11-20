@@ -73,7 +73,7 @@ module.exports = (gulp, isDev, iff, concat, liveReload, sourcemaps) => {
 		});
 
 		gulp.task('js:other', () => {
-			return gulp.src(['src/js/ballPit.js', 'src/js/stars.js', 'src/js/list-carousel.js']).
+			return gulp.src(['src/js/ballPit.js', 'src/js/stars.js', 'src/js/listCarousel.js']).
 			pipe(iff(isDev, sourcemaps.init())).
 			pipe(babel({presets: ['es2015']})).
 			pipe(iff(!isDev, uglify())).

@@ -2,16 +2,14 @@
 
 class GamesController {
 	index() {
-		jw.Router.grab('/games/index.html', data => {
-			jw.Router.swap(data);
-			
-			jw.Util.require('/assets/list-carousel.js', () => {
+		jw.Router.load('/games/index.html', succeeded => {
+			jw.Util.require('/assets/listCarousel.js', () => {
 				new ListCarousel(document.querySelector('.colL ul'));
 			});
 		});
 
 		document.title = 'Games';
-		document.body.classList.add('absHover', 'games');
+		document.body.classList.add('games', 'carousel-list-page');
 	}
 }
 

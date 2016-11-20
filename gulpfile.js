@@ -1,15 +1,15 @@
 'use strict';
 
-let argv = require('yargs').argv;
-let concat = require('gulp-concat');
-let gulp = require('gulp');
-let iff = require('gulp-if');
-let liveReload = require('gulp-livereload'); // TODO: inject into page if isDev
-let sourcemaps = require('gulp-sourcemaps');
+const argv = require('yargs').argv;
+const concat = require('gulp-concat');
+const gulp = require('gulp');
+const iff = require('gulp-if');
+const liveReload = require('gulp-livereload');
+const sourcemaps = require('gulp-sourcemaps');
 
 const isDev = argv._.length === 0;
 
-let scssSrc = ['src/scss/**/*.scss', '!vars.scss', '!blog.scss'];
+const scssSrc = ['src/scss/**/*.scss', '!vars.scss'];
 
 require('./gulp_tasks/del')(gulp);
 require('./gulp_tasks/scss')(gulp, isDev, iff, concat, liveReload, sourcemaps, scssSrc);
@@ -17,7 +17,7 @@ require('./gulp_tasks/js')(gulp, isDev, iff, concat, liveReload, sourcemaps);
 require('./gulp_tasks/copy')(gulp);
 require('./gulp_tasks/include')(gulp, isDev, iff, liveReload);
 require('./gulp_tasks/server')(gulp);
-require('./gulp_tasks/watch')(gulp, liveReload, scssSrc/*, jsAll, jsPageMeet, ...*/ );
+require('./gulp_tasks/watch')(gulp, liveReload, scssSrc);
 
 gulp.task('default', gulp.series(
 	gulp.parallel(

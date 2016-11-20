@@ -5,7 +5,7 @@ class StarryBg {
 		const color = document.querySelector('input[type=radio]:checked').value;
 		this.initStar(color);
 		
-		let radios = document.querySelectorAll('input[type=radio]');
+		let radios = Array.from(document.querySelectorAll('input[type=radio]'));
 		for(let radio of radios) {
 			radio.addEventListener('click', e => this.onColorChange(e.target.value));
 		}
@@ -17,7 +17,7 @@ class StarryBg {
 	destroy() {
 		this.starBg.destroy();
 		
-		let radios = document.querySelectorAll('input[type=radio]');
+		let radios = Array.from(document.querySelectorAll('input[type=radio]'));
 		for(let radio of radios) {
 			radio.removeEventListener('click', e => this.onColorChange(e.target.value));
 		}
@@ -27,13 +27,13 @@ class StarryBg {
 	
 	initStar(color) {
 		this.starBg = new StarBg({
-			elt: document.getElementById('html5_star'),
+			elt: document.getElementById('starry-canvas'),
 			window_width: jw.Util.getMainWidth(),
 			window_height: 400,
 			star_color: color,
 			star_count: 1300,
 			star_depth: 330,
-			container: 'html5_star'
+			container: 'starry-canvas'
 		});
 	}
 
