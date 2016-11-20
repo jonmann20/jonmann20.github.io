@@ -1,0 +1,26 @@
+{
+	"multistr": true,
+	"esnext": true,
+	"globalstrict": true,
+	"node": true,
+	"globals": {
+		"$": true,
+		"jw": true,
+		"ga": true,
+		"twttr": true,
+		"Util": true,
+		"document": true,
+		"window": true,
+		"requestAnimationFrame": true,
+		"cancelAnimationFrame": true,
+		"Router": true,
+		"ListCarousel": true,
+		"location": true,
+		"XMLHttpRequest": true,
+		"onhashchange": true,
+		"StarryBg": true,
+		"BallPit": true
+	},
+	"browser": true,
+	"devel": true
+}

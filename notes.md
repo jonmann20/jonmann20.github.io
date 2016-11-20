@@ -20,4 +20,4 @@ Add a page
 
 Filtering Search:
 ================
-src/**, -games, -plugins, -assets, -node_modules
+src/**, gulp_tasks, -games, -plugins, -assets, -node_modules

@@ -6,8 +6,7 @@ class Util {
         this.jsSrcHash = {
             // src: id
             'https://platform.twitter.com/widgets.js': false,
-            '/js/plugins/jquery.cycle.lite.js': false,
-            '/js/plugins/jquery.listCarousel.js': false,
+            '/assets/list-carousel.js': false,
             '/assets/stars.js': false,
             '/assets/ballPit.js': false
         };
@@ -15,14 +14,17 @@ class Util {
 
     require(src, callback) { // callback(cached)
         if(!this.jsSrcHash[src]) {
-            $.ajax({
-                url: src,
-                dataType: 'script',
-                success: data => {
-                    this.jsSrcHash[src] = true;
-                    callback(false);
-                }
-            });
+            let script = document.createElement('script');
+            script.src = src;
+            script.async = 1;
+            
+            let firstScriptTag = document.getElementsByTagName('script')[0];
+            firstScriptTag.parentNode.insertBefore(script, firstScriptTag);
+            
+            script.onload = () => {
+                this.jsSrcHash[src] = true;
+                callback(false);    
+            };
         }
         else {
             callback(true);
@@ -33,14 +35,14 @@ class Util {
         return new Date().getFullYear();
     }
 
-    resetModel() {
+    resetController() {
         this.main.innerHTML = '';
 
-        if(jw.Routing.lastPg === 'ballPit') {
+        if(jw.Router.lastPg === 'ballPit') {
             jw.BallPit.destroy();
             delete jw.BallPit;
         }
-        else if(jw.Routing.lastPg === 'stars') {
+        else if(jw.Router.lastPg === 'stars') {
             jw.StarryBg.destroy();
             delete jw.StarryBg;
         }
@@ -66,13 +68,10 @@ class Util {
         // if page not playground inner
         let h = window.location.hash;
         if(typeof(h) === 'undefined' || h.indexOf('#playground') !== 0) {  // startsWith
-            let pNavs = document.querySelectorAll('.dPlaygroundNav');
-            pNavs.forEach(pNav => {
-                if(pNav.classList.contains('visible')) {
-                    pNav.classList.remove('visible');
-                    $(pNav).slideUp();
-                }    
-            });
+            let pNav = document.querySelector('.hdrNav2 .dPlaygroundNav');
+            if(pNav.classList.contains('visible')) {
+                pNav.classList.remove('visible');
+            }
         }
     }
     
@@ -81,6 +80,13 @@ class Util {
         meta.setAttribute('name', name);
         meta.setAttribute('content', content);
         document.head.appendChild(meta);
+    }
+    
+    getMainWidth() {
+        const main = document.querySelector('.main');
+        const mainStyles = window.getComputedStyle(main, null);
+        const paddingLeft = parseFloat(mainStyles.getPropertyValue('padding-left'));
+        return main.getBoundingClientRect().width - paddingLeft;
     }
 }
 

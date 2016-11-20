@@ -7,7 +7,7 @@ class BallPit {
         this.radius = 3.5;
         this.balls = [];
 
-        this.canvas.width = $('.main').width() / 1.5;
+        this.canvas.width = jw.Util.getMainWidth() / 1.5;
         this.canvas.height = this.canvas.width / 2;
 
         // set up modifications

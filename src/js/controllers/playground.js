@@ -1,36 +1,15 @@
 'use strict';
 
-class PlaygroundModel {
-    render(that, page) {
-        jw.Util.resetModel();
-        this.ctx = that;
-
-        switch(page) {
-            case 'index':
-                this.renderIndex();
-                break;
-            case 'ballPit':
-                this.renderBallPit();
-                break;
-            case 'stars':
-                this.renderStars();
-                break;
-            case 'bCube':
-                this.renderBreakdancingCube();
-                break;
+class PlaygroundController {
+    index() {
+        let pNav = document.querySelector('.hdrNav2 .dPlaygroundNav');
+        if(!pNav.classList.contains('visible')) {
+            pNav.classList.add('visible');
         }
-
-        let pNavs = document.querySelectorAll('.dPlaygroundNav');
-        pNavs.forEach(pNav => {
-            if(!pNav.classList.contains('visible')) {
-                pNav.classList.add('visible');
-                $(pNav).slideDown();
-            }    
+        
+        jw.Router.grab('/playground/index.html', data => {
+            jw.Router.swap(data);
         });
-    }
-    
-    renderIndex() {
-        this.ctx.load('/playground/index.html', data => {}).swap();
     
         document.title = 'Playground';
         jw.Util.addMeta('description', 'An playground area for web tech demos.');
@@ -38,12 +17,14 @@ class PlaygroundModel {
         document.body.classList.add('playground', 'playInner');
     }
     
-    renderBallPit() {
-        this.ctx.load('/playground/ballPit.html', data => {
+    ballPit() {
+        jw.Router.grab('/playground/ballPit.html', data => {
+            jw.Router.swap(data);
+            
             jw.Util.require('/assets/ballPit.js', () => {
                 jw.BallPit = new BallPit();
             });
-        }).swap();
+        })
 
         document.title = 'Ball Pit | Playground';
         jw.Util.addMeta('description', 'A canvas example showcasing a ball pit.');
@@ -51,12 +32,14 @@ class PlaygroundModel {
         document.body.classList.add('playground', 'playInner', 'nav3');
     }
     
-    renderStars() {
-        this.ctx.load('/playground/stars.html', data => {
+    starryBackground() {
+        jw.Router.grab('/playground/stars.html', data => {
+            jw.Router.swap(data);
+            
             jw.Util.require('/assets/stars.js', cached => {
                 jw.StarryBg = new StarryBg();
             });
-        }).swap();
+        });
 
         document.title = 'Starry Background | Playground';
         jw.Util.addMeta('description', 'A canvas example showcasing a starry background.');
@@ -64,12 +47,14 @@ class PlaygroundModel {
         document.body.classList.add('playground', 'playInner', 'nav2');
     }
     
-    renderBreakdancingCube() {
-        this.ctx.load('/playground/breakdancing-cube.html', data => {
+    breakdancingCube() {
+        jw.Router.grab('/playground/breakdancing-cube.html', data => {
+            jw.Router.swap(data);
+            
             document.getElementById('cube').addEventListener('click', e =>
                 e.preventDefault()
             );
-        }).swap();
+        });
 
         document.title = 'Breakdancing Cube | Playground';
         jw.Util.addMeta('description', 'Pure CSS3 animation demo.');
@@ -78,4 +63,4 @@ class PlaygroundModel {
     }
 }
 
-jw.PlaygroundModel = new PlaygroundModel();
+jw.PlaygroundController = new PlaygroundController();

@@ -28,7 +28,7 @@ class StarryBg {
 	initStar(color) {
 		this.starBg = new StarBg({
 			elt: document.getElementById('html5_star'),
-			window_width: $('.main').width(),
+			window_width: jw.Util.getMainWidth(),
 			window_height: 400,
 			star_color: color,
 			star_count: 1300,
@@ -106,8 +106,9 @@ class StarBg {
             let z3d = point3d[2];
             z3d -= 1.08;
 
-            if (z3d < -this.fov)
+            if(z3d < -this.fov) {
                 z3d += 400;
+            }
 
             point3d[2] = z3d;
             this.draw3Din2D(point3d);
@@ -115,7 +116,7 @@ class StarBg {
     }
     
     draw3Din2D(point3d) {
-        let x3d = point3d[0],
+        const x3d = point3d[0],
             y3d = point3d[1],
             z3d = point3d[2],
             scale = this.fov / (this.fov + z3d),

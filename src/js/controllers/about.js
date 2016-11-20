@@ -1,16 +1,15 @@
 'use strict';
 
-class AboutModel {
-    render(that) {
-        jw.Util.resetModel();
-
-        that.load('/about.html', () => {
+class AboutController {
+    index() {
+        jw.Router.grab('/about.html', data => {
+            jw.Router.swap(data);
             document.getElementById('dateYear').textContent = jw.Util.getYear();
-        }).swap();
+        });
 
         document.title = 'About';
         document.body.classList.add('about');
     }
 }
 
-jw.AboutModel = new AboutModel();
+jw.AboutController = new AboutController();

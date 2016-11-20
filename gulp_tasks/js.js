@@ -19,10 +19,9 @@ module.exports = (gulp, isDev, iff, concat, liveReload, sourcemaps) => {
 	return (() => {
 		gulp.task('js:master', () => {
 			return gulp.src([
-				'src/js/plugins/sammy.js',
 				'src/js/util.js',
-				'src/js/models/*.js',
-				'src/js/routing.js',
+				'src/js/controllers/*.js',
+				'src/js/router.js',
 				'src/js/main.js'
 			]).
 			pipe(iff(isDev, sourcemaps.init())).
@@ -74,7 +73,7 @@ module.exports = (gulp, isDev, iff, concat, liveReload, sourcemaps) => {
 		});
 
 		gulp.task('js:other', () => {
-			return gulp.src(['src/js/ballPit.js', 'src/js/stars.js']).
+			return gulp.src(['src/js/ballPit.js', 'src/js/stars.js', 'src/js/list-carousel.js']).
 			pipe(iff(isDev, sourcemaps.init())).
 			pipe(babel({presets: ['es2015']})).
 			pipe(iff(!isDev, uglify())).

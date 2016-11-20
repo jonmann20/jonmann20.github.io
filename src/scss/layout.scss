@@ -228,8 +228,18 @@ header nav a:hover i,
 	text-shadow: #ff6a00 0 0 18px;
 }
 
-.dPlaygroundNav {
-	display: none;
+.hdrNav2 .dPlaygroundNav {
+	height: 0;
+	opacity: 0;
+	visibility: hidden;
+	will-change: height, opacity;
+	transition: 0.25s ease;
+	
+	&.visible {
+		height: 92px;
+		visibility: visible;
+		opacity: 1;
+	}
 }
 /*#endregion*/
 
@@ -307,18 +317,22 @@ header nav a:hover i,
 .absHover {
 	.colR {
 		> div {
+			opacity: 0;
+			visibility: hidden;
+			transition: 450ms opacity; // in
 			position: absolute;
-			display: none;
 			width: 44%;
 			max-width: 728px;
+			
+			&.fade-in {
+				opacity: 1 !important;
+				visibility: visible !important;
+				transition: 300ms opacity; // out
+			}
 		}
 
 		div > p {
 			margin-bottom: 12px;
-		}
-
-		#divDefualt {
-			display: block;
 		}
 	}
 }

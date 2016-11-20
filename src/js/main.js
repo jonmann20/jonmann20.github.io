@@ -2,11 +2,8 @@
 
 class Main {
 	constructor() {
-		jw.Routing = new Routing();
-		jw.Routing.run();
-		
-		window.addEventListener('resize', () => this.onWindowResize);
-		//setTimeout(() => this.onWindowResize, 0);
+		jw.Router = new Router();
+		jw.Router.run();
 
 		document.querySelector('header a').addEventListener('click', () => {
 			document.querySelector('.main').style.height = 'auto';
@@ -34,31 +31,8 @@ class Main {
 			}
 		});
 	}
-
-	// 158: padding + footer height
-	fixColRHeight(h) {
-		let main = document.querySelector('.main');
-		const leftColH = document.querySelector('.colL').clientHeight;
-		
-		if(window.innerWidth <= 800) {
-			main.style.height = 'auto';
-		}
-		else if(window.innerWidth <= 1265) {
-			main.style.height = `${leftColH + h + 158}px`;
-		}
-		else {
-			main.style.height = (leftColH > h) ? 
-				`${leftColH}px` : `${h + 158}px`;
-		}
-	}
-	
-	onWindowResize() {
-		// NOTE: first view h is wrong!
-		const h = $('.colR > div:visible').height();
-		this.fixColRHeight(h);
-	}
 }
 
-$(() => {
+document.addEventListener('DOMContentLoaded', () => {
 	jw.Main = new Main();
 });
