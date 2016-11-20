@@ -4,13 +4,13 @@ class Router {
 	constructor() {
 		this.lastPg = null;
 		this.root = document.querySelector('main');
-		
+
 		onhashchange = e => this.route(location.hash);
 	}
-	
+
 	route(slug) {
 		this.resetController();
-		
+
 		switch(slug) {
 			case '#home':
 				jw.HomeController.index();
@@ -50,51 +50,51 @@ class Router {
 				break;
 		}
 	}
-	
+
 	load(url, callback) {
 		let that = this;
-		
+
         let r = new XMLHttpRequest();
         r.onreadystatechange = function() {
-            if(this.readyState === 4) {
-            	if(this.status === 200) {
-            		// swap page
-            		that.root.innerHTML = this.responseText;
-					
+			if(this.readyState === 4) {
+				if(this.status === 200) {
+					// swap page
+					that.root.innerHTML = this.responseText;
+
 					if(callback) {
 						callback(true);
 					}
-            	}
-            	else {
-            		if(callback) {
-            			callback(false);
-            		}
-            	}
+				}
+				else {
+					if(callback) {
+						callback(false);
+					}
+				}
             }
         };
         r.open('GET', url, true);
         r.send();
 	}
-	
+
 	run() {
 		this.route(location.hash);
 	}
-	
+
     resetController() {
-    	this.root.innerHTML = '';
+		this.root.innerHTML = '';
         document.body.className = '';
         document.title = '';
-        
+
         function rmMeta(query) {
-        	const tag = document.head.querySelector(query);
-        	if(tag) {
-        		document.head.removeChild(tag);
-        	}
+			const tag = document.head.querySelector(query);
+			if(tag) {
+				document.head.removeChild(tag);
+			}
         }
-        
+
         rmMeta('meta[name=description]');
         rmMeta('meta[name=keywords]');
-        
+
         switch(this.lastPg) {
 			case 'ballPit':
 				jw.BallPit.destroy();
@@ -104,8 +104,8 @@ class Router {
 				jw.StarryBg.destroy();
 				delete jw.StarryBg;
 				break;
-    	}
-        
+		}
+
         // if page is not playground inner
         let h = window.location.hash;
         if(typeof(h) === 'undefined' || h.indexOf('#playground') !== 0) {  // startsWith

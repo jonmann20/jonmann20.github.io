@@ -14,7 +14,7 @@ class BallPit {
         this.boundOnNumBalls = (e) => this.onNumBalls(e.target.value);
         this.boundOnSizeBalls = (e) => this.onSizeBalls(e.target.value);
         this.boundOnSpeedBalls = (e) => this.onSpeedBalls(e.target.value);
-        
+
         document.querySelector('.numBalls').addEventListener('input', this.boundOnNumBalls);
         document.querySelector('.sizeBalls').addEventListener('input', this.boundOnSizeBalls);
         document.querySelector('.speedBalls').addEventListener('input', this.boundOnSpeedBalls);
@@ -33,33 +33,33 @@ class BallPit {
 
         this.runSim();
     }
-    
+
     destroy() {
         window.cancelAnimationFrame(this.animLoop);
-        
+
         const numBalls = document.querySelector('.numBalls');
         const sizeBalls = document.querySelector('.sizeBalls');
         const speedBalls = document.querySelector('.speedBalls');
-        
+
         if(numBalls) {
             numBalls.removeEventListener('input', this.boundOnNumBalls);
         }
-        
+
         if(sizeBalls) {
            sizeBalls.removeEventListener('input', this.boundOnSizeBalls);
         }
-        
+
         if(speedBalls) {
             speedBalls.removeEventListener('input', this.boundOnSpeedBalls);
         }
     }
-    
+
     update() {
         for(let ball of this.balls) {
             // update position
             ball.x += ball.velocity.x;
             ball.y += ball.velocity.y;
-            
+
             // detect collisions
             if(ball.x < 0 && ball.velocity.x < 0) {
                 ball.velocity.x = -ball.velocity.x;
@@ -117,19 +117,21 @@ class BallPit {
 
             for(; i < diff; ++i) {
                 let ball = {						// (max   - min + 1)  + min
-                    x: Math.floor(Math.random() * (this.canvas.width - 0 + 1)) + 0,  // [0, canvas.width]
-                    y: Math.floor(Math.random() * (this.canvas.height + 1)), 		// [0, canvas.height]
+                    x: Math.floor(Math.random() * (this.canvas.width - 0 + 1)) + 0, // [0, canvas.width]
+                    y: Math.floor(Math.random() * (this.canvas.height + 1)),        // [0, canvas.height]
                     velocity: {
-                        x: Math.floor(Math.random() * (2 - (-2) + 1)) + (-2),  // [-2, 2]
-                        y: Math.floor(Math.random() * (3 - (-3) + 1)) + (-3)   // [-3, 3]
+                        x: Math.floor(Math.random() * (2 - (-2) + 1)) + (-2),       // [-2, 2]
+                        y: Math.floor(Math.random() * (3 - (-3) + 1)) + (-3)        // [-3, 3]
                     }
                 };
 
-                if (ball.velocity.x === 0)
+                if(ball.velocity.x === 0) {
                     ball.velocity.x = 1;
+                }
 
-                if (ball.velocity.y === 0)
+                if(ball.velocity.y === 0) {
                     ball.velocity.y = 1;
+                }
 
                 this.balls.push(ball);
             }
@@ -152,12 +154,12 @@ class BallPit {
         document.querySelector('.litNumBalls').textContent = num;
         this.fixArr(num);
     }
-    
+
     onSizeBalls(num) {
         document.querySelector('.litSizeBalls').textContent = num;
         this.radius = num;
     }
-    
+
     onSpeedBalls(num) {
         this.updateUserSpeed(document.querySelector('.litSpeedBalls').textContent, num);
         document.querySelector('.litSpeedBalls').textContent = num;

@@ -10,11 +10,11 @@ class Main {
 					pListen = true;
 				}
 			});
-			
+
 			addEventListener('test', null, opts);
 		}
 		catch(e) {}
-		
+
 		// Start Router
 		jw.Router = new Router();
 		jw.Router.run();
@@ -34,7 +34,7 @@ class Main {
 				document.querySelector('aside').classList.add('active');
 				hasClass = true;
 				setTimeout(() => {
-					document.body.addEventListener('click', hide, pListen ? {passive: true} : false)
+					document.body.addEventListener('click', hide, pListen ? {passive: true} : false);
 				}, 0);
 			}
 			else {

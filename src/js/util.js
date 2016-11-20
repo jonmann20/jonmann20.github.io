@@ -16,13 +16,13 @@ class Util {
             let script = document.createElement('script');
             script.src = src;
             script.async = 1;
-            
+
             let firstScriptTag = document.getElementsByTagName('script')[0];
             firstScriptTag.parentNode.insertBefore(script, firstScriptTag);
-            
+
             script.onload = () => {
                 this.jsSrcHash[src] = true;
-                callback(false);    
+                callback(false);
             };
         }
         else {
@@ -33,14 +33,14 @@ class Util {
     getYear() {
         return new Date().getFullYear();
     }
-    
+
     addMeta(name, content) {
         let meta = document.createElement('meta');
         meta.setAttribute('name', name);
         meta.setAttribute('content', content);
         document.head.appendChild(meta);
     }
-    
+
     getMainWidth() {
         const main = document.querySelector('main');
         const mainStyles = window.getComputedStyle(main, null);

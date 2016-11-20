@@ -19,7 +19,8 @@
 		"XMLHttpRequest": true,
 		"onhashchange": true,
 		"StarryBg": true,
-		"BallPit": true
+		"BallPit": true,
+		"pListen": true
 	},
 	"browser": true,
 	"devel": true

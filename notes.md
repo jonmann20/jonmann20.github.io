@@ -8,6 +8,8 @@ Filtering Search
 src/**, gulp_tasks, gulpfile.js, -games, -plugins, -assets, -node_modules
 
 
+[server gh-pages from sub directory](https://gist.github.com/cobyism/4730490)
+
 open server in background
 =========================
 windows:  

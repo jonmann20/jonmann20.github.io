@@ -4,27 +4,27 @@ class StarryBg {
 	constructor() {
 		const color = document.querySelector('input[type=radio]:checked').value;
 		this.initStar(color);
-		
+
 		let radios = Array.from(document.querySelectorAll('input[type=radio]'));
 		for(let radio of radios) {
 			radio.addEventListener('click', e => this.onColorChange(e.target.value));
 		}
-		
+
 		// TODO: not working in Chrome or FF??
 		// document.getElementById('custom').addEventListener('change', this.onColorChange);
 	}
 
 	destroy() {
 		this.starBg.destroy();
-		
+
 		let radios = Array.from(document.querySelectorAll('input[type=radio]'));
 		for(let radio of radios) {
 			radio.removeEventListener('click', e => this.onColorChange(e.target.value));
 		}
-		
+
 		//document.getElementById('custom').removeEventListener('change', this.onColorChange);
 	}
-	
+
 	initStar(color) {
 		this.starBg = new StarBg({
 			elt: document.getElementById('starry-canvas'),
@@ -40,7 +40,7 @@ class StarryBg {
 	onColorChange(color) {
 		this.starBg.destroy();
 		delete this.starBg;
-		
+
 		this.initStar(color);
 	}
 }
@@ -77,12 +77,12 @@ class StarBg {
         cancelAnimationFrame(this.animLoop);
         document.removeEventListener('mousemove', this.boundOnMouseMove);
     }
-    
+
     onMouseMove(e) {
         this.mouse_x = e.pageX - this.HALF_WIDTH; //- this.offsetLeft
         this.mouse_y = e.pageY - this.HALF_HEIGHT; //- this.offsetTop
     }
-    
+
     initPoints() {
         let point;
         for(let i=0; i < this.numPoints; ++i) {
@@ -90,12 +90,12 @@ class StarBg {
             this.points.push(point);
         }
     }
-    
+
     loop() {
         this.render();
         this.animLoop = requestAnimationFrame(() => this.loop());
     }
-    
+
     render() {
         this.ctx.fillStyle = this.w_b;
         this.ctx.fillRect(0, 0, this.SCREEN_WIDTH, this.SCREEN_HEIGHT);
@@ -114,7 +114,7 @@ class StarBg {
             this.draw3Din2D(point3d);
         }
     }
-    
+
     draw3Din2D(point3d) {
         const x3d = point3d[0],
             y3d = point3d[1],

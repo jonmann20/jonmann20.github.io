@@ -32,7 +32,10 @@ gulp.task('default', gulp.series(
 	)
 ));
 
+gulp.task('test', gulp.series(/*'scsslint', 'jasmine',*/ 'jscs', 'jshint'));
+
 gulp.task('prd', gulp.parallel(
+	'test',
 	'scss',
 	'js',
 	'copy',
@@ -40,5 +43,3 @@ gulp.task('prd', gulp.parallel(
 ));
 
 gulp.task('srv', gulp.series('server'));
-
-//gulp.task('test', [/*'jasmine',*/'jshint', 'scsslint']);
