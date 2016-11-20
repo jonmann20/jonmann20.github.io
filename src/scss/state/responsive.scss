@@ -132,7 +132,8 @@
 	}
 
 	.absHover .colR > div {
-		display: block;
+		opacity: 1;
+		visibility: visible;
 		width: 100%;
 		position: static;
 		margin-bottom: 20px;
