@@ -5,17 +5,17 @@ TODO
 
 Filtering Search
 ================
-src/**, gulp_tasks, gulpfile.js, -games, -plugins, -assets, -node_modules
+src/**, gulp_tasks, gulpfile.js, -dungeon, -font, -plugins, -assets, -node_modules, -*.map
 
 
 [server gh-pages from sub directory](https://gist.github.com/cobyism/4730490)
 
 open server in background
 =========================
-windows:  
+windows:
 `START gulp`
 
-*nix:  
+*nix:
 `gulp &`
 
 

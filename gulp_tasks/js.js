@@ -7,7 +7,7 @@ module.exports = (gulp, isDev, iff, concat, liveReload, sourcemaps) => {
 	const jscs = require('gulp-jscs');
 	const stylish = require('gulp-jscs-stylish');
 
-	let gamesCommonJs = [
+	const gamesCommonJs = [
 		'src/games/common/js/GameEngine.js',
 		'src/games/common/js/GameSave.js',
 		'src/games/common/js/GameInput.js',
@@ -17,6 +17,14 @@ module.exports = (gulp, isDev, iff, concat, liveReload, sourcemaps) => {
 		'src/games/common/js/view/GameView.js',
 		'src/games/common/js/view/TitleView.js',
 		'src/games/common/js/view/GameSaveView.js'
+	];
+
+	const lints = [
+		'src/js/**/*.js',
+		'gulpfile.js',
+		'gulp_tasks/**/*.js',
+		'!src/js/plugins/**/*.js',
+		'!src/js/analytics.js'
 	];
 
 	return (() => {
@@ -84,14 +92,6 @@ module.exports = (gulp, isDev, iff, concat, liveReload, sourcemaps) => {
 				pipe(gulp.dest('assets')).
 				pipe(iff(isDev, liveReload()));
 		});
-
-		const lints = [
-			'src/js/**/*.js',
-			'gulpfile.js',
-			'gulp_tasks/**/*.js',
-			'!src/js/plugins/**/*.js',
-			'!src/js/analytics.js'
-		];
 
 		gulp.task('jshint', () => {
 			return gulp.src(lints).

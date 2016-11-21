@@ -6,25 +6,25 @@
 }
 
 body {
-    padding-top: 40px;
-    background: radial-gradient(ellipse at center, #45484d 0%, #000 100%) no-repeat center center fixed;
+	padding-top: 40px;
+	background: radial-gradient(ellipse at center, #45484d 0%, #000 100%) no-repeat center center fixed;
 	background-size: cover;
 	height: 100%;
 }
 
 input,
 textarea {
-    outline-color: #888;
+	outline-color: #888;
 }
 
 input:focus,
 textarea:focus {
-    box-shadow: 2px 2px 16px 2px rgba(0, 0, 0, 0.45);
+	box-shadow: 2px 2px 16px 2px rgba(0, 0, 0, 0.45);
 }
 
 input[type=submit],
 button {
-	transition: all .35s ease-out;
+	transition: all 0.35s ease-out;
 }
 
 input[type=submit]:hover,
@@ -39,7 +39,7 @@ h3,
 h4,
 h5,
 h6 {
-	margin: .4em 0 .6em;
+	margin: 0.4em 0 0.6em;
 	font-size: 1.62em;
 	letter-spacing: -0.03em;
 	color: #ff6a00;
@@ -51,127 +51,26 @@ a {
 	text-decoration: none;
 	outline: none;
 
-    &:hover {
-    	color: hsl(200, 60%, 65%);
-	    text-shadow: hsl(200, 60%, 65%) 0 0 6px;
-    }
+	&:hover {
+		color: hsl(200, 60%, 65%);
+		text-shadow: hsl(200, 60%, 65%) 0 0 6px;
+	}
 
-    &:visited,
-    &:active {
-        color: hsl(200, 60%, 55%);
-    }
+	&:visited,
+	&:active {
+		color: hsl(200, 60%, 55%);
+	}
 
-    &:focus {
-        outline: 0;
-    }
-}
-/*#endregion*/
-
-/*#region Fonts */
-@font-face {
-	font-family: "icomoon";
-	src: url("/font/icomoon.eot");
-	src: url("/font/icomoon.svg#icomoon") format("svg"),
-         url("/font/icomoon.eot?#iefix") format("embedded-opentype"),
-		 url("/font/icomoon.ttf") format("truetype"),
-		 url("/font/icomoon.woff") format("woff");
-	font-weight: normal;
-	font-style: normal;
-}
-
-[class*="icon-"] {
-	font-family: "icomoon";
-	speak: none;
-	font-style: normal;
-	font-weight: normal;
-	font-variant: normal;
-	text-transform: none;
-	line-height: 1;
-	-webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
-
-.icon-uniF000:before {
-	content: "\f000";
-}
-.icon-github:before {
-	content: "\e000";
-}
-.icon-home:before {
-	content: "\e001";
-}
-.icon-facebook:before {
-	content: "\e002";
-}
-.icon-twitter:before {
-	content: "\e003";
-}
-.icon-music:before {
-	content: "\e004";
-}
-.icon-google-plus:before {
-	content: "\e006";
-}
-.icon-linkedin:before {
-	content: "\e007";
-}
-.icon-briefcase:before {
-	content: "\e00b";
-}
-.icon-mail:before {
-	content: "\e00c";
-}
-.icon-youtube-sign:before {
-	content: "\f166";
-}
-.icon-volume-mute:before {
-	content: "\e00a";
-}
-.icon-controllernes:before {
-	content: "\f2d2";
-}
-.icon-beaker:before {
-	content: "\f0c3";
-}
-.icon-github2:before {
-	content: "\e008";
-}
-.icon-volume-medium:before {
-	content: "\e005";
-}
-.icon-feed:before {
-	content: "\e00d";
-}
-.icon-arrow-left:before {
-	content: "\e00e";
-}
-.icon-folder-open:before {
-	content: "\e00f";
-}
-.icon-soundcloud:before {
-	content: "\e009";
-}
-.icon-user:before {
-	content: "\e010";
-}
-.icon-phone:before {
-	content: "\e011";
-}
-.icon-expand:before {
-	content: "\e012";
-}
-.icon-contract:before {
-	content: "\e013";
-}
-.icon-link:before {
-	content: "\e600";
+	&:focus {
+		outline: 0;
+	}
 }
 /*#endregion*/
 
 /*#region ************ Utilities *************/
 .clr:before,
 .clr:after {
-	content: " ";
+	content: ' ';
 	display: table;
 }
 
@@ -186,12 +85,8 @@ br.clr {
 .lh {
 	list-style-type: none;
 	font-weight: 700;
-	margin: 12px 0 8px 0;
+	margin: 12px 0 8px;
 	padding-left: 0;
-}
-
-.noHeaderR {
-	margin-top: .55em;
 }
 
 .noselect {
@@ -202,33 +97,34 @@ br.clr {
 	user-select: none;
 }
 
-.noBullet {
-    list-style-type: none;
+.no-bullet {
+	list-style-type: none;
 }
 
 .card {
-    display: inline-block;
+	display: inline-block;
 }
 
 .card,
-.card, .colL,
-.colR > div,
-.colR > img,
+.card,
+.col-left,
+.col-right > div,
+.col-right > img,
 .twitter-timeline-rendered,
-.music .colR iframe {
+.music .col-right iframe {
 	background: $card-bg;
 	padding: 3px 15px 5px;
 	border-radius: 2px;
-	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+	box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 }
 
-.colR > img,
+.col-right > img,
 .twitter-timeline,
-.music .colR iframe {
-    padding: 0;
+.music .col-right iframe {
+	padding: 0;
 }
 
-.bigBtn {
+.big-btn {
 	display: inline-block;
 	margin-top: 10px;
 	padding: 9px 14px;
@@ -240,26 +136,26 @@ br.clr {
 	box-shadow: 0 3px 0 rgba(54, 54, 54, 0.94);
 	opacity: 1;
 
-	.colL & {
+	.col-left & {
 		margin-left: -20px;
 		text-align: center;
 	}
 
-    &:hover,
-    &:focus {
-    	background: rgb(204, 85, 0);
-	    box-shadow: 0 3px 0 rgb(102, 43, 0);
-    }
+	&:hover,
+	&:focus {
+		background: rgb(204, 85, 0);
+		box-shadow: 0 3px 0 rgb(102, 43, 0);
+	}
 
-    &:active {
-    	box-shadow: none;
-	    margin-top: 11px;
-	    transition: all 0.05s;
-    }
-    
-    span {
-    	padding-right: 10px;
-	    vertical-align: -1px;
-    }
+	&:active {
+		box-shadow: none;
+		margin-top: 11px;
+		transition: all 0.05s;
+	}
+
+	span {
+		padding-right: 10px;
+		vertical-align: -1px;
+	}
 }
 /*#endregion*/

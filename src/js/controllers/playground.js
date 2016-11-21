@@ -2,7 +2,7 @@
 
 class PlaygroundController {
     index() {
-        let pNav = document.querySelector('.hdrNav2 .playground-nav-wrap');
+        let pNav = document.querySelector('.hdr-nav2 .playground-nav-wrap');
         if(!pNav.classList.contains('visible')) {
             pNav.classList.add('visible');
         }
@@ -47,7 +47,7 @@ class PlaygroundController {
         document.title = 'Breakdancing Cube | Playground';
         jw.Util.addMeta('description', 'Pure CSS3 animation demo.');
         jw.Util.addMeta('keywords', 'CSS3, HTML5');
-        document.body.classList.add('playground', 'playInner', 'bDancingCube', 'nav1');
+        document.body.classList.add('playground', 'playInner', 'break-dancing-cube', 'nav1');
     }
 }
 

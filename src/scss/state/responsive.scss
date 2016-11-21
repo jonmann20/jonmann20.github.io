@@ -11,19 +11,19 @@
 		padding-left: 215px;
 	}
 
-	.colL {
+	.col-left {
 		width: 100% !important;
 		margin-bottom: 0;
 		max-width: 528px;
 	}
 
-	.colR {
+	.col-right {
 		float: left;
 		width: 100% !important;
 		margin-top: 25px;
 	}
 
-	.carousel-list-page .colR {
+	.carousel-list-page .col-right {
 		> div {
 			width: 100%;
 			max-width: 528px;
@@ -86,7 +86,7 @@
 		}
 	}
 
-	.hdrNav2 {
+	.hdr-nav2 {
 		margin-top: 22px;
 		display: none;
 	}
@@ -104,17 +104,17 @@
 		}
 	}
 
-	.colL,
-	.colR {
+	.col-left,
+	.col-right {
 		float: none !important;
 	}
 
-	.colL {
+	.col-left {
 		display: none;
 		max-width: 100%;
 	}
 
-	.colR {
+	.col-right {
 		margin-top: 0;
 	}
 
@@ -122,35 +122,35 @@
 	.music,
 	.about,
 	.playground {
-		.colL {
+		.col-left {
 			display: block;
 		}
 
-		.colR {
+		.col-right {
 			margin-top: 25px;
 		}
 	}
 
 	.carousel-list-page {
-		.colR > div {
+		.col-right > div {
 			opacity: 1;
 			visibility: visible;
 			width: 100%;
 			position: static;
 			margin-bottom: 20px;
 			max-width: 100%;
-	
+
 			&:last-child {
 				margin-bottom: 100px;
 			}
-			
+
 			p {
 				width: 100%;
 			}
 		}
 	}
 
-	#divDefault {
+	#div-default {
 		display: none !important;
 	}
 
@@ -159,22 +159,22 @@
 		padding: 0;
 	}
 
-	.bigBtn {
+	.big-btn {
 		margin: 30px auto 0;
 	}
 
-	.enlSite {
+	.enl-site {
 		float: none !important;
 	}
 
 	.home {
-		.noBullet {
+		.no-bullet {
 			padding-left: 0;
 		}
 	}
 
 	.about {
-		.colR {
+		.col-right {
 			margin-bottom: 85px;
 		}
 	}

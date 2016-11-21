@@ -156,8 +156,7 @@ aside a:visited {      // TODO: combine with above?
 	transition: none;
 }
 
-header nav a:hover,
-.backNav a:hover i {
+header nav a:hover {
 	text-shadow: 0 0 6px rgba(140, 177, 24, 1);
 }
 
@@ -182,7 +181,7 @@ header nav a:hover i,
 }
 
 // Second Nav
-.hdrNav2 {
+.hdr-nav2 {
 	margin-top: 30px;
 	padding-top: 5px;
 
@@ -193,17 +192,6 @@ header nav a:hover i,
 
 	.icon-controllernes {
 		font-size: 0.72em;
-	}
-}
-
-// Back Nav
-.backNav {
-	a:hover span {
-		color: #8cb118 !important;
-	}
-
-	span {
-		display: inline;
 	}
 }
 
@@ -227,13 +215,13 @@ header nav a:hover i,
 	text-shadow: #ff6a00 0 0 18px;
 }
 
-.hdrNav2 .playground-nav-wrap {
+.hdr-nav2 .playground-nav-wrap {
 	height: 0;
 	opacity: 0;
 	visibility: hidden;
 	will-change: height, opacity;
 	transition: 0.25s ease;
-	
+
 	&.visible {
 		height: 92px;
 		visibility: visible;
@@ -248,7 +236,7 @@ main {
 	height: 100%;
 }
 
-.colL {
+.col-left {
 	float: left;
 	width: 37%;
 	min-width: 121px;
@@ -258,7 +246,7 @@ main {
 	}
 }
 
-.colR {
+.col-right {
 	float: right;
 	width: 58%;
 	padding-bottom: 13px;
@@ -267,23 +255,19 @@ main {
 		max-width: 100%;
 	}
 
-	&.noHdr {
-		margin-top: 51px;
-	}
-
 	> div {
 		padding-bottom: 13px !important;
 	}
 }
 
-#divDefault {
+#div-default {
 	display: block;
 }
 /*#endregion*/
 
 /*#region ********** Page Templates **********/
 .carousel-list-page {
-	.colR {
+	.col-right {
 		> div {
 			opacity: 0;
 			visibility: hidden;
@@ -291,7 +275,7 @@ main {
 			position: absolute;
 			width: 44%;
 			max-width: 728px;
-			
+
 			&.fade-in {
 				opacity: 1 !important;
 				visibility: visible !important;
@@ -307,7 +291,7 @@ main {
 
 #starry-canvas,
 .ball-pit canvas {
-	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+	box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 	margin: 10px 0;
 	border-radius: 2px;
 }

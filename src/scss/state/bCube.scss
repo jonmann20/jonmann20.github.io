@@ -1,6 +1,6 @@
 @import '../vars';
 
-.bDancingCube main {
+.break-dancing-cube main {
 	min-height: 38em;
 }
 
@@ -8,7 +8,7 @@
 	background: $card-bg;
 	padding: 15px;
 	border-radius: 2px;
-	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+	box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 }
 
 .container {
@@ -48,7 +48,7 @@
 
 			&.long {
 				transform: rotate(41deg);
-				font-size: .75em;
+				font-size: 0.75em;
 				padding: 49px 0 0 21px;
 				display: block;
 				letter-spacing: 3px;

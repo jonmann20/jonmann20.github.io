@@ -19,21 +19,12 @@ class ListCarousel {
 
 					link.appendChild(span);
 
-					document.querySelector(`#div${this.capitalize(active)}`)
-						.classList.remove('fade-in');
-
-					document.querySelector(`#div${this.capitalize(id)}`)
-						.classList.add('fade-in');
+					document.querySelector(`#div-${active}`).classList.remove('fade-in');
+					document.querySelector(`#div-${id}`).classList.add('fade-in');
 
 					active = id;
 				}
 			});
-		});
-	}
-
-	capitalize(s) {
-		return s.replace(/(?:^|\s)\S/g, a => {
-			return a.toUpperCase();
 		});
 	}
 }

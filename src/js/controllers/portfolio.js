@@ -4,7 +4,7 @@ class PortfolioController {
 	index() {
 		jw.Router.load('/portfolio/index.html', succeeded => {
 			jw.Util.require('/assets/listCarousel.js', () => {
-				new ListCarousel(document.querySelector('.colL ul'));
+				new ListCarousel(document.querySelector('.col-left ul'));
 			});
 		});
 

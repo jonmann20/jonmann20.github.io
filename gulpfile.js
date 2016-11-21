@@ -1,15 +1,13 @@
 'use strict';
 
-const argv = require('yargs').argv;
-const concat = require('gulp-concat');
-const gulp = require('gulp');
-const iff = require('gulp-if');
-const liveReload = require('gulp-livereload');
-const sourcemaps = require('gulp-sourcemaps');
-
-const isDev = argv._.length === 0;
-
-const scssSrc = ['src/scss/**/*.scss', '!vars.scss'];
+const argv = require('yargs').argv,
+	concat = require('gulp-concat'),
+	gulp = require('gulp'),
+	iff = require('gulp-if'),
+	liveReload = require('gulp-livereload'),
+	sourcemaps = require('gulp-sourcemaps'),
+	isDev = argv._.length === 0,
+	scssSrc = ['src/scss/**/*.scss', '!vars.scss'];
 
 require('./gulp_tasks/del')(gulp);
 require('./gulp_tasks/scss')(gulp, isDev, iff, concat, liveReload, sourcemaps, scssSrc);
@@ -32,7 +30,7 @@ gulp.task('default', gulp.series(
 	)
 ));
 
-gulp.task('test', gulp.series(/*'scsslint', 'jasmine',*/ 'jscs', 'jshint'));
+gulp.task('test', gulp.series('scss-lint', 'jscs', 'jshint'));
 
 gulp.task('prd', gulp.parallel(
 	'test',

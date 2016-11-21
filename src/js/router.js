@@ -81,6 +81,7 @@ class Router {
 	}
 
     resetController() {
+		scrollTo(0, 0);
 		this.root.innerHTML = '';
         document.body.className = '';
         document.title = '';
@@ -109,7 +110,7 @@ class Router {
         // if page is not playground inner
         let h = window.location.hash;
         if(typeof(h) === 'undefined' || h.indexOf('#playground') !== 0) {  // startsWith
-            let pNav = document.querySelector('.hdrNav2 .playground-nav-wrap');
+            let pNav = document.querySelector('.hdr-nav2 .playground-nav-wrap');
             if(pNav.classList.contains('visible')) {
                 pNav.classList.remove('visible');
             }

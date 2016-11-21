@@ -1,8 +1,9 @@
 'use strict';
 
 module.exports = (gulp, isDev, iff, concat, liveReload, sourcemaps, scssSrc) => {
-	let cleanCss = require('gulp-clean-css');
-	let scss = require('gulp-sass');
+	const cleanCss = require('gulp-clean-css'),
+		scss = require('gulp-sass'),
+		sassLint = require('gulp-sass-lint');
 
 	return (() => {
 		gulp.task('scss:all', () => {
@@ -15,9 +16,25 @@ module.exports = (gulp, isDev, iff, concat, liveReload, sourcemaps, scssSrc) => 
 				pipe(iff(isDev, liveReload()));
 		});
 
+		gulp.task('scss-lint', () => {
+			return gulp.src(scssSrc).
+				pipe(sassLint({
+					files: {
+						ignore: [
+							'src/scss/font-icons.scss',
+							'src/scss/module/colorbox.scss',
+							'src/scss/normalize.scss'
+						]
+					}
+				})).
+				pipe(sassLint.format()).
+				pipe(sassLint.failOnError());
+		});
+
 		gulp.task('concat:master', () => {
 			return gulp.src([
 					'assets/css/normalize.css',
+					'assets/css/font-icons.css',
 					'assets/css/base.css',
 					'assets/css/layout.css',
 					'assets/css/state/home.css',

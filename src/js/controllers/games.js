@@ -4,7 +4,7 @@ class GamesController {
 	index() {
 		jw.Router.load('/games/index.html', succeeded => {
 			jw.Util.require('/assets/listCarousel.js', () => {
-				new ListCarousel(document.querySelector('.colL ul'));
+				new ListCarousel(document.querySelector('.col-left ul'));
 			});
 		});
 

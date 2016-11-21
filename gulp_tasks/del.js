@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = (gulp) => {
-	let del = require('del');
+	const del = require('del');
 
 	return (() => {
 		gulp.task('del', () => {
@@ -13,11 +13,11 @@ module.exports = (gulp) => {
 				'!.sass-cache/**',
 				'!src/**',
 				'!.gitignore',
-				'!.jshintrc',
+				'!.eslintrc',
+				'!.jscsrc',
+				'!.sass-lint.yml',
 				'!CNAME',
 				'!gulpfile.js',
-				'!jonw.sublime-project',
-				'!jonw.sublime-workspace',
 				'!license.txt',
 				'!notes.md',
 				'!package.json',
