@@ -2,12 +2,15 @@
 
 class BallPit {
     constructor() {
+        this.boundOnRoute = (e) => this.destroy(e.detail);
+        addEventListener('route', this.boundOnRoute, pListen ? {passive: true} : false);
+
         this.canvas = document.querySelector('canvas');
         this.ctx = this.canvas.getContext('2d');
-        this.radius = 3.5;
+        this.radius = 16.5;
         this.balls = [];
 
-        this.canvas.width = jw.Util.getMainWidth() / 1.5;
+        this.canvas.width = util.getMainWidth() / 1.5;
         this.canvas.height = this.canvas.width / 2;
 
         // set up modifications
@@ -27,15 +30,21 @@ class BallPit {
                 velocity: {
                     x: Math.floor(Math.random() * (-3)),  // [-2, 2]
                     y: Math.floor(Math.random() * 7) - 3  // [-3, 3]
-                }
+                },
+                color: this.getRandomColor()
             });
         }
 
         this.runSim();
     }
 
-    destroy() {
-        window.cancelAnimationFrame(this.animLoop);
+    destroy(page) {
+        if(page === '#playground/ballPit') {
+            return;
+        }
+
+        removeEventListener('route', this.boundOnRoute, pListen ? {passive: true} : false);
+        cancelAnimationFrame(this.animLoop);
 
         const numBalls = document.querySelector('.numBalls');
         const sizeBalls = document.querySelector('.sizeBalls');
@@ -52,6 +61,8 @@ class BallPit {
         if(speedBalls) {
             speedBalls.removeEventListener('input', this.boundOnSpeedBalls);
         }
+
+        delete window.ballPit;
     }
 
     update() {
@@ -61,19 +72,19 @@ class BallPit {
             ball.y += ball.velocity.y;
 
             // detect collisions
-            if(ball.x < 0 && ball.velocity.x < 0) {
+            if((ball.x - this.radius) < 0 && ball.velocity.x < 0) {
                 ball.velocity.x = -ball.velocity.x;
             }
 
-            if(ball.y >= this.canvas.height && ball.velocity.y > 0) {
+            if(ball.y >= (this.canvas.height - this.radius) && ball.velocity.y > 0) {
                 ball.velocity.y = -ball.velocity.y;
             }
 
-            if(ball.x >= this.canvas.width && ball.velocity.x > 0) {
+            if(ball.x >= (this.canvas.width - this.radius) && ball.velocity.x > 0) {
                 ball.velocity.x = -ball.velocity.x;
             }
 
-            if(ball.y < 0 && ball.velocity.y < 0) {
+            if((ball.y - this.radius) < 0 && ball.velocity.y < 0) {
                 ball.velocity.y = -ball.velocity.y;
             }
         }
@@ -85,15 +96,11 @@ class BallPit {
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
         // draw balls
-        this.ctx.fillStyle = '#e1e1e1';
         for(let ball of this.balls) {
+            this.ctx.fillStyle = ball.color;
             this.ctx.beginPath();
             this.ctx.arc(ball.x, ball.y, this.radius, 0, 2 * Math.PI, false);
             this.ctx.fill();
-            this.ctx.lineWidth = this.radius / 15;
-            this.ctx.strokeStyle = '#19a2ff';
-            this.ctx.stroke();
-            this.ctx.closePath();
         }
     }
 
@@ -122,7 +129,8 @@ class BallPit {
                     velocity: {
                         x: Math.floor(Math.random() * (2 - (-2) + 1)) + (-2),       // [-2, 2]
                         y: Math.floor(Math.random() * (3 - (-3) + 1)) + (-3)        // [-3, 3]
-                    }
+                    },
+                    color: this.getRandomColor()
                 };
 
                 if(ball.velocity.x === 0) {
@@ -163,5 +171,16 @@ class BallPit {
     onSpeedBalls(num) {
         this.updateUserSpeed(document.querySelector('.litSpeedBalls').textContent, num);
         document.querySelector('.litSpeedBalls').textContent = num;
+    }
+
+    getRandomColor() {
+        const letters = '0123456789ABCDEF';
+        let color = '#';
+
+        for(let i=0; i < 6; ++i) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+
+        return color;
     }
 }

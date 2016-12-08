@@ -2,118 +2,90 @@
 
 class Router {
 	constructor() {
-		this.lastPg = null;
 		this.root = document.querySelector('main');
-
-		onhashchange = e => this.route(location.hash);
+		onhashchange = (e) => this.route(location.hash);
 	}
 
 	route(slug) {
-		this.resetController();
+		this.resetController(slug);
 
 		switch(slug) {
-			case '#home':
-				jw.HomeController.index();
-				this.lastPg = 'home';
-				break;
 			case '#about':
-				jw.AboutController.index();
-				this.lastPg = 'about';
+				aboutController.index();
 				break;
 			case '#games':
-				jw.GamesController.index();
-				this.lastPg = 'games';
+				gamesController.index();
 				break;
 			case '#portfolio':
-				jw.PortfolioController.index();
-				this.lastPg = 'portfolio';
+				portfolioController.index();
 				break;
 			case '#playground':
-				jw.PlaygroundController.index();
-				this.lastPg = 'playground';
+				playgroundController.index();
 				break;
 			case '#playground/ballPit':
-				jw.PlaygroundController.ballPit();
-				this.lastPg = 'playground/ballPit';
+				playgroundController.ballPit();
 				break;
 			case '#playground/breakdancing-cube':
-				jw.PlaygroundController.breakdancingCube();
-				this.lastPg = 'playground/breakdancing-cube';
+				playgroundController.breakdancingCube();
 				break;
 			case '#playground/starry-background':
-				jw.PlaygroundController.starryBackground();
-				this.lastPg = 'playground/starry-background';
+				playgroundController.starryBackground();
 				break;
+			case '#home':
+				/* falls through */
 			default:
-				jw.HomeController.index();
-				this.lastPg = '/';
+				homeController.index();
 				break;
 		}
 	}
 
 	load(url, callback) {
-		let that = this;
+		// TODO: use Fetch API, (not working with cloud9 cors)
+		// console.log('fetching', url);
+		// fetch(url, {mode: 'cors'}).then(data => {
+		// 	console.log(data);
+		// });
 
-        let r = new XMLHttpRequest();
-        r.onreadystatechange = function() {
-			if(this.readyState === 4) {
-				if(this.status === 200) {
-					// swap page
-					that.root.innerHTML = this.responseText;
+		return new Promise((resolve, reject) => {
+			let dis = this;
 
-					if(callback) {
-						callback(true);
+			let r = new XMLHttpRequest();
+			r.onreadystatechange = function() {
+				if(this.readyState === 4) {
+					if(this.status === 200) {
+						// swap page
+						dis.root.innerHTML = this.responseText;
+						resolve();
+					}
+					else {
+						reject();
 					}
 				}
-				else {
-					if(callback) {
-						callback(false);
-					}
-				}
-            }
-        };
-        r.open('GET', url, true);
-        r.send();
+			};
+			r.open('GET', url, true);
+			r.send();
+		});
 	}
 
 	run() {
 		this.route(location.hash);
 	}
 
-    resetController() {
+	rmMeta(query) {
+		const tag = document.head.querySelector(query);
+		if(tag) {
+			document.head.removeChild(tag);
+		}
+	}
+
+	resetController(slug) {
 		scrollTo(0, 0);
 		this.root.innerHTML = '';
-        document.body.className = '';
-        document.title = '';
+		document.body.className = '';
+		document.title = '';
+		this.rmMeta('meta[name=description]');
+		this.rmMeta('meta[name=keywords]');
 
-        function rmMeta(query) {
-			const tag = document.head.querySelector(query);
-			if(tag) {
-				document.head.removeChild(tag);
-			}
-        }
-
-        rmMeta('meta[name=description]');
-        rmMeta('meta[name=keywords]');
-
-        switch(this.lastPg) {
-			case 'ballPit':
-				jw.BallPit.destroy();
-				delete jw.BallPit;
-				break;
-			case 'stars':
-				jw.StarryBg.destroy();
-				delete jw.StarryBg;
-				break;
-		}
-
-        // if page is not playground inner
-        let h = window.location.hash;
-        if(typeof(h) === 'undefined' || h.indexOf('#playground') !== 0) {  // startsWith
-            let pNav = document.querySelector('.hdr-nav2 .playground-nav-wrap');
-            if(pNav.classList.contains('visible')) {
-                pNav.classList.remove('visible');
-            }
-        }
-    }
+		dispatchEvent(new CustomEvent('route', {detail: slug}));
+	}
 }

@@ -2,10 +2,10 @@
 
 class GamesController {
 	index() {
-		jw.Router.load('/games/index.html', succeeded => {
-			jw.Util.require('/assets/listCarousel.js', () => {
-				new ListCarousel(document.querySelector('.col-left ul'));
-			});
+		const p0 = router.load('/games/index.html');
+		const p1 = util.require('/assets/listCarousel.js');
+		Promise.all([p0, p1]).then(() => {
+			new ListCarousel(document.querySelector('.col-left ul'));
 		});
 
 		document.title = 'Games';
@@ -13,4 +13,4 @@ class GamesController {
 	}
 }
 
-jw.GamesController = new GamesController();
+window.gamesController = new GamesController();

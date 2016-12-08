@@ -12,22 +12,28 @@ class Util {
     }
 
     require(src, callback) { // callback(cached)
-        if(!this.jsSrcHash[src]) {
-            let script = document.createElement('script');
-            script.src = src;
-            script.async = 1;
+        return new Promise((resolve, reject) => {
+            if(!this.jsSrcHash[src]) {
+                let script = document.createElement('script');
+                script.src = src;
+                script.async = 1;
 
-            let firstScriptTag = document.getElementsByTagName('script')[0];
-            firstScriptTag.parentNode.insertBefore(script, firstScriptTag);
+                let firstScriptTag = document.getElementsByTagName('script')[0];
+                firstScriptTag.parentNode.insertBefore(script, firstScriptTag);
 
-            script.onload = () => {
-                this.jsSrcHash[src] = true;
-                callback(false);
-            };
-        }
-        else {
-            callback(true);
-        }
+                script.onload = () => {
+                    this.jsSrcHash[src] = true;
+                    resolve();
+                };
+
+                script.onerror = () => {
+                    reject();
+                };
+            }
+            else {
+                resolve();
+            }
+        });
     }
 
     getYear() {
@@ -49,4 +55,4 @@ class Util {
     }
 }
 
-jw.Util = new Util();
+window.util = new Util();

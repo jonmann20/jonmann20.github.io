@@ -2,6 +2,9 @@
 
 class StarryBg {
 	constructor() {
+        this.boundOnRoute = (e) => this.destroy(e.detail);
+        addEventListener('route', this.boundOnRoute, pListen ? {passive: true} : false);
+
 		const color = document.querySelector('input[type=radio]:checked').value;
 		this.initStar(color);
 
@@ -14,7 +17,14 @@ class StarryBg {
 		// document.getElementById('custom').addEventListener('change', this.onColorChange);
 	}
 
-	destroy() {
+	destroy(page) {
+        if(page === '#playground/starry-background') {
+            return;
+        }
+
+        removeEventListener('route', this.boundOnRoute, pListen ? {passive: true} : false);
+        cancelAnimationFrame(this.animLoop);
+
 		this.starBg.destroy();
 
 		let radios = Array.from(document.querySelectorAll('input[type=radio]'));
@@ -23,12 +33,13 @@ class StarryBg {
 		}
 
 		//document.getElementById('custom').removeEventListener('change', this.onColorChange);
+		delete window.starryBg;
 	}
 
 	initStar(color) {
 		this.starBg = new StarBg({
 			elt: document.getElementById('starry-canvas'),
-			window_width: jw.Util.getMainWidth(),
+			window_width: util.getMainWidth(),
 			window_height: 400,
 			star_color: color,
 			star_count: 1300,

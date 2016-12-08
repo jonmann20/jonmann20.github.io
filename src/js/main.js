@@ -16,8 +16,8 @@ class Main {
 		catch(e) {}
 
 		// Start Router
-		jw.Router = new Router();
-		jw.Router.run();
+		window.router = new Router();
+		router.run();
 
 		// Handle Leftbar
 		let hasClass = false;
@@ -41,6 +41,17 @@ class Main {
 				hide();
 			}
 		});
+
+		addEventListener('route', e => {
+			// if page is not playground inner
+			const h = window.location.hash;
+			if(typeof(h) === 'undefined' || h.indexOf('#playground') !== 0) {  // startsWith
+				let pNav = document.querySelector('.hdr-nav2 .playground-nav-wrap');
+				if(pNav.classList.contains('visible')) {
+					pNav.classList.remove('visible');
+				}
+			}
+		}, pListen ? {passive: true} : false);
 	}
 }
 

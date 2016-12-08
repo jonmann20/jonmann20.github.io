@@ -2,8 +2,8 @@
 
 class AboutController {
     index() {
-        jw.Router.load('/about.html', succeeded => {
-            document.getElementById('dateYear').textContent = jw.Util.getYear();
+        router.load('/about.html').then(() => {
+            document.getElementById('dateYear').textContent = util.getYear();
         });
 
         document.title = 'About';
@@ -11,4 +11,4 @@ class AboutController {
     }
 }
 
-jw.AboutController = new AboutController();
+window.aboutController = new AboutController();

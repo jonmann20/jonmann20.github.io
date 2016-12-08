@@ -77,7 +77,7 @@
 	//"requireSpacesInsideObjectBrackets": "allButNested",
 	//"requireSpacesInsideParentheses": "all",
 	//"requireTrailingComma": true,
-	"safeContextKeyword": ["that"],
+	"safeContextKeyword": ["dis"],
 //"validateIndentation": "\t",
 	// "validateJSDoc": {
 	// 	"checkParamNames": true,

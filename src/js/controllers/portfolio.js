@@ -2,10 +2,10 @@
 
 class PortfolioController {
 	index() {
-		jw.Router.load('/portfolio/index.html', succeeded => {
-			jw.Util.require('/assets/listCarousel.js', () => {
-				new ListCarousel(document.querySelector('.col-left ul'));
-			});
+		const p0 = router.load('/portfolio/index.html');
+		const p1 = util.require('/assets/listCarousel.js');
+		Promise.all([p0, p1]).then(() => {
+			new ListCarousel(document.querySelector('.col-left ul'));
 		});
 
 		document.title = 'Portfolio';
@@ -13,4 +13,4 @@ class PortfolioController {
 	}
 }
 
-jw.PortfolioController = new PortfolioController();
+window.portfolioController = new PortfolioController();
