@@ -7,7 +7,7 @@
     "del": "^2.2.2",
     "gulp": "gulpjs/gulp#4.0",
     "gulp-babel": "^6.1.2",
-    "gulp-clean-css": "^2.1.2",
+    "gulp-clean-css": "^2.2.0",
     "gulp-concat": "^2.6.1",
     "gulp-file-include": "^1.0.0",
     "gulp-htmlmin": "^3.0.0",

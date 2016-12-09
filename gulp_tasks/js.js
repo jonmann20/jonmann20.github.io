@@ -27,6 +27,13 @@ module.exports = (gulp, isDev, iff, concat, liveReload, sourcemaps) => {
 		'!src/js/analytics.js'
 	];
 
+	const presets = [
+		['es2015', {
+			loose: true,
+			modules: false
+		}]
+	];
+
 	return (() => {
 		gulp.task('js:master', () => {
 			return gulp.src([
@@ -36,7 +43,7 @@ module.exports = (gulp, isDev, iff, concat, liveReload, sourcemaps) => {
 					'src/js/main.js'
 				]).
 				pipe(iff(isDev, sourcemaps.init())).
-				pipe(babel({presets: ['es2015']})).
+				pipe(babel({presets: presets})).
 				pipe(concat('master.js')).
 				pipe(iff(!isDev, uglify())).
 				pipe(iff(isDev, sourcemaps.write())).
@@ -54,7 +61,7 @@ module.exports = (gulp, isDev, iff, concat, liveReload, sourcemaps) => {
 				])).
 				pipe(iff(isDev, sourcemaps.init())).
 				pipe(babel({
-					presets: ['es2015'],
+					presets: presets,
 					ignore: ['src/games/common/js/physics/SAT.js']
 				})).
 				pipe(concat('pageDormanticide.js')).
@@ -73,7 +80,7 @@ module.exports = (gulp, isDev, iff, concat, liveReload, sourcemaps) => {
 				])).
 				pipe(iff(isDev, sourcemaps.init())).
 				pipe(babel({
-					presets: ['es2015'],
+					presets: presets,
 					ignore: ['src/games/common/js/physics/SAT.js']
 				})).
 				pipe(concat('pageVamp.js')).
@@ -86,7 +93,7 @@ module.exports = (gulp, isDev, iff, concat, liveReload, sourcemaps) => {
 		gulp.task('js:other', () => {
 			return gulp.src(['src/js/ballPit.js', 'src/js/stars.js', 'src/js/listCarousel.js']).
 				pipe(iff(isDev, sourcemaps.init())).
-				pipe(babel({presets: ['es2015']})).
+				pipe(babel({presets: presets})).
 				pipe(iff(!isDev, uglify())).
 				pipe(iff(isDev, sourcemaps.write())).
 				pipe(gulp.dest('assets')).
