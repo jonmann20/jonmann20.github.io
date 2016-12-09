@@ -1,38 +1,35 @@
 'use strict';
 
 module.exports = (gulp, isDev, iff, concat, liveReload, sourcemaps) => {
-	const babel = require('gulp-babel');
-	const uglify = require('gulp-uglify');
-	const jshint = require('gulp-jshint');
-	const jscs = require('gulp-jscs');
-	const stylish = require('gulp-jscs-stylish');
-
-	const gamesCommonJs = [
-		'src/games/common/js/GameEngine.js',
-		'src/games/common/js/GameSave.js',
-		'src/games/common/js/GameInput.js',
-		'src/games/common/js/GameUtils.js',
-		'src/games/common/js/physics/SAT.js',
-		'src/games/common/js/graphics/GameGraphics.js',
-		'src/games/common/js/view/GameView.js',
-		'src/games/common/js/view/TitleView.js',
-		'src/games/common/js/view/GameSaveView.js'
-	];
-
-	const lints = [
-		'src/js/**/*.js',
-		'gulpfile.js',
-		'gulp_tasks/**/*.js',
-		'!src/js/plugins/**/*.js',
-		'!src/js/analytics.js'
-	];
-
-	const presets = [
-		['es2015', {
-			loose: true,
-			modules: false
-		}]
-	];
+	const babel = require('gulp-babel'),
+		uglify = require('gulp-uglify'),
+		jshint = require('gulp-jshint'),
+		jscs = require('gulp-jscs'),
+		stylish = require('gulp-jscs-stylish'),
+		gamesCommonJs = [
+			'src/games/common/js/GameEngine.js',
+			'src/games/common/js/GameSave.js',
+			'src/games/common/js/GameInput.js',
+			'src/games/common/js/GameUtils.js',
+			'src/games/common/js/physics/SAT.js',
+			'src/games/common/js/graphics/GameGraphics.js',
+			'src/games/common/js/view/GameView.js',
+			'src/games/common/js/view/TitleView.js',
+			'src/games/common/js/view/GameSaveView.js'
+		],
+		lints = [
+			'src/js/**/*.js',
+			'gulpfile.js',
+			'gulp_tasks/**/*.js',
+			'!src/js/plugins/**/*.js',
+			'!src/js/analytics.js'
+		],
+		presets = [
+			['es2015', {
+				loose: true,
+				modules: false
+			}]
+		];
 
 	return (() => {
 		gulp.task('js:master', () => {
