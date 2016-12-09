@@ -12,7 +12,7 @@ module.exports = (gulp, isDev, iff, concat, liveReload, sourcemaps) => {
 		'src/games/common/js/GameSave.js',
 		'src/games/common/js/GameInput.js',
 		'src/games/common/js/GameUtils.js',
-		'src/games/common/js/physics/SAT.js', // NOTE: babel causes error; have to ignore transpile
+		'src/games/common/js/physics/SAT.js',
 		'src/games/common/js/graphics/GameGraphics.js',
 		'src/games/common/js/view/GameView.js',
 		'src/games/common/js/view/TitleView.js',
@@ -43,8 +43,8 @@ module.exports = (gulp, isDev, iff, concat, liveReload, sourcemaps) => {
 					'src/js/main.js'
 				]).
 				pipe(iff(isDev, sourcemaps.init())).
-				pipe(babel({presets: presets})).
 				pipe(concat('master.js')).
+				pipe(babel({presets: presets})).
 				pipe(iff(!isDev, uglify())).
 				pipe(iff(isDev, sourcemaps.write())).
 				pipe(gulp.dest('assets')).
@@ -60,11 +60,8 @@ module.exports = (gulp, isDev, iff, concat, liveReload, sourcemaps) => {
 					'src/games/dormanticide/js/main.js'
 				])).
 				pipe(iff(isDev, sourcemaps.init())).
-				pipe(babel({
-					presets: presets,
-					ignore: ['src/games/common/js/physics/SAT.js']
-				})).
 				pipe(concat('pageDormanticide.js')).
+				pipe(babel({presets: presets})).
 				pipe(iff(!isDev, uglify())).
 				pipe(iff(isDev, sourcemaps.write())).
 				pipe(gulp.dest('assets')).
@@ -79,11 +76,8 @@ module.exports = (gulp, isDev, iff, concat, liveReload, sourcemaps) => {
 					'src/games/vamp/js/main.js'
 				])).
 				pipe(iff(isDev, sourcemaps.init())).
-				pipe(babel({
-					presets: presets,
-					ignore: ['src/games/common/js/physics/SAT.js']
-				})).
 				pipe(concat('pageVamp.js')).
+				pipe(babel({presets: presets})).
 				pipe(iff(!isDev, uglify())).
 				pipe(iff(isDev, sourcemaps.write())).
 				pipe(gulp.dest('assets')).
@@ -91,7 +85,11 @@ module.exports = (gulp, isDev, iff, concat, liveReload, sourcemaps) => {
 		});
 
 		gulp.task('js:other', () => {
-			return gulp.src(['src/js/ballPit.js', 'src/js/stars.js', 'src/js/listCarousel.js']).
+			return gulp.src([
+					'src/js/ballPit.js',
+					'src/js/stars.js',
+					'src/js/listCarousel.js'
+				]).
 				pipe(iff(isDev, sourcemaps.init())).
 				pipe(babel({presets: presets})).
 				pipe(iff(!isDev, uglify())).
