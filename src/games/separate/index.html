@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -72,15 +72,20 @@
 			text-decoration: none;
 			outline: none;
 		}
-		a:link, a:visited {
+
+		a:link,
+		a:visited {
 			color: #5dafd7;
 		}
-		a:active, a:hover {
-			color: hsla(200, 60%, 60%, 1);
+
+		a:active,
+		a:hover {
+			color: hsl(200, 60%, 60%);
 			text-shadow: #61b0d7 0 0 6px;
 		}
+
 		h1 {
-			margin: .4em 0 .6em 0;
+			margin: 0.4em 0 0.6em;
 			font-size: 1.62em;
 			letter-spacing: -0.03em;
 			color: #ff6a00;
@@ -91,6 +96,7 @@
 			margin: auto;
 			width: 960px;
 		}
+
 		div.broken,
 		div.missing {
 			margin: auto;
@@ -98,19 +104,23 @@
 			top: 50%;
 			width: 193px;
 		}
+
 		div.broken a,
 		div.missing a {
 			height: 63px;
 			position: relative;
 			top: -31px;
 		}
+
 		div.broken img,
 		div.missing img {
 			border-width: 0px;
 		}
+
 		div.broken {
 			display: none;
 		}
+
 		div#unityPlayer {
 			cursor: default;
 			height: 600px;

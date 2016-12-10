@@ -38,7 +38,7 @@ aside {
 	}
 
 	a {
-		font-family: 'Open Sans Condensed', Verdana, sans-serif;
+		font-family: 'Open Sans Condensed', monospace;
 		display: block;
 		font-size: 1.75em;
 		padding: 10px 0 10px 20px;
@@ -74,7 +74,7 @@ header {
 	}
 
 	nav {
-		font-family: 'Open Sans Condensed', Verdana, sans-serif;
+		font-family: 'Open Sans Condensed', monospace;
 		font-size: 2.1em;
 		text-align: center;
 		margin-top: 35px;
@@ -146,7 +146,7 @@ aside a,
 header nav a:visited,
 aside a:visited {
 	text-align: right;
-	color: rgba(140, 177, 24, 0.84) !important;
+	color: rgb(140, 177, 24) !important;
 	-webkit-text-stroke: 1px rgb(140, 177, 24);
 	text-stroke: 1px rgb(140, 177, 24);
 	text-shadow: 0 3px 3px #000;
@@ -157,7 +157,7 @@ aside a:visited {
 }
 
 header nav a:hover {
-	text-shadow: 0 0 6px rgba(140, 177, 24, 1);
+	text-shadow: 0 0 6px rgb(140, 177, 24);
 }
 
 header nav a:hover i,
@@ -174,7 +174,7 @@ header nav a:hover i,
 .about aside .icon-user,
 .contact nav .icon-phone,
 .contact aside .icon-phone {
-	color: hsla(0, 70%, 56%, 1) !important;
+	color: hsl(0, 70%, 56%) !important;
 	text-shadow: 0 3px 3px #000;
 	-webkit-text-stroke: 0;
 	text-stroke: 0;
