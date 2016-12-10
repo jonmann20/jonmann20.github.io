@@ -1,8 +1,6 @@
-/// <reference path="../commonLinker.js" />
-
 /*
-    A generic view interface.
-*/
+ * A generic view interface.
+ */
 function GameView(gEngine) {
     this.privates = {
         bgColor: "#ccc"

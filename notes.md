@@ -2,6 +2,7 @@ TODO
 ====
 * Waiting for Gulp v4.0 to hit stable before fixing watch/crash bug (with js error)
 * Waiting for Polymer v2.0 to hit stable before adding Web Componenets
+* Fix Jon's Quest index.html and colorbox color
 
 Filtering Search
 ================

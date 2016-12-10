@@ -1,5 +1,3 @@
-/// <reference path="../linker.js" />
-
 function OverworldView() {
     this.privates = {};
     this.init();
@@ -29,7 +27,7 @@ OverworldView.prototype = (function () {
             }
             else if (game.input.lastKeyDown === KeyCode.RIGHT) {
                 game.input.lastKeyDown = KeyCode.EMPTY;
-                
+
                 if (arrow.slot < 7) {
                     arrow.x += 115;
                     ++arrow.slot;

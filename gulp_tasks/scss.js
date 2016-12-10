@@ -22,7 +22,6 @@ module.exports = (gulp, isDev, iff, concat, liveReload, sourcemaps, scssSrc) => 
 					files: {
 						ignore: [
 							'src/scss/font-icons.scss',
-							'src/scss/module/colorbox.scss',
 							'src/scss/normalize.scss'
 						]
 					}

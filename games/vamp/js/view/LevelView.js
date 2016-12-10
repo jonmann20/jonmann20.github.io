@@ -1,5 +1,3 @@
-/// <reference path="../linker.js" />
-
 function LevelView(player, curLvl) {
     this.privates = {};
     this.player = player;

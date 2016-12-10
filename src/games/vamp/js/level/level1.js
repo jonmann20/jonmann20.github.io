@@ -1,7 +1,4 @@
-/// <reference path="../linker.js" />
-
 function Level1() {
-    
     this.init();
 }
 
@@ -25,8 +22,8 @@ Level1.prototype = (function() {
             }
         },
 
-        update: function(){
-            for(var i = 0; i < this.projectiles.length; ++i) {
+        update: function() {
+            for(var i=0; i < this.projectiles.length; ++i) {
                 this.projectiles[i].pos.y -= this.projectiles[i].speed;
             }
         },
@@ -39,7 +36,7 @@ Level1.prototype = (function() {
             // projectiles
 
             ctx.fillStyle = "silver";
-            for(var i = 0; i < this.projectiles.length; ++i){
+            for(var i=0; i < this.projectiles.length; ++i) {
                 ctx.fillRect(this.projectiles[i].pos.x, this.projectiles[i].pos.y, 10, 20);
             }
         }

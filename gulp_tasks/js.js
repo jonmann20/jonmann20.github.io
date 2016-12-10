@@ -29,7 +29,11 @@ module.exports = (gulp, isDev, iff, concat, liveReload, sourcemaps) => {
 				loose: true,
 				modules: false
 			}]
-		];
+		],
+		handleErr = function(e) {
+			console.log(`caught error: ${e}`);
+			this.emit('end');
+		};
 
 	return (() => {
 		gulp.task('js:master', () => {
@@ -41,7 +45,7 @@ module.exports = (gulp, isDev, iff, concat, liveReload, sourcemaps) => {
 				]).
 				pipe(iff(isDev, sourcemaps.init())).
 				pipe(concat('master.js')).
-				pipe(babel({presets: presets})).
+				pipe(babel({presets: presets}).on('error', handleErr)).
 				pipe(iff(!isDev, uglify())).
 				pipe(iff(isDev, sourcemaps.write())).
 				pipe(gulp.dest('assets')).
@@ -88,7 +92,7 @@ module.exports = (gulp, isDev, iff, concat, liveReload, sourcemaps) => {
 					'src/js/listCarousel.js'
 				]).
 				pipe(iff(isDev, sourcemaps.init())).
-				pipe(babel({presets: presets})).
+				pipe(babel({presets: presets}).on('error', handleErr)).
 				pipe(iff(!isDev, uglify())).
 				pipe(iff(isDev, sourcemaps.write())).
 				pipe(gulp.dest('assets')).

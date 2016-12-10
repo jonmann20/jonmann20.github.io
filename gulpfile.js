@@ -18,28 +18,16 @@ require('./gulp_tasks/server')(gulp);
 require('./gulp_tasks/watch')(gulp, liveReload, scssSrc);
 
 gulp.task('default', gulp.series(
-	'scss',
-	gulp.parallel(
-		'js',
-		'copy',
-		'include'
-	),
-	gulp.parallel(
-		'server',
-		'watch' // NOTE: keep dependencies up to date
-	)
+	gulp.parallel('scss', 'js', 'copy', 'include'),
+	gulp.parallel('srv', 'watch')
 ));
 
-gulp.task('test', gulp.series('scss-lint', 'jscs', 'jshint'));
+gulp.task('test', gulp.parallel('scss-lint', 'jscs', 'jshint'));
 
-gulp.task('prd', gulp.series(
+gulp.task('prd', gulp.parallel(
 	'scss',
-	gulp.parallel(
-		'test',
-		'js',
-		'copy',
-		'include'
-	)
+	'test',
+	'js',
+	'copy',
+	'include'
 ));
-
-gulp.task('srv', gulp.series('server'));

@@ -4,7 +4,6 @@ module.exports = (gulp, isDev, iff, liveReload) => {
 	const fileInclude = require('gulp-file-include'),
 		htmlmin = require('gulp-htmlmin');
 
-
 	return (() => {
 		gulp.task('include', () => {
 			return gulp.src(['src/**/*.html']).

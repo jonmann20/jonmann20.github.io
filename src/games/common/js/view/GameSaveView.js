@@ -1,5 +1,3 @@
-/// <reference path="../commonLinker.js" />
-
 function GameSaveView() {
     this.privates = {};
 
