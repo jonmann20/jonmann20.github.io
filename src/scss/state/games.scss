@@ -1,9 +1,19 @@
-.games .tech-used {
-	margin-top: 26px;
-	margin-bottom: 22px;
+.games {
+	.col-right {
+		iron-icon[icon="hardware:videogame-asset"],
+		iron-icon[icon="icons:code"] {
+			margin-right: 10px;
+			vertical-align: -6px;
+		}
+	}
 
-	.lh {
-		margin-left: -30px;
+	.tech-used {
+		margin-top: 26px;
+		margin-bottom: 22px;
+
+		.lh {
+			margin-left: -30px;
+		}
 	}
 }
 

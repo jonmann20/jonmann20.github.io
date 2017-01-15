@@ -21,7 +21,7 @@ body {
 
 aside {
 	transform: translateX(-100%);
-	transition: all 0.3s;
+	transition: all 0.3s cubic-bezier(0, 0, 0.3, 1);
 	padding-top: 60px;
 	height: 100%;
 	width: 75%;
@@ -32,6 +32,7 @@ aside {
 	top: 0;
 	background: $mobile-nav-bg;
 	z-index: 999;
+	will-change: transform;
 
 	&.active {
 		transform: translateX(0);
@@ -50,6 +51,12 @@ aside {
 		}
 	}
 
+	iron-icon {
+		float: left;
+		margin-top: 3px;
+		margin-right: 20px;
+	}
+
 	.playground-nav {
 		margin-left: 25px;
 
@@ -66,11 +73,11 @@ header {
 
 	.menu {
 		position: absolute;
-		right: 21px;
-		top: 13px;
-		text-align: right !important;
-		width: 39px;
-		font-size: 0.65 !important;
+		display: flex;
+		right: 6px;
+		top: 6px;
+		padding: 10px;
+		width: auto;
 	}
 
 	nav {
@@ -114,6 +121,13 @@ header {
 				margin-left: 15px;
 				padding-top: 10px;
 			}
+		}
+
+		&.hdr-nav2 iron-icon {
+			font-size: 0.6em;
+			float: right;
+			margin-left: 15px;
+			margin-top: 6px;
 		}
 
 		ul { // Playground Nav
@@ -160,20 +174,17 @@ header nav a:hover {
 	text-shadow: 0 0 6px rgb(140, 177, 24);
 }
 
+header nav a:hover iron-icon,
 header nav a:hover i,
 .home nav .icon-home,
 .games nav .icon-controllernes,
 .games aside .icon-controllernes,
-.music nav .icon-music,
-.music aside .icon-music,
 .playground nav .icon-beaker,
 .playground aside .icon-beaker,
 .portfolio nav .icon-briefcase,
 .portfolio aside .icon-briefcase,
 .about nav .icon-user,
-.about aside .icon-user,
-.contact nav .icon-phone,
-.contact aside .icon-phone {
+.about aside .icon-user {
 	color: hsl(0, 70%, 56%) !important;
 	text-shadow: 0 3px 3px #000;
 	-webkit-text-stroke: 0;
@@ -197,10 +208,7 @@ header nav a:hover i,
 
 .nav1 .playground-nav li:nth-child(1) a,
 .nav2 .playground-nav li:nth-child(2) a,
-.nav3 .playground-nav li:nth-child(3) a,
-.nav4 .playground-nav li:nth-child(4) a,
-.nav5 .playground-nav li:nth-child(5) a,
-.nav6 .playground-nav li:nth-child(6) a {
+.nav3 .playground-nav li:nth-child(3) a {
 	color: #ff6a00 !important;
 	-webkit-text-stroke: 1px #ff6a00;
 	text-stroke: 1px #ff6a00;
@@ -208,10 +216,7 @@ header nav a:hover i,
 
 .nav1 .playground-nav li:nth-child(1) a:hover,
 .nav2 .playground-nav li:nth-child(2) a:hover,
-.nav3 .playground-nav li:nth-child(3) a:hover,
-.nav4 .playground-nav li:nth-child(4) a:hover,
-.nav5 .playground-nav li:nth-child(5) a:hover,
-.nav6 .playground-nav li:nth-child(6) a:hover {
+.nav3 .playground-nav li:nth-child(3) a:hover {
 	text-shadow: #ff6a00 0 0 18px;
 }
 
@@ -291,7 +296,7 @@ main {
 
 #starry-canvas,
 .ball-pit canvas {
-	box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+	box-shadow: $box-shadow-2;
 	margin: 10px 0;
 	border-radius: 2px;
 }

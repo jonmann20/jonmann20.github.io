@@ -1,2 +1,5 @@
 $card-bg: #292f33;
-$mobile-nav-bg: lighten($card-bg, 2%);
+$mobile-nav-bg: lighten($card-bg, 6%);
+
+// https://codepen.io/sdthornton/pen/wBZdXq
+$box-shadow-2: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);

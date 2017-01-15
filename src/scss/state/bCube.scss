@@ -1,14 +1,16 @@
 @import '../vars';
 
-.break-dancing-cube main {
-	min-height: 38em;
+.break-dancing-cube {
+	main {
+		min-height: 38em;
+	}
 }
 
 .iframe-wrap iframe {
 	background: $card-bg;
 	padding: 15px;
 	border-radius: 2px;
-	box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+	box-shadow: $box-shadow-2;
 }
 
 .container {

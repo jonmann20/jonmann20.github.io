@@ -33,7 +33,6 @@ module.exports = (gulp, isDev, iff, concat, liveReload, sourcemaps, scssSrc) => 
 		gulp.task('concat:master', () => {
 			return gulp.src([
 					'node_modules/normalize.css/normalize.css',
-					'assets/css/font-icons.css',
 					'assets/css/base.css',
 					'assets/css/layout.css',
 					'assets/css/state/home.css',

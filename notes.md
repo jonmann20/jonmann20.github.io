@@ -8,6 +8,17 @@ Filtering Search
 ================
 src/**, gulp_tasks, gulpfile.js, -dungeon, -font, -plugins, -assets, -node_modules, -*.map
 
+Node
+----
+sudo n x.x.x
+sudo npm i -g npm
+npm outdated
+npm update
+
+Bower
+-----
+sudo npm i -g npm
+bower list | grep PACKAGE-NAME
 
 [server gh-pages from sub directory](https://gist.github.com/cobyism/4730490)
 
@@ -29,3 +40,5 @@ Add a page
 
 
 [2d-hero art](http://opengameart.org/content/2d-hero)
+
+https://www.webcomponents.org/element/PolymerElements/iron-icons/demo/demo/index.html

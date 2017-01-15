@@ -1,5 +1,9 @@
 .portfolio .big-btn {
 	margin-bottom: 20px;
+
+	iron-icon[icon="icons:open-in-new"] {
+		vertical-align: -6px;
+	}
 }
 
 .wht-img {
