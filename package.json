@@ -23,6 +23,7 @@
     "jshint": "^2.9.4",
     "jshint-stylish": "^2.2.1",
     "normalize.css": "^5.0.0",
+    "polymer-bundler": "^2.0.0-pre.1",
     "sass-lint": "^1.10.2",
     "yargs": "^6.6.0"
   },

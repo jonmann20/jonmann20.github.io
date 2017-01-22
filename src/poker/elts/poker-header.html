@@ -1,0 +1,57 @@
+<link rel="import" href="/bower_components/polymer/polymer.html">
+
+<dom-module id="poker-header">
+    <template>
+        <style>
+    		:host {
+    		    display: block;
+    			background: #3f51b5;
+    			color: #fff;
+    			height: 56px;
+    			line-height: 56px;
+    		}
+
+            .menu {
+                color: #fff !important;
+    			position: absolute;
+    			top: 0;
+    			left: 0;
+    			padding: 16px;
+    			line-height: 0;
+    		}
+
+    		h1 {
+    		    font-size: 16px;
+    		    text-align: left;
+    		    margin-left: 72px;
+    		}
+
+            @media (min-width: 576px) {
+                .menu {
+                    display: none;
+                }
+
+    			h1 {
+    				font-size: 28px;
+    				margin-left: 0;
+    				text-align: center;
+    			}
+            }
+        </style>
+
+		<a href="#" class="menu" on-tap="openMenu">
+			<iron-icon icon="icons:menu"></iron-icon>
+		</a>
+		<h1>Southeast Michigan Poker Meetup</h1>
+    </template>
+    <script>
+        Polymer({
+            is: 'poker-header',
+
+            openMenu: function(e) {
+                e.preventDefault();
+                this.fire('menu');
+            }
+        });
+    </script>
+</dom-module>
