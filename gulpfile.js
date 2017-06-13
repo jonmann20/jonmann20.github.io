@@ -1,12 +1,11 @@
 'use strict';
 
-const argv = require('yargs').argv,
-	concat = require('gulp-concat'),
+const concat = require('gulp-concat'),
 	gulp = require('gulp'),
 	iff = require('gulp-if'),
 	liveReload = require('gulp-livereload'),
 	sourcemaps = require('gulp-sourcemaps'),
-	isDev = argv._.length === 0,
+	isDev = process.argv.length === 2,
 	scssSrc = ['src/scss/**/*.scss', '!vars.scss'];
 
 require('./gulp_tasks/del')(gulp);

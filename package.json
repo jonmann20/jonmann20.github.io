@@ -25,8 +25,7 @@
     "jshint-stylish": "^2.2.1",
     "normalize.css": "^7.0.0",
     "polymer-bundler": "^2.0.3",
-    "sass-lint": "^1.10.2",
-    "yargs": "^8.0.1"
+    "sass-lint": "^1.10.2"
   },
   "name": "jonw.me",
   "author": "Jon Wiedmann",
