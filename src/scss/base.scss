@@ -1,6 +1,6 @@
 @import 'vars';
 
-/*#region **** override browser elts ****/
+// Override browser elts
 * {
 	box-sizing: border-box;
 }
@@ -68,9 +68,8 @@ a {
 		outline: 0;
 	}
 }
-/*#endregion*/
 
-/*#region ************ Utilities *************/
+// Utilities
 .clr:before,
 .clr:after {
 	content: ' ';
@@ -161,4 +160,3 @@ br.clr {
 		vertical-align: -1px;
 	}
 }
-/*#endregion*/

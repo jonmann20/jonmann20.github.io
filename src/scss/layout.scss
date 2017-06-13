@@ -1,6 +1,6 @@
 @import 'vars';
 
-/*#region ************** Global **************/
+// Global
 html {
 	min-width: 315px;
 }
@@ -65,18 +65,17 @@ aside {
 		}
 	}
 }
-/*#endregion*/
 
-/*#region ************** Header **************/
+// Header
 header {
 	position: fixed;
 
 	.menu {
 		position: absolute;
 		display: flex;
-		right: 6px;
-		top: 6px;
-		padding: 10px;
+		top: 0;
+		right: 0;
+		padding: 16px 20px 16px 16px;
 		width: auto;
 	}
 
@@ -89,7 +88,6 @@ header {
 		min-width: 165px;
 
 		&:first-child {
-			text-indent: 9px;
 			padding-bottom: 20px;
 			margin-top: 0;
 
@@ -233,9 +231,8 @@ header nav a:hover i,
 		opacity: 1;
 	}
 }
-/*#endregion*/
 
-/*#region *************** Main ***************/
+// Main
 main {
 	padding-left: 215px;
 	height: 100%;
@@ -268,9 +265,8 @@ main {
 #div-default {
 	display: block;
 }
-/*#endregion*/
 
-/*#region ********** Page Templates **********/
+// Page Templates
 .carousel-list-page {
 	.col-right {
 		> div {
@@ -304,4 +300,3 @@ main {
 .range-inputs {
 	margin-top: 10px;
 }
-/*#endregion*/
