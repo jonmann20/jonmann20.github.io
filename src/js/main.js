@@ -26,6 +26,11 @@ class Main {
 			hasClass = false;
 			document.body.removeEventListener('click', hide, pListen ? {passive: true} : false);
 		}
+		window.onresize = () => {
+			if(window.innerWidth > 800) {
+				hide();
+			}
+		};
 
 		document.querySelector('.menu').addEventListener('click', e => {
 			e.preventDefault();

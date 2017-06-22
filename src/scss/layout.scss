@@ -52,7 +52,6 @@ aside {
 
 	iron-icon {
 		float: left;
-		margin-top: 3px;
 		margin-right: 20px;
 	}
 
@@ -79,7 +78,7 @@ header {
 	}
 
 	nav {
-		font-size: 1.45em;
+		font-size: 1.48em;
 		text-align: center;
 		margin-top: 35px;
 		padding: 10px;
@@ -122,15 +121,14 @@ header {
 		&.hdr-nav2 iron-icon {
 			font-size: 0.6em;
 			margin-left: 15px;
-			margin-top: 6px;
 		}
 
 		ul { // Playground Nav
 			list-style-type: none;
-			font-size: 58%;
+			font-size: 61%;
 			width: 90%;
-			margin: 10px auto 4px;
-			padding: 10px 0;
+			margin: 0 auto;
+			padding: 0;
 			border-radius: 1px;
 
 			a {
@@ -161,7 +159,7 @@ aside a:visited {
 	text-shadow: 0 3px 3px #000;
 	display: block;
 	margin-right: 18px;
-	line-height: 1.2;
+	line-height: 1.7;
 	transition: none;
 }
 
@@ -223,6 +221,7 @@ header nav a:hover i,
 	transition: 0.25s ease;
 
 	&.visible {
+		padding: 10px 0;
 		height: 92px;
 		visibility: visible;
 		opacity: 1;
