@@ -23,11 +23,16 @@ gulp.task('default', gulp.series(
 
 gulp.task('test', gulp.parallel('scss-lint', 'jscs', 'jshint'));
 
-gulp.task('prd', gulp.parallel(
-	'scss',
-	'test',
-	'js',
-	'copy',
-	'include',
-	'bundle'
+gulp.task('prd', gulp.series(
+	gulp.parallel(
+		'scss',
+		'test',
+		'js',
+		'copy',
+		'include'
+	),
+	gulp.series(
+		'include:bundle',
+		'include:minify'
+	)
 ));

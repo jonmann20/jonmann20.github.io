@@ -24,22 +24,23 @@ module.exports = (gulp, isDev, iff, liveReload) => {
 				pipe(iff(isDev, liveReload()));
 		});
 
-		gulp.task('bundle', (done) => {
-			bash.cmd('polymer-bundler', ['index.html', '--out-html', 'index.html']);
-			done();
+		gulp.task('include:bundle', (done) => {
+			bash.cmd('polymer-bundler', ['index.html', '--out-html', 'index.html']).then(p => {
+				done();
+			});
 		});
 
-		// gulp.task('minify', () => {
-		// 	return gulp.src(['./a.html']).
-		// 		pipe(htmlmin({
-		// 			removeComments: true,
-		// 			collapseWhitespace: true,
-		// 			removeAttributeQuotes: true,
-		// 			removeEmptyAttributes: true,
-		// 			minifyJS: true,
-		// 			minifyCSS: true
-		// 		})).
-		// 		pipe(gulp.dest('./'));
-		// });
+		gulp.task('include:minify', () => {
+			return gulp.src(['./index.html']).
+				pipe(htmlmin({
+					removeComments: true,
+					collapseWhitespace: true,
+					removeAttributeQuotes: true,
+					removeEmptyAttributes: true,
+					minifyJS: true,
+					minifyCSS: true
+				})).
+				pipe(gulp.dest('./'));
+		});
 	})();
 };
