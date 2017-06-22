@@ -8,7 +8,7 @@ html {
 body {
 	line-height: 1.25;
 	font-size: 87.5%;
-	font-family: 'Open Sans', Verdana, sans-serif;
+	font-family: 'Open Sans', sans-serif;
 	color: #eaeaea;
 }
 
@@ -39,9 +39,8 @@ aside {
 	}
 
 	a {
-		font-family: 'Open Sans Condensed', monospace;
 		display: block;
-		font-size: 1.75em;
+		font-size: 1.45em;
 		padding: 10px 0 10px 20px;
 		text-align: left !important;
 
@@ -75,13 +74,12 @@ header {
 		display: flex;
 		top: 0;
 		right: 0;
-		padding: 16px 20px 16px 16px;
+		padding: 16px 20px 17px 16px;
 		width: auto;
 	}
 
 	nav {
-		font-family: 'Open Sans Condensed', monospace;
-		font-size: 2.1em;
+		font-size: 1.45em;
 		text-align: center;
 		margin-top: 35px;
 		padding: 10px;
@@ -123,7 +121,6 @@ header {
 
 		&.hdr-nav2 iron-icon {
 			font-size: 0.6em;
-			float: right;
 			margin-left: 15px;
 			margin-top: 6px;
 		}
