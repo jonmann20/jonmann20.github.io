@@ -28,5 +28,6 @@ gulp.task('prd', gulp.parallel(
 	'test',
 	'js',
 	'copy',
-	'include'
+	'include',
+	'bundle'
 ));
