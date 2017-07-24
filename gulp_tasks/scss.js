@@ -18,21 +18,13 @@ module.exports = (gulp, isDev, iff, concat, liveReload, sourcemaps, scssSrc) => 
 
 		gulp.task('scss-lint', () => {
 			return gulp.src(scssSrc).
-				pipe(sassLint({
-					files: {
-						ignore: [
-							'src/scss/font-icons.scss',
-							'src/scss/normalize.scss'
-						]
-					}
-				})).
+				pipe(sassLint()).
 				pipe(sassLint.format()).
 				pipe(sassLint.failOnError());
 		});
 
 		gulp.task('concat:master', () => {
 			return gulp.src([
-					'node_modules/normalize.css/normalize.css',
 					'assets/css/base.css',
 					'assets/css/layout.css',
 					'assets/css/state/home.css',

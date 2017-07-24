@@ -2,9 +2,7 @@
 
 class AboutController {
     index() {
-        router.load('/about.html').then(() => {
-            document.getElementById('dateYear').textContent = util.getYear();
-        });
+        router.load('/about.html');
 
         document.title = 'About';
         document.body.classList.add('about');

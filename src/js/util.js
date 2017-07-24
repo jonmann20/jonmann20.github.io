@@ -36,10 +36,6 @@ class Util {
         });
     }
 
-    getYear() {
-        return new Date().getFullYear();
-    }
-
     addMeta(name, content) {
         let meta = document.createElement('meta');
         meta.setAttribute('name', name);

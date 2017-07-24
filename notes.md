@@ -1,23 +1,21 @@
 TODO
 ====
 * Waiting for Gulp v4.0 to hit stable before fixing watch/crash bug (with js error)
-* Waiting for Polymer v2.0 to hit stable before adding Web Componenets
 * Fix Jon's Quest index.html and colorbox color
 
 Filtering Search
 ================
-src/**, gulp_tasks, gulpfile.js, -dungeon, -font, -plugins, -assets, -node_modules, -*.map
+src/**, gulp_tasks, gulpfile.js, -dungeon, -font, -assets, -*.map
 
 Node
 ----
-sudo n x.x.x
+nvm use x.x.x
 sudo npm i -g npm
 npm outdated
 npm update
 
 Bower
 -----
-sudo npm i -g npm
 bower list | grep PACKAGE-NAME
 
 [server gh-pages from sub directory](https://gist.github.com/cobyism/4730490)

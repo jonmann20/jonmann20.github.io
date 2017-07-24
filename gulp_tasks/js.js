@@ -21,7 +21,6 @@ module.exports = (gulp, isDev, iff, concat, liveReload, sourcemaps) => {
 			'src/js/**/*.js',
 			'gulpfile.js',
 			'gulp_tasks/**/*.js',
-			'!src/js/plugins/**/*.js',
 			'!src/js/analytics.js'
 		],
 		presets = [

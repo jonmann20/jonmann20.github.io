@@ -6,6 +6,7 @@ My personal website.
 Setup
 -----
 * `npm i`
+* `bower i`
 
 Develop
 -------

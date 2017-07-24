@@ -13,6 +13,7 @@ body {
 	padding-top: 40px;
 	min-height: 100vh;
 	position: relative;
+	margin: 0;
 }
 
 input,
@@ -80,23 +81,11 @@ a {
 	clear: both;
 }
 
-br.clr {
-	display: none;
-}
-
 .lh {
 	list-style-type: none;
 	font-weight: 700;
 	margin: 12px 0 8px;
 	padding-left: 0;
-}
-
-.noselect {
-	-webkit-touch-callout: none;
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
 }
 
 .no-bullet {

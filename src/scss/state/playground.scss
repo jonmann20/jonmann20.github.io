@@ -15,37 +15,29 @@
 		background-color: transparent;
 	}
 
-	.ball-pit {
-		canvas,
-		.range-inputs {
-			float: left;
-			margin-right: 35px;
-		}
+	.card:first-child {
+		margin-bottom: 20px;
+	}
+}
+
+.range-inputs {
+	margin-top: 10px;
+
+	> div {
+		margin: 0 0 30px;
 	}
 
-	.range-inputs {
-		> div {
-			margin: 0 0 30px;
-		}
-
-		label {
-			display: block;
-			margin-bottom: 5px;
-		}
-
-		input {
-			cursor: ew-resize;
-
-			&:focus {
-				box-shadow: none;
-				outline-color: transparent;
-			}
-		}
+	label {
+		display: block;
+		margin-bottom: 5px;
 	}
 
-	.card {
-		&:first-child {
-			margin-bottom: 20px;
+	input {
+		cursor: ew-resize;
+
+		&:focus {
+			box-shadow: none;
+			outline-color: transparent;
 		}
 	}
 }
@@ -62,31 +54,18 @@
 	}
 }
 
-.img-inline {
-	float: left;
-	padding-right: 15px;
-}
-
-.iframe-wrap {
-	margin-top: -480px;
-}
-
 // Starry Background
 .nav2 {
 	label {
 		cursor: pointer;
 	}
 
-	input {
-		&:focus {
-			box-shadow: none;
-			outline-color: transparent;
-		}
+	input:focus {
+		box-shadow: none;
+		outline-color: transparent;
 	}
 
-	.card {
-		&:last-child {
-			margin-top: 10px;
-		}
+	.card:last-child {
+		margin-top: 10px;
 	}
 }

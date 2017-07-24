@@ -6,11 +6,15 @@
 	}
 }
 
-.iframe-wrap iframe {
-	background: $card-bg;
-	padding: 15px;
-	border-radius: 2px;
-	box-shadow: $box-shadow-2;
+.iframe-wrap {
+	margin-top: -480px;
+
+	iframe {
+		background: $card-bg;
+		padding: 15px;
+		border-radius: 2px;
+		box-shadow: $box-shadow-2;
+	}
 }
 
 .container {
