@@ -1,7 +1,7 @@
 TODO
 ====
 * Waiting for Gulp v4.0 to hit stable before fixing watch/crash bug (with js error)
-* Fix Jon's Quest index.html and colorbox color
+* Fix Jon's Quest index.html, node_modules import, and colorbox color
 
 Filtering Search
 ================
