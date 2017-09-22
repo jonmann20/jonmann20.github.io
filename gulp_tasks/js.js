@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = (gulp, isDev, iff, concat, liveReload, sourcemaps) => {
+module.exports = (gulp, isDev, iff, concat, sourcemaps) => {
 	const babel = require('gulp-babel'),
 		uglify = require('gulp-uglify-es').default,
 		jshint = require('gulp-jshint'),
@@ -52,11 +52,10 @@ module.exports = (gulp, isDev, iff, concat, liveReload, sourcemaps) => {
 				]).
 				pipe(iff(isDev, sourcemaps.init())).
 				pipe(concat('master.js')).
-				pipe(babel({presets: presets}).on('error', handleErr)).
+				pipe(iff(!isDev, babel({presets: presets}).on('error', handleErr))).
 				pipe(iff(!isDev, uglify())).
 				pipe(iff(isDev, sourcemaps.write())).
-				pipe(gulp.dest('assets')).
-				pipe(iff(isDev, liveReload()));
+				pipe(gulp.dest('assets'));
 		});
 
 		gulp.task('js:pageDormanticide', () => {
@@ -69,11 +68,10 @@ module.exports = (gulp, isDev, iff, concat, liveReload, sourcemaps) => {
 				])).
 				pipe(iff(isDev, sourcemaps.init())).
 				pipe(concat('pageDormanticide.js')).
-				pipe(babel({presets: presets})).
+				pipe(iff(!isDev, babel({presets: presets}).on('error', handleErr))).
 				pipe(iff(!isDev, uglify())).
 				pipe(iff(isDev, sourcemaps.write())).
-				pipe(gulp.dest('assets')).
-				pipe(iff(isDev, liveReload()));
+				pipe(gulp.dest('assets'));
 		});
 
 		gulp.task('js:pageVamp', () => {
@@ -85,11 +83,10 @@ module.exports = (gulp, isDev, iff, concat, liveReload, sourcemaps) => {
 				])).
 				pipe(iff(isDev, sourcemaps.init())).
 				pipe(concat('pageVamp.js')).
-				pipe(babel({presets: presets})).
+				pipe(iff(!isDev, babel({presets: presets}).on('error', handleErr))).
 				pipe(iff(!isDev, uglify())).
 				pipe(iff(isDev, sourcemaps.write())).
-				pipe(gulp.dest('assets')).
-				pipe(iff(isDev, liveReload()));
+				pipe(gulp.dest('assets'));
 		});
 
 		gulp.task('js:other', () => {
@@ -99,11 +96,10 @@ module.exports = (gulp, isDev, iff, concat, liveReload, sourcemaps) => {
 					'src/js/listCarousel.js'
 				]).
 				pipe(iff(isDev, sourcemaps.init())).
-				pipe(babel({presets: presets}).on('error', handleErr)).
+				pipe(iff(!isDev, babel({presets: presets}).on('error', handleErr))).
 				pipe(iff(!isDev, uglify())).
 				pipe(iff(isDev, sourcemaps.write())).
-				pipe(gulp.dest('assets')).
-				pipe(iff(isDev, liveReload()));
+				pipe(gulp.dest('assets'));
 		});
 
 		gulp.task('jshint', () => {

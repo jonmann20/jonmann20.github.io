@@ -88,6 +88,7 @@ rules:
     - 1
     - extra-properties:
       - 'touch-callout'
+      - 'text-stroke'
   no-qualifying-elements:
     - 0
     - allow-element-with-attribute: false

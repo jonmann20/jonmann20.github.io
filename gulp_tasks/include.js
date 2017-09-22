@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = (gulp, isDev, iff, liveReload) => {
+module.exports = (gulp, isDev, iff) => {
 	const fileInclude = require('gulp-file-include'),
 		htmlmin = require('gulp-htmlmin'),
 		bash = require('./bash');
@@ -8,26 +8,15 @@ module.exports = (gulp, isDev, iff, liveReload) => {
 	return (() => {
 		gulp.task('include', () => {
 			return gulp.src(['src/**/*.html']).
-				pipe(fileInclude({
-					prefix: '@@',
-					basepath: '@file'
-				})).
-				pipe(iff(!isDev, htmlmin({
-					removeComments: true,
-					collapseWhitespace: true,
-					removeAttributeQuotes: true,
-					removeEmptyAttributes: true,
-					minifyJS: true,
-					minifyCSS: true
-				}))).
-				pipe(gulp.dest('./')).
-				pipe(iff(isDev, liveReload()));
+				pipe(fileInclude({prefix: '@@', basepath: '@file'})).
+				pipe(gulp.dest('./'));
 		});
 
-		gulp.task('include:bundle', (done) => {
-			bash.cmd('polymer-bundler', ['index.html', '--out-html', 'index.html']).then(p => {
-				done();
-			});
+		gulp.task('include:bundle', done => {
+			bash.cmd('polymer-bundler', [
+				'--inline-css', '--inline-scripts',
+				'index.html', '--out-html', 'index.html'
+			]).then(() => done());
 		});
 
 		gulp.task('include:minify', () => {

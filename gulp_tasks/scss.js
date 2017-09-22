@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = (gulp, isDev, iff, concat, liveReload, sourcemaps, scssSrc) => {
+module.exports = (gulp, isDev, iff, concat, sourcemaps, scssSrc) => {
 	const cleanCss = require('gulp-clean-css'),
 		scss = require('gulp-sass'),
 		sassLint = require('gulp-sass-lint');
@@ -12,8 +12,7 @@ module.exports = (gulp, isDev, iff, concat, liveReload, sourcemaps, scssSrc) => 
 				pipe(scss()).
 				pipe(iff(!isDev, cleanCss())).
 				pipe(iff(isDev, sourcemaps.write())).
-				pipe(gulp.dest('assets/css')).
-				pipe(iff(isDev, liveReload()));
+				pipe(gulp.dest('assets/css'));
 		});
 
 		gulp.task('scss-lint', () => {
