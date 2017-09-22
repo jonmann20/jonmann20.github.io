@@ -1,7 +1,7 @@
 {
   "dependencies": {
-    "polymer": "^2.0.2",
-    "iron-icon": "PolymerElements/iron-icon#^2.0.0",
+    "polymer": "^2.1.0",
+    "iron-icon": "PolymerElements/iron-icon#^2.0.1",
     "iron-icons": "PolymerElements/iron-icons#^2.0.1"
   },
   "name": "jonw.me",

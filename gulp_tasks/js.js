@@ -2,7 +2,7 @@
 
 module.exports = (gulp, isDev, iff, concat, liveReload, sourcemaps) => {
 	const babel = require('gulp-babel'),
-		uglify = require('gulp-uglify'),
+		uglify = require('gulp-uglify-es').default,
 		jshint = require('gulp-jshint'),
 		jscs = require('gulp-jscs'),
 		stylish = require('gulp-jscs-stylish'),
@@ -24,9 +24,17 @@ module.exports = (gulp, isDev, iff, concat, liveReload, sourcemaps) => {
 			'!src/js/analytics.js'
 		],
 		presets = [
-			['es2015', {
-				loose: true,
-				modules: false
+			['env', {
+				targets: {
+					browsers: [
+						'last 2 Chrome versions',
+						'last 2 Firefox versions',
+						'last 2 Edge versions',
+						'last 2 Safari versions',
+						'last 2 iOS versions',
+						'last 2 ChromeAndroid versions'
+					]
+				}
 			}]
 		],
 		handleErr = function(e) {
