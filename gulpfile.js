@@ -16,7 +16,7 @@ require('./gulp_tasks/server')(gulp);
 require('./gulp_tasks/watch')(gulp, scssSrc);
 
 gulp.task('default', gulp.series(
-	gulp.parallel('scss', 'js', 'copy', 'include'),
+	gulp.parallel('scss', 'js', 'copy', 'include'/*, 'include:bundle'*/),
 	gulp.parallel('srv', 'watch')
 ));
 
@@ -24,5 +24,5 @@ gulp.task('test', gulp.parallel('scss-lint', 'jscs', 'jshint'));
 
 gulp.task('prd', gulp.series(
 	gulp.parallel('scss', 'test', 'js', 'copy', 'include'),
-	gulp.series('include:bundle', 'include:minify')
+	gulp.series('include:bundle', 'js:minifyBundle')
 ));

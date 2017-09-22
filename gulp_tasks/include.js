@@ -3,33 +3,27 @@
 module.exports = (gulp, isDev, iff) => {
 	const fileInclude = require('gulp-file-include'),
 		htmlmin = require('gulp-htmlmin'),
-		bash = require('./bash');
+		webpack = require('webpack-stream');
 
 	return (() => {
 		gulp.task('include', () => {
-			return gulp.src(['src/**/*.html']).
+			return gulp.src(['src/**/*.html', '!src/icons.html']).
 				pipe(fileInclude({prefix: '@@', basepath: '@file'})).
-				pipe(gulp.dest('./'));
-		});
-
-		gulp.task('include:bundle', done => {
-			bash.cmd('polymer-bundler', [
-				'--inline-css', '--inline-scripts',
-				'index.html', '--out-html', 'index.html'
-			]).then(() => done());
-		});
-
-		gulp.task('include:minify', () => {
-			return gulp.src(['./index.html']).
-				pipe(htmlmin({
+				pipe(iff(!isDev, htmlmin({
 					removeComments: true,
 					collapseWhitespace: true,
 					removeAttributeQuotes: true,
 					removeEmptyAttributes: true,
 					minifyJS: true,
 					minifyCSS: true
-				})).
+				}))).
 				pipe(gulp.dest('./'));
+		});
+
+		gulp.task('include:bundle', () => {
+			return gulp.src('src/icons.html').
+				pipe(webpack(require('../webpack.config.js'))).
+				pipe(gulp.dest('assets'));
 		});
 	})();
 };

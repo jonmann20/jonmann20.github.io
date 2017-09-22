@@ -11,7 +11,7 @@ module.exports = (gulp) => {
 				'**',
 				'!.git/**',
 				'!gulp_tasks/**',
-				'!bower_modules/**',
+				'!bower_components/**',
 				'!node_modules/**',
 				'!.sass-cache/**',
 				'!src/**',
@@ -25,6 +25,7 @@ module.exports = (gulp) => {
 				'!notes.md',
 				'!bower.json',
 				'!package.json',
+				'!webpack.config.js',
 				'!params.json',
 				'!readme.md',
 				'!server.js'

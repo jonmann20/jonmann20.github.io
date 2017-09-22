@@ -114,6 +114,12 @@ module.exports = (gulp, isDev, iff, concat, sourcemaps) => {
 				pipe(stylish());
 		});
 
+		gulp.task('js:minifyBundle', () => {
+			return gulp.src('assets/icons.bundle.js').
+				pipe(uglify()).
+				pipe(gulp.dest('assets'));
+		});
+
 		gulp.task('js', gulp.parallel(
 			'js:master',
 			'js:pageDormanticide',

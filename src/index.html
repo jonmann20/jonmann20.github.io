@@ -11,11 +11,27 @@
 
 	<link rel="stylesheet" href="/assets/master.css">
 
-	<link rel="import" href="/bower_components/iron-icon/iron-icon.html">
-	<link rel="import" href="/bower_components/iron-icons/iron-icons.html">
-	<link rel="import" href="/bower_components/iron-icons/communication-icons.html">
-	<link rel="import" href="/bower_components/iron-icons/social-icons.html">
-	<link rel="import" href="/bower_components/iron-icons/hardware-icons.html">
+	<!--<% if ENV['bundle_polymer_assets'] == 'bundle' %>-->
+	  <script>
+	    if(window.fetch) {
+	      var refScript = document.getElementsByTagName('script')[0];
+	      var script = document.createElement('script');
+	      script.src = '/bower_components/webcomponentsjs/custom-elements-es5-adapter.js';
+	      refScript.parentNode.insertBefore(script, refScript);
+	    }
+
+	    document.addEventListener('WebComponentsReady', function webcomponentsready() {
+	      var refScript = document.getElementsByTagName('script')[0];
+	      var script = document.createElement('script');
+	      script.src = '/assets/icons.bundle.js';
+	      refScript.parentNode.insertBefore(script, refScript);
+	      document.removeEventListener('WebComponentsReady', webcomponentsready, false);
+	    }, false);
+	  </script>
+	  <script src="/bower_components/webcomponentsjs/webcomponents-loader.js"></script>
+	<!--<% else %>-->
+	<!--  <link rel="import" href="/src/icons.html">-->
+	<!--<% end %>-->
 
 	<link rel="preconnect" href="https://platform.twitter.com" crossorigin>
 	<link rel="preconnect" href="https://cdn.syndication.twimg.com" crossorigin>
@@ -75,15 +91,5 @@
 	</div>
 
 	<script src="/assets/master.js"></script>
-	<script>
-		if(!('registerElement' in document) ||
-		   !('import' in document.createElement('link')) ||
-		   !('content' in document.createElement('template'))
-		){
-			let s = document.createElement('script');
-			s.src = '/bower_components/webcomponentsjs/webcomponents-lite.js';
-			document.head.appendChild(s);
-		}
-	</script>
 </body>
 </html>
