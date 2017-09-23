@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = (gulp, isDev, iff, concat, sourcemaps) => {
+module.exports = (gulp, isDev, iff, concat, sourcemaps, replace, fs) => {
 	const babel = require('gulp-babel'),
 		uglify = require('gulp-uglify-es').default,
 		jshint = require('gulp-jshint'),
@@ -118,6 +118,19 @@ module.exports = (gulp, isDev, iff, concat, sourcemaps) => {
 			return gulp.src('assets/icons.bundle.js').
 				pipe(uglify()).
 				pipe(gulp.dest('assets'));
+		});
+
+		gulp.task('inline-js', () => {
+			return gulp.src('index.html').
+				// pipe(replace(/<script src=\/bower_components\/webcomponentsjs\/webcomponents-loader.js><\/script>/, () => {
+				// 	const s = fs.readFileSync(`${__dirname}/../bower_components/webcomponentsjs/webcomponents-loader.js`, 'utf8');
+				// 	return `<script>${s}</script>`;
+				// })).
+				pipe(replace(/<script src=\/assets\/master.js><\/script>/, () => {
+					const s = fs.readFileSync(`${__dirname}/../assets/master.js`, 'utf8');
+					return `<script>${s}</script>`;
+				})).
+				pipe(gulp.dest('./'));
 		});
 
 		gulp.task('js', gulp.parallel(

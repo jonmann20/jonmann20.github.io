@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
@@ -8,30 +8,9 @@
 
 	<link rel="manifest" href="manifest.json">
 	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="theme-color" content="#141a1e">
 
 	<link rel="stylesheet" href="/assets/master.css">
-
-	<!--<% if ENV['bundle_polymer_assets'] == 'bundle' %>-->
-	  <script>
-	    if(window.fetch) {
-	      var refScript = document.getElementsByTagName('script')[0];
-	      var script = document.createElement('script');
-	      script.src = '/bower_components/webcomponentsjs/custom-elements-es5-adapter.js';
-	      refScript.parentNode.insertBefore(script, refScript);
-	    }
-
-	    document.addEventListener('WebComponentsReady', function webcomponentsready() {
-	      var refScript = document.getElementsByTagName('script')[0];
-	      var script = document.createElement('script');
-	      script.src = '/assets/icons.bundle.js';
-	      refScript.parentNode.insertBefore(script, refScript);
-	      document.removeEventListener('WebComponentsReady', webcomponentsready, false);
-	    }, false);
-	  </script>
-	  <script src="/bower_components/webcomponentsjs/webcomponents-loader.js"></script>
-	<!--<% else %>-->
-	<!--  <link rel="import" href="/src/icons.html">-->
-	<!--<% end %>-->
 
 	<link rel="preconnect" href="https://platform.twitter.com" crossorigin>
 	<link rel="preconnect" href="https://cdn.syndication.twimg.com" crossorigin>
@@ -91,5 +70,27 @@
 	</div>
 
 	<script src="/assets/master.js"></script>
+
+	<!-- if bundle_polymer_assets -->
+	<script>
+		if(window.fetch) {
+		  var refScript = document.getElementsByTagName('script')[0];
+		  var script = document.createElement('script');
+		  script.src = '/bower_components/webcomponentsjs/custom-elements-es5-adapter.js';
+		  refScript.parentNode.insertBefore(script, refScript);
+		}
+
+		document.addEventListener('WebComponentsReady', function webcomponentsready() {
+		  var refScript = document.getElementsByTagName('script')[0];
+		  var script = document.createElement('script');
+		  script.src = '/assets/icons.bundle.js';
+		  refScript.parentNode.insertBefore(script, refScript);
+		  document.removeEventListener('WebComponentsReady', webcomponentsready, false);
+		}, false);
+	</script>
+	<script src="/bower_components/webcomponentsjs/webcomponents-loader.js"></script>
+	<!-- else -->
+		<!--<link rel="import" href="/src/icons.html">-->
+	<!-- end -->
 </body>
 </html>

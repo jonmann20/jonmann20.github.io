@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = (gulp, isDev, iff, concat, sourcemaps, scssSrc) => {
+module.exports = (gulp, isDev, iff, concat, sourcemaps, scssSrc, replace, fs) => {
 	const cleanCss = require('gulp-clean-css'),
 		scss = require('gulp-sass'),
 		sassLint = require('gulp-sass-lint');
@@ -34,6 +34,15 @@ module.exports = (gulp, isDev, iff, concat, sourcemaps, scssSrc) => {
 				]).
 				pipe(concat('master.css')).
 				pipe(gulp.dest('assets'));
+		});
+
+		gulp.task('inline-css', () => {
+			return gulp.src('index.html').
+				pipe(replace(/<link rel=stylesheet href=\/assets\/master.css>/, () => {
+					const styles = fs.readFileSync(`${__dirname}/../assets/master.css`, 'utf8');
+					return `<style>${styles}</style>`;
+				})).
+				pipe(gulp.dest('./'));
 		});
 
 		gulp.task('scss', gulp.series('scss:all', 'concat:master'));

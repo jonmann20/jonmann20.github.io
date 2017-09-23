@@ -25,5 +25,18 @@ module.exports = (gulp, isDev, iff) => {
 				pipe(webpack(require('../webpack.config.js'))).
 				pipe(gulp.dest('assets'));
 		});
+
+		gulp.task('minify-html-index', () => {
+			return gulp.src('index.html').
+				pipe(iff(!isDev, htmlmin({
+					removeComments: true,
+					collapseWhitespace: true,
+					removeAttributeQuotes: true,
+					removeEmptyAttributes: true,
+					minifyJS: true,
+					minifyCSS: true
+				}))).
+				pipe(gulp.dest('./'));
+		});
 	})();
 };
