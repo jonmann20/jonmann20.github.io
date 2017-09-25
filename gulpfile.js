@@ -18,7 +18,7 @@ require('./gulp_tasks/server')(gulp);
 require('./gulp_tasks/watch')(gulp, scssSrc);
 
 gulp.task('default', gulp.series(
-	gulp.parallel('scss', 'js', 'copy', 'include'/*, 'include:bundle'*/),
+	gulp.parallel('scss', 'js', 'copy', 'include'/*, 'bundle:icons'*/),
 	gulp.parallel('srv', 'watch')
 ));
 
@@ -26,5 +26,5 @@ gulp.task('test', gulp.parallel('scss-lint', 'jscs', 'jshint'));
 
 gulp.task('prd', gulp.series(
 	gulp.parallel('scss', 'test', 'js', 'copy', 'include'),
-	gulp.series('include:bundle', 'inline-css', 'inline-js', 'js:minifyBundle', 'minify-html-index')
+	gulp.series('bundle:icons', 'js:minifyBundle', 'css:inline', 'js:inlineIndex', 'html:minifyIndex')
 ));

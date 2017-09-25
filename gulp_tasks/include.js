@@ -20,13 +20,13 @@ module.exports = (gulp, isDev, iff) => {
 				pipe(gulp.dest('./'));
 		});
 
-		gulp.task('include:bundle', () => {
+		gulp.task('bundle:icons', () => {
 			return gulp.src('src/icons.html').
 				pipe(webpack(require('../webpack.config.js'))).
 				pipe(gulp.dest('assets'));
 		});
 
-		gulp.task('minify-html-index', () => {
+		gulp.task('html:minifyIndex', () => {
 			return gulp.src('index.html').
 				pipe(iff(!isDev, htmlmin({
 					removeComments: true,

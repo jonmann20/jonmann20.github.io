@@ -1,7 +1,7 @@
 'use strict';
 
 const path = require('path');
-const webpack = require('webpack');
+//const webpack = require('webpack');
 
 module.exports = {
 	entry: ['./src/icons.html'],
@@ -22,22 +22,18 @@ module.exports = {
 				{
 					loader: 'babel-loader',
 					options: {
-						presets: ['env']
-						// NOTE: was causing build error
-
-						// [['env', {
-						// 	targets: {
-						// 		browsers: [
-						// 			'last 2 Chrome versions',
-						// 			'last 2 Firefox versions',
-						// 			'last 2 Edge versions',
-						// 			'last 2 Safari versions',
-						// 			'last 2 iOS versions',
-						// 			'last 2 ChromeAndroid versions'
-						// 		]
-						// 	}
-						// }]]//,
-						//plugins: ['syntax-dynamic-import']
+						presets: [['env', {
+							targets: {
+								browsers: [
+									'last 2 Chrome versions',
+									'last 2 Firefox versions',
+									'last 2 Edge versions',
+									'last 2 Safari versions',
+									'last 2 iOS versions',
+									'last 2 ChromeAndroid versions'
+								]
+							}
+						}]]
 					}
 				},
 				{
@@ -46,7 +42,6 @@ module.exports = {
 			]
 		}]
 	}//,
-
 	// NOTE: was causing build error (see gulp js:minifyBundle)
 	// plugins: [
 	// 	new webpack.DefinePlugin({

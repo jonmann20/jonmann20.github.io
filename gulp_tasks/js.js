@@ -116,12 +116,18 @@ module.exports = (gulp, isDev, iff, concat, sourcemaps, replace, fs) => {
 
 		gulp.task('js:minifyBundle', () => {
 			return gulp.src('assets/icons.bundle.js').
-				pipe(uglify()).
+				pipe(uglify({
+					// https://github.com/mishoo/UglifyJS2/issues/1753
+					mangle: {
+						safari10: true,
+					}
+				})).
 				pipe(gulp.dest('assets'));
 		});
 
-		gulp.task('inline-js', () => {
+		gulp.task('js:inlineIndex', () => {
 			return gulp.src('index.html').
+				// https://github.com/webcomponents/webcomponentsjs/issues/801
 				// pipe(replace(/<script src=\/bower_components\/webcomponentsjs\/webcomponents-loader.js><\/script>/, () => {
 				// 	const s = fs.readFileSync(`${__dirname}/../bower_components/webcomponentsjs/webcomponents-loader.js`, 'utf8');
 				// 	return `<script>${s}</script>`;

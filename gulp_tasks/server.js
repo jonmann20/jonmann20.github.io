@@ -1,12 +1,17 @@
 'use strict';
 
 module.exports = (gulp) => {
-	const liveServer = require('gulp-live-server'),
-		server = liveServer.static('./', 8080);
+	const connect = require('gulp-connect');
 
 	return (() => {
-		gulp.task('srv', () => {
-			server.start();
+		gulp.task('srv', done => {
+			connect.server({
+				root: './'//,
+				//port: 8080,
+				//livereload: true
+			});
+
+			done();
 		});
 	})();
 };

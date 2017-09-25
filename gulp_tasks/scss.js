@@ -36,7 +36,7 @@ module.exports = (gulp, isDev, iff, concat, sourcemaps, scssSrc, replace, fs) =>
 				pipe(gulp.dest('assets'));
 		});
 
-		gulp.task('inline-css', () => {
+		gulp.task('css:inline', () => {
 			return gulp.src('index.html').
 				pipe(replace(/<link rel=stylesheet href=\/assets\/master.css>/, () => {
 					const styles = fs.readFileSync(`${__dirname}/../assets/master.css`, 'utf8');
