@@ -1,13 +1,8 @@
 .home .no-bullet {
-	padding-left: 35px;
-	line-height: 1.6;
-
-	a::before {
-		padding-right: 5px;
-	}
+	line-height: 2;
 
 	iron-icon {
-		margin-right: 2px;
+		margin-right: 5px;
 		vertical-align: -7px;
 	}
 }

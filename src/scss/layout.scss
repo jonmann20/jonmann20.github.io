@@ -42,11 +42,6 @@ aside {
 		font-size: 1.45em;
 		padding: 10px 0 10px 20px;
 		text-align: left !important;
-
-		i {
-			float: left;
-			padding-right: 20px;
-		}
 	}
 
 	iron-icon {
@@ -73,7 +68,7 @@ header {
 		display: flex;
 		top: 0;
 		right: 0;
-		padding: 16px 20px 17px 16px;
+		padding: 16px 20px 15px 16px;
 		width: auto;
 	}
 
@@ -87,34 +82,13 @@ header {
 		&:first-child {
 			padding-bottom: 20px;
 			margin-top: 0;
+			height: 55px;
 
 			a {
 				text-align: center;
 				line-height: 1.1 !important;
 				margin-bottom: 0;
 				margin-right: 0;
-			}
-
-			i {
-				float: none;
-				margin-left: 0;
-				padding-top: 0;
-			}
-		}
-
-		a {
-			&:active {
-				background: transparent;
-			}
-
-			i {
-				font-size: 0.6em;
-				-webkit-text-stroke: 0;
-				text-stroke: 0;
-				display: block;
-				float: right;
-				margin-left: 15px;
-				padding-top: 10px;
 			}
 		}
 
@@ -137,12 +111,6 @@ header {
 				&:active {
 					margin-bottom: 4px;
 				}
-			}
-
-			#cube {
-				margin: inherit;
-				width: inherit;
-				height: inherit;
 			}
 		}
 	}
@@ -168,7 +136,6 @@ header nav a:hover {
 }
 
 header nav a:hover iron-icon,
-header nav a:hover i,
 .home nav .icon-home,
 .games nav .icon-controllernes,
 .games aside .icon-controllernes,
@@ -256,10 +223,6 @@ main {
 	> div {
 		padding-bottom: 13px !important;
 	}
-}
-
-#div-default {
-	display: block;
 }
 
 // Page Templates

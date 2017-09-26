@@ -148,3 +148,9 @@ a {
 		vertical-align: -1px;
 	}
 }
+
+// avoid FOUC
+iron-icon {
+	display: inline-block;
+	width: 24px;
+}
