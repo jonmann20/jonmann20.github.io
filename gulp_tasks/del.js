@@ -25,8 +25,8 @@ module.exports = (gulp) => {
 				'!notes.md',
 				'!bower.json',
 				'!package.json',
+				'!package-lock.json',
 				'!webpack.config.js',
-				'!params.json',
 				'!readme.md',
 				'!server.js'
 			]);
