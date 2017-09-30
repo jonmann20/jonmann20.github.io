@@ -5,7 +5,6 @@ const concat = require('gulp-concat'),
 	iff = require('gulp-if'),
 	sourcemaps = require('gulp-sourcemaps'),
 	isDev = process.argv.length === 2,
-	scssSrc = ['src/scss/**/*.scss', '!vars.scss'],
 	replace = require('gulp-replace'),
 	fs = require('fs');
 
@@ -13,9 +12,9 @@ require('./gulp_tasks/copy')(gulp);
 require('./gulp_tasks/del')(gulp);
 require('./gulp_tasks/include')(gulp, isDev, iff);
 require('./gulp_tasks/js')(gulp, isDev, iff, concat, sourcemaps, replace, fs);
-require('./gulp_tasks/scss')(gulp, isDev, iff, concat, sourcemaps, scssSrc, replace, fs);
+require('./gulp_tasks/scss')(gulp, isDev, iff, concat, sourcemaps, replace, fs);
 require('./gulp_tasks/server')(gulp);
-require('./gulp_tasks/watch')(gulp, scssSrc);
+require('./gulp_tasks/watch')(gulp);
 
 gulp.task('default', gulp.series(
 	gulp.parallel('scss', 'js', 'copy', 'include'/*, 'bundle:icons'*/),

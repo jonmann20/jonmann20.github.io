@@ -1,8 +1,9 @@
 'use strict';
 
-module.exports = (gulp, isDev, iff, concat, sourcemaps, scssSrc, replace, fs) => {
+module.exports = (gulp, isDev, iff, concat, sourcemaps, replace, fs) => {
 	const cleanCss = require('gulp-clean-css'),
 		scss = require('gulp-sass'),
+		scssSrc = 'src/scss/**/*.scss',
 		sassLint = require('gulp-sass-lint');
 
 	return (() => {
@@ -28,7 +29,7 @@ module.exports = (gulp, isDev, iff, concat, sourcemaps, scssSrc, replace, fs) =>
 					'assets/css/layout.css',
 					'assets/css/state/home.css',
 					'assets/css/state/games.css',
-					'assets/css/state/playground.css',
+					//'assets/css/state/playground.css',
 					'assets/css/state/portfolio.css',
 					'assets/css/state/responsive.css'
 				]).
