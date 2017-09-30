@@ -29,7 +29,7 @@ module.exports = (gulp, isDev, iff, concat, sourcemaps, replace, fs) => {
 					'assets/css/layout.css',
 					'assets/css/state/home.css',
 					'assets/css/state/games.css',
-					//'assets/css/state/playground.css',
+					'assets/css/state/playground.css',
 					'assets/css/state/portfolio.css',
 					'assets/css/state/responsive.css'
 				]).
