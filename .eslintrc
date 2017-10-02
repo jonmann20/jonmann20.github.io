@@ -19,6 +19,8 @@
 		"removeEventListener": true,
 		"requestAnimationFrame": true,
 		"cancelAnimationFrame": true,
+		"Image": true,
+		"fetch": true,
 		"Router": true,
 		"router": true,
 		"ListCarousel": true,

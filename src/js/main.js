@@ -26,6 +26,7 @@ class Main {
 			hasClass = false;
 			document.body.removeEventListener('click', hide, pListen ? {passive: true} : false);
 		}
+
 		window.onresize = () => {
 			if(window.innerWidth > 800) {
 				hide();
@@ -38,9 +39,9 @@ class Main {
 			if(!hasClass) {
 				document.querySelector('aside').classList.add('active');
 				hasClass = true;
-				setTimeout(() => {
+				requestAnimationFrame(() => {
 					document.body.addEventListener('click', hide, pListen ? {passive: true} : false);
-				}, 0);
+				});
 			}
 			else {
 				hide();
@@ -50,7 +51,7 @@ class Main {
 		addEventListener('route', e => {
 			// if page is not playground inner
 			const h = window.location.hash;
-			if(typeof(h) === 'undefined' || h.indexOf('#playground') !== 0) {  // startsWith
+			if(typeof(h) === 'undefined' || h.startsWith('#playground') !== 0) {
 				let pNav = document.querySelector('.hdr-nav2 .playground-nav-wrap');
 				if(pNav.classList.contains('visible')) {
 					pNav.classList.remove('visible');

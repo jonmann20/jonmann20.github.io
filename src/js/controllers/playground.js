@@ -21,9 +21,10 @@ class PlaygroundController {
     ballPit() {
         this.openNav();
 
-        const p0 = router.load('/playground/ballPit.html');
-        const p1 = util.require('/assets/ballPit.js');
-        Promise.all([p0, p1]).then(() => {
+        Promise.all([
+            router.load('/playground/ballPit.html'),
+            util.require('/assets/ballPit.js')
+        ]).then(() => {
             window.ballPit = new BallPit();
         });
 
@@ -36,9 +37,10 @@ class PlaygroundController {
     starryBackground() {
         this.openNav();
 
-        const p0 = router.load('/playground/stars.html');
-        const p1 = util.require('/assets/stars.js');
-        Promise.all([p0, p1]).then(() => {
+        Promise.all([
+            router.load('/playground/stars.html'),
+            util.require('/assets/stars.js')
+        ]).then(() => {
             window.starryBg = new StarryBg();
         });
 

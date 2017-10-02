@@ -24,6 +24,6 @@ gulp.task('default', gulp.series(
 gulp.task('test', gulp.parallel('scss-lint', 'jscs', 'jshint'));
 
 gulp.task('prd', gulp.series(
-	gulp.parallel('scss', 'test', 'js', 'copy', 'include'),
-	gulp.series('bundle:icons', 'js:minifyBundle', 'css:inline', 'js:inlineIndex', 'html:minifyIndex')
+	gulp.parallel('scss', 'test', 'js', 'copy', 'include', 'bundle:icons'),
+	gulp.series('js:minifyBundle', 'css:inline', 'js:inlineIndex', 'html:minifyIndex')
 ));

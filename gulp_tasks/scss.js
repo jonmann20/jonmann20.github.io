@@ -37,7 +37,7 @@ module.exports = (gulp, isDev, iff, concat, sourcemaps, replace, fs) => {
 				pipe(gulp.dest('assets'));
 		});
 
-		gulp.task('css:inline', () => {
+		gulp.task('css:inlineIndex', () => {
 			return gulp.src('index.html').
 				pipe(replace(/<link rel=stylesheet href=\/assets\/master.css>/, () => {
 					const styles = fs.readFileSync(`${__dirname}/../assets/master.css`, 'utf8');
@@ -45,6 +45,17 @@ module.exports = (gulp, isDev, iff, concat, sourcemaps, replace, fs) => {
 				})).
 				pipe(gulp.dest('./'));
 		});
+
+		gulp.task('css:inlineBreakdancingCube', () => {
+			return gulp.src('playground/breakdancing-cube.html').
+				pipe(replace(/<link rel=stylesheet href=\/assets\/css\/state\/breakdancing-cube.css>/, () => {
+					const styles = fs.readFileSync(`${__dirname}/../assets/css/state/breakdancing-cube.css`, 'utf8');
+					return `<style>${styles}</style>`;
+				})).
+				pipe(gulp.dest('./playground'));
+		});
+
+		gulp.task('css:inline', gulp.parallel('css:inlineIndex', 'css:inlineBreakdancingCube'));
 
 		gulp.task('scss', gulp.series('scss:all', 'concat:master'));
 	})();

@@ -96,7 +96,7 @@ class BallPit {
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
         // draw balls
-        for(let ball of this.balls) {
+        for(const ball of this.balls) {
             this.ctx.fillStyle = ball.color;
             this.ctx.beginPath();
             this.ctx.arc(ball.x, ball.y, this.radius, 0, 2 * Math.PI, false);

@@ -11,7 +11,7 @@ class Util {
         };
     }
 
-    require(src, callback) { // callback(cached)
+    require(src) {
         return new Promise((resolve, reject) => {
             if(!this.jsSrcHash[src]) {
                 let script = document.createElement('script');

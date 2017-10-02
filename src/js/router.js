@@ -2,7 +2,7 @@
 
 class Router {
 	constructor() {
-		this.root = document.querySelector('main');
+		this.main = document.querySelector('main');
 		onhashchange = (e) => this.route(location.hash);
 	}
 
@@ -39,31 +39,14 @@ class Router {
 		}
 	}
 
-	load(url, callback) {
-		// TODO: use Fetch API, (not working with cloud9 cors)
-		// console.log('fetching', url);
-		// fetch(url, {mode: 'cors'}).then(data => {
-		// 	console.log(data);
-		// });
-
-		return new Promise((resolve, reject) => {
-			let dis = this;
-
-			let r = new XMLHttpRequest();
-			r.onreadystatechange = function() {
-				if(this.readyState === 4) {
-					if(this.status === 200) {
-						// swap page
-						dis.root.innerHTML = this.responseText;
-						resolve();
-					}
-					else {
-						reject();
-					}
-				}
-			};
-			r.open('GET', url, true);
-			r.send();
+	load(url) {
+		return fetch(url, {mode: 'cors'}).then(response => {
+			if(response.ok) {
+				return response.text().then(text => {
+					// swap page
+					this.main.innerHTML = text;
+				});
+			}
 		});
 	}
 
@@ -80,7 +63,7 @@ class Router {
 
 	resetController(slug) {
 		scrollTo(0, 0);
-		this.root.innerHTML = '';
+		this.main.innerHTML = '';
 		document.body.className = '';
 		document.title = '';
 		this.rmMeta('meta[name=description]');
