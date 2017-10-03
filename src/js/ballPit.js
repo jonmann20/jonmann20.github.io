@@ -39,7 +39,7 @@ class BallPit {
     }
 
     destroy(page) {
-        if(page === '#playground/ballPit') {
+        if(page === '#playground/ball-pit') {
             return;
         }
 

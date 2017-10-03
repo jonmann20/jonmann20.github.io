@@ -68,7 +68,8 @@ module.exports = (gulp, isDev, iff, concat, sourcemaps, replace, fs) => {
 				])).
 				pipe(iff(isDev, sourcemaps.init())).
 				pipe(concat('pageDormanticide.js')).
-				pipe(iff(!isDev, babel({presets: presets}).on('error', handleErr))).
+				// NOTE: babel was causing page to break
+				//pipe(iff(!isDev, babel({presets: presets}).on('error', handleErr))).
 				pipe(iff(!isDev, uglify())).
 				pipe(iff(isDev, sourcemaps.write())).
 				pipe(gulp.dest('assets'));
@@ -83,7 +84,8 @@ module.exports = (gulp, isDev, iff, concat, sourcemaps, replace, fs) => {
 				])).
 				pipe(iff(isDev, sourcemaps.init())).
 				pipe(concat('pageVamp.js')).
-				pipe(iff(!isDev, babel({presets: presets}).on('error', handleErr))).
+				// NOTE: babel was causing page to break
+				//pipe(iff(!isDev, babel({presets: presets}).on('error', handleErr))).
 				pipe(iff(!isDev, uglify())).
 				pipe(iff(isDev, sourcemaps.write())).
 				pipe(gulp.dest('assets'));

@@ -5,7 +5,7 @@ TODO
 
 Filtering Search
 ================
-src/**, gulp_tasks, gulpfile.js, -dungeon, -font, -assets, -*.map
+src/**, gulp_tasks, gulpfile.js, -dungeon, -font, -assets, -*.map, -src/games/common/img/sprites/player/player.tps, -src/games/common/js/physics/SAT.js, -src/games/jonsQuest/img/sprites/player/player.tps
 
 Node
 ----

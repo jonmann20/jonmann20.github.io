@@ -1,16 +1,7 @@
 @import '../vars';
 
-@media screen and (max-width: 1350px) {
-	main {
-		padding-left: 207px;
-	}
-}
-
+// <= Tablet
 @media screen and (max-width: 1265px) {
-	main {
-		padding-left: 215px;
-	}
-
 	.col-left {
 		width: 100% !important;
 		margin-bottom: 0;
@@ -37,12 +28,7 @@
 	}
 }
 
-@media screen and (max-width: 920px) {
-	main {
-		padding-left: 207px;
-	}
-}
-
+// > Mobile
 @media screen and (min-width: 801px) {
 	header {
 		nav:first-child {
@@ -55,6 +41,7 @@
 	}
 }
 
+// <= Mobile
 @media screen and (max-width: 800px) {
 	.page {
 		padding: 0;

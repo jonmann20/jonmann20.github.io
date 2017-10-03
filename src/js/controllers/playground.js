@@ -22,7 +22,7 @@ class PlaygroundController {
         this.openNav();
 
         Promise.all([
-            router.load('/playground/ballPit.html'),
+            router.load('/playground/ball-pit.html'),
             util.require('/assets/ballPit.js')
         ]).then(() => {
             window.ballPit = new BallPit();
@@ -57,7 +57,7 @@ class PlaygroundController {
         document.title = 'Breakdancing Cube | Playground';
         util.addMeta('description', 'Pure CSS3 animation demo.');
         util.addMeta('keywords', 'CSS3, HTML5');
-        document.body.classList.add('playground', 'playInner', 'break-dancing-cube', 'nav1');
+        document.body.classList.add('playground', 'playInner', 'nav1');
     }
 }
 

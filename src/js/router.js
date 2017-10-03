@@ -22,7 +22,7 @@ class Router {
 			case '#playground':
 				playgroundController.index();
 				break;
-			case '#playground/ballPit':
+			case '#playground/ball-pit':
 				playgroundController.ballPit();
 				break;
 			case '#playground/breakdancing-cube':
