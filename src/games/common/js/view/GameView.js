@@ -1,15 +1,12 @@
-/*
- * A generic view interface.
- */
 function GameView(gEngine) {
     this.privates = {
-        bgColor: "#ccc"
+        bgColor: '#ccc'
     };
 
     this.init();
 }
 
-GameView.prototype = (function () {
+GameView.prototype = (function() {
 
     return {
         then: function(callback){

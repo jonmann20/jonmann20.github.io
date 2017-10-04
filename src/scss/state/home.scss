@@ -1,8 +1,17 @@
+@import '../vars';
+
 .no-bullet {
+	padding: 0;
 	line-height: 2;
 
 	iron-icon {
 		margin-right: 7px;
 		vertical-align: -6px;
+	}
+}
+
+@include desktop {
+	.no-bullet {
+		padding-left: 40px;
 	}
 }

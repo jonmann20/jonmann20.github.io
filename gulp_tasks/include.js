@@ -28,14 +28,14 @@ module.exports = (gulp, isDev, iff) => {
 
 		gulp.task('html:minifyIndex', () => {
 			return gulp.src('index.html').
-				pipe(iff(!isDev, htmlmin({
+				pipe(htmlmin({
 					removeComments: true,
 					collapseWhitespace: true,
 					removeAttributeQuotes: true,
 					removeEmptyAttributes: true,
 					minifyJS: true,
 					minifyCSS: true
-				}))).
+				})).
 				pipe(gulp.dest('./'));
 		});
 	})();

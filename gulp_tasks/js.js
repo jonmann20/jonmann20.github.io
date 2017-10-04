@@ -68,7 +68,7 @@ module.exports = (gulp, isDev, iff, concat, sourcemaps, replace, fs) => {
 				])).
 				pipe(iff(isDev, sourcemaps.init())).
 				pipe(concat('pageDormanticide.js')).
-				// NOTE: babel was causing page to break
+				// NOTE: babel was causing page to break (due to SAT.js)
 				//pipe(iff(!isDev, babel({presets: presets}).on('error', handleErr))).
 				pipe(iff(!isDev, uglify())).
 				pipe(iff(isDev, sourcemaps.write())).
@@ -84,7 +84,7 @@ module.exports = (gulp, isDev, iff, concat, sourcemaps, replace, fs) => {
 				])).
 				pipe(iff(isDev, sourcemaps.init())).
 				pipe(concat('pageVamp.js')).
-				// NOTE: babel was causing page to break
+				// NOTE: babel was causing page to break (due to SAT.js)
 				//pipe(iff(!isDev, babel({presets: presets}).on('error', handleErr))).
 				pipe(iff(!isDev, uglify())).
 				pipe(iff(isDev, sourcemaps.write())).
@@ -121,7 +121,7 @@ module.exports = (gulp, isDev, iff, concat, sourcemaps, replace, fs) => {
 				pipe(uglify({
 					// https://github.com/mishoo/UglifyJS2/issues/1753
 					mangle: {
-						safari10: true,
+						safari10: true
 					}
 				})).
 				pipe(gulp.dest('assets'));
@@ -130,11 +130,11 @@ module.exports = (gulp, isDev, iff, concat, sourcemaps, replace, fs) => {
 		gulp.task('js:inlineIndex', () => {
 			return gulp.src('index.html').
 				// https://github.com/webcomponents/webcomponentsjs/issues/801
-				// pipe(replace(/<script src=\/bower_components\/webcomponentsjs\/webcomponents-loader.js><\/script>/, () => {
+				// pipe(replace('<script src=/bower_components/webcomponentsjs/webcomponents-loader.js></script>', () => {
 				// 	const s = fs.readFileSync(`${__dirname}/../bower_components/webcomponentsjs/webcomponents-loader.js`, 'utf8');
 				// 	return `<script>${s}</script>`;
 				// })).
-				pipe(replace(/<script src=\/assets\/master.js><\/script>/, () => {
+				pipe(replace('<script src=/assets/master.js></script>', () => {
 					const s = fs.readFileSync(`${__dirname}/../assets/master.js`, 'utf8');
 					return `<script>${s}</script>`;
 				})).

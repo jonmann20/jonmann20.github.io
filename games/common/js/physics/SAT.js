@@ -1,14 +1,14 @@
-// Version 0.2 - Copyright 2013 -  Jim Riecken <jimr@jimr.ca>
+// Version 0.6.0 - Copyright 2012 - 2016 -  Jim Riecken <jimr@jimr.ca>
 //
 // Released under the MIT License - https://github.com/jriecken/sat-js
 //
 // A simple library for determining intersections of circles and
 // polygons using the Separating Axis Theorem.
-/** @preserve SAT.js - Version 0.2 - Copyright 2013 - Jim Riecken <jimr@jimr.ca> - released under the MIT License. https://github.com/jriecken/sat-js */
+/** @preserve SAT.js - Version 0.6.0 - Copyright 2012 - 2016 - Jim Riecken <jimr@jimr.ca> - released under the MIT License. https://github.com/jriecken/sat-js */
 
 /*global define: false, module: false*/
-/*jshint shadow:true, sub:true, forin:true, noarg:true, noempty:true, 
-  eqeqeq:true, bitwise:true, strict:true, undef:true, 
+/*jshint shadow:true, sub:true, forin:true, noarg:true, noempty:true,
+  eqeqeq:true, bitwise:true, strict:true, undef:true,
   curly:true, browser:true */
 
 // Create a UMD wrapper for SAT. Works in:
@@ -45,7 +45,7 @@
 
   // Create a new Vector, optionally passing in the `x` and `y` coordinates. If
   // a coordinate is not specified, it will be set to `0`
-  /** 
+  /**
    * @param {?number=} x The x position.
    * @param {?number=} y The y position.
    * @constructor
@@ -68,6 +68,14 @@
     this['x'] = other['x'];
     this['y'] = other['y'];
     return this;
+  };
+
+  // Create a new vector with the same coordinates as this on.
+  /**
+   * @return {Vector} The new cloned vector
+   */
+  Vector.prototype['clone'] = Vector.prototype.clone = function() {
+    return new Vector(this['x'], this['y']);
   };
 
   // Change this vector to be perpendicular to what it was before. (Effectively
@@ -104,7 +112,7 @@
     this['y'] = -this['y'];
     return this;
   };
-  
+
 
   // Normalize this vector.  (make it have length of `1`)
   /**
@@ -118,7 +126,7 @@
     }
     return this;
   };
-  
+
   // Add another vector to this one.
   /**
    * @param {Vector} other The other Vector.
@@ -129,7 +137,7 @@
     this['y'] += other['y'];
     return this;
   };
-  
+
   // Subtract another vector from this one.
   /**
    * @param {Vector} other The other Vector.
@@ -140,7 +148,7 @@
     this['y'] -= other['y'];
     return this;
   };
-  
+
   // Scale this vector. An independant scaling factor can be provided
   // for each axis, or a single scaling factor that will scale both `x` and `y`.
   /**
@@ -152,9 +160,9 @@
   Vector.prototype['scale'] = Vector.prototype.scale = function(x,y) {
     this['x'] *= x;
     this['y'] *= y || x;
-    return this; 
+    return this;
   };
-  
+
   // Project this vector on to another vector.
   /**
    * @param {Vector} other The vector to project onto.
@@ -166,7 +174,7 @@
     this['y'] = amt * other['y'];
     return this;
   };
-  
+
   // Project this vector onto a vector of unit length. This is slightly more efficient
   // than `project` when dealing with unit vectors.
   /**
@@ -179,7 +187,7 @@
     this['y'] = amt * other['y'];
     return this;
   };
-  
+
   // Reflect this vector on an arbitrary axis.
   /**
    * @param {Vector} axis The vector representing the axis.
@@ -193,7 +201,7 @@
     this['y'] -= y;
     return this;
   };
-  
+
   // Reflect this vector on an arbitrary axis (represented by a unit vector). This is
   // slightly more efficient than `reflect` when dealing with an axis that is a unit vector.
   /**
@@ -208,7 +216,7 @@
     this['y'] -= y;
     return this;
   };
-  
+
   // Get the dot product of this vector and another.
   /**
    * @param {Vector}  other The vector to dot this one against.
@@ -217,7 +225,7 @@
   Vector.prototype['dot'] = Vector.prototype.dot = function(other) {
     return this['x'] * other['x'] + this['y'] * other['y'];
   };
-  
+
   // Get the squared length of this vector.
   /**
    * @return {number} The length^2 of this vector.
@@ -225,7 +233,7 @@
   Vector.prototype['len2'] = Vector.prototype.len2 = function() {
     return this.dot(this);
   };
-  
+
   // Get the length of this vector.
   /**
    * @return {number} The length of this vector.
@@ -233,7 +241,7 @@
   Vector.prototype['len'] = Vector.prototype.len = function() {
     return Math.sqrt(this.len2());
   };
-  
+
   // ## Circle
   //
   // Represents a circle with a position and a radius.
@@ -252,13 +260,26 @@
   }
   SAT['Circle'] = Circle;
 
+  // Compute the axis-aligned bounding box (AABB) of this Circle.
+  //
+  // Note: Returns a _new_ `Polygon` each time you call this.
+  /**
+   * @return {Polygon} The AABB
+   */
+  Circle.prototype['getAABB'] = Circle.prototype.getAABB = function() {
+    var r = this['r'];
+    var corner = this["pos"].clone().sub(new Vector(r, r));
+    return new Box(corner, r*2, r*2).toPolygon();
+  };
+
   // ## Polygon
   //
   // Represents a *convex* polygon with any number of points (specified in counter-clockwise order)
   //
-  // The edges/normals of the polygon will be calculated on creation and stored in the
-  // `edges` and `normals` properties. If you change the polygon's points, you will need
-  // to call `recalc` to recalculate the edges/normals.
+  // Note: Do _not_ manually change the `points`, `angle`, or `offset` properties. Use the
+  // provided setters. Otherwise the calculated properties will not be updated correctly.
+  //
+  // `pos` can be changed directly.
 
   // Create a new polygon, passing in a position vector, and an array of points (represented
   // by vectors relative to the position vector). If no position is passed in, the position
@@ -272,81 +293,180 @@
    */
   function Polygon(pos, points) {
     this['pos'] = pos || new Vector();
-    this['points'] = points || [];
-    this.recalc();
+    this['angle'] = 0;
+    this['offset'] = new Vector();
+    this.setPoints(points || []);
   }
   SAT['Polygon'] = Polygon;
-  
-  // Recalculates the edges and normals of the polygon. This **must** be called
-  // if the `points` array is modified at all and the edges or normals are to be
-  // accessed.
+
+  // Set the points of the polygon.
+  //
+  // Note: The points are counter-clockwise *with respect to the coordinate system*.
+  // If you directly draw the points on a screen that has the origin at the top-left corner
+  // it will _appear_ visually that the points are being specified clockwise. This is just
+  // because of the inversion of the Y-axis when being displayed.
   /**
+   * @param {Array.<Vector>=} points An array of vectors representing the points in the polygon,
+   *   in counter-clockwise order.
    * @return {Polygon} This for chaining.
    */
-  Polygon.prototype['recalc'] = Polygon.prototype.recalc = function() {
-    // The edges here are the direction of the `n`th edge of the polygon, relative to
-    // the `n`th point. If you want to draw a given edge from the edge value, you must
-    // first translate to the position of the starting point.
-    this['edges'] = [];
-    // The normals here are the direction of the normal for the `n`th edge of the polygon, relative
-    // to the position of the `n`th point. If you want to draw an edge normal, you must first
-    // translate to the position of the starting point.
-    this['normals'] = [];
-    var points = this['points'];
-    var len = points.length;
-    for (var i = 0; i < len; i++) {
-      var p1 = points[i]; 
-      var p2 = i < len - 1 ? points[i + 1] : points[0];
-      var e = new Vector().copy(p2).sub(p1);
-      var n = new Vector().copy(e).perp().normalize();
-      this['edges'].push(e);
-      this['normals'].push(n);
+  Polygon.prototype['setPoints'] = Polygon.prototype.setPoints = function(points) {
+    // Only re-allocate if this is a new polygon or the number of points has changed.
+    var lengthChanged = !this['points'] || this['points'].length !== points.length;
+    if (lengthChanged) {
+      var i;
+      var calcPoints = this['calcPoints'] = [];
+      var edges = this['edges'] = [];
+      var normals = this['normals'] = [];
+      // Allocate the vector arrays for the calculated properties
+      for (i = 0; i < points.length; i++) {
+        calcPoints.push(new Vector());
+        edges.push(new Vector());
+        normals.push(new Vector());
+      }
     }
+    this['points'] = points;
+    this._recalc();
+    return this;
+  };
+
+  // Set the current rotation angle of the polygon.
+  /**
+   * @param {number} angle The current rotation angle (in radians).
+   * @return {Polygon} This for chaining.
+   */
+  Polygon.prototype['setAngle'] = Polygon.prototype.setAngle = function(angle) {
+    this['angle'] = angle;
+    this._recalc();
+    return this;
+  };
+
+  // Set the current offset to apply to the `points` before applying the `angle` rotation.
+  /**
+   * @param {Vector} offset The new offset vector.
+   * @return {Polygon} This for chaining.
+   */
+  Polygon.prototype['setOffset'] = Polygon.prototype.setOffset = function(offset) {
+    this['offset'] = offset;
+    this._recalc();
     return this;
   };
 
   // Rotates this polygon counter-clockwise around the origin of *its local coordinate system* (i.e. `pos`).
   //
-  // Note: You do **not** need to call `recalc` after rotation.
+  // Note: This changes the **original** points (so any `angle` will be applied on top of this rotation).
   /**
    * @param {number} angle The angle to rotate (in radians)
    * @return {Polygon} This for chaining.
    */
   Polygon.prototype['rotate'] = Polygon.prototype.rotate = function(angle) {
-    var i;
     var points = this['points'];
-    var edges = this['edges'];
-    var normals = this['normals'];
     var len = points.length;
-    for (i = 0; i < len; i++) {
+    for (var i = 0; i < len; i++) {
       points[i].rotate(angle);
-      edges[i].rotate(angle);
-      normals[i].rotate(angle);
     }
+    this._recalc();
     return this;
   };
 
   // Translates the points of this polygon by a specified amount relative to the origin of *its own coordinate
   // system* (i.e. `pos`).
   //
-  // This is most useful to change the "center point" of a polygon.
+  // This is most useful to change the "center point" of a polygon. If you just want to move the whole polygon, change
+  // the coordinates of `pos`.
   //
-  // Note: You do **not** need to call `recalc` after translation.
+  // Note: This changes the **original** points (so any `offset` will be applied on top of this translation)
   /**
    * @param {number} x The horizontal amount to translate.
    * @param {number} y The vertical amount to translate.
    * @return {Polygon} This for chaining.
    */
   Polygon.prototype['translate'] = Polygon.prototype.translate = function (x, y) {
-    var i;
     var points = this['points'];
     var len = points.length;
-    for (i = 0; i < len; i++) {
+    for (var i = 0; i < len; i++) {
       points[i].x += x;
       points[i].y += y;
     }
+    this._recalc();
     return this;
   };
+
+
+  // Computes the calculated collision polygon. Applies the `angle` and `offset` to the original points then recalculates the
+  // edges and normals of the collision polygon.
+  /**
+   * @return {Polygon} This for chaining.
+   */
+  Polygon.prototype._recalc = function() {
+    // Calculated points - this is what is used for underlying collisions and takes into account
+    // the angle/offset set on the polygon.
+    var calcPoints = this['calcPoints'];
+    // The edges here are the direction of the `n`th edge of the polygon, relative to
+    // the `n`th point. If you want to draw a given edge from the edge value, you must
+    // first translate to the position of the starting point.
+    var edges = this['edges'];
+    // The normals here are the direction of the normal for the `n`th edge of the polygon, relative
+    // to the position of the `n`th point. If you want to draw an edge normal, you must first
+    // translate to the position of the starting point.
+    var normals = this['normals'];
+    // Copy the original points array and apply the offset/angle
+    var points = this['points'];
+    var offset = this['offset'];
+    var angle = this['angle'];
+    var len = points.length;
+    var i;
+    for (i = 0; i < len; i++) {
+      var calcPoint = calcPoints[i].copy(points[i]);
+      calcPoint.x += offset.x;
+      calcPoint.y += offset.y;
+      if (angle !== 0) {
+        calcPoint.rotate(angle);
+      }
+    }
+    // Calculate the edges/normals
+    for (i = 0; i < len; i++) {
+      var p1 = calcPoints[i];
+      var p2 = i < len - 1 ? calcPoints[i + 1] : calcPoints[0];
+      var e = edges[i].copy(p2).sub(p1);
+      normals[i].copy(e).perp().normalize();
+    }
+    return this;
+  };
+
+
+  // Compute the axis-aligned bounding box. Any current state
+  // (translations/rotations) will be applied before constructing the AABB.
+  //
+  // Note: Returns a _new_ `Polygon` each time you call this.
+  /**
+   * @return {Polygon} The AABB
+   */
+  Polygon.prototype["getAABB"] = Polygon.prototype.getAABB = function() {
+    var points = this["calcPoints"];
+    var len = points.length;
+    var xMin = points[0]["x"];
+    var yMin = points[0]["y"];
+    var xMax = points[0]["x"];
+    var yMax = points[0]["y"];
+    for (var i = 1; i < len; i++) {
+      var point = points[i];
+      if (point["x"] < xMin) {
+        xMin = point["x"];
+      }
+      else if (point["x"] > xMax) {
+        xMax = point["x"];
+      }
+      if (point["y"] < yMin) {
+        yMin = point["y"];
+      }
+      else if (point["y"] > yMax) {
+        yMax = point["y"];
+      }
+    }
+    return new Box(this["pos"].clone().add(new Vector(xMin, yMin)), xMax - xMin, yMax - yMin).toPolygon();
+  };
+
 
   // ## Box
   //
@@ -357,7 +477,7 @@
   // is given, the position will be `(0,0)`. If no width or height are given, they will
   // be set to `0`.
   /**
-   * @param {Vector=} pos A vector representing the top-left of the box.
+   * @param {Vector=} pos A vector representing the bottom-left of the box (i.e. the smallest x and smallest y value).
    * @param {?number=} w The width of the box.
    * @param {?number=} h The height of the box.
    * @constructor
@@ -378,11 +498,11 @@
     var w = this['w'];
     var h = this['h'];
     return new Polygon(new Vector(pos['x'], pos['y']), [
-     new Vector(), new Vector(w, 0), 
+     new Vector(), new Vector(w, 0),
      new Vector(w,h), new Vector(0,h)
     ]);
   };
-  
+
   // ## Response
   //
   // An object representing the result of an intersection. Contains:
@@ -393,7 +513,7 @@
   //  - Whether the first object is entirely inside the second, and vice versa.
   /**
    * @constructor
-   */  
+   */
   function Response() {
     this['a'] = null;
     this['b'] = null;
@@ -425,7 +545,7 @@
    */
   var T_VECTORS = [];
   for (var i = 0; i < 10; i++) { T_VECTORS.push(new Vector()); }
-  
+
   // A pool of arrays of numbers used in calculations to avoid allocating
   // memory.
   /**
@@ -433,6 +553,18 @@
    */
   var T_ARRAYS = [];
   for (var i = 0; i < 5; i++) { T_ARRAYS.push([]); }
+
+  // Temporary response used for polygon hit detection.
+  /**
+   * @type {Response}
+   */
+  var T_RESPONSE = new Response();
+
+  // Tiny "point" polygon used for polygon hit detection.
+  /**
+   * @type {Polygon}
+   */
+  var TEST_POINT = new Box(new Vector(), 0.000001, 0.000001).toPolygon();
 
   // ## Helper Functions
 
@@ -458,7 +590,7 @@
     }
     result[0] = min; result[1] = max;
   }
-  
+
   // Check whether two convex polygons are separated by the specified
   // axis (must be a unit vector).
   /**
@@ -488,8 +620,8 @@
     rangeB[1] += projectedOffset;
     // Check if there is a gap. If there is, this is a separating axis and we can stop
     if (rangeA[0] > rangeB[1] || rangeB[0] > rangeA[1]) {
-      T_VECTORS.push(offsetV); 
-      T_ARRAYS.push(rangeA); 
+      T_VECTORS.push(offsetV);
+      T_ARRAYS.push(rangeA);
       T_ARRAYS.push(rangeB);
       return true;
     }
@@ -500,7 +632,7 @@
       if (rangeA[0] < rangeB[0]) {
         response['aInB'] = false;
         // A ends before B does. We have to pull A out of B
-        if (rangeA[1] < rangeB[1]) { 
+        if (rangeA[1] < rangeB[1]) {
           overlap = rangeA[1] - rangeB[0];
           response['bInA'] = false;
         // B is fully inside A.  Pick the shortest way out.
@@ -513,7 +645,7 @@
       } else {
         response['bInA'] = false;
         // B ends before A ends. We have to push A out of B
-        if (rangeA[1] > rangeB[1]) { 
+        if (rangeA[1] > rangeB[1]) {
           overlap = rangeA[0] - rangeB[1];
           response['aInB'] = false;
         // A is fully inside B.  Pick the shortest way out.
@@ -531,15 +663,16 @@
         if (overlap < 0) {
           response['overlapN'].reverse();
         }
-      }      
+      }
     }
-    T_VECTORS.push(offsetV); 
-    T_ARRAYS.push(rangeA); 
+    T_VECTORS.push(offsetV);
+    T_ARRAYS.push(rangeA);
     T_ARRAYS.push(rangeB);
     return false;
   }
-  
-  // Calculates which Vornoi region a point is on a line segment.
+  SAT['isSeparatingAxis'] = isSeparatingAxis;
+
+  // Calculates which Voronoi region a point is on a line segment.
   // It is assumed that both the line and the point are relative to `(0,0)`
   //
   //            |       (0)      |
@@ -548,37 +681,70 @@
   /**
    * @param {Vector} line The line segment.
    * @param {Vector} point The point.
-   * @return  {number} LEFT_VORNOI_REGION (-1) if it is the left region, 
-   *          MIDDLE_VORNOI_REGION (0) if it is the middle region, 
-   *          RIGHT_VORNOI_REGION (1) if it is the right region.
+   * @return  {number} LEFT_VORONOI_REGION (-1) if it is the left region,
+   *          MIDDLE_VORONOI_REGION (0) if it is the middle region,
+   *          RIGHT_VORONOI_REGION (1) if it is the right region.
    */
-  function vornoiRegion(line, point) {
+  function voronoiRegion(line, point) {
     var len2 = line.len2();
     var dp = point.dot(line);
     // If the point is beyond the start of the line, it is in the
-    // left vornoi region.
-    if (dp < 0) { return LEFT_VORNOI_REGION; }
+    // left voronoi region.
+    if (dp < 0) { return LEFT_VORONOI_REGION; }
     // If the point is beyond the end of the line, it is in the
-    // right vornoi region.
-    else if (dp > len2) { return RIGHT_VORNOI_REGION; }
+    // right voronoi region.
+    else if (dp > len2) { return RIGHT_VORONOI_REGION; }
     // Otherwise, it's in the middle one.
-    else { return MIDDLE_VORNOI_REGION; }
+    else { return MIDDLE_VORONOI_REGION; }
   }
-  // Constants for Vornoi regions
+  // Constants for Voronoi regions
   /**
    * @const
    */
-  var LEFT_VORNOI_REGION = -1;
+  var LEFT_VORONOI_REGION = -1;
   /**
    * @const
    */
-  var MIDDLE_VORNOI_REGION = 0;
+  var MIDDLE_VORONOI_REGION = 0;
   /**
    * @const
    */
-  var RIGHT_VORNOI_REGION = 1;
-  
+  var RIGHT_VORONOI_REGION = 1;
+
   // ## Collision Tests
+
+  // Check if a point is inside a circle.
+  /**
+   * @param {Vector} p The point to test.
+   * @param {Circle} c The circle to test.
+   * @return {boolean} true if the point is inside the circle, false if it is not.
+   */
+  function pointInCircle(p, c) {
+    var differenceV = T_VECTORS.pop().copy(p).sub(c['pos']);
+    var radiusSq = c['r'] * c['r'];
+    var distanceSq = differenceV.len2();
+    T_VECTORS.push(differenceV);
+    // If the distance between is smaller than the radius then the point is inside the circle.
+    return distanceSq <= radiusSq;
+  }
+  SAT['pointInCircle'] = pointInCircle;
+
+  // Check if a point is inside a convex polygon.
+  /**
+   * @param {Vector} p The point to test.
+   * @param {Polygon} poly The polygon to test.
+   * @return {boolean} true if the point is inside the polygon, false if it is not.
+   */
+  function pointInPolygon(p, poly) {
+    TEST_POINT['pos'].copy(p);
+    T_RESPONSE.clear();
+    var result = testPolygonPolygon(TEST_POINT, poly, T_RESPONSE);
+    if (result) {
+      result = T_RESPONSE['aInB'];
+    }
+    return result;
+  }
+  SAT['pointInPolygon'] = pointInPolygon;
 
   // Check if two circles collide.
   /**
@@ -586,7 +752,7 @@
    * @param {Circle} b The second circle.
    * @param {Response=} response Response object (optional) that will be populated if
    *   the circles intersect.
-   * @return {boolean} true if the circles intersect, false if they don't. 
+   * @return {boolean} true if the circles intersect, false if they don't.
    */
   function testCircleCircle(a, b, response) {
     // Check if the distance between the centers of the two
@@ -601,7 +767,7 @@
       return false;
     }
     // They intersect.  If we're calculating a response, calculate the overlap.
-    if (response) { 
+    if (response) {
       var dist = Math.sqrt(distanceSq);
       response['a'] = a;
       response['b'] = b;
@@ -615,7 +781,7 @@
     return true;
   }
   SAT['testCircleCircle'] = testCircleCircle;
-  
+
   // Check if a polygon and a circle collide.
   /**
    * @param {Polygon} polygon The polygon.
@@ -629,47 +795,47 @@
     var circlePos = T_VECTORS.pop().copy(circle['pos']).sub(polygon['pos']);
     var radius = circle['r'];
     var radius2 = radius * radius;
-    var points = polygon['points'];
+    var points = polygon['calcPoints'];
     var len = points.length;
     var edge = T_VECTORS.pop();
     var point = T_VECTORS.pop();
-    
+
     // For each edge in the polygon:
     for (var i = 0; i < len; i++) {
       var next = i === len - 1 ? 0 : i + 1;
       var prev = i === 0 ? len - 1 : i - 1;
       var overlap = 0;
       var overlapN = null;
-      
+
       // Get the edge.
       edge.copy(polygon['edges'][i]);
       // Calculate the center of the circle relative to the starting point of the edge.
       point.copy(circlePos).sub(points[i]);
-      
+
       // If the distance between the center of the circle and the point
       // is bigger than the radius, the polygon is definitely not fully in
       // the circle.
       if (response && point.len2() > radius2) {
         response['aInB'] = false;
       }
-      
-      // Calculate which Vornoi region the center of the circle is in.
-      var region = vornoiRegion(edge, point);
+
+      // Calculate which Voronoi region the center of the circle is in.
+      var region = voronoiRegion(edge, point);
       // If it's the left region:
-      if (region === LEFT_VORNOI_REGION) { 
-        // We need to make sure we're in the RIGHT_VORNOI_REGION of the previous edge.
+      if (region === LEFT_VORONOI_REGION) {
+        // We need to make sure we're in the RIGHT_VORONOI_REGION of the previous edge.
         edge.copy(polygon['edges'][prev]);
         // Calculate the center of the circle relative the starting point of the previous edge
         var point2 = T_VECTORS.pop().copy(circlePos).sub(points[prev]);
-        region = vornoiRegion(edge, point2);
-        if (region === RIGHT_VORNOI_REGION) {
+        region = voronoiRegion(edge, point2);
+        if (region === RIGHT_VORONOI_REGION) {
           // It's in the region we want.  Check if the circle intersects the point.
           var dist = point.len();
           if (dist > radius) {
             // No intersection
-            T_VECTORS.push(circlePos); 
+            T_VECTORS.push(circlePos);
             T_VECTORS.push(edge);
-            T_VECTORS.push(point); 
+            T_VECTORS.push(point);
             T_VECTORS.push(point2);
             return false;
           } else if (response) {
@@ -681,21 +847,21 @@
         }
         T_VECTORS.push(point2);
       // If it's the right region:
-      } else if (region === RIGHT_VORNOI_REGION) {
+      } else if (region === RIGHT_VORONOI_REGION) {
         // We need to make sure we're in the left region on the next edge
         edge.copy(polygon['edges'][next]);
         // Calculate the center of the circle relative to the starting point of the next edge.
         point.copy(circlePos).sub(points[next]);
-        region = vornoiRegion(edge, point);
-        if (region === LEFT_VORNOI_REGION) {
+        region = voronoiRegion(edge, point);
+        if (region === LEFT_VORONOI_REGION) {
           // It's in the region we want.  Check if the circle intersects the point.
           var dist = point.len();
           if (dist > radius) {
             // No intersection
-            T_VECTORS.push(circlePos); 
-            T_VECTORS.push(edge); 
+            T_VECTORS.push(circlePos);
+            T_VECTORS.push(edge);
             T_VECTORS.push(point);
-            return false;              
+            return false;
           } else if (response) {
             // It intersects, calculate the overlap.
             response['bInA'] = false;
@@ -708,15 +874,15 @@
         // Need to check if the circle is intersecting the edge,
         // Change the edge into its "edge normal".
         var normal = edge.perp().normalize();
-        // Find the perpendicular distance between the center of the 
+        // Find the perpendicular distance between the center of the
         // circle and the edge.
         var dist = point.dot(normal);
         var distAbs = Math.abs(dist);
         // If the circle is on the outside of the edge, there is no intersection.
         if (dist > 0 && distAbs > radius) {
           // No intersection
-          T_VECTORS.push(circlePos); 
-          T_VECTORS.push(normal); 
+          T_VECTORS.push(circlePos);
+          T_VECTORS.push(normal);
           T_VECTORS.push(point);
           return false;
         } else if (response) {
@@ -730,28 +896,28 @@
           }
         }
       }
-      
-      // If this is the smallest overlap we've seen, keep it. 
-      // (overlapN may be null if the circle was in the wrong Vornoi region).
+
+      // If this is the smallest overlap we've seen, keep it.
+      // (overlapN may be null if the circle was in the wrong Voronoi region).
       if (overlapN && response && Math.abs(overlap) < Math.abs(response['overlap'])) {
         response['overlap'] = overlap;
         response['overlapN'].copy(overlapN);
       }
     }
-    
+
     // Calculate the final overlap vector - based on the smallest overlap.
     if (response) {
       response['a'] = polygon;
       response['b'] = circle;
       response['overlapV'].copy(response['overlapN']).scale(response['overlap']);
     }
-    T_VECTORS.push(circlePos); 
-    T_VECTORS.push(edge); 
+    T_VECTORS.push(circlePos);
+    T_VECTORS.push(edge);
     T_VECTORS.push(point);
     return true;
   }
   SAT['testPolygonCircle'] = testPolygonCircle;
-  
+
   // Check if a circle and a polygon collide.
   //
   // **NOTE:** This is slightly less efficient than polygonCircle as it just
@@ -780,7 +946,7 @@
     return result;
   }
   SAT['testCirclePolygon'] = testCirclePolygon;
-  
+
   // Checks whether polygons collide.
   /**
    * @param {Polygon} a The first polygon.
@@ -790,9 +956,9 @@
    * @return {boolean} true if they intersect, false if they don't.
    */
   function testPolygonPolygon(a, b, response) {
-    var aPoints = a['points'];
+    var aPoints = a['calcPoints'];
     var aLen = aPoints.length;
-    var bPoints = b['points'];
+    var bPoints = b['calcPoints'];
     var bLen = bPoints.length;
     // If any of the edge normals of A is a separating axis, no intersection.
     for (var i = 0; i < aLen; i++) {

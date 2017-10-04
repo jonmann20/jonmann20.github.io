@@ -7,6 +7,13 @@ module.exports = (gulp, isDev, iff, concat, sourcemaps, replace, fs) => {
 		sassLint = require('gulp-sass-lint');
 
 	return (() => {
+		gulp.task('scss-lint', () => {
+			return gulp.src(scssSrc).
+				pipe(sassLint()).
+				pipe(sassLint.format()).
+				pipe(sassLint.failOnError());
+		});
+
 		gulp.task('scss:all', () => {
 			return gulp.src(scssSrc).
 				pipe(iff(isDev, sourcemaps.init())).
@@ -14,13 +21,6 @@ module.exports = (gulp, isDev, iff, concat, sourcemaps, replace, fs) => {
 				pipe(iff(!isDev, cleanCss())).
 				pipe(iff(isDev, sourcemaps.write())).
 				pipe(gulp.dest('assets/css'));
-		});
-
-		gulp.task('scss-lint', () => {
-			return gulp.src(scssSrc).
-				pipe(sassLint()).
-				pipe(sassLint.format()).
-				pipe(sassLint.failOnError());
 		});
 
 		gulp.task('concat:master', () => {
@@ -32,82 +32,39 @@ module.exports = (gulp, isDev, iff, concat, sourcemaps, replace, fs) => {
 				pipe(gulp.dest('assets'));
 		});
 
-		gulp.task('css:inlineIndex', () => {
-			return gulp.src('index.html').
-				pipe(replace(/<link rel=stylesheet href=\/assets\/master.css>/, () => {
-					const styles = fs.readFileSync(`${__dirname}/../assets/master.css`, 'utf8');
-					return `<style>${styles}</style>`;
-				})).
-				pipe(gulp.dest('./'));
-		});
+		function inline(src, filename, dest) {
+			const cond = `<link rel=stylesheet href=${filename}>`;
+			const file = `${__dirname}/..${filename}`;
 
-		gulp.task('css:inlineHome', () => {
-			return gulp.src('home.html').
-				pipe(replace(/<link rel=stylesheet href=\/assets\/css\/state\/home.css>/, () => {
-					const styles = fs.readFileSync(`${__dirname}/../assets/css/state/home.css`, 'utf8');
+			return gulp.src(src).
+				pipe(replace(cond, () => {
+					const styles = fs.readFileSync(file, 'utf8');
 					return `<style>${styles}</style>`;
 				})).
-				pipe(gulp.dest('./'));
-		});
+				pipe(gulp.dest(dest));
+		}
 
-		gulp.task('css:inlineGames', () => {
-			return gulp.src('games/index.html').
-				pipe(replace(/<link rel=stylesheet href=\/assets\/css\/state\/games.css>/, () => {
-					const styles = fs.readFileSync(`${__dirname}/../assets/css/state/games.css`, 'utf8');
-					return `<style>${styles}</style>`;
-				})).
-				pipe(gulp.dest('./games'));
-		});
-
-		gulp.task('css:inlinePlayground', () => {
-			return gulp.src('playground/index.html').
-				pipe(replace(/<link rel=stylesheet href=\/assets\/css\/state\/playground.css>/, () => {
-					const styles = fs.readFileSync(`${__dirname}/../assets/css/state/playground.css`, 'utf8');
-					return `<style>${styles}</style>`;
-				})).
-				pipe(gulp.dest('./playground'));
-		});
-
-		gulp.task('css:inlineBreakdancingCube', () => {
-			return gulp.src('playground/breakdancing-cube.html').
-				pipe(replace(/<link rel=stylesheet href=\/assets\/css\/state\/breakdancing-cube.css>/, () => {
-					const styles = fs.readFileSync(`${__dirname}/../assets/css/state/breakdancing-cube.css`, 'utf8');
-					return `<style>${styles}</style>`;
-				})).
-				pipe(gulp.dest('./playground'));
-		});
-
-		gulp.task('css:inlineStars', () => {
-			return gulp.src('playground/stars.html').
-				pipe(replace(/<link rel=stylesheet href=\/assets\/css\/state\/stars.css>/, () => {
-					const styles = fs.readFileSync(`${__dirname}/../assets/css/state/stars.css`, 'utf8');
-					return `<style>${styles}</style>`;
-				})).
-				pipe(gulp.dest('./playground'));
-		});
-
-		gulp.task('css:inlineBallPit', () => {
-			return gulp.src('playground/ball-pit.html').
-				pipe(replace(/<link rel=stylesheet href=\/assets\/css\/state\/ball-pit.css>/, () => {
-					const styles = fs.readFileSync(`${__dirname}/../assets/css/state/ball-pit.css`, 'utf8');
-					return `<style>${styles}</style>`;
-				})).
-				pipe(gulp.dest('./playground'));
-		});
-
-		gulp.task('css:inlinePortfolio', () => {
-			return gulp.src('portfolio/index.html').
-				pipe(replace(/<link rel=stylesheet href=\/assets\/css\/state\/portfolio.css>/, () => {
-					const styles = fs.readFileSync(`${__dirname}/../assets/css/state/portfolio.css`, 'utf8');
-					return `<style>${styles}</style>`;
-				})).
-				pipe(gulp.dest('./portfolio'));
-		});
+		gulp.task('css:inlineIndex', () => inline('index.html', '/assets/master.css', './'));
+		gulp.task('css:inlineHome', () => inline('home.html', '/assets/css/state/home.css', './'));
+		gulp.task('css:inlineGames', () => inline('games/index.html', '/assets/css/state/games.css', './games'));
+		gulp.task('css:inlineVamp', () => inline('games/vamp/index.html', '/assets/css/shell.css', './games/vamp'));
+		//gulp.task('css:inlineVamp2', () => inline('games/vamp/index.html', '/games/common/css/main.css', './games/vamp'));
+		gulp.task('css:inlineDormanticide', () => inline('games/dormanticide/index.html', '/assets/css/shell.css', './games/dormanticide'));
+		//gulp.task('css:inlineDormanticide2', () => inline('games/dormanticide/index.html', '/games/common/css/main.css', './games/dormanticide'));
+		gulp.task('css:inlinePlayground', () => inline('playground/index.html', '/assets/css/state/playground.css', './playground'));
+		gulp.task('css:inlineBreakdancingCube', () => inline('playground/breakdancing-cube.html', '/assets/css/state/breakdancing-cube.css', './playground'));
+		gulp.task('css:inlineStars', () => inline('playground/stars.html', '/assets/css/state/stars.css', './playground'));
+		gulp.task('css:inlineBallPit', () => inline('playground/ball-pit.html', '/assets/css/state/ball-pit.css', './playground'));
+		gulp.task('css:inlinePortfolio', () => inline('portfolio/index.html', '/assets/css/state/portfolio.css', './portfolio'));
 
 		gulp.task('css:inline', gulp.parallel(
 			'css:inlineIndex',
 			'css:inlineHome',
 			'css:inlineGames',
+			'css:inlineVamp',
+			//'css:inlineVamp2',
+			'css:inlineDormanticide',
+			//'css:inlineDormanticide2',
 			'css:inlinePlayground',
 			'css:inlineBreakdancingCube',
 			'css:inlineStars',

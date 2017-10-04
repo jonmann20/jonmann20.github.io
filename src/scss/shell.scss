@@ -63,8 +63,8 @@ input {
 	}
 }
 
-// avoid FOUC
 iron-icon {
+	// avoid FOUC
 	display: inline-block;
 	width: 24px;
 }
@@ -99,8 +99,7 @@ iron-icon {
 .col-left,
 .col-right > div,
 .col-right > img,
-.twitter-timeline-rendered,
-.music .col-right iframe {
+.twitter-timeline-rendered {
 	background: $card-bg;
 	padding: 3px 15px 5px;
 	border-radius: 2px;
@@ -108,8 +107,7 @@ iron-icon {
 }
 
 .col-right > img,
-.twitter-timeline,
-.music .col-right iframe {
+.twitter-timeline {
 	padding: 0;
 }
 
@@ -193,7 +191,7 @@ aside {
 	height: 100%;
 	max-width: 1520px;
 	margin: 0 auto;
-	padding: 0 6%;
+	padding: 0;
 }
 
 // Header

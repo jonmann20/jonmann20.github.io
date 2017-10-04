@@ -1,7 +1,7 @@
 @import '../vars';
 
 // <= Tablet
-@media screen and (max-width: 1265px) {
+@include tablet {
 	.col-left {
 		width: 100% !important;
 		margin-bottom: 0;
@@ -29,7 +29,7 @@
 }
 
 // > Mobile
-@media screen and (min-width: 801px) {
+@include desktop {
 	header {
 		nav:first-child {
 			text-indent: 9px;
@@ -39,14 +39,14 @@
 			display: none;
 		}
 	}
+
+	.page {
+		padding: 0 6%;
+	}
 }
 
 // <= Mobile
-@media screen and (max-width: 800px) {
-	.page {
-		padding: 0;
-	}
-
+@include mobile {
 	header {
 		position: fixed;
 		top: 0;
@@ -112,7 +112,6 @@
 	}
 
 	.home,
-	.music,
 	.about,
 	.playground {
 		.col-left {
@@ -154,22 +153,6 @@
 
 	.big-btn {
 		margin: 30px auto 0;
-	}
-
-	.enl-site {
-		float: none !important;
-	}
-
-	.home {
-		.no-bullet {
-			padding-left: 0;
-		}
-	}
-
-	.about {
-		.col-right {
-			margin-bottom: 85px;
-		}
 	}
 
 	.playground {

@@ -1,3 +1,5 @@
+@import '../vars';
+
 .big-btn {
 	margin-bottom: 20px;
 
@@ -17,6 +19,9 @@
 
 .enl-site {
 	margin-top: 25px;
-	float: left;
 	clear: both;
+
+	@include desktop {
+		float: left;
+	}
 }

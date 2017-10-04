@@ -1,3 +1,5 @@
+/* globals SAT */
+
 function LevelView(player, curLvl) {
     this.privates = {};
     this.player = player;
@@ -7,11 +9,10 @@ function LevelView(player, curLvl) {
 }
 
 LevelView.prototype = (function() {
-    var that,
+    let that,
         onUpdateSet = false,
         onRenderSet = false
     ;
-
 
     function checkCollision() {
         if(that.player.invincible) {
@@ -23,7 +24,7 @@ LevelView.prototype = (function() {
             return;
         }
 
-        for(var i = 0; i < that.curLvl.projectiles.length; ++i){
+        for(var i = 0; i < that.curLvl.projectiles.length; ++i) {
             var collided = SAT.testPolygonPolygon(that.player, that.curLvl.projectiles[i]);
             if(collided) {
                 --that.player.hp;
@@ -35,20 +36,17 @@ LevelView.prototype = (function() {
 
 
     return {
-        then: function(callback){
+        then: function(callback) {
             this.privates.callback = callback;
         },
 
-        init: function(){
+        init: function() {
             that = this;
         },
 
         update: function() {
             this.curLvl.update();
             this.player.update();
-
-            //if(onUpdateSet)
-            //    this.onUpdate();
 
             checkCollision();
         },
@@ -61,9 +59,6 @@ LevelView.prototype = (function() {
         render: function () {
             this.curLvl.render();
             this.player.render();
-
-            //if(onRenderSet)
-            //    this.onRender();
         },
 
         onRender: function(callback) {

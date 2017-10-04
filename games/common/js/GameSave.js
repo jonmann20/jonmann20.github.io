@@ -1,14 +1,12 @@
 'use strict';
-/*
- *
- */
+
 class GameSave {
     load(slot) {
         return localStorage[`slot ${slot}`];
     }
 
     getList() {
-        var zero = this.load(0),
+        const zero = this.load(0),
             one = this.load(1),
             two = this.load(2),
             def = '---'

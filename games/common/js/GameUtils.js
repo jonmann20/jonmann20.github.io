@@ -1,12 +1,9 @@
-/*
-    The utils component of GameEngine.
-*/
 function GameUtils(gEngine) {
     return {
         /*
-            Resets the newView's private variables.
-            Changes the view.
-        */
+         * Resets the newView's private variables.
+         * Changes the view.
+         */
         switchView: function(newView) {
             newView.init();
             gEngine.view = newView;
@@ -14,8 +11,8 @@ function GameUtils(gEngine) {
     };
 }
 
-// global enums
-var Dir = Object.freeze({
+// Global enums
+const Dir = {
     RIGHT: 0,
     LEFT: 1
-});
+};

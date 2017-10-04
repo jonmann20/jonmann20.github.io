@@ -1,5 +1,6 @@
 'use strict';
 /* globals game, canvas, ctx, KeyCode */
+
 /*
  *  Implements GameView.
  */

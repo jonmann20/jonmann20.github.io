@@ -1,7 +1,8 @@
 'use strict';
-/* globals canvas, ctx, GameInput, GameGraphics, GameUtils, GameView */
+/* globals canvas, GameInput, GameGraphics, GameUtils, GameView */
+
 /*
- *    Declares two globals: canvas and ctx
+ * Declares two globals: canvas and ctx
  */
 function GameEngine() {
     // back button
@@ -17,8 +18,8 @@ function GameEngine() {
 
     // canvas
     window.canvas = document.createElement('canvas');
-    canvas.setAttribute('width', 16*63);
-    canvas.setAttribute('height', 9*63);
+    canvas.setAttribute('width', 16 * 63);
+    canvas.setAttribute('height', 9 * 63);
     wrap.appendChild(canvas);
     document.body.appendChild(wrap);
 

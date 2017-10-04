@@ -1,7 +1,5 @@
 'use strict';
-/*
- * The input component of GameEngine.
- */
+
 function GameInput() {
 	this.keysDown = {};
 	this.lastKeyUp = KeyCode.EMPTY;
@@ -14,14 +12,18 @@ GameInput.prototype = (function() {
 	let that;
 
 	function fixKey(key) {
-		if(key === KeyCode.W)
+		if(key === KeyCode.W) {
 			key = KeyCode.UP;
-		else if(key === KeyCode.S)
+		}
+		else if(key === KeyCode.S) {
 			key = KeyCode.DOWN;
-		else if(key === KeyCode.D)
+		}
+		else if(key === KeyCode.D) {
 			key = KeyCode.RIGHT;
-		else if(key === KeyCode.A)
+		}
+		else if(key === KeyCode.A) {
 			key = KeyCode.LEFT;
+		}
 
 		return key;
 	}
@@ -50,17 +52,13 @@ GameInput.prototype = (function() {
 
 		update: function() {
 
-		}//,
-
-		// onKeyDown: function(callback) {
-		//     this.onKeyDown = callback;
-		// }
+		}
 	};
 })();
 
 
 // global enums
-var KeyCode = Object.freeze({
+const KeyCode = {
 	EMPTY: -1,
 	ENTER: 13,
 	CTRL: 17,
@@ -82,7 +80,7 @@ var KeyCode = Object.freeze({
 	R: 82,
 	S: 83,
 	W: 87
-});
+};
 
 let KeyCodeNames = {};
 KeyCodeNames[-1] = 'EMPTY';
