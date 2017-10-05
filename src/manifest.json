@@ -5,14 +5,12 @@
         {
             "src": "img/favicon.ico",
             "sizes": "16x16",
-            "type": "image/x-icon",
-            "density": "0.75"
+            "type": "image/x-icon"
         },
         {
-            "src": "/games/common/img/player/playerDown.png",
-            "sizes": "48x65",
-            "type": "image/png",
-            "density": "1.0"
+            "src": "/img/player-down-large.png",
+            "sizes": "512x512",
+            "type": "image/png"
         }
     ],
     "start_url": "index.html",

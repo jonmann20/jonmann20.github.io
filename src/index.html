@@ -5,7 +5,7 @@
 	<meta name="viewport" content="width=device-width">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-	<link rel="stylesheet" href="/assets/master.css">
+	<link rel="stylesheet" href="/assets/css/shell.css">
 
 	<link rel="preconnect" href="https://platform.twitter.com" crossorigin>
 	<link rel="preconnect" href="https://cdn.syndication.twimg.com" crossorigin>
@@ -41,7 +41,7 @@
 				<a href="#home">
 					<iron-icon icon="icons:home" class="icon-home"></iron-icon>&nbsp;Jon Wiedmann
 				</a>
-				<a href="#" class="menu">
+				<a class="menu">
 					<iron-icon icon="icons:menu"></iron-icon>
 				</a>
 			</nav>
@@ -67,19 +67,20 @@
 
 	<script src="/assets/master.js"></script>
 
-	<!-- if bundlePolymerAssets -->
 	<script>
 		document.addEventListener('WebComponentsReady', function webComponentsReady() {
-			let refScript = document.getElementsByTagName('script')[0];
 			let script = document.createElement('script');
 			script.src = '/assets/icons.bundle.js';
-			refScript.parentNode.insertBefore(script, refScript);
+			document.head.appendChild(script);
 			document.removeEventListener('WebComponentsReady', webComponentsReady, false);
 		}, false);
 	</script>
 	<script src="/bower_components/webcomponentsjs/webcomponents-loader.js"></script>
-	<!-- else -->
-		<!--<link rel="import" href="/src/icons.html">-->
-	<!-- end -->
+
+	<script>
+		if('serviceWorker' in navigator) {
+			navigator.serviceWorker.register('sw.js');
+		}
+	</script>
 </body>
 </html>

@@ -34,6 +34,7 @@ a {
 	color: hsl(200, 60%, 60%);
 	text-decoration: none;
 	outline: none;
+	cursor: pointer;
 
 	&:hover {
 		color: hsl(200, 60%, 65%);
@@ -332,7 +333,7 @@ header nav a:hover iron-icon,
 
 // Main
 main {
-	padding-left: 215px;
+	padding-left: 230px;
 	height: 100%;
 }
 
@@ -363,6 +364,8 @@ main {
 // Page Templates
 .carousel-list-page {
 	.col-right {
+		margin-top: 0;
+
 		> div {
 			opacity: 0;
 			visibility: hidden;
@@ -389,4 +392,177 @@ main {
 	box-shadow: $box-shadow-2;
 	margin: 10px 0;
 	border-radius: 2px;
+}
+
+
+// <= Tablet
+@include tablet {
+	.col-left {
+		width: 100% !important;
+		margin-bottom: 0;
+		max-width: 528px;
+	}
+
+	.col-right {
+		float: left;
+		width: 100% !important;
+		margin-top: 25px;
+	}
+
+	.carousel-list-page .col-right {
+		margin-top: 25px;
+
+		> div {
+			width: 100%;
+			max-width: 528px;
+			margin-bottom: 30px;
+		}
+
+		div p {
+			width: 100%;
+			margin-bottom: 15px;
+		}
+	}
+}
+
+// > Mobile
+@include desktop {
+	header {
+		nav:first-child {
+			text-indent: 9px;
+		}
+
+		.menu {
+			display: none;
+		}
+	}
+
+	.page {
+		padding: 0 6%;
+	}
+}
+
+// <= Mobile
+@include mobile {
+	ul {
+		list-style-type: none;
+		padding: 0;
+	}
+
+	.big-btn {
+		margin: 30px auto 0;
+	}
+
+	header {
+		position: fixed;
+		top: 0;
+		z-index: 99999;
+		width: 100%;
+		float: none;
+		background: $mobile-nav-bg;
+
+		nav {
+			text-align: left;
+			border-radius: 2px !important;
+
+			&:first-child {
+				padding: 15px 20px;
+			}
+
+			a {
+				width: 100%;
+				line-height: 1.35;
+				display: inline;
+
+				span {
+					display: none;
+				}
+
+				i {
+					display: inline;
+				}
+			}
+		}
+	}
+
+	.hdr-nav2 {
+		margin-top: 22px;
+		display: none;
+	}
+
+	main {
+		text-align: center;
+		overflow: visible;
+		padding-left: 0;
+		margin: 40px auto 0;
+		width: 93%;
+		min-height: 740px;
+
+		img {
+			max-width: 100%;
+		}
+	}
+
+	.col-left,
+	.col-right {
+		float: none !important;
+	}
+
+	.col-left {
+		display: none;
+		max-width: 100%;
+	}
+
+	.home,
+	.about,
+	.playground {
+		.col-left {
+			display: block;
+		}
+
+		.col-right {
+			margin-top: 25px;
+		}
+	}
+
+	.carousel-list-page {
+		.col-right {
+			margin-top: 0;
+
+			> div {
+				opacity: 1;
+				visibility: visible;
+				width: 100%;
+				position: static;
+				margin-bottom: 20px;
+				max-width: 100%;
+
+				&:last-child {
+					margin-bottom: 100px;
+				}
+
+				p {
+					width: 100%;
+				}
+			}
+		}
+	}
+
+	#div-default {
+		display: none !important;
+	}
+
+	.playground {
+		.iframe-wrap {
+			display: none;
+		}
+
+		.container {
+			margin: 110px 0 140px;
+		}
+	}
+
+	.playground-nav-wrap a {
+		margin-right: auto !important;
+	}
 }

@@ -104,6 +104,14 @@ module.exports = (gulp, isDev, iff, concat, sourcemaps, replace, fs) => {
 				pipe(gulp.dest('assets'));
 		});
 
+		gulp.task('js:serviceWorker', () => {
+			return gulp.src('src/js/sw.js').
+				pipe(replace('const CACHE_VERSION = 1;', () => {
+					return `const CACHE_VERSION = ${new Date().getTime()};`;
+				})).
+				pipe(gulp.dest('./'));
+		});
+
 		gulp.task('jshint', () => {
 			return gulp.src(lints).
 				pipe(jshint('.eslintrc')).
@@ -145,7 +153,8 @@ module.exports = (gulp, isDev, iff, concat, sourcemaps, replace, fs) => {
 			'js:master',
 			'js:pageDormanticide',
 			'js:pageVamp',
-			'js:other'
+			'js:other',
+			'js:serviceWorker'
 		));
 	})();
 };

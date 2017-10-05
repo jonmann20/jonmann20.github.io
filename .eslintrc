@@ -20,6 +20,7 @@
 		"requestAnimationFrame": true,
 		"cancelAnimationFrame": true,
 		"localStorage": true,
+		"navigator": true,
 		"alert": true,
 		"Image": true,
 		"fetch": true,

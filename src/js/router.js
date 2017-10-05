@@ -40,7 +40,7 @@ class Router {
 	}
 
 	load(url) {
-		return fetch(url, {mode: 'cors'}).then(response => {
+		return fetch(url).then(response => {
 			if(response.ok) {
 				return response.text().then(text => {
 					// swap page

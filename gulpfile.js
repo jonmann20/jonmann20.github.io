@@ -23,6 +23,7 @@ gulp.task('default', gulp.series(
 
 gulp.task('test', gulp.parallel('scss-lint', 'jscs', 'jshint'));
 
+// TODO: add analytics.js and clientSideLogging.js
 gulp.task('prd', gulp.series(
 	gulp.parallel('scss', 'test', 'js', 'copy', 'include', 'bundle:icons'),
 	gulp.series(
