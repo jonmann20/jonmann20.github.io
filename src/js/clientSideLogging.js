@@ -1,14 +1,14 @@
 'use strict';
 
-(function() {
-	var orgDebug = console.debug,
+(() => {
+	let orgDebug = console.debug,
 		orgErr = console.error,
 		orgLog = console.log,
 		orgWarn = console.warn
 	;
 
 	console.debug = function(msg) {
-		ga('send', 'event', 'JS console', 'debug', msg);		// univeral google analytics syntax
+		ga('send', 'event', 'JS console', 'debug', msg);	// univeral google analytics syntax
 		orgDebug.apply(console, arguments);
 	};
 

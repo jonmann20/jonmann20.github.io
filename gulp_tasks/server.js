@@ -1,12 +1,7 @@
 'use strict';
 
-module.exports = (gulp) => {
-	const connect = require('gulp-connect');
-
-	return (() => {
-		gulp.task('srv', done => {
-			connect.server({root: './'});
-			done();
-		});
-	})();
-};
+module.exports = gulp =>
+	gulp.task('srv', done => {
+		require('gulp-connect').server({root: './'});
+		done();
+	});
