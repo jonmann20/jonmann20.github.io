@@ -17,7 +17,7 @@ require('./gulp_tasks/server')(gulp);
 require('./gulp_tasks/watch')(gulp);
 
 gulp.task('default', gulp.series(
-	gulp.parallel('scss', 'js', 'copy'/*, 'bundle:icons'*/),
+	gulp.parallel('scss', 'js', 'copy'/*, 'html:bundleIcons'*/),
 	gulp.parallel('srv', 'watch')
 ));
 

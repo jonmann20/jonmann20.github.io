@@ -138,11 +138,11 @@ module.exports = (gulp, isDev, iff, concat, sourcemaps, replace, fs) => {
 		gulp.task('js:inlineIndex', () => {
 			return gulp.src('index.html').
 				// https://github.com/webcomponents/webcomponentsjs/issues/801
-				// pipe(replace('<script src=/bower_components/webcomponentsjs/webcomponents-loader.js></script>', () => {
+				// pipe(replace('<script src="/bower_components/webcomponentsjs/webcomponents-loader.js"></script>', () => {
 				// 	const s = fs.readFileSync(`${__dirname}/../bower_components/webcomponentsjs/webcomponents-loader.js`, 'utf8');
 				// 	return `<script>${s}</script>`;
 				// })).
-				pipe(replace('<script src=/assets/master.js></script>', () => {
+				pipe(replace('<script src="/assets/master.js"></script>', () => {
 					const s = fs.readFileSync(`${__dirname}/../assets/master.js`, 'utf8');
 					return `<script>${s}</script>`;
 				})).

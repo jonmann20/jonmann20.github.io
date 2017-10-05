@@ -24,7 +24,7 @@ module.exports = (gulp, isDev, iff, concat, sourcemaps, replace, fs) => {
 		});
 
 		function inline(src, filename, dest) {
-			const cond = `<link rel=stylesheet href=${filename}>`;
+			const cond = `<link rel="stylesheet" href="${filename}">`;
 			const file = `${__dirname}/..${filename}`;
 
 			return gulp.src(src).

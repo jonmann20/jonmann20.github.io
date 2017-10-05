@@ -4,7 +4,7 @@ const path = require('path');
 //const webpack = require('webpack');
 
 module.exports = {
-	entry: ['./src/icons.html'],
+	entry: ['./src/elts/icons.html'],
 	output: {
 		filename: 'icons.bundle.js',
 		path: path.resolve(__dirname, './assets'),

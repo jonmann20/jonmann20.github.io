@@ -6,13 +6,13 @@ module.exports = (gulp) => {
 
 	return (() => {
 		gulp.task('html:bundleIcons', () => {
-			return gulp.src('src/icons.html').
+			return gulp.src('src/elts/icons.html').
 				pipe(webpack(require('../webpack.config.js'))).
 				pipe(gulp.dest('assets'));
 		});
 
 		gulp.task('html:minify', () => {
-			return gulp.src(['**/*.html', '!src', '!node_modules', '!bower_components']).
+			return gulp.src(['**/*.html', '!src/**', '!node_modules/**', '!bower_components/**']).
 				pipe(htmlmin({
 					removeComments: true,
 					collapseWhitespace: true,
