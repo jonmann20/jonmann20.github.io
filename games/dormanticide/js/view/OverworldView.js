@@ -1,12 +1,14 @@
+'use strict';
+/* globals game, canvas, ctx, KeyCode */
+
 function OverworldView() {
     this.privates = {};
     this.init();
 }
 
-OverworldView.prototype = (function () {
-
-    var arrow = {
-        img: "^^"
+OverworldView.prototype = (function() {
+    let arrow = {
+        img: '^^'
     };
 
     return {
@@ -43,28 +45,28 @@ OverworldView.prototype = (function () {
             }
         },
 
-        render: function () {
+        render: function() {
             // background
-            ctx.fillStyle = "#34282c";
+            ctx.fillStyle = '#34282c';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
             // levels
-            var size = 80, x, y;
+            let size = 80, x, y;
 
-            for (var i = 0; i < 8; ++i) {
+            for (let i = 0; i < 8; ++i) {
                 x = 60 + i * 115;
                 y = canvas.height / 2 - size / 2;
 
-                ctx.fillStyle = "#fff";
-                ctx.font = "18px Arial";
-                ctx.fillText("Level " + (i+1), x + 10, y - 13);
+                ctx.fillStyle = '#fff';
+                ctx.font = '18px Arial';
+                ctx.fillText('Level ' + (i+1), x + 10, y - 13);
 
-                ctx.fillStyle = "red";
+                ctx.fillStyle = 'red';
                 ctx.fillRect(x, y, size, size);
             }
 
             // arrow
-            ctx.fillStyle = "#fff";
+            ctx.fillStyle = '#fff';
             ctx.fillText(arrow.img, arrow.x, arrow.y);
         }
     };

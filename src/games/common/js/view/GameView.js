@@ -1,4 +1,7 @@
-function GameView(gEngine) {
+'use strict';
+/* globals canvas, ctx */
+
+function GameView() {
     this.privates = {
         bgColor: '#ccc'
     };

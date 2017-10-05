@@ -1,8 +1,6 @@
 'use strict';
 /* globals game, canvas, ctx, KeyCode, Dir, FightAction */
-/*
- *  Implements GameView.
- */
+
 function BattleView(bgColor, dormantL, dormantR) {
     this.privates = {
         bgColor: bgColor,
@@ -79,37 +77,37 @@ BattleView.prototype = (function() {
         // name
         let str = dormant.name + ' L' + dormant.lvl;
 
-        ctx.fillStyle = "#000";
+        ctx.fillStyle = '#000';
         ctx.fillText(str, x + ctx.measureText(str).width / 2, y);
 
         // hp
         ctx.fillText('HP', x, y + 20);
-        ctx.strokeStyle = "#000";
+        ctx.strokeStyle = '#000';
         ctx.strokeRect(x + 21, y + 12, 100, 10);
 
-        ctx.fillStyle = "red";
+        ctx.fillStyle = 'red';
         ctx.fillRect(x + 22, y + 13, dormant.hp * (100 / dormant.initHP) - 1, 8);
 
         // xp
         if(drawXP) {
-            ctx.fillStyle = "#000";
-            ctx.fillText("XP", x, y + 40);
-            ctx.strokeStyle = "#000";
+            ctx.fillStyle = '#000';
+            ctx.fillText('XP', x, y + 40);
+            ctx.strokeStyle = '#000';
             ctx.strokeRect(x + 21, y + 32, 100, 10);
 
-            ctx.fillStyle = "#777";
+            ctx.fillStyle = '#777';
             ctx.fillRect(x + 22, y + 33, dormant.xp * (100 / dormant.xpNeeded) - 1, 8);
         }
     }
 
     function drawHUD() {
-        ctx.strokeStyle = "#000";
+        ctx.strokeStyle = '#000';
         ctx.strokeRect(20, 300, 500, 250);
 
-        ctx.font = "12px Arial";
-        ctx.fillStyle = "#000";
-        ctx.fillText("ATK: " + dormantL.atk, 460, 320);
-        ctx.fillText("DEF: " + dormantL.def, 460, 340);
+        ctx.font = '12px Arial';
+        ctx.fillStyle = '#000';
+        ctx.fillText('ATK: ' + dormantL.atk, 460, 320);
+        ctx.fillText('DEF: ' + dormantL.def, 460, 340);
 
         drawActionList();
         drawActionArrow();
@@ -118,8 +116,8 @@ BattleView.prototype = (function() {
     function drawActionList() {
         ctx.fillStyle = '#000';
 
-        for(var i=0; i < 4; ++i) {
-            if (dormantL.actions[i] === null) {
+        for(let i = 0; i < 4; ++i) {
+            if(dormantL.actions[i] === null) {
                 ctx.fillText('--', 80, 350 + i * 30);
             }
             else {
@@ -170,8 +168,10 @@ BattleView.prototype = (function() {
             if(wasAttack) {
                 dormantR.hp -= theAttack.atk / 60;
             }
+
             if(!game.graphics.isAnimating) {
-                var _wasAttack = checkInput(dormantL, dormantR);
+                const _wasAttack = checkInput(dormantL, dormantR);
+
                 if(_wasAttack) {
                     if(theAttack.name === FightAction.TACKLE.name) {
                         runTackleAnimation();
@@ -230,7 +230,6 @@ BattleView.prototype = (function() {
                     wasAttackTimer = 60;
                 }
             }
-
         }
     };
 })();

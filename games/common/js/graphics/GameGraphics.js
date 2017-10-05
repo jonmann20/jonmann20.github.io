@@ -1,28 +1,27 @@
-function GameGraphics(gEngine) {
-    return {
-        isAnimating: false,
+'use strict';
 
-        /*
-         * timeStep The wait time between running the action (in ms).
-         * numTimes The number to times to run the action.
-         * callback The callback function.
-         */
-        repeatAction: function(timeStep, numTimes, callback) {
-            this.isAnimating = true;
+class GameGraphics {
+    constructor() {
+        this.isAnimating = false;
+    }
 
-            let num = 0,
-                that = this
-            ;
+    /*
+     * timeStep The wait time between running the action (in ms).
+     * numTimes The number to times to run the action.
+     * callback The callback function.
+     */
+    repeatAction(timeStep, numTimes, callback) {
+        this.isAnimating = true;
 
-            let theAnimation = setInterval(function() {
-                if(num++ > numTimes) {
-                    clearInterval(theAnimation);
-                    that.isAnimating = false;
-                }
-                else {
-                    callback();
-                }
-            }, timeStep);
-        }
-    };
+        let num = 0;
+        let theAnimation = setInterval(() => {
+            if(num++ > numTimes) {
+                clearInterval(theAnimation);
+                this.isAnimating = false;
+            }
+            else {
+                callback();
+            }
+        }, timeStep);
+    }
 }

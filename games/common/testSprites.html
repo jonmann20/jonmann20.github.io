@@ -1,4 +1,16 @@
-<!DOCTYPE html><html><head><title></title></head><body><canvas width=500 height=500></canvas><button>Start</button><script src=https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js></script><script src=js/GameInput.js></script><script>'use strict';
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<canvas width="500" height="500"></canvas>
+	<button>Start</button>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="js/GameInput.js"></script>
+	<script>
+		'use strict';
 
 		// meta
 		let canvas = document.getElementsByTagName('canvas')[0];
@@ -104,4 +116,7 @@
 			}
 
 			ctx.drawImage(img, pos.x, pos.y, 48, 65, 100, 150, 48 * 2, 65 * 2);
-		}</script></body></html>
+		}
+	</script>
+</body>
+</html>

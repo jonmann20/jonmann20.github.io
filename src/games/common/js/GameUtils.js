@@ -1,3 +1,5 @@
+'use strict';
+
 function GameUtils(gEngine) {
     return {
         /*
@@ -11,7 +13,6 @@ function GameUtils(gEngine) {
     };
 }
 
-// Global enums
 const Dir = {
     RIGHT: 0,
     LEFT: 1

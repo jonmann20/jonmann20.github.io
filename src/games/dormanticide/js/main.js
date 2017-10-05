@@ -1,12 +1,8 @@
 'use strict';
 /* globals GameEngine, TitleView, OverworldView, FightAction, Dormant, BattleView, game */
-/*
- *  The main class for dormanticide.
- *  Declares game as a global.
- */
-(function Main() {
+
+(() => {
 	window.game = new GameEngine();
-	game.start();
 
 	let curLvl = 1;
 
@@ -29,7 +25,6 @@
 
 	let malaise = new Dormant('malaise.png', 'MALAISE', 12, 8, 27, actions);
 	let erabor = new Dormant('erabor.png', 'ERABOR', 8, 12, 23, actions);
-	let tildamesh = new Dormant('tildamesh.png', 'TILDAMESH', 8, 12, 23, actions);
 
 	let lvl1 = new BattleView('#ddd', malaise, erabor);
 	lvl1.then(() => {
@@ -37,7 +32,7 @@
 		game.utils.switchView(overworldView);
 	});
 
-	let lvl2 = new BattleView('#ddd', malaise, tildamesh);
+	let lvl2 = new BattleView('#ddd', malaise, erabor);
 	lvl2.then(() => {
 		game.utils.switchView(overworldView);
 	});

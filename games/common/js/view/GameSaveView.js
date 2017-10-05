@@ -47,7 +47,7 @@ GameSaveView.prototype = (function() {
                 this.privates.callback(KeyCode.ENTER);
             }
             else if(game.input.lastKeyDown === KeyCode.DELETE) {
-                game.input.lastKeyDownp = KeyCode.EMPTY;
+                game.input.lastKeyDown = KeyCode.EMPTY;
 
                 list = storage.erase(arrow.slot);
             }

@@ -1,87 +1,72 @@
 'use strict';
 /* globals canvas, GameInput, GameGraphics, GameUtils, GameView */
 
-/*
- * Declares two globals: canvas and ctx
- */
-function GameEngine() {
-    // back button
-    let backBtn = document.createElement('a');
-    backBtn.href = '/#games';
-    backBtn.innerText = 'Back';
-    backBtn.className = 'btnBack';
-    document.body.appendChild(backBtn);
+class GameEngine {
+    constructor() {
+        this.update = this.update.bind(this);
+        this.render = this.render.bind(this);
 
-    // canvasWrap
-    let wrap = document.createElement('div');
-    wrap.className = 'canvasWrap';
+        this.updateInterval = setInterval(this.update, 1000 / 60);
+        this.renderRAF = requestAnimationFrame(this.render);
 
-    // canvas
-    window.canvas = document.createElement('canvas');
-    canvas.setAttribute('width', 16 * 63);
-    canvas.setAttribute('height', 9 * 63);
-    wrap.appendChild(canvas);
-    document.body.appendChild(wrap);
+        this.onUpdateSet = false;
+        this.onRenderSet = false;
 
-    window.ctx = canvas.getContext('2d');
+        // back button
+        let backBtn = document.createElement('a');
+        backBtn.href = '/#games';
+        backBtn.innerText = 'Back';
+        backBtn.className = 'btnBack';
+        document.body.appendChild(backBtn);
 
-    this.input = new GameInput(this);
-    this.graphics = new GameGraphics(this);
-    this.utils = new GameUtils(this);
-    this.view = new GameView(this);
+        // canvas wrap
+        let wrap = document.createElement('div');
+        wrap.className = 'canvasWrap';
 
-    this.init();
+        // canvas
+        window.canvas = document.createElement('canvas');
+        canvas.setAttribute('width', 16 * 63);
+        canvas.setAttribute('height', 9 * 63);
+        wrap.appendChild(canvas);
+        document.body.appendChild(wrap);
+
+        window.ctx = canvas.getContext('2d');
+
+        this.input = new GameInput();
+        this.graphics = new GameGraphics();
+        this.view = new GameView();
+        this.utils = new GameUtils(this);
+    }
+
+    update() {
+        this.view.update();
+
+        if(this.onUpdateSet) {
+            this.onUpdate();
+        }
+    }
+
+    render() {
+        this.renderRAF = requestAnimationFrame(this.render);
+        this.view.render();
+
+        if(this.onRenderSet) {
+            this.onRender();
+        }
+    }
+
+    onUpdate(callback) {
+        this.onUpdateSet = true;
+        this.onUpdate = callback;
+    }
+
+    onRender(callback) {
+        this.onRenderSet = true;
+        this.onRender = callback;
+    }
+
+    stop() {
+        clearInterval(this.updateInterval);
+        cancelAnimationFrame(this.renderRAF);
+    }
 }
-
-GameEngine.prototype = (function() {
-    let that,
-        updateInterval,
-        renderRAF,
-        onUpdateSet = false,
-        onRenderSet = false
-    ;
-
-    function update() {
-        that.view.update();
-
-        if(onUpdateSet) {
-            that.onUpdate();
-        }
-    }
-
-    function render() {
-        renderRAF = requestAnimationFrame(render);
-        that.view.render();
-
-        if(onRenderSet) {
-            that.onRender();
-        }
-    }
-
-
-    return {
-        init: function() {
-            that = this;
-        },
-
-        onUpdate: function(callback) {
-            onUpdateSet = true;
-            this.onUpdate = callback;
-        },
-
-        onRender: function(callback) {
-            onRenderSet = true;
-            this.onRender = callback;
-        },
-
-        start: () => {
-            updateInterval = setInterval(update, 1000 / 60);
-            renderRAF = requestAnimationFrame(render);
-        },
-
-        stop: () => {
-            clearInterval(updateInterval);
-            cancelAnimationFrame(renderRAF);
-        }
-    };
-})();

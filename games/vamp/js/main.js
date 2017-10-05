@@ -3,7 +3,6 @@
 
 (() => {
     window.game = new GameEngine();
-    game.start();
 
     let titleView = new TitleView('Vamp: The Great and Powerful', true);
     let saveView = new GameSaveView();

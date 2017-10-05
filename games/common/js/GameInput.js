@@ -1,63 +1,5 @@
 'use strict';
 
-function GameInput() {
-	this.keysDown = {};
-	this.lastKeyUp = KeyCode.EMPTY;
-	this.lastKeyDown = KeyCode.EMPTY;
-
-	this.init();
-}
-
-GameInput.prototype = (function() {
-	let that;
-
-	function fixKey(key) {
-		if(key === KeyCode.W) {
-			key = KeyCode.UP;
-		}
-		else if(key === KeyCode.S) {
-			key = KeyCode.DOWN;
-		}
-		else if(key === KeyCode.D) {
-			key = KeyCode.RIGHT;
-		}
-		else if(key === KeyCode.A) {
-			key = KeyCode.LEFT;
-		}
-
-		return key;
-	}
-
-	addEventListener('keydown', function(e) {
-		let key = fixKey(e.keyCode);
-
-		if(!that.keysDown[key]) {
-			that.lastKeyDown = key;
-			that.keysDown[key] = true;
-		}
-
-		//that.onKeyDown(key);
-	});
-
-	addEventListener('keyup', function(e) {
-		that.lastKeyUp = fixKey(e.keyCode);
-		delete that.keysDown[that.lastKeyUp];
-	});
-
-
-	return {
-		init: function() {
-			that = this;
-		},
-
-		update: function() {
-
-		}
-	};
-})();
-
-
-// global enums
 const KeyCode = {
 	EMPTY: -1,
 	ENTER: 13,
@@ -104,3 +46,43 @@ KeyCodeNames[79] = 'O';
 KeyCodeNames[82] = 'R';
 KeyCodeNames[83] = 'S';
 KeyCodeNames[87] = 'W';
+
+class GameInput {
+	constructor() {
+		this.keysDown = {};
+		this.lastKeyDown = KeyCode.EMPTY;
+
+		let lastKeyUp = KeyCode.EMPTY;
+
+		addEventListener('keydown', e => {
+			const key = this.fixKey(e.keyCode);
+
+			if(!this.keysDown[key]) {
+				this.lastKeyDown = key;
+				this.keysDown[key] = true;
+			}
+		});
+
+		addEventListener('keyup', e => {
+			lastKeyUp = this.fixKey(e.keyCode);
+			delete this.keysDown[lastKeyUp];
+		});
+	}
+
+	fixKey(key) {
+		if(key === KeyCode.W) {
+			key = KeyCode.UP;
+		}
+		else if(key === KeyCode.S) {
+			key = KeyCode.DOWN;
+		}
+		else if(key === KeyCode.D) {
+			key = KeyCode.RIGHT;
+		}
+		else if(key === KeyCode.A) {
+			key = KeyCode.LEFT;
+		}
+
+		return key;
+	}
+}
