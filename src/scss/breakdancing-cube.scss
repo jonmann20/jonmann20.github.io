@@ -1,15 +1,20 @@
+@import 'vars';
+
 main {
 	min-height: 38em;
 }
 
 .iframe-wrap {
+	display: none;
 	margin-top: -480px;
+
+	@include desktop {
+		display: block;
+	}
 
 	iframe {
 		background: var(--card-bg);
 		padding: 15px;
-		border-radius: 2px;
-		box-shadow: var(--box-shadow-2);
 	}
 }
 
@@ -17,10 +22,13 @@ main {
 	perspective: 1000px;
 	perspective-origin: 50% 50%;
 	font-size: 2.25em;
-	margin: 65px 0 290px 360px;
+	margin: 110px 0 140px;
 	display: block;
-
 	-webkit-box-reflect: below 165px linear-gradient(to bottom, transparent, transparent 42%, rgba(255, 255, 255, 0.5));
+
+	@include desktop {
+		margin: 65px 0 290px 360px;
+	}
  }
 
 .animate {

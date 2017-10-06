@@ -1,6 +1,4 @@
 .range-inputs {
-	margin-top: 10px;
-
 	> div {
 		margin: 0 0 30px;
 	}
@@ -18,4 +16,8 @@
 			outline-color: transparent;
 		}
 	}
+}
+
+canvas {
+	margin: 20px 0;
 }

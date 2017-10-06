@@ -1,4 +1,5 @@
 'use strict';
+/* eslint no-unused-vars: ["error", {"varsIgnorePattern": "ListCarousel"}] */
 
 class ListCarousel {
 	constructor(list) {

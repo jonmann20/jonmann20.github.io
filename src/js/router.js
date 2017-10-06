@@ -1,9 +1,10 @@
 'use strict';
+/* eslint no-unused-vars: ["error", {"varsIgnorePattern": "Router"}] */
 
 class Router {
 	constructor() {
 		this.main = document.querySelector('main');
-		onhashchange = (e) => this.route(location.hash);
+		window.onhashchange = () => this.route(location.hash);
 	}
 
 	route(slug) {

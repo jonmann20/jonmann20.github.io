@@ -1,8 +1,13 @@
 @import 'vars';
 
-.no-bullet {
+main ul {
+	list-style-type: none;
 	padding: 0;
 	line-height: 2;
+
+	@include desktop {
+		padding-left: 40px;
+	}
 
 	iron-icon {
 		margin-right: 7px;
@@ -10,8 +15,8 @@
 	}
 }
 
-@include desktop {
-	.no-bullet {
-		padding-left: 40px;
-	}
+.twitter-timeline-rendered {
+	background: var(--card-bg);
+	box-shadow: var(--box-shadow-2);
+	border-radius: 2px;
 }

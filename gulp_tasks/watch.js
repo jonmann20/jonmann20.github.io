@@ -2,9 +2,9 @@
 
 module.exports = gulp =>
 	gulp.task('watch', done => {
-		gulp.watch('src/**/*.html', gulp.series('copy'/*, 'jshint:html'*/));
+		gulp.watch('src/**/*.html', gulp.series('copy'/*, 'eslint:html'*/));
 		gulp.watch('src/scss/*.scss', gulp.series('scss', 'scss-lint'));
-		gulp.watch('src/**/*.js', gulp.series('js', gulp.parallel('jshint', 'jscs')));
+		gulp.watch('src/**/*.js', gulp.series('js', 'eslint'));
 
 		done();
 	});

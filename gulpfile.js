@@ -21,11 +21,12 @@ gulp.task('default', gulp.series(
 	gulp.parallel('srv', 'watch')
 ));
 
-gulp.task('test', gulp.parallel('scss-lint', 'jscs', 'jshint'));
+gulp.task('test', gulp.parallel('scss-lint', 'eslint'));
 
 // TODO: add analytics.js and clientSideLogging.js
 gulp.task('prd', gulp.series(
-	gulp.parallel('scss', 'test', 'js', 'copy', 'html:bundleIcons'),
+	'scss', 'test', // NOTE: running test in parallel w/JS was causing bugs
+	gulp.parallel('js', 'copy', 'html:bundleIcons'),
 	gulp.series(
 		gulp.parallel('js:minifyBundle', 'css:inline'),
 		gulp.series('js:inlineIndex', 'html:minify')

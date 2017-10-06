@@ -1,3 +1,11 @@
+@import 'vars';
+
+.lh {
+	list-style-type: none;
+	margin: 12px 0 8px;
+	padding-left: 0;
+}
+
 .col-right {
 	iron-icon[icon="hardware:videogame-asset"],
 	iron-icon[icon="icons:code"] {
@@ -21,7 +29,12 @@
 	}
 
 	.big-img {
+		display: block;
 		width: 375px;
-		margin-top: 14px;
+		margin: 14px auto 0;
+
+		@include desktop {
+			margin: 14px 0 0;
+		}
 	}
 }

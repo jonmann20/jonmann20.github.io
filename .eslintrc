@@ -17,7 +17,6 @@
 		"location": true,
 		"alert": true,
 		"fetch": true,
-		"onhashchange": true,
 		"Event": true,
 		"CustomEvent": true,
 		"Image": true,

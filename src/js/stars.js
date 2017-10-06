@@ -1,9 +1,11 @@
 'use strict';
+/* eslint no-unused-vars: ["error", {"varsIgnorePattern": "StarryBg"}] */
+/* eslint camelcase: 0 */
 
 class StarryBg {
 	constructor() {
-        this.boundOnRoute = (e) => this.destroy(e.detail);
-        addEventListener('route', this.boundOnRoute, pListen ? {passive: true} : false);
+		this.boundOnRoute = (e) => this.destroy(e.detail);
+		addEventListener('route', this.boundOnRoute, pListen ? {passive: true} : false);
 
 		const color = document.querySelector('input[type=radio]:checked').value;
 		this.initStar(color);
@@ -18,12 +20,12 @@ class StarryBg {
 	}
 
 	destroy(page) {
-        if(page === '#playground/starry-background') {
-            return;
-        }
+		if(page === '#playground/starry-background') {
+			return;
+		}
 
-        removeEventListener('route', this.boundOnRoute, pListen ? {passive: true} : false);
-        cancelAnimationFrame(this.animLoop);
+		removeEventListener('route', this.boundOnRoute, pListen ? {passive: true} : false);
+		cancelAnimationFrame(this.animLoop);
 
 		this.starBg.destroy();
 
@@ -57,90 +59,90 @@ class StarryBg {
 }
 
 class StarBg {
-    constructor(p) {
-        this.w_b = '#000';
-        this.s_color = p.star_color;
-        this.fov = p.star_depth;
-        this.SCREEN_WIDTH = p.window_width;
-        this.SCREEN_HEIGHT = p.window_height;
-        this.HALF_WIDTH = this.SCREEN_WIDTH / 2;
-        this.HALF_HEIGHT = this.SCREEN_HEIGHT / 2;
-        this.mouse_x = 0;
-        this.mouse_y = 0;
-        this.numPoints = p.star_count;
-        this.points = [];
-        this.elt = p.elt;
-        this.ctx = this.elt.getContext('2d');
+	constructor(p) {
+		this.windowBg = '#000';
+		this.starColor = p.star_color;
+		this.fov = p.star_depth;
+		this.SCREEN_WIDTH = p.window_width;
+		this.SCREEN_HEIGHT = p.window_height;
+		this.HALF_WIDTH = this.SCREEN_WIDTH / 2;
+		this.HALF_HEIGHT = this.SCREEN_HEIGHT / 2;
+		this.mouseX = 0;
+		this.mouseY = 0;
+		this.numPoints = p.star_count;
+		this.points = [];
+		this.elt = p.elt;
+		this.ctx = this.elt.getContext('2d');
 
-        // initialize
-        this.elt.setAttribute('width', this.SCREEN_WIDTH);
-        this.elt.setAttribute('height', this.SCREEN_HEIGHT);
+		// initialize
+		this.elt.setAttribute('width', this.SCREEN_WIDTH);
+		this.elt.setAttribute('height', this.SCREEN_HEIGHT);
 
 		this.boundOnMouseMove = e => this.onMouseMove(e);
-        document.addEventListener('mousemove', this.boundOnMouseMove);
+		document.addEventListener('mousemove', this.boundOnMouseMove);
 
-        // start program
-        this.initPoints();
-        this.loop();
-    }
+		// start program
+		this.initPoints();
+		this.loop();
+	}
 
-    destroy() {
-        cancelAnimationFrame(this.animLoop);
-        document.removeEventListener('mousemove', this.boundOnMouseMove);
-    }
+	destroy() {
+		cancelAnimationFrame(this.animLoop);
+		document.removeEventListener('mousemove', this.boundOnMouseMove);
+	}
 
-    onMouseMove(e) {
-        this.mouse_x = e.pageX - this.HALF_WIDTH; //- this.offsetLeft
-        this.mouse_y = e.pageY - this.HALF_HEIGHT; //- this.offsetTop
-    }
+	onMouseMove(e) {
+		this.mouseX = e.pageX - this.HALF_WIDTH; //- this.offsetLeft
+		this.mouseY = e.pageY - this.HALF_HEIGHT; //- this.offsetTop
+	}
 
-    initPoints() {
-        let point;
-        for(let i=0; i < this.numPoints; ++i) {
-            point = [(Math.random() * 400) - 200, (Math.random() * 400) - 200, (Math.random() * 400) - 200];
-            this.points.push(point);
-        }
-    }
+	initPoints() {
+		let point;
+		for(let i = 0; i < this.numPoints; ++i) {
+			point = [(Math.random() * 400) - 200, (Math.random() * 400) - 200, (Math.random() * 400) - 200];
+			this.points.push(point);
+		}
+	}
 
-    loop() {
-        this.render();
-        this.animLoop = requestAnimationFrame(() => this.loop());
-    }
+	loop() {
+		this.render();
+		this.animLoop = requestAnimationFrame(() => this.loop());
+	}
 
-    render() {
-        this.ctx.fillStyle = this.w_b;
-        this.ctx.fillRect(0, 0, this.SCREEN_WIDTH, this.SCREEN_HEIGHT);
+	render() {
+		this.ctx.fillStyle = this.windowBg;
+		this.ctx.fillRect(0, 0, this.SCREEN_WIDTH, this.SCREEN_HEIGHT);
 
-        for(let i=0; i < this.numPoints; ++i) {
-            let point3d = this.points[i];
+		for(let i = 0; i < this.numPoints; ++i) {
+			let point3d = this.points[i];
 
-            let z3d = point3d[2];
-            z3d -= 1.08;
+			let z3d = point3d[2];
+			z3d -= 1.08;
 
-            if(z3d < -this.fov) {
-                z3d += 400;
-            }
+			if(z3d < -this.fov) {
+				z3d += 400;
+			}
 
-            point3d[2] = z3d;
-            this.draw3Din2D(point3d);
-        }
-    }
+			point3d[2] = z3d;
+			this.draw3Din2D(point3d);
+		}
+	}
 
-    draw3Din2D(point3d) {
-        const x3d = point3d[0],
-            y3d = point3d[1],
-            z3d = point3d[2],
-            scale = this.fov / (this.fov + z3d),
-            x2d = (x3d * scale) + this.HALF_WIDTH - this.mouse_x / 3,
-            y2d = (y3d * scale) + this.HALF_HEIGHT - this.mouse_y / 3
-        ;
+	draw3Din2D(point3d) {
+		const x3d = point3d[0],
+			y3d = point3d[1],
+			z3d = point3d[2],
+			scale = this.fov / (this.fov + z3d),
+			x2d = (x3d * scale) + this.HALF_WIDTH - this.mouseX / 3,
+			y2d = (y3d * scale) + this.HALF_HEIGHT - this.mouseY / 3
+		;
 
-        this.ctx.lineWidth = scale;
-        this.ctx.strokeStyle = this.s_color;
+		this.ctx.lineWidth = scale;
+		this.ctx.strokeStyle = this.starColor;
 
-        this.ctx.beginPath();
-        this.ctx.moveTo(x2d, y2d);
-        this.ctx.lineTo(x2d + scale, y2d);
-        this.ctx.stroke();
-    }
+		this.ctx.beginPath();
+		this.ctx.moveTo(x2d, y2d);
+		this.ctx.lineTo(x2d + scale, y2d);
+		this.ctx.stroke();
+	}
 }

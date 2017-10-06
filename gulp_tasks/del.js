@@ -12,7 +12,7 @@ module.exports = gulp =>
 			'!src/**',
 			'!.gitignore',
 			'!.eslintrc',
-			'!.jscsrc',
+			'!.eslintrc.js',
 			'!.sass-lint.yml',
 			'!CNAME',
 			'!gulpfile.js',

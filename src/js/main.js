@@ -12,7 +12,9 @@
 
 		addEventListener('test', null, opts);
 	}
-	catch(e) {}
+	catch(e) {
+		// empty
+	}
 
 	// Start Router
 	window.router = new Router();
@@ -47,7 +49,7 @@
 		}
 	});
 
-	addEventListener('route', e => {
+	addEventListener('route', () => {
 		// if page is not playground inner
 		const h = window.location.hash;
 		if(typeof(h) === 'undefined' || h.startsWith('#playground') !== 0) {
