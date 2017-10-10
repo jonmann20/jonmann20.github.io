@@ -39,6 +39,17 @@ module.exports = (gulp, isDev, iff, concat, sourcemaps, replace, fs) => {
 		handleErr = function(e) {
 			console.log(`caught error: ${e}`);
 			this.emit('end');
+		},
+		inline = (src, filename, dest) => {
+			const cond = `<script src="${filename}">`;
+			const file = `${__dirname}/..${filename}`;
+
+			return gulp.src(src).
+				pipe(replace(cond, () => {
+					const styles = fs.readFileSync(file, 'utf8');
+					return `<script>${styles}`;
+				})).
+				pipe(gulp.dest(dest));
 		};
 
 	return (() => {
@@ -122,18 +133,13 @@ module.exports = (gulp, isDev, iff, concat, sourcemaps, replace, fs) => {
 			})).
 			pipe(gulp.dest('assets')));
 
-		gulp.task('js:inlineIndex', () =>
-			gulp.src('index.html').
-			// https://github.com/webcomponents/webcomponentsjs/issues/801
-			// pipe(replace('<script src="/bower_components/webcomponentsjs/webcomponents-loader.js"></script>', () => {
-			// 	const s = fs.readFileSync(`${__dirname}/../bower_components/webcomponentsjs/webcomponents-loader.js`, 'utf8');
-			// 	return `<script>${s}</script>`;
-			// })).
-			pipe(replace('<script src="/assets/master.js"></script>', () => {
-				const s = fs.readFileSync(`${__dirname}/../assets/master.js`, 'utf8');
-				return `<script>${s}</script>`;
-			})).
-			pipe(gulp.dest('./')));
+		gulp.task('js:inlineIndex', () => inline('index.html', '/assets/master.js', './'));
+		// https://github.com/webcomponents/webcomponentsjs/issues/801
+		//gulp.task('js:inlineIndex2', () => inline('index.html', '/bower_components/webcomponentsjs/webcomponents-loader.js', './'));
+		gulp.task('js:inlineDormanticide', () => inline('games/dormanticide/index.html', '/assets/pageDormanticide.js', './games/dormanticide'));
+		gulp.task('js:inlineVamp', () => inline('games/vamp/index.html', '/assets/pageVamp.js', './games/vamp'));
+
+		gulp.task('js:inline', gulp.parallel('js:inlineIndex', 'js:inlineDormanticide', 'js:inlineVamp'));
 
 		gulp.task('js', gulp.parallel(
 			'js:master',

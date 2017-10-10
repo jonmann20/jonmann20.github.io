@@ -1,81 +1,168 @@
 'use strict';
 /* globals game, canvas, ctx, KeyCode, Dir, FightAction */
 
-function BattleView(bgColor, dormantL, dormantR) {
-    this.privates = {
-        bgColor: bgColor,
-        dormantL: dormantL,
-        dormantR: dormantR
-    };
-
-    this.init();
-}
-
-BattleView.prototype = (function() {
-    let that,
-        arrow = {
+class BattleView {
+    constructor(bgColor, dormantL, dormantR) {
+        this._arrow = {
             img: '>>'
-        },
-        left,
-        wasAttack,
-        wasAttackTimer,
-        fire,
-        theAttack,
-        dormantL,
-        dormantR
-    ;
+        };
 
-    function checkInput(dormantL, dormantR) {
+        this.privates = {
+            bgColor: bgColor,
+            dormantL: dormantL,
+            dormantR: dormantR
+        };
+
+        this.init();
+    }
+
+    then(callback) {
+        this.privates.callback = callback;
+    }
+
+    init() {
+        this._arrow.x = 43;
+        this._arrow.y = 350;
+        this._arrow.curSlot = 0;
+
+        this._left = {
+            x: 30,
+            dir: Dir.RIGHT
+        };
+
+        this._fire = {
+            x: 0,
+            y: 0
+        };
+
+        this._wasAttack = false;
+        this._wasAttackTimer = 60;
+        this._theAttack = {
+            name: 'EMPTY',
+            atk: 0
+        };
+
+        this._dormantL = this.privates.dormantL;
+        this._dormantR = this.privates.dormantR;
+    }
+
+    _checkInput() {
         switch(game.input.lastKeyDown) {
             case KeyCode.ENTER:
                 game.input.lastKeyDown = KeyCode.EMPTY;
 
-                theAttack.name = dormantL.actions[arrow.curSlot].name;
-                theAttack.atk = (dormantL.atk * dormantL.actions[arrow.curSlot].multiplier) / dormantR.def;
+                this._theAttack.name = this._dormantL.actions[this._arrow.curSlot].name;
+                this._theAttack.atk = (this._dormantL.atk * this._dormantL.actions[this._arrow.curSlot].multiplier) / this._dormantR.def;
 
                 return true;
             case KeyCode.UP:
                 game.input.lastKeyDown = KeyCode.EMPTY;
 
-                if(arrow.curSlot !== 0 && dormantL.actions[arrow.curSlot - 1] !== null) {
-                    --arrow.curSlot;
-                    arrow.y -= 30;
+                if(this._arrow.curSlot !== 0 && this._dormantL.actions[this._arrow.curSlot - 1] !== null) {
+                    --this._arrow.curSlot;
+                    this._arrow.y -= 30;
                 }
                 break;
             case KeyCode.DOWN:
                 game.input.lastKeyDown = KeyCode.EMPTY;
 
-                if(arrow.curSlot !== 3 && dormantL.actions[arrow.curSlot + 1] !== null) {
-                    ++arrow.curSlot;
-                    arrow.y += 30;
+                if(this._arrow.curSlot !== 3 && this._dormantL.actions[this._arrow.curSlot + 1] !== null) {
+                    ++this._arrow.curSlot;
+                    this._arrow.y += 30;
                 }
                 break;
         }
     }
 
-    function runTackleAnimation() {
-        left.dir = Dir.RIGHT;
+    update() {
+        if(this._wasAttack) {
+            this._dormantR.hp -= this._theAttack.atk / 60;
+        }
 
-        game.graphics.repeatAction(6, 60, function() {
-            if(left.dir === Dir.RIGHT && left.x > 60) {
-                left.dir = Dir.LEFT;
+        if(!game.graphics.isAnimating) {
+            const wasAttack = this._checkInput();
+
+            if(wasAttack) {
+                if(this._theAttack.name === FightAction.TACKLE.name) {
+                    this._runTackleAnimation();
+                }
+                else if(this._theAttack.name === FightAction.DRAGONS_BREATH.name) {
+                    this._wasAttack = true;
+                }
+            }
+        }
+
+        if(this._dormantR.hp <= 0) {
+            this._dormantL.xp += 25;
+            this.privates.callback();
+        }
+    }
+
+    _runTackleAnimation() {
+        this._left.dir = Dir.RIGHT;
+
+        game.graphics.repeatAction(6, 60, () => {
+            if(this._left.dir === Dir.RIGHT && this._left.x > 60) {
+                this._left.dir = Dir.LEFT;
             }
 
-            if(left.dir === Dir.RIGHT) {
-                ++left.x;
+            if(this._left.dir === Dir.RIGHT) {
+                ++this._left.x;
             }
             else {
-                --left.x;
+                --this._left.x;
             }
 
-            dormantR.hp -= theAttack.atk / 60;
+            this._dormantR.hp -= this._theAttack.atk / 60;
         });
     }
 
-    /****** Render *****/
-    function drawDormantHUD(dormant, x, y, drawXP) {
+    render() {
+        // background
+        ctx.fillStyle = this.privates.bgColor;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        // left
+        this._drawDormantHUD(this._dormantL, 10, 15, true);
+        this._dormantL.draw(this._left.x, 90);
+        this._drawHUD();
+
+        // right
+        this._drawDormantHUD(this._dormantR, canvas.width - 130, 15, false);
+        this._dormantR.draw(770, 90);
+
+        // attack animation
+        if(this._wasAttack) {
+            const t = (this._wasAttackTimer % 40);
+
+            if(t >= 0 && t < 10) {
+                this._fire.x = 0;
+            }
+            else if(t >= 10 && t < 20) {
+                this._fire.x = 5;
+            }
+            else if(t >= 20 && t < 30) {
+                this._fire.x = 0;
+            }
+            else if(t >= 30 && t < 40) {
+                this._fire.x = -5;
+            }
+
+            ctx.fillStyle = 'red';
+            ctx.fillRect(870 + this._fire.x, 242, 40, 12);
+            ctx.fillRect(880 + this._fire.x, 230, 30, 12);
+            ctx.fillRect(880 + this._fire.x, 218, 20, 12);
+
+            if(this._wasAttackTimer-- === 0) {
+                this._wasAttack = false;
+                this._wasAttackTimer = 60;
+            }
+        }
+    }
+
+    _drawDormantHUD(dormant, x, y, drawXP) {
         // name
-        let str = dormant.name + ' L' + dormant.lvl;
+        const str = `${dormant.name} L${dormant.lvl}`;
 
         ctx.fillStyle = '#000';
         ctx.fillText(str, x + ctx.measureText(str).width / 2, y);
@@ -100,136 +187,34 @@ BattleView.prototype = (function() {
         }
     }
 
-    function drawHUD() {
+    _drawHUD() {
         ctx.strokeStyle = '#000';
         ctx.strokeRect(20, 300, 500, 250);
 
         ctx.font = '12px Arial';
         ctx.fillStyle = '#000';
-        ctx.fillText('ATK: ' + dormantL.atk, 460, 320);
-        ctx.fillText('DEF: ' + dormantL.def, 460, 340);
+        ctx.fillText('ATK: ' + this._dormantL.atk, 460, 320);
+        ctx.fillText('DEF: ' + this._dormantL.def, 460, 340);
 
-        drawActionList();
-        drawActionArrow();
+        this._drawActionList();
+        this._drawActionArrow();
     }
 
-    function drawActionList() {
+    _drawActionList() {
         ctx.fillStyle = '#000';
 
         for(let i = 0; i < 4; ++i) {
-            if(dormantL.actions[i] === null) {
+            if(this._dormantL.actions[i] === null) {
                 ctx.fillText('--', 80, 350 + i * 30);
             }
             else {
-                ctx.fillText(dormantL.actions[i].name, 80, 350 + i * 30);
+                ctx.fillText(this._dormantL.actions[i].name, 80, 350 + i * 30);
             }
         }
     }
 
-    function drawActionArrow() {
+    _drawActionArrow() {
         ctx.fillStyle = '#000';
-        ctx.fillText(arrow.img, arrow.x, arrow.y);
+        ctx.fillText(this._arrow.img, this._arrow.x, this._arrow.y);
     }
-
-
-    return {
-        then: function(callback) {
-            this.privates.callback = callback;
-        },
-
-        init: function() {
-            that = this;
-            arrow.x = 43;
-            arrow.y = 350;
-            arrow.curSlot = 0;
-
-            left = {
-                x: 30,
-                dir: Dir.RIGHT
-            };
-
-            fire = {
-                x: 0,
-                y: 0
-            };
-
-            wasAttack = false;
-            wasAttackTimer = 60;
-            theAttack = {
-                name: 'EMPTY',
-                atk: 0
-            };
-
-            dormantL = this.privates.dormantL;
-            dormantR = this.privates.dormantR;
-        },
-
-        update: function() {
-            if(wasAttack) {
-                dormantR.hp -= theAttack.atk / 60;
-            }
-
-            if(!game.graphics.isAnimating) {
-                const _wasAttack = checkInput(dormantL, dormantR);
-
-                if(_wasAttack) {
-                    if(theAttack.name === FightAction.TACKLE.name) {
-                        runTackleAnimation();
-                    }
-                    else if(theAttack.name === FightAction.DRAGONS_BREATH.name) {
-                        wasAttack = true;
-                    }
-                }
-            }
-
-            if(dormantR.hp <= 0) {
-                dormantL.xp += 25;
-                this.privates.callback();
-            }
-        },
-
-        render: function () {
-            // background
-            ctx.fillStyle = this.privates.bgColor;
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-            // left
-            drawDormantHUD(dormantL, 10, 15, true);
-            dormantL.draw(left.x, 90);
-            drawHUD();
-
-            // right
-            drawDormantHUD(dormantR, canvas.width - 130, 15, false);
-            dormantR.draw(770, 90);
-
-            // attack animation
-            if(wasAttack) {
-                let t = (wasAttackTimer % 40);
-
-                if(t >= 0 && t < 10) {
-                    fire.x = 0;
-                }
-                else if(t >= 10 && t < 20) {
-                    fire.x = 5;
-                }
-                else if(t >= 20 && t < 30) {
-                    fire.x = 0;
-                }
-                else if(t >= 30 && t < 40) {
-                    fire.x = -5;
-                }
-
-                ctx.fillStyle = 'red';
-                ctx.fillRect(870 + fire.x, 242, 40, 12);
-                ctx.fillRect(880 + fire.x, 230, 30, 12);
-                ctx.fillRect(880 + fire.x, 218, 20, 12);
-
-
-                if(wasAttackTimer-- === 0) {
-                    wasAttack = false;
-                    wasAttackTimer = 60;
-                }
-            }
-        }
-    };
-})();
+}

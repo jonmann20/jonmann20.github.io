@@ -1,7 +1,6 @@
 'use strict';
 /* eslint indent: 0 */
 
-
 module.exports = gulp =>
 	gulp.task('copy', () =>
 		gulp.src([

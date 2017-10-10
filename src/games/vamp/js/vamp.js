@@ -10,7 +10,7 @@ class Vamp {
         this.invincibleTimer = 120;
         this.dead = false;
 
-        $.extend(this, new SAT.Box(new SAT.Vector(0, 0), this.w, this.h).toPolygon());
+        Object.assign(this, new SAT.Box(new SAT.Vector(0, 0), this.w, this.h).toPolygon());
     }
 
     update() {
@@ -38,6 +38,10 @@ class Vamp {
     }
 
     render() {
+        if(this.dead) {
+            return;
+        }
+
         // body
         let doDraw = true;
         if(this.invincible) {

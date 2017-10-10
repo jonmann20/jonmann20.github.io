@@ -29,6 +29,6 @@ gulp.task('prd', gulp.series(
 	gulp.parallel('js', 'copy', 'html:bundleIcons'),
 	gulp.series(
 		gulp.parallel('js:minifyBundle', 'css:inline'),
-		gulp.series('js:inlineIndex', 'html:minify')
+		gulp.series('js:inline', 'html:minify')
 	)
 ));

@@ -1,10 +1,22 @@
-.btnBack {
-	position: absolute;
-	top: 8px;
-	left: 8px;
+body {
+	background: #141a1e;
+	margin: 0;
 }
 
-.canvasWrap {
+.btn-back {
+	position: absolute;
+	top: 20px;
+	left: 20px;
+	color: hsl(200, 60%, 60%);
+	text-decoration: none;
+}
+
+.btn-back:hover {
+	color: hsl(200, 60%, 65%);
+	text-shadow: hsl(200, 60%, 65%) 0 0 6px;
+}
+
+.canvas-wrap {
 	width: 1008px;
-	margin: 3% auto 0;
+	margin: 75px auto 0;
 }

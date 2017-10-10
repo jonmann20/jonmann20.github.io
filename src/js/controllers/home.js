@@ -8,8 +8,8 @@ class HomeController {
 		]).then(() => twttr.widgets.load());
 
 		document.title = 'Jon Wiedmann';
-		util.addMeta('description', "Jon Wiedmann's personal website.  This site is set up to showcase some of my technical ability.  This site has information regarding my work experience and hobbies.");
-		util.addMeta('keywords', 'Jon Wiedmann, Web Developer, PHP, HTML5, CSS, Javascript');
+		util.addMeta('description', "Jon Wiedmann's personal website.  A site with information on Jon's work experience and hobbies.");
+		util.addMeta('keywords', 'Jon Wiedmann, Web Developer, HTML5, CSS, Javascript', 'Polymer');
 		document.body.classList.add('home');
 	}
 }

@@ -1,69 +1,64 @@
 /* globals SAT */
 
-function LevelView(player, curLvl) {
-    this.privates = {};
-    this.player = player;
-    this.curLvl = curLvl;
+class LevelView {
+    constructor(player, curLvl) {
+        this.onUpdateSet = false;
+        this.onRenderSet = false;
 
-    this.init();
-}
+        this.privates = {};
+        this.player = player;
+        this.curLvl = curLvl;
 
-LevelView.prototype = (function() {
-    let that,
-        onUpdateSet = false,
-        onRenderSet = false
-    ;
+        this.init();
+    }
 
-    function checkCollision() {
-        if(that.player.invincible) {
-            if(that.player.invincibleTimer-- === 0) {
-                that.player.invincible = false;
-                that.player.invincibleTimer = 120;
+    then(callback) {
+        this.privates.callback = callback;
+    }
+
+    init() {
+
+    }
+
+    update() {
+        this.curLvl.update();
+        this.player.update();
+
+        this._checkCollision();
+    }
+
+    onUpdate(callback) {
+        this.onUpdateSet = true;
+        this.onUpdate = callback;
+    }
+
+    render() {
+        this.curLvl.render();
+        this.player.render();
+    }
+
+    onRender(callback) {
+        this.onRenderSet = true;
+        this.onRender = callback;
+    }
+
+    _checkCollision() {
+        if(this.player.invincible) {
+            if(this.player.invincibleTimer-- === 0) {
+                this.player.invincible = false;
+                this.player.invincibleTimer = 120;
             }
 
             return;
         }
 
-        for(var i = 0; i < that.curLvl.projectiles.length; ++i) {
-            var collided = SAT.testPolygonPolygon(that.player, that.curLvl.projectiles[i]);
+        for(let i = 0; i < this.curLvl.projectiles.length; ++i) {
+            const collided = SAT.testPolygonPolygon(this.player, this.curLvl.projectiles[i]);
             if(collided) {
-                --that.player.hp;
-                that.player.invincible = true;
+                --this.player.hp;
+                this.player.invincible = true;
                 break;
             }
         }
     }
-
-
-    return {
-        then: function(callback) {
-            this.privates.callback = callback;
-        },
-
-        init: function() {
-            that = this;
-        },
-
-        update: function() {
-            this.curLvl.update();
-            this.player.update();
-
-            checkCollision();
-        },
-
-        onUpdate: function(callback) {
-            onUpdateSet = true;
-            this.onUpdate = callback;
-        },
-
-        render: function () {
-            this.curLvl.render();
-            this.player.render();
-        },
-
-        onRender: function(callback) {
-            onRenderSet = true;
-            this.onRender = callback;
-        }
-    };
-})();
+}

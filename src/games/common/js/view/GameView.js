@@ -1,32 +1,29 @@
 'use strict';
 /* globals canvas, ctx */
 
-function GameView() {
-    this.privates = {
-        bgColor: '#ccc'
-    };
-
-    this.init();
+class GameView {
+    constructor() {
+        this.privates = {
+            bgColor: '#ccc'
+        };
+    
+        this.init();
+    }
+    
+    then(callback) {
+        this.privates.callback = callback;
+    }
+    
+    init() {
+        
+    }
+    
+    update() {
+        
+    }
+    
+    render() {
+        ctx.fillStyle = this.privates.bgColor;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+    }
 }
-
-GameView.prototype = (function() {
-
-    return {
-        then: function(callback){
-            this.privates.callback = callback;
-        },
-
-        init: function(){
-
-        },
-
-        update: function () {
-
-        },
-
-        render: function () {
-            ctx.fillStyle = this.privates.bgColor;
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-        }
-    };
-})();

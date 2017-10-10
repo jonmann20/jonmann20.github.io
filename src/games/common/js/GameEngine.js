@@ -16,12 +16,12 @@ class GameEngine {
         let backBtn = document.createElement('a');
         backBtn.href = '/#games';
         backBtn.innerText = 'Back';
-        backBtn.className = 'btnBack';
+        backBtn.className = 'btn-back';
         document.body.appendChild(backBtn);
 
         // canvas wrap
         let wrap = document.createElement('div');
-        wrap.className = 'canvasWrap';
+        wrap.className = 'canvas-wrap';
 
         // canvas
         window.canvas = document.createElement('canvas');

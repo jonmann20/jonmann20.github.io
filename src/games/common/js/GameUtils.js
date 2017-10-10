@@ -1,16 +1,18 @@
 'use strict';
 
-function GameUtils(gEngine) {
-    return {
-        /*
-         * Resets the newView's private variables.
-         * Changes the view.
-         */
-        switchView: function(newView) {
-            newView.init();
-            gEngine.view = newView;
-        }
-    };
+class GameUtils {
+    constructor(gEngine) {
+        this.gEngine = gEngine;
+    }
+
+    /*
+     * Resets the newView's private variables.
+     * Changes the view.
+     */
+    switchView(newView) {
+        newView.init();
+        this.gEngine.view = newView;
+    }
 }
 
 const Dir = {
