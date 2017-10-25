@@ -7,6 +7,9 @@ module.exports = {
 		node: true,
 		es6: true
 	},
+	parserOptions: {
+    	ecmaVersion: 8
+	},
 	globals: {
 		ga: true,
 		Router: true,

@@ -40,15 +40,11 @@ class Router {
 		}
 	}
 
-	load(url) {
-		return fetch(url).then(response => {
-			if(response.ok) {
-				return response.text().then(text => {
-					// swap page
-					this.main.innerHTML = text;
-				});
-			}
-		});
+	async load(url) {
+		const response = await fetch(url);
+		if(response.ok) {
+			this.main.innerHTML = await response.text();
+		}
 	}
 
 	run() {
