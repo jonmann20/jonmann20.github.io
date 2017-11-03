@@ -17,8 +17,7 @@
 	}
 
 	// Start Router
-	window.router = new Router();
-	router.run();
+	Router.run();
 
 	// Handle Leftbar
 	let hasClass = false;

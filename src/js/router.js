@@ -2,70 +2,67 @@
 /* eslint no-unused-vars: ["error", {"varsIgnorePattern": "Router"}] */
 
 class Router {
-	constructor() {
-		this.main = document.querySelector('main');
-		window.onhashchange = () => this.route(location.hash);
-	}
-
-	route(slug) {
-		this.resetController(slug);
+	static route(slug) {
+		Router.resetController(slug);
 
 		switch(slug) {
 			case '#about':
-				aboutController.index();
+				AboutController.index();
 				break;
 			case '#games':
-				gamesController.index();
+				GamesController.index();
 				break;
 			case '#portfolio':
-				portfolioController.index();
+				PortfolioController.index();
 				break;
 			case '#playground':
-				playgroundController.index();
+				PlaygroundController.index();
 				break;
 			case '#playground/ball-pit':
-				playgroundController.ballPit();
+				PlaygroundController.ballPit();
 				break;
 			case '#playground/breakdancing-cube':
-				playgroundController.breakdancingCube();
+				PlaygroundController.breakdancingCube();
 				break;
 			case '#playground/starry-background':
-				playgroundController.starryBackground();
+				PlaygroundController.starryBackground();
 				break;
 			case '#home':
 				/* falls through */
 			default:
-				homeController.index();
+				HomeController.index();
 				break;
 		}
 	}
 
-	async load(url) {
+	static async load(url) {
 		const response = await fetch(url);
 		if(response.ok) {
-			this.main.innerHTML = await response.text();
+			document.querySelector('main').innerHTML = await response.text();
 		}
 	}
 
-	run() {
-		this.route(location.hash);
+	static run() {
+		Router.route(location.hash);
 	}
 
-	rmMeta(query) {
+	static rmMeta(query) {
 		const tag = document.head.querySelector(query);
 		if(tag) {
 			document.head.removeChild(tag);
 		}
 	}
 
-	resetController(slug) {
+	static resetController(slug) {
 		scrollTo(0, 0);
-		this.main.innerHTML = '';
+		document.querySelector('main').innerHTML = '';
 		document.body.className = '';
 		document.title = '';
-		this.rmMeta('meta[name=description]');
-		this.rmMeta('meta[name=keywords]');
+		Router.rmMeta('meta[name=description]');
+		Router.rmMeta('meta[name=keywords]');
 
 		dispatchEvent(new CustomEvent('route', {detail: slug}));
 	}
 }
+
+window.onhashchange = () => Router.route(location.hash);

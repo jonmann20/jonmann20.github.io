@@ -1,64 +1,63 @@
 'use strict';
+/* eslint no-unused-vars: ["error", {"varsIgnorePattern": "PlaygroundController"}] */
 
 class PlaygroundController {
-	openNav() {
+	static openNav() {
 		let pNav = document.querySelector('.hdr-nav2 .playground-nav-wrap');
 		if(!pNav.classList.contains('visible')) {
 			pNav.classList.add('visible');
 		}
 	}
 
-	index() {
-		this.openNav();
-		router.load('/playground/index.html');
+	static index() {
+		PlaygroundController.openNav();
+		Router.load('/playground/index.html');
 
 		document.title = 'Playground';
-		util.addMeta('description', 'An playground area for web tech demos.');
-		util.addMeta('keywords', 'canvas, html5');
+		Util.addMeta('description', 'An playground area for web tech demos.');
+		Util.addMeta('keywords', 'canvas, html5');
 		document.body.classList.add('playground', 'playInner');
 	}
 
-	ballPit() {
-		this.openNav();
+	static ballPit() {
+		PlaygroundController.openNav();
 
 		Promise.all([
-			router.load('/playground/ball-pit.html'),
-			util.require('/assets/ballPit.js')
+			Router.load('/playground/ball-pit.html'),
+			Util.require('/assets/ballPit.js')
 		]).then(() => {
 			window.ballPit = new BallPit();
 		});
 
 		document.title = 'Ball Pit | Playground';
-		util.addMeta('description', 'A canvas example showcasing a ball pit.');
-		util.addMeta('keywords', 'canvas, html5');
+		Util.addMeta('description', 'A canvas example showcasing a ball pit.');
+		Util.addMeta('keywords', 'canvas, html5');
 		document.body.classList.add('playground', 'playInner', 'nav3');
 	}
 
-	starryBackground() {
-		this.openNav();
+	static starryBackground() {
+		PlaygroundController.openNav();
 
 		Promise.all([
-			router.load('/playground/stars.html'),
-			util.require('/assets/stars.js')
+			Router.load('/playground/stars.html'),
+			Util.require('/assets/stars.js')
 		]).then(() => {
 			window.starryBg = new StarryBg();
 		});
 
 		document.title = 'Starry Background | Playground';
-		util.addMeta('description', 'A canvas example showcasing a starry background.');
-		util.addMeta('keywords', 'canvas, html5');
+		Util.addMeta('description', 'A canvas example showcasing a starry background.');
+		Util.addMeta('keywords', 'canvas, html5');
 		document.body.classList.add('playground', 'playInner', 'nav2');
 	}
 
-	breakdancingCube() {
-		this.openNav();
-		router.load('/playground/breakdancing-cube.html');
+	static breakdancingCube() {
+		PlaygroundController.openNav();
+		Router.load('/playground/breakdancing-cube.html');
 
 		document.title = 'Breakdancing Cube | Playground';
-		util.addMeta('description', 'Pure CSS3 animation demo.');
-		util.addMeta('keywords', 'CSS3, HTML5');
+		Util.addMeta('description', 'Pure CSS3 animation demo.');
+		Util.addMeta('keywords', 'CSS3, HTML5');
 		document.body.classList.add('playground', 'playInner', 'nav1');
 	}
 }
-
-window.playgroundController = new PlaygroundController();

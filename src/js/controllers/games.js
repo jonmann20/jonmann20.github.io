@@ -1,10 +1,11 @@
 'use strict';
+/* eslint no-unused-vars: ["error", {"varsIgnorePattern": "GamesController"}] */
 
 class GamesController {
-	index() {
+	static index() {
 		Promise.all([
-			router.load('/games/index.html'),
-			util.require('/assets/listCarousel.js')
+			Router.load('/games/index.html'),
+			Util.require('/assets/listCarousel.js')
 		]).then(() =>
 			new ListCarousel(document.querySelector('.col-left ul'))
 		);
@@ -13,5 +14,3 @@ class GamesController {
 		document.body.classList.add('games', 'carousel-list-page');
 	}
 }
-
-window.gamesController = new GamesController();

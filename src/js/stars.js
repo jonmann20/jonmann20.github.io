@@ -41,7 +41,7 @@ class StarryBg {
 	initStar(color) {
 		this.starBg = new StarBg({
 			elt: document.getElementById('starry-canvas'),
-			window_width: util.getMainWidth(),
+			window_width: Util.getMainWidth,
 			window_height: 400,
 			star_color: color,
 			star_count: 1300,

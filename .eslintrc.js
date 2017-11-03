@@ -13,20 +13,19 @@ module.exports = {
 	globals: {
 		ga: true,
 		Router: true,
-		router: true,
 		twttr: true,
-		util: true,
+		Util: true,
 		pListen: true,
 		ListCarousel: true,
 		StarryBg: true,
 		starryBg: true,
 		BallPit: true,
 		ballPit: true,
-		aboutController: true,
-		gamesController: true,
-		homeController: true,
-		playgroundController: true,
-		portfolioController: true
+		AboutController: true,
+		GamesController: true,
+		HomeController: true,
+		PlaygroundController: true,
+		PortfolioController: true
 	},
 	rules: {
 		quotes: ['error', 'single', {avoidEscape: true}],

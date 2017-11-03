@@ -1,10 +1,11 @@
 'use strict';
+/* eslint no-unused-vars: ["error", {"varsIgnorePattern": "PortfolioController"}] */
 
 class PortfolioController {
-	index() {
+	static index() {
 		Promise.all([
-			router.load('/portfolio/index.html'),
-			util.require('/assets/listCarousel.js')
+			Router.load('/portfolio/index.html'),
+			Util.require('/assets/listCarousel.js')
 		]).then(() =>
 			new ListCarousel(document.querySelector('.col-left ul'))
 		);
@@ -13,5 +14,3 @@ class PortfolioController {
 		document.body.classList.add('portfolio', 'carousel-list-page');
 	}
 }
-
-window.portfolioController = new PortfolioController();

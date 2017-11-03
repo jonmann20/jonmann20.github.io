@@ -11,7 +11,7 @@ class BallPit {
 		this.radius = 16.5;
 		this.balls = [];
 
-		this.canvas.width = util.getMainWidth() / 1.5;
+		this.canvas.width = Util.getMainWidth / 1.5;
 		this.canvas.height = this.canvas.width / 2;
 
 		// set up modifications
