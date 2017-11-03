@@ -5,14 +5,14 @@
 class StarryBg {
 	constructor() {
 		this.boundOnRoute = (e) => this.destroy(e.detail);
-		addEventListener('route', this.boundOnRoute, pListen ? {passive: true} : false);
+		addEventListener('route', this.boundOnRoute, {passive: true});
 
 		const color = document.querySelector('input[type=radio]:checked').value;
 		this.initStar(color);
 
 		let radios = Array.from(document.querySelectorAll('input[type=radio]'));
 		for(let radio of radios) {
-			radio.addEventListener('click', e => this.onColorChange(e.target.value));
+			radio.addEventListener('click', e => this.onColorChange(e.target.value), {passive: true});
 		}
 
 		// TODO: not working in Chrome or FF??
@@ -24,14 +24,14 @@ class StarryBg {
 			return;
 		}
 
-		removeEventListener('route', this.boundOnRoute, pListen ? {passive: true} : false);
+		removeEventListener('route', this.boundOnRoute, {passive: true});
 		cancelAnimationFrame(this.animLoop);
 
 		this.starBg.destroy();
 
 		let radios = Array.from(document.querySelectorAll('input[type=radio]'));
 		for(let radio of radios) {
-			radio.removeEventListener('click', e => this.onColorChange(e.target.value));
+			radio.removeEventListener('click', e => this.onColorChange(e.target.value), {passive: true});
 		}
 
 		//document.getElementById('custom').removeEventListener('change', this.onColorChange);

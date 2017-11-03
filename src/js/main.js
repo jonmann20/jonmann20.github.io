@@ -1,21 +1,6 @@
 'use strict';
 
 (() => {
-	// Setup Passive Listeners
-	window.pListen = false;
-	try {
-		const opts = Object.defineProperty({}, 'passive', {
-			get: () => {
-				pListen = true;
-			}
-		});
-
-		addEventListener('test', null, opts);
-	}
-	catch(e) {
-		// empty
-	}
-
 	// Start Router
 	Router.run();
 
@@ -24,7 +9,7 @@
 	function hide() {
 		document.querySelector('aside').classList.remove('active');
 		hasClass = false;
-		document.body.removeEventListener('click', hide, pListen ? {passive: true} : false);
+		document.body.removeEventListener('click', hide, {passive: true});
 	}
 
 	window.onresize = () => {
@@ -39,9 +24,9 @@
 		if(!hasClass) {
 			document.querySelector('aside').classList.add('active');
 			hasClass = true;
-			requestAnimationFrame(() => {
-				document.body.addEventListener('click', hide, pListen ? {passive: true} : false);
-			});
+			requestAnimationFrame(() =>
+				document.body.addEventListener('click', hide, {passive: true})
+			);
 		}
 		else {
 			hide();
@@ -57,5 +42,5 @@
 				pNav.classList.remove('visible');
 			}
 		}
-	}, pListen ? {passive: true} : false);
+	}, {passive: true});
 })();

@@ -1,7 +1,7 @@
 'use strict';
 
 const path = require('path');
-//const webpack = require('webpack');
+const webpack = require('webpack');
 
 module.exports = {
 	entry: ['./src/elts/icons.html'],
@@ -41,14 +41,14 @@ module.exports = {
 				}
 			]
 		}]
-	}//,
-	// NOTE: was causing build error (see gulp js:minifyBundle)
-	// plugins: [
-	// 	new webpack.DefinePlugin({
-	// 		'process.env': {
-	// 			'NODE_ENV': "'production'"
-	// 		}
-	// 	}),
-	// 	new webpack.optimize.UglifyJsPlugin()
-	// ]
+	},
+	plugins: [
+		new webpack.DefinePlugin({
+			'process.env': {
+				'NODE_ENV': "'production'"
+			}
+		})//,
+		// NOTE: was causing build error (see gulp js:minifyBundle)
+		//new webpack.optimize.UglifyJsPlugin()
+	]
 };

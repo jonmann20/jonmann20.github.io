@@ -4,7 +4,7 @@
 class BallPit {
 	constructor() {
 		this.boundOnRoute = (e) => this.destroy(e.detail);
-		addEventListener('route', this.boundOnRoute, pListen ? {passive: true} : false);
+		addEventListener('route', this.boundOnRoute, {passive: true});
 
 		this.canvas = document.querySelector('canvas');
 		this.ctx = this.canvas.getContext('2d');
@@ -44,7 +44,7 @@ class BallPit {
 			return;
 		}
 
-		removeEventListener('route', this.boundOnRoute, pListen ? {passive: true} : false);
+		removeEventListener('route', this.boundOnRoute, {passive: true});
 		cancelAnimationFrame(this.animLoop);
 
 		const numBalls = document.querySelector('.numBalls');

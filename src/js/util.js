@@ -1,18 +1,10 @@
 'use strict';
 /* eslint no-unused-vars: ["error", {"varsIgnorePattern": "Util"}] */
 
-let _jsSrcHash = {
-	// src: id
-	'https://platform.twitter.com/widgets.js': false,
-	'/assets/listCarousel.js': false,
-	'/assets/stars.js': false,
-	'/assets/ballPit.js': false
-};
-
 class Util {
 	static require(src) {
 		return new Promise((resolve, reject) => {
-			if(!_jsSrcHash[src]) {
+			if(!Util.constructor._jsSrc.includes(src)) {
 				let script = document.createElement('script');
 				script.src = src;
 				script.async = 1;
@@ -20,13 +12,11 @@ class Util {
 				document.head.appendChild(script);
 
 				script.onload = () => {
-					_jsSrcHash[src] = true;
+					Util.constructor._jsSrc.push(src);
 					resolve();
 				};
 
-				script.onerror = () => {
-					reject();
-				};
+				script.onerror = () => reject();
 			}
 			else {
 				resolve();
@@ -48,3 +38,4 @@ class Util {
 		return main.getBoundingClientRect().width - paddingLeft;
 	}
 }
+Util.constructor._jsSrc = [];

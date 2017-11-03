@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "polymer": "^2.1.1",
+    "polymer": "^2.2.0",
     "iron-icon": "^2.0.1",
     "iron-icons": "^2.0.1"
   },
