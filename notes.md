@@ -9,6 +9,7 @@ src/**, gulp_tasks, gulpfile.js, -dungeon, -font, -assets, -*.map, -src/games/co
 
 Node
 ----
+nvm install x.x.x
 nvm use x.x.x
 sudo npm i -g npm
 npm outdated
@@ -17,16 +18,6 @@ npm update
 Bower
 -----
 bower list | grep PACKAGE-NAME
-
-[server gh-pages from sub directory](https://gist.github.com/cobyism/4730490)
-
-open server in background
-=========================
-windows:
-`START gulp`
-
-*nix:
-`gulp &`
 
 
 Add a page
@@ -38,5 +29,5 @@ Add a page
 
 
 [2d-hero art](http://opengameart.org/content/2d-hero)
-
+[serve gh-pages from sub directory](https://gist.github.com/cobyism/4730490)
 https://www.webcomponents.org/element/PolymerElements/iron-icons/demo/demo/index.html
