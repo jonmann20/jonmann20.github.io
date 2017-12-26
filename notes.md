@@ -9,9 +9,12 @@ src/**, gulp_tasks, gulpfile.js, -dungeon, -font, -assets, -*.map, -src/games/co
 
 Node
 ----
+nvm ls-remote
 nvm install x.x.x
 nvm use x.x.x
-sudo npm i -g npm
+nvm alias default x.x.x
+
+npm i -g npm
 npm outdated
 npm update
 
