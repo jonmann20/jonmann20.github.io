@@ -6,9 +6,6 @@ class Router {
 		Router.resetController(slug);
 
 		switch(slug) {
-			case '#about':
-				AboutController.index();
-				break;
 			case '#games':
 				GamesController.index();
 				break;

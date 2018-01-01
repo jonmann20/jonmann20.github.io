@@ -1,6 +1,18 @@
 @import 'vars';
 
+.col-left {
+	min-width: 317px;
+	max-width: 520px;
+}
+
+img {
+	float: left;
+	padding-right: 15px;
+	padding-bottom: 15px;
+}
+
 main ul {
+	margin-top: 55px;
 	list-style-type: none;
 	padding: 0;
 	line-height: 2;
