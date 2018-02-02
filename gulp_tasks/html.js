@@ -1,27 +1,27 @@
-'use strict';
+import gulp from 'gulp';
+import htmlmin from 'gulp-htmlmin';
+import webpack from 'webpack-stream';
 
-module.exports = (gulp) => {
-	const htmlmin = require('gulp-htmlmin'),
-		webpack = require('webpack-stream');
+function htmlBundleIcons() {
+	return gulp.src('src/elts/icons.html').
+		pipe(webpack(require('../webpack.config.js'))).
+		pipe(gulp.dest('assets'));
+}
 
-	return (() => {
-		gulp.task('html:bundleIcons', () => {
-			return gulp.src('src/elts/icons.html').
-				pipe(webpack(require('../webpack.config.js'))).
-				pipe(gulp.dest('assets'));
-		});
+function htmlMinify() {
+	return gulp.src(['**/*.html', '!src/**', '!node_modules/**', '!bower_components/**']).
+		pipe(htmlmin({
+			removeComments: true,
+			collapseWhitespace: true,
+			removeAttributeQuotes: true,
+			removeEmptyAttributes: true,
+			minifyJS: true,
+			minifyCSS: true
+		})).
+		pipe(gulp.dest('./'));
+}
 
-		gulp.task('html:minify', () => {
-			return gulp.src(['**/*.html', '!src/**', '!node_modules/**', '!bower_components/**']).
-				pipe(htmlmin({
-					removeComments: true,
-					collapseWhitespace: true,
-					removeAttributeQuotes: true,
-					removeEmptyAttributes: true,
-					minifyJS: true,
-					minifyCSS: true
-				})).
-				pipe(gulp.dest('./'));
-		});
-	})();
+export {
+	htmlBundleIcons,
+	htmlMinify
 };

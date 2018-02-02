@@ -1,28 +1,32 @@
-'use strict';
+import gulp from 'gulp';
+import _del from 'del';
 
-module.exports = gulp =>
-	gulp.task('del', () =>
-		require('del')([
-			'**',
-			'!.git/**',
-			'!gulp_tasks/**',
-			'!bower_components/**',
-			'!node_modules/**',
-			'!.sass-cache/**',
-			'!src/**',
-			'!.gitignore',
-			'!.eslintrc',
-			'!.eslintrc.js',
-			'!.sass-lint.yml',
-			'!CNAME',
-			'!gulpfile.js',
-			'!license.txt',
-			'!notes.md',
-			'!bower.json',
-			'!package.json',
-			'!package-lock.json',
-			'!webpack.config.js',
-			'!readme.md',
-			'!server.js'
-		])
-	);
+del.description = 'Cleanup built files';
+function del() {
+	return _del([
+		'**',
+		'!.git/**',
+		'!gulp_tasks/**',
+		'!bower_components/**',
+		'!node_modules/**',
+		'!.sass-cache/**',
+		'!src/**',
+		'!.babelrc',
+		'!.gitignore',
+		'!.eslintrc',
+		'!.eslintrc.js',
+		'!.sass-lint.yml',
+		'!CNAME',
+		'!gulpfile.babel.js',
+		'!license.txt',
+		'!notes.md',
+		'!bower.json',
+		'!package.json',
+		'!package-lock.json',
+		'!webpack.config.js',
+		'!readme.md',
+		'!server.js'
+	]);
+}
+
+export {del};

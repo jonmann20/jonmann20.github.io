@@ -1,10 +1,12 @@
-'use strict';
+import gulp from 'gulp';
+import connect from 'gulp-connect';
 
-module.exports = gulp =>
-	gulp.task('srv', done => {
-		require('gulp-connect').server({
-			root: './',
-			host: '0.0.0.0'
-		});
-		done();
+function srv(done) {
+	connect.server({
+		root: './',
+		host: '0.0.0.0'
 	});
+	done();
+}
+
+export {srv};

@@ -1,10 +1,15 @@
-'use strict';
+import gulp from 'gulp';
 
-module.exports = gulp =>
-	gulp.task('watch', done => {
-		gulp.watch('src/**/*.html', gulp.series('copy'/*, 'eslint:html'*/));
-		gulp.watch('src/scss/*.scss', gulp.series('scss', 'scss-lint'));
-		gulp.watch('src/**/*.js', gulp.series('js', 'eslint'));
+import {copy} from './copy';
+import {scss, scssLint} from './scss';
+import {js, eslint} from './js';
 
-		done();
-	});
+function watch(done) {
+	gulp.watch('src/**/*.html', gulp.series(copy/*, 'eslint:html'*/));
+	gulp.watch('src/scss/*.scss', gulp.series(scss, scssLint));
+	gulp.watch('src/**/*.js', gulp.series(js, eslint));
+
+	done();
+}
+
+export {watch};
