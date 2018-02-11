@@ -1,4 +1,3 @@
-import gulp from 'gulp';
 import connect from 'gulp-connect';
 
 function srv(done) {

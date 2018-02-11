@@ -38,7 +38,10 @@ module.exports = {
 				'try': {after: true},
 				'case': {after: true},
 				'return': {after: true},
-				'else': {after: true}
+				'else': {after: true},
+				'from': {after: true},
+				'import': {after: true},
+				'export': {after: true}
 			}
 		}],
 		semi: ['error', 'always'],
@@ -58,5 +61,11 @@ module.exports = {
 		'linebreak-style': ['error', 'unix'],
 		'space-infix-ops': 'error',
 		//'max-len': ['error', 120]
-	}
+	},
+	overrides: [{
+		files: ['gulpfile.babel.js', 'gulp_tasks/**/*'],
+		parserOptions: {
+			sourceType: 'module'
+		}
+	}]
 };

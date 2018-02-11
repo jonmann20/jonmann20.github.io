@@ -1,4 +1,3 @@
-import gulp from 'gulp';
 import _del from 'del';
 
 del.description = 'Cleanup built files';

@@ -1,6 +1,6 @@
 import gulp from 'gulp';
 
-import {isDev} from './gulp_tasks/env';
+//import {isDev} from './gulp_tasks/env';
 import {copy} from './gulp_tasks/copy';
 import {del} from './gulp_tasks/del';
 import {htmlBundleIcons, htmlMinify} from './gulp_tasks/html';
@@ -32,7 +32,7 @@ export {
 	copy,
 	del,
 	js,
-	eslint // TODO: use babel-eslint instead
+	eslint
 };
 
 const dev = gulp.parallel(
