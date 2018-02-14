@@ -10,6 +10,7 @@
 		document.querySelector('aside').classList.remove('active');
 		hasClass = false;
 		document.body.removeEventListener('click', hide, {passive: true});
+		document.body.removeEventListener('touchend', hide, {passive: true});
 	}
 
 	window.onresize = () => {
@@ -24,9 +25,10 @@
 		if(!hasClass) {
 			document.querySelector('aside').classList.add('active');
 			hasClass = true;
-			requestAnimationFrame(() =>
-				document.body.addEventListener('click', hide, {passive: true})
-			);
+			requestAnimationFrame(() => {
+				document.body.addEventListener('click', hide, {passive: true});
+				document.body.addEventListener('touchend', hide, {passive: true});
+			});
 		}
 		else {
 			hide();
