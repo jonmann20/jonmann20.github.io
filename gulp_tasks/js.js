@@ -63,12 +63,18 @@ function _inline(src, filename, dest) {
 }
 
 function jsMaster() {
-	return gulp.src([
-			'src/js/util.js',
-			'src/js/controllers/*.js',
-			'src/js/router.js',
-			'src/js/main.js'
-		]).
+	let src = [
+		'src/js/util.js',
+		'src/js/controllers/*.js',
+		'src/js/router.js',
+		'src/js/main.js'
+	];
+
+	if(!isDev) {
+		src.push('src/js/analytics.js');
+	}
+
+	return gulp.src(src).
 		pipe(iff(isDev, sourcemaps.init())).
 		pipe(concat('master.js')).
 		pipe(iff(!isDev, babel({presets: presets}).on('error', _handleErr))).

@@ -147,6 +147,10 @@ header {
 		right: 0;
 		padding: 16px 20px 15px 16px;
 		width: auto;
+		-webkit-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
 	}
 
 	nav {
