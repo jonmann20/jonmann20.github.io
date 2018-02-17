@@ -6,11 +6,27 @@
 
 	// Handle Leftbar
 	let hasClass = false;
-	function hide() {
+	let initX, x;
+	function hide(e) {
+		if(e && e.type === 'touchend' && initX === x) {
+			return;
+		}
+
 		document.querySelector('aside').classList.remove('active');
 		hasClass = false;
 		document.body.removeEventListener('click', hide, {passive: true});
+		document.body.removeEventListener('touchstart', setInitX, {passive: true});
+		document.body.removeEventListener('touchmove', setX, {passive: true});
 		document.body.removeEventListener('touchend', hide, {passive: true});
+	}
+
+	function setInitX(e) {
+		initX = e.touches[0].pageX;
+		x = initX;
+	}
+
+	function setX(e) {
+		x = e.touches[0].pageX;
 	}
 
 	window.onresize = () => {
@@ -27,6 +43,8 @@
 			hasClass = true;
 			requestAnimationFrame(() => {
 				document.body.addEventListener('click', hide, {passive: true});
+				document.body.addEventListener('touchstart', setInitX, {passive: true});
+				document.body.addEventListener('touchmove', setX, {passive: true});
 				document.body.addEventListener('touchend', hide, {passive: true});
 			});
 		}
