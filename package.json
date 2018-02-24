@@ -6,7 +6,6 @@
 		"babel-core": "~6.26.0",
 		"babel-loader": "~7.1.2",
 		"babel-preset-env": "~1.6.1",
-		"bower": "~1.8.2",
 		"del": "~3.0.0",
 		"eslint": "~4.18.1",
 		"eslint-plugin-html": "~4.0.2",
