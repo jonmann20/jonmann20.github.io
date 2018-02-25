@@ -17,12 +17,8 @@
 
 	<title>Jon's Quest | Games</title>
 
-	<link href="/node_modules/jquery-colorbox/example3/colorbox.css" rel="stylesheet">
+	<link href="node_modules/jquery-colorbox/example3/colorbox.css" rel="stylesheet">
 	<link href="css/jons-quest.css" rel="stylesheet">
-
-	<link rel="import" href="/bower_components/iron-icon/iron-icon.html">
-	<link rel="import" href="/bower_components/iron-icons/iron-icons.html">
-	<link rel="import" href="/bower_components/iron-icons/av-icons.html">
 </head>
 <body>
 	<header>
@@ -67,28 +63,27 @@
 			</li>
 			<li class="audioSwitch">
 				<span class="keyAction">M:</span>
-				audio .... <button class="audioState off"><iron-icon icon="av:volume-up"></iron-icon></button>
+				audio .... <button class="audioState off"><iron-icon icon="i:volume-off"></iron-icon></button>
 			</li>
 			<li>
 				<span class="keyAction">F:</span>
-				fullscreen <button class="resize off" title="Fullscreen"><iron-icon icon="icons:fullscreen"></iron-icon></button>
+				fullscreen <button class="resize off" title="Fullscreen"><iron-icon icon="i:fullscreen"></iron-icon></button>
 			</li>
 		</ul>
 	</div>
 
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<script src="/node_modules/jquery-colorbox/jquery.colorbox-min.js"></script>
-	<script src="js/jons-quest.js"></script>
-
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="node_modules/jquery-colorbox/jquery.colorbox-min.js"></script>
+	<script src="js/build/jons-quest.js"></script>
+	
 	<script>
-		if(!('registerElement' in document) ||
-		   !('import' in document.createElement('link')) ||
-		   !('content' in document.createElement('template'))
-		){
-			var s = document.createElement('script');
-			s.src = '/bower_components/webcomponentsjs/webcomponents-lite.min.js';
-			document.head.appendChild(s);
-		}
+		document.addEventListener('WebComponentsReady', function webComponentsReady() {
+			let script = document.createElement('script');
+			script.src = 'assets/icons.bundle.js';
+			document.head.appendChild(script);
+			document.removeEventListener('WebComponentsReady', webComponentsReady, false);
+		}, false);
 	</script>
+	<script src="node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
 </body>
 </html>

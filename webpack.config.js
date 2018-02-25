@@ -11,8 +11,8 @@ module.exports = {
 		publicPath: 'assets'
 	},
 	resolve: {
-		modules: ['node_modules', 'bower_components'],
-		descriptionFiles: ['package.json', 'bower.json']
+		modules: ['node_modules'],
+		descriptionFiles: ['package.json']
 	},
 	devtool: 'inline-source-map',
 	module: {
