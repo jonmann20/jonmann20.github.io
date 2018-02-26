@@ -16,7 +16,7 @@ module.exports = {
 	},
 	devtool: 'inline-source-map',
 	module: {
-		loaders: [{
+		rules: [{
 			test: /\.html/,
 			use: [
 				{
@@ -42,13 +42,8 @@ module.exports = {
 			]
 		}]
 	},
-	plugins: [
-		new webpack.DefinePlugin({
-			'process.env': {
-				'NODE_ENV': "'production'"
-			}
-		})//,
-		// NOTE: was causing build error (see gulp js:minifyBundle)
-		//new webpack.optimize.UglifyJsPlugin()
-	]
+	performance: {
+		hints: false
+	},
+	mode: 'production'
 };

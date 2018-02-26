@@ -14,7 +14,7 @@ test.description = 'Lint SCSS and JS files';
 // TODO: add analytics.js and clientSideLogging.js
 const prd = gulp.series(
 	scss, /*test,*/  // NOTE: running test in parallel w/JS was causing bugs
-	gulp.parallel(js, copy, htmlBundleIcons),
+	gulp.parallel(js, copy/*, htmlBundleIcons*/),
 	gulp.series(
 		gulp.parallel(jsMinifyBundle, cssInline),
 		gulp.series(jsInline, htmlMinify)
