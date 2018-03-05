@@ -1,7 +1,7 @@
 @import 'vars';
 
 .col-left {
-	min-width: 325px;
+	min-width: 361px;
 	max-width: 520px;
 }
 
@@ -17,6 +17,12 @@ main ul {
 	padding: 0;
 	line-height: 2;
 
+	a:hover {
+		iron-icon {
+			color: $nav-link-active-color;
+		}
+	}
+
 	@include desktop {
 		padding-left: 40px;
 	}
@@ -28,7 +34,6 @@ main ul {
 }
 
 .twitter-timeline-rendered {
-	background: var(--card-bg);
 	box-shadow: var(--box-shadow-2);
 	border-radius: 2px;
 }

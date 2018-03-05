@@ -2,7 +2,7 @@ import gulp from 'gulp';
 
 import {copy} from './gulp_tasks/copy';
 import {del} from './gulp_tasks/del';
-import {htmlBundleIcons, htmlMinify} from './gulp_tasks/html';
+import {/*htmlBundleIcons, */htmlMinify} from './gulp_tasks/html';
 import {js, eslint, jsInline, jsMinifyBundle} from './gulp_tasks/js';
 import {scss, scssLint, cssInline} from './gulp_tasks/scss';
 import {srv} from './gulp_tasks/server';

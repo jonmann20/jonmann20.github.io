@@ -1,7 +1,9 @@
 TODO
 ====
-* Waiting for Gulp v4.0 to hit stable before fixing watch/crash bug (with js error)
-* Fix Jon's Quest index.html, node_modules import, and colorbox color
+* Fixing watch/crash bug (with js error) [Gulp v4.0 is now stable]
+* Make starry background fullscreen below text
+* Click games should reset page
+* Add opacity to .page when leftbar is open
 
 Filtering Search
 ================
@@ -31,6 +33,9 @@ Add a page
 4. Add html with css
 
 
-[2d-hero art](http://opengameart.org/content/2d-hero)
-[serve gh-pages from sub directory](https://gist.github.com/cobyism/4730490)
-https://www.webcomponents.org/element/PolymerElements/iron-icons/demo/demo/index.html
+Other
+-------
+* [2d-hero art](http://opengameart.org/content/2d-hero)
+* [serve gh-pages from sub directory](https://gist.github.com/cobyism/4730490)
+* https://www.webcomponents.org/element/PolymerElements/iron-icons/demo/demo/index.html
+* Theme inspiration: https://www.monokai.nl/

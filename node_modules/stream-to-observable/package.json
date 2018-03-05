@@ -1,6 +1,6 @@
 {
   "name": "stream-to-observable",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Convert Node Streams into ECMAScript-Observables",
   "license": "MIT",
   "repository": "jamestalmage/stream-to-observable",
@@ -13,7 +13,8 @@
     "node": ">=0.12.0"
   },
   "scripts": {
-    "test": "xo && nyc --reporter=lcov --reporter=text ava"
+    "test": "xo && nyc --reporter=lcov --reporter=text npm run test_both",
+    "test_both": "ava --require=any-observable/register/rxjs && ava --require=any-observable/register/zen"
   },
   "files": [
     "index.js",
@@ -23,17 +24,30 @@
   ],
   "keywords": [
     "stream",
-    "observable"
+    "observable",
+    "convert"
   ],
-  "dependencies": {},
+  "dependencies": {
+    "any-observable": "^0.2.0"
+  },
   "devDependencies": {
     "array-to-events": "^1.0.0",
-    "ava": "^0.14.0",
+    "ava": "^0.15.2",
     "coveralls": "^2.11.9",
     "delay": "^1.3.1",
     "nyc": "^6.4.0",
     "rxjs": "^5.0.0-beta.6",
-    "xo": "^0.14.0",
-    "zen-observable": "^0.2.1"
+    "xo": "^0.16.0",
+    "zen-observable": "^0.3.0"
+  },
+  "xo": {
+    "overrides": [
+      {
+        "files": [
+          "test.js"
+        ],
+        "esnext": true
+      }
+    ]
   }
 }

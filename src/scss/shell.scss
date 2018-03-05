@@ -7,7 +7,7 @@
 
 html {
 	min-width: 315px;
-	background-color: rgb(20, 26, 30);
+	background-color: $html-background;
 }
 
 body {
@@ -18,12 +18,11 @@ body {
 	line-height: 1.25;
 	font-size: 87.5%;
 	font-family: 'Open Sans', sans-serif;
-	color: #eaeaea;
+	color: $txt-color;
 
 	// https://codepen.io/sdthornton/pen/wBZdXq
 	--box-shadow-2: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-	--card-bg: #292f33;
-	--mobile-nav-bg: #373f44; // lighten card-bg by 6%
+	--mobile-nav-bg: $card-background;
 }
 
 h1,
@@ -31,8 +30,9 @@ h2,
 h3,
 h4 {
 	margin: 0.4em 0 0.6em;
-	font-size: 1.6em;
-	color: #ff6a00;
+	font-size: 1.75em;
+	font-weight: 300;
+	color: $header-txt-color;
 	text-shadow: 0 2px 3px #212121;
 }
 
@@ -42,19 +42,18 @@ ul {
 }
 
 a {
-	color: hsl(200, 60%, 60%);
+	color: $link-color;
 	text-decoration: none;
 	outline: none;
 	cursor: pointer;
 
 	&:hover {
-		color: hsl(200, 60%, 65%);
-		text-shadow: hsl(200, 60%, 65%) 0 0 6px;
+		color: $link-color-hover;
+		text-shadow: $link-color-hover 0 0 6px;
 	}
 
-	&:visited,
 	&:active {
-		color: hsl(200, 60%, 55%);
+		color: $link-color-active;
 	}
 
 	&:focus {
@@ -84,15 +83,19 @@ iron-icon {
 //-- Utilities --\\
 .card {
 	display: inline-block;
-	background: var(--card-bg);
+	background: $card-background;
 	box-shadow: var(--box-shadow-2);
 	border-radius: 2px;
-	padding: 3px 15px 5px;
+	padding: 3px 25px 5px;
 }
 
 .card-light {
 	border-radius: 2px;
 	box-shadow: var(--box-shadow-2);
+}
+
+.caption {
+	color: $gray;
 }
 
 .big-btn {
@@ -102,21 +105,31 @@ iron-icon {
 	border-radius: 10px;
 	font-weight: bold;
 	font-size: 1.2em;
-	color: #eaeaea !important;
 	background: rgba(107, 107, 107, 0.64);
 	box-shadow: 0 3px 0 rgba(54, 54, 54, 0.94);
 	opacity: 1;
+	transition: all 0.19s;
+	color: $yellow;
+
+	// &.alt {
+	// 	color: $white !important;
+
+	// 	&:hover,
+	// 	&:focus {
+	// 		box-shadow: 0 3px 0 $white;
+	// 	}
+	// }
 
 	&:hover,
 	&:focus {
-		background: rgb(204, 85, 0);
-		box-shadow: 0 3px 0 rgb(102, 43, 0);
+		color: $yellow;
+		box-shadow: 0 3px 0 $yellow;
+		text-shadow: none;
 	}
 
 	&:active {
-		box-shadow: none;
-		margin-top: 11px;
-		transition: all 0.05s;
+		box-shadow: none !important;
+		transform: translateY(3px);
 	}
 
 	span {
@@ -138,7 +151,7 @@ header {
 	z-index: 99999;
 	top: 0;
 	width: 100%;
-	background: var(--mobile-nav-bg);
+	background: $card-background;
 
 	.menu {
 		position: absolute;
@@ -197,9 +210,11 @@ header {
 
 		a {
 			width: 100%;
+			color: $nav-link-color;
 
 			&:hover {
-				text-shadow: 0 0 6px rgb(140, 177, 24);
+				color: $nav-link-color;
+				text-shadow: 0 0 6px $nav-link-color;
 			}
 		}
 	}
@@ -216,7 +231,7 @@ aside {
 	position: fixed;
 	left: 0;
 	top: 0;
-	background: var(--mobile-nav-bg);
+	background: $card-background;
 	z-index: 999;
 	will-change: transform;
 
@@ -229,6 +244,13 @@ aside {
 		font-size: 1.45em;
 		padding: 10px 0 10px 20px;
 		text-align: left !important;
+		color: $nav-link-color;
+
+		&:hover {
+			color: $nav-link-color;
+			text-shadow: 0 0 6px $nav-link-color;
+
+		}
 	}
 
 	iron-icon {
@@ -251,10 +273,6 @@ aside a,
 header nav a:visited,
 aside a:visited {
 	text-align: right;
-	color: rgb(140, 177, 24) !important;
-	-webkit-text-stroke: 1px rgb(140, 177, 24);
-	text-stroke: 1px rgb(140, 177, 24);
-	text-shadow: 0 3px 3px #000;
 	display: block;
 	margin-right: 18px;
 	line-height: 1.7;
@@ -262,6 +280,7 @@ aside a:visited {
 }
 
 header nav a:hover iron-icon,
+aside a:hover iron-icon,
 .home nav .icon-home,
 .games nav .icon-controllernes,
 .games aside .icon-controllernes,
@@ -271,10 +290,7 @@ header nav a:hover iron-icon,
 .portfolio aside .icon-briefcase,
 .about nav .icon-user,
 .about aside .icon-user {
-	color: hsl(0, 70%, 56%) !important;
-	text-shadow: 0 3px 3px #000;
-	-webkit-text-stroke: 0;
-	text-stroke: 0;
+	color: $nav-link-active-color;
 }
 
 // Second Nav
@@ -295,15 +311,16 @@ header nav a:hover iron-icon,
 .nav1 .playground-nav li:nth-child(1) a,
 .nav2 .playground-nav li:nth-child(2) a,
 .nav3 .playground-nav li:nth-child(3) a {
-	color: #ff6a00 !important;
-	-webkit-text-stroke: 1px #ff6a00;
-	text-stroke: 1px #ff6a00;
+	color: $nav-link-active-color !important;
+	-webkit-text-stroke: 1px $nav-link-active-color;
+	text-stroke: 1px $nav-link-active-color;
 }
 
 .nav1 .playground-nav li:nth-child(1) a:hover,
 .nav2 .playground-nav li:nth-child(2) a:hover,
 .nav3 .playground-nav li:nth-child(3) a:hover {
-	text-shadow: #ff6a00 0 0 18px;
+	cursor: default;
+	text-shadow: none;
 }
 
 .hdr-nav2 .playground-nav-wrap {
@@ -398,7 +415,7 @@ main {
 @include desktop {
 	ul {
 		list-style-type: inherit;
-		padding-left: 40px;
+		padding-left: 20px;
 	}
 
 	.page {
