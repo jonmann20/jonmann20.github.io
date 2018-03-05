@@ -3,7 +3,7 @@
 import gulp from 'gulp';
 
 copy.description = 'Copy files from `src` to `/`';
-function copy() {
+export default function copy() {
 	return gulp.src([
 		'src/**',
 		'!src/elts',
@@ -25,5 +25,3 @@ function copy() {
 	]).
 	pipe(gulp.dest('./'));
 }
-
-export {copy};

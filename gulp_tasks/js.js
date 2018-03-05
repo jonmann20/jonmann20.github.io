@@ -11,7 +11,7 @@ import babel from 'gulp-babel';
 import uglify from 'gulp-uglify-es';
 import _eslint from 'gulp-eslint';
 
-import {isDev} from './env';
+import isDev from './env';
 
 const gamesCommonJs = [
 	'src/games/common/js/GameEngine.js',
@@ -164,7 +164,7 @@ function jsInlineIndex() {
 // function jsInlineIndex2() {
 // 	return _inline(
 // 		'index.html',
-// 		'/bower_components/webcomponentsjs/webcomponents-loader.js',
+// 		'/node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js',
 // 		'./'
 // 	);
 // }

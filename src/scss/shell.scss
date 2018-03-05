@@ -344,6 +344,7 @@ main {
 	width: 93%;
 	height: 100%;
 	margin: 40px auto 0;
+	transition: opacity 0.3s cubic-bezier(0, 0, 0.3, 1);
 
 	&::before,
 	&::after {
@@ -353,6 +354,10 @@ main {
 
 	&::after {
 		clear: both;
+	}
+
+	&.leftbar-active {
+		opacity: 0.5;
 	}
 }
 

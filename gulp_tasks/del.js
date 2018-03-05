@@ -1,12 +1,11 @@
 import _del from 'del';
 
 del.description = 'Cleanup built files';
-function del() {
+export default function del() {
 	return _del([
 		'**',
 		'!.git/**',
 		'!gulp_tasks/**',
-		'!bower_components/**',
 		'!node_modules/**',
 		'!.sass-cache/**',
 		'!src/**',
@@ -21,11 +20,8 @@ function del() {
 		'!notes.md',
 		'!bower.json',
 		'!package.json',
-		'!package-lock.json',
 		'!webpack.config.js',
 		'!readme.md',
 		'!server.js'
 	]);
 }
-
-export {del};

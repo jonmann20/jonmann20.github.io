@@ -8,7 +8,7 @@ import cleanCss from 'gulp-clean-css';
 import sass from 'gulp-sass';
 import sassLint from 'gulp-sass-lint';
 
-import {isDev} from './env';
+import isDev from './env';
 
 const scssSrc = 'src/scss/*.scss';
 

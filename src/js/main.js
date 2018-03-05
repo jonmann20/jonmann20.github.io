@@ -13,6 +13,7 @@
 		}
 
 		document.querySelector('aside').classList.remove('active');
+		document.querySelector('main').classList.remove('leftbar-active');
 		hasClass = false;
 		document.body.removeEventListener('click', hide, {passive: true});
 		document.body.removeEventListener('touchstart', setInitX, {passive: true});
@@ -40,6 +41,7 @@
 
 		if(!hasClass) {
 			document.querySelector('aside').classList.add('active');
+			document.querySelector('main').classList.add('leftbar-active');
 			hasClass = true;
 			requestAnimationFrame(() => {
 				document.body.addEventListener('click', hide, {passive: true});

@@ -1,15 +1,18 @@
 import gulp from 'gulp';
 import htmlmin from 'gulp-htmlmin';
-import webpack from 'webpack-stream';
+import webpackStream from 'webpack-stream';
+import webpack from 'webpack';
 
 function htmlBundleIcons() {
+	const webpackConfig = require('../webpack.config.js');
+
 	return gulp.src('src/elts/icons.html').
-		pipe(webpack(require('../webpack.config.js'))).
+		pipe(webpackStream(webpackConfig, webpack)).
 		pipe(gulp.dest('assets'));
 }
 
 function htmlMinify() {
-	return gulp.src(['**/*.html', '!src/**', '!node_modules/**', '!bower_components/**']).
+	return gulp.src(['**/*.html', '!src/**', '!node_modules/**']).
 		pipe(htmlmin({
 			removeComments: true,
 			collapseWhitespace: true,
