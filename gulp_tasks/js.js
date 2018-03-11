@@ -71,7 +71,7 @@ function jsMaster() {
 	];
 
 	if(!isDev) {
-		src.push('src/js/analytics.js');
+		src.push('src/js/analytics.js', 'src/js/clientSideLogging.js');
 	}
 
 	return gulp.src(src).
@@ -145,17 +145,6 @@ function eslint() {
 		pipe(_eslint.failAfterError());
 }
 
-function jsMinifyBundle() {
-	return gulp.src('assets/icons.bundle.js').
-		pipe(uglify({
-			// https://github.com/mishoo/UglifyJS2/issues/1753
-			mangle: {
-				safari10: true
-			}
-		})).
-		pipe(gulp.dest('assets'));
-}
-
 function jsInlineIndex() {
 	return _inline('index.html', '/assets/master.js', './');
 }
@@ -202,6 +191,5 @@ const js = gulp.parallel(
 export {
 	js,
 	eslint,
-	jsInline,
-	jsMinifyBundle
+	jsInline
 };

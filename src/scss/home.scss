@@ -1,7 +1,7 @@
 @import 'vars';
 
 .col-left {
-	min-width: 361px;
+	min-width: 337px;
 	max-width: 520px;
 }
 
@@ -33,7 +33,13 @@ main ul {
 	}
 }
 
-.twitter-timeline-rendered {
+.twitter-timeline {
+	opacity: 0;
+	transition: opacity 0.15s cubic-bezier(0, 0, 0.3, 1);
+}
+
+.twitter-timline-custom-styled {
+	opacity: 1;
 	box-shadow: var(--box-shadow-2);
 	border-radius: 2px;
 }

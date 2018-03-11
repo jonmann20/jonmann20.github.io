@@ -3,46 +3,20 @@
 const path = require('path');
 
 module.exports = {
-	entry: ['./src/elts/icons.html'],
+	entry: './src/elts/icons.html',
 	output: {
 		filename: 'icons.bundle.js',
-		path: path.resolve(__dirname, './assets'),
-		publicPath: 'assets'
+		path: path.resolve(__dirname, './assets')
 	},
 	resolve: {
 		modules: ['node_modules'],
 		descriptionFiles: ['package.json']
 	},
-	//devtool: 'inline-source-map',
 	module: {
 		rules: [{
 			test: /\.html/,
-			use: [
-				// {
-				// 	loader: 'babel-loader',
-				// 	options: {
-				// 		presets: [['env', {
-				// 			targets: {
-				// 				browsers: [
-				// 					'last 2 Chrome versions',
-				// 					'last 2 Firefox versions',
-				// 					'last 2 Edge versions',
-				// 					'last 2 Safari versions',
-				// 					'last 2 iOS versions',
-				// 					'last 2 ChromeAndroid versions'
-				// 				]
-				// 			}
-				// 		}]]
-				// 	}
-				// },
-				{
-					loader: 'polymer-webpack-loader'
-				}
-			]
+			use: 'polymer-webpack-loader'
 		}]
 	},
-	// performance: {
-	// 	hints: false
-	// },
 	mode: 'production'
 };

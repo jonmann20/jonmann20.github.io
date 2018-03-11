@@ -8,7 +8,7 @@
 	;
 
 	console.debug = function(msg) {
-		ga('send', 'event', 'JS console', 'debug', msg);	// univeral google analytics syntax
+		ga('send', 'event', 'JS console', 'debug', msg);
 		orgDebug.apply(console, arguments);
 	};
 
