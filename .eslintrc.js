@@ -58,7 +58,7 @@ module.exports = {
 		'space-before-function-paren': ['error', 'never'],
 		'comma-spacing': ['error', {after: true}],
 		indent: ['error', 'tab', {SwitchCase: 1}],
-		'linebreak-style': ['error', 'unix'],
+		//'linebreak-style': ['error', 'unix'],
 		'space-infix-ops': 'error',
 		//'max-len': ['error', 120]
 	},
