@@ -1,5 +1,5 @@
-jonmann20.github.com
-====================
+jonmann20.github.io
+===================
 
 My personal website.
 
