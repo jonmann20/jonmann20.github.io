@@ -20,8 +20,7 @@ export default function copy() {
 		'!src/js/stars.js',
 		'!src/js/listCarousel.js',
 		'!src/js/analytics.js',
-		'!src/js/clientSideLogging.js',
-		'!src/js/sw.js'
+		'!src/js/clientSideLogging.js'
 	]).
 	pipe(gulp.dest('./'));
 }

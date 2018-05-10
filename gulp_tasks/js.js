@@ -129,13 +129,13 @@ function jsOther() {
 		pipe(gulp.dest('assets'));
 }
 
-// function jsServiceWorker() {
-// 	return gulp.src('src/js/sw.js').
-// 	pipe(replace('const CACHE_VERSION = 1;', () => {
-// 		return `const CACHE_VERSION = ${new Date().getTime()};`;
-// 	})).
-// 	pipe(gulp.dest('./'));
-// }
+function jsServiceWorker() {
+	return gulp.src('src/js/sw.js').
+	pipe(replace('const CACHE_VERSION = 1;', () => {
+		return `const CACHE_VERSION = ${new Date().getTime()};`;
+	})).
+	pipe(gulp.dest('./'));
+}
 
 eslint.description = 'Lint JavaScript files';
 function eslint() {
@@ -184,12 +184,13 @@ const js = gulp.parallel(
 	jsMaster,
 	jsPageDormanticide,
 	jsPageVamp,
-	jsOther//,
-	//jsServiceWorker
+	jsOther,
+	jsServiceWorker
 );
 
 export {
 	js,
 	eslint,
-	jsInline
+	jsInline//,
+	//jsInlineIndex2
 };
