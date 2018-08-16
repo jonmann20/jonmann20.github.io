@@ -3,4 +3,6 @@
 			script.src = '/assets/icons.bundle.js';
 			document.head.appendChild(script);
 			document.removeEventListener('WebComponentsReady', webComponentsReady, false);
-		}, false);</script><script src=/node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js></script><script>"serviceWorker"in navigator&&navigator.serviceWorker.register("sw.js")</script></body></html>
+		}, false);
+
+		navigator.serviceWorker.register('sw.js');</script><script src=/node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js></script></body></html>

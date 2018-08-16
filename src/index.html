@@ -72,13 +72,9 @@
 			document.head.appendChild(script);
 			document.removeEventListener('WebComponentsReady', webComponentsReady, false);
 		}, false);
+
+		navigator.serviceWorker.register('sw.js');
 	</script>
 	<script src="/node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
-
-	<script>
-		if('serviceWorker' in navigator) {
-			navigator.serviceWorker.register('sw.js');
-		}
-	</script>
 </body>
 </html>
