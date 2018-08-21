@@ -149,13 +149,13 @@ function jsInlineIndex() {
 	return _inline('index.html', '/assets/master.js', './');
 }
 
-function jsInlineIndex2() {
-	return _inline(
-		'index.html',
-		'/node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js',
-		'./'
-	);
-}
+// function jsInlineIndex2() {
+// 	return _inline(
+// 		'index.html',
+// 		'/node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js',
+// 		'./'
+// 	);
+// }
 
 function jsInlineDormanticide() {
 	return _inline(
@@ -198,6 +198,6 @@ export {
 	js,
 	eslint,
 	jsInline,
-	jsInlineIndex2,
+	//jsInlineIndex2,
 	jsIconBundleMinify
 };
