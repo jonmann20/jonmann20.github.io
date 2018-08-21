@@ -149,14 +149,13 @@ function jsInlineIndex() {
 	return _inline('index.html', '/assets/master.js', './');
 }
 
-// https://github.com/webcomponents/webcomponentsjs/issues/801
-// function jsInlineIndex2() {
-// 	return _inline(
-// 		'index.html',
-// 		'/node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js',
-// 		'./'
-// 	);
-// }
+function jsInlineIndex2() {
+	return _inline(
+		'index.html',
+		'/node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js',
+		'./'
+	);
+}
 
 function jsInlineDormanticide() {
 	return _inline(
@@ -172,6 +171,13 @@ function jsInlineVamp() {
 		'/assets/pageVamp.js',
 		'./games/vamp'
 	);
+}
+
+function jsIconBundleMinify() {
+	return gulp.src('assets/icons.bundle.js').
+		pipe(iff(!isDev, babel({presets: presets}).on('error', _handleErr))).
+		pipe(iff(!isDev, uglify())).
+		pipe(gulp.dest('assets'));
 }
 
 const jsInline = gulp.parallel(
@@ -191,6 +197,7 @@ const js = gulp.parallel(
 export {
 	js,
 	eslint,
-	jsInline//,
-	//jsInlineIndex2
+	jsInline,
+	jsInlineIndex2,
+	jsIconBundleMinify
 };
