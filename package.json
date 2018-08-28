@@ -1,11 +1,12 @@
 {
 	"dependencies": {
-		"@polymer/iron-icon": "^3.0.0-pre.21",
-		"@polymer/iron-iconset-svg": "^3.0.0-pre.21",
+		"@babel/core": "~7.0.0",
+		"@babel/preset-env": "~7.0.0",
+		"@babel/register": "~7.0.0",
+		"@polymer/iron-icon": "^3.0.0-pre.23",
+		"@polymer/iron-iconset-svg": "^3.0.0-pre.23",
 		"@webcomponents/webcomponentsjs": "~2.1.0",
-		"babel-core": "~6.26.3",
-		"babel-loader": "~7.1.5",
-		"babel-preset-env": "~1.7.0",
+		"babel-loader": "~8.0.0",
 		"del": "~3.0.0",
 		"eslint": "~5.4.0",
 		"eslint-plugin-html": "~4.0.5",
@@ -26,7 +27,7 @@
 		"node-sass": "~4.9.3",
 		"polymer-webpack-loader": "~2.0.3",
 		"sass-lint": "~1.12.1",
-		"webpack": "~4.17.0",
+		"webpack": "^4.17.1",
 		"webpack-cli": "~3.1.0",
 		"webpack-stream": "~5.1.1"
 	},
