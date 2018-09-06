@@ -31,7 +31,7 @@ lints = [
 	'!src/js/analytics.js'
 ],
 presets = [
-	['env', {
+	['@babel/preset-env', {
 		targets: {
 			browsers: [
 				'last 2 Chrome versions',
@@ -77,7 +77,7 @@ function jsMaster() {
 	return gulp.src(src).
 		pipe(iff(isDev, sourcemaps.init())).
 		pipe(concat('master.js')).
-		pipe(iff(!isDev, babel({presets: presets}).on('error', _handleErr))).
+		pipe(iff(!isDev, babel({presets}).on('error', _handleErr))).
 		pipe(iff(!isDev, uglify())).
 		pipe(iff(isDev, sourcemaps.write())).
 		pipe(gulp.dest('assets'));
@@ -94,7 +94,7 @@ function jsPageDormanticide() {
 		pipe(iff(isDev, sourcemaps.init())).
 		pipe(concat('pageDormanticide.js')).
 		// NOTE: babel was causing page to break (due to SAT.js)
-		//pipe(iff(!isDev, babel({presets: presets}).on('error', _handleErr))).
+		//pipe(iff(!isDev, babel({presets}).on('error', _handleErr))).
 		pipe(iff(!isDev, uglify())).
 		pipe(iff(isDev, sourcemaps.write())).
 		pipe(gulp.dest('assets'));
@@ -110,7 +110,7 @@ function jsPageVamp() {
 		pipe(iff(isDev, sourcemaps.init())).
 		pipe(concat('pageVamp.js')).
 		// NOTE: babel was causing page to break (due to SAT.js)
-		//pipe(iff(!isDev, babel({presets: presets}).on('error', _handleErr))).
+		//pipe(iff(!isDev, babel({presets}).on('error', _handleErr))).
 		pipe(iff(!isDev, uglify())).
 		pipe(iff(isDev, sourcemaps.write())).
 		pipe(gulp.dest('assets'));
@@ -123,7 +123,7 @@ function jsOther() {
 			'src/js/listCarousel.js'
 		]).
 		pipe(iff(isDev, sourcemaps.init())).
-		pipe(iff(!isDev, babel({presets: presets}).on('error', _handleErr))).
+		pipe(iff(!isDev, babel({presets}).on('error', _handleErr))).
 		pipe(iff(!isDev, uglify())).
 		pipe(iff(isDev, sourcemaps.write())).
 		pipe(gulp.dest('assets'));
@@ -175,7 +175,7 @@ function jsInlineVamp() {
 
 function jsIconBundleMinify() {
 	return gulp.src('assets/icons.bundle.js').
-		pipe(iff(!isDev, babel({presets: presets}).on('error', _handleErr))).
+		pipe(iff(!isDev, babel({presets}).on('error', _handleErr))).
 		pipe(iff(!isDev, uglify())).
 		pipe(gulp.dest('assets'));
 }
