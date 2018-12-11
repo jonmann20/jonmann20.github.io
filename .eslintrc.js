@@ -30,6 +30,7 @@ module.exports = {
 	rules: {
 		quotes: ['error', 'single', {avoidEscape: true}],
 		strict: ['error', 'global'],
+		'no-unused-vars': 'warn',
 		'no-global-assign': 'error',
 		'no-console': ['off'],
 		'keyword-spacing': ['error', {

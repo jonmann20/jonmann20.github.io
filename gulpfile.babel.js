@@ -19,7 +19,7 @@ dev.description = 'Build files and run server';
 const prd = gulp.series(
 	scss, test,  // NOTE: running test in parallel w/JS was causing bugs
 	gulp.parallel(js, copy, htmlBundleIcons),
-	gulp.series(cssInline, jsInline, jsInlineIndex2, jsIconBundleMinify, htmlMinify)
+	gulp.series(cssInline, jsInline, /*jsInlineIndex2,*/ jsIconBundleMinify, htmlMinify)
 );
 prd.description = 'Build files for production';
 

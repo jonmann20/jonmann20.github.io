@@ -9,7 +9,6 @@ var nodePath = require('path');
 var through = require('through');
 var ProgressPlugin = require('webpack/lib/ProgressPlugin');
 var clone = require('lodash.clone');
-var some = require('lodash.some');
 
 var defaultStatsOptions = {
   colors: supportsColor.stdout.hasBasic,
@@ -39,6 +38,13 @@ module.exports = function (options, wp, done) {
 
   options = clone(options) || {};
   var config = options.config || options;
+
+  // Webpack 4 doesn't support the `quiet` attribute, however supports
+  // setting `stats` to a string within an array of configurations
+  // (errors-only|minimal|none|normal|verbose) or an object with an absurd
+  // amount of config
+  const isSilent = options.quiet || (typeof options.stats === 'string' && (options.stats.match(/^(errors-only|minimal|none)$/)));
+
   if (typeof done !== 'function') {
     var callingDone = false;
     done = function (err, stats) {
@@ -47,7 +53,7 @@ module.exports = function (options, wp, done) {
         return;
       }
       stats = stats || {};
-      if (options.quiet || callingDone) {
+      if (isSilent || callingDone) {
         return;
       }
 
@@ -167,13 +173,13 @@ module.exports = function (options, wp, done) {
         self.queue(null);
       }
       done(err, stats);
-      if (options.watch && !options.quiet) {
+      if (options.watch && !isSilent) {
         fancyLog('webpack is watching for changes');
       }
     };
 
     if (options.watch) {
-      const watchOptions = {};
+      const watchOptions = options.watchOptions || {};
       compiler.watch(watchOptions, callback);
     } else {
       compiler.run(callback);
@@ -221,7 +227,7 @@ module.exports = function (options, wp, done) {
 
   // If entry point manually specified, trigger that
   var hasEntry = Array.isArray(config)
-    ? some(config, function (c) { return c.entry; })
+    ? config.some(function (c) { return c.entry; })
     : config.entry;
   if (hasEntry) {
     stream.end();
