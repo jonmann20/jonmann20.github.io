@@ -7,8 +7,11 @@ module.exports = {
 		node: true,
 		es6: true
 	},
+	parser: 'babel-eslint',
 	parserOptions: {
-    	ecmaVersion: 8
+		ecmaVersion: 8,
+		//sourceType: 'module',
+		allowImportExportEverywhere: true
 	},
 	globals: {
 		ga: true,
@@ -29,7 +32,7 @@ module.exports = {
 	},
 	rules: {
 		quotes: ['error', 'single', {avoidEscape: true}],
-		strict: ['error', 'global'],
+		strict: ['warn', 'global'],
 		'no-unused-vars': 'warn',
 		'no-global-assign': 'error',
 		'no-console': ['off'],
@@ -56,17 +59,11 @@ module.exports = {
 		'space-before-blocks': 'error',
 		camelcase: 'error',
 		'brace-style': ['error', 'stroustrup', {allowSingleLine: false}],
-		'space-before-function-paren': ['error', 'never'],
+		'space-before-function-paren': ['warn', 'never'],
 		'comma-spacing': ['error', {after: true}],
-		indent: ['error', 'tab', {SwitchCase: 1}],
+		indent: ['warn', 'tab', {SwitchCase: 1}],
 		//'linebreak-style': ['error', 'unix'],
 		'space-infix-ops': 'error',
 		//'max-len': ['error', 120]
-	},
-	overrides: [{
-		files: ['gulpfile.babel.js', 'gulp_tasks/**/*'],
-		parserOptions: {
-			sourceType: 'module'
-		}
-	}]
+	}
 };

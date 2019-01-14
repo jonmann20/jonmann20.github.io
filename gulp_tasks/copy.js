@@ -6,8 +6,6 @@ copy.description = 'Copy files from `src` to `/`';
 export default function copy() {
 	return gulp.src([
 		'src/**',
-		'!src/elts',
-		'!src/elts/**',
 		'!src/scss',
 		'!src/scss/**',
 		'!src/js',

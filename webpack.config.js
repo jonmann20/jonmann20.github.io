@@ -3,10 +3,13 @@
 const path = require('path');
 
 module.exports = {
-	entry: './src/elts/icons.html',
+	entry: {
+		icons: './src/elts/icons.html',
+		'page-home': './src/elts/page-home.js'
+	},
 	output: {
-		filename: 'icons.bundle.js',
-		path: path.resolve(__dirname, './assets')
+		path: path.resolve(__dirname, './assets'),
+		filename: '[name].bundle.js'
 	},
 	resolve: {
 		modules: ['node_modules'],

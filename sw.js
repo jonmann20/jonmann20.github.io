@@ -11,13 +11,13 @@
  limitations under the License.
 */
 
-'use strict';
+'use strict'; // eslint-disable-line
 
 /* globals caches, self, Request */
 
 // Incrementing CACHE_VERSION will kick off the install event and force previously cached
 // resources to be cached again.
-const CACHE_VERSION = 1544561027368;
+const CACHE_VERSION = 1547432802175;
 let CURRENT_CACHES = {
 	offline: 'offline-v' + CACHE_VERSION
 };

@@ -1,4 +1,4 @@
-'use strict';
+'use strict'; // eslint-disable-line
 /* eslint no-unused-vars: ["error", {"varsIgnorePattern": "StarryBg"}] */
 /* eslint camelcase: 0 */
 

@@ -70,6 +70,9 @@
 			let script = document.createElement('script');
 			script.src = '/assets/icons.bundle.js';
 			document.head.appendChild(script);
+
+			window.componentsReady = true;
+
 			document.removeEventListener('WebComponentsReady', webComponentsReady, false);
 		}, false);
 

@@ -1,12 +1,17 @@
+/* eslint indent: 0 */
+
 import gulp from 'gulp';
 import htmlmin from 'gulp-htmlmin';
 import webpackStream from 'webpack-stream';
 import webpack from 'webpack';
 
-function htmlBundleIcons() {
+function bundleComponents() {
 	const webpackConfig = require('../webpack.config.js');
 
-	return gulp.src('src/elts/icons.html').
+	return gulp.src([
+			'src/elts/icons.html',
+			'src/elts/page-home.js'
+		]).
 		pipe(webpackStream(webpackConfig, webpack)).
 		pipe(gulp.dest('assets'));
 }
@@ -25,6 +30,6 @@ function htmlMinify() {
 }
 
 export {
-	htmlBundleIcons,
+	bundleComponents,
 	htmlMinify
 };

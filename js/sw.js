@@ -11,7 +11,7 @@
  limitations under the License.
 */
 
-'use strict';
+'use strict'; // eslint-disable-line
 
 /* globals caches, self, Request */
 

@@ -1,4 +1,4 @@
-'use strict';
+'use strict'; // eslint-disable-line
 /* eslint no-unused-vars: ["error", {"varsIgnorePattern": "Router"}] */
 
 class Router {
@@ -36,6 +36,23 @@ class Router {
 		const response = await fetch(url);
 		if(response.ok) {
 			document.querySelector('main').innerHTML = await response.text();
+		}
+	}
+
+	static async loadComponent(url, html) {
+		if(await this.componentsReady()) {
+			if(await import(url)) {
+				document.querySelector('main').innerHTML = html;
+			}
+		}
+	}
+
+	static async componentsReady() {
+		if(window.componentsReady) {
+			return await Promise.resolve(true);
+		}
+		else {
+			return new Promise(resolve => document.addEventListener('WebComponentsReady', resolve, {once: true}));
 		}
 	}
 
