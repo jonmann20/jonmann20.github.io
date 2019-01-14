@@ -12,7 +12,7 @@
 			return;
 		}
 
-		document.querySelector('aside').classList.remove('active');
+		document.querySelector('a-side').removeAttribute('active');
 		document.querySelector('main').classList.remove('leftbar-active');
 		hasClass = false;
 		document.body.removeEventListener('click', hide, {passive: true});
@@ -40,7 +40,7 @@
 		e.preventDefault();
 
 		if(!hasClass) {
-			document.querySelector('aside').classList.add('active');
+			document.querySelector('a-side').setAttribute('active', true);
 			document.querySelector('main').classList.add('leftbar-active');
 			hasClass = true;
 			requestAnimationFrame(() => {

@@ -2,10 +2,12 @@
 /* eslint no-unused-vars: ["error", {"varsIgnorePattern": "ListCarousel"}] */
 
 class ListCarousel {
-	constructor(list) {
+	constructor(list, doc) {
 		let id,
 			active = 'default',
 			links = Array.from(list.querySelectorAll('a'));
+
+		doc = doc ? doc : document;
 
 		links.forEach(link => {
 			link.addEventListener('click', e => {
@@ -14,8 +16,8 @@ class ListCarousel {
 				if(id && active !== id) {
 					e.preventDefault();
 
-					document.querySelector(`#div-${active}`).classList.remove('fade-in');
-					document.querySelector(`#div-${id}`).classList.add('fade-in');
+					doc.querySelector(`#div-${active}`).classList.remove('fade-in');
+					doc.querySelector(`#div-${id}`).classList.add('fade-in');
 
 					active = id;
 				}

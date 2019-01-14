@@ -7,7 +7,7 @@ class Router {
 
 		switch(slug) {
 			case '#games':
-				GamesController.index();
+				this.loadComponent('page-games');
 				break;
 			case '#portfolio':
 				PortfolioController.index();

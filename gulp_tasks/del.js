@@ -9,7 +9,7 @@ export default function del() {
 		'!node_modules/**',
 		'!.sass-cache/**',
 		'!src/**',
-		'!.babelrc',
+		'!babel.config.js',
 		'!.gitignore',
 		'!.eslintrc',
 		'!.eslintrc.js',

@@ -48,7 +48,7 @@ class PageHome extends LitElement {
 				sourceType: 'profile',
 				screenName: 'jonwiedmann'
 			}, this.shadowRoot.querySelector('.col-right'), {
-				width: 520,
+				width: 620,
 				height: 520,
 				theme: 'dark',
 				linkColor: '#66d9ef',
@@ -111,13 +111,13 @@ class PageHome extends LitElement {
 				@media (min-width: 1061px) {
 					.col-left {
 						float: left;
-						width: 48%;
+						width: 46%;
 						margin-right: 2%;
 					}
 
 					.col-right {
 						float: right;
-						width: 48%;
+						width: 50%;
 						margin-top: 0;
 					}
 				}

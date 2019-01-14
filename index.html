@@ -5,7 +5,239 @@
 	<meta name="viewport" content="width=device-width">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-	<link rel="stylesheet" href="/assets/css/shell.css">
+	<style>
+		* {
+			box-sizing: border-box;
+		}
+
+		html {
+			min-width: 315px;
+			background-color: #1d1b1e;
+		}
+
+		body {
+			min-height: 100vh;
+			position: relative;
+			margin: 0;
+			padding-top: 40px;
+			line-height: 1.25;
+			font-size: 87.5%;
+			font-family: Arial, sans-serif;
+			color: #fcfcfa;
+			--box-shadow-2: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+			--mobile-nav-bg: $card-background;
+		}
+
+		.page {
+			height: 100%;
+			max-width: 1520px;
+			margin: 0 auto;
+			padding: 0;
+		}
+
+		header {
+			position: fixed;
+			z-index: 99999;
+			top: 0;
+			width: 100%;
+			background: #2d2a2e;
+		}
+
+		header .menu {
+			position: absolute;
+			display: flex;
+			top: 0;
+			right: 0;
+			padding: 16px 20px 15px 16px;
+			width: auto;
+			-webkit-user-select: none;
+			-moz-user-select: none;
+			-ms-user-select: none;
+			user-select: none;
+		}
+
+		header nav {
+			font-size: 1.57em;
+			text-align: left;
+			margin-top: 35px;
+			padding: 15px 20px;
+			min-width: 165px;
+		}
+
+		header nav:first-child {
+			margin-top: 0;
+			height: 55px;
+		}
+
+		header nav:first-child a {
+			display: inline;
+			text-align: center;
+			line-height: 1.1 !important;
+			margin-bottom: 0;
+			margin-right: 0;
+		}
+
+		header nav.hdr-nav2 iron-icon {
+			font-size: 0.6em;
+			margin-left: 15px;
+		}
+
+		header nav ul {
+			list-style-type: none;
+			font-size: 62%;
+			width: 90%;
+			margin: 0 auto;
+			padding: 0;
+			border-radius: 1px;
+		}
+
+		header nav ul a {
+			margin-right: 0 !important;
+		}
+
+		header nav ul a:active {
+			margin-bottom: 4px;
+		}
+
+		header nav a {
+			width: 100%;
+			color: #ffd866;
+		}
+
+		header nav a:hover {
+			color: #ffd866;
+			text-shadow: 0 0 6px #ffd866;
+		}
+
+		header nav a,
+		aside a,
+		header nav a:visited,
+		aside a:visited {
+			text-align: right;
+			display: block;
+			margin-right: 18px;
+			line-height: 1.7;
+			transition: none;
+		}
+
+		header nav a:hover iron-icon,
+		aside a:hover iron-icon,
+		.home nav .icon-home,
+		.games nav .icon-controllernes,
+		.games aside .icon-controllernes,
+		.playground nav .icon-beaker,
+		.playground aside .icon-beaker,
+		.portfolio nav .icon-briefcase,
+		.portfolio aside .icon-briefcase,
+		.about nav .icon-user,
+		.about aside .icon-user {
+			color: #ff6188;
+		}
+
+		.hdr-nav2 {
+			display: none;
+			margin-top: 20px;
+		}
+
+		.hdr-nav2 ul a {
+			margin-bottom: 4px;
+			text-align: center;
+		}
+
+		.hdr-nav2 .icon-controllernes {
+			font-size: 0.72em;
+		}
+
+		.nav1 .playground-nav li:nth-child(1) a,
+		.nav2 .playground-nav li:nth-child(2) a,
+		.nav3 .playground-nav li:nth-child(3) a {
+			color: #ff6188 !important;
+			-webkit-text-stroke: 1px #ff6188;
+			text-stroke: 1px #ff6188;
+		}
+
+		.nav1 .playground-nav li:nth-child(1) a:hover,
+		.nav2 .playground-nav li:nth-child(2) a:hover,
+		.nav3 .playground-nav li:nth-child(3) a:hover {
+			cursor: default;
+			text-shadow: none;
+		}
+
+		.hdr-nav2 .playground-nav-wrap {
+			height: 0;
+			opacity: 0;
+			visibility: hidden;
+			will-change: height, padding, opacity;
+			transition: 0.25s ease;
+		}
+
+		.hdr-nav2 .playground-nav-wrap.visible {
+			padding: 10px 0 10px 40px;
+			height: 92px;
+			visibility: visible;
+			opacity: 1;
+		}
+
+		main {
+			text-align: center;
+			padding-left: 0;
+			width: 93%;
+			height: 100%;
+			margin: 40px auto 0;
+			transition: opacity 0.3s cubic-bezier(0, 0, 0.3, 1);
+		}
+
+		main::before,
+		main::after {
+			content: ' ';
+			display: table;
+		}
+
+		main::after {
+			clear: both;
+		}
+
+		main.leftbar-active {
+			opacity: 0.5;
+		}
+
+		@media (min-width: 801px) {
+			.page {
+				padding: 0 6%;
+			}
+
+			header {
+				top: auto;
+				width: auto;
+				background: none;
+			}
+
+			header nav {
+				text-align: center;
+				padding: 15px 15px 0 0;
+			}
+
+			header nav:first-child {
+				text-indent: 9px;
+				padding-bottom: 20px;
+			}
+
+			header .menu {
+				display: none !important;
+			}
+
+			.hdr-nav2 {
+				display: block;
+			}
+
+			main {
+				text-align: left;
+				padding-left: 230px;
+				width: 100%;
+				margin: 0;
+			}
+		}
+	</style>
 
 	<link rel="icon" type="image/ico" href="/img/favicon.ico">
 	<meta name="theme-color" content="#373f44">
@@ -13,24 +245,7 @@
 	<link rel="manifest" href="manifest.json">
 </head>
 <body>
-	<aside>
-		<a href="#games">
-			Games <iron-icon icon="i:videogame-asset" class="icon-controllernes"></iron-icon>
-		</a>
-		<a href="#playground">
-			Playground <iron-icon icon="i:polymer" class="icon-beaker"></iron-icon>
-		</a>
-		<div class="playground-nav-wrap">
-			<ul class="playground-nav">
-				<li><a href="#playground/breakdancing-cube">Breakdancing Cube</a></li>
-				<li><a href="#playground/starry-background">Starry Background</a></li>
-				<li><a href="#playground/ball-pit">Ball Pit</a></li>
-			</ul>
-		</div>
-		<a href="#portfolio">
-			Portfolio <iron-icon icon="i:work" class="icon-briefcase"></iron-icon>
-		</a>
-	</aside>
+	<a-side></a-side>
 	<div class="page">
 		<header>
 			<nav>
@@ -65,13 +280,14 @@
 	</div>
 
 	<script src="/assets/master.js"></script>
-	<script>
+	<script type="module">
 		document.addEventListener('WebComponentsReady', function webComponentsReady() {
 			let script = document.createElement('script');
 			script.src = '/assets/icons.bundle.js';
 			document.head.appendChild(script);
 
 			window.componentsReady = true;
+			import('./elts/a-side.js');
 
 			document.removeEventListener('WebComponentsReady', webComponentsReady, false);
 		}, false);
