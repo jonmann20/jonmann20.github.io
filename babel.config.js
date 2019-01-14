@@ -4,10 +4,9 @@ function isBabelRegister(caller) {
 
 module.exports = (api) => {
 	const isRegister = api.caller(isBabelRegister);
-	let config = {};
 
 	if(isRegister) { // is a gulp task script
-		config = {
+		return {
 			presets: [[
 				'@babel/preset-env', {
 					targets: {
@@ -17,6 +16,9 @@ module.exports = (api) => {
 			]]
 		};
 	}
-
-	return config;
+	else {
+		return {
+			plugins: ['@babel/plugin-syntax-dynamic-import']
+		};
+	}
 };

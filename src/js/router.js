@@ -27,7 +27,7 @@ class Router {
 			case '#home':
 				/* falls through */
 			default:
-				HomeController.index();
+				this.loadComponent('page-home');
 				break;
 		}
 	}
@@ -39,10 +39,10 @@ class Router {
 		}
 	}
 
-	static async loadComponent(url, html) {
+	static async loadComponent(name) {
 		if(await this.componentsReady()) {
-			if(await import(url)) {
-				document.querySelector('main').innerHTML = html;
+			if(await import(`../elts/${name}.js`)) {
+				document.querySelector('main').innerHTML = `<${name}></${name}>`;
 			}
 		}
 	}
