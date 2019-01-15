@@ -5,14 +5,14 @@ import {bundleComponents, htmlMinify} from './gulp_tasks/html';
 //import {/*cssLint,*/ cssInline} from './gulp_tasks/css';
 import {js, eslint, jsInline, /*jsInlineIndex2,*/ jsMinifyBundles} from './gulp_tasks/js';
 import srv from './gulp_tasks/server';
-import watch from './gulp_tasks/watch';
+//import watch from './gulp_tasks/watch';
 
 const test = gulp.parallel(/*cssLint,*/ eslint);
 test.description = 'Lint SCSS and JS files';
 
 const dev = gulp.parallel(
-	gulp.series(js, copy),
-	gulp.series(srv, watch)
+	gulp.series(js),
+	gulp.series(srv/*, watch*/)
 );
 dev.description = 'Build files and run server';
 
@@ -25,7 +25,6 @@ prd.description = 'Build files for production';
 
 export {
 	del,
-	copy,
 	//cssLint,
 	js, eslint,
 	test, prd, srv,
