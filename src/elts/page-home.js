@@ -1,13 +1,13 @@
 import {html, LitElement} from 'lit-element';
-import {shellStyles} from './styles/shell';
+import {baseStyles} from './styles/base';
+import {pageStyles} from './styles/page';
+import Util from '../js/util';
 
 class PageHome extends LitElement {
 	constructor() {
 		super();
 
 		document.title = 'Jon Wiedmann';
-		document.body.classList.add('home'); // TODO: move to redux
-
 		Util.addMeta('description', "Jon Wiedmann's personal website.  A site with information on Jon's work experience and hobbies.");
 		Util.addMeta('keywords', 'Jon Wiedmann, Web Developer, HTML5, CSS, Javascript', 'Polymer');
 
@@ -64,11 +64,8 @@ class PageHome extends LitElement {
 	render() {
 		return html`
 			<style>
-				${shellStyles}
-
-				:host {
-					display: block;
-				}
+				${baseStyles}
+				${pageStyles}
 
 				.col-left {
 					min-width: 337px;
@@ -106,20 +103,6 @@ class PageHome extends LitElement {
 					opacity: 1;
 					box-shadow: var(--box-shadow-2);
 					border-radius: 2px;
-				}
-
-				@media (min-width: 1061px) {
-					.col-left {
-						float: left;
-						width: 46%;
-						margin-right: 2%;
-					}
-
-					.col-right {
-						float: right;
-						width: 50%;
-						margin-top: 0;
-					}
 				}
 			</style>
 

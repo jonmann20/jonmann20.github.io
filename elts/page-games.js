@@ -1,33 +1,34 @@
 import {html, LitElement} from 'lit-element';
-import {shellStyles} from './styles/shell';
+import {baseStyles} from './styles/base';
+import {pageStyles} from './styles/page';
+import {carouselStyles} from './styles/carousel';
+import ListCarousel from '../js/listCarousel';
 
 class PageGames extends LitElement {
 	constructor() {
 		super();
-
 		document.title = 'Games';
-		document.body.classList.add('games', 'carousel-list-page');
 	}
 
 	firstUpdated() {
-		Util.require('/assets/listCarousel.js').then(() => {
-			new ListCarousel(this.shadowRoot.querySelector('.col-left ul'), this.shadowRoot);
-		});
+		new ListCarousel(this.shadowRoot.querySelector('.col-left ul'), this.shadowRoot);
 	}
 
 	render() {
 		return html`
 			<style>
-				${shellStyles}
-
-				:host {
-					display: block;
-				}
+				${baseStyles}
+				${pageStyles}
+				${carouselStyles}
 
 				.lh {
 					list-style-type: none;
 					margin: 12px 0 8px;
 					padding-left: 0;
+					color: #919091;
+				}
+
+				.caption {
 					color: #919091;
 				}
 
@@ -60,6 +61,7 @@ class PageGames extends LitElement {
 					margin: 14px auto 0;
 				}
 
+				/* > mobile */
 				@media (min-width: 801px) {
 					#div-separate .big-img {
 						margin: 14px 0 0;

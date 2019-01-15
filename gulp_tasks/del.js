@@ -7,7 +7,6 @@ export default function del() {
 		'!.git/**',
 		'!gulp_tasks/**',
 		'!node_modules/**',
-		'!.sass-cache/**',
 		'!src/**',
 		'!babel.config.js',
 		'!.gitignore',

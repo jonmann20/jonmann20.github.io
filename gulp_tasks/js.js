@@ -30,20 +30,23 @@ lints = [
 	'gulp_tasks/**/*.js',
 	'!src/js/analytics.js'
 ],
-presets = [
-	['@babel/preset-env', {
-		targets: {
-			browsers: [
-				'last 2 Chrome versions',
-				'last 2 Firefox versions',
-				'last 2 Edge versions',
-				'last 2 Safari versions',
-				'last 2 iOS versions',
-				'last 2 ChromeAndroid versions'
-			]
-		}
-	}]
-];
+babelConfig = {
+	presets: [
+		['@babel/preset-env', {
+			targets: {
+				browsers: [
+					'last 2 Chrome versions',
+					'last 2 Firefox versions',
+					'last 2 Edge versions',
+					'last 2 Safari versions',
+					'last 2 iOS versions',
+					'last 2 ChromeAndroid versions'
+				]
+			}
+		}]
+	],
+	plugins: ['@babel/plugin-syntax-dynamic-import']
+};
 
 function _handleErr(e) {
 	console.log(`caught error: ${e}`);
@@ -60,27 +63,6 @@ function _inline(src, filename, dest) {
 			return `<script>${styles}`;
 		})).
 		pipe(gulp.dest(dest));
-}
-
-function jsMaster() {
-	let src = [
-		'src/js/util.js',
-		'src/js/controllers/*.js',
-		'src/js/router.js',
-		'src/js/main.js'
-	];
-
-	if(!isDev) {
-		src.push('src/js/analytics.js', 'src/js/clientSideLogging.js');
-	}
-
-	return gulp.src(src).
-		pipe(iff(isDev, sourcemaps.init())).
-		pipe(concat('master.js')).
-		pipe(iff(!isDev, babel({presets}).on('error', _handleErr))).
-		pipe(iff(!isDev, uglify())).
-		pipe(iff(isDev, sourcemaps.write())).
-		pipe(gulp.dest('assets'));
 }
 
 function jsPageDormanticide() {
@@ -116,19 +98,6 @@ function jsPageVamp() {
 		pipe(gulp.dest('assets'));
 }
 
-function jsOther() {
-	return gulp.src([
-			'src/js/ballPit.js',
-			'src/js/stars.js',
-			'src/js/listCarousel.js'
-		]).
-		pipe(iff(isDev, sourcemaps.init())).
-		pipe(iff(!isDev, babel({presets}).on('error', _handleErr))).
-		pipe(iff(!isDev, uglify())).
-		pipe(iff(isDev, sourcemaps.write())).
-		pipe(gulp.dest('assets'));
-}
-
 function jsServiceWorker() {
 	return gulp.src('src/js/sw.js').
 	pipe(replace('const CACHE_VERSION = 1;', () => {
@@ -145,9 +114,9 @@ function eslint() {
 		pipe(_eslint.failAfterError());
 }
 
-function jsInlineIndex() {
-	return _inline('index.html', '/assets/master.js', './');
-}
+// function jsInlineIndex() {
+// 	return _inline('index.html', '/assets/router.js', './');
+// }
 
 // function jsInlineIndex2() {
 // 	return _inline(
@@ -173,24 +142,24 @@ function jsInlineVamp() {
 	);
 }
 
-function jsIconBundleMinify() {
-	return gulp.src('assets/icons.bundle.js').
-		pipe(iff(!isDev, babel({presets}).on('error', _handleErr))).
+function jsMinifyBundles() {
+	return gulp.src('assets/*.bundle.js').
+		pipe(iff(isDev, sourcemaps.init())).
+		pipe(iff(!isDev, babel(babelConfig).on('error', _handleErr))).
 		pipe(iff(!isDev, uglify())).
+		pipe(iff(isDev, sourcemaps.write())).
 		pipe(gulp.dest('assets'));
 }
 
 const jsInline = gulp.parallel(
-	jsInlineIndex,
+	//jsInlineIndex,
 	jsInlineDormanticide,
 	jsInlineVamp
 );
 
 const js = gulp.parallel(
-	jsMaster,
 	jsPageDormanticide,
 	jsPageVamp,
-	jsOther,
 	jsServiceWorker
 );
 
@@ -199,5 +168,5 @@ export {
 	eslint,
 	jsInline,
 	//jsInlineIndex2,
-	jsIconBundleMinify
+	jsMinifyBundles
 };

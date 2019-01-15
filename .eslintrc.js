@@ -15,20 +15,8 @@ module.exports = {
 	},
 	globals: {
 		ga: true,
-		Router: true,
 		twttr: true,
-		Util: true,
-		pListen: true,
-		ListCarousel: true,
-		StarryBg: true,
-		starryBg: true,
-		BallPit: true,
-		ballPit: true,
-		AboutController: true,
-		GamesController: true,
-		HomeController: true,
-		PlaygroundController: true,
-		PortfolioController: true
+		WebComponents: true
 	},
 	rules: {
 		quotes: ['error', 'single', {avoidEscape: true}],
@@ -48,7 +36,7 @@ module.exports = {
 				'export': {after: true}
 			}
 		}],
-		semi: ['error', 'always'],
+		semi: ['warn', 'always'],
 		curly: ['error', 'all'],
 		'no-trailing-spaces': 'error',
 		'quote-props': ['error', 'as-needed'],

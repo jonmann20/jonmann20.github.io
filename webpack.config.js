@@ -5,12 +5,12 @@ const path = require('path');
 module.exports = {
 	entry: {
 		icons: './src/elts/icons.html',
-		'page-home': './src/elts/page-home.js',
-		'page-games': './src/elts/page-games.js'
+		router: './src/js/router.js'
 	},
 	output: {
 		path: path.resolve(__dirname, './assets'),
-		filename: '[name].bundle.js'
+		publicPath: '/assets/',
+		filename: '[name].js'
 	},
 	resolve: {
 		modules: ['node_modules'],

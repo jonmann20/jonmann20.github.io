@@ -9,8 +9,8 @@ function bundleComponents() {
 	const webpackConfig = require('../webpack.config.js');
 
 	return gulp.src([
-			'src/elts/icons.html',
-			'src/elts/page-home.js'
+			'src/elts/**/*.js',
+			'src/js/router.js'
 		]).
 		pipe(webpackStream(webpackConfig, webpack)).
 		pipe(gulp.dest('assets'));

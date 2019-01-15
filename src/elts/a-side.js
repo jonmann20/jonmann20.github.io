@@ -1,10 +1,11 @@
 import {html, LitElement} from 'lit-element';
-import {shellStyles} from './styles/shell';
+import {baseStyles} from './styles/base';
 
 class ASide extends LitElement {
 	static get properties() {
 		return {
-			active: {type: Boolean}//, attribute: true, reflect: true}
+			active: {type: Boolean},
+			selectedPage: {type: String}
 		};
 	}
 
@@ -16,10 +17,16 @@ class ASide extends LitElement {
 	render() {
 		return html`
 			<style>
-				${shellStyles}
+				${baseStyles}
 
-				:host {
-					display: block;
+				/* keep in sync with head-er */
+				[selected],
+				[selected]:hover {
+					color: #ff6188 !important;
+					-webkit-text-stroke: 1px #ff6188;
+					text-stroke: 1px #ff6188;
+					cursor: default;
+					text-shadow: none;
 				}
 
 				aside {
@@ -44,6 +51,7 @@ class ASide extends LitElement {
 
 				a {
 					display: block;
+					line-height: 1.7;
 					font-size: 1.45em;
 					padding: 10px 0 10px 20px;
 					text-align: left !important;
@@ -59,6 +67,20 @@ class ASide extends LitElement {
 					float: left;
 					margin-right: 20px;
 					margin-top: 5px;
+					cursor: pointer
+				}
+
+				[selected],
+				[selected]:hover {
+					color: #ff6188 !important;
+					-webkit-text-stroke: 1px #ff6188;
+					text-stroke: 1px #ff6188;
+					cursor: default;
+					text-shadow: none;
+				}
+
+				iron-icon {
+					cursor: pointer !important;
 				}
 
 				.playground-nav {
@@ -72,20 +94,20 @@ class ASide extends LitElement {
 
 			<aside id="${this.active ? 'activated' : ''}">
 				<a href="#games">
-					Games <iron-icon icon="i:videogame-asset" class="icon-controllernes"></iron-icon>
+					Games <iron-icon icon="i:videogame-asset" class="icon-controllernes" ?selected="${this.selectedPage === 'games'}"></iron-icon>
 				</a>
 				<a href="#playground">
-					Playground <iron-icon icon="i:polymer" class="icon-beaker"></iron-icon>
+					Playground <iron-icon icon="i:polymer" class="icon-beaker" ?selected="${this.selectedPage.includes('playground')}"></iron-icon>
 				</a>
 				<div class="playground-nav-wrap">
 					<ul class="playground-nav">
-						<li><a href="#playground/breakdancing-cube">Breakdancing Cube</a></li>
-						<li><a href="#playground/starry-background">Starry Background</a></li>
-						<li><a href="#playground/ball-pit">Ball Pit</a></li>
+						<li><a href="#playground/breakdancing-cube" ?selected="${this.selectedPage === 'playground/breakdancing-cube'}">Breakdancing Cube</a></li>
+						<li><a href="#playground/starry-background" ?selected="${this.selectedPage === 'playground/starry-background'}">Starry Background</a></li>
+						<li><a href="#playground/ball-pit" ?selected="${this.selectedPage === 'playground/ball-pit'}">Ball Pit</a></li>
 					</ul>
 				</div>
 				<a href="#portfolio">
-					Portfolio <iron-icon icon="i:work" class="icon-briefcase"></iron-icon>
+					Portfolio <iron-icon icon="i:work" class="icon-briefcase" ?selected="${this.selectedPage === 'portfolio'}"></iron-icon>
 				</a>
 			</aside>
 		`;
