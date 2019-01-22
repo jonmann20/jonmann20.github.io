@@ -63,11 +63,11 @@ class ASide extends LitElement {
 					text-shadow: 0 0 6px #ffd866;
 				}
 
-				iron-icon {
+				mwc-icon {
 					float: left;
-					margin-right: 20px;
+					margin-right: 13px;
 					margin-top: 5px;
-					cursor: pointer
+					cursor: pointer !important;
 				}
 
 				[selected],
@@ -77,10 +77,6 @@ class ASide extends LitElement {
 					text-stroke: 1px #ff6188;
 					cursor: default;
 					text-shadow: none;
-				}
-
-				iron-icon {
-					cursor: pointer !important;
 				}
 
 				.playground-nav {
@@ -94,10 +90,10 @@ class ASide extends LitElement {
 
 			<aside id="${this.active ? 'activated' : ''}">
 				<a href="#games">
-					Games <iron-icon icon="i:videogame-asset" class="icon-controllernes" ?selected="${this.selectedPage === 'games'}"></iron-icon>
+					Games <mwc-icon ?selected="${this.selectedPage === 'games'}">videogame_asset</mwc-icon>
 				</a>
 				<a href="#playground">
-					Playground <iron-icon icon="i:polymer" class="icon-beaker" ?selected="${this.selectedPage.includes('playground')}"></iron-icon>
+					Playground <mwc-icon ?selected="${this.selectedPage.includes('playground')}">polymer</mwc-icon>
 				</a>
 				<div class="playground-nav-wrap">
 					<ul class="playground-nav">
@@ -107,7 +103,7 @@ class ASide extends LitElement {
 					</ul>
 				</div>
 				<a href="#portfolio">
-					Portfolio <iron-icon icon="i:work" class="icon-briefcase" ?selected="${this.selectedPage === 'portfolio'}"></iron-icon>
+					Portfolio <mwc-icon ?selected="${this.selectedPage === 'portfolio'}">work</mwc-icon>
 				</a>
 			</aside>
 		`;

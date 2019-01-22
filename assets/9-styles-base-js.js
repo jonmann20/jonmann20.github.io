@@ -1,4 +1,4 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[12],{37:function(o,n,d){"use strict";d.r(n),d.d(n,"baseStyles",function(){return e});var i=d(47);const e=i["b"]`
+(window.webpackJsonp=window.webpackJsonp||[]).push([[11],{5:function(o,i,d){"use strict";d.r(i),d.d(i,"baseStyles",function(){return a});var n=d(0);const a=n["c"]`
 	:host {
 		display: block;
 	}
@@ -50,9 +50,12 @@
 		box-shadow: 2px 2px 16px 2px rgba(0, 0, 0, 0.45);
 	}
 
-	iron-icon {
+	/* avoid FOUC, could remove if bundled? */
+	mwc-icon {
 		display: inline-block;
 		width: 24px;
+		opacity: var(--icon-opacity);
+		/* not working --- font-display: block; */
 	}
 
 	/* utils */

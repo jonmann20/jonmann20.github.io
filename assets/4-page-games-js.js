@@ -1,235 +1,8 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[7,3,4,12],{37:function(e,i,a){"use strict";a.r(i),a.d(i,"baseStyles",function(){return n});var t=a(47);const n=t["b"]`
-	:host {
-		display: block;
-	}
-
-	* {
-		box-sizing: border-box;
-	}
-
-	h1,
-	h2,
-	h3 {
-		margin: 0.4em 0 0.6em;
-		font-size: 1.75em;
-		font-weight: 300;
-		color: #fcfcfa;
-		text-shadow: 0 2px 3px #212121;
-	}
-
-	ul {
-		list-style-type: none;
-		padding: 0;
-	}
-
-	a {
-		color: #66d9ef;
-		text-decoration: none;
-		outline: none;
-		cursor: pointer;
-	}
-
-	a:hover {
-		color: #7ddff1;
-		text-shadow: #7ddff1 0 0 6px;
-	}
-
-	a:active {
-		color: #4fd3ed;
-	}
-
-	a:focus {
-		outline: 0;
-	}
-
-	input {
-		outline-color: #888;
-	}
-
-	input:focus {
-		box-shadow: 2px 2px 16px 2px rgba(0, 0, 0, 0.45);
-	}
-
-	iron-icon {
-		display: inline-block;
-		width: 24px;
-	}
-
-	/* utils */
-
-	.card {
-		display: inline-block;
-		background: #2d2a2e;
-		box-shadow: var(--box-shadow-2);
-		border-radius: 2px;
-		padding: 3px 25px 5px;
-	}
-
-	.card-light {
-		border-radius: 2px;
-		box-shadow: var(--box-shadow-2);
-	}
-`},38:function(e,i,a){"use strict";a.r(i),a.d(i,"pageStyles",function(){return n});var t=a(47);const n=t["b"]`
-	.col-left {
-		min-width: 121px;
-		width: 100%;
-	}
-
-	.col-left ul {
-		font-size: 1.15em;
-	}
-
-	.col-right {
-		margin-top: 25px;
-		padding-bottom: 13px;
-	}
-
-	.col-right img {
-		max-width: 100%;
-	}
-
-	.col-right > div {
-		padding-bottom: 13px !important;
-	}
-
-	/* > mobile */
-	@media (min-width: 801px) {
-		.col-left {
-			float: left;
-			width: 46%;
-			margin-right: 2%;
-		}
-
-		.col-right {
-			float: right;
-			width: 50%;
-			margin-top: 0;
-		}
-	}
-
-	/* tablet */
-	@media (min-width: 801px) and (max-width: 1265px) {
-		.col-left {
-			width: 100%;
-			margin-bottom: 0;
-		}
-
-		.col-right {
-			width: 100%;
-			margin-top: 25px;
-		}
-	}
-`},39:function(e,i,a){"use strict";a.r(i),a.d(i,"carouselStyles",function(){return n});var t=a(47);const n=t["b"]`
-	:host {
-		position: relative;
-	}
-
-	.big-btn {
-		display: inline-block;
-		margin: 10px auto;
-		padding: 9px 14px;
-		border-radius: 10px;
-		font-weight: bold;
-		font-size: 1.2em;
-		background: rgba(107, 107, 107, 0.64);
-		box-shadow: 0 3px 0 rgba(54, 54, 54, 0.94);
-		opacity: 1;
-		transition: all 0.19s;
-		color: #ffd866;
-	}
-
-	.big-btn:hover,
-	.big-btn:focus {
-		color: #ffd866;
-		box-shadow: 0 3px 0 #ffd866;
-		text-shadow: none;
-	}
-
-	.big-btn:active {
-		box-shadow: none !important;
-		transform: translateY(3px);
-	}
-
-	.big-btn span {
-		padding-right: 10px;
-		vertical-align: -1px;
-	}
-
-	.col-left {
-		display: none;
-	}
-
-	.col-right {
-		margin-top: 0;
-	}
-
-	.col-right > div {
-		opacity: 1;
-		visibility: visible;
-		transition: 450ms opacity;
-		position: static;
-		width: 100%;
-		margin-bottom: 20px;
-	}
-
-	.col-right > div:last-child {
-		margin-bottom: 100px;
-	}
-
-	.col-right > div.fade-in {
-		opacity: 1 !important;
-		visibility: visible !important;
-		transition: 300ms opacity;
-	}
-
-	#div-default {
-		display: none;
-	}
-
-	/* > mobile */
-	@media (min-width: 801px) {
-		ul {
-			list-style-type: inherit;
-			padding-left: 20px;
-		}
-
-		.col-left {
-			display: block;
-		}
-
-		.col-right > div {
-			opacity: 0;
-			visibility: hidden;
-			width: 44%;
-			position: absolute;
-			max-width: 728px;
-		}
-
-		.col-right > div:last-child {
-			margin-bottom: 20px;
-		}
-
-		#div-default {
-			display: block;
-		}
-	}
-
-	/* tablet */
-	@media (min-width: 801px) and (max-width: 1265px) {
-		.col-right {
-			margin-top: 25px;
-		}
-
-		.col-right > div {
-			width: 100%;
-			max-width: 490px;
-		}
-	}
-`},41:function(e,i,a){"use strict";a.r(i);var t=a(47),n=a(37),o=a(38),r=a(39),l=a(49);customElements.define("page-games",class extends t.a{constructor(){super(),document.title="Games"}firstUpdated(){new l.a(this.shadowRoot.querySelector(".col-left ul"),this.shadowRoot)}render(){return t["b"]`
+(window.webpackJsonp=window.webpackJsonp||[]).push([[6,2,3,11],{11:function(e,a,i){"use strict";i.r(a);var t=i(0),o=i(5),n=i(6),s=i(7),l=i(18);customElements.define("page-games",class extends t.a{constructor(){super(),document.title="Games"}firstUpdated(){new l.a(this.shadowRoot.querySelector(".col-left ul"),this.shadowRoot)}render(){return t["c"]`
 			<style>
-				${n.baseStyles}
-				${o.pageStyles}
-				${r.carouselStyles}
+				${o.baseStyles}
+				${n.pageStyles}
+				${s.carouselStyles}
 
 				.lh {
 					list-style-type: none;
@@ -242,8 +15,8 @@
 					color: #919091;
 				}
 
-				.col-right iron-icon[icon="i:videogame-asset"],
-				.col-right iron-icon[icon="i:code"] {
+				.col-right .videogame-asset,
+				.col-right .code {
 					margin-right: 10px;
 					vertical-align: -6px;
 				}
@@ -352,10 +125,10 @@
 					</ul>
 
 					<a class="big-btn" href="/games/jonsQuest">
-						<iron-icon icon="i:videogame-asset"></iron-icon>Play Game
+						<mwc-icon class="videogame-asset">videogame_asset</mwc-icon>Play Game
 					</a>&nbsp;
 					<a class="big-btn alt" href="https://github.com/jonmann20/jonmann20.github.com/tree/master/games/jonsQuest" target="_blank" rel="noopener" title="Source Code on Github">
-						<iron-icon icon="i:code"></iron-icon>Source Code &#8599;
+						<mwc-icon class="code">code</mwc-icon>Source Code &#8599;
 					</a>
 				</div>
 				<div id="div-dungeon" class="card">
@@ -376,10 +149,10 @@
 					</ul>
 
 					<a class="big-btn" href="/games/dungeon/build/web">
-						<iron-icon icon="i:videogame-asset"></iron-icon>Play Game
+						<mwc-icon class="videogame-asset">videogame_asset</mwc-icon>Play Game
 					</a>&nbsp;
 					<a class="big-btn alt" href="https://github.com/jonmann20/jonmann20.github.com/tree/master/games/dungeon" target="_blank" rel="noopener" title="Source Code on Github">
-						<iron-icon icon="i:code"></iron-icon>Source Code &#8599;
+						<mwc-icon class="code">code</mwc-icon>Source Code &#8599;
 					</a>
 				</div>
 				<div id="div-separate" class="card">
@@ -409,10 +182,10 @@
 					</ul>
 
 					<a class="big-btn" href="/games/separate">
-						<iron-icon icon="i:videogame-asset"></iron-icon>Play Game
+						<mwc-icon class="videogame-asset">videogame_asset</mwc-icon>Play Game
 					</a>&nbsp;
 					<a class="big-btn alt" href="https://github.com/jonmann20/GameJam14" target="_blank" rel="noopener" title="Source Code on Github">
-						<iron-icon icon="i:code"></iron-icon>Source Code &#8599;
+						<mwc-icon class="code">code</mwc-icon>Source Code &#8599;
 					</a>
 				</div>
 				<div id="div-defend" class="card">
@@ -423,10 +196,10 @@
 
 					<p>
 						<a class="big-btn" href="/games/defendThyKingdom/">
-							<iron-icon icon="i:videogame-asset"></iron-icon>Play Game
+							<mwc-icon class="videogame-asset">videogame_asset</mwc-icon>Play Game
 						</a>&nbsp;
 						<a class="big-btn alt" href="https://github.com/jonmann20/WizardSurvival" target="_blank" rel="noopener" title="Source Code on Github">
-							<iron-icon icon="i:code"></iron-icon>Source Code &#8599;
+							<mwc-icon class="code">code</mwc-icon>Source Code &#8599;
 						</a>
 					</p>
 				</div>
@@ -443,10 +216,10 @@
 					</ul>
 
 					<a class="big-btn" href="/games/bloodCellBrigade">
-						<iron-icon icon="i:videogame-asset"></iron-icon>Play Game
+						<mwc-icon class="videogame-asset">videogame_asset</mwc-icon>Play Game
 					</a>&nbsp;
 					<a class="big-btn alt" href="https://github.com/jonmann20/IntelGameJamW14" target="_blank" rel="noopener" title="Source Code on Github">
-						<iron-icon icon="i:code"></iron-icon>Source Code &#8599;
+						<mwc-icon class="code">code</mwc-icon>Source Code &#8599;
 					</a>
 				</div>
 				<div id="div-deflection" class="card">
@@ -460,10 +233,10 @@
 					</ul>
 
 					<a class="big-btn" href="/games/deflection">
-						<iron-icon icon="i:videogame-asset"></iron-icon>Play Game
+						<mwc-icon class="videogame-asset">videogame_asset</mwc-icon>Play Game
 					</a>&nbsp;
 					<a class="big-btn alt" href="https://github.com/jonmann20/Deflection" target="_blank" rel="noopener" title="Source Code on Github">
-						<iron-icon icon="i:code"></iron-icon>Source Code &#8599;
+						<mwc-icon class="code">code</mwc-icon>Source Code &#8599;
 					</a>
 				</div>
 				<div id="div-zelda" class="card">
@@ -482,10 +255,10 @@
 					<p>Original game is copyrighted by Nintendo.</p>
 
 					<a class="big-btn" href="/games/zeldaReservanted">
-						<iron-icon icon="i:videogame-asset"></iron-icon>Play Game
+						<mwc-icon class="videogame-asset">videogame_asset</mwc-icon>Play Game
 					</a>&nbsp;
 					<a class="big-btn alt" href="https://github.com/jonmann20/ZeldaReservanted" target="_blank" rel="noopener" title="Source Code on Github">
-						<iron-icon icon="i:code"></iron-icon>Source Code &#8599;
+						<mwc-icon class="code">code</mwc-icon>Source Code &#8599;
 					</a>
 				</div>
 				<div id="div-dormanticide" class="card">
@@ -493,10 +266,10 @@
 					<p>A battle simulator (very early in development).</p>
 
 					<a class="big-btn" href="/games/dormanticide">
-						<iron-icon icon="i:videogame-asset"></iron-icon>Play Game
+						<mwc-icon class="videogame-asset">videogame_asset</mwc-icon>Play Game
 					</a>&nbsp;
 					<a class="big-btn alt" href="https://github.com/jonmann20/jonmann20.github.com/tree/master/games/dormanticide" target="_blank" rel="noopener" title="Source Code on Github">
-						<iron-icon icon="i:code"></iron-icon>Source Code &#8599;
+						<mwc-icon class="code">code</mwc-icon>Source Code &#8599;
 					</a>
 				</div>
 				<div id="div-vamp" class="card">
@@ -504,10 +277,10 @@
 					<p>A game about a vamprie with the ability to save your game (very early in development)</p>
 
 					<a class="big-btn" href="/games/vamp">
-						<iron-icon icon="i:videogame-asset"></iron-icon>Play Game
+						<mwc-icon class="videogame-asset">videogame_asset</mwc-icon>Play Game
 					</a>&nbsp;
 					<a class="big-btn alt" href="https://github.com/jonmann20/jonmann20.github.com/tree/master/games/vamp" target="_blank" rel="noopener" title="Source Code on Github">
-						<iron-icon icon="i:code"></iron-icon>Source Code &#8599;
+						<mwc-icon class="code">code</mwc-icon>Source Code &#8599;
 					</a>
 				</div>
 
@@ -525,4 +298,234 @@
 					</ul>
 				</div>
 			</div>
-        `}})},49:function(e,i,a){"use strict";i.a=class{constructor(e,i){let a,t="default",n=Array.from(e.querySelectorAll("a"));i=i||document,n.forEach(e=>{e.addEventListener("click",e=>{(a=e.target.id)&&t!==a&&(e.preventDefault(),i.querySelector(`#div-${t}`).classList.remove("fade-in"),i.querySelector(`#div-${a}`).classList.add("fade-in"),t=a)})})}}}}]);
+        `}})},18:function(e,a,i){"use strict";a.a=class{constructor(e,a){let i,t="default",o=Array.from(e.querySelectorAll("a"));a=a||document,o.forEach(e=>{e.addEventListener("click",e=>{(i=e.target.id)&&t!==i&&(e.preventDefault(),a.querySelector(`#div-${t}`).classList.remove("fade-in"),a.querySelector(`#div-${i}`).classList.add("fade-in"),t=i)})})}}},5:function(e,a,i){"use strict";i.r(a),i.d(a,"baseStyles",function(){return o});var t=i(0);const o=t["c"]`
+	:host {
+		display: block;
+	}
+
+	* {
+		box-sizing: border-box;
+	}
+
+	h1,
+	h2,
+	h3 {
+		margin: 0.4em 0 0.6em;
+		font-size: 1.75em;
+		font-weight: 300;
+		color: #fcfcfa;
+		text-shadow: 0 2px 3px #212121;
+	}
+
+	ul {
+		list-style-type: none;
+		padding: 0;
+	}
+
+	a {
+		color: #66d9ef;
+		text-decoration: none;
+		outline: none;
+		cursor: pointer;
+	}
+
+	a:hover {
+		color: #7ddff1;
+		text-shadow: #7ddff1 0 0 6px;
+	}
+
+	a:active {
+		color: #4fd3ed;
+	}
+
+	a:focus {
+		outline: 0;
+	}
+
+	input {
+		outline-color: #888;
+	}
+
+	input:focus {
+		box-shadow: 2px 2px 16px 2px rgba(0, 0, 0, 0.45);
+	}
+
+	/* avoid FOUC, could remove if bundled? */
+	mwc-icon {
+		display: inline-block;
+		width: 24px;
+		opacity: var(--icon-opacity);
+		/* not working --- font-display: block; */
+	}
+
+	/* utils */
+
+	.card {
+		display: inline-block;
+		background: #2d2a2e;
+		box-shadow: var(--box-shadow-2);
+		border-radius: 2px;
+		padding: 3px 25px 5px;
+	}
+
+	.card-light {
+		border-radius: 2px;
+		box-shadow: var(--box-shadow-2);
+	}
+`},6:function(e,a,i){"use strict";i.r(a),i.d(a,"pageStyles",function(){return o});var t=i(0);const o=t["c"]`
+	.col-left {
+		min-width: 121px;
+		width: 100%;
+	}
+
+	.col-left ul {
+		font-size: 1.15em;
+	}
+
+	.col-right {
+		margin-top: 25px;
+		padding-bottom: 13px;
+	}
+
+	.col-right img {
+		max-width: 100%;
+	}
+
+	.col-right > div {
+		padding-bottom: 13px !important;
+	}
+
+	/* > mobile */
+	@media (min-width: 801px) {
+		.col-left {
+			float: left;
+			width: 46%;
+			margin-right: 2%;
+		}
+
+		.col-right {
+			float: right;
+			width: 50%;
+			margin-top: 0;
+		}
+	}
+
+	/* tablet */
+	@media (min-width: 801px) and (max-width: 1265px) {
+		.col-left {
+			width: 100%;
+			margin-bottom: 0;
+		}
+
+		.col-right {
+			width: 100%;
+			margin-top: 25px;
+		}
+	}
+`},7:function(e,a,i){"use strict";i.r(a),i.d(a,"carouselStyles",function(){return o});var t=i(0);const o=t["c"]`
+	:host {
+		position: relative;
+	}
+
+	.big-btn {
+		display: inline-block;
+		margin: 10px auto;
+		padding: 9px 14px;
+		border-radius: 10px;
+		font-weight: bold;
+		font-size: 1.2em;
+		background: rgba(107, 107, 107, 0.64);
+		box-shadow: 0 3px 0 rgba(54, 54, 54, 0.94);
+		opacity: 1;
+		transition: all 0.19s;
+		color: #ffd866;
+	}
+
+	.big-btn:hover,
+	.big-btn:focus {
+		color: #ffd866;
+		box-shadow: 0 3px 0 #ffd866;
+		text-shadow: none;
+	}
+
+	.big-btn:active {
+		box-shadow: none !important;
+		transform: translateY(3px);
+	}
+
+	.big-btn span {
+		padding-right: 10px;
+		vertical-align: -1px;
+	}
+
+	.col-left {
+		display: none;
+	}
+
+	.col-right {
+		margin-top: 0;
+	}
+
+	.col-right > div {
+		opacity: 1;
+		visibility: visible;
+		transition: 450ms opacity;
+		position: static;
+		width: 100%;
+		margin-bottom: 20px;
+	}
+
+	.col-right > div:last-child {
+		margin-bottom: 100px;
+	}
+
+	.col-right > div.fade-in {
+		opacity: 1 !important;
+		visibility: visible !important;
+		transition: 300ms opacity;
+	}
+
+	#div-default {
+		display: none;
+	}
+
+	/* > mobile */
+	@media (min-width: 801px) {
+		ul {
+			list-style-type: inherit;
+			padding-left: 20px;
+		}
+
+		.col-left {
+			display: block;
+		}
+
+		.col-right > div {
+			opacity: 0;
+			visibility: hidden;
+			width: 44%;
+			position: absolute;
+			max-width: 728px;
+		}
+
+		.col-right > div:last-child {
+			margin-bottom: 20px;
+		}
+
+		#div-default {
+			display: block;
+		}
+	}
+
+	/* tablet */
+	@media (min-width: 801px) and (max-width: 1265px) {
+		.col-right {
+			margin-top: 25px;
+		}
+
+		.col-right > div {
+			width: 100%;
+			max-width: 490px;
+		}
+	}
+`}}]);

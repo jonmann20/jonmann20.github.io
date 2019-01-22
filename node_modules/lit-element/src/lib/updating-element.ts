@@ -18,25 +18,7 @@
  * alias this function, so we have to use a small shim that has the same
  * behavior when not compiling.
  */
-const JSCompiler_renameProperty = (prop: PropertyKey, _obj: any) => prop;
-
-/**
- * Returns the property descriptor for a property on this prototype by walking
- * up the prototype chain. Note that we stop just before Object.prototype, which
- * also avoids issues with Symbol polyfills (core-js, get-own-property-symbols),
- * which create accessors for the symbols on Object.prototype.
- */
-const descriptorFromPrototype = (name: PropertyKey, proto: UpdatingElement) => {
-  if (name in proto) {
-    while (proto !== Object.prototype) {
-      if (proto.hasOwnProperty(name)) {
-        return Object.getOwnPropertyDescriptor(proto, name);
-      }
-      proto = Object.getPrototypeOf(proto);
-    }
-  }
-  return undefined;
-};
+export const JSCompiler_renameProperty = (prop: PropertyKey, _obj: any) => prop;
 
 /**
  * Converts property values to and from attribute values.
@@ -242,14 +224,16 @@ export abstract class UpdatingElement extends HTMLElement {
   static get observedAttributes() {
     // note: piggy backing on this to ensure we're _finalized.
     this._finalize();
-    const attributes = [];
-    for (const [p, v] of this._classProperties!) {
+    const attributes: string[] = [];
+    // Use forEach so this works even if for/of loops are compiled to for loops
+    // expecting arrays
+    this._classProperties!.forEach((v, p) => {
       const attr = this._attributeNameForProperty(p, v);
       if (attr !== undefined) {
         this._attributeToPropertyMap.set(attr, p);
         attributes.push(attr);
       }
-    }
+    });
     return attributes;
   }
 
@@ -288,37 +272,26 @@ export abstract class UpdatingElement extends HTMLElement {
     // metadata.
     this._ensureClassProperties();
     this._classProperties!.set(name, options);
-    if (!options.noAccessor) {
-      const superDesc = descriptorFromPrototype(name, this.prototype);
-      let desc;
-      // If there is a super accessor, capture it and "super" to it
-      if (superDesc !== undefined && (superDesc.set && superDesc.get)) {
-        const {set, get} = superDesc;
-        desc = {
-          get() { return get.call(this); },
-          set(value: any) {
-            const oldValue = this[name];
-            set.call(this, value);
-            this.requestUpdate(name, oldValue);
-          },
-          configurable : true,
-          enumerable : true
-        };
-      } else {
-        const key = typeof name === 'symbol' ? Symbol() : `__${name}`;
-        desc = {
-          get() { return this[key]; },
-          set(value: any) {
-            const oldValue = this[name];
-            this[key] = value;
-            this.requestUpdate(name, oldValue);
-          },
-          configurable : true,
-          enumerable : true
-        };
-      }
-      Object.defineProperty(this.prototype, name, desc);
+    // Do not generate an accessor if the prototype already has one, since
+    // it would be lost otherwise and that would never be the user's intention;
+    // Instead, we expect users to call `requestUpdate` themselves from
+    // user-defined accessors. Note that if the super has an accessor we will
+    // still overwrite it
+    if (options.noAccessor || this.prototype.hasOwnProperty(name)) {
+      return;
     }
+    const key = typeof name === 'symbol' ? Symbol() : `__${name}`;
+    Object.defineProperty(this.prototype, name, {
+      get(): any { return (this as any)[key]; },
+      set(this: UpdatingElement, value: any) {
+        const oldValue = (this as any)[name];
+        (this as any)[key] = value;
+          this.requestUpdate(name, oldValue);
+        },
+        configurable : true,
+        enumerable : true
+      }
+    );
   }
 
   /**
@@ -353,6 +326,7 @@ export abstract class UpdatingElement extends HTMLElement {
             ? Object.getOwnPropertySymbols(props)
             : []
       ];
+      // This for/of is ok because propKeys is an array
       for (const p of propKeys) {
         // note, use of `any` is due to TypeSript lack of support for symbol in
         // index types
@@ -464,26 +438,28 @@ export abstract class UpdatingElement extends HTMLElement {
    * the native platform default).
    */
   private _saveInstanceProperties() {
-    for (const [p] of (this.constructor as typeof UpdatingElement)
-             ._classProperties!) {
-      if (this.hasOwnProperty(p)) {
-        const value = this[p as keyof this];
-        delete this[p as keyof this];
-        if (!this._instanceProperties) {
-          this._instanceProperties = new Map();
-        }
-        this._instanceProperties.set(p, value);
-      }
-    }
+    // Use forEach so this works even if for/of loops are compiled to for loops
+    // expecting arrays
+    (this.constructor as typeof UpdatingElement)
+        ._classProperties!.forEach((_v, p) => {
+          if (this.hasOwnProperty(p)) {
+            const value = this[p as keyof this];
+            delete this[p as keyof this];
+            if (!this._instanceProperties) {
+              this._instanceProperties = new Map();
+            }
+            this._instanceProperties.set(p, value);
+          }
+        });
   }
 
   /**
    * Applies previously saved instance properties.
    */
   private _applyInstanceProperties() {
-    for (const [p, v] of this._instanceProperties!) {
-      (this as any)[p] = v;
-    }
+    // Use forEach so this works even if for/of loops are compiled to for loops
+    // expecting arrays
+    this._instanceProperties!.forEach((v, p) => (this as any)[p] = v);
     this._instanceProperties = undefined;
   }
 
@@ -720,9 +696,10 @@ export abstract class UpdatingElement extends HTMLElement {
   protected update(_changedProperties: PropertyValues) {
     if (this._reflectingProperties !== undefined &&
         this._reflectingProperties.size > 0) {
-      for (const [k, v] of this._reflectingProperties) {
-        this._propertyToAttribute(k, this[k as keyof this], v);
-      }
+      // Use forEach so this works even if for/of loops are compiled to for
+      // loops expecting arrays
+      this._reflectingProperties.forEach(
+          (v, k) => this._propertyToAttribute(k, this[k as keyof this], v));
       this._reflectingProperties = undefined;
     }
   }

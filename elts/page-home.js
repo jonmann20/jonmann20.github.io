@@ -85,11 +85,11 @@ class PageHome extends LitElement {
 					line-height: 2;
 				}
 
-				ul a:hover iron-icon {
+				ul a:hover mwc-icon {
 					color: #ff6188;
 				}
 
-				iron-icon {
+				mwc-icon {
 					margin-right: 7px;
 					vertical-align: -6px;
 				}
@@ -113,19 +113,19 @@ class PageHome extends LitElement {
                 <ul>
                     <li>
                         <a href="mailto:jonwiedmann@gmail.com" title="jonwiedmann@gmail.com" target="_blank" rel="noopener">
-                            <iron-icon icon="i:mail"></iron-icon>
+							<mwc-icon>mail</mwc-icon>
                             Email
                         </a>
                     </li>
                     <li>
                         <a href="https://github.com/jonmann20" target="_blank" rel="noopener">
-                            <iron-icon icon="i:code"></iron-icon>
+							<mwc-icon>code</mwc-icon>
                             GitHub
                         </a>
                     </li>
                     <li>
                         <a href="https://www.linkedin.com/pub/jon-wiedmann/67/42b/b64" target="_blank" rel="noopener">
-                            <iron-icon icon="i:assignment-ind"></iron-icon>
+							<mwc-icon>assignment_ind</mwc-icon>
                             LinkedIn
                         </a>
                     </li>

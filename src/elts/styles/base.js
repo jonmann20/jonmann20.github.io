@@ -52,9 +52,12 @@ export const baseStyles = html`
 		box-shadow: 2px 2px 16px 2px rgba(0, 0, 0, 0.45);
 	}
 
-	iron-icon {
+	/* avoid FOUC, could remove if bundled? */
+	mwc-icon {
 		display: inline-block;
 		width: 24px;
+		opacity: var(--icon-opacity);
+		/* not working --- font-display: block; */
 	}
 
 	/* utils */
@@ -72,38 +75,3 @@ export const baseStyles = html`
 		box-shadow: var(--box-shadow-2);
 	}
 `;
-
-/* vars
-
-// Monakai theme
-$black: #2d2a2e;
-$blue: #66d9ef;
-$green: #a6e22e;
-$white: #fcfcfa;
-$red: #ff6188;
-$purple: #ab9df2;
-$yellow: #ffd866;
-$gray: #919091;
-
-$html-background: darken($black, 6%);
-$card-background: $black;
-$txt-color: $white;
-$link-color: $blue;
-$link-color-hover: lighten($link-color, 5%);
-$link-color-active: darken($link-color, 5%);
-$nav-link-color: $yellow;
-$nav-link-active-color: $red;
-$header-txt-color: $white;
-
-@mixin desktop {
-	@media (min-width: 801px) {
-		@content;
-	}
-}
-
-@mixin tablet {
-	@media (min-width: 801px) and (max-width: 1265px) {
-		@content;
-	}
-}
-*/

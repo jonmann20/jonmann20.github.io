@@ -25,7 +25,7 @@ class PagePortfolio extends LitElement {
 					margin-bottom: 20px;
 				}
 
-				.big-btn iron-icon[icon="i:open-in-new"] {
+				.big-btn .open-in-new {
 					vertical-align: -6px;
 					margin-left: 3px;
 				}
@@ -82,7 +82,7 @@ class PagePortfolio extends LitElement {
 					</p>
 
 					<a href="https://wellopp.com" class="big-btn" target="_blank" rel="noopener">
-						Visit wellopp.com <iron-icon icon="i:open-in-new"></iron-icon>
+						Visit wellopp.com <mwc-icon class="open-in-new">open_in_new</mwc-icon>
 					</a>
 
 					<p><img src="/img/portfolio/wellopp.png" alt="Wellopp website"></p>
@@ -111,7 +111,7 @@ class PagePortfolio extends LitElement {
 						The app takes you through a quiz, revealing what white elephant gift you are most like.
 					</p>
 					<a href="https://perficient.com" class="big-btn" target="_blank" rel="noopener">
-						Visit perficient.com <iron-icon icon="i:open-in-new"></iron-icon>
+						Visit perficient.com <mwc-icon class="open-in-new">open_in_new</mwc-icon>
 					</a>
 
 					<img class="enl-site" src="/img/portfolio/enlighten.jpg" alt="Enlighten Agency">
@@ -124,7 +124,7 @@ class PagePortfolio extends LitElement {
 					</p>
 
 					<a href="http://picocal.com" class="big-btn" target="_blank" rel="noopener">
-						Visit picocal.com <iron-icon icon="i:open-in-new"></iron-icon>
+						Visit picocal.com <mwc-icon class="open-in-new">open_in_new</mwc-icon>
 					</a>
 
 					<img src="/img/portfolio/pico.jpg" alt="PicoCal">
@@ -138,7 +138,7 @@ class PagePortfolio extends LitElement {
 					</p>
 
 					<a href="https://twitter.com/Nologydigital" class="big-btn" target="_blank" rel="noopener">
-						Visit @Nologydigital <iron-icon icon="i:open-in-new"></iron-icon>
+						Visit @Nologydigital <mwc-icon class="open-in-new">open_in_new</mwc-icon>
 					</a>
 
 					<img src="/img/portfolio/nology.jpg" alt="Nology Digital">

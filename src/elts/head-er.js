@@ -39,7 +39,7 @@ class HeadEr extends LitElement {
 					background: #2d2a2e;
 				}
 
-				header .menu {
+				.menu {
 					position: absolute;
 					display: flex;
 					top: 0;
@@ -52,7 +52,7 @@ class HeadEr extends LitElement {
 					user-select: none;
 				}
 
-				header nav {
+				nav {
 					font-size: 1.57em;
 					text-align: left;
 					margin-top: 35px;
@@ -60,24 +60,19 @@ class HeadEr extends LitElement {
 					min-width: 165px;
 				}
 
-				header nav:first-child {
+				nav:first-child {
 					margin-top: 0;
 					height: 55px;
 				}
 
-				header nav:first-child a {
+				nav:first-child a {
 					display: inline;
 					text-align: center;
 					line-height: 1.1 !important;
 					margin-right: 0;
 				}
 
-				header nav.hdr-nav2 iron-icon {
-					font-size: 0.6em;
-					margin-left: 15px;
-				}
-
-				header nav ul {
+				ul {
 					list-style-type: none;
 					font-size: 62%;
 					width: 90%;
@@ -86,28 +81,26 @@ class HeadEr extends LitElement {
 					border-radius: 1px;
 				}
 
-				header nav ul a {
+				ul a {
 					margin-right: 0 !important;
 				}
 
-				header nav ul a:active {
+				ul a:active {
 					margin-bottom: 4px;
 				}
 
-				header nav a {
+				a {
 					width: 100%;
 					color: #ffd866;
 				}
 
-				header nav a:hover {
+				a:hover {
 					color: #ffd866;
 					text-shadow: 0 0 6px #ffd866;
 				}
 
-				header nav a,
-				aside a,
-				header nav a:visited,
-				aside a:visited {
+				a,
+				a:visited {
 					text-align: right;
 					display: block;
 					margin-right: 18px;
@@ -117,36 +110,38 @@ class HeadEr extends LitElement {
 
 				/* TODO: extract template, logic, and styling of nav links between head-er and a-side */
 				/* keep in sync with a-side */
-				header nav a:hover iron-icon,
-				aside a:hover iron-icon,
+				a:hover mwc-icon,
 				[selected],
 				[selected]:hover {
 					color: #ff6188 !important;
-					-webkit-text-stroke: 1px #ff6188;
-					text-stroke: 1px #ff6188;
 					cursor: default;
 					text-shadow: none;
 				}
 
-				iron-icon {
+				mwc-icon {
 					cursor: pointer !important;
 				}
 
-				.hdr-nav2 {
+				.icon-home {
+					margin-right: 7px;
+					vertical-align: -3px;
+				}
+
+				.nav2 {
 					display: none;
 					margin-top: 20px;
 				}
 
-				.hdr-nav2 ul a {
+				.nav2 ul a {
 					margin-bottom: 4px;
 					text-align: center;
 				}
 
-				.hdr-nav2 .icon-controllernes {
-					font-size: 0.72em;
+				.nav2 mwc-icon {
+					vertical-align: -5px;
 				}
 
-				.hdr-nav2 .playground-nav-wrap {
+				.playground-nav-wrap {
 					height: 0;
 					opacity: 0;
 					visibility: hidden;
@@ -154,7 +149,7 @@ class HeadEr extends LitElement {
 					transition: 0.25s ease;
 				}
 
-				.hdr-nav2 .playground-nav-wrap.visible {
+				.playground-nav-wrap.visible {
 					padding: 10px 0 10px 40px;
 					height: 92px;
 					visibility: visible;
@@ -169,21 +164,21 @@ class HeadEr extends LitElement {
 						background: none;
 					}
 
-					header nav {
+					nav {
 						text-align: center;
 						padding: 15px 15px 0 0;
 					}
 
-					header nav:first-child {
+					nav:first-child {
 						text-indent: 9px;
 						padding-bottom: 20px;
 					}
 
-					header .menu {
+					.menu {
 						display: none !important;
 					}
 
-					.hdr-nav2 {
+					.nav2 {
 						display: block;
 					}
 				}
@@ -192,18 +187,18 @@ class HeadEr extends LitElement {
 			<header>
 				<nav>
 					<a href="#home">
-						<iron-icon icon="i:home" class="icon-home" ?selected="${this.selectedPage === 'home'}"></iron-icon>&nbsp;Jon Wiedmann
+						<mwc-icon class="icon-home" ?selected="${this.selectedPage === 'home'}">home</mwc-icon>&nbsp;Jon Wiedmann
 					</a>
 					<a class="menu" @click="${this.menuClick}">
-						<iron-icon icon="i:menu"></iron-icon>
+						<mwc-icon>menu</mwc-icon>
 					</a>
 				</nav>
-				<nav class="hdr-nav2">
+				<nav class="nav2">
 					<a href="#games">
-						Games <iron-icon icon="i:videogame-asset" class="icon-controllernes" ?selected="${this.selectedPage === 'games'}"></iron-icon>
+						Games <mwc-icon ?selected="${this.selectedPage === 'games'}">videogame_asset</mwc-icon>
 					</a>
 					<a href="#playground">
-						Playground <iron-icon icon="i:polymer" class="icon-beaker" ?selected="${this.selectedPage.includes('playground')}"></iron-icon>
+						Playground <mwc-icon ?selected="${this.selectedPage.includes('playground')}">polymer</mwc-icon>
 					</a>
 
 					<!-- TODO: convert sub nav to a component -->
@@ -215,7 +210,7 @@ class HeadEr extends LitElement {
 						</ul>
 					</div>
 					<a href="#portfolio">
-						Portfolio <iron-icon icon="i:work" class="icon-briefcase" ?selected="${this.selectedPage === 'portfolio'}"></iron-icon>
+						Portfolio <mwc-icon ?selected="${this.selectedPage === 'portfolio'}">work</mwc-icon>
 					</a>
 				</nav>
 			</header>

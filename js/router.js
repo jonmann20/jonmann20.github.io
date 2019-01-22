@@ -1,3 +1,4 @@
+import '@material/mwc-icon';
 import PlaygroundController from './controllers/playground';
 
 const routes = {
@@ -50,14 +51,17 @@ class Router {
 // Start router
 window.onhashchange = () => Router.route(location.hash);
 
-WebComponents.waitFor(() => {
-	// TODO: fix race condition
-	Promise.all([
-		import('../elts/head-er'),
-		import('../elts/a-side')
-	]).then(() => {
-		PlaygroundController.handleSubNav();
-	});
-
-	Router.route(location.hash);
+// TODO: fix race condition
+Promise.all([
+	import('../elts/head-er'),
+	import('../elts/a-side')
+]).then(() => {
+	PlaygroundController.handleSubNav();
 });
+
+// TODO: fix icon FOUC hack
+addEventListener('load', () => {
+	document.body.style.setProperty('--icon-opacity', 1);
+});
+
+Router.route(location.hash);

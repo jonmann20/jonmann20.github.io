@@ -26,6 +26,7 @@
 			color: #fcfcfa;
 			--box-shadow-2: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 			--mobile-nav-bg: $card-background;
+			--icon-opacity: 0;
 		}
 
 		.page {
@@ -87,40 +88,25 @@
 
 	<script src="/node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js" defer></script>
 	<script type="module">
-		// TODO: move DEV vs PRD to build step
+		// TODO: move DEV vs PRD to build step?
 		let isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
 		const isDev = window.location.host !== 'jonw.me' && isChrome;
 		//console.info('isDev', isDev);
 
 		WebComponents.waitFor(() => {
-			window.componentsReady = true;
-
 			// Import router
 			let s = document.createElement('script');
 			s.src = `./${isDev ? 'js' : 'assets'}/router.js`;
 			s.type = 'module';
 			document.head.appendChild(s);
-
-			if(!isDev) {
-				//TODO: import analytics and clientSideLogging
-			}
-
-			// Import icons
-			if(isDev) {
-				let link = document.createElement('link');
-				link.rel = 'import';
-				link.href = 'elts/icons.html';
-				document.head.appendChild(link);
-			}
-			else {
-				let script = document.createElement('script');
-				script.src = '/assets/icons.js';
-				document.head.appendChild(script);
-			}
 		});
 
 		if(!isDev) {
 			navigator.serviceWorker.register('sw.js');
+
+			let script = document.createElement('script');
+			script.src = '/assets/prd.js';
+			document.head.appendChild(script);
 		}
 	</script>
 </body>

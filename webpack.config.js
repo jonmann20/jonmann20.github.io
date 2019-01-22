@@ -4,7 +4,6 @@ const path = require('path');
 
 module.exports = {
 	entry: {
-		icons: './src/elts/icons.html',
 		router: './src/js/router.js'
 	},
 	output: {
@@ -15,12 +14,6 @@ module.exports = {
 	resolve: {
 		modules: ['node_modules'],
 		descriptionFiles: ['package.json']
-	},
-	module: {
-		rules: [{
-			test: /\.html/,
-			use: 'polymer-webpack-loader'
-		}]
 	},
 	mode: 'production'
 };

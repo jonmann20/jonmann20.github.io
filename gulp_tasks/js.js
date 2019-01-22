@@ -26,6 +26,7 @@ const gamesCommonJs = [
 ],
 lints = [
 	'src/js/**/*.js',
+	'src/elts/**/*.js',
 	'gulpfile.babel.js',
 	'gulp_tasks/**/*.js',
 	'!src/js/analytics.js'
@@ -65,6 +66,17 @@ function _inline(src, filename, dest) {
 		pipe(gulp.dest(dest));
 }
 
+function jsPrd() {
+	return gulp.src([
+			'src/js/analytics.js',
+			'src/js/clientSideLogging.js'
+		]).
+		pipe(concat('prd.js')).
+		pipe(iff(!isDev, babel(babelConfig).on('error', _handleErr))).
+		pipe(iff(!isDev, uglify())).
+		pipe(gulp.dest('assets'));
+}
+
 function jsPageDormanticide() {
 	return gulp.src(gamesCommonJs.concat([
 			'src/games/dormanticide/js/view/OverworldView.js',
@@ -76,7 +88,7 @@ function jsPageDormanticide() {
 		pipe(iff(isDev, sourcemaps.init())).
 		pipe(concat('pageDormanticide.js')).
 		// NOTE: babel was causing page to break (due to SAT.js)
-		//pipe(iff(!isDev, babel({presets}).on('error', _handleErr))).
+		//pipe(iff(!isDev, babel(babelConfig).on('error', _handleErr))).
 		pipe(iff(!isDev, uglify())).
 		pipe(iff(isDev, sourcemaps.write())).
 		pipe(gulp.dest('assets'));
@@ -92,7 +104,7 @@ function jsPageVamp() {
 		pipe(iff(isDev, sourcemaps.init())).
 		pipe(concat('pageVamp.js')).
 		// NOTE: babel was causing page to break (due to SAT.js)
-		//pipe(iff(!isDev, babel({presets}).on('error', _handleErr))).
+		//pipe(iff(!isDev, babel(babelConfig).on('error', _handleErr))).
 		pipe(iff(!isDev, uglify())).
 		pipe(iff(isDev, sourcemaps.write())).
 		pipe(gulp.dest('assets'));
@@ -160,7 +172,8 @@ const jsInline = gulp.parallel(
 const js = gulp.parallel(
 	jsPageDormanticide,
 	jsPageVamp,
-	jsServiceWorker
+	jsServiceWorker,
+	jsPrd
 );
 
 export {

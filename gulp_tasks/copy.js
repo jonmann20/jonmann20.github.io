@@ -1,5 +1,4 @@
 /* eslint indent: 0 */
-
 import gulp from 'gulp';
 
 copy.description = 'Copy files from `src` to `/`';

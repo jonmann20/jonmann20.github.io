@@ -1,6 +1,6 @@
 class PlaygroundController {
 	static get pNav() {
-		return document.querySelector('head-er').shadowRoot.querySelector('.hdr-nav2 .playground-nav-wrap');
+		return document.querySelector('head-er').shadowRoot.querySelector('.nav2 .playground-nav-wrap');
 	}
 
 	static handleSubNav() {

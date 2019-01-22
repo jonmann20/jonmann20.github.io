@@ -32,8 +32,8 @@ class PageGames extends LitElement {
 					color: #919091;
 				}
 
-				.col-right iron-icon[icon="i:videogame-asset"],
-				.col-right iron-icon[icon="i:code"] {
+				.col-right .videogame-asset,
+				.col-right .code {
 					margin-right: 10px;
 					vertical-align: -6px;
 				}
@@ -142,10 +142,10 @@ class PageGames extends LitElement {
 					</ul>
 
 					<a class="big-btn" href="/games/jonsQuest">
-						<iron-icon icon="i:videogame-asset"></iron-icon>Play Game
+						<mwc-icon class="videogame-asset">videogame_asset</mwc-icon>Play Game
 					</a>&nbsp;
 					<a class="big-btn alt" href="https://github.com/jonmann20/jonmann20.github.com/tree/master/games/jonsQuest" target="_blank" rel="noopener" title="Source Code on Github">
-						<iron-icon icon="i:code"></iron-icon>Source Code &#8599;
+						<mwc-icon class="code">code</mwc-icon>Source Code &#8599;
 					</a>
 				</div>
 				<div id="div-dungeon" class="card">
@@ -166,10 +166,10 @@ class PageGames extends LitElement {
 					</ul>
 
 					<a class="big-btn" href="/games/dungeon/build/web">
-						<iron-icon icon="i:videogame-asset"></iron-icon>Play Game
+						<mwc-icon class="videogame-asset">videogame_asset</mwc-icon>Play Game
 					</a>&nbsp;
 					<a class="big-btn alt" href="https://github.com/jonmann20/jonmann20.github.com/tree/master/games/dungeon" target="_blank" rel="noopener" title="Source Code on Github">
-						<iron-icon icon="i:code"></iron-icon>Source Code &#8599;
+						<mwc-icon class="code">code</mwc-icon>Source Code &#8599;
 					</a>
 				</div>
 				<div id="div-separate" class="card">
@@ -199,10 +199,10 @@ class PageGames extends LitElement {
 					</ul>
 
 					<a class="big-btn" href="/games/separate">
-						<iron-icon icon="i:videogame-asset"></iron-icon>Play Game
+						<mwc-icon class="videogame-asset">videogame_asset</mwc-icon>Play Game
 					</a>&nbsp;
 					<a class="big-btn alt" href="https://github.com/jonmann20/GameJam14" target="_blank" rel="noopener" title="Source Code on Github">
-						<iron-icon icon="i:code"></iron-icon>Source Code &#8599;
+						<mwc-icon class="code">code</mwc-icon>Source Code &#8599;
 					</a>
 				</div>
 				<div id="div-defend" class="card">
@@ -213,10 +213,10 @@ class PageGames extends LitElement {
 
 					<p>
 						<a class="big-btn" href="/games/defendThyKingdom/">
-							<iron-icon icon="i:videogame-asset"></iron-icon>Play Game
+							<mwc-icon class="videogame-asset">videogame_asset</mwc-icon>Play Game
 						</a>&nbsp;
 						<a class="big-btn alt" href="https://github.com/jonmann20/WizardSurvival" target="_blank" rel="noopener" title="Source Code on Github">
-							<iron-icon icon="i:code"></iron-icon>Source Code &#8599;
+							<mwc-icon class="code">code</mwc-icon>Source Code &#8599;
 						</a>
 					</p>
 				</div>
@@ -233,10 +233,10 @@ class PageGames extends LitElement {
 					</ul>
 
 					<a class="big-btn" href="/games/bloodCellBrigade">
-						<iron-icon icon="i:videogame-asset"></iron-icon>Play Game
+						<mwc-icon class="videogame-asset">videogame_asset</mwc-icon>Play Game
 					</a>&nbsp;
 					<a class="big-btn alt" href="https://github.com/jonmann20/IntelGameJamW14" target="_blank" rel="noopener" title="Source Code on Github">
-						<iron-icon icon="i:code"></iron-icon>Source Code &#8599;
+						<mwc-icon class="code">code</mwc-icon>Source Code &#8599;
 					</a>
 				</div>
 				<div id="div-deflection" class="card">
@@ -250,10 +250,10 @@ class PageGames extends LitElement {
 					</ul>
 
 					<a class="big-btn" href="/games/deflection">
-						<iron-icon icon="i:videogame-asset"></iron-icon>Play Game
+						<mwc-icon class="videogame-asset">videogame_asset</mwc-icon>Play Game
 					</a>&nbsp;
 					<a class="big-btn alt" href="https://github.com/jonmann20/Deflection" target="_blank" rel="noopener" title="Source Code on Github">
-						<iron-icon icon="i:code"></iron-icon>Source Code &#8599;
+						<mwc-icon class="code">code</mwc-icon>Source Code &#8599;
 					</a>
 				</div>
 				<div id="div-zelda" class="card">
@@ -272,10 +272,10 @@ class PageGames extends LitElement {
 					<p>Original game is copyrighted by Nintendo.</p>
 
 					<a class="big-btn" href="/games/zeldaReservanted">
-						<iron-icon icon="i:videogame-asset"></iron-icon>Play Game
+						<mwc-icon class="videogame-asset">videogame_asset</mwc-icon>Play Game
 					</a>&nbsp;
 					<a class="big-btn alt" href="https://github.com/jonmann20/ZeldaReservanted" target="_blank" rel="noopener" title="Source Code on Github">
-						<iron-icon icon="i:code"></iron-icon>Source Code &#8599;
+						<mwc-icon class="code">code</mwc-icon>Source Code &#8599;
 					</a>
 				</div>
 				<div id="div-dormanticide" class="card">
@@ -283,10 +283,10 @@ class PageGames extends LitElement {
 					<p>A battle simulator (very early in development).</p>
 
 					<a class="big-btn" href="/games/dormanticide">
-						<iron-icon icon="i:videogame-asset"></iron-icon>Play Game
+						<mwc-icon class="videogame-asset">videogame_asset</mwc-icon>Play Game
 					</a>&nbsp;
 					<a class="big-btn alt" href="https://github.com/jonmann20/jonmann20.github.com/tree/master/games/dormanticide" target="_blank" rel="noopener" title="Source Code on Github">
-						<iron-icon icon="i:code"></iron-icon>Source Code &#8599;
+						<mwc-icon class="code">code</mwc-icon>Source Code &#8599;
 					</a>
 				</div>
 				<div id="div-vamp" class="card">
@@ -294,10 +294,10 @@ class PageGames extends LitElement {
 					<p>A game about a vamprie with the ability to save your game (very early in development)</p>
 
 					<a class="big-btn" href="/games/vamp">
-						<iron-icon icon="i:videogame-asset"></iron-icon>Play Game
+						<mwc-icon class="videogame-asset">videogame_asset</mwc-icon>Play Game
 					</a>&nbsp;
 					<a class="big-btn alt" href="https://github.com/jonmann20/jonmann20.github.com/tree/master/games/vamp" target="_blank" rel="noopener" title="Source Code on Github">
-						<iron-icon icon="i:code"></iron-icon>Source Code &#8599;
+						<mwc-icon class="code">code</mwc-icon>Source Code &#8599;
 					</a>
 				</div>
 
