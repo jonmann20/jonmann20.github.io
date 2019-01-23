@@ -14,22 +14,22 @@ import _eslint from 'gulp-eslint';
 import isDev from './env';
 
 const gamesCommonJs = [
-	'src/games/common/js/GameEngine.js',
-	'src/games/common/js/GameSave.js',
-	'src/games/common/js/GameInput.js',
-	'src/games/common/js/GameUtils.js',
-	'src/games/common/js/physics/SAT.js',
-	'src/games/common/js/graphics/GameGraphics.js',
-	'src/games/common/js/view/GameView.js',
-	'src/games/common/js/view/TitleView.js',
-	'src/games/common/js/view/GameSaveView.js'
+	'games/common/js/GameEngine.js',
+	'games/common/js/GameSave.js',
+	'games/common/js/GameInput.js',
+	'games/common/js/GameUtils.js',
+	'games/common/js/physics/SAT.js',
+	'games/common/js/graphics/GameGraphics.js',
+	'games/common/js/view/GameView.js',
+	'games/common/js/view/TitleView.js',
+	'games/common/js/view/GameSaveView.js'
 ],
 lints = [
-	'src/js/**/*.js',
-	'src/elts/**/*.js',
+	'js/**/*.js',
+	'elts/**/*.js',
 	'gulpfile.babel.js',
 	'gulp_tasks/**/*.js',
-	'!src/js/analytics.js'
+	'!js/analytics.js'
 ],
 babelConfig = {
 	presets: [
@@ -54,36 +54,36 @@ function _handleErr(e) {
 	this.emit('end');
 }
 
-function _inline(src, filename, dest) {
-	const cond = `<script src="${filename}">`;
-	const file = `${__dirname}/..${filename}`;
+// function _inline(src, filename, dest) {
+// 	const cond = `<script src="${filename}">`;
+// 	const file = `${__dirname}/..${filename}`;
 
-	return gulp.src(src).
-		pipe(replace(cond, () => {
-			const styles = fs.readFileSync(file, 'utf8');
-			return `<script>${styles}`;
-		})).
-		pipe(gulp.dest(dest));
-}
+// 	return gulp.src(src).
+// 		pipe(replace(cond, () => {
+// 			const styles = fs.readFileSync(file, 'utf8');
+// 			return `<script>${styles}`;
+// 		})).
+// 		pipe(gulp.dest(dest));
+// }
 
 function jsPrd() {
 	return gulp.src([
-			'src/js/analytics.js',
-			'src/js/clientSideLogging.js'
+			'js/analytics.js',
+			'js/clientSideLogging.js'
 		]).
 		pipe(concat('prd.js')).
 		pipe(iff(!isDev, babel(babelConfig).on('error', _handleErr))).
 		pipe(iff(!isDev, uglify())).
-		pipe(gulp.dest('assets'));
+		pipe(gulp.dest('dist'));
 }
 
 function jsPageDormanticide() {
 	return gulp.src(gamesCommonJs.concat([
-			'src/games/dormanticide/js/view/OverworldView.js',
-			'src/games/dormanticide/js/view/BattleView.js',
-			'src/games/dormanticide/js/dormant/Dormant.js',
-			'src/games/dormanticide/js/dormant/FightAction.js',
-			'src/games/dormanticide/js/main.js'
+			'games/dormanticide/js/view/OverworldView.js',
+			'games/dormanticide/js/view/BattleView.js',
+			'games/dormanticide/js/dormant/Dormant.js',
+			'games/dormanticide/js/dormant/FightAction.js',
+			'games/dormanticide/js/main.js'
 		])).
 		pipe(iff(isDev, sourcemaps.init())).
 		pipe(concat('pageDormanticide.js')).
@@ -91,15 +91,15 @@ function jsPageDormanticide() {
 		//pipe(iff(!isDev, babel(babelConfig).on('error', _handleErr))).
 		pipe(iff(!isDev, uglify())).
 		pipe(iff(isDev, sourcemaps.write())).
-		pipe(gulp.dest('assets'));
+		pipe(gulp.dest('games/dormanticide/assets'));
 }
 
 function jsPageVamp() {
 	return gulp.src(gamesCommonJs.concat([
-			'src/games/vamp/js/view/LevelView.js',
-			'src/games/vamp/js/level/level1.js',
-			'src/games/vamp/js/vamp.js',
-			'src/games/vamp/js/main.js'
+			'games/vamp/js/view/LevelView.js',
+			'games/vamp/js/level/level1.js',
+			'games/vamp/js/vamp.js',
+			'games/vamp/js/main.js'
 		])).
 		pipe(iff(isDev, sourcemaps.init())).
 		pipe(concat('pageVamp.js')).
@@ -107,15 +107,15 @@ function jsPageVamp() {
 		//pipe(iff(!isDev, babel(babelConfig).on('error', _handleErr))).
 		pipe(iff(!isDev, uglify())).
 		pipe(iff(isDev, sourcemaps.write())).
-		pipe(gulp.dest('assets'));
+		pipe(gulp.dest('games/vamp/assets'));
 }
 
 function jsServiceWorker() {
-	return gulp.src('src/js/sw.js').
+	return gulp.src('js/sw.js').
 	pipe(replace('const CACHE_VERSION = 1;', () => {
 		return `const CACHE_VERSION = ${new Date().getTime()};`;
 	})).
-	pipe(gulp.dest('./'));
+	pipe(gulp.dest('dist'));
 }
 
 eslint.description = 'Lint JavaScript files';
@@ -127,7 +127,7 @@ function eslint() {
 }
 
 // function jsInlineIndex() {
-// 	return _inline('index.html', '/assets/router.js', './');
+// 	return _inline('index.html', '/dist/router.js', './');
 // }
 
 // function jsInlineIndex2() {
@@ -138,36 +138,36 @@ function eslint() {
 // 	);
 // }
 
-function jsInlineDormanticide() {
-	return _inline(
-		'games/dormanticide/index.html',
-		'/assets/pageDormanticide.js',
-		'./games/dormanticide'
-	);
-}
+// function jsInlineDormanticide() {
+// 	return _inline(
+// 		'games/dormanticide/index.html',
+// 		'/dist/pageDormanticide.js',
+// 		'./games/dormanticide'
+// 	);
+// }
 
-function jsInlineVamp() {
-	return _inline(
-		'games/vamp/index.html',
-		'/assets/pageVamp.js',
-		'./games/vamp'
-	);
-}
+// function jsInlineVamp() {
+// 	return _inline(
+// 		'games/vamp/index.html',
+// 		'/dist/pageVamp.js',
+// 		'./games/vamp'
+// 	);
+// }
 
 function jsMinifyBundles() {
-	return gulp.src('assets/*.bundle.js').
+	return gulp.src('dist/*.bundle.js').
 		pipe(iff(isDev, sourcemaps.init())).
 		pipe(iff(!isDev, babel(babelConfig).on('error', _handleErr))).
 		pipe(iff(!isDev, uglify())).
 		pipe(iff(isDev, sourcemaps.write())).
-		pipe(gulp.dest('assets'));
+		pipe(gulp.dest('dist'));
 }
 
-const jsInline = gulp.parallel(
-	//jsInlineIndex,
-	jsInlineDormanticide,
-	jsInlineVamp
-);
+// const jsInline = gulp.parallel(
+// 	//jsInlineIndex,
+// 	jsInlineDormanticide,
+// 	jsInlineVamp
+// );
 
 const js = gulp.parallel(
 	jsPageDormanticide,
@@ -179,7 +179,7 @@ const js = gulp.parallel(
 export {
 	js,
 	eslint,
-	jsInline,
+	//jsInline,
 	//jsInlineIndex2,
 	jsMinifyBundles
 };

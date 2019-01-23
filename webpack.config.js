@@ -4,11 +4,11 @@ const path = require('path');
 
 module.exports = {
 	entry: {
-		router: './src/js/router.js'
+		router: './js/router.js'
 	},
 	output: {
-		path: path.resolve(__dirname, './assets'),
-		publicPath: '/assets/',
+		path: path.resolve(__dirname, './dist'),
+		//publicPath: '/dist/',
 		filename: '[name].js'
 	},
 	resolve: {

@@ -1,6 +1,6 @@
 Filtering Search
 ================
-src/**, gulp_tasks, gulpfile.js, -dungeon, -font, -assets, -*.map, -src/games/common/img/sprites/player/player.tps, -src/games/common/js/physics/SAT.js, -src/games/jonsQuest/img/sprites/player/player.tps, -src/games/jonsQuest/node_modules
+-dungeon, -font, -dist, -*.map, -games/common/img/sprites/player/player.tps, -games/common/js/physics/SAT.js, -games/jonsQuest/img/sprites/player/player.tps, -games/jonsQuest/node_modules
 
 Node
 ----

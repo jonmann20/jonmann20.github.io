@@ -5,31 +5,42 @@ import htmlmin from 'gulp-htmlmin';
 import webpackStream from 'webpack-stream';
 import webpack from 'webpack';
 
+import replace from 'gulp-replace';
+import fs from 'fs';
+
 function bundleComponents() {
 	const webpackConfig = require('../webpack.config.js');
 
 	return src([
-			'src/elts/**/*.js',
-			'src/js/router.js'
+			'elts/**/*.js',
+			'js/router.js'
 		]).
 		pipe(webpackStream(webpackConfig, webpack)).
-		pipe(dest('assets'));
+		pipe(dest('dist'));
 }
 
-function htmlMinify() {
-	return src(['**/*.html', '!src/**', '!node_modules/**']).
-		pipe(htmlmin({
-			removeComments: true,
-			collapseWhitespace: true,
-			removeAttributeQuotes: true,
-			removeEmptyAttributes: true,
-			minifyJS: true,
-			minifyCSS: true
-		})).
-		pipe(dest('./'));
+
+function prdIndex() {
+	return src('dist/index.html').
+		pipe(replace('isDev = true', 'isDev = false')).
+		pipe(dest('dist'));
 }
+
+// function htmlMinify() {
+// 	return src(['**/*.html', '!dist/**', '!node_modules/**']).
+// 		pipe(htmlmin({
+// 			removeComments: true,
+// 			collapseWhitespace: true,
+// 			removeAttributeQuotes: true,
+// 			removeEmptyAttributes: true,
+// 			minifyJS: true,
+// 			minifyCSS: true
+// 		})).
+// 		pipe(dest('./'));
+// }
 
 export {
-	bundleComponents,
-	htmlMinify
+	prdIndex,
+	bundleComponents//,
+	//htmlMinify
 };
