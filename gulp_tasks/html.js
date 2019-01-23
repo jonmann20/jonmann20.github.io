@@ -33,7 +33,7 @@ function htmlMinify() {
 			minifyJS: true,
 			minifyCSS: true
 		})).
-		pipe(dest('./'));
+		pipe(dest('dist'));
 }
 
 export {
