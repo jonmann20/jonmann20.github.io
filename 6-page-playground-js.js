@@ -1,4 +1,4 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[8,3,11],{13:function(t,e,o){"use strict";o.r(e);var i=o(0),n=o(5),a=o(6),r=o(17),d=o(1);customElements.define("page-playground",class extends i.a{constructor(){super(),document.title="Playground",r.a.addMeta("description","An playground area for web tech demos."),r.a.addMeta("keywords","canvas, html5")}firstUpdated(){d.a.openNav()}render(){return i["c"]`
+(window.webpackJsonp=window.webpackJsonp||[]).push([[8,3,11],{13:function(t,e,o){"use strict";o.r(e);var i=o(0),n=o(5),a=o(6),r=o(17),d=o(1);customElements.define("page-playground",class extends i.a{constructor(){super(),document.title="Playground",r.a.addMeta("description","An playground area for web tech demos."),r.a.addMeta("keywords","canvas, html5")}firstUpdated(){d.a.openNav()}render(){return i.c`
 			<style>
 				${n.baseStyles}
 				${a.pageStyles}
@@ -17,7 +17,7 @@
 			<div class="col-right">
 				<img class="card-light" src="/img/megaman-cross-stitch.jpg" alt="Megaman cross stitch">
 			</div>
-        `}})},17:function(t,e,o){"use strict";class i{static require(t){return new Promise((e,o)=>{if(i.constructor._jsSrc.includes(t))e();else{let n=document.createElement("script");n.src=t,n.async=1,document.head.appendChild(n),n.onload=(()=>{i.constructor._jsSrc.push(t),e()}),n.onerror=(()=>o())}})}static addMeta(t,e){let o=document.createElement("meta");o.setAttribute("name",t),o.setAttribute("content",e),document.head.appendChild(o)}static get getMainWidth(){const t=document.querySelector("main"),e=window.getComputedStyle(t,null),o=parseFloat(e.getPropertyValue("padding-left"));return t.getBoundingClientRect().width-o}}i.constructor._jsSrc=[],e.a=i},5:function(t,e,o){"use strict";o.r(e),o.d(e,"baseStyles",function(){return n});var i=o(0);const n=i["c"]`
+        `}})},17:function(t,e,o){"use strict";class i{static require(t){return new Promise((e,o)=>{if(i.constructor._jsSrc.includes(t))e();else{let n=document.createElement("script");n.src=t,n.async=1,document.head.appendChild(n),n.onload=(()=>{i.constructor._jsSrc.push(t),e()}),n.onerror=(()=>o())}})}static addMeta(t,e){let o=document.createElement("meta");o.setAttribute("name",t),o.setAttribute("content",e),document.head.appendChild(o)}static get getMainWidth(){const t=document.querySelector("main"),e=window.getComputedStyle(t,null),o=parseFloat(e.getPropertyValue("padding-left"));return t.getBoundingClientRect().width-o}}i.constructor._jsSrc=[],e.a=i},5:function(t,e,o){"use strict";o.r(e),o.d(e,"baseStyles",function(){return i});const i=o(0).c`
 	:host {
 		display: block;
 	}
@@ -91,7 +91,7 @@
 		border-radius: 2px;
 		box-shadow: var(--box-shadow-2);
 	}
-`},6:function(t,e,o){"use strict";o.r(e),o.d(e,"pageStyles",function(){return n});var i=o(0);const n=i["c"]`
+`},6:function(t,e,o){"use strict";o.r(e),o.d(e,"pageStyles",function(){return i});const i=o(0).c`
 	.col-left {
 		min-width: 121px;
 		width: 100%;

@@ -1,4 +1,4 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[6,2,3,11],{11:function(e,a,i){"use strict";i.r(a);var t=i(0),o=i(5),n=i(6),s=i(7),l=i(18);customElements.define("page-games",class extends t.a{constructor(){super(),document.title="Games"}firstUpdated(){new l.a(this.shadowRoot.querySelector(".col-left ul"),this.shadowRoot)}render(){return t["c"]`
+(window.webpackJsonp=window.webpackJsonp||[]).push([[6,2,3,11],{11:function(e,a,i){"use strict";i.r(a);var t=i(0),o=i(5),n=i(6),s=i(7),l=i(18);customElements.define("page-games",class extends t.a{constructor(){super(),document.title="Games"}firstUpdated(){new l.a(this.shadowRoot.querySelector(".col-left ul"),this.shadowRoot)}render(){return t.c`
 			<style>
 				${o.baseStyles}
 				${n.pageStyles}
@@ -298,7 +298,7 @@
 					</ul>
 				</div>
 			</div>
-        `}})},18:function(e,a,i){"use strict";a.a=class{constructor(e,a){let i,t="default",o=Array.from(e.querySelectorAll("a"));a=a||document,o.forEach(e=>{e.addEventListener("click",e=>{(i=e.target.id)&&t!==i&&(e.preventDefault(),a.querySelector(`#div-${t}`).classList.remove("fade-in"),a.querySelector(`#div-${i}`).classList.add("fade-in"),t=i)})})}}},5:function(e,a,i){"use strict";i.r(a),i.d(a,"baseStyles",function(){return o});var t=i(0);const o=t["c"]`
+        `}})},18:function(e,a,i){"use strict";a.a=class{constructor(e,a){let i,t="default",o=Array.from(e.querySelectorAll("a"));a=a||document,o.forEach(e=>{e.addEventListener("click",e=>{(i=e.target.id)&&t!==i&&(e.preventDefault(),a.querySelector(`#div-${t}`).classList.remove("fade-in"),a.querySelector(`#div-${i}`).classList.add("fade-in"),t=i)})})}}},5:function(e,a,i){"use strict";i.r(a),i.d(a,"baseStyles",function(){return t});const t=i(0).c`
 	:host {
 		display: block;
 	}
@@ -372,7 +372,7 @@
 		border-radius: 2px;
 		box-shadow: var(--box-shadow-2);
 	}
-`},6:function(e,a,i){"use strict";i.r(a),i.d(a,"pageStyles",function(){return o});var t=i(0);const o=t["c"]`
+`},6:function(e,a,i){"use strict";i.r(a),i.d(a,"pageStyles",function(){return t});const t=i(0).c`
 	.col-left {
 		min-width: 121px;
 		width: 100%;
@@ -422,7 +422,7 @@
 			margin-top: 25px;
 		}
 	}
-`},7:function(e,a,i){"use strict";i.r(a),i.d(a,"carouselStyles",function(){return o});var t=i(0);const o=t["c"]`
+`},7:function(e,a,i){"use strict";i.r(a),i.d(a,"carouselStyles",function(){return t});const t=i(0).c`
 	:host {
 		position: relative;
 	}

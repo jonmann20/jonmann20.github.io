@@ -1,4 +1,4 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[0,11],{5:function(e,t,a){"use strict";a.r(t),a.d(t,"baseStyles",function(){return i});var o=a(0);const i=o["c"]`
+(window.webpackJsonp=window.webpackJsonp||[]).push([[0,11],{5:function(e,t,o){"use strict";o.r(t),o.d(t,"baseStyles",function(){return a});const a=o(0).c`
 	:host {
 		display: block;
 	}
@@ -72,7 +72,7 @@
 		border-radius: 2px;
 		box-shadow: var(--box-shadow-2);
 	}
-`},9:function(e,t,a){"use strict";a.r(t);var o=a(0),i=a(5);customElements.define("a-side",class extends o.a{static get properties(){return{active:{type:Boolean},selectedPage:{type:String}}}constructor(){super(),this.active=!1}render(){return o["c"]`
+`},9:function(e,t,o){"use strict";o.r(t);var a=o(0),i=o(5);customElements.define("a-side",class extends a.a{static get properties(){return{active:{type:Boolean},selectedPage:{type:String}}}constructor(){super(),this.active=!1}render(){return a.c`
 			<style>
 				${i.baseStyles}
 

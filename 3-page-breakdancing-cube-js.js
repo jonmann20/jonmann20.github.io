@@ -1,4 +1,4 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[5,3,11],{10:function(t,e,a){"use strict";a.r(e);var i=a(0),n=a(5),r=a(6),o=a(17),d=a(1);customElements.define("page-breakdancing-cube",class extends i.a{constructor(){super(),document.title="Breakdancing Cube | Playground",o.a.addMeta("description","Pure CSS3 animation demo."),o.a.addMeta("keywords","CSS3, HTML5")}firstUpdated(){d.a.openNav()}render(){return i["c"]`
+(window.webpackJsonp=window.webpackJsonp||[]).push([[5,3,11],{10:function(t,e,a){"use strict";a.r(e);var i=a(0),n=a(5),r=a(6),o=a(17),d=a(1);customElements.define("page-breakdancing-cube",class extends i.a{constructor(){super(),document.title="Breakdancing Cube | Playground",o.a.addMeta("description","Pure CSS3 animation demo."),o.a.addMeta("keywords","CSS3, HTML5")}firstUpdated(){d.a.openNav()}render(){return i.c`
 			<style>
 				${n.baseStyles}
 				${r.pageStyles}
@@ -139,7 +139,7 @@
 			<div class="iframe-wrap">
 				<iframe class="card" width="300" height="410" src="https://bandcamp.com/EmbeddedPlayer/v=2/album=1886256771/size=grande3/bgcol=FFFFFF/linkcol=5dafd7/transparent=true/" allowtransparency="true" frameborder="0"></iframe>
 			</div>
-        `}})},17:function(t,e,a){"use strict";class i{static require(t){return new Promise((e,a)=>{if(i.constructor._jsSrc.includes(t))e();else{let n=document.createElement("script");n.src=t,n.async=1,document.head.appendChild(n),n.onload=(()=>{i.constructor._jsSrc.push(t),e()}),n.onerror=(()=>a())}})}static addMeta(t,e){let a=document.createElement("meta");a.setAttribute("name",t),a.setAttribute("content",e),document.head.appendChild(a)}static get getMainWidth(){const t=document.querySelector("main"),e=window.getComputedStyle(t,null),a=parseFloat(e.getPropertyValue("padding-left"));return t.getBoundingClientRect().width-a}}i.constructor._jsSrc=[],e.a=i},5:function(t,e,a){"use strict";a.r(e),a.d(e,"baseStyles",function(){return n});var i=a(0);const n=i["c"]`
+        `}})},17:function(t,e,a){"use strict";class i{static require(t){return new Promise((e,a)=>{if(i.constructor._jsSrc.includes(t))e();else{let n=document.createElement("script");n.src=t,n.async=1,document.head.appendChild(n),n.onload=(()=>{i.constructor._jsSrc.push(t),e()}),n.onerror=(()=>a())}})}static addMeta(t,e){let a=document.createElement("meta");a.setAttribute("name",t),a.setAttribute("content",e),document.head.appendChild(a)}static get getMainWidth(){const t=document.querySelector("main"),e=window.getComputedStyle(t,null),a=parseFloat(e.getPropertyValue("padding-left"));return t.getBoundingClientRect().width-a}}i.constructor._jsSrc=[],e.a=i},5:function(t,e,a){"use strict";a.r(e),a.d(e,"baseStyles",function(){return i});const i=a(0).c`
 	:host {
 		display: block;
 	}
@@ -213,7 +213,7 @@
 		border-radius: 2px;
 		box-shadow: var(--box-shadow-2);
 	}
-`},6:function(t,e,a){"use strict";a.r(e),a.d(e,"pageStyles",function(){return n});var i=a(0);const n=i["c"]`
+`},6:function(t,e,a){"use strict";a.r(e),a.d(e,"pageStyles",function(){return i});const i=a(0).c`
 	.col-left {
 		min-width: 121px;
 		width: 100%;

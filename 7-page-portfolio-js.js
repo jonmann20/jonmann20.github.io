@@ -1,4 +1,4 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[9,2,3,11],{14:function(e,i,t){"use strict";t.r(i);var o=t(0),a=t(5),n=t(6),r=t(7),l=t(18);customElements.define("page-portfolio",class extends o.a{constructor(){super(),document.title="Portfolio"}firstUpdated(){new l.a(this.shadowRoot.querySelector(".col-left ul"),this.shadowRoot)}render(){return o["c"]`
+(window.webpackJsonp=window.webpackJsonp||[]).push([[9,2,3,11],{14:function(e,i,t){"use strict";t.r(i);var o=t(0),a=t(5),n=t(6),r=t(7),l=t(18);customElements.define("page-portfolio",class extends o.a{constructor(){super(),document.title="Portfolio"}firstUpdated(){new l.a(this.shadowRoot.querySelector(".col-left ul"),this.shadowRoot)}render(){return o.c`
 			<style>
 				${a.baseStyles}
 				${n.pageStyles}
@@ -127,7 +127,7 @@
 					<img src="/img/portfolio/nology.jpg" alt="Nology Digital">
 				</div>
 			</div>
-		`}})},18:function(e,i,t){"use strict";i.a=class{constructor(e,i){let t,o="default",a=Array.from(e.querySelectorAll("a"));i=i||document,a.forEach(e=>{e.addEventListener("click",e=>{(t=e.target.id)&&o!==t&&(e.preventDefault(),i.querySelector(`#div-${o}`).classList.remove("fade-in"),i.querySelector(`#div-${t}`).classList.add("fade-in"),o=t)})})}}},5:function(e,i,t){"use strict";t.r(i),t.d(i,"baseStyles",function(){return a});var o=t(0);const a=o["c"]`
+		`}})},18:function(e,i,t){"use strict";i.a=class{constructor(e,i){let t,o="default",a=Array.from(e.querySelectorAll("a"));i=i||document,a.forEach(e=>{e.addEventListener("click",e=>{(t=e.target.id)&&o!==t&&(e.preventDefault(),i.querySelector(`#div-${o}`).classList.remove("fade-in"),i.querySelector(`#div-${t}`).classList.add("fade-in"),o=t)})})}}},5:function(e,i,t){"use strict";t.r(i),t.d(i,"baseStyles",function(){return o});const o=t(0).c`
 	:host {
 		display: block;
 	}
@@ -201,7 +201,7 @@
 		border-radius: 2px;
 		box-shadow: var(--box-shadow-2);
 	}
-`},6:function(e,i,t){"use strict";t.r(i),t.d(i,"pageStyles",function(){return a});var o=t(0);const a=o["c"]`
+`},6:function(e,i,t){"use strict";t.r(i),t.d(i,"pageStyles",function(){return o});const o=t(0).c`
 	.col-left {
 		min-width: 121px;
 		width: 100%;
@@ -251,7 +251,7 @@
 			margin-top: 25px;
 		}
 	}
-`},7:function(e,i,t){"use strict";t.r(i),t.d(i,"carouselStyles",function(){return a});var o=t(0);const a=o["c"]`
+`},7:function(e,i,t){"use strict";t.r(i),t.d(i,"carouselStyles",function(){return o});const o=t(0).c`
 	:host {
 		position: relative;
 	}

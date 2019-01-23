@@ -1,4 +1,4 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[11],{5:function(o,i,d){"use strict";d.r(i),d.d(i,"baseStyles",function(){return a});var n=d(0);const a=n["c"]`
+(window.webpackJsonp=window.webpackJsonp||[]).push([[11],{5:function(o,i,d){"use strict";d.r(i),d.d(i,"baseStyles",function(){return n});const n=d(0).c`
 	:host {
 		display: block;
 	}

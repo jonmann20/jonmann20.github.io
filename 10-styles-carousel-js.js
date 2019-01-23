@@ -1,4 +1,4 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[2],{7:function(i,t,o){"use strict";o.r(t),o.d(t,"carouselStyles",function(){return n});var a=o(0);const n=a["c"]`
+(window.webpackJsonp=window.webpackJsonp||[]).push([[2],{7:function(i,t,o){"use strict";o.r(t),o.d(t,"carouselStyles",function(){return a});const a=o(0).c`
 	:host {
 		position: relative;
 	}

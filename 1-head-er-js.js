@@ -1,4 +1,4 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[1,11],{5:function(e,i,t){"use strict";t.r(i),t.d(i,"baseStyles",function(){return o});var n=t(0);const o=n["c"]`
+(window.webpackJsonp=window.webpackJsonp||[]).push([[1,11],{5:function(e,i,t){"use strict";t.r(i),t.d(i,"baseStyles",function(){return n});const n=t(0).c`
 	:host {
 		display: block;
 	}
@@ -72,7 +72,7 @@
 		border-radius: 2px;
 		box-shadow: var(--box-shadow-2);
 	}
-`},8:function(e,i,t){"use strict";t.r(i);var n=t(0),o=t(5);customElements.define("head-er",class extends n.a{static get properties(){return{selectedPage:{type:String}}}constructor(){super(),this.asideIsActive=!1,this.initX=0,this.x=0,this.boundHideAside=(e=>this.hideAside(e)),this.boundSetInitX=(e=>this.hideSetInitX(e)),this.boundSetX=(e=>this.hideSetX(e)),window.onresize=(()=>{window.innerWidth>800&&this.boundHideAside()})}render(){return n["c"]`
+`},8:function(e,i,t){"use strict";t.r(i);var n=t(0),o=t(5);customElements.define("head-er",class extends n.a{static get properties(){return{selectedPage:{type:String}}}constructor(){super(),this.asideIsActive=!1,this.initX=0,this.x=0,this.boundHideAside=(e=>this.hideAside(e)),this.boundSetInitX=(e=>this.hideSetInitX(e)),this.boundSetX=(e=>this.hideSetX(e)),window.onresize=(()=>{window.innerWidth>800&&this.boundHideAside()})}render(){return n.c`
 			<style>
 				${o.baseStyles}
 
