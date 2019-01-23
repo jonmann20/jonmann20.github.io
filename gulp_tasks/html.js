@@ -1,6 +1,6 @@
 /* eslint indent: 0 */
 
-import gulp from 'gulp';
+import {src, dest} from 'gulp';
 import htmlmin from 'gulp-htmlmin';
 import webpackStream from 'webpack-stream';
 import webpack from 'webpack';
@@ -8,16 +8,16 @@ import webpack from 'webpack';
 function bundleComponents() {
 	const webpackConfig = require('../webpack.config.js');
 
-	return gulp.src([
+	return src([
 			'src/elts/**/*.js',
 			'src/js/router.js'
 		]).
 		pipe(webpackStream(webpackConfig, webpack)).
-		pipe(gulp.dest('assets'));
+		pipe(dest('assets'));
 }
 
 function htmlMinify() {
-	return gulp.src(['**/*.html', '!src/**', '!node_modules/**']).
+	return src(['**/*.html', '!src/**', '!node_modules/**']).
 		pipe(htmlmin({
 			removeComments: true,
 			collapseWhitespace: true,
@@ -26,7 +26,7 @@ function htmlMinify() {
 			minifyJS: true,
 			minifyCSS: true
 		})).
-		pipe(gulp.dest('./'));
+		pipe(dest('./'));
 }
 
 export {

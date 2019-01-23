@@ -1,10 +1,6 @@
-/* eslint indent: 0 */
-import gulp from 'gulp';
+import {src, dest} from 'gulp';
 
 copy.description = 'Copy files from `src` to `/`';
 export default function copy() {
-	return gulp.src([
-		'src/**'
-	]).
-	pipe(gulp.dest('./'));
+	return src('src/**').pipe(dest('./'));
 }
