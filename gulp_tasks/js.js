@@ -1,16 +1,13 @@
 /* eslint indent: 0 */
-
 import gulp from 'gulp';
 import iff from 'gulp-if';
 import concat from 'gulp-concat';
 import sourcemaps from 'gulp-sourcemaps';
 import replace from 'gulp-replace';
-import fs from 'fs';
-
+//import fs from 'fs';
 import babel from 'gulp-babel';
 import uglify from 'gulp-uglify-es';
 import _eslint from 'gulp-eslint';
-
 import isDev from './env';
 
 const gamesCommonJs = [
