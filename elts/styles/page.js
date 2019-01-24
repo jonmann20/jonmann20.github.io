@@ -1,6 +1,4 @@
-import {html} from 'lit-element';
-
-export const pageStyles = html`
+const pageStyles = `
 	.col-left {
 		min-width: 121px;
 		width: 100%;
@@ -51,3 +49,5 @@ export const pageStyles = html`
 		}
 	}
 `;
+
+export default pageStyles;

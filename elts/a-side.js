@@ -1,5 +1,5 @@
 import {html, LitElement} from 'lit-element';
-import {baseStyles} from './styles/base';
+import baseStyles from './styles/base';
 
 class ASide extends LitElement {
 	static get properties() {

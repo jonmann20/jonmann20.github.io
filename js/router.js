@@ -1,5 +1,6 @@
 import '@material/mwc-icon';
 import PlaygroundController from './controllers/playground';
+import Util from './util';
 
 const routes = {
 	home: 'page-home',

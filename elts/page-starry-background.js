@@ -1,6 +1,6 @@
 import {html, LitElement} from 'lit-element';
-import {baseStyles} from './styles/base';
-import {pageStyles} from './styles/page';
+import baseStyles from './styles/base';
+import pageStyles from './styles/page';
 import Util from '../js/util';
 import PlaygroundController from '../js/controllers/playground';
 import StarryBg from '../js/stars';

@@ -9,6 +9,7 @@ export default function copy() {
 			'offline.html',
 			'manifest.json',
 			'node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js',
+			'node_modules/@webcomponents/webcomponentsjs/bundles/*.js',
 			'img/**/*',
 			'games/**/*'
 		], {

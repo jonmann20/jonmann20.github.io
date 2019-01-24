@@ -1,6 +1,4 @@
-import {html} from 'lit-element';
-
-export const baseStyles = html`
+const baseStyles = `
 	:host {
 		display: block;
 	}
@@ -75,3 +73,5 @@ export const baseStyles = html`
 		box-shadow: var(--box-shadow-2);
 	}
 `;
+
+export default baseStyles;

@@ -1,7 +1,7 @@
 import {html, LitElement} from 'lit-element';
-import {baseStyles} from './styles/base';
-import {pageStyles} from './styles/page';
-import {carouselStyles} from './styles/carousel';
+import baseStyles from './styles/base';
+import pageStyles from './styles/page';
+import carouselStyles from './styles/carousel';
 import ListCarousel from '../js/listCarousel';
 
 class PagePortfolio extends LitElement {

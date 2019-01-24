@@ -1,5 +1,5 @@
 import {html, LitElement} from 'lit-element';
-import {baseStyles} from './styles/base';
+import baseStyles from './styles/base';
 
 class HeadEr extends LitElement {
 	static get properties() {
@@ -138,7 +138,8 @@ class HeadEr extends LitElement {
 				}
 
 				.nav2 mwc-icon {
-					vertical-align: -5px;
+					vertical-align: -6px;
+					margin-left: 7px;
 				}
 
 				.playground-nav-wrap {

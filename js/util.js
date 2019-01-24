@@ -28,6 +28,18 @@ class Util {
 		document.head.appendChild(meta);
 	}
 
+	static addLink(rel, href, crossorigin = true) {
+		let link = document.createElement('link');
+		link.setAttribute('rel', rel);
+		link.setAttribute('href', href);
+
+		if(crossorigin) {
+			link.setAttribute('crossorigin', '');
+		}
+
+		document.head.appendChild(link);
+	}
+
 	static get getMainWidth() {
 		const main = document.querySelector('main');
 		const mainStyles = window.getComputedStyle(main, null);

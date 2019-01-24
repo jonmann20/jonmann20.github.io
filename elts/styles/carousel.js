@@ -1,6 +1,4 @@
-import {html} from 'lit-element';
-
-export const carouselStyles = html`
+const carouselStyles = `
 	:host {
 		position: relative;
 	}
@@ -107,3 +105,5 @@ export const carouselStyles = html`
 		}
 	}
 `;
+
+export default carouselStyles;

@@ -1,6 +1,6 @@
 import {html, LitElement} from 'lit-element';
-import {baseStyles} from './styles/base';
-import {pageStyles} from './styles/page';
+import baseStyles from './styles/base';
+import pageStyles from './styles/page';
 import Util from '../js/util';
 
 class PageHome extends LitElement {
@@ -11,12 +11,13 @@ class PageHome extends LitElement {
 		Util.addMeta('description', "Jon Wiedmann's personal website.  A site with information on Jon's work experience and hobbies.");
 		Util.addMeta('keywords', 'Jon Wiedmann, Web Developer, HTML5, CSS, Javascript', 'Polymer');
 
-		// <link rel="preconnect" href="https://platform.twitter.com" crossorigin>
-		// <link rel="preconnect" href="https://cdn.syndication.twimg.com" crossorigin>
-		// <link rel="preconnect" href="https://syndication.twitter.com" crossorigin>
-		// <link rel="dns-prefetch" href="https://abs.twimg.com" crossorigin>
-		// <link rel="dns-prefetch" href="https://pbs.twimg.com" crossorigin>
-		// <link rel="dns-prefetch" href="https://ton.twimg.com" crossorigin>
+		// NOTE: these will not be removed when changing routes
+		Util.addLink('preconnect', 'https://platform.twitter.com');
+		Util.addLink('preconnect', 'https://cdn.syndication.twimg.com');
+		Util.addLink('preconnect', 'https://syndication.twitter.com');
+		Util.addLink('dns-prefetch', 'https://abs.twimg.com');
+		Util.addLink('dns-prefetch', 'https://pbs.twimg.com');
+		Util.addLink('dns-prefetch', 'https://ton.twimg.com');
 	}
 
 	firstUpdated() {
@@ -96,7 +97,6 @@ class PageHome extends LitElement {
 
 				.twitter-timeline {
 					opacity: 0;
-					transition: opacity 0.15s cubic-bezier(0, 0, 0.3, 1);
 				}
 
 				.twitter-timline-custom-styled {
@@ -108,7 +108,7 @@ class PageHome extends LitElement {
 
             <div class="col-left card">
                 <h1>Fullstack Web Engineer</h1>
-                <img src="/img/jon-icon.png" alt="Jon Wiedmann" class="jon-icon">
+                <img src="/img/jon-icon.png" width="190" height="175" alt="Jon Wiedmann" class="jon-icon">
 
                 <ul>
                     <li>
