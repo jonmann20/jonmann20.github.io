@@ -1,80 +1,6 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[1,11],{5:function(e,i,t){"use strict";t.r(i),t.d(i,"baseStyles",function(){return n});const n=t(0).c`
-	:host {
-		display: block;
-	}
-
-	* {
-		box-sizing: border-box;
-	}
-
-	h1,
-	h2,
-	h3 {
-		margin: 0.4em 0 0.6em;
-		font-size: 1.75em;
-		font-weight: 300;
-		color: #fcfcfa;
-		text-shadow: 0 2px 3px #212121;
-	}
-
-	ul {
-		list-style-type: none;
-		padding: 0;
-	}
-
-	a {
-		color: #66d9ef;
-		text-decoration: none;
-		outline: none;
-		cursor: pointer;
-	}
-
-	a:hover {
-		color: #7ddff1;
-		text-shadow: #7ddff1 0 0 6px;
-	}
-
-	a:active {
-		color: #4fd3ed;
-	}
-
-	a:focus {
-		outline: 0;
-	}
-
-	input {
-		outline-color: #888;
-	}
-
-	input:focus {
-		box-shadow: 2px 2px 16px 2px rgba(0, 0, 0, 0.45);
-	}
-
-	/* avoid FOUC, could remove if bundled? */
-	mwc-icon {
-		display: inline-block;
-		width: 24px;
-		opacity: var(--icon-opacity);
-		/* not working --- font-display: block; */
-	}
-
-	/* utils */
-
-	.card {
-		display: inline-block;
-		background: #2d2a2e;
-		box-shadow: var(--box-shadow-2);
-		border-radius: 2px;
-		padding: 3px 25px 5px;
-	}
-
-	.card-light {
-		border-radius: 2px;
-		box-shadow: var(--box-shadow-2);
-	}
-`},8:function(e,i,t){"use strict";t.r(i);var n=t(0),o=t(5);customElements.define("head-er",class extends n.a{static get properties(){return{selectedPage:{type:String}}}constructor(){super(),this.asideIsActive=!1,this.initX=0,this.x=0,this.boundHideAside=(e=>this.hideAside(e)),this.boundSetInitX=(e=>this.hideSetInitX(e)),this.boundSetX=(e=>this.hideSetX(e)),window.onresize=(()=>{window.innerWidth>800&&this.boundHideAside()})}render(){return n.c`
+(window.webpackJsonp=window.webpackJsonp||[]).push([[1,11],{6:function(t,e,n){"use strict";n.r(e);e.default="\n\t:host {\n\t\tdisplay: block;\n\t}\n\n\t* {\n\t\tbox-sizing: border-box;\n\t}\n\n\th1,\n\th2,\n\th3 {\n\t\tmargin: 0.4em 0 0.6em;\n\t\tfont-size: 1.75em;\n\t\tfont-weight: 300;\n\t\tcolor: #fcfcfa;\n\t\ttext-shadow: 0 2px 3px #212121;\n\t}\n\n\tul {\n\t\tlist-style-type: none;\n\t\tpadding: 0;\n\t}\n\n\ta {\n\t\tcolor: #66d9ef;\n\t\ttext-decoration: none;\n\t\toutline: none;\n\t\tcursor: pointer;\n\t}\n\n\ta:hover {\n\t\tcolor: #7ddff1;\n\t\ttext-shadow: #7ddff1 0 0 6px;\n\t}\n\n\ta:active {\n\t\tcolor: #4fd3ed;\n\t}\n\n\ta:focus {\n\t\toutline: 0;\n\t}\n\n\tinput {\n\t\toutline-color: #888;\n\t}\n\n\tinput:focus {\n\t\tbox-shadow: 2px 2px 16px 2px rgba(0, 0, 0, 0.45);\n\t}\n\n\t/* avoid FOUC, could remove if bundled? */\n\tmwc-icon {\n\t\tdisplay: inline-block;\n\t\twidth: 24px;\n\t\topacity: var(--icon-opacity);\n\t\t/* not working --- font-display: block; */\n\t}\n\n\t/* utils */\n\n\t.card {\n\t\tdisplay: inline-block;\n\t\tbackground: #2d2a2e;\n\t\tbox-shadow: var(--box-shadow-2);\n\t\tborder-radius: 2px;\n\t\tpadding: 3px 25px 5px;\n\t}\n\n\t.card-light {\n\t\tborder-radius: 2px;\n\t\tbox-shadow: var(--box-shadow-2);\n\t}\n"},9:function(t,e,n){"use strict";n.r(e);var i=n(0),a=n(6);customElements.define("head-er",class extends i.a{static get properties(){return{selectedPage:{type:String}}}constructor(){super(),this.asideIsActive=!1,this.initX=0,this.x=0,this.boundHideAside=(t=>this.hideAside(t)),this.boundSetInitX=(t=>this.hideSetInitX(t)),this.boundSetX=(t=>this.hideSetX(t)),window.onresize=(()=>{window.innerWidth>800&&this.boundHideAside()})}render(){return i.c`
 			<style>
-				${o.baseStyles}
+				${a.default}
 
 				header {
 					position: fixed;
@@ -183,7 +109,8 @@
 				}
 
 				.nav2 mwc-icon {
-					vertical-align: -5px;
+					vertical-align: -6px;
+					margin-left: 7px;
 				}
 
 				.playground-nav-wrap {
@@ -259,4 +186,4 @@
 					</a>
 				</nav>
 			</header>
-		`}menuClick(e){e.preventDefault(),this.asideIsActive?this.hideAside():(document.querySelector("a-side").setAttribute("active",!0),document.querySelector("main").classList.add("leftbar-active"),this.asideIsActive=!0,requestAnimationFrame(()=>{document.body.addEventListener("click",this.boundHideAside,{passive:!0}),document.body.addEventListener("touchstart",this.boundSetInitX,{passive:!0}),document.body.addEventListener("touchmove",this.boundSetX,{passive:!0}),document.body.addEventListener("touchend",this.boundHideAside,{passive:!0})}))}hideAside(e){e&&"touchend"===e.type&&this.initX===this.x||(document.querySelector("a-side").removeAttribute("active"),document.querySelector("main").classList.remove("leftbar-active"),this.asideIsActive=!1,document.body.removeEventListener("click",this.boundHideAside,{passive:!0}),document.body.removeEventListener("touchstart",this.boundSetInitX,{passive:!0}),document.body.removeEventListener("touchmove",this.boundSetX,{passive:!0}),document.body.removeEventListener("touchend",this.boundHideAside,{passive:!0}))}setInitX(e){this.initX=e.touches[0].pageX,this.x=this.initX}setX(e){this.x=e.touches[0].pageX}})}}]);
+		`}menuClick(t){t.preventDefault(),this.asideIsActive?this.hideAside():(document.querySelector("a-side").setAttribute("active",!0),document.querySelector("main").classList.add("leftbar-active"),this.asideIsActive=!0,requestAnimationFrame(()=>{document.body.addEventListener("click",this.boundHideAside,{passive:!0}),document.body.addEventListener("touchstart",this.boundSetInitX,{passive:!0}),document.body.addEventListener("touchmove",this.boundSetX,{passive:!0}),document.body.addEventListener("touchend",this.boundHideAside,{passive:!0})}))}hideAside(t){t&&"touchend"===t.type&&this.initX===this.x||(document.querySelector("a-side").removeAttribute("active"),document.querySelector("main").classList.remove("leftbar-active"),this.asideIsActive=!1,document.body.removeEventListener("click",this.boundHideAside,{passive:!0}),document.body.removeEventListener("touchstart",this.boundSetInitX,{passive:!0}),document.body.removeEventListener("touchmove",this.boundSetX,{passive:!0}),document.body.removeEventListener("touchend",this.boundHideAside,{passive:!0}))}setInitX(t){this.initX=t.touches[0].pageX,this.x=this.initX}setX(t){this.x=t.touches[0].pageX}})}}]);
