@@ -1,4 +1,4 @@
-/* eslint indent: 0 */
+/* eslint-disable indent */
 import {src, dest} from 'gulp';
 import htmlmin from 'gulp-htmlmin';
 import webpackStream from 'webpack-stream';

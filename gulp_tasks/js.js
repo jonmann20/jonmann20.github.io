@@ -1,4 +1,4 @@
-/* eslint indent: 0 */
+/* eslint-disable indent */
 import gulp from 'gulp';
 import iff from 'gulp-if';
 import concat from 'gulp-concat';
@@ -20,13 +20,6 @@ const gamesCommonJs = [
 	'games/common/js/view/GameView.js',
 	'games/common/js/view/TitleView.js',
 	'games/common/js/view/GameSaveView.js'
-],
-lints = [
-	'js/**/*.js',
-	'elts/**/*.js',
-	'gulpfile.babel.js',
-	'gulp_tasks/**/*.js',
-	'!js/analytics.js'
 ],
 babelConfig = {
 	presets: [
@@ -117,21 +110,27 @@ function jsServiceWorker() {
 
 eslint.description = 'Lint JavaScript files';
 function eslint() {
-	return gulp.src(lints).
+	return gulp.src([
+			'js/**/*.js',
+			'elts/**/*.js',
+			'gulpfile.babel.js',
+			'gulp_tasks/**/*.js',
+			'!js/analytics.js'
+		]).
 		pipe(_eslint('.eslintrc.js')).
 		pipe(_eslint.format()).
 		pipe(_eslint.failAfterError());
 }
 
 // function jsInlineIndex() {
-// 	return _inline('index.html', '/dist/router.js', './');
+// 	return _inline('index.html', '/dist/router.js', 'dist');
 // }
 
 // function jsInlineIndex2() {
 // 	return _inline(
 // 		'index.html',
 // 		'/node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js',
-// 		'./'
+// 		'dist'
 // 	);
 // }
 
@@ -161,7 +160,7 @@ function jsMinifyBundles() {
 }
 
 // const jsInline = gulp.parallel(
-// 	//jsInlineIndex,
+// 	jsInlineIndex,
 // 	jsInlineDormanticide,
 // 	jsInlineVamp
 // );

@@ -1,4 +1,4 @@
-/* eslint camelcase: 0 */
+/* eslint-disable camelcase */
 import Util from './util';
 
 class StarryBg {
