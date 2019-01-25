@@ -1,7 +1,3 @@
-import '@material/mwc-icon';
-import PlaygroundController from './controllers/playground';
-import Util from './util';
-
 const routes = {
 	home: 'page-home',
 	games: 'page-games',
@@ -18,6 +14,7 @@ class Router {
 		Router.resetController(slug);
 
 		// TODO: use redux?
+		window.selectedPage = slug;
 		document.querySelector('head-er').setAttribute('selectedPage', slug);
 		document.querySelector('a-side').setAttribute('selectedPage', slug);
 
@@ -52,17 +49,32 @@ class Router {
 // Start router
 window.onhashchange = () => Router.route(location.hash);
 
-// TODO: fix race condition
-Promise.all([
-	import('../elts/head-er'),
-	import('../elts/a-side')
-]).then(() => {
-	PlaygroundController.handleSubNav();
-});
+WebComponents.waitFor(() => {
+	// TODO: concat
+	// NOTE: should also wait for elements loaded and firstUpdated?
+	import('@material/mwc-icon');
+	import('../elts/head-er');
+	import('../elts/a-side');
 
-// TODO: fix icon FOUC hack
-addEventListener('load', () => {
-	document.body.style.setProperty('--icon-opacity', 1);
-});
+	// Avoid font text until loaded
+	if(document.fonts) {
+		let iconFontLoaded;
+		let count = 0;
+		let interval = setInterval(() => {
+			++count;
+			iconFontLoaded = document.fonts.check('12px "Material Icons"');
 
-Router.route(location.hash);
+			if(iconFontLoaded || count > 100) { // quit after 10s
+				document.body.style.setProperty('--icon-opacity', 1);
+				clearInterval(interval);
+			}
+		}, 100);
+	}
+	else {
+		// Microsoft Edge
+		document.body.style.setProperty('--icon-opacity', 1);
+	}
+
+	// Show page
+	Router.route(location.hash);
+});

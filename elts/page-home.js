@@ -56,8 +56,10 @@ class PageHome extends LitElement {
 				chrome: 'nofooter'
 			}).then(widget => {
 				let iframeDoc = widget.contentDocument;
-				iframeDoc.head.appendChild(styles);
-				widget.classList.add('twitter-timline-custom-styled');
+				if(iframeDoc) {
+					iframeDoc.head.appendChild(styles);
+					widget.classList.add('twitter-timline-custom-styled');
+				}
 			});
 		});
 	}

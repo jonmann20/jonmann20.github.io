@@ -2,7 +2,6 @@ import {html, LitElement} from 'lit-element';
 import baseStyles from './styles/base';
 import pageStyles from './styles/page';
 import Util from '../js/util';
-import PlaygroundController from '../js/controllers/playground';
 
 class PageBreakdancingCube extends LitElement {
 	constructor() {
@@ -11,10 +10,6 @@ class PageBreakdancingCube extends LitElement {
 		document.title = 'Breakdancing Cube | Playground';
 		Util.addMeta('description', 'Pure CSS3 animation demo.');
 		Util.addMeta('keywords', 'CSS3, HTML5');
-	}
-
-	firstUpdated() {
-		PlaygroundController.openNav();
 	}
 
 	render() {

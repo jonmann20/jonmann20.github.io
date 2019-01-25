@@ -114,6 +114,7 @@ function eslint() {
 			'js/**/*.js',
 			'elts/**/*.js',
 			'gulpfile.babel.js',
+			'webpack.config.babel.js',
 			'gulp_tasks/**/*.js',
 			'!js/analytics.js'
 		]).
@@ -167,14 +168,14 @@ function jsMinifyBundles() {
 
 const js = gulp.parallel(
 	jsPageDormanticide,
-	jsPageVamp,
-	jsServiceWorker,
-	jsPrd
+	jsPageVamp
 );
 
 export {
 	js,
 	eslint,
+	jsServiceWorker,
+	jsPrd,
 	//jsInline,
 	//jsInlineIndex2,
 	jsMinifyBundles

@@ -2,7 +2,6 @@ import {html, LitElement} from 'lit-element';
 import baseStyles from './styles/base';
 import pageStyles from './styles/page';
 import Util from '../js/util';
-import PlaygroundController from '../js/controllers/playground';
 
 class PagePlayground extends LitElement {
 	constructor() {
@@ -11,10 +10,6 @@ class PagePlayground extends LitElement {
 		document.title = 'Playground';
 		Util.addMeta('description', 'An playground area for web tech demos.');
 		Util.addMeta('keywords', 'canvas, html5');
-	}
-
-	firstUpdated() {
-		PlaygroundController.openNav();
 	}
 
 	render() {

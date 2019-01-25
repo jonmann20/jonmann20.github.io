@@ -1,6 +1,6 @@
 'use strict'; // eslint-disable-line
 
-(() => {
+if(location.hostname === 'jonw.me') {
 	let orgDebug = console.debug,
 		orgErr = console.error,
 		orgLog = console.log,
@@ -31,4 +31,4 @@
 		ga('send', 'event', 'JS console', 'error', msg + ' |---url--| ' + url + ' |---line--| ' + line);
 		return false;
 	};
-})();
+}

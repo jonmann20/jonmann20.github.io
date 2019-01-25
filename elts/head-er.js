@@ -24,6 +24,22 @@ class HeadEr extends LitElement {
 				this.boundHideAside();
 			}
 		};
+
+		this.navVisible = window.selectedPage.includes('playground');
+	}
+
+	firstUpdated() {
+		this.pNav = this.shadowRoot.querySelector('.playground-nav-wrap');
+
+		addEventListener('route', e => {
+			const slug = e.detail;
+			if(!slug.includes('playground')) {
+				this.navVisible = false;
+			}
+			else {
+				this.navVisible = true;
+			}
+		}, {passive: true});
 	}
 
 	render() {
@@ -203,7 +219,7 @@ class HeadEr extends LitElement {
 					</a>
 
 					<!-- TODO: convert sub nav to a component -->
-					<div class="playground-nav-wrap">
+					<div class="playground-nav-wrap${this.navVisible ? ' visible' : ''}">
 						<ul class="playground-nav">
 							<li><a href="#playground/breakdancing-cube" ?selected="${this.selectedPage === 'playground/breakdancing-cube'}">Breakdancing Cube</a></li>
 							<li><a href="#playground/starry-background" ?selected="${this.selectedPage === 'playground/starry-background'}">Starry Background</a></li>

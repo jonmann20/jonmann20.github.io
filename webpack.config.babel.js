@@ -1,6 +1,4 @@
-'use strict';
-
-const path = require('path');
+import path from 'path';
 
 module.exports = {
 	entry: {
@@ -8,7 +6,6 @@ module.exports = {
 	},
 	output: {
 		path: path.resolve(__dirname, './dist'),
-		//publicPath: '/dist/',
 		filename: '[name].js'
 	},
 	resolve: {

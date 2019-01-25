@@ -6,7 +6,7 @@ import webpack from 'webpack';
 import replace from 'gulp-replace';
 
 function bundleComponents() {
-	const webpackConfig = require('../webpack.config.js');
+	const webpackConfig = require('../webpack.config.babel.js');
 
 	return src([
 			'elts/**/*.js',
@@ -20,6 +20,7 @@ function bundleComponents() {
 function prdIndex() {
 	return src('dist/index.html').
 		pipe(replace('isDev = true', 'isDev = false')).
+		pipe(replace('js/router.js', 'router.js')).
 		pipe(dest('dist'));
 }
 
