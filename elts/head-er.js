@@ -124,20 +124,6 @@ class HeadEr extends LitElement {
 					transition: none;
 				}
 
-				/* TODO: extract template, logic, and styling of nav links between head-er and a-side */
-				/* keep in sync with a-side */
-				a:hover mwc-icon,
-				[selected],
-				[selected]:hover {
-					color: #ff6188 !important;
-					cursor: default;
-					text-shadow: none;
-				}
-
-				mwc-icon {
-					cursor: pointer !important;
-				}
-
 				.icon-home {
 					margin-right: 7px;
 					vertical-align: -3px;
@@ -153,7 +139,7 @@ class HeadEr extends LitElement {
 					text-align: center;
 				}
 
-				.nav2 mwc-icon {
+				.nav2 i-con {
 					vertical-align: -6px;
 					margin-left: 7px;
 				}
@@ -204,18 +190,18 @@ class HeadEr extends LitElement {
 			<header>
 				<nav>
 					<a href="#home">
-						<mwc-icon class="icon-home" ?selected="${this.selectedPage === 'home'}">home</mwc-icon>&nbsp;Jon Wiedmann
+						<i-con name="home" class="icon-home" ?selected="${this.selectedPage === 'home'}"></i-con>&nbsp;Jon Wiedmann
 					</a>
 					<a class="menu" @click="${this.menuClick}">
-						<mwc-icon>menu</mwc-icon>
+						<i-con name="menu"></i-con>
 					</a>
 				</nav>
 				<nav class="nav2">
 					<a href="#games">
-						Games <mwc-icon ?selected="${this.selectedPage === 'games'}">videogame_asset</mwc-icon>
+						Games <i-con name="videogameAsset" ?selected="${this.selectedPage === 'games'}"></i-con>
 					</a>
 					<a href="#playground">
-						Playground <mwc-icon ?selected="${this.selectedPage.includes('playground')}">polymer</mwc-icon>
+						Playground <i-con name="polymer" ?selected="${this.selectedPage.includes('playground')}"></i-con>
 					</a>
 
 					<!-- TODO: convert sub nav to a component -->
@@ -227,7 +213,7 @@ class HeadEr extends LitElement {
 						</ul>
 					</div>
 					<a href="#portfolio">
-						Portfolio <mwc-icon ?selected="${this.selectedPage === 'portfolio'}">work</mwc-icon>
+						Portfolio <i-con name="work" ?selected="${this.selectedPage === 'portfolio'}"></i-con>
 					</a>
 				</nav>
 			</header>

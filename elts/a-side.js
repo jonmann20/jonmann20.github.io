@@ -19,16 +19,6 @@ class ASide extends LitElement {
 			<style>
 				${baseStyles}
 
-				/* keep in sync with head-er */
-				[selected],
-				[selected]:hover {
-					color: #ff6188 !important;
-					-webkit-text-stroke: 1px #ff6188;
-					text-stroke: 1px #ff6188;
-					cursor: default;
-					text-shadow: none;
-				}
-
 				aside {
 					transform: translateX(-100%);
 					transition: all 0.3s cubic-bezier(0, 0, 0.3, 1);
@@ -63,20 +53,11 @@ class ASide extends LitElement {
 					text-shadow: 0 0 6px #ffd866;
 				}
 
-				mwc-icon {
+				i-con {
 					float: left;
 					margin-right: 13px;
 					margin-top: 5px;
 					cursor: pointer !important;
-				}
-
-				[selected],
-				[selected]:hover {
-					color: #ff6188 !important;
-					-webkit-text-stroke: 1px #ff6188;
-					text-stroke: 1px #ff6188;
-					cursor: default;
-					text-shadow: none;
 				}
 
 				.playground-nav {
@@ -90,10 +71,10 @@ class ASide extends LitElement {
 
 			<aside id="${this.active ? 'activated' : ''}">
 				<a href="#games">
-					Games <mwc-icon ?selected="${this.selectedPage === 'games'}">videogame_asset</mwc-icon>
+					Games <i-con name="videogameAsset" ?selected="${this.selectedPage === 'games'}"></i-con>
 				</a>
 				<a href="#playground">
-					Playground <mwc-icon ?selected="${this.selectedPage.includes('playground')}">polymer</mwc-icon>
+					Playground <i-con name="polymer" ?selected="${this.selectedPage.includes('playground')}"></i-con>
 				</a>
 				<div class="playground-nav-wrap">
 					<ul class="playground-nav">
@@ -103,7 +84,7 @@ class ASide extends LitElement {
 					</ul>
 				</div>
 				<a href="#portfolio">
-					Portfolio <mwc-icon ?selected="${this.selectedPage === 'portfolio'}">work</mwc-icon>
+					Portfolio <i-con name="work" ?selected="${this.selectedPage === 'portfolio'}"></i-con>
 				</a>
 			</aside>
 		`;

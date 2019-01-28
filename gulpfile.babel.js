@@ -3,7 +3,7 @@ import del from './gulp_tasks/del';
 import copy from './gulp_tasks/copy';
 import {bundleComponents, prdIndex, htmlMinify} from './gulp_tasks/html';
 //import {cssLint, cssInline} from './gulp_tasks/css';
-import {js, eslint, jsServiceWorker, jsPrd, /* jsInline, jsInlineIndex2,*/ jsMinifyBundles} from './gulp_tasks/js';
+import {js, eslint, jsServiceWorker, jsPrd, jsInlineIndex, jsMinifyBundles} from './gulp_tasks/js';
 import srv from './gulp_tasks/server';
 
 const test = parallel(/*htmlLint, cssLint,*/ eslint);
@@ -15,7 +15,7 @@ dev.description = 'Build files and run server';
 const prd = series(
 	js,
 	parallel(test, jsServiceWorker, jsPrd, copy, bundleComponents),
-	series(/*cssInline, jsInline, jsInlineIndex2,*/ prdIndex, jsMinifyBundles, htmlMinify)
+	series(/*cssInline*/ prdIndex, jsInlineIndex, jsMinifyBundles, htmlMinify)
 );
 prd.description = 'Build files for production';
 

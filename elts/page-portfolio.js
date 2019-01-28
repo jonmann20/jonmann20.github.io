@@ -82,7 +82,7 @@ class PagePortfolio extends LitElement {
 					</p>
 
 					<a href="https://wellopp.com" class="big-btn" target="_blank" rel="noopener">
-						Visit wellopp.com <mwc-icon class="open-in-new">open_in_new</mwc-icon>
+						Visit wellopp.com <i-con name="openInNew" class="open-in-new"></i-con>
 					</a>
 
 					<p><img src="/img/portfolio/wellopp.png" alt="Wellopp website"></p>
@@ -111,7 +111,7 @@ class PagePortfolio extends LitElement {
 						The app takes you through a quiz, revealing what white elephant gift you are most like.
 					</p>
 					<a href="https://perficient.com" class="big-btn" target="_blank" rel="noopener">
-						Visit perficient.com <mwc-icon class="open-in-new">open_in_new</mwc-icon>
+						Visit perficient.com <i-con name="openInNew" class="open-in-new"></i-con>
 					</a>
 
 					<img class="enl-site" src="/img/portfolio/enlighten.jpg" alt="Enlighten Agency">
@@ -124,7 +124,7 @@ class PagePortfolio extends LitElement {
 					</p>
 
 					<a href="http://picocal.com" class="big-btn" target="_blank" rel="noopener">
-						Visit picocal.com <mwc-icon class="open-in-new">open_in_new</mwc-icon>
+						Visit picocal.com <i-con name="openInNew" class="open-in-new"></i-con>
 					</a>
 
 					<img src="/img/portfolio/pico.jpg" alt="PicoCal">
@@ -138,7 +138,7 @@ class PagePortfolio extends LitElement {
 					</p>
 
 					<a href="https://twitter.com/Nologydigital" class="big-btn" target="_blank" rel="noopener">
-						Visit @Nologydigital <mwc-icon class="open-in-new">open_in_new</mwc-icon>
+						Visit @Nologydigital <i-con name="openInNew" class="open-in-new"></i-con>
 					</a>
 
 					<img src="/img/portfolio/nology.jpg" alt="Nology Digital">

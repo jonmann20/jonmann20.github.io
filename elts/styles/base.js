@@ -50,14 +50,6 @@ const baseStyles = `
 		box-shadow: 2px 2px 16px 2px rgba(0, 0, 0, 0.45);
 	}
 
-	/* avoid FOUC, could remove if bundled? */
-	mwc-icon {
-		display: inline-block;
-		width: 24px;
-		opacity: var(--icon-opacity);
-		/* not working --- font-display: block; */
-	}
-
 	/* utils */
 
 	.card {

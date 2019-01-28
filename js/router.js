@@ -52,28 +52,9 @@ window.onhashchange = () => Router.route(location.hash);
 WebComponents.waitFor(() => {
 	// TODO: concat
 	// NOTE: should also wait for elements loaded and firstUpdated?
-	import('@material/mwc-icon');
+	import('../elts/i-con.js');
 	import('../elts/head-er');
 	import('../elts/a-side');
-
-	// Avoid font text until loaded
-	if(document.fonts) {
-		let iconFontLoaded;
-		let count = 0;
-		let interval = setInterval(() => {
-			++count;
-			iconFontLoaded = document.fonts.check('12px "Material Icons"');
-
-			if(iconFontLoaded || count > 100) { // quit after 10s
-				document.body.style.setProperty('--icon-opacity', 1);
-				clearInterval(interval);
-			}
-		}, 100);
-	}
-	else {
-		// Microsoft Edge
-		document.body.style.setProperty('--icon-opacity', 1);
-	}
 
 	// Show page
 	Router.route(location.hash);
