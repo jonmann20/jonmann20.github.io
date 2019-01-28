@@ -1,4 +1,4 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[2,12],[function(t,e,n){"use strict";n.r(e);var i=n(16),a=n(4);customElements.define("head-er",class extends i.a{static get properties(){return{selectedPage:{type:String}}}constructor(){super(),this.asideIsActive=!1,this.initX=0,this.x=0,this.boundHideAside=(t=>this.hideAside(t)),this.boundSetInitX=(t=>this.hideSetInitX(t)),this.boundSetX=(t=>this.hideSetX(t)),window.onresize=(()=>{window.innerWidth>800&&this.boundHideAside()}),this.navVisible=window.selectedPage.includes("playground")}firstUpdated(){this.pNav=this.shadowRoot.querySelector(".playground-nav-wrap"),addEventListener("route",t=>{t.detail.includes("playground")?this.navVisible=!0:this.navVisible=!1},{passive:!0})}render(){return i.c`
+(window.webpackJsonp=window.webpackJsonp||[]).push([[2,4],{1:function(t,e,n){"use strict";n.r(e);var i=n(16),a=n(5);customElements.define("head-er",class extends i.a{static get properties(){return{selectedPage:{type:String}}}constructor(){super(),this.asideIsActive=!1,this.initX=0,this.x=0,this.boundHideAside=(t=>this.hideAside(t)),this.boundSetInitX=(t=>this.hideSetInitX(t)),this.boundSetX=(t=>this.hideSetX(t)),window.onresize=(()=>{window.innerWidth>800&&this.boundHideAside()}),this.navVisible=window.selectedPage.includes("playground")}firstUpdated(){this.pNav=this.shadowRoot.querySelector(".playground-nav-wrap"),addEventListener("route",t=>{t.detail.includes("playground")?this.navVisible=!0:this.navVisible=!1},{passive:!0})}render(){return i.b`
 			<style>
 				${a.default}
 
@@ -79,20 +79,6 @@
 					transition: none;
 				}
 
-				/* TODO: extract template, logic, and styling of nav links between head-er and a-side */
-				/* keep in sync with a-side */
-				a:hover mwc-icon,
-				[selected],
-				[selected]:hover {
-					color: #ff6188 !important;
-					cursor: default;
-					text-shadow: none;
-				}
-
-				mwc-icon {
-					cursor: pointer !important;
-				}
-
 				.icon-home {
 					margin-right: 7px;
 					vertical-align: -3px;
@@ -108,7 +94,7 @@
 					text-align: center;
 				}
 
-				.nav2 mwc-icon {
+				.nav2 i-con {
 					vertical-align: -6px;
 					margin-left: 7px;
 				}
@@ -159,18 +145,18 @@
 			<header>
 				<nav>
 					<a href="#home">
-						<mwc-icon class="icon-home" ?selected="${"home"===this.selectedPage}">home</mwc-icon>&nbsp;Jon Wiedmann
+						<i-con name="home" class="icon-home" ?selected="${"home"===this.selectedPage}"></i-con>&nbsp;Jon Wiedmann
 					</a>
 					<a class="menu" @click="${this.menuClick}">
-						<mwc-icon>menu</mwc-icon>
+						<i-con name="menu"></i-con>
 					</a>
 				</nav>
 				<nav class="nav2">
 					<a href="#games">
-						Games <mwc-icon ?selected="${"games"===this.selectedPage}">videogame_asset</mwc-icon>
+						Games <i-con name="videogameAsset" ?selected="${"games"===this.selectedPage}"></i-con>
 					</a>
 					<a href="#playground">
-						Playground <mwc-icon ?selected="${this.selectedPage.includes("playground")}">polymer</mwc-icon>
+						Playground <i-con name="polymer" ?selected="${this.selectedPage.includes("playground")}"></i-con>
 					</a>
 
 					<!-- TODO: convert sub nav to a component -->
@@ -182,8 +168,8 @@
 						</ul>
 					</div>
 					<a href="#portfolio">
-						Portfolio <mwc-icon ?selected="${"portfolio"===this.selectedPage}">work</mwc-icon>
+						Portfolio <i-con name="work" ?selected="${"portfolio"===this.selectedPage}"></i-con>
 					</a>
 				</nav>
 			</header>
-		`}menuClick(t){t.preventDefault(),this.asideIsActive?this.hideAside():(document.querySelector("a-side").setAttribute("active",!0),document.querySelector("main").classList.add("leftbar-active"),this.asideIsActive=!0,requestAnimationFrame(()=>{document.body.addEventListener("click",this.boundHideAside,{passive:!0}),document.body.addEventListener("touchstart",this.boundSetInitX,{passive:!0}),document.body.addEventListener("touchmove",this.boundSetX,{passive:!0}),document.body.addEventListener("touchend",this.boundHideAside,{passive:!0})}))}hideAside(t){t&&"touchend"===t.type&&this.initX===this.x||(document.querySelector("a-side").removeAttribute("active"),document.querySelector("main").classList.remove("leftbar-active"),this.asideIsActive=!1,document.body.removeEventListener("click",this.boundHideAside,{passive:!0}),document.body.removeEventListener("touchstart",this.boundSetInitX,{passive:!0}),document.body.removeEventListener("touchmove",this.boundSetX,{passive:!0}),document.body.removeEventListener("touchend",this.boundHideAside,{passive:!0}))}setInitX(t){this.initX=t.touches[0].pageX,this.x=this.initX}setX(t){this.x=t.touches[0].pageX}})},,,,function(t,e,n){"use strict";n.r(e);e.default="\n\t:host {\n\t\tdisplay: block;\n\t}\n\n\t* {\n\t\tbox-sizing: border-box;\n\t}\n\n\th1,\n\th2,\n\th3 {\n\t\tmargin: 0.4em 0 0.6em;\n\t\tfont-size: 1.75em;\n\t\tfont-weight: 300;\n\t\tcolor: #fcfcfa;\n\t\ttext-shadow: 0 2px 3px #212121;\n\t}\n\n\tul {\n\t\tlist-style-type: none;\n\t\tpadding: 0;\n\t}\n\n\ta {\n\t\tcolor: #66d9ef;\n\t\ttext-decoration: none;\n\t\toutline: none;\n\t\tcursor: pointer;\n\t}\n\n\ta:hover {\n\t\tcolor: #7ddff1;\n\t\ttext-shadow: #7ddff1 0 0 6px;\n\t}\n\n\ta:active {\n\t\tcolor: #4fd3ed;\n\t}\n\n\ta:focus {\n\t\toutline: 0;\n\t}\n\n\tinput {\n\t\toutline-color: #888;\n\t}\n\n\tinput:focus {\n\t\tbox-shadow: 2px 2px 16px 2px rgba(0, 0, 0, 0.45);\n\t}\n\n\t/* avoid FOUC, could remove if bundled? */\n\tmwc-icon {\n\t\tdisplay: inline-block;\n\t\twidth: 24px;\n\t\topacity: var(--icon-opacity);\n\t\t/* not working --- font-display: block; */\n\t}\n\n\t/* utils */\n\n\t.card {\n\t\tdisplay: inline-block;\n\t\tbackground: #2d2a2e;\n\t\tbox-shadow: var(--box-shadow-2);\n\t\tborder-radius: 2px;\n\t\tpadding: 3px 25px 5px;\n\t}\n\n\t.card-light {\n\t\tborder-radius: 2px;\n\t\tbox-shadow: var(--box-shadow-2);\n\t}\n"}]]);
+		`}menuClick(t){t.preventDefault(),this.asideIsActive?this.hideAside():(document.querySelector("a-side").setAttribute("active",!0),document.querySelector("main").classList.add("leftbar-active"),this.asideIsActive=!0,requestAnimationFrame(()=>{document.body.addEventListener("click",this.boundHideAside,{passive:!0}),document.body.addEventListener("touchstart",this.boundSetInitX,{passive:!0}),document.body.addEventListener("touchmove",this.boundSetX,{passive:!0}),document.body.addEventListener("touchend",this.boundHideAside,{passive:!0})}))}hideAside(t){t&&"touchend"===t.type&&this.initX===this.x||(document.querySelector("a-side").removeAttribute("active"),document.querySelector("main").classList.remove("leftbar-active"),this.asideIsActive=!1,document.body.removeEventListener("click",this.boundHideAside,{passive:!0}),document.body.removeEventListener("touchstart",this.boundSetInitX,{passive:!0}),document.body.removeEventListener("touchmove",this.boundSetX,{passive:!0}),document.body.removeEventListener("touchend",this.boundHideAside,{passive:!0}))}setInitX(t){this.initX=t.touches[0].pageX,this.x=this.initX}setX(t){this.x=t.touches[0].pageX}})},5:function(t,e,n){"use strict";n.r(e);e.default="\n\t:host {\n\t\tdisplay: block;\n\t}\n\n\t* {\n\t\tbox-sizing: border-box;\n\t}\n\n\th1,\n\th2,\n\th3 {\n\t\tmargin: 0.4em 0 0.6em;\n\t\tfont-size: 1.75em;\n\t\tfont-weight: 300;\n\t\tcolor: #fcfcfa;\n\t\ttext-shadow: 0 2px 3px #212121;\n\t}\n\n\tul {\n\t\tlist-style-type: none;\n\t\tpadding: 0;\n\t}\n\n\ta {\n\t\tcolor: #66d9ef;\n\t\ttext-decoration: none;\n\t\toutline: none;\n\t\tcursor: pointer;\n\t}\n\n\ta:hover {\n\t\tcolor: #7ddff1;\n\t\ttext-shadow: #7ddff1 0 0 6px;\n\t}\n\n\ta:active {\n\t\tcolor: #4fd3ed;\n\t}\n\n\ta:focus {\n\t\toutline: 0;\n\t}\n\n\tinput {\n\t\toutline-color: #888;\n\t}\n\n\tinput:focus {\n\t\tbox-shadow: 2px 2px 16px 2px rgba(0, 0, 0, 0.45);\n\t}\n\n\t/* utils */\n\n\t.card {\n\t\tdisplay: inline-block;\n\t\tbackground: #2d2a2e;\n\t\tbox-shadow: var(--box-shadow-2);\n\t\tborder-radius: 2px;\n\t\tpadding: 3px 25px 5px;\n\t}\n\n\t.card-light {\n\t\tborder-radius: 2px;\n\t\tbox-shadow: var(--box-shadow-2);\n\t}\n"}}]);
