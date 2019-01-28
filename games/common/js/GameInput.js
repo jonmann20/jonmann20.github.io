@@ -1,5 +1,3 @@
-'use strict';
-
 const KeyCode = {
 	EMPTY: -1,
 	ENTER: 13,
@@ -86,3 +84,9 @@ class GameInput {
 		return key;
 	}
 }
+
+export {
+	KeyCode,
+	KeyCodeNames,
+	GameInput
+};

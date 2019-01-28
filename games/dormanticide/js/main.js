@@ -1,5 +1,11 @@
-'use strict';
-/* globals GameEngine, TitleView, OverworldView, FightAction, Dormant, BattleView, game */
+import GameEngine from '../../common/js/GameEngine';
+import TitleView from '../../common/js/view/TitleView';
+
+import OverworldView from './view/OverworldView';
+import BattleView from './view/BattleView';
+import FightAction from './dormant/FightAction';
+import Dormant from './dormant/Dormant';
+
 
 (() => {
 	window.game = new GameEngine();

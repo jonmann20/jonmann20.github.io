@@ -1,64 +1,66 @@
-/* globals SAT */
+import SAT from '../../../common/js/physics/SAT';
 
 class LevelView {
-    constructor(player, curLvl) {
-        this.onUpdateSet = false;
-        this.onRenderSet = false;
+	constructor(player, curLvl) {
+		this.onUpdateSet = false;
+		this.onRenderSet = false;
 
-        this.privates = {};
-        this.player = player;
-        this.curLvl = curLvl;
+		this.privates = {};
+		this.player = player;
+		this.curLvl = curLvl;
 
-        this.init();
-    }
+		this.init();
+	}
 
-    then(callback) {
-        this.privates.callback = callback;
-    }
+	then(callback) {
+		this.privates.callback = callback;
+	}
 
-    init() {
+	init() {
 
-    }
+	}
 
-    update() {
-        this.curLvl.update();
-        this.player.update();
+	update() {
+		this.curLvl.update();
+		this.player.update();
 
-        this._checkCollision();
-    }
+		this._checkCollision();
+	}
 
-    onUpdate(callback) {
-        this.onUpdateSet = true;
-        this.onUpdate = callback;
-    }
+	onUpdate(callback) {
+		this.onUpdateSet = true;
+		this.onUpdate = callback;
+	}
 
-    render() {
-        this.curLvl.render();
-        this.player.render();
-    }
+	render() {
+		this.curLvl.render();
+		this.player.render();
+	}
 
-    onRender(callback) {
-        this.onRenderSet = true;
-        this.onRender = callback;
-    }
+	onRender(callback) {
+		this.onRenderSet = true;
+		this.onRender = callback;
+	}
 
-    _checkCollision() {
-        if(this.player.invincible) {
-            if(this.player.invincibleTimer-- === 0) {
-                this.player.invincible = false;
-                this.player.invincibleTimer = 120;
-            }
+	_checkCollision() {
+		if(this.player.invincible) {
+			if(this.player.invincibleTimer-- === 0) {
+				this.player.invincible = false;
+				this.player.invincibleTimer = 120;
+			}
 
-            return;
-        }
+			return;
+		}
 
-        for(let i = 0; i < this.curLvl.projectiles.length; ++i) {
-            const collided = SAT.testPolygonPolygon(this.player, this.curLvl.projectiles[i]);
-            if(collided) {
-                --this.player.hp;
-                this.player.invincible = true;
-                break;
-            }
-        }
-    }
+		for(let i = 0; i < this.curLvl.projectiles.length; ++i) {
+			const collided = SAT.testPolygonPolygon(this.player, this.curLvl.projectiles[i]);
+			if(collided) {
+				--this.player.hp;
+				this.player.invincible = true;
+				break;
+			}
+		}
+	}
 }
+
+export default LevelView;
