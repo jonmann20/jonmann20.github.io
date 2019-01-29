@@ -1,34 +1,45 @@
-// import gulp from 'gulp';
-// import replace from 'gulp-replace';
-// import fs from 'fs';
-// import cleanCss from 'gulp-clean-css';
+import {src, dest, parallel} from 'gulp';
+import replace from 'gulp-replace';
+import fs from 'fs';
+//import cleanCss from 'gulp-clean-css';
 
-// function _inline(src, filename, dest) {
-// 	const cond = `<link rel="stylesheet" href="${filename}">`;
-// 	const file = `${__dirname}/..${filename}`;
-
-// 	return gulp.src(src).
-// 		pipe(replace(cond, () => {
-// 			const styles = fs.readFileSync(file, 'utf8');
-// 			return `<style>${styles}</style>`;
-// 		})).
-// 		pipe(gulp.dest(dest));
+// function cssLint() {
+// 	return gulp.src('elts/styles/*.js').
+// 		pipe(_cssLint());
 // }
 
-// // function cssLint() {
-// // 	return gulp.src('elts/styles/*.js').
-// // 		pipe(cssLint());
-// // }
+function _inline(_src, _dest, assetHref, assetFile) {
+	const cond = `<link rel="stylesheet" href="${assetHref}">`;
+	const file = `${__dirname}/../${assetFile}`;
 
-// const cssInlineVamp = () => _inline('games/vamp/index.html', '/games/common/css/main.css', './games/vamp');
-// const cssInlineDormanticide = () => _inline('games/dormanticide/index.html', '/games/common/css/main.css', './games/dormanticide');
+	return src(_src).
+		pipe(replace(cond, () => {
+			const styles = fs.readFileSync(file, 'utf8');
+			return `<style>${styles}</style>`;
+		})).
+		pipe(dest(_dest));
+}
 
-// const cssInline = gulp.parallel(
-// 	cssInlineVamp,
-// 	cssInlineDormanticide
-// );
+function cssInlineDormanticide() {
+	return _inline(
+		'dist/games/dormanticide/index.html', 'dist/games/dormanticide',
+		'/games/common/css/main.css', 'dist/games/common/css/main.css'
+	);
+}
 
-// export {
-//	cssInline,
-// 	cssLint
-// };
+function cssInlineVamp() {
+	return _inline(
+		'dist/games/vamp/index.html', 'dist/games/vamp',
+		'/games/common/css/main.css', 'dist/games/common/css/main.css'
+	);
+}
+
+const cssInline = parallel(
+	cssInlineDormanticide,
+	cssInlineVamp
+);
+
+export {
+	//cssLint,
+	cssInline
+};
