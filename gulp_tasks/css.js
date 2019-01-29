@@ -1,13 +1,7 @@
 // import gulp from 'gulp';
-// import iff from 'gulp-if';
-// import sourcemaps from 'gulp-sourcemaps';
 // import replace from 'gulp-replace';
 // import fs from 'fs';
-
 // import cleanCss from 'gulp-clean-css';
-// import isDev from './env';
-
-// const cssSrc = 'src/elts/styles/*.js';
 
 // function _inline(src, filename, dest) {
 // 	const cond = `<link rel="stylesheet" href="${filename}">`;
@@ -22,7 +16,7 @@
 // }
 
 // // function cssLint() {
-// // 	return gulp.src(cssSrc).
+// // 	return gulp.src('elts/styles/*.js').
 // // 		pipe(cssLint());
 // // }
 
@@ -35,5 +29,6 @@
 // );
 
 // export {
-// 	//cssLint
+//	cssInline,
+// 	cssLint
 // };

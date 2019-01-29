@@ -6,13 +6,12 @@ import webpack from 'webpack';
 import replace from 'gulp-replace';
 
 function bundleComponents() {
-	const webpackConfig = require('../webpack.config.babel.js');
-
 	return src([
-			'elts/**/*.js',
-			'js/router.js'
+			'js/router.js',
+			'games/vamp/js/main.js',
+			'games/dormanticide/js/main.js'
 		]).
-		pipe(webpackStream(webpackConfig, webpack)).
+		pipe(webpackStream(require('../webpack.config.babel.js'), webpack)).
 		pipe(dest('dist'));
 }
 

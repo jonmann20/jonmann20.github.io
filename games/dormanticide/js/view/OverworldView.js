@@ -1,3 +1,4 @@
+/* globals game, ctx, canvas */
 import {KeyCode} from '../../../common/js/GameInput';
 
 class OverworldView {
@@ -51,13 +52,13 @@ class OverworldView {
 		// levels
 		let size = 80, x, y;
 
-		for (let i = 0; i < 8; ++i) {
+		for(let i = 0; i < 8; ++i) {
 			x = 60 + i * 115;
 			y = canvas.height / 2 - size / 2;
 
 			ctx.fillStyle = '#fff';
 			ctx.font = '18px Arial';
-			ctx.fillText('Level ' + (i+1), x + 10, y - 13);
+			ctx.fillText('Level ' + (i + 1), x + 10, y - 13);
 
 			ctx.fillStyle = 'red';
 			ctx.fillRect(x, y, size, size);

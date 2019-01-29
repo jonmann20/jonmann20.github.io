@@ -1,3 +1,4 @@
+/* globals game, ctx */
 import SAT from '../../common/js/physics/SAT';
 import {KeyCode} from '../../common/js/GameInput';
 
@@ -60,7 +61,7 @@ class Vamp {
 		// health
 		ctx.fillStyle = 'red';
 		for(let i = 0; i < this.hp; ++i) {
-			ctx.fillRect(this.pos.x - 10 + i*20, this.pos.y - 20, 20, 10);
+			ctx.fillRect(this.pos.x - 10 + i * 20, this.pos.y - 20, 20, 10);
 		}
 	}
 }

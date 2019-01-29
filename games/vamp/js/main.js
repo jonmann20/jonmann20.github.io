@@ -1,3 +1,4 @@
+/* globals game */
 import GameEngine from '../../common/js/GameEngine';
 import {KeyCode} from '../../common/js/GameInput';
 import TitleView from '../../common/js/view/TitleView';

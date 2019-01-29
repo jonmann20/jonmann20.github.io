@@ -21,4 +21,4 @@ const Dir = {
 export {
 	GameUtils,
 	Dir
-}
+};

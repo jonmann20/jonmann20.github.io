@@ -59,3 +59,11 @@ WebComponents.waitFor(() => {
 	// Show page
 	Router.route(location.hash);
 });
+
+if(!window.isDev) {
+	// Load service worker
+	navigator.serviceWorker.register('sw.js');
+
+	// Load analytics
+	import('./prd.js');
+}

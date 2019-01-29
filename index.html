@@ -86,20 +86,8 @@
 		<main></main>
 	</div>
 
+	<script>window.isDev = true;</script><!-- prdIndex task will modify -->
 	<script src="node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
 	<script src="js/router.js" type="module"></script><!-- prdIndex task will modify -->
-	<script>
-		const isDev = true; // prdIndex task will modify
-
-		if(!isDev) {
-			// Load service worker
-			navigator.serviceWorker.register('sw.js');
-
-			// Load analytics
-			let script = document.createElement('script');
-			script.src = 'prd.js';
-			document.head.appendChild(script);
-		}
-	</script>
 </body>
 </html>
