@@ -1,3 +1,4 @@
+/* globals ctx, canvas */
 import SAT from '../../../common/js/physics/SAT';
 
 class Level1 {

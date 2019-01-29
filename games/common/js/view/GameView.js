@@ -1,3 +1,5 @@
+/* globals ctx, canvas */
+
 class GameView {
 	constructor() {
 		this.privates = {

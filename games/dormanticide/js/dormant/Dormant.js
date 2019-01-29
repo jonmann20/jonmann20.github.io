@@ -1,3 +1,5 @@
+/* globals ctx */
+
 class Dormant {
 	constructor(src, name, atk, def, hp, actions, lvl) {
 		this.img = new Image();

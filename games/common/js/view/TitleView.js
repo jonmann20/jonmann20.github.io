@@ -1,3 +1,4 @@
+/* globals game, ctx, canvas */
 import {KeyCode} from '../GameInput';
 
 class TitleView {

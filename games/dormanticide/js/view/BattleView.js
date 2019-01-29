@@ -1,3 +1,4 @@
+/* globals game, ctx, canvas */
 import {KeyCode} from '../../../common/js/GameInput';
 import {Dir} from '../../../common/js/GameUtils';
 import FightAction from '../dormant/FightAction';

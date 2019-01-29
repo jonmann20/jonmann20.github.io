@@ -1,3 +1,4 @@
+/* globals game, ctx, canvas */
 import GameSave from '../GameSave';
 import {KeyCode} from '../GameInput';
 

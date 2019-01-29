@@ -1,3 +1,5 @@
+/* globals canvas */
+
 import {GameInput} from './GameInput';
 import GameGraphics from './graphics/GameGraphics';
 import GameView from './view/GameView';
