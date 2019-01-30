@@ -1,8 +1,124 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[8,4,6],{11:function(t,n,e){"use strict";e.r(n);n.default="\n\t:host {\n\t\tdisplay: block;\n\t}\n\n\t* {\n\t\tbox-sizing: border-box;\n\t}\n\n\th1,\n\th2,\n\th3 {\n\t\tmargin: 0.4em 0 0.6em;\n\t\tfont-size: 1.75em;\n\t\tfont-weight: 300;\n\t\tcolor: #fcfcfa;\n\t\ttext-shadow: 0 2px 3px #212121;\n\t}\n\n\tul {\n\t\tlist-style-type: none;\n\t\tpadding: 0;\n\t}\n\n\ta {\n\t\tcolor: #66d9ef;\n\t\ttext-decoration: none;\n\t\toutline: none;\n\t\tcursor: pointer;\n\t}\n\n\ta:hover {\n\t\tcolor: #7ddff1;\n\t\ttext-shadow: #7ddff1 0 0 6px;\n\t}\n\n\ta:active {\n\t\tcolor: #4fd3ed;\n\t}\n\n\ta:focus {\n\t\toutline: 0;\n\t}\n\n\tinput {\n\t\toutline-color: #888;\n\t}\n\n\tinput:focus {\n\t\tbox-shadow: 2px 2px 16px 2px rgba(0, 0, 0, 0.45);\n\t}\n\n\t/* utils */\n\n\t.card {\n\t\tdisplay: inline-block;\n\t\tbackground: #2d2a2e;\n\t\tbox-shadow: var(--box-shadow-2);\n\t\tborder-radius: 2px;\n\t\tpadding: 3px 25px 5px;\n\t}\n\n\t.card-light {\n\t\tborder-radius: 2px;\n\t\tbox-shadow: var(--box-shadow-2);\n\t}\n"},12:function(t,n,e){"use strict";e.r(n);n.default="\n\t.col-left {\n\t\tmin-width: 121px;\n\t\twidth: 100%;\n\t}\n\n\t.col-left ul {\n\t\tfont-size: 1.15em;\n\t}\n\n\t.col-right {\n\t\tmargin-top: 25px;\n\t\tpadding-bottom: 13px;\n\t}\n\n\t.col-right img {\n\t\tmax-width: 100%;\n\t}\n\n\t.col-right > div {\n\t\tpadding-bottom: 13px !important;\n\t}\n\n\t/* > mobile */\n\t@media (min-width: 801px) {\n\t\t.col-left {\n\t\t\tfloat: left;\n\t\t\twidth: 46%;\n\t\t\tmargin-right: 2%;\n\t\t}\n\n\t\t.col-right {\n\t\t\tfloat: right;\n\t\t\twidth: 50%;\n\t\t\tmargin-top: 0;\n\t\t}\n\t}\n\n\t/* tablet */\n\t@media (min-width: 801px) and (max-width: 1265px) {\n\t\t.col-left {\n\t\t\twidth: 100%;\n\t\t\tmargin-bottom: 0;\n\t\t}\n\n\t\t.col-right {\n\t\t\twidth: 100%;\n\t\t\tmargin-top: 25px;\n\t\t}\n\t}\n"},15:function(t,n,e){"use strict";e.r(n);var a=e(23),i=e(11),r=e(12),o=e(22);customElements.define("page-breakdancing-cube",class extends a.a{constructor(){super(),document.title="Breakdancing Cube | Playground",o.a.addMeta("description","Pure CSS3 animation demo."),o.a.addMeta("keywords","CSS3, HTML5")}render(){return a.b`
-			<style>
-				${i.default}
-				${r.default}
+(window.webpackJsonp=window.webpackJsonp||[]).push([[9,4,6,7],{11:function(t,e,a){"use strict";a.r(e),a.d(e,"BLACK",function(){return r}),a.d(e,"BLUE",function(){return i}),a.d(e,"GREEN",function(){return d}),a.d(e,"WHITE",function(){return o}),a.d(e,"PURPLE",function(){return c}),a.d(e,"YELLOW",function(){return s}),a.d(e,"GRAY",function(){return p}),a.d(e,"RED",function(){return l});var n=a(23);const r=Object(n.d)("#2d2a2e"),i=Object(n.d)("#66d9ef"),d=Object(n.d)("#a6e22e"),o=Object(n.d)("#fcfcfa"),c=Object(n.d)("#ab9df2"),s=Object(n.d)("#ffd866"),p=Object(n.d)("#919091"),l=Object(n.d)("#ff6188")},12:function(t,e,a){"use strict";a.r(e);var n=a(23),r=a(11);e.default=n.b`
+	:host {
+		display: block;
+	}
 
+	* {
+		box-sizing: border-box;
+	}
+
+	h1,
+	h2,
+	h3 {
+		margin: 0.4em 0 0.6em;
+		font-size: 1.75em;
+		font-weight: 300;
+		color: ${r.WHITE};
+		text-shadow: 0 2px 3px #212121;
+	}
+
+	ul {
+		list-style-type: none;
+		padding: 0;
+	}
+
+	a {
+		color: ${r.BLUE};
+		text-decoration: none;
+		outline: none;
+		cursor: pointer;
+	}
+
+	a:hover {
+		color: #7ddff1;
+		text-shadow: #7ddff1 0 0 6px;
+	}
+
+	a:active {
+		color: #4fd3ed;
+	}
+
+	a:focus {
+		outline: 0;
+	}
+
+	a[selected] {
+		color: ${r.RED} !important;
+	}
+
+	input {
+		outline-color: #888;
+	}
+
+	input:focus {
+		box-shadow: 2px 2px 16px 2px rgba(0, 0, 0, 0.45);
+	}
+
+	/* utils */
+
+	.card {
+		display: inline-block;
+		background: ${r.BLACK};
+		box-shadow: var(--box-shadow-2);
+		border-radius: 2px;
+		padding: 3px 25px 5px;
+	}
+
+	.card-light {
+		border-radius: 2px;
+		box-shadow: var(--box-shadow-2);
+	}
+`},13:function(t,e,a){"use strict";a.r(e);var n=a(23);e.default=n.b`
+	.col-left {
+		min-width: 121px;
+		width: 100%;
+	}
+
+	.col-left ul {
+		font-size: 1.15em;
+	}
+
+	.col-right {
+		margin-top: 25px;
+		padding-bottom: 13px;
+	}
+
+	.col-right img {
+		max-width: 100%;
+	}
+
+	.col-right > div {
+		padding-bottom: 13px !important;
+	}
+
+	/* > mobile */
+	@media (min-width: 801px) {
+		.col-left {
+			float: left;
+			width: 46%;
+			margin-right: 2%;
+		}
+
+		.col-right {
+			float: right;
+			width: 50%;
+			margin-top: 0;
+		}
+	}
+
+	/* tablet */
+	@media (min-width: 801px) and (max-width: 1265px) {
+		.col-left {
+			width: 100%;
+			margin-bottom: 0;
+		}
+
+		.col-right {
+			width: 100%;
+			margin-top: 25px;
+		}
+	}
+`},16:function(t,e,a){"use strict";a.r(e);var n=a(23),r=a(12),i=a(13),d=a(24);customElements.define("page-breakdancing-cube",class extends n.a{static get styles(){return[r.default,i.default,n.b`
 				main {
 					min-height: 38em;
 				}
@@ -118,8 +234,7 @@
 						transform: rotateX(360deg) rotateY(360deg);
 					}
 				}
-			</style>
-
+			`]}constructor(){super(),document.title="Breakdancing Cube | Playground",d.a.addMeta("description","Pure CSS3 animation demo."),d.a.addMeta("keywords","CSS3, HTML5")}render(){return n.c`
 			<div class="card">
 				<h2>Breakdancing Cube</h2>
 				<p>A pure CSS<sub>3</sub> animation demo.</p>
@@ -139,4 +254,4 @@
 			<div class="iframe-wrap">
 				<iframe class="card" width="300" height="410" src="https://bandcamp.com/EmbeddedPlayer/v=2/album=1886256771/size=grande3/bgcol=FFFFFF/linkcol=5dafd7/transparent=true/" allowtransparency="true" frameborder="0"></iframe>
 			</div>
-        `}})},22:function(t,n,e){"use strict";class a{static require(t){return new Promise((n,e)=>{if(a.constructor._jsSrc.includes(t))n();else{let i=document.createElement("script");i.src=t,i.async=1,document.head.appendChild(i),i.onload=(()=>{a.constructor._jsSrc.push(t),n()}),i.onerror=(()=>e())}})}static addMeta(t,n){let e=document.createElement("meta");e.setAttribute("name",t),e.setAttribute("content",n),document.head.appendChild(e)}static addLink(t,n,e=!0){let a=document.createElement("link");a.setAttribute("rel",t),a.setAttribute("href",n),e&&a.setAttribute("crossorigin",""),document.head.appendChild(a)}static get getMainWidth(){const t=document.querySelector("main"),n=window.getComputedStyle(t,null),e=parseFloat(n.getPropertyValue("padding-left"));return t.getBoundingClientRect().width-e}}a.constructor._jsSrc=[],n.a=a}}]);
+        `}})},24:function(t,e,a){"use strict";class n{static require(t){return new Promise((e,a)=>{if(n.constructor._jsSrc.includes(t))e();else{let r=document.createElement("script");r.src=t,r.async=1,document.head.appendChild(r),r.onload=(()=>{n.constructor._jsSrc.push(t),e()}),r.onerror=(()=>a())}})}static addMeta(t,e){let a=document.createElement("meta");a.setAttribute("name",t),a.setAttribute("content",e),document.head.appendChild(a)}static addLink(t,e,a=!0){let n=document.createElement("link");n.setAttribute("rel",t),n.setAttribute("href",e),a&&n.setAttribute("crossorigin",""),document.head.appendChild(n)}static get getMainWidth(){const t=document.querySelector("main"),e=window.getComputedStyle(t,null),a=parseFloat(e.getPropertyValue("padding-left"));return t.getBoundingClientRect().width-a}}n.constructor._jsSrc=[],e.a=n}}]);

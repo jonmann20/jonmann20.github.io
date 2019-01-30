@@ -1,8 +1,124 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[10,4,6],{11:function(t,n,e){"use strict";e.r(n);n.default="\n\t:host {\n\t\tdisplay: block;\n\t}\n\n\t* {\n\t\tbox-sizing: border-box;\n\t}\n\n\th1,\n\th2,\n\th3 {\n\t\tmargin: 0.4em 0 0.6em;\n\t\tfont-size: 1.75em;\n\t\tfont-weight: 300;\n\t\tcolor: #fcfcfa;\n\t\ttext-shadow: 0 2px 3px #212121;\n\t}\n\n\tul {\n\t\tlist-style-type: none;\n\t\tpadding: 0;\n\t}\n\n\ta {\n\t\tcolor: #66d9ef;\n\t\ttext-decoration: none;\n\t\toutline: none;\n\t\tcursor: pointer;\n\t}\n\n\ta:hover {\n\t\tcolor: #7ddff1;\n\t\ttext-shadow: #7ddff1 0 0 6px;\n\t}\n\n\ta:active {\n\t\tcolor: #4fd3ed;\n\t}\n\n\ta:focus {\n\t\toutline: 0;\n\t}\n\n\tinput {\n\t\toutline-color: #888;\n\t}\n\n\tinput:focus {\n\t\tbox-shadow: 2px 2px 16px 2px rgba(0, 0, 0, 0.45);\n\t}\n\n\t/* utils */\n\n\t.card {\n\t\tdisplay: inline-block;\n\t\tbackground: #2d2a2e;\n\t\tbox-shadow: var(--box-shadow-2);\n\t\tborder-radius: 2px;\n\t\tpadding: 3px 25px 5px;\n\t}\n\n\t.card-light {\n\t\tborder-radius: 2px;\n\t\tbox-shadow: var(--box-shadow-2);\n\t}\n"},12:function(t,n,e){"use strict";e.r(n);n.default="\n\t.col-left {\n\t\tmin-width: 121px;\n\t\twidth: 100%;\n\t}\n\n\t.col-left ul {\n\t\tfont-size: 1.15em;\n\t}\n\n\t.col-right {\n\t\tmargin-top: 25px;\n\t\tpadding-bottom: 13px;\n\t}\n\n\t.col-right img {\n\t\tmax-width: 100%;\n\t}\n\n\t.col-right > div {\n\t\tpadding-bottom: 13px !important;\n\t}\n\n\t/* > mobile */\n\t@media (min-width: 801px) {\n\t\t.col-left {\n\t\t\tfloat: left;\n\t\t\twidth: 46%;\n\t\t\tmargin-right: 2%;\n\t\t}\n\n\t\t.col-right {\n\t\t\tfloat: right;\n\t\t\twidth: 50%;\n\t\t\tmargin-top: 0;\n\t\t}\n\t}\n\n\t/* tablet */\n\t@media (min-width: 801px) and (max-width: 1265px) {\n\t\t.col-left {\n\t\t\twidth: 100%;\n\t\t\tmargin-bottom: 0;\n\t\t}\n\n\t\t.col-right {\n\t\t\twidth: 100%;\n\t\t\tmargin-top: 25px;\n\t\t}\n\t}\n"},17:function(t,n,e){"use strict";e.r(n);var o=e(23),i=e(11),a=e(12),r=e(22);customElements.define("page-home",class extends o.a{constructor(){super(),document.title="Jon Wiedmann",r.a.addMeta("description","Jon Wiedmann's personal website.  A site with information on Jon's work experience and hobbies."),r.a.addMeta("keywords","Jon Wiedmann, Web Developer, HTML5, CSS, Javascript","Polymer"),r.a.addLink("preconnect","https://platform.twitter.com"),r.a.addLink("preconnect","https://cdn.syndication.twimg.com"),r.a.addLink("preconnect","https://syndication.twitter.com"),r.a.addLink("dns-prefetch","https://abs.twimg.com"),r.a.addLink("dns-prefetch","https://pbs.twimg.com"),r.a.addLink("dns-prefetch","https://ton.twimg.com")}firstUpdated(){r.a.require("https://platform.twitter.com/widgets.js").then(()=>{let t=document.createElement("style");t.type="text/css",t.innerHTML="\n\t\t\t\tbody {\n\t\t\t\t\tcolor: #fcfcfa;\n\t\t\t\t}\n\n\t\t\t\t.timeline-Widget {\n\t\t\t\t\tbackground: #2d2a2e;\n\t\t\t\t}\n\n\t\t\t\t.customisable-highlight {\n\t\t\t\t\tcolor: #66d9ef !important;\n\t\t\t\t}\n\n\t\t\t\t.timeline-Body {\n\t\t\t\t\tborder-top: none;\n\t\t\t\t\tborder-bottom: 2px solid #2d2a2e;\n\t\t\t\t\tborder-radius: 3px;\n\t\t\t\t}\n\t\t\t",twttr.widgets.createTimeline({sourceType:"profile",screenName:"jonwiedmann"},this.shadowRoot.querySelector(".col-right"),{width:620,height:520,theme:"dark",linkColor:"#66d9ef",chrome:"nofooter"}).then(n=>{let e=n.contentDocument;e&&(e.head.appendChild(t),n.classList.add("twitter-timline-custom-styled"))})})}render(){return o.b`
-			<style>
-				${i.default}
-				${a.default}
+(window.webpackJsonp=window.webpackJsonp||[]).push([[11,4,6,7],{11:function(t,e,n){"use strict";n.r(e),n.d(e,"BLACK",function(){return i}),n.d(e,"BLUE",function(){return r}),n.d(e,"GREEN",function(){return a}),n.d(e,"WHITE",function(){return d}),n.d(e,"PURPLE",function(){return c}),n.d(e,"YELLOW",function(){return s}),n.d(e,"GRAY",function(){return l}),n.d(e,"RED",function(){return m});var o=n(23);const i=Object(o.d)("#2d2a2e"),r=Object(o.d)("#66d9ef"),a=Object(o.d)("#a6e22e"),d=Object(o.d)("#fcfcfa"),c=Object(o.d)("#ab9df2"),s=Object(o.d)("#ffd866"),l=Object(o.d)("#919091"),m=Object(o.d)("#ff6188")},12:function(t,e,n){"use strict";n.r(e);var o=n(23),i=n(11);e.default=o.b`
+	:host {
+		display: block;
+	}
 
+	* {
+		box-sizing: border-box;
+	}
+
+	h1,
+	h2,
+	h3 {
+		margin: 0.4em 0 0.6em;
+		font-size: 1.75em;
+		font-weight: 300;
+		color: ${i.WHITE};
+		text-shadow: 0 2px 3px #212121;
+	}
+
+	ul {
+		list-style-type: none;
+		padding: 0;
+	}
+
+	a {
+		color: ${i.BLUE};
+		text-decoration: none;
+		outline: none;
+		cursor: pointer;
+	}
+
+	a:hover {
+		color: #7ddff1;
+		text-shadow: #7ddff1 0 0 6px;
+	}
+
+	a:active {
+		color: #4fd3ed;
+	}
+
+	a:focus {
+		outline: 0;
+	}
+
+	a[selected] {
+		color: ${i.RED} !important;
+	}
+
+	input {
+		outline-color: #888;
+	}
+
+	input:focus {
+		box-shadow: 2px 2px 16px 2px rgba(0, 0, 0, 0.45);
+	}
+
+	/* utils */
+
+	.card {
+		display: inline-block;
+		background: ${i.BLACK};
+		box-shadow: var(--box-shadow-2);
+		border-radius: 2px;
+		padding: 3px 25px 5px;
+	}
+
+	.card-light {
+		border-radius: 2px;
+		box-shadow: var(--box-shadow-2);
+	}
+`},13:function(t,e,n){"use strict";n.r(e);var o=n(23);e.default=o.b`
+	.col-left {
+		min-width: 121px;
+		width: 100%;
+	}
+
+	.col-left ul {
+		font-size: 1.15em;
+	}
+
+	.col-right {
+		margin-top: 25px;
+		padding-bottom: 13px;
+	}
+
+	.col-right img {
+		max-width: 100%;
+	}
+
+	.col-right > div {
+		padding-bottom: 13px !important;
+	}
+
+	/* > mobile */
+	@media (min-width: 801px) {
+		.col-left {
+			float: left;
+			width: 46%;
+			margin-right: 2%;
+		}
+
+		.col-right {
+			float: right;
+			width: 50%;
+			margin-top: 0;
+		}
+	}
+
+	/* tablet */
+	@media (min-width: 801px) and (max-width: 1265px) {
+		.col-left {
+			width: 100%;
+			margin-bottom: 0;
+		}
+
+		.col-right {
+			width: 100%;
+			margin-top: 25px;
+		}
+	}
+`},18:function(t,e,n){"use strict";n.r(e);var o=n(23),i=n(12),r=n(13),a=n(24),d=n(11);customElements.define("page-home",class extends o.a{static get styles(){return[i.default,r.default,o.b`
 				.col-left {
 					min-width: 337px;
 					max-width: 520px;
@@ -22,7 +138,7 @@
 				}
 
 				ul a:hover i-con {
-					color: #ff6188;
+					color: ${d.RED};
 				}
 
 				i-con {
@@ -39,8 +155,7 @@
 					box-shadow: var(--box-shadow-2);
 					border-radius: 2px;
 				}
-			</style>
-
+			`]}constructor(){super(),document.title="Jon Wiedmann",a.a.addMeta("description","Jon Wiedmann's personal website.  A site with information on Jon's work experience and hobbies."),a.a.addMeta("keywords","Jon Wiedmann, Web Developer, HTML5, CSS, Javascript","Polymer"),a.a.addLink("preconnect","https://platform.twitter.com"),a.a.addLink("preconnect","https://cdn.syndication.twimg.com"),a.a.addLink("preconnect","https://syndication.twitter.com"),a.a.addLink("dns-prefetch","https://abs.twimg.com"),a.a.addLink("dns-prefetch","https://pbs.twimg.com"),a.a.addLink("dns-prefetch","https://ton.twimg.com")}firstUpdated(){a.a.require("https://platform.twitter.com/widgets.js").then(()=>{let t=document.createElement("style");t.type="text/css",t.innerHTML=`\n\t\t\t\tbody {\n\t\t\t\t\tcolor: ${d.WHITE.cssText};\n\t\t\t\t}\n\n\t\t\t\t.timeline-Widget {\n\t\t\t\t\tbackground: ${d.BLACK.cssText};\n\t\t\t\t}\n\n\t\t\t\t.customisable-highlight {\n\t\t\t\t\tcolor: ${d.BLUE.cssText} !important;\n\t\t\t\t}\n\n\t\t\t\t.timeline-Body {\n\t\t\t\t\tborder-top: none;\n\t\t\t\t\tborder-bottom: 2px solid ${d.BLACK.cssText};\n\t\t\t\t\tborder-radius: 3px;\n\t\t\t\t}\n\t\t\t`,twttr.widgets.createTimeline({sourceType:"profile",screenName:"jonwiedmann"},this.shadowRoot.querySelector(".col-right"),{width:620,height:520,theme:"dark",linkColor:d.BLUE.cssText,chrome:"nofooter"}).then(e=>{let n=e.contentDocument;n&&(n.head.appendChild(t),e.classList.add("twitter-timline-custom-styled"))})})}render(){return o.c`
             <div class="col-left card">
                 <h1>Fullstack Web Engineer</h1>
                 <img src="/img/jon-icon.png" width="190" height="175" alt="Jon Wiedmann" class="jon-icon">
@@ -48,23 +163,23 @@
                 <ul>
                     <li>
                         <a href="mailto:jonwiedmann@gmail.com" title="jonwiedmann@gmail.com" target="_blank" rel="noopener">
-							<i-con name="mail" color="#66d9ef"></i-con>
+							<i-con name="mail" color="${d.BLUE.cssText}"></i-con>
                             Email
                         </a>
                     </li>
                     <li>
                         <a href="https://github.com/jonmann20" target="_blank" rel="noopener">
-							<i-con name="code" color="#66d9ef"></i-con>
+							<i-con name="code" color="${d.BLUE.cssText}"></i-con>
                             GitHub
                         </a>
                     </li>
                     <li>
                         <a href="https://www.linkedin.com/pub/jon-wiedmann/67/42b/b64" target="_blank" rel="noopener">
-							<i-con name="assignmentInd" color="#66d9ef"></i-con>
+							<i-con name="assignmentInd" color="${d.BLUE.cssText}"></i-con>
                             LinkedIn
                         </a>
                     </li>
                 </ul>
             </div>
             <div class="col-right"></div>
-        `}})},22:function(t,n,e){"use strict";class o{static require(t){return new Promise((n,e)=>{if(o.constructor._jsSrc.includes(t))n();else{let i=document.createElement("script");i.src=t,i.async=1,document.head.appendChild(i),i.onload=(()=>{o.constructor._jsSrc.push(t),n()}),i.onerror=(()=>e())}})}static addMeta(t,n){let e=document.createElement("meta");e.setAttribute("name",t),e.setAttribute("content",n),document.head.appendChild(e)}static addLink(t,n,e=!0){let o=document.createElement("link");o.setAttribute("rel",t),o.setAttribute("href",n),e&&o.setAttribute("crossorigin",""),document.head.appendChild(o)}static get getMainWidth(){const t=document.querySelector("main"),n=window.getComputedStyle(t,null),e=parseFloat(n.getPropertyValue("padding-left"));return t.getBoundingClientRect().width-e}}o.constructor._jsSrc=[],n.a=o}}]);
+        `}})},24:function(t,e,n){"use strict";class o{static require(t){return new Promise((e,n)=>{if(o.constructor._jsSrc.includes(t))e();else{let i=document.createElement("script");i.src=t,i.async=1,document.head.appendChild(i),i.onload=(()=>{o.constructor._jsSrc.push(t),e()}),i.onerror=(()=>n())}})}static addMeta(t,e){let n=document.createElement("meta");n.setAttribute("name",t),n.setAttribute("content",e),document.head.appendChild(n)}static addLink(t,e,n=!0){let o=document.createElement("link");o.setAttribute("rel",t),o.setAttribute("href",e),n&&o.setAttribute("crossorigin",""),document.head.appendChild(o)}static get getMainWidth(){const t=document.querySelector("main"),e=window.getComputedStyle(t,null),n=parseFloat(e.getPropertyValue("padding-left"));return t.getBoundingClientRect().width-n}}o.constructor._jsSrc=[],e.a=o}}]);
