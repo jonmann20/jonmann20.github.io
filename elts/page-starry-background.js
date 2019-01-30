@@ -1,28 +1,16 @@
-import {html, LitElement} from 'lit-element';
+import {css, html, LitElement} from 'lit-element';
 import baseStyles from './styles/base';
 import pageStyles from './styles/page';
 import Util from '../js/util';
 import StarryBg from '../js/stars';
+import {GREEN, WHITE, PURPLE, YELLOW} from './styles/vars';
 
 class PageStarryBackground extends LitElement {
-	constructor() {
-		super();
-
-		document.title = 'Starry Background | Playground';
-		Util.addMeta('description', 'A canvas example showcasing a starry background.');
-		Util.addMeta('keywords', 'canvas, html5');
-	}
-
-	firstUpdated() {
-		window.starryBg = new StarryBg(this.shadowRoot);
-	}
-
-	render() {
-		return html`
-			<style>
-				${baseStyles}
-				${pageStyles}
-
+	static get styles() {
+		return [
+			baseStyles,
+			pageStyles,
+			css`
 				canvas {
 					z-index: -1;
 					position: absolute;
@@ -56,8 +44,24 @@ class PageStarryBackground extends LitElement {
 				input:last-child {
 					margin-right: 0;
 				}
-			</style>
+			`
+		];
+	}
 
+	constructor() {
+		super();
+
+		document.title = 'Starry Background | Playground';
+		Util.addMeta('description', 'A canvas example showcasing a starry background.');
+		Util.addMeta('keywords', 'canvas, html5');
+	}
+
+	firstUpdated() {
+		window.starryBg = new StarryBg(this.shadowRoot);
+	}
+
+	render() {
+		return html`
 			<div class="card">
 				<h2>Starry Background</h2>
 				<p>A Javascript and HTML<sub>5</sub> canvas example showcasing an interactive starry background.</p>
@@ -69,16 +73,16 @@ class PageStarryBackground extends LitElement {
 
 				<p class="color-picker">
 					<label>
-						White <input type="radio" value="#fcfcfa" name="colors" checked>
+						White <input type="radio" value="${WHITE.cssText}" name="colors" checked>
 					</label>
 					<label>
-						Green <input type="radio" value="#a6e22e" name="colors">
+						Green <input type="radio" value="${GREEN.cssText}" name="colors">
 					</label>
 					<label>
-						Yellow <input type="radio" value="#ffd866" name="colors">
+						Yellow <input type="radio" value="${YELLOW.cssText}" name="colors">
 					</label>
 					<label>
-						Purple <input type="radio" value="#ab9df2" name="colors">
+						Purple <input type="radio" value="${PURPLE.cssText}" name="colors">
 					</label>
 				</p>
 			</div>

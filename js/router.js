@@ -14,9 +14,9 @@ class Router {
 		Router.resetController(slug);
 
 		// TODO: use redux?
-		window.selectedPage = slug;
-		document.querySelector('head-er').setAttribute('selectedPage', slug);
-		document.querySelector('a-side').setAttribute('selectedPage', slug);
+		window.page = slug;
+		document.querySelector('head-er').setAttribute('page', slug);
+		document.querySelector('a-side').setAttribute('page', slug);
 
 		const r = routes[slug] ? routes[slug] : routes.home;
 		this.loadComponent(r);

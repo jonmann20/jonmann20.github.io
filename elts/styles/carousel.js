@@ -1,4 +1,7 @@
-const carouselStyles = `
+import {css} from 'lit-element';
+import {YELLOW} from './vars';
+
+export default css`
 	:host {
 		position: relative;
 	}
@@ -14,13 +17,13 @@ const carouselStyles = `
 		box-shadow: 0 3px 0 rgba(54, 54, 54, 0.94);
 		opacity: 1;
 		transition: all 0.19s;
-		color: #ffd866;
+		color: ${YELLOW};
 	}
 
 	.big-btn:hover,
 	.big-btn:focus {
-		color: #ffd866;
-		box-shadow: 0 3px 0 #ffd866;
+		color: ${YELLOW};
+		box-shadow: 0 3px 0 ${YELLOW};
 		text-shadow: none;
 	}
 
@@ -105,5 +108,3 @@ const carouselStyles = `
 		}
 	}
 `;
-
-export default carouselStyles;

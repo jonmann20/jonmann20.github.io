@@ -1,23 +1,14 @@
-import {html, LitElement} from 'lit-element';
+import {css, html, LitElement} from 'lit-element';
 import baseStyles from './styles/base';
 import pageStyles from './styles/page';
 import Util from '../js/util';
 
 class PageBreakdancingCube extends LitElement {
-	constructor() {
-		super();
-
-		document.title = 'Breakdancing Cube | Playground';
-		Util.addMeta('description', 'Pure CSS3 animation demo.');
-		Util.addMeta('keywords', 'CSS3, HTML5');
-	}
-
-	render() {
-		return html`
-			<style>
-				${baseStyles}
-				${pageStyles}
-
+	static get styles() {
+		return [
+			baseStyles,
+			pageStyles,
+			css`
 				main {
 					min-height: 38em;
 				}
@@ -133,8 +124,20 @@ class PageBreakdancingCube extends LitElement {
 						transform: rotateX(360deg) rotateY(360deg);
 					}
 				}
-			</style>
+			`
+		];
+	}
 
+	constructor() {
+		super();
+
+		document.title = 'Breakdancing Cube | Playground';
+		Util.addMeta('description', 'Pure CSS3 animation demo.');
+		Util.addMeta('keywords', 'CSS3, HTML5');
+	}
+
+	render() {
+		return html`
 			<div class="card">
 				<h2>Breakdancing Cube</h2>
 				<p>A pure CSS<sub>3</sub> animation demo.</p>

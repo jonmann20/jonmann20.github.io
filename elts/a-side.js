@@ -1,24 +1,12 @@
-import {html, LitElement} from 'lit-element';
+import {css, html, LitElement} from 'lit-element';
 import baseStyles from './styles/base';
+import {BLACK, YELLOW} from './styles/vars';
 
 class ASide extends LitElement {
-	static get properties() {
-		return {
-			active: {type: Boolean},
-			selectedPage: {type: String}
-		};
-	}
-
-	constructor() {
-		super();
-		this.active = false;
-	}
-
-	render() {
-		return html`
-			<style>
-				${baseStyles}
-
+	static get styles() {
+		return [
+			baseStyles,
+			css`
 				aside {
 					transform: translateX(-100%);
 					transition: all 0.3s cubic-bezier(0, 0, 0.3, 1);
@@ -30,7 +18,7 @@ class ASide extends LitElement {
 					position: fixed;
 					left: 0;
 					top: 0;
-					background: #2d2a2e;
+					background: ${BLACK};
 					z-index: 999;
 					will-change: transform;
 				}
@@ -45,12 +33,12 @@ class ASide extends LitElement {
 					font-size: 1.45em;
 					padding: 10px 0 10px 20px;
 					text-align: left !important;
-					color: #ffd866;
+					color: ${YELLOW};
 				}
 
 				a:hover {
-					color: #ffd866;
-					text-shadow: 0 0 6px #ffd866;
+					color: ${YELLOW};
+					text-shadow: 0 0 6px ${YELLOW};
 				}
 
 				i-con {
@@ -67,24 +55,40 @@ class ASide extends LitElement {
 				.playground-nav a {
 					font-size: 1.2em;
 				}
-			</style>
+			`
+		];
+	}
 
+	static get properties() {
+		return {
+			active: {type: Boolean},
+			page: {type: String}
+		};
+	}
+
+	constructor() {
+		super();
+		this.active = false;
+	}
+
+	render() {
+		return html`
 			<aside id="${this.active ? 'activated' : ''}">
 				<a href="#games">
-					Games <i-con name="videogameAsset" ?selected="${this.selectedPage === 'games'}"></i-con>
+					Games <i-con name="videogameAsset" ?selected="${this.page === 'games'}"></i-con>
 				</a>
 				<a href="#playground">
-					Playground <i-con name="polymer" ?selected="${this.selectedPage.includes('playground')}"></i-con>
+					Playground <i-con name="polymer" ?selected="${this.page.includes('playground')}"></i-con>
 				</a>
 				<div class="playground-nav-wrap">
 					<ul class="playground-nav">
-						<li><a href="#playground/breakdancing-cube" ?selected="${this.selectedPage === 'playground/breakdancing-cube'}">Breakdancing Cube</a></li>
-						<li><a href="#playground/starry-background" ?selected="${this.selectedPage === 'playground/starry-background'}">Starry Background</a></li>
-						<li><a href="#playground/ball-pit" ?selected="${this.selectedPage === 'playground/ball-pit'}">Ball Pit</a></li>
+						<li><a href="#playground/breakdancing-cube" ?selected="${this.page === 'playground/breakdancing-cube'}">Breakdancing Cube</a></li>
+						<li><a href="#playground/starry-background" ?selected="${this.page === 'playground/starry-background'}">Starry Background</a></li>
+						<li><a href="#playground/ball-pit" ?selected="${this.page === 'playground/ball-pit'}">Ball Pit</a></li>
 					</ul>
 				</div>
 				<a href="#portfolio">
-					Portfolio <i-con name="work" ?selected="${this.selectedPage === 'portfolio'}"></i-con>
+					Portfolio <i-con name="work" ?selected="${this.page === 'portfolio'}"></i-con>
 				</a>
 			</aside>
 		`;

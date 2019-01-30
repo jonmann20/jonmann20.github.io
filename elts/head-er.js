@@ -1,58 +1,18 @@
-import {html, LitElement} from 'lit-element';
+import {css, html, LitElement} from 'lit-element';
 import baseStyles from './styles/base';
+import {BLACK, YELLOW} from './styles/vars';
 
 class HeadEr extends LitElement {
-	static get properties() {
-		return {
-			selectedPage: {type: String}
-		};
-	}
-
-	constructor() {
-		super();
-
-		this.asideIsActive = false;
-		this.initX = 0;
-		this.x = 0;
-
-		this.boundHideAside = (e) => this.hideAside(e);
-		this.boundSetInitX = (e) => this.hideSetInitX(e);
-		this.boundSetX = (e) => this.hideSetX(e);
-
-		window.onresize = () => {
-			if(window.innerWidth > 800) {
-				this.boundHideAside();
-			}
-		};
-
-		this.navVisible = window.selectedPage.includes('playground');
-	}
-
-	firstUpdated() {
-		this.pNav = this.shadowRoot.querySelector('.playground-nav-wrap');
-
-		addEventListener('route', e => {
-			const slug = e.detail;
-			if(!slug.includes('playground')) {
-				this.navVisible = false;
-			}
-			else {
-				this.navVisible = true;
-			}
-		}, {passive: true});
-	}
-
-	render() {
-		return html`
-			<style>
-				${baseStyles}
-
+	static get styles() {
+		return [
+			baseStyles,
+			css`
 				header {
 					position: fixed;
 					z-index: 99999;
 					top: 0;
 					width: 100%;
-					background: #2d2a2e;
+					background: ${BLACK};
 				}
 
 				.menu {
@@ -107,12 +67,12 @@ class HeadEr extends LitElement {
 
 				a {
 					width: 100%;
-					color: #ffd866;
+					color: ${YELLOW};
 				}
 
 				a:hover {
-					color: #ffd866;
-					text-shadow: 0 0 6px #ffd866;
+					color: ${YELLOW};
+					text-shadow: 0 0 6px ${YELLOW};
 				}
 
 				a,
@@ -185,12 +145,56 @@ class HeadEr extends LitElement {
 						display: block;
 					}
 				}
-			</style>
+			`
+		];
+	}
 
+	static get properties() {
+		return {
+			page: {type: String}
+		};
+	}
+
+	constructor() {
+		super();
+
+		this.asideIsActive = false;
+		this.initX = 0;
+		this.x = 0;
+
+		this.boundHideAside = (e) => this.hideAside(e);
+		this.boundSetInitX = (e) => this.hideSetInitX(e);
+		this.boundSetX = (e) => this.hideSetX(e);
+
+		window.onresize = () => {
+			if(window.innerWidth > 800) {
+				this.boundHideAside();
+			}
+		};
+
+		this.navVisible = window.page.includes('playground');
+	}
+
+	firstUpdated() {
+		this.pNav = this.shadowRoot.querySelector('.playground-nav-wrap');
+
+		addEventListener('route', e => {
+			const slug = e.detail;
+			if(!slug.includes('playground')) {
+				this.navVisible = false;
+			}
+			else {
+				this.navVisible = true;
+			}
+		}, {passive: true});
+	}
+
+	render() {
+		return html`
 			<header>
 				<nav>
 					<a href="#home">
-						<i-con name="home" class="icon-home" ?selected="${this.selectedPage === 'home'}"></i-con>&nbsp;Jon Wiedmann
+						<i-con name="home" class="icon-home" ?selected="${this.page === 'home'}"></i-con>&nbsp;Jon Wiedmann
 					</a>
 					<a class="menu" @click="${this.menuClick}">
 						<i-con name="menu"></i-con>
@@ -198,22 +202,22 @@ class HeadEr extends LitElement {
 				</nav>
 				<nav class="nav2">
 					<a href="#games">
-						Games <i-con name="videogameAsset" ?selected="${this.selectedPage === 'games'}"></i-con>
+						Games <i-con name="videogameAsset" ?selected="${this.page === 'games'}"></i-con>
 					</a>
 					<a href="#playground">
-						Playground <i-con name="polymer" ?selected="${this.selectedPage.includes('playground')}"></i-con>
+						Playground <i-con name="polymer" ?selected="${this.page.includes('playground')}"></i-con>
 					</a>
 
 					<!-- TODO: convert sub nav to a component -->
 					<div class="playground-nav-wrap${this.navVisible ? ' visible' : ''}">
 						<ul class="playground-nav">
-							<li><a href="#playground/breakdancing-cube" ?selected="${this.selectedPage === 'playground/breakdancing-cube'}">Breakdancing Cube</a></li>
-							<li><a href="#playground/starry-background" ?selected="${this.selectedPage === 'playground/starry-background'}">Starry Background</a></li>
-							<li><a href="#playground/ball-pit" ?selected="${this.selectedPage === 'playground/ball-pit'}">Ball Pit</a></li>
+							<li><a href="#playground/breakdancing-cube" ?selected="${this.page === 'playground/breakdancing-cube'}">Breakdancing Cube</a></li>
+							<li><a href="#playground/starry-background" ?selected="${this.page === 'playground/starry-background'}">Starry Background</a></li>
+							<li><a href="#playground/ball-pit" ?selected="${this.page === 'playground/ball-pit'}">Ball Pit</a></li>
 						</ul>
 					</div>
 					<a href="#portfolio">
-						Portfolio <i-con name="work" ?selected="${this.selectedPage === 'portfolio'}"></i-con>
+						Portfolio <i-con name="work" ?selected="${this.page === 'portfolio'}"></i-con>
 					</a>
 				</nav>
 			</header>

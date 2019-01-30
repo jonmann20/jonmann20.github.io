@@ -1,26 +1,16 @@
-import {html, LitElement} from 'lit-element';
+import {css, html, LitElement} from 'lit-element';
 import baseStyles from './styles/base';
 import pageStyles from './styles/page';
 import carouselStyles from './styles/carousel';
 import ListCarousel from '../js/listCarousel';
 
 class PagePortfolio extends LitElement {
-	constructor() {
-		super();
-		document.title = 'Portfolio';
-	}
-
-	firstUpdated() {
-		new ListCarousel(this.shadowRoot.querySelector('.col-left ul'), this.shadowRoot);
-	}
-
-	render() {
-		return html`
-			<style>
-				${baseStyles}
-				${pageStyles}
-				${carouselStyles}
-
+	static get styles() {
+		return [
+			baseStyles,
+			pageStyles,
+			carouselStyles,
+			css`
 				.big-btn {
 					margin-bottom: 20px;
 				}
@@ -50,8 +40,21 @@ class PagePortfolio extends LitElement {
 						float: left;
 					}
 				}
-			</style>
+			`
+		];
+	}
 
+	constructor() {
+		super();
+		document.title = 'Portfolio';
+	}
+
+	firstUpdated() {
+		new ListCarousel(this.shadowRoot.querySelector('.col-left ul'), this.shadowRoot);
+	}
+
+	render() {
+		return html`
 			<div class="col-left card">
 				<h1>Porfolio</h1>
 				<p>

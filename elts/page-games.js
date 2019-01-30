@@ -1,35 +1,26 @@
-import {html, LitElement} from 'lit-element';
+import {css, html, LitElement} from 'lit-element';
 import baseStyles from './styles/base';
 import pageStyles from './styles/page';
 import carouselStyles from './styles/carousel';
 import ListCarousel from '../js/listCarousel';
+import {GRAY} from './styles/vars';
 
 class PageGames extends LitElement {
-	constructor() {
-		super();
-		document.title = 'Games';
-	}
-
-	firstUpdated() {
-		new ListCarousel(this.shadowRoot.querySelector('.col-left ul'), this.shadowRoot);
-	}
-
-	render() {
-		return html`
-			<style>
-				${baseStyles}
-				${pageStyles}
-				${carouselStyles}
-
+	static get styles() {
+		return [
+			baseStyles,
+			pageStyles,
+			carouselStyles,
+			css`
 				.lh {
 					list-style-type: none;
 					margin: 12px 0 8px;
 					padding-left: 0;
-					color: #919091;
+					color: ${GRAY};
 				}
 
 				.caption {
-					color: #919091;
+					color: ${GRAY};
 				}
 
 				.col-right .videogame-asset,
@@ -75,8 +66,21 @@ class PageGames extends LitElement {
 				.additional-links ul .lh {
 					margin-top: 25px;
 				}
-			</style>
+			`
+		];
+	}
 
+	constructor() {
+		super();
+		document.title = 'Games';
+	}
+
+	firstUpdated() {
+		new ListCarousel(this.shadowRoot.querySelector('.col-left ul'), this.shadowRoot);
+	}
+
+	render() {
+		return html`
 			<div class="col-left card">
 				<h1>Games</h1>
 				<ul>

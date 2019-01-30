@@ -1,4 +1,5 @@
-import {html, LitElement} from 'lit-element';
+import {css, html, LitElement} from 'lit-element';
+import {YELLOW, RED} from './styles/vars';
 
 const d = {
 	mail: 'M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z',
@@ -12,9 +13,17 @@ const d = {
 	openInNew: 'M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z'
 };
 
-const SELECTED_COLOR = '#ff6188';
-
 class ICon extends LitElement {
+	static get styles() {
+		return css`
+			:host {
+				display: inline-block;
+				width: 24px;
+				cursor: pointer !important;
+			}
+		`;
+	}
+
 	static get properties() {
 		return {
 			name: {type: String},
@@ -27,12 +36,13 @@ class ICon extends LitElement {
 	constructor() {
 		super();
 		this._hovering = false;
-		this.color = '#ffd866';
+		this.color = YELLOW.cssText;
 
 		const a = this.parentElement;
 		a.addEventListener('mouseover', () => {
 			this._hovering = true;
 		});
+
 		a.addEventListener('mouseout', () => {
 			this._hovering = false;
 		});
@@ -40,15 +50,7 @@ class ICon extends LitElement {
 
 	render() {
 		return html`
-			<style>
-				:host {
-					display: inline-block;
-					width: 24px;
-					cursor: pointer !important;
-				}
-			</style>
-
-			<svg width="24" height="24" fill="${(this.selected || this._hovering) ? SELECTED_COLOR : this.color}">
+			<svg width="24" height="24" fill="${(this.selected || this._hovering) ? RED.cssText : this.color}">
 				<path d="${d[this.name]}"></path>
 			</svg>
 		`;

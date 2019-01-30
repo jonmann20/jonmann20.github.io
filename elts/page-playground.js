@@ -1,9 +1,22 @@
-import {html, LitElement} from 'lit-element';
+import {css, html, LitElement} from 'lit-element';
 import baseStyles from './styles/base';
 import pageStyles from './styles/page';
 import Util from '../js/util';
 
 class PagePlayground extends LitElement {
+	static get styles() {
+		return [
+			baseStyles,
+			pageStyles,
+			css`
+				h2 {
+					font-size: 1.15em;
+					margin: 0.5em 0 0.3em;
+				}
+			`
+		];
+	}
+
 	constructor() {
 		super();
 
@@ -14,16 +27,6 @@ class PagePlayground extends LitElement {
 
 	render() {
 		return html`
-			<style>
-				${baseStyles}
-				${pageStyles}
-
-				h2 {
-					font-size: 1.15em;
-					margin: 0.5em 0 0.3em;
-				}
-			</style>
-
 			<div class="col-left card">
 				<h1>Playground</h1>
 				<p>This area contains small tech demos.  Including some web technology prototypes, various snippets, and extractions from other projects I have worked on.</p>
