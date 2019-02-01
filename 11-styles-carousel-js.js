@@ -1,4 +1,4 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[5,7],{11:function(i,t,n){"use strict";n.r(t),n.d(t,"BLACK",function(){return d}),n.d(t,"BLUE",function(){return a}),n.d(t,"GREEN",function(){return e}),n.d(t,"WHITE",function(){return r}),n.d(t,"PURPLE",function(){return c}),n.d(t,"YELLOW",function(){return l}),n.d(t,"GRAY",function(){return p}),n.d(t,"RED",function(){return b});var o=n(23);const d=Object(o.d)("#2d2a2e"),a=Object(o.d)("#66d9ef"),e=Object(o.d)("#a6e22e"),r=Object(o.d)("#fcfcfa"),c=Object(o.d)("#ab9df2"),l=Object(o.d)("#ffd866"),p=Object(o.d)("#919091"),b=Object(o.d)("#ff6188")},14:function(i,t,n){"use strict";n.r(t);var o=n(23),d=n(11);t.default=o.b`
+(window.webpackJsonp=window.webpackJsonp||[]).push([[5],{14:function(i,t,o){"use strict";o.r(t);var a=o(23);t.default=a.b`
 	:host {
 		position: relative;
 	}
@@ -14,13 +14,13 @@
 		box-shadow: 0 3px 0 rgba(54, 54, 54, 0.94);
 		opacity: 1;
 		transition: all 0.19s;
-		color: ${d.YELLOW};
+		color: var(--yellow);
 	}
 
 	.big-btn:hover,
 	.big-btn:focus {
-		color: ${d.YELLOW};
-		box-shadow: 0 3px 0 ${d.YELLOW};
+		color: var(--yellow);
+		box-shadow: 0 3px 0 var(--yellow);
 		text-shadow: none;
 	}
 

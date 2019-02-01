@@ -1,4 +1,4 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[13,4,5,6,7],{11:function(e,t,i){"use strict";i.r(t),i.d(t,"BLACK",function(){return a}),i.d(t,"BLUE",function(){return n}),i.d(t,"GREEN",function(){return r}),i.d(t,"WHITE",function(){return l}),i.d(t,"PURPLE",function(){return s}),i.d(t,"YELLOW",function(){return p}),i.d(t,"GRAY",function(){return c}),i.d(t,"RED",function(){return d});var o=i(23);const a=Object(o.d)("#2d2a2e"),n=Object(o.d)("#66d9ef"),r=Object(o.d)("#a6e22e"),l=Object(o.d)("#fcfcfa"),s=Object(o.d)("#ab9df2"),p=Object(o.d)("#ffd866"),c=Object(o.d)("#919091"),d=Object(o.d)("#ff6188")},12:function(e,t,i){"use strict";i.r(t);var o=i(23),a=i(11);t.default=o.b`
+(window.webpackJsonp=window.webpackJsonp||[]).push([[13,4,5,6],{11:function(e,i,t){"use strict";t.r(i);var a=t(23);i.default=a.b`
 	:host {
 		display: block;
 	}
@@ -13,7 +13,7 @@
 		margin: 0.4em 0 0.6em;
 		font-size: 1.75em;
 		font-weight: 300;
-		color: ${a.WHITE};
+		color: var(--white);
 		text-shadow: 0 2px 3px #212121;
 	}
 
@@ -23,7 +23,7 @@
 	}
 
 	a {
-		color: ${a.BLUE};
+		color: var(--blue);
 		text-decoration: none;
 		outline: none;
 		cursor: pointer;
@@ -43,7 +43,7 @@
 	}
 
 	a[selected] {
-		color: ${a.RED} !important;
+		color: var(--red) !important;
 	}
 
 	input {
@@ -58,7 +58,7 @@
 
 	.card {
 		display: inline-block;
-		background: ${a.BLACK};
+		background: var(--black);
 		box-shadow: var(--box-shadow-2);
 		border-radius: 2px;
 		padding: 3px 25px 5px;
@@ -68,12 +68,7 @@
 		border-radius: 2px;
 		box-shadow: var(--box-shadow-2);
 	}
-`},13:function(e,t,i){"use strict";i.r(t);var o=i(23);t.default=o.b`
-	.col-left {
-		min-width: 121px;
-		width: 100%;
-	}
-
+`},12:function(e,i,t){"use strict";t.r(i);var a=t(23);i.default=a.b`
 	.col-left ul {
 		font-size: 1.15em;
 	}
@@ -118,7 +113,7 @@
 			margin-top: 25px;
 		}
 	}
-`},14:function(e,t,i){"use strict";i.r(t);var o=i(23),a=i(11);t.default=o.b`
+`},14:function(e,i,t){"use strict";t.r(i);var a=t(23);i.default=a.b`
 	:host {
 		position: relative;
 	}
@@ -134,13 +129,13 @@
 		box-shadow: 0 3px 0 rgba(54, 54, 54, 0.94);
 		opacity: 1;
 		transition: all 0.19s;
-		color: ${a.YELLOW};
+		color: var(--yellow);
 	}
 
 	.big-btn:hover,
 	.big-btn:focus {
-		color: ${a.YELLOW};
-		box-shadow: 0 3px 0 ${a.YELLOW};
+		color: var(--yellow);
+		box-shadow: 0 3px 0 var(--yellow);
 		text-shadow: none;
 	}
 
@@ -224,7 +219,7 @@
 			max-width: 490px;
 		}
 	}
-`},20:function(e,t,i){"use strict";i.r(t);var o=i(23),a=i(12),n=i(13),r=i(14),l=i(25);customElements.define("page-portfolio",class extends o.a{static get styles(){return[a.default,n.default,r.default,o.b`
+`},20:function(e,i,t){"use strict";t.r(i);var a=t(23),o=t(11),r=t(12),n=t(14),l=t(25);customElements.define("page-portfolio",class extends a.a{static get styles(){return[o.default,r.default,n.default,a.b`
 				.big-btn {
 					margin-bottom: 20px;
 				}
@@ -254,7 +249,7 @@
 						float: left;
 					}
 				}
-			`]}constructor(){super(),document.title="Portfolio"}firstUpdated(){new l.a(this.shadowRoot.querySelector(".col-left ul"),this.shadowRoot)}render(){return o.c`
+			`]}constructor(){super(),document.title="Portfolio"}firstUpdated(){new l.a(this.shadowRoot.querySelector(".col-left ul"),this.shadowRoot)}render(){return a.c`
 			<div class="col-left card">
 				<h1>Porfolio</h1>
 				<p>
@@ -347,4 +342,4 @@
 					<img src="/img/portfolio/nology.jpg" alt="Nology Digital">
 				</div>
 			</div>
-		`}})},25:function(e,t,i){"use strict";t.a=class{constructor(e,t){let i,o="default",a=Array.from(e.querySelectorAll("a"));t=t||document,a.forEach(e=>{e.addEventListener("click",e=>{(i=e.target.id)&&o!==i&&(e.preventDefault(),t.querySelector(`#div-${o}`).classList.remove("fade-in"),t.querySelector(`#div-${i}`).classList.add("fade-in"),o=i)})})}}}}]);
+		`}})},25:function(e,i,t){"use strict";i.a=class{constructor(e,i){let t,a="default",o=Array.from(e.querySelectorAll("a"));i=i||document,o.forEach(e=>{e.addEventListener("click",e=>{(t=e.target.id)&&a!==t&&(e.preventDefault(),i.querySelector(`#div-${a}`).classList.remove("fade-in"),i.querySelector(`#div-${t}`).classList.add("fade-in"),a=t)})})}}}}]);

@@ -1,4 +1,4 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[9,4,6,7],{11:function(t,e,a){"use strict";a.r(e),a.d(e,"BLACK",function(){return r}),a.d(e,"BLUE",function(){return i}),a.d(e,"GREEN",function(){return d}),a.d(e,"WHITE",function(){return o}),a.d(e,"PURPLE",function(){return c}),a.d(e,"YELLOW",function(){return s}),a.d(e,"GRAY",function(){return p}),a.d(e,"RED",function(){return l});var n=a(23);const r=Object(n.d)("#2d2a2e"),i=Object(n.d)("#66d9ef"),d=Object(n.d)("#a6e22e"),o=Object(n.d)("#fcfcfa"),c=Object(n.d)("#ab9df2"),s=Object(n.d)("#ffd866"),p=Object(n.d)("#919091"),l=Object(n.d)("#ff6188")},12:function(t,e,a){"use strict";a.r(e);var n=a(23),r=a(11);e.default=n.b`
+(window.webpackJsonp=window.webpackJsonp||[]).push([[9,4,6],{11:function(t,e,a){"use strict";a.r(e);var i=a(23);e.default=i.b`
 	:host {
 		display: block;
 	}
@@ -13,7 +13,7 @@
 		margin: 0.4em 0 0.6em;
 		font-size: 1.75em;
 		font-weight: 300;
-		color: ${r.WHITE};
+		color: var(--white);
 		text-shadow: 0 2px 3px #212121;
 	}
 
@@ -23,7 +23,7 @@
 	}
 
 	a {
-		color: ${r.BLUE};
+		color: var(--blue);
 		text-decoration: none;
 		outline: none;
 		cursor: pointer;
@@ -43,7 +43,7 @@
 	}
 
 	a[selected] {
-		color: ${r.RED} !important;
+		color: var(--red) !important;
 	}
 
 	input {
@@ -58,7 +58,7 @@
 
 	.card {
 		display: inline-block;
-		background: ${r.BLACK};
+		background: var(--black);
 		box-shadow: var(--box-shadow-2);
 		border-radius: 2px;
 		padding: 3px 25px 5px;
@@ -68,12 +68,7 @@
 		border-radius: 2px;
 		box-shadow: var(--box-shadow-2);
 	}
-`},13:function(t,e,a){"use strict";a.r(e);var n=a(23);e.default=n.b`
-	.col-left {
-		min-width: 121px;
-		width: 100%;
-	}
-
+`},12:function(t,e,a){"use strict";a.r(e);var i=a(23);e.default=i.b`
 	.col-left ul {
 		font-size: 1.15em;
 	}
@@ -118,7 +113,7 @@
 			margin-top: 25px;
 		}
 	}
-`},16:function(t,e,a){"use strict";a.r(e);var n=a(23),r=a(12),i=a(13),d=a(24);customElements.define("page-breakdancing-cube",class extends n.a{static get styles(){return[r.default,i.default,n.b`
+`},16:function(t,e,a){"use strict";a.r(e);var i=a(23),r=a(11),n=a(12),o=a(24);customElements.define("page-breakdancing-cube",class extends i.a{static get styles(){return[r.default,n.default,i.b`
 				main {
 					min-height: 38em;
 				}
@@ -234,7 +229,7 @@
 						transform: rotateX(360deg) rotateY(360deg);
 					}
 				}
-			`]}constructor(){super(),document.title="Breakdancing Cube | Playground",d.a.addMeta("description","Pure CSS3 animation demo."),d.a.addMeta("keywords","CSS3, HTML5")}render(){return n.c`
+			`]}constructor(){super(),document.title="Breakdancing Cube | Playground",o.a.addMeta("description","Pure CSS3 animation demo."),o.a.addMeta("keywords","CSS3, HTML5")}render(){return i.c`
 			<div class="card">
 				<h2>Breakdancing Cube</h2>
 				<p>A pure CSS<sub>3</sub> animation demo.</p>
@@ -254,4 +249,4 @@
 			<div class="iframe-wrap">
 				<iframe class="card" width="300" height="410" src="https://bandcamp.com/EmbeddedPlayer/v=2/album=1886256771/size=grande3/bgcol=FFFFFF/linkcol=5dafd7/transparent=true/" allowtransparency="true" frameborder="0"></iframe>
 			</div>
-        `}})},24:function(t,e,a){"use strict";class n{static require(t){return new Promise((e,a)=>{if(n.constructor._jsSrc.includes(t))e();else{let r=document.createElement("script");r.src=t,r.async=1,document.head.appendChild(r),r.onload=(()=>{n.constructor._jsSrc.push(t),e()}),r.onerror=(()=>a())}})}static addMeta(t,e){let a=document.createElement("meta");a.setAttribute("name",t),a.setAttribute("content",e),document.head.appendChild(a)}static addLink(t,e,a=!0){let n=document.createElement("link");n.setAttribute("rel",t),n.setAttribute("href",e),a&&n.setAttribute("crossorigin",""),document.head.appendChild(n)}static get getMainWidth(){const t=document.querySelector("main"),e=window.getComputedStyle(t,null),a=parseFloat(e.getPropertyValue("padding-left"));return t.getBoundingClientRect().width-a}}n.constructor._jsSrc=[],e.a=n}}]);
+        `}})},24:function(t,e,a){"use strict";class i{static require(t){return new Promise((e,a)=>{if(i.constructor._jsSrc.includes(t))e();else{let r=document.createElement("script");r.src=t,r.async=1,document.head.appendChild(r),r.onload=(()=>{i.constructor._jsSrc.push(t),e()}),r.onerror=(()=>a())}})}static addMeta(t,e){let a=document.createElement("meta");a.setAttribute("name",t),a.setAttribute("content",e),document.head.appendChild(a)}static addLink(t,e,a=!0){let i=document.createElement("link");i.setAttribute("rel",t),i.setAttribute("href",e),a&&i.setAttribute("crossorigin",""),document.head.appendChild(i)}static get getMainWidth(){const t=document.querySelector("main"),e=window.getComputedStyle(t,null),a=parseFloat(e.getPropertyValue("padding-left"));return t.getBoundingClientRect().width-a}}i.constructor._jsSrc=[],e.a=i}}]);

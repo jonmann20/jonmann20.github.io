@@ -1,4 +1,4 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[2,4,7],{11:function(e,t,i){"use strict";i.r(t),i.d(t,"BLACK",function(){return a}),i.d(t,"BLUE",function(){return o}),i.d(t,"GREEN",function(){return d}),i.d(t,"WHITE",function(){return s}),i.d(t,"PURPLE",function(){return r}),i.d(t,"YELLOW",function(){return c}),i.d(t,"GRAY",function(){return l}),i.d(t,"RED",function(){return u});var n=i(23);const a=Object(n.d)("#2d2a2e"),o=Object(n.d)("#66d9ef"),d=Object(n.d)("#a6e22e"),s=Object(n.d)("#fcfcfa"),r=Object(n.d)("#ab9df2"),c=Object(n.d)("#ffd866"),l=Object(n.d)("#919091"),u=Object(n.d)("#ff6188")},12:function(e,t,i){"use strict";i.r(t);var n=i(23),a=i(11);t.default=n.b`
+(window.webpackJsonp=window.webpackJsonp||[]).push([[2,4],{11:function(e,i,t){"use strict";t.r(i);var n=t(23);i.default=n.b`
 	:host {
 		display: block;
 	}
@@ -13,7 +13,7 @@
 		margin: 0.4em 0 0.6em;
 		font-size: 1.75em;
 		font-weight: 300;
-		color: ${a.WHITE};
+		color: var(--white);
 		text-shadow: 0 2px 3px #212121;
 	}
 
@@ -23,7 +23,7 @@
 	}
 
 	a {
-		color: ${a.BLUE};
+		color: var(--blue);
 		text-decoration: none;
 		outline: none;
 		cursor: pointer;
@@ -43,7 +43,7 @@
 	}
 
 	a[selected] {
-		color: ${a.RED} !important;
+		color: var(--red) !important;
 	}
 
 	input {
@@ -58,7 +58,7 @@
 
 	.card {
 		display: inline-block;
-		background: ${a.BLACK};
+		background: var(--black);
 		box-shadow: var(--box-shadow-2);
 		border-radius: 2px;
 		padding: 3px 25px 5px;
@@ -68,13 +68,13 @@
 		border-radius: 2px;
 		box-shadow: var(--box-shadow-2);
 	}
-`},5:function(e,t,i){"use strict";i.r(t);var n=i(23),a=i(12),o=i(11);customElements.define("head-er",class extends n.a{static get styles(){return[a.default,n.b`
+`},5:function(e,i,t){"use strict";t.r(i);var n=t(23),a=t(11);customElements.define("head-er",class extends n.a{static get styles(){return[a.default,n.b`
 				header {
 					position: fixed;
 					z-index: 99999;
 					top: 0;
 					width: 100%;
-					background: ${o.BLACK};
+					background: var(--black);
 				}
 
 				.menu {
@@ -129,12 +129,12 @@
 
 				a {
 					width: 100%;
-					color: ${o.YELLOW};
+					color: var(--yellow);
 				}
 
 				a:hover {
-					color: ${o.YELLOW};
-					text-shadow: 0 0 6px ${o.YELLOW};
+					color: var(--yellow);
+					text-shadow: 0 0 6px var(--yellow);
 				}
 
 				a,

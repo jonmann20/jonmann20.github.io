@@ -1,4 +1,4 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[1,4,7],{11:function(e,t,a){"use strict";a.r(t),a.d(t,"BLACK",function(){return n}),a.d(t,"BLUE",function(){return r}),a.d(t,"GREEN",function(){return i}),a.d(t,"WHITE",function(){return d}),a.d(t,"PURPLE",function(){return c}),a.d(t,"YELLOW",function(){return s}),a.d(t,"GRAY",function(){return l}),a.d(t,"RED",function(){return p});var o=a(23);const n=Object(o.d)("#2d2a2e"),r=Object(o.d)("#66d9ef"),i=Object(o.d)("#a6e22e"),d=Object(o.d)("#fcfcfa"),c=Object(o.d)("#ab9df2"),s=Object(o.d)("#ffd866"),l=Object(o.d)("#919091"),p=Object(o.d)("#ff6188")},12:function(e,t,a){"use strict";a.r(t);var o=a(23),n=a(11);t.default=o.b`
+(window.webpackJsonp=window.webpackJsonp||[]).push([[1,4],{11:function(a,e,o){"use strict";o.r(e);var t=o(23);e.default=t.b`
 	:host {
 		display: block;
 	}
@@ -13,7 +13,7 @@
 		margin: 0.4em 0 0.6em;
 		font-size: 1.75em;
 		font-weight: 300;
-		color: ${n.WHITE};
+		color: var(--white);
 		text-shadow: 0 2px 3px #212121;
 	}
 
@@ -23,7 +23,7 @@
 	}
 
 	a {
-		color: ${n.BLUE};
+		color: var(--blue);
 		text-decoration: none;
 		outline: none;
 		cursor: pointer;
@@ -43,7 +43,7 @@
 	}
 
 	a[selected] {
-		color: ${n.RED} !important;
+		color: var(--red) !important;
 	}
 
 	input {
@@ -58,7 +58,7 @@
 
 	.card {
 		display: inline-block;
-		background: ${n.BLACK};
+		background: var(--black);
 		box-shadow: var(--box-shadow-2);
 		border-radius: 2px;
 		padding: 3px 25px 5px;
@@ -68,7 +68,7 @@
 		border-radius: 2px;
 		box-shadow: var(--box-shadow-2);
 	}
-`},6:function(e,t,a){"use strict";a.r(t);var o=a(23),n=a(12),r=a(11);customElements.define("a-side",class extends o.a{static get styles(){return[n.default,o.b`
+`},6:function(a,e,o){"use strict";o.r(e);var t=o(23),r=o(11);customElements.define("a-side",class extends t.a{static get styles(){return[r.default,t.b`
 				aside {
 					transform: translateX(-100%);
 					transition: all 0.3s cubic-bezier(0, 0, 0.3, 1);
@@ -80,7 +80,7 @@
 					position: fixed;
 					left: 0;
 					top: 0;
-					background: ${r.BLACK};
+					background: var(--black);
 					z-index: 999;
 					will-change: transform;
 				}
@@ -95,12 +95,12 @@
 					font-size: 1.45em;
 					padding: 10px 0 10px 20px;
 					text-align: left !important;
-					color: ${r.YELLOW};
+					color: var(--yellow);
 				}
 
 				a:hover {
-					color: ${r.YELLOW};
-					text-shadow: 0 0 6px ${r.YELLOW};
+					color: var(--yellow);
+					text-shadow: 0 0 6px var(--yellow);
 				}
 
 				i-con {
@@ -117,7 +117,7 @@
 				.playground-nav a {
 					font-size: 1.2em;
 				}
-			`]}static get properties(){return{active:{type:Boolean},page:{type:String}}}constructor(){super(),this.active=!1}render(){return o.c`
+			`]}static get properties(){return{active:{type:Boolean},page:{type:String}}}constructor(){super(),this.active=!1}render(){return t.c`
 			<aside id="${this.active?"activated":""}">
 				<a href="#games">
 					Games <i-con name="videogameAsset" ?selected="${"games"===this.page}"></i-con>

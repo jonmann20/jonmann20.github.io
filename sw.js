@@ -17,7 +17,7 @@
 
 // Incrementing CACHE_VERSION will kick off the install event and force previously cached
 // resources to be cached again.
-const CACHE_VERSION = 1548876345494;
+const CACHE_VERSION = 1549053508361;
 let CURRENT_CACHES = {
 	offline: 'offline-v' + CACHE_VERSION
 };

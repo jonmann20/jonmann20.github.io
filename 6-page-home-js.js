@@ -1,4 +1,4 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[11,4,6,7],{11:function(t,e,n){"use strict";n.r(e),n.d(e,"BLACK",function(){return i}),n.d(e,"BLUE",function(){return r}),n.d(e,"GREEN",function(){return a}),n.d(e,"WHITE",function(){return d}),n.d(e,"PURPLE",function(){return c}),n.d(e,"YELLOW",function(){return s}),n.d(e,"GRAY",function(){return l}),n.d(e,"RED",function(){return m});var o=n(23);const i=Object(o.d)("#2d2a2e"),r=Object(o.d)("#66d9ef"),a=Object(o.d)("#a6e22e"),d=Object(o.d)("#fcfcfa"),c=Object(o.d)("#ab9df2"),s=Object(o.d)("#ffd866"),l=Object(o.d)("#919091"),m=Object(o.d)("#ff6188")},12:function(t,e,n){"use strict";n.r(e);var o=n(23),i=n(11);e.default=o.b`
+(window.webpackJsonp=window.webpackJsonp||[]).push([[11,4,6,7],{11:function(t,e,n){"use strict";n.r(e);var o=n(23);e.default=o.b`
 	:host {
 		display: block;
 	}
@@ -13,7 +13,7 @@
 		margin: 0.4em 0 0.6em;
 		font-size: 1.75em;
 		font-weight: 300;
-		color: ${i.WHITE};
+		color: var(--white);
 		text-shadow: 0 2px 3px #212121;
 	}
 
@@ -23,7 +23,7 @@
 	}
 
 	a {
-		color: ${i.BLUE};
+		color: var(--blue);
 		text-decoration: none;
 		outline: none;
 		cursor: pointer;
@@ -43,7 +43,7 @@
 	}
 
 	a[selected] {
-		color: ${i.RED} !important;
+		color: var(--red) !important;
 	}
 
 	input {
@@ -58,7 +58,7 @@
 
 	.card {
 		display: inline-block;
-		background: ${i.BLACK};
+		background: var(--black);
 		box-shadow: var(--box-shadow-2);
 		border-radius: 2px;
 		padding: 3px 25px 5px;
@@ -68,12 +68,7 @@
 		border-radius: 2px;
 		box-shadow: var(--box-shadow-2);
 	}
-`},13:function(t,e,n){"use strict";n.r(e);var o=n(23);e.default=o.b`
-	.col-left {
-		min-width: 121px;
-		width: 100%;
-	}
-
+`},12:function(t,e,n){"use strict";n.r(e);var o=n(23);e.default=o.b`
 	.col-left ul {
 		font-size: 1.15em;
 	}
@@ -118,7 +113,7 @@
 			margin-top: 25px;
 		}
 	}
-`},18:function(t,e,n){"use strict";n.r(e);var o=n(23),i=n(12),r=n(13),a=n(24),d=n(11);customElements.define("page-home",class extends o.a{static get styles(){return[i.default,r.default,o.b`
+`},13:function(t,e,n){"use strict";n.r(e),n.d(e,"BLACK",function(){return i}),n.d(e,"BLUE",function(){return r}),n.d(e,"RED",function(){return a}),n.d(e,"WHITE",function(){return d}),n.d(e,"YELLOW",function(){return c});const o=getComputedStyle(document.body),i=o.getPropertyValue("--black"),r=o.getPropertyValue("--blue"),a=o.getPropertyValue("--red"),d=o.getPropertyValue("--white"),c=o.getPropertyValue("--yellow")},18:function(t,e,n){"use strict";n.r(e);var o=n(23),i=n(11),r=n(12),a=n(24),d=n(13);customElements.define("page-home",class extends o.a{static get styles(){return[i.default,r.default,o.b`
 				.col-left {
 					min-width: 337px;
 					max-width: 520px;
@@ -138,7 +133,7 @@
 				}
 
 				ul a:hover i-con {
-					color: ${d.RED};
+					color: var(--red);
 				}
 
 				i-con {
@@ -155,7 +150,7 @@
 					box-shadow: var(--box-shadow-2);
 					border-radius: 2px;
 				}
-			`]}constructor(){super(),document.title="Jon Wiedmann",a.a.addMeta("description","Jon Wiedmann's personal website.  A site with information on Jon's work experience and hobbies."),a.a.addMeta("keywords","Jon Wiedmann, Web Developer, HTML5, CSS, Javascript","Polymer"),a.a.addLink("preconnect","https://platform.twitter.com"),a.a.addLink("preconnect","https://cdn.syndication.twimg.com"),a.a.addLink("preconnect","https://syndication.twitter.com"),a.a.addLink("dns-prefetch","https://abs.twimg.com"),a.a.addLink("dns-prefetch","https://pbs.twimg.com"),a.a.addLink("dns-prefetch","https://ton.twimg.com")}firstUpdated(){a.a.require("https://platform.twitter.com/widgets.js").then(()=>{let t=document.createElement("style");t.type="text/css",t.innerHTML=`\n\t\t\t\tbody {\n\t\t\t\t\tcolor: ${d.WHITE.cssText};\n\t\t\t\t}\n\n\t\t\t\t.timeline-Widget {\n\t\t\t\t\tbackground: ${d.BLACK.cssText};\n\t\t\t\t}\n\n\t\t\t\t.customisable-highlight {\n\t\t\t\t\tcolor: ${d.BLUE.cssText} !important;\n\t\t\t\t}\n\n\t\t\t\t.timeline-Body {\n\t\t\t\t\tborder-top: none;\n\t\t\t\t\tborder-bottom: 2px solid ${d.BLACK.cssText};\n\t\t\t\t\tborder-radius: 3px;\n\t\t\t\t}\n\t\t\t`,twttr.widgets.createTimeline({sourceType:"profile",screenName:"jonwiedmann"},this.shadowRoot.querySelector(".col-right"),{width:620,height:520,theme:"dark",linkColor:d.BLUE.cssText,chrome:"nofooter"}).then(e=>{let n=e.contentDocument;n&&(n.head.appendChild(t),e.classList.add("twitter-timline-custom-styled"))})})}render(){return o.c`
+			`]}constructor(){super(),document.title="Jon Wiedmann",a.a.addMeta("description","Jon Wiedmann's personal website.  A site with information on Jon's work experience and hobbies."),a.a.addMeta("keywords","Jon Wiedmann, Web Developer, HTML5, CSS, Javascript","Polymer"),a.a.addLink("preconnect","https://platform.twitter.com"),a.a.addLink("preconnect","https://cdn.syndication.twimg.com"),a.a.addLink("preconnect","https://syndication.twitter.com"),a.a.addLink("dns-prefetch","https://abs.twimg.com"),a.a.addLink("dns-prefetch","https://pbs.twimg.com"),a.a.addLink("dns-prefetch","https://ton.twimg.com")}firstUpdated(){a.a.require("https://platform.twitter.com/widgets.js").then(()=>{let t=document.createElement("style");t.type="text/css",t.innerHTML=`\n\t\t\t\tbody {\n\t\t\t\t\tcolor: ${d.WHITE};\n\t\t\t\t}\n\n\t\t\t\t.timeline-Widget {\n\t\t\t\t\tbackground: ${d.BLACK};\n\t\t\t\t}\n\n\t\t\t\t.customisable-highlight {\n\t\t\t\t\tcolor: ${d.BLUE} !important;\n\t\t\t\t}\n\n\t\t\t\t.timeline-Body {\n\t\t\t\t\tborder-top: none;\n\t\t\t\t\tborder-bottom: 2px solid ${d.BLACK};\n\t\t\t\t\tborder-radius: 3px;\n\t\t\t\t}\n\t\t\t`,twttr.widgets.createTimeline({sourceType:"profile",screenName:"jonwiedmann"},this.shadowRoot.querySelector(".col-right"),{width:620,height:520,theme:"dark",linkColor:d.BLUE,chrome:"nofooter"}).then(e=>{let n=e.contentDocument;n&&(n.head.appendChild(t),e.classList.add("twitter-timline-custom-styled"))})})}render(){return o.c`
             <div class="col-left card">
                 <h1>Fullstack Web Engineer</h1>
                 <img src="/img/jon-icon.png" width="190" height="175" alt="Jon Wiedmann" class="jon-icon">
@@ -163,19 +158,19 @@
                 <ul>
                     <li>
                         <a href="mailto:jonwiedmann@gmail.com" title="jonwiedmann@gmail.com" target="_blank" rel="noopener">
-							<i-con name="mail" color="${d.BLUE.cssText}"></i-con>
+							<i-con name="mail" color="${d.BLUE}"></i-con>
                             Email
                         </a>
                     </li>
                     <li>
                         <a href="https://github.com/jonmann20" target="_blank" rel="noopener">
-							<i-con name="code" color="${d.BLUE.cssText}"></i-con>
+							<i-con name="code" color="${d.BLUE}"></i-con>
                             GitHub
                         </a>
                     </li>
                     <li>
                         <a href="https://www.linkedin.com/pub/jon-wiedmann/67/42b/b64" target="_blank" rel="noopener">
-							<i-con name="assignmentInd" color="${d.BLUE.cssText}"></i-con>
+							<i-con name="assignmentInd" color="${d.BLUE}"></i-con>
                             LinkedIn
                         </a>
                     </li>

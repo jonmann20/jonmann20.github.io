@@ -1,9 +1,4 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[6],{13:function(t,i,o){"use strict";o.r(i);var d=o(23);i.default=d.b`
-	.col-left {
-		min-width: 121px;
-		width: 100%;
-	}
-
+(window.webpackJsonp=window.webpackJsonp||[]).push([[6],{12:function(t,i,o){"use strict";o.r(i);var a=o(23);i.default=a.b`
 	.col-left ul {
 		font-size: 1.15em;
 	}
