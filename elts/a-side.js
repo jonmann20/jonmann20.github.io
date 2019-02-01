@@ -1,6 +1,5 @@
 import {css, html, LitElement} from 'lit-element';
 import baseStyles from './styles/base';
-import {BLACK, YELLOW} from './styles/vars';
 
 class ASide extends LitElement {
 	static get styles() {
@@ -18,7 +17,7 @@ class ASide extends LitElement {
 					position: fixed;
 					left: 0;
 					top: 0;
-					background: ${BLACK};
+					background: var(--black);
 					z-index: 999;
 					will-change: transform;
 				}
@@ -33,12 +32,12 @@ class ASide extends LitElement {
 					font-size: 1.45em;
 					padding: 10px 0 10px 20px;
 					text-align: left !important;
-					color: ${YELLOW};
+					color: var(--yellow);
 				}
 
 				a:hover {
-					color: ${YELLOW};
-					text-shadow: 0 0 6px ${YELLOW};
+					color: var(--yellow);
+					text-shadow: 0 0 6px var(--yellow);
 				}
 
 				i-con {

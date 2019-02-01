@@ -1,22 +1,16 @@
-import {unsafeCss} from 'lit-element';
+const bodyStyles = getComputedStyle(document.body);
 
 // Monakai theme
-const BLACK = unsafeCss('#2d2a2e');
-const BLUE = unsafeCss('#66d9ef');
-const GREEN = unsafeCss('#a6e22e');
-const WHITE = unsafeCss('#fcfcfa');
-const PURPLE = unsafeCss('#ab9df2');
-const YELLOW = unsafeCss('#ffd866');
-const GRAY = unsafeCss('#919091');
-const RED = unsafeCss('#ff6188');
+const BLACK = bodyStyles.getPropertyValue('--black');
+const BLUE = bodyStyles.getPropertyValue('--blue');
+const RED = bodyStyles.getPropertyValue('--red');
+const WHITE = bodyStyles.getPropertyValue('--white');
+const YELLOW = bodyStyles.getPropertyValue('--yellow');
 
 export {
 	BLACK,
 	BLUE,
-	GREEN,
+	RED,
 	WHITE,
-	PURPLE,
-	YELLOW,
-	GRAY,
-	RED
+	YELLOW
 };

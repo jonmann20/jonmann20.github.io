@@ -1,11 +1,10 @@
 import {src, dest, parallel} from 'gulp';
 import replace from 'gulp-replace';
 import fs from 'fs';
-//import cleanCss from 'gulp-clean-css';
 
 // function cssLint() {
-// 	return gulp.src('elts/styles/*.js').
-// 		pipe(_cssLint());
+// 	return gulp.src(['elts/**/*.js', 'games/**/*.css']).
+// 		pipe(styleLint());
 // }
 
 function _inline(_src, _dest, assetHref, assetFile) {

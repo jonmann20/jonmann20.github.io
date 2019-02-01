@@ -1,5 +1,4 @@
 import {css} from 'lit-element';
-import {BLACK, BLUE, WHITE, RED} from './vars';
 
 export default css`
 	:host {
@@ -16,7 +15,7 @@ export default css`
 		margin: 0.4em 0 0.6em;
 		font-size: 1.75em;
 		font-weight: 300;
-		color: ${WHITE};
+		color: var(--white);
 		text-shadow: 0 2px 3px #212121;
 	}
 
@@ -26,7 +25,7 @@ export default css`
 	}
 
 	a {
-		color: ${BLUE};
+		color: var(--blue);
 		text-decoration: none;
 		outline: none;
 		cursor: pointer;
@@ -46,7 +45,7 @@ export default css`
 	}
 
 	a[selected] {
-		color: ${RED} !important;
+		color: var(--red) !important;
 	}
 
 	input {
@@ -61,7 +60,7 @@ export default css`
 
 	.card {
 		display: inline-block;
-		background: ${BLACK};
+		background: var(--black);
 		box-shadow: var(--box-shadow-2);
 		border-radius: 2px;
 		padding: 3px 25px 5px;

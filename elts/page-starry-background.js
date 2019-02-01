@@ -3,7 +3,7 @@ import baseStyles from './styles/base';
 import pageStyles from './styles/page';
 import Util from '../js/util';
 import StarryBg from '../js/stars';
-import {GREEN, WHITE, PURPLE, YELLOW} from './styles/vars';
+import {WHITE, YELLOW} from './styles/vars';
 
 class PageStarryBackground extends LitElement {
 	static get styles() {
@@ -73,16 +73,16 @@ class PageStarryBackground extends LitElement {
 
 				<p class="color-picker">
 					<label>
-						White <input type="radio" value="${WHITE.cssText}" name="colors" checked>
+						White <input type="radio" value="${WHITE}" name="colors" checked>
 					</label>
 					<label>
-						Green <input type="radio" value="${GREEN.cssText}" name="colors">
+						Green <input type="radio" value="#a6e22e" name="colors">
 					</label>
 					<label>
-						Yellow <input type="radio" value="${YELLOW.cssText}" name="colors">
+						Yellow <input type="radio" value="${YELLOW}" name="colors">
 					</label>
 					<label>
-						Purple <input type="radio" value="${PURPLE.cssText}" name="colors">
+						Purple <input type="radio" value="#ab9df2" name="colors">
 					</label>
 				</p>
 			</div>

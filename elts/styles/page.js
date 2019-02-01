@@ -1,10 +1,5 @@
 import {css} from 'lit-element';
 export default css`
-	.col-left {
-		min-width: 121px;
-		width: 100%;
-	}
-
 	.col-left ul {
 		font-size: 1.15em;
 	}

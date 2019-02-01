@@ -1,6 +1,5 @@
 import {css, html, LitElement} from 'lit-element';
 import baseStyles from './styles/base';
-import {BLACK, YELLOW} from './styles/vars';
 
 class HeadEr extends LitElement {
 	static get styles() {
@@ -12,7 +11,7 @@ class HeadEr extends LitElement {
 					z-index: 99999;
 					top: 0;
 					width: 100%;
-					background: ${BLACK};
+					background: var(--black);
 				}
 
 				.menu {
@@ -67,12 +66,12 @@ class HeadEr extends LitElement {
 
 				a {
 					width: 100%;
-					color: ${YELLOW};
+					color: var(--yellow);
 				}
 
 				a:hover {
-					color: ${YELLOW};
-					text-shadow: 0 0 6px ${YELLOW};
+					color: var(--yellow);
+					text-shadow: 0 0 6px var(--yellow);
 				}
 
 				a,

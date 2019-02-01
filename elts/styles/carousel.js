@@ -1,5 +1,4 @@
 import {css} from 'lit-element';
-import {YELLOW} from './vars';
 
 export default css`
 	:host {
@@ -17,13 +16,13 @@ export default css`
 		box-shadow: 0 3px 0 rgba(54, 54, 54, 0.94);
 		opacity: 1;
 		transition: all 0.19s;
-		color: ${YELLOW};
+		color: var(--yellow);
 	}
 
 	.big-btn:hover,
 	.big-btn:focus {
-		color: ${YELLOW};
-		box-shadow: 0 3px 0 ${YELLOW};
+		color: var(--yellow);
+		box-shadow: 0 3px 0 var(--yellow);
 		text-shadow: none;
 	}
 

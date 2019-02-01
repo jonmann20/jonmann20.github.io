@@ -3,7 +3,6 @@ import baseStyles from './styles/base';
 import pageStyles from './styles/page';
 import carouselStyles from './styles/carousel';
 import ListCarousel from '../js/listCarousel';
-import {GRAY} from './styles/vars';
 
 class PageGames extends LitElement {
 	static get styles() {
@@ -16,11 +15,11 @@ class PageGames extends LitElement {
 					list-style-type: none;
 					margin: 12px 0 8px;
 					padding-left: 0;
-					color: ${GRAY};
+					color: var(--gray);
 				}
 
 				.caption {
-					color: ${GRAY};
+					color: var(--gray);
 				}
 
 				.col-right .videogame-asset,

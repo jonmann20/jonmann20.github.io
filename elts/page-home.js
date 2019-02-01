@@ -2,7 +2,7 @@ import {css, html, LitElement} from 'lit-element';
 import baseStyles from './styles/base';
 import pageStyles from './styles/page';
 import Util from '../js/util';
-import {BLACK, BLUE, WHITE, RED} from './styles/vars';
+import {BLACK, BLUE, WHITE} from './styles/vars';
 
 class PageHome extends LitElement {
 	static get styles() {
@@ -29,7 +29,7 @@ class PageHome extends LitElement {
 				}
 
 				ul a:hover i-con {
-					color: ${RED};
+					color: var(--red);
 				}
 
 				i-con {
@@ -73,20 +73,20 @@ class PageHome extends LitElement {
 			styles.type = 'text/css';
 			styles.innerHTML = `
 				body {
-					color: ${WHITE.cssText};
+					color: ${WHITE};
 				}
 
 				.timeline-Widget {
-					background: ${BLACK.cssText};
+					background: ${BLACK};
 				}
 
 				.customisable-highlight {
-					color: ${BLUE.cssText} !important;
+					color: ${BLUE} !important;
 				}
 
 				.timeline-Body {
 					border-top: none;
-					border-bottom: 2px solid ${BLACK.cssText};
+					border-bottom: 2px solid ${BLACK};
 					border-radius: 3px;
 				}
 			`;
@@ -98,7 +98,7 @@ class PageHome extends LitElement {
 				width: 620,
 				height: 520,
 				theme: 'dark',
-				linkColor: BLUE.cssText,
+				linkColor: BLUE,
 				chrome: 'nofooter'
 			}).then(widget => {
 				let iframeDoc = widget.contentDocument;
@@ -119,19 +119,19 @@ class PageHome extends LitElement {
                 <ul>
                     <li>
                         <a href="mailto:jonwiedmann@gmail.com" title="jonwiedmann@gmail.com" target="_blank" rel="noopener">
-							<i-con name="mail" color="${BLUE.cssText}"></i-con>
+							<i-con name="mail" color="${BLUE}"></i-con>
                             Email
                         </a>
                     </li>
                     <li>
                         <a href="https://github.com/jonmann20" target="_blank" rel="noopener">
-							<i-con name="code" color="${BLUE.cssText}"></i-con>
+							<i-con name="code" color="${BLUE}"></i-con>
                             GitHub
                         </a>
                     </li>
                     <li>
                         <a href="https://www.linkedin.com/pub/jon-wiedmann/67/42b/b64" target="_blank" rel="noopener">
-							<i-con name="assignmentInd" color="${BLUE.cssText}"></i-con>
+							<i-con name="assignmentInd" color="${BLUE}"></i-con>
                             LinkedIn
                         </a>
                     </li>

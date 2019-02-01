@@ -36,7 +36,7 @@ class ICon extends LitElement {
 	constructor() {
 		super();
 		this._hovering = false;
-		this.color = YELLOW.cssText;
+		this.color = YELLOW;
 
 		const a = this.parentElement;
 		a.addEventListener('mouseover', () => {
@@ -50,7 +50,7 @@ class ICon extends LitElement {
 
 	render() {
 		return html`
-			<svg width="24" height="24" fill="${(this.selected || this._hovering) ? RED.cssText : this.color}">
+			<svg width="24" height="24" fill="${(this.selected || this._hovering) ? RED : this.color}">
 				<path d="${d[this.name]}"></path>
 			</svg>
 		`;
