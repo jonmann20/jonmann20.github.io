@@ -5,35 +5,33 @@ import Util from '../js/util';
 import BallPit from '../js/ballPit';
 
 class PageBallPit extends LitElement {
-	static get styles() {
-		return [
-			baseStyles,
-			pageStyles,
-			css`
-				.range-inputs > div {
-					margin: 0 0 30px;
-				}
+	static styles = [
+		baseStyles,
+		pageStyles,
+		css`
+			.range-inputs > div {
+				margin: 0 0 30px;
+			}
 
-				.range-inputs label {
-					display: block;
-					margin-bottom: 5px;
-				}
+			.range-inputs label {
+				display: block;
+				margin-bottom: 5px;
+			}
 
-				.range-inputs input {
-					cursor: ew-resize;
-				}
+			.range-inputs input {
+				cursor: ew-resize;
+			}
 
-				.range-inputs input:focus {
-					box-shadow: none;
-					outline-color: transparent;
-				}
+			.range-inputs input:focus {
+				box-shadow: none;
+				outline-color: transparent;
+			}
 
-				canvas {
-					margin: 20px 0;
-				}
-			`
-		];
-	}
+			canvas {
+				margin: 20px 0;
+			}
+		`
+	];
 
 	constructor() {
 		super();

@@ -5,50 +5,48 @@ import Util from '../js/util';
 import {BLACK, BLUE, WHITE} from './styles/vars';
 
 class PageHome extends LitElement {
-	static get styles() {
-		return [
-			baseStyles,
-			pageStyles,
-			css`
-				.col-left {
-					min-width: 337px;
-					max-width: 520px;
-				}
+	static styles = [
+		baseStyles,
+		pageStyles,
+		css`
+			.col-left {
+				min-width: 337px;
+				max-width: 520px;
+			}
 
-				img {
-					float: left;
-					padding-right: 15px;
-					margin-bottom: -5px;
-				}
+			img {
+				float: left;
+				padding-right: 15px;
+				margin-bottom: -5px;
+			}
 
-				ul {
-					margin-top: 55px;
-					list-style-type: none;
-					padding: 0;
-					line-height: 2;
-				}
+			ul {
+				margin-top: 55px;
+				list-style-type: none;
+				padding: 0;
+				line-height: 2;
+			}
 
-				ul a:hover i-con {
-					color: var(--red);
-				}
+			ul a:hover i-con {
+				color: var(--red);
+			}
 
-				i-con {
-					margin-right: 7px;
-					vertical-align: -6px;
-				}
+			i-con {
+				margin-right: 7px;
+				vertical-align: -6px;
+			}
 
-				.twitter-timeline {
-					opacity: 0;
-				}
+			.twitter-timeline {
+				opacity: 0;
+			}
 
-				.twitter-timline-custom-styled {
-					opacity: 1;
-					box-shadow: var(--box-shadow-2);
-					border-radius: 2px;
-				}
-			`
-		];
-	}
+			.twitter-timline-custom-styled {
+				opacity: 1;
+				box-shadow: var(--box-shadow-2);
+				border-radius: 2px;
+			}
+		`
+	];
 
 	constructor() {
 		super();

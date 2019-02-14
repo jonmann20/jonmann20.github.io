@@ -5,44 +5,42 @@ import carouselStyles from './styles/carousel';
 import ListCarousel from '../js/listCarousel';
 
 class PagePortfolio extends LitElement {
-	static get styles() {
-		return [
-			baseStyles,
-			pageStyles,
-			carouselStyles,
-			css`
-				.big-btn {
-					margin-bottom: 20px;
-				}
+	static styles = [
+		baseStyles,
+		pageStyles,
+		carouselStyles,
+		css`
+			.big-btn {
+				margin-bottom: 20px;
+			}
 
-				.big-btn .open-in-new {
-					vertical-align: -6px;
-					margin-left: 3px;
-				}
+			.big-btn .open-in-new {
+				vertical-align: -6px;
+				margin-left: 3px;
+			}
 
-				.wht-img {
-					float: left;
-					margin-right: 15px;
-				}
+			.wht-img {
+				float: left;
+				margin-right: 15px;
+			}
 
-				.wht-ele {
-					margin-top: 70px;
-				}
+			.wht-ele {
+				margin-top: 70px;
+			}
 
+			.enl-site {
+				margin-top: 25px;
+				clear: both;
+			}
+
+			/* > mobile */
+			@media (min-width: 801px) {
 				.enl-site {
-					margin-top: 25px;
-					clear: both;
+					float: left;
 				}
-
-				/* > mobile */
-				@media (min-width: 801px) {
-					.enl-site {
-						float: left;
-					}
-				}
-			`
-		];
-	}
+			}
+		`
+	];
 
 	constructor() {
 		super();

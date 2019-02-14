@@ -5,69 +5,67 @@ import carouselStyles from './styles/carousel';
 import ListCarousel from '../js/listCarousel';
 
 class PageGames extends LitElement {
-	static get styles() {
-		return [
-			baseStyles,
-			pageStyles,
-			carouselStyles,
-			css`
-				.lh {
-					list-style-type: none;
-					margin: 12px 0 8px;
-					padding-left: 0;
-					color: var(--gray);
-				}
+	static styles = [
+		baseStyles,
+		pageStyles,
+		carouselStyles,
+		css`
+			.lh {
+				list-style-type: none;
+				margin: 12px 0 8px;
+				padding-left: 0;
+				color: var(--gray);
+			}
 
-				.caption {
-					color: var(--gray);
-				}
+			.caption {
+				color: var(--gray);
+			}
 
-				.col-right .videogame-asset,
-				.col-right .code {
-					margin-right: 10px;
-					vertical-align: -6px;
-				}
+			.col-right .videogame-asset,
+			.col-right .code {
+				margin-right: 10px;
+				vertical-align: -6px;
+			}
 
-				.tech-used {
-					margin-top: 26px;
-					margin-bottom: 22px;
-				}
+			.tech-used {
+				margin-top: 26px;
+				margin-bottom: 22px;
+			}
 
-				.tech-used .lh {
-					margin-left: -30px;
-				}
+			.tech-used .lh {
+				margin-left: -30px;
+			}
 
-				#div-default img {
-					margin-top: 15px;
-				}
+			#div-default img {
+				margin-top: 15px;
+			}
 
-				#div-separate img {
-					width: 38px;
-				}
+			#div-separate img {
+				width: 38px;
+			}
 
+			#div-separate .big-img {
+				display: block;
+				width: 375px;
+				margin: 14px auto 0;
+			}
+
+			/* > mobile */
+			@media (min-width: 801px) {
 				#div-separate .big-img {
-					display: block;
-					width: 375px;
-					margin: 14px auto 0;
+					margin: 14px 0 0;
 				}
+			}
 
-				/* > mobile */
-				@media (min-width: 801px) {
-					#div-separate .big-img {
-						margin: 14px 0 0;
-					}
-				}
+			.additional-links ul {
+				line-height: 1.6;
+			}
 
-				.additional-links ul {
-					line-height: 1.6;
-				}
-
-				.additional-links ul .lh {
-					margin-top: 25px;
-				}
-			`
-		];
-	}
+			.additional-links ul .lh {
+				margin-top: 25px;
+			}
+		`
+	];
 
 	constructor() {
 		super();

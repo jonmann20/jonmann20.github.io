@@ -6,47 +6,45 @@ import StarryBg from '../js/stars';
 import {WHITE, YELLOW} from './styles/vars';
 
 class PageStarryBackground extends LitElement {
-	static get styles() {
-		return [
-			baseStyles,
-			pageStyles,
-			css`
-				canvas {
-					z-index: -1;
-					position: absolute;
-					top: 0;
-					right: 0;
-					left: 0;
-					bottom: 0;
-					width: 100%;
-					height: 100%;
-				}
+	static styles = [
+		baseStyles,
+		pageStyles,
+		css`
+			canvas {
+				z-index: -1;
+				position: absolute;
+				top: 0;
+				right: 0;
+				left: 0;
+				bottom: 0;
+				width: 100%;
+				height: 100%;
+			}
 
-				.color-wrap {
-					margin-top: 25px;
-				}
+			.color-wrap {
+				margin-top: 25px;
+			}
 
-				label {
-					cursor: pointer;
-					margin-right: 15px;
-				}
+			label {
+				cursor: pointer;
+				margin-right: 15px;
+			}
 
-				input {
-					cursor: pointer;
-					vertical-align: -2px;
-				}
+			input {
+				cursor: pointer;
+				vertical-align: -2px;
+			}
 
-				input:focus {
-					box-shadow: none;
-					outline-color: transparent;
-				}
+			input:focus {
+				box-shadow: none;
+				outline-color: transparent;
+			}
 
-				input:last-child {
-					margin-right: 0;
-				}
-			`
-		];
-	}
+			input:last-child {
+				margin-right: 0;
+			}
+		`
+	];
 
 	constructor() {
 		super();

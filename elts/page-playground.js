@@ -4,18 +4,16 @@ import pageStyles from './styles/page';
 import Util from '../js/util';
 
 class PagePlayground extends LitElement {
-	static get styles() {
-		return [
-			baseStyles,
-			pageStyles,
-			css`
-				h2 {
-					font-size: 1.15em;
-					margin: 0.5em 0 0.3em;
-				}
-			`
-		];
-	}
+	static styles = [
+		baseStyles,
+		pageStyles,
+		css`
+			h2 {
+				font-size: 1.15em;
+				margin: 0.5em 0 0.3em;
+			}
+		`
+	];
 
 	constructor() {
 		super();

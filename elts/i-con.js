@@ -14,24 +14,20 @@ const d = {
 };
 
 class ICon extends LitElement {
-	static get styles() {
-		return css`
-			:host {
-				display: inline-block;
-				width: 24px;
-				cursor: pointer !important;
-			}
-		`;
-	}
+	static styles = css`
+		:host {
+			display: inline-block;
+			width: 24px;
+			cursor: pointer !important;
+		}
+	`;
 
-	static get properties() {
-		return {
-			name: {type: String},
-			selected: {type: Boolean},
-			color: {type: String},
-			_hovering: {type: Boolean}
-		};
-	}
+	static properties = {
+		name: {type: String},
+		selected: {type: Boolean},
+		color: {type: String},
+		_hovering: {type: Boolean}
+	};
 
 	constructor() {
 		super();

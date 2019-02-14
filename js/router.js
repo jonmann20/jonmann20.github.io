@@ -5,7 +5,8 @@ const routes = {
 	'playground/ball-pit': 'page-ball-pit',
 	'playground/breakdancing-cube': 'page-breakdancing-cube',
 	'playground/starry-background': 'page-starry-background',
-	portfolio: 'page-portfolio'
+	portfolio: 'page-portfolio',
+	grid: 'page-grid'
 };
 
 class Router {

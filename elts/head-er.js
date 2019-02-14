@@ -2,157 +2,153 @@ import {css, html, LitElement} from 'lit-element';
 import baseStyles from './styles/base';
 
 class HeadEr extends LitElement {
-	static get styles() {
-		return [
-			baseStyles,
-			css`
-				header {
-					position: fixed;
-					z-index: 99999;
-					top: 0;
-					width: 100%;
-					background: var(--black);
-				}
+	static styles = [
+		baseStyles,
+		css`
+			header {
+				position: fixed;
+				z-index: 99999;
+				top: 0;
+				width: 100%;
+				background: var(--black);
+			}
 
-				.menu {
-					position: absolute;
-					display: flex;
-					top: 0;
-					right: 0;
-					padding: 16px 20px 15px 16px;
+			.menu {
+				position: absolute;
+				display: flex;
+				top: 0;
+				right: 0;
+				padding: 16px 20px 15px 16px;
+				width: auto;
+				-webkit-user-select: none;
+				-moz-user-select: none;
+				-ms-user-select: none;
+				user-select: none;
+			}
+
+			nav {
+				font-size: 1.57em;
+				text-align: left;
+				margin-top: 35px;
+				padding: 15px 20px;
+				min-width: 165px;
+			}
+
+			nav:first-child {
+				margin-top: 0;
+				height: 55px;
+			}
+
+			nav:first-child a {
+				display: inline;
+				text-align: center;
+				line-height: 1.1 !important;
+				margin-right: 0;
+			}
+
+			ul {
+				list-style-type: none;
+				font-size: 62%;
+				width: 90%;
+				margin: 0 auto;
+				padding: 0;
+				border-radius: 1px;
+			}
+
+			ul a {
+				margin-right: 0 !important;
+			}
+
+			ul a:active {
+				margin-bottom: 4px;
+			}
+
+			a {
+				width: 100%;
+				color: var(--yellow);
+			}
+
+			a:hover {
+				color: var(--yellow);
+				text-shadow: 0 0 6px var(--yellow);
+			}
+
+			a,
+			a:visited {
+				text-align: right;
+				display: block;
+				margin-right: 18px;
+				line-height: 1.7;
+				transition: none;
+			}
+
+			.icon-home {
+				margin-right: 7px;
+				vertical-align: -3px;
+			}
+
+			.nav2 {
+				display: none;
+				margin-top: 20px;
+			}
+
+			.nav2 ul a {
+				margin-bottom: 4px;
+				text-align: center;
+			}
+
+			.nav2 i-con {
+				vertical-align: -6px;
+				margin-left: 7px;
+			}
+
+			.playground-nav-wrap {
+				height: 0;
+				opacity: 0;
+				visibility: hidden;
+				will-change: height, padding, opacity;
+				transition: 0.25s ease;
+			}
+
+			.playground-nav-wrap.visible {
+				padding: 10px 0 10px 40px;
+				height: 92px;
+				visibility: visible;
+				opacity: 1;
+			}
+
+			/* > mobile */
+			@media (min-width: 801px) {
+				header {
+					top: auto;
 					width: auto;
-					-webkit-user-select: none;
-					-moz-user-select: none;
-					-ms-user-select: none;
-					user-select: none;
+					background: none;
 				}
 
 				nav {
-					font-size: 1.57em;
-					text-align: left;
-					margin-top: 35px;
-					padding: 15px 20px;
-					min-width: 165px;
+					text-align: center;
+					padding: 15px 15px 0 0;
 				}
 
 				nav:first-child {
-					margin-top: 0;
-					height: 55px;
+					text-indent: 9px;
+					padding-bottom: 20px;
 				}
 
-				nav:first-child a {
-					display: inline;
-					text-align: center;
-					line-height: 1.1 !important;
-					margin-right: 0;
-				}
-
-				ul {
-					list-style-type: none;
-					font-size: 62%;
-					width: 90%;
-					margin: 0 auto;
-					padding: 0;
-					border-radius: 1px;
-				}
-
-				ul a {
-					margin-right: 0 !important;
-				}
-
-				ul a:active {
-					margin-bottom: 4px;
-				}
-
-				a {
-					width: 100%;
-					color: var(--yellow);
-				}
-
-				a:hover {
-					color: var(--yellow);
-					text-shadow: 0 0 6px var(--yellow);
-				}
-
-				a,
-				a:visited {
-					text-align: right;
-					display: block;
-					margin-right: 18px;
-					line-height: 1.7;
-					transition: none;
-				}
-
-				.icon-home {
-					margin-right: 7px;
-					vertical-align: -3px;
+				.menu {
+					display: none !important;
 				}
 
 				.nav2 {
-					display: none;
-					margin-top: 20px;
+					display: block;
 				}
+			}
+		`
+	];
 
-				.nav2 ul a {
-					margin-bottom: 4px;
-					text-align: center;
-				}
-
-				.nav2 i-con {
-					vertical-align: -6px;
-					margin-left: 7px;
-				}
-
-				.playground-nav-wrap {
-					height: 0;
-					opacity: 0;
-					visibility: hidden;
-					will-change: height, padding, opacity;
-					transition: 0.25s ease;
-				}
-
-				.playground-nav-wrap.visible {
-					padding: 10px 0 10px 40px;
-					height: 92px;
-					visibility: visible;
-					opacity: 1;
-				}
-
-				/* > mobile */
-				@media (min-width: 801px) {
-					header {
-						top: auto;
-						width: auto;
-						background: none;
-					}
-
-					nav {
-						text-align: center;
-						padding: 15px 15px 0 0;
-					}
-
-					nav:first-child {
-						text-indent: 9px;
-						padding-bottom: 20px;
-					}
-
-					.menu {
-						display: none !important;
-					}
-
-					.nav2 {
-						display: block;
-					}
-				}
-			`
-		];
-	}
-
-	static get properties() {
-		return {
-			page: {type: String}
-		};
-	}
+	static properties = {
+		page: {type: String}
+	};
 
 	constructor() {
 		super();

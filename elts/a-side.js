@@ -2,68 +2,64 @@ import {css, html, LitElement} from 'lit-element';
 import baseStyles from './styles/base';
 
 class ASide extends LitElement {
-	static get styles() {
-		return [
-			baseStyles,
-			css`
-				aside {
-					transform: translateX(-100%);
-					transition: all 0.3s cubic-bezier(0, 0, 0.3, 1);
-					padding-top: 60px;
-					height: 100%;
-					width: 75%;
-					min-width: 200px;
-					max-width: 260px;
-					position: fixed;
-					left: 0;
-					top: 0;
-					background: var(--black);
-					z-index: 999;
-					will-change: transform;
-				}
+	static styles = [
+		baseStyles,
+		css`
+			aside {
+				transform: translateX(-100%);
+				transition: all 0.3s cubic-bezier(0, 0, 0.3, 1);
+				padding-top: 60px;
+				height: 100%;
+				width: 75%;
+				min-width: 200px;
+				max-width: 260px;
+				position: fixed;
+				left: 0;
+				top: 0;
+				background: var(--black);
+				z-index: 999;
+				will-change: transform;
+			}
 
-				aside#activated {
-					transform: translateX(0);
-				}
+			aside#activated {
+				transform: translateX(0);
+			}
 
-				a {
-					display: block;
-					line-height: 1.7;
-					font-size: 1.45em;
-					padding: 10px 0 10px 20px;
-					text-align: left !important;
-					color: var(--yellow);
-				}
+			a {
+				display: block;
+				line-height: 1.7;
+				font-size: 1.45em;
+				padding: 10px 0 10px 20px;
+				text-align: left !important;
+				color: var(--yellow);
+			}
 
-				a:hover {
-					color: var(--yellow);
-					text-shadow: 0 0 6px var(--yellow);
-				}
+			a:hover {
+				color: var(--yellow);
+				text-shadow: 0 0 6px var(--yellow);
+			}
 
-				i-con {
-					float: left;
-					margin-right: 13px;
-					margin-top: 5px;
-					cursor: pointer !important;
-				}
+			i-con {
+				float: left;
+				margin-right: 13px;
+				margin-top: 5px;
+				cursor: pointer !important;
+			}
 
-				.playground-nav {
-					margin-left: 25px;
-				}
+			.playground-nav {
+				margin-left: 25px;
+			}
 
-				.playground-nav a {
-					font-size: 1.2em;
-				}
-			`
-		];
-	}
+			.playground-nav a {
+				font-size: 1.2em;
+			}
+		`
+	];
 
-	static get properties() {
-		return {
-			active: {type: Boolean},
-			page: {type: String}
-		};
-	}
+	static properties = {
+		active: {type: Boolean},
+		page: {type: String}
+	};
 
 	constructor() {
 		super();

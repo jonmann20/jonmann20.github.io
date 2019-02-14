@@ -17,23 +17,12 @@ module.exports = (api) => {
 		};
 	}
 	else {
+		// Used by server (dynamic transform)
 		return {
-			// TODO: breaking dynamic import with requires
-			// presets: [
-			// 	['@babel/preset-env', {
-			// 		targets: {
-			// 			browsers: [
-			// 				'last 2 Chrome versions',
-			// 				'last 2 Firefox versions',
-			// 				'last 2 Edge versions',
-			// 				'last 2 Safari versions',
-			// 				'last 2 iOS versions',
-			// 				'last 2 ChromeAndroid versions'
-			// 			]
-			// 		}
-			// 	}]
-			// ],
-			plugins: ['@babel/plugin-syntax-dynamic-import']
+			plugins: [
+				'@babel/plugin-syntax-dynamic-import',
+				'@babel/plugin-proposal-class-properties'
+			]
 		};
 	}
 };

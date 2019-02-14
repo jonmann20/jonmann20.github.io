@@ -15,7 +15,6 @@ function bundleComponents() {
 		pipe(dest('dist'));
 }
 
-
 function prdAppIndex() {
 	return src('dist/index.html').
 		pipe(replace('isDev = true', 'isDev = false')).
