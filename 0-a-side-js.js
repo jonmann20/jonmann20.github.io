@@ -1,4 +1,4 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[1,4],{11:function(a,e,o){"use strict";o.r(e);var t=o(23);e.default=t.b`
+(window.webpackJsonp=window.webpackJsonp||[]).push([[1,8],{11:function(a,e,o){"use strict";o.r(e);var r=o(26);e.default=r.b`
 	:host {
 		display: block;
 	}
@@ -68,56 +68,7 @@
 		border-radius: 2px;
 		box-shadow: var(--box-shadow-2);
 	}
-`},6:function(a,e,o){"use strict";o.r(e);var t=o(23),r=o(11);customElements.define("a-side",class extends t.a{static get styles(){return[r.default,t.b`
-				aside {
-					transform: translateX(-100%);
-					transition: all 0.3s cubic-bezier(0, 0, 0.3, 1);
-					padding-top: 60px;
-					height: 100%;
-					width: 75%;
-					min-width: 200px;
-					max-width: 260px;
-					position: fixed;
-					left: 0;
-					top: 0;
-					background: var(--black);
-					z-index: 999;
-					will-change: transform;
-				}
-
-				aside#activated {
-					transform: translateX(0);
-				}
-
-				a {
-					display: block;
-					line-height: 1.7;
-					font-size: 1.45em;
-					padding: 10px 0 10px 20px;
-					text-align: left !important;
-					color: var(--yellow);
-				}
-
-				a:hover {
-					color: var(--yellow);
-					text-shadow: 0 0 6px var(--yellow);
-				}
-
-				i-con {
-					float: left;
-					margin-right: 13px;
-					margin-top: 5px;
-					cursor: pointer !important;
-				}
-
-				.playground-nav {
-					margin-left: 25px;
-				}
-
-				.playground-nav a {
-					font-size: 1.2em;
-				}
-			`]}static get properties(){return{active:{type:Boolean},page:{type:String}}}constructor(){super(),this.active=!1}render(){return t.c`
+`},6:function(a,e,o){"use strict";o.r(e);var r=o(26);function t(a,e,o){return e in a?Object.defineProperty(a,e,{value:o,enumerable:!0,configurable:!0,writable:!0}):a[e]=o,a}class i extends r.a{constructor(){super(),this.active=!1}render(){return r.c`
 			<aside id="${this.active?"activated":""}">
 				<a href="#games">
 					Games <i-con name="videogameAsset" ?selected="${"games"===this.page}"></i-con>
@@ -136,4 +87,53 @@
 					Portfolio <i-con name="work" ?selected="${"portfolio"===this.page}"></i-con>
 				</a>
 			</aside>
-		`}})}}]);
+		`}}t(i,"styles",[o(11).default,r.b`
+			aside {
+				transform: translateX(-100%);
+				transition: all 0.3s cubic-bezier(0, 0, 0.3, 1);
+				padding-top: 60px;
+				height: 100%;
+				width: 75%;
+				min-width: 200px;
+				max-width: 260px;
+				position: fixed;
+				left: 0;
+				top: 0;
+				background: var(--black);
+				z-index: 999;
+				will-change: transform;
+			}
+
+			aside#activated {
+				transform: translateX(0);
+			}
+
+			a {
+				display: block;
+				line-height: 1.7;
+				font-size: 1.45em;
+				padding: 10px 0 10px 20px;
+				text-align: left !important;
+				color: var(--yellow);
+			}
+
+			a:hover {
+				color: var(--yellow);
+				text-shadow: 0 0 6px var(--yellow);
+			}
+
+			i-con {
+				float: left;
+				margin-right: 13px;
+				margin-top: 5px;
+				cursor: pointer !important;
+			}
+
+			.playground-nav {
+				margin-left: 25px;
+			}
+
+			.playground-nav a {
+				font-size: 1.2em;
+			}
+		`]),t(i,"properties",{active:{type:Boolean},page:{type:String}}),customElements.define("a-side",i)}}]);
