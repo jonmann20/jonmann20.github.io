@@ -26,14 +26,18 @@ class GelGrid extends LitElement {
 			width: var(--gel-width);
 			height: var(--gel-height);
 
+			width: 100%;
+			height: 100%;
+			padding-top: var(--offset-top);
+			padding-left: calc(var(--offset-left) + var(--gel-item-margin));
+
 			position: fixed;
 
 			display: flex;
 			flex-direction: row;
 			flex-flow: wrap;
-			justify-content: center;
 			align-content: baseline;
-			background: #ccc;
+			background: red;
 		}
 	`;
 

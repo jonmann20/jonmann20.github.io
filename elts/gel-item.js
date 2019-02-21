@@ -3,7 +3,7 @@ import {css, html, LitElement} from 'lit-element';
 class GelItem extends LitElement {
 	static styles = css`
 		:host {
-			--duration: 0.65s;
+			--duration: 0.5s;
 			--bezier: cubic-bezier(0, 0, 0.3, 1);
 			--transition-props: var(--duration) var(--bezier);
 			--header-height: 50px;
@@ -18,16 +18,21 @@ class GelItem extends LitElement {
 				width var(--duration) var(--bezier),
 				margin var(--duration) var(--bezier),
 				top var(--duration) var(--bezier),
-				background var(--duration) var(--bezier);
+				background var(--duration) var(--bezier),
+				box-shadow var(--duration) var(--bezier);
 
 			position: relative;
 			z-index: 0;
 			white-space: nowrap;
-			box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.3);
+			box-shadow: var(--box-shadow-2);
 			cursor: pointer;
-			background: #fefefe;
-			color: #444;
+			background: var(--black);
+			color: var(--white);
 			border-radius: 2px;
+		}
+
+		:host(:hover) {
+			box-shadow: var(--box-shadow-4);
 		}
 
 		:host:active {
@@ -40,6 +45,7 @@ class GelItem extends LitElement {
 			position: absolute;
 			box-shadow: none;
 			border-radius: 0;
+			z-index: 999999;
 		}
 
 		:host(.expanding),
@@ -63,7 +69,8 @@ class GelItem extends LitElement {
 			height: calc(var(--gel-item-height) - var(--header-height));
 			transition:
 				left  var(--transition-props),
-				transform var(--transition-props);
+				transform var(--transition-props),
+				opacity var(--duration) var(--bezier);
 		}
 
 		:host(.expanding) ::slotted(img),
@@ -78,8 +85,7 @@ class GelItem extends LitElement {
 			transform: translate(-50%);
 			z-index: 1;
 			margin-top: 15px;
-			transition:
-				transform 0.5s var(--bezier);
+			transition: transform 0.5s var(--bezier);
 		}
 
 		:host(.expanding) ::slotted(header),
