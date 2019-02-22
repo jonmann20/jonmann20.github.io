@@ -29,6 +29,8 @@ class GelItem extends LitElement {
 			background: var(--black);
 			color: var(--white);
 			border-radius: 2px;
+			display: flex;
+			justify-content: center;
 		}
 
 		:host(:hover) {

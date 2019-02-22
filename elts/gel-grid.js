@@ -37,7 +37,7 @@ class GelGrid extends LitElement {
 			flex-direction: row;
 			flex-flow: wrap;
 			align-content: baseline;
-			background: red;
+			/*background: red;*/
 		}
 	`;
 
@@ -46,6 +46,7 @@ class GelGrid extends LitElement {
 			<style>
 				:host {
 					overflow-y: ${this.expanded ? 'hidden' : 'overlay'};
+					z-index: ${this.expanded ? 999999 : 0};
 				}
 			</style>
 			<slot></slot>

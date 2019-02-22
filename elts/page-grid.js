@@ -10,9 +10,6 @@ class PageGrid extends LitElement {
 		pageStyles,
 		css`
 			:host {
-				--gel-offset-top: 40px;
-				--gel-offset-left: 284px;
-
 				position: absolute;
 				top: 0;
 				left: 0;
@@ -24,12 +21,32 @@ class PageGrid extends LitElement {
 		`
 	];
 
+	static properties = {
+		isMobile: {type: Boolean}
+	};
+
+	constructor() {
+		super();
+		this.isMobile = window.innerWidth < 801;
+
+		// TODO: use Util, debounce
+		window.addEventListener('resize', () => {
+			this.isMobile = window.innerWidth < 801;
+		});
+	}
+
 	render() {
 		return html`
-			<div class="card">
+			<style>
+				:host {
+					--gel-offset-top: ${this.isMobile ? 55 : 40}px;
+					--gel-offset-left: ${this.isMobile ? 0 : 284}px;
+				}
+			</style>
+			<!--<div class="card">
 				<h1>Games</h1>
 				<p>As a hobbyist Game Developer, I have created several game prototypes using technologies like Unity with C# and custom game engines in HTML5 Canvas with Javascript or Dart. Unless otherwise noted, all audio, graphics, and develepment was handmade.</p>
-			</div>
+			</div>-->
 
 			<gel-grid>
 				<gel-item>
