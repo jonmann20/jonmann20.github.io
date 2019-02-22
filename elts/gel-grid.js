@@ -37,7 +37,7 @@ class GelGrid extends LitElement {
 			flex-direction: row;
 			flex-flow: wrap;
 			align-content: baseline;
-			/*background: red;*/
+			/*background: blue;*/
 		}
 	`;
 
