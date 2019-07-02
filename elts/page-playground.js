@@ -27,7 +27,7 @@ class PagePlayground extends LitElement {
 		return html`
 			<div class="col-left card">
 				<h1>Playground</h1>
-				<p>This area contains small tech demos.  Including some web technology prototypes, various snippets, and extractions from other projects I have worked on.</p>
+				<p>This area contains small tech demos and web technology prototypes.</p>
 			</div>
 
 			<div class="col-right">

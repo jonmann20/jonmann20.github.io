@@ -61,7 +61,7 @@ class PagePortfolio extends LitElement {
 				</p>
 				<p>
 					My main interest in computer science is in web engineering and game engine development.
-					I am also an avid indoor soccer player and musician.
+					I am also an avid CrossFitter, indoor soccer player, and musician.
 				</p>
 
 				<ul>

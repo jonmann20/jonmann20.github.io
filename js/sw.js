@@ -13,8 +13,6 @@
 
 'use strict'; // eslint-disable-line
 
-/* globals caches, self, Request */
-
 // Incrementing CACHE_VERSION will kick off the install event and force previously cached
 // resources to be cached again.
 const CACHE_VERSION = 1;

@@ -190,9 +190,7 @@ class GelItem extends LitElement {
 		}
 	}
 
-	_onTransitionEnd(e) {
-		//console.log(this._id, this.className, e.propertyName, this._expandingPropsCount, this._numProps);
-
+	_onTransitionEnd() {
 		if(this.classList.contains('expanding') && ++this._expandingPropsCount === this._numProps) {
 			this.classList.remove('expanding');
 			this.classList.add('expanded');

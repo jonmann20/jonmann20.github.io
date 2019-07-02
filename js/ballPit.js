@@ -124,7 +124,8 @@ class BallPit {
 			diff = -diff;
 
 			for(; i < diff; ++i) {
-				let ball = {						// (max   - min + 1)  + min
+				// (max   - min + 1)  + min
+				let ball = {
 					x: Math.floor(Math.random() * (this.canvas.width - 0 + 1)) + 0, // [0, canvas.width]
 					y: Math.floor(Math.random() * (this.canvas.height + 1)),        // [0, canvas.height]
 					velocity: {
