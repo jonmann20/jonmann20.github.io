@@ -20,9 +20,17 @@
 		"gulp-express": "~0.3.5",
 		"gulp-htmlmin": "~5.0.1",
 		"gulp-replace": "~1.0.0",
+		"gulp-stylelint": "~9.0.0",
 		"lit-element": "~2.2.0",
+		"stylelint": "~10.1.0",
+		"stylelint-config-recommended": "~2.2.0",
+		"stylelint-config-styled-components": "~0.1.1",
+		"stylelint-processor-styled-components": "~1.8.0",
 		"webpack": "~4.35.2",
 		"webpack-stream": "~5.2.1"
+	},
+	"scripts": {
+		"lint": "stylelint elts/styles/*.js"
 	},
 	"private": true
 }

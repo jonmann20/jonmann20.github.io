@@ -1,11 +1,16 @@
 import {src, dest, parallel} from 'gulp';
 import replace from 'gulp-replace';
 import fs from 'fs';
+import styleLint from 'gulp-stylelint';
 
-// function cssLint() {
-// 	return gulp.src(['elts/**/*.js', 'games/**/*.css']).
-// 		pipe(styleLint());
-// }
+function cssLint() {
+	return src(['elts/**/*.js']).//, 'games/**/*.css']).
+		pipe(styleLint({
+			reporters: [
+				{formatter: 'string', console: true},
+			]
+		}));
+}
 
 function _inline(_src, _dest, assetHref, assetFile) {
 	const cond = `<link rel="stylesheet" href="${assetHref}">`;
@@ -39,6 +44,6 @@ const cssInline = parallel(
 );
 
 export {
-	//cssLint,
+	cssLint,
 	cssInline
 };
