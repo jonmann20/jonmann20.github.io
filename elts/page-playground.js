@@ -33,7 +33,7 @@ class PagePlayground extends LitElement {
 			<div class="col-right">
 				<img class="card-light" src="/img/megaman-cross-stitch.jpg" alt="Megaman cross stitch">
 			</div>
-        `;
+    `;
 	}
 }
 
