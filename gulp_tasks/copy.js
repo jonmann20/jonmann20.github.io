@@ -5,6 +5,8 @@ export default function copy() {
 		'.nojekyll',
 		'CNAME',
 		'index.html',
+		'github-user-search.html',
+		'github-user-search.js',
 		'offline.html',
 		'manifest.json',
 		'node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js',
