@@ -13,7 +13,7 @@ function eslint() {
 			'!games/common/js/physics/SAT.js',
 			'games/vamp/**/*.js',
 			'games/dormanticide/**/*.js',
-			'gulpfile.babel.js',
+			'gulpfile.esm.js',
 			'webpack.config.babel.js',
 			'gulp_tasks/**/*.js',
 			'!js/prd.js'
