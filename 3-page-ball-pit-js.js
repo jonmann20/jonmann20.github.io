@@ -1,1 +1,162 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[8,4,6],{11:function(t,n,e){"use strict";e.r(n);var i=e(23);function a(){const t=function(t,n){n||(n=t.slice(0));return Object.freeze(Object.defineProperties(t,{raw:{value:Object.freeze(n)}}))}(["\n\t:host {\n\t\tdisplay: block;\n\t}\n\n\t* {\n\t\tbox-sizing: border-box;\n\t}\n\n\th1,\n\th2,\n\th3 {\n\t\tmargin: 0.4em 0 0.6em;\n\t\tfont-size: 1.75em;\n\t\tfont-weight: 300;\n\t\tcolor: var(--white);\n\t\ttext-shadow: 0 2px 3px #212121;\n\t}\n\n\tul {\n\t\tlist-style-type: none;\n\t\tpadding: 0;\n\t}\n\n\ta {\n\t\tcolor: var(--blue);\n\t\ttext-decoration: none;\n\t\toutline: none;\n\t\tcursor: pointer;\n\t}\n\n\ta:hover {\n\t\tcolor: #7ddff1;\n\t\ttext-shadow: #7ddff1 0 0 6px;\n\t}\n\n\ta:active {\n\t\tcolor: #4fd3ed;\n\t}\n\n\ta:focus {\n\t\toutline: 0;\n\t}\n\n\ta[selected] {\n\t\tcolor: var(--red) !important;\n\t}\n\n\tinput {\n\t\toutline-color: #888;\n\t}\n\n\tinput:focus {\n\t\tbox-shadow: 2px 2px 16px 2px rgba(0, 0, 0, 0.45);\n\t}\n\n\t/* utils */\n\n\t.card {\n\t\tdisplay: inline-block;\n\t\tbackground: var(--black);\n\t\tbox-shadow: var(--box-shadow-2);\n\t\tborder-radius: 2px;\n\t\tpadding: 3px 25px 5px;\n\t}\n\n\t.card-light {\n\t\tborder-radius: 2px;\n\t\tbox-shadow: var(--box-shadow-2);\n\t}\n"]);return a=function(){return t},t}n.default=Object(i.b)(a())},12:function(t,n,e){"use strict";e.r(n);var i=e(23);function a(){const t=function(t,n){n||(n=t.slice(0));return Object.freeze(Object.defineProperties(t,{raw:{value:Object.freeze(n)}}))}(["\n\t.col-left ul {\n\t\tfont-size: 1.15em;\n\t}\n\n\t.col-right {\n\t\tmargin-top: 25px;\n\t\tpadding-bottom: 13px;\n\t}\n\n\t.col-right img {\n\t\tmax-width: 100%;\n\t}\n\n\t.col-right > div {\n\t\tpadding-bottom: 13px !important;\n\t}\n\n\t/* > mobile */\n\t@media (min-width: 801px) {\n\t\t.col-left {\n\t\t\tfloat: left;\n\t\t\twidth: 46%;\n\t\t\tmargin-right: 2%;\n\t\t}\n\n\t\t.col-right {\n\t\t\tfloat: right;\n\t\t\twidth: 50%;\n\t\t\tmargin-top: 0;\n\t\t}\n\t}\n\n\t/* tablet */\n\t@media (min-width: 801px) and (max-width: 1265px) {\n\t\t.col-left {\n\t\t\twidth: 100%;\n\t\t\tmargin-bottom: 0;\n\t\t}\n\n\t\t.col-right {\n\t\t\twidth: 100%;\n\t\t\tmargin-top: 25px;\n\t\t}\n\t}\n"]);return a=function(){return t},t}n.default=Object(i.b)(a())},22:function(t,n,e){"use strict";e.r(n);var i=e(23),a=e(11),l=e(12),s=e(24);var o,r,c,d=class{constructor(t){this.doc=t,this.boundOnRoute=t=>this.destroy(t.detail),addEventListener("route",this.boundOnRoute,{passive:!0}),this.canvas=t.querySelector("canvas"),this.ctx=this.canvas.getContext("2d"),this.radius=16.5,this.balls=[],this.canvas.width=s.a.getMainWidth/1.5,this.canvas.height=this.canvas.width/2,this.boundOnNumBalls=t=>this.onNumBalls(t.target.value),this.boundOnSizeBalls=t=>this.onSizeBalls(t.target.value),this.boundOnSpeedBalls=t=>this.onSpeedBalls(t.target.value),t.querySelector(".numBalls").addEventListener("input",this.boundOnNumBalls),t.querySelector(".sizeBalls").addEventListener("input",this.boundOnSizeBalls),t.querySelector(".speedBalls").addEventListener("input",this.boundOnSpeedBalls);for(let t=0;t<20;++t)this.balls.push({x:Math.floor(Math.random()*(this.canvas.width+1)),y:Math.floor(Math.random()*(this.canvas.height+1)),velocity:{x:Math.floor(-3*Math.random()),y:Math.floor(7*Math.random())-3},color:this.getRandomColor()});this.runSim()}destroy(t){if("playground/ball-pit"===t)return;removeEventListener("route",this.boundOnRoute,{passive:!0}),cancelAnimationFrame(this.animLoop);const n=this.doc.querySelector(".numBalls"),e=this.doc.querySelector(".sizeBalls"),i=this.doc.querySelector(".speedBalls");n&&n.removeEventListener("input",this.boundOnNumBalls),e&&e.removeEventListener("input",this.boundOnSizeBalls),i&&i.removeEventListener("input",this.boundOnSpeedBalls),delete window.ballPit}update(){for(let t of this.balls)t.x+=t.velocity.x,t.y+=t.velocity.y,t.x-this.radius<0&&t.velocity.x<0&&(t.velocity.x=-t.velocity.x),t.y>=this.canvas.height-this.radius&&t.velocity.y>0&&(t.velocity.y=-t.velocity.y),t.x>=this.canvas.width-this.radius&&t.velocity.x>0&&(t.velocity.x=-t.velocity.x),t.y-this.radius<0&&t.velocity.y<0&&(t.velocity.y=-t.velocity.y)}render(){this.ctx.fillStyle="#0098ff",this.ctx.fillRect(0,0,this.canvas.width,this.canvas.height);for(const t of this.balls)this.ctx.fillStyle=t.color,this.ctx.beginPath(),this.ctx.arc(t.x,t.y,this.radius,0,2*Math.PI,!1),this.ctx.fill()}runSim(){this.update(),this.render(),this.animLoop=requestAnimationFrame(()=>this.runSim())}fixArr(t){let n=0,e=this.balls.length-t;if(e>0)for(;n<e;++n)this.balls.pop();else if(e<0)for(e=-e;n<e;++n){let t={x:Math.floor(Math.random()*(this.canvas.width-0+1))+0,y:Math.floor(Math.random()*(this.canvas.height+1)),velocity:{x:Math.floor(5*Math.random())+-2,y:Math.floor(7*Math.random())+-3},color:this.getRandomColor()};0===t.velocity.x&&(t.velocity.x=1),0===t.velocity.y&&(t.velocity.y=1),this.balls.push(t)}}updateUserSpeed(t,n){let e,i;for(let a of this.balls)e=a.velocity.x/t,i=a.velocity.y/t,a.velocity.x=e*n,a.velocity.y=i*n}onNumBalls(t){this.doc.querySelector(".litNumBalls").textContent=t,this.fixArr(t)}onSizeBalls(t){this.doc.querySelector(".litSizeBalls").textContent=t,this.radius=t}onSpeedBalls(t){this.updateUserSpeed(this.doc.querySelector(".litSpeedBalls").textContent,t),this.doc.querySelector(".litSpeedBalls").textContent=t}getRandomColor(){let t="#";for(let n=0;n<6;++n)t+="0123456789ABCDEF"[Math.floor(16*Math.random())];return t}};function u(){const t=p(["\n\t\t\t.range-inputs > div {\n\t\t\t\tmargin: 0 0 30px;\n\t\t\t}\n\n\t\t\t.range-inputs label {\n\t\t\t\tdisplay: block;\n\t\t\t\tmargin-bottom: 5px;\n\t\t\t}\n\n\t\t\t.range-inputs input {\n\t\t\t\tcursor: ew-resize;\n\t\t\t}\n\n\t\t\t.range-inputs input:focus {\n\t\t\t\tbox-shadow: none;\n\t\t\t\toutline-color: transparent;\n\t\t\t}\n\n\t\t\tcanvas {\n\t\t\t\tmargin: 20px 0;\n\t\t\t}\n\t\t"]);return u=function(){return t},t}function h(){const t=p(['\n\t\t\t<div class="card">\n\t\t\t\t<h2>Ball Pit</h2>\n\t\t\t\t<p>A Javascript and HTML<sub>5</sub> canvas example with balls colliding into the edges of a box.</p>\n\t\t\t</div>\n\n\t\t\t<div class="ball-pit">\n\t\t\t\t<canvas class="card-light"></canvas>\n\n\t\t\t\t<div class="range-inputs">\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<label>Number of Balls: <span class="litNumBalls">20</span></label>\n\t\t\t\t\t\t<input type="range" value="20" min="1" class="numBalls">\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<label>Size of Balls (radius): <span class="litSizeBalls">16.5</span></label>\n\t\t\t\t\t\t<input type="range" value="16.5" min="3" step="0.5" max="40" class="sizeBalls">\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<label>Speed of Balls: <span class="litSpeedBalls">1</span></label>\n\t\t\t\t\t\t<input type="range" value="1" min="0.05" step="0.05" max="2.5" class="speedBalls">\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t</div>\n        ']);return h=function(){return t},t}function p(t,n){return n||(n=t.slice(0)),Object.freeze(Object.defineProperties(t,{raw:{value:Object.freeze(n)}}))}class v extends i.a{constructor(){super(),document.title="Ball Pit | Playground",s.a.addMeta("description","A canvas example showcasing a ball pit."),s.a.addMeta("keywords","canvas, html5")}firstUpdated(){window.ballPit=new d(this.shadowRoot)}render(){return Object(i.c)(h())}}o=v,r="styles",c=[a.default,l.default,Object(i.b)(u())],r in o?Object.defineProperty(o,r,{value:c,enumerable:!0,configurable:!0,writable:!0}):o[r]=c,customElements.define("page-ball-pit",v)},24:function(t,n,e){"use strict";class i{static require(t){return new Promise((n,e)=>{if(i.constructor._jsSrc.includes(t))n();else{let a=document.createElement("script");a.src=t,a.async=1,document.head.appendChild(a),a.onload=()=>{i.constructor._jsSrc.push(t),n()},a.onerror=()=>e()}})}static addMeta(t,n){let e=document.createElement("meta");e.setAttribute("name",t),e.setAttribute("content",n),document.head.appendChild(e)}static addLink(t,n){let e=!(arguments.length>2&&void 0!==arguments[2])||arguments[2],i=document.createElement("link");i.setAttribute("rel",t),i.setAttribute("href",n),e&&i.setAttribute("crossorigin",""),document.head.appendChild(i)}static get getMainWidth(){const t=document.querySelector("main"),n=window.getComputedStyle(t,null),e=parseFloat(n.getPropertyValue("padding-left"));return t.getBoundingClientRect().width-e}}i.constructor._jsSrc=[],n.a=i}}]);
+(window.webpackJsonp=window.webpackJsonp||[]).push([[8,4,6],{11:function(t,e,i){"use strict";i.r(e);var a=i(23);let l;e.default=Object(a.b)(l||(l=(t=>t)`
+	:host {
+		display: block;
+	}
+
+	* {
+		box-sizing: border-box;
+	}
+
+	h1,
+	h2,
+	h3 {
+		margin: 0.4em 0 0.6em;
+		font-size: 1.75em;
+		font-weight: 300;
+		color: var(--white);
+		text-shadow: 0 2px 3px #212121;
+	}
+
+	ul {
+		list-style-type: none;
+		padding: 0;
+	}
+
+	a {
+		color: var(--blue);
+		text-decoration: none;
+		outline: none;
+		cursor: pointer;
+	}
+
+	a:hover {
+		color: #7ddff1;
+		text-shadow: #7ddff1 0 0 6px;
+	}
+
+	a:active {
+		color: #4fd3ed;
+	}
+
+	a:focus {
+		outline: 0;
+	}
+
+	a[selected] {
+		color: var(--red) !important;
+	}
+
+	input {
+		outline-color: #888;
+	}
+
+	input:focus {
+		box-shadow: 2px 2px 16px 2px rgba(0, 0, 0, 0.45);
+	}
+
+	/* utils */
+
+	.card {
+		display: inline-block;
+		background: var(--black);
+		box-shadow: var(--box-shadow-2);
+		border-radius: 2px;
+		padding: 3px 25px 5px;
+	}
+
+	.card-light {
+		border-radius: 2px;
+		box-shadow: var(--box-shadow-2);
+	}
+`))},12:function(t,e,i){"use strict";i.r(e);var a=i(23);let l;e.default=Object(a.b)(l||(l=(t=>t)`
+	.col-left ul {
+		font-size: 1.15em;
+	}
+
+	.col-right {
+		margin-top: 25px;
+		padding-bottom: 13px;
+	}
+
+	.col-right img {
+		max-width: 100%;
+	}
+
+	.col-right > div {
+		padding-bottom: 13px !important;
+	}
+
+	/* > mobile */
+	@media (min-width: 801px) {
+		.col-left {
+			float: left;
+			width: 46%;
+			margin-right: 2%;
+		}
+
+		.col-right {
+			float: right;
+			width: 50%;
+			margin-top: 0;
+		}
+	}
+
+	/* tablet */
+	@media (min-width: 801px) and (max-width: 1265px) {
+		.col-left {
+			width: 100%;
+			margin-bottom: 0;
+		}
+
+		.col-right {
+			width: 100%;
+			margin-top: 25px;
+		}
+	}
+`))},21:function(t,e,i){"use strict";i.r(e);var a=i(23),l=i(11),s=i(12),o=i(24);var n=class{constructor(t){this.doc=t,this.boundOnRoute=t=>this.destroy(t.detail),addEventListener("route",this.boundOnRoute,{passive:!0}),this.canvas=t.querySelector("canvas"),this.ctx=this.canvas.getContext("2d"),this.radius=16.5,this.balls=[],this.canvas.width=o.a.getMainWidth/1.5,this.canvas.height=this.canvas.width/2,this.boundOnNumBalls=t=>this.onNumBalls(t.target.value),this.boundOnSizeBalls=t=>this.onSizeBalls(t.target.value),this.boundOnSpeedBalls=t=>this.onSpeedBalls(t.target.value),t.querySelector(".numBalls").addEventListener("input",this.boundOnNumBalls),t.querySelector(".sizeBalls").addEventListener("input",this.boundOnSizeBalls),t.querySelector(".speedBalls").addEventListener("input",this.boundOnSpeedBalls);for(let t=0;t<20;++t)this.balls.push({x:Math.floor(Math.random()*(this.canvas.width+1)),y:Math.floor(Math.random()*(this.canvas.height+1)),velocity:{x:Math.floor(-3*Math.random()),y:Math.floor(7*Math.random())-3},color:this.getRandomColor()});this.runSim()}destroy(t){if("playground/ball-pit"===t)return;removeEventListener("route",this.boundOnRoute,{passive:!0}),cancelAnimationFrame(this.animLoop);const e=this.doc.querySelector(".numBalls"),i=this.doc.querySelector(".sizeBalls"),a=this.doc.querySelector(".speedBalls");e&&e.removeEventListener("input",this.boundOnNumBalls),i&&i.removeEventListener("input",this.boundOnSizeBalls),a&&a.removeEventListener("input",this.boundOnSpeedBalls),delete window.ballPit}update(){for(let t of this.balls)t.x+=t.velocity.x,t.y+=t.velocity.y,t.x-this.radius<0&&t.velocity.x<0&&(t.velocity.x=-t.velocity.x),t.y>=this.canvas.height-this.radius&&t.velocity.y>0&&(t.velocity.y=-t.velocity.y),t.x>=this.canvas.width-this.radius&&t.velocity.x>0&&(t.velocity.x=-t.velocity.x),t.y-this.radius<0&&t.velocity.y<0&&(t.velocity.y=-t.velocity.y)}render(){this.ctx.fillStyle="#0098ff",this.ctx.fillRect(0,0,this.canvas.width,this.canvas.height);for(const t of this.balls)this.ctx.fillStyle=t.color,this.ctx.beginPath(),this.ctx.arc(t.x,t.y,this.radius,0,2*Math.PI,!1),this.ctx.fill()}runSim(){this.update(),this.render(),this.animLoop=requestAnimationFrame(()=>this.runSim())}fixArr(t){let e=0,i=this.balls.length-t;if(i>0)for(;e<i;++e)this.balls.pop();else if(i<0)for(i=-i;e<i;++e){let t={x:Math.floor(Math.random()*(this.canvas.width-0+1))+0,y:Math.floor(Math.random()*(this.canvas.height+1)),velocity:{x:Math.floor(5*Math.random())+-2,y:Math.floor(7*Math.random())+-3},color:this.getRandomColor()};0===t.velocity.x&&(t.velocity.x=1),0===t.velocity.y&&(t.velocity.y=1),this.balls.push(t)}}updateUserSpeed(t,e){let i,a;for(let l of this.balls)i=l.velocity.x/t,a=l.velocity.y/t,l.velocity.x=i*e,l.velocity.y=a*e}onNumBalls(t){this.doc.querySelector(".litNumBalls").textContent=t,this.fixArr(t)}onSizeBalls(t){this.doc.querySelector(".litSizeBalls").textContent=t,this.radius=t}onSpeedBalls(t){this.updateUserSpeed(this.doc.querySelector(".litSpeedBalls").textContent,t),this.doc.querySelector(".litSpeedBalls").textContent=t}getRandomColor(){let t="#";for(let e=0;e<6;++e)t+="0123456789ABCDEF"[Math.floor(16*Math.random())];return t}};let r,d,c=t=>t;class h extends a.a{constructor(){super(),document.title="Ball Pit | Playground",o.a.addMeta("description","A canvas example showcasing a ball pit."),o.a.addMeta("keywords","canvas, html5")}firstUpdated(){window.ballPit=new n(this.shadowRoot)}render(){return Object(a.c)(r||(r=c`
+			<div class="card">
+				<h2>Ball Pit</h2>
+				<p>A Javascript and HTML<sub>5</sub> canvas example with balls colliding into the edges of a box.</p>
+			</div>
+
+			<div class="ball-pit">
+				<canvas class="card-light"></canvas>
+
+				<div class="range-inputs">
+					<div>
+						<label>Number of Balls: <span class="litNumBalls">20</span></label>
+						<input type="range" value="20" min="1" class="numBalls">
+					</div>
+					<div>
+						<label>Size of Balls (radius): <span class="litSizeBalls">16.5</span></label>
+						<input type="range" value="16.5" min="3" step="0.5" max="40" class="sizeBalls">
+					</div>
+					<div>
+						<label>Speed of Balls: <span class="litSpeedBalls">1</span></label>
+						<input type="range" value="1" min="0.05" step="0.05" max="2.5" class="speedBalls">
+					</div>
+				</div>
+			</div>
+        `))}}var u,p,v;u=h,p="styles",v=[l.default,s.default,Object(a.b)(d||(d=c`
+			.range-inputs > div {
+				margin: 0 0 30px;
+			}
+
+			.range-inputs label {
+				display: block;
+				margin-bottom: 5px;
+			}
+
+			.range-inputs input {
+				cursor: ew-resize;
+			}
+
+			.range-inputs input:focus {
+				box-shadow: none;
+				outline-color: transparent;
+			}
+
+			canvas {
+				margin: 20px 0;
+			}
+		`))],p in u?Object.defineProperty(u,p,{value:v,enumerable:!0,configurable:!0,writable:!0}):u[p]=v,customElements.define("page-ball-pit",h)},24:function(t,e,i){"use strict";class a{static require(t){return new Promise((e,i)=>{if(a.constructor._jsSrc.includes(t))e();else{let l=document.createElement("script");l.src=t,l.async=1,document.head.appendChild(l),l.onload=()=>{a.constructor._jsSrc.push(t),e()},l.onerror=()=>i()}})}static addMeta(t,e){let i=document.createElement("meta");i.setAttribute("name",t),i.setAttribute("content",e),document.head.appendChild(i)}static addLink(t,e,i=!0){let a=document.createElement("link");a.setAttribute("rel",t),a.setAttribute("href",e),i&&a.setAttribute("crossorigin",""),document.head.appendChild(a)}static get getMainWidth(){const t=document.querySelector("main"),e=window.getComputedStyle(t,null),i=parseFloat(e.getPropertyValue("padding-left"));return t.getBoundingClientRect().width-i}}a.constructor._jsSrc=[],e.a=a}}]);

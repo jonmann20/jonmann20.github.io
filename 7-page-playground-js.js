@@ -1,1 +1,130 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[12,4,6],{11:function(t,n,e){"use strict";e.r(n);var r=e(23);function o(){const t=function(t,n){n||(n=t.slice(0));return Object.freeze(Object.defineProperties(t,{raw:{value:Object.freeze(n)}}))}(["\n\t:host {\n\t\tdisplay: block;\n\t}\n\n\t* {\n\t\tbox-sizing: border-box;\n\t}\n\n\th1,\n\th2,\n\th3 {\n\t\tmargin: 0.4em 0 0.6em;\n\t\tfont-size: 1.75em;\n\t\tfont-weight: 300;\n\t\tcolor: var(--white);\n\t\ttext-shadow: 0 2px 3px #212121;\n\t}\n\n\tul {\n\t\tlist-style-type: none;\n\t\tpadding: 0;\n\t}\n\n\ta {\n\t\tcolor: var(--blue);\n\t\ttext-decoration: none;\n\t\toutline: none;\n\t\tcursor: pointer;\n\t}\n\n\ta:hover {\n\t\tcolor: #7ddff1;\n\t\ttext-shadow: #7ddff1 0 0 6px;\n\t}\n\n\ta:active {\n\t\tcolor: #4fd3ed;\n\t}\n\n\ta:focus {\n\t\toutline: 0;\n\t}\n\n\ta[selected] {\n\t\tcolor: var(--red) !important;\n\t}\n\n\tinput {\n\t\toutline-color: #888;\n\t}\n\n\tinput:focus {\n\t\tbox-shadow: 2px 2px 16px 2px rgba(0, 0, 0, 0.45);\n\t}\n\n\t/* utils */\n\n\t.card {\n\t\tdisplay: inline-block;\n\t\tbackground: var(--black);\n\t\tbox-shadow: var(--box-shadow-2);\n\t\tborder-radius: 2px;\n\t\tpadding: 3px 25px 5px;\n\t}\n\n\t.card-light {\n\t\tborder-radius: 2px;\n\t\tbox-shadow: var(--box-shadow-2);\n\t}\n"]);return o=function(){return t},t}n.default=Object(r.b)(o())},12:function(t,n,e){"use strict";e.r(n);var r=e(23);function o(){const t=function(t,n){n||(n=t.slice(0));return Object.freeze(Object.defineProperties(t,{raw:{value:Object.freeze(n)}}))}(["\n\t.col-left ul {\n\t\tfont-size: 1.15em;\n\t}\n\n\t.col-right {\n\t\tmargin-top: 25px;\n\t\tpadding-bottom: 13px;\n\t}\n\n\t.col-right img {\n\t\tmax-width: 100%;\n\t}\n\n\t.col-right > div {\n\t\tpadding-bottom: 13px !important;\n\t}\n\n\t/* > mobile */\n\t@media (min-width: 801px) {\n\t\t.col-left {\n\t\t\tfloat: left;\n\t\t\twidth: 46%;\n\t\t\tmargin-right: 2%;\n\t\t}\n\n\t\t.col-right {\n\t\t\tfloat: right;\n\t\t\twidth: 50%;\n\t\t\tmargin-top: 0;\n\t\t}\n\t}\n\n\t/* tablet */\n\t@media (min-width: 801px) and (max-width: 1265px) {\n\t\t.col-left {\n\t\t\twidth: 100%;\n\t\t\tmargin-bottom: 0;\n\t\t}\n\n\t\t.col-right {\n\t\t\twidth: 100%;\n\t\t\tmargin-top: 25px;\n\t\t}\n\t}\n"]);return o=function(){return t},t}n.default=Object(r.b)(o())},19:function(t,n,e){"use strict";e.r(n);var r,o,i,a=e(23),c=e(11),d=e(12),s=e(24);function l(){const t=p(["\n\t\t\th2 {\n\t\t\t\tfont-size: 1.15em;\n\t\t\t\tmargin: 0.5em 0 0.3em;\n\t\t\t}\n\t\t"]);return l=function(){return t},t}function u(){const t=p(['\n\t\t\t<div class="col-left card">\n\t\t\t\t<h1>Playground</h1>\n\t\t\t\t<p>This area contains small tech demos and web technology prototypes.</p>\n\t\t\t</div>\n\n\t\t\t<div class="col-right">\n\t\t\t\t<img class="card-light" src="/img/megaman-cross-stitch.jpg" alt="Megaman cross stitch">\n\t\t\t</div>\n    ']);return u=function(){return t},t}function p(t,n){return n||(n=t.slice(0)),Object.freeze(Object.defineProperties(t,{raw:{value:Object.freeze(n)}}))}class m extends a.a{constructor(){super(),document.title="Playground",s.a.addMeta("description","An playground area for web tech demos."),s.a.addMeta("keywords","canvas, html5")}render(){return Object(a.c)(u())}}r=m,o="styles",i=[c.default,d.default,Object(a.b)(l())],o in r?Object.defineProperty(r,o,{value:i,enumerable:!0,configurable:!0,writable:!0}):r[o]=i,customElements.define("page-playground",m)},24:function(t,n,e){"use strict";class r{static require(t){return new Promise((n,e)=>{if(r.constructor._jsSrc.includes(t))n();else{let o=document.createElement("script");o.src=t,o.async=1,document.head.appendChild(o),o.onload=()=>{r.constructor._jsSrc.push(t),n()},o.onerror=()=>e()}})}static addMeta(t,n){let e=document.createElement("meta");e.setAttribute("name",t),e.setAttribute("content",n),document.head.appendChild(e)}static addLink(t,n){let e=!(arguments.length>2&&void 0!==arguments[2])||arguments[2],r=document.createElement("link");r.setAttribute("rel",t),r.setAttribute("href",n),e&&r.setAttribute("crossorigin",""),document.head.appendChild(r)}static get getMainWidth(){const t=document.querySelector("main"),n=window.getComputedStyle(t,null),e=parseFloat(n.getPropertyValue("padding-left"));return t.getBoundingClientRect().width-e}}r.constructor._jsSrc=[],n.a=r}}]);
+(window.webpackJsonp=window.webpackJsonp||[]).push([[12,4,6],{11:function(t,e,o){"use strict";o.r(e);var a=o(23);let r;e.default=Object(a.b)(r||(r=(t=>t)`
+	:host {
+		display: block;
+	}
+
+	* {
+		box-sizing: border-box;
+	}
+
+	h1,
+	h2,
+	h3 {
+		margin: 0.4em 0 0.6em;
+		font-size: 1.75em;
+		font-weight: 300;
+		color: var(--white);
+		text-shadow: 0 2px 3px #212121;
+	}
+
+	ul {
+		list-style-type: none;
+		padding: 0;
+	}
+
+	a {
+		color: var(--blue);
+		text-decoration: none;
+		outline: none;
+		cursor: pointer;
+	}
+
+	a:hover {
+		color: #7ddff1;
+		text-shadow: #7ddff1 0 0 6px;
+	}
+
+	a:active {
+		color: #4fd3ed;
+	}
+
+	a:focus {
+		outline: 0;
+	}
+
+	a[selected] {
+		color: var(--red) !important;
+	}
+
+	input {
+		outline-color: #888;
+	}
+
+	input:focus {
+		box-shadow: 2px 2px 16px 2px rgba(0, 0, 0, 0.45);
+	}
+
+	/* utils */
+
+	.card {
+		display: inline-block;
+		background: var(--black);
+		box-shadow: var(--box-shadow-2);
+		border-radius: 2px;
+		padding: 3px 25px 5px;
+	}
+
+	.card-light {
+		border-radius: 2px;
+		box-shadow: var(--box-shadow-2);
+	}
+`))},12:function(t,e,o){"use strict";o.r(e);var a=o(23);let r;e.default=Object(a.b)(r||(r=(t=>t)`
+	.col-left ul {
+		font-size: 1.15em;
+	}
+
+	.col-right {
+		margin-top: 25px;
+		padding-bottom: 13px;
+	}
+
+	.col-right img {
+		max-width: 100%;
+	}
+
+	.col-right > div {
+		padding-bottom: 13px !important;
+	}
+
+	/* > mobile */
+	@media (min-width: 801px) {
+		.col-left {
+			float: left;
+			width: 46%;
+			margin-right: 2%;
+		}
+
+		.col-right {
+			float: right;
+			width: 50%;
+			margin-top: 0;
+		}
+	}
+
+	/* tablet */
+	@media (min-width: 801px) and (max-width: 1265px) {
+		.col-left {
+			width: 100%;
+			margin-bottom: 0;
+		}
+
+		.col-right {
+			width: 100%;
+			margin-top: 25px;
+		}
+	}
+`))},19:function(t,e,o){"use strict";o.r(e);var a=o(23),r=o(11),i=o(12),n=o(24);let d,c,l=t=>t;class s extends a.a{constructor(){super(),document.title="Playground",n.a.addMeta("description","An playground area for web tech demos."),n.a.addMeta("keywords","canvas, html5")}render(){return Object(a.c)(d||(d=l`
+			<div class="col-left card">
+				<h1>Playground</h1>
+				<p>This area contains small tech demos and web technology prototypes.</p>
+			</div>
+
+			<div class="col-right">
+				<img class="card-light" src="/img/megaman-cross-stitch.jpg" alt="Megaman cross stitch">
+			</div>
+    `))}}var u,p,m;u=s,p="styles",m=[r.default,i.default,Object(a.b)(c||(c=l`
+			h2 {
+				font-size: 1.15em;
+				margin: 0.5em 0 0.3em;
+			}
+		`))],p in u?Object.defineProperty(u,p,{value:m,enumerable:!0,configurable:!0,writable:!0}):u[p]=m,customElements.define("page-playground",s)},24:function(t,e,o){"use strict";class a{static require(t){return new Promise((e,o)=>{if(a.constructor._jsSrc.includes(t))e();else{let r=document.createElement("script");r.src=t,r.async=1,document.head.appendChild(r),r.onload=()=>{a.constructor._jsSrc.push(t),e()},r.onerror=()=>o()}})}static addMeta(t,e){let o=document.createElement("meta");o.setAttribute("name",t),o.setAttribute("content",e),document.head.appendChild(o)}static addLink(t,e,o=!0){let a=document.createElement("link");a.setAttribute("rel",t),a.setAttribute("href",e),o&&a.setAttribute("crossorigin",""),document.head.appendChild(a)}static get getMainWidth(){const t=document.querySelector("main"),e=window.getComputedStyle(t,null),o=parseFloat(e.getPropertyValue("padding-left"));return t.getBoundingClientRect().width-o}}a.constructor._jsSrc=[],e.a=a}}]);

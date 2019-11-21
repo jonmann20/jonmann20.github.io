@@ -1,1 +1,252 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[9,4,6],{11:function(t,n,e){"use strict";e.r(n);var r=e(23);function a(){const t=function(t,n){n||(n=t.slice(0));return Object.freeze(Object.defineProperties(t,{raw:{value:Object.freeze(n)}}))}(["\n\t:host {\n\t\tdisplay: block;\n\t}\n\n\t* {\n\t\tbox-sizing: border-box;\n\t}\n\n\th1,\n\th2,\n\th3 {\n\t\tmargin: 0.4em 0 0.6em;\n\t\tfont-size: 1.75em;\n\t\tfont-weight: 300;\n\t\tcolor: var(--white);\n\t\ttext-shadow: 0 2px 3px #212121;\n\t}\n\n\tul {\n\t\tlist-style-type: none;\n\t\tpadding: 0;\n\t}\n\n\ta {\n\t\tcolor: var(--blue);\n\t\ttext-decoration: none;\n\t\toutline: none;\n\t\tcursor: pointer;\n\t}\n\n\ta:hover {\n\t\tcolor: #7ddff1;\n\t\ttext-shadow: #7ddff1 0 0 6px;\n\t}\n\n\ta:active {\n\t\tcolor: #4fd3ed;\n\t}\n\n\ta:focus {\n\t\toutline: 0;\n\t}\n\n\ta[selected] {\n\t\tcolor: var(--red) !important;\n\t}\n\n\tinput {\n\t\toutline-color: #888;\n\t}\n\n\tinput:focus {\n\t\tbox-shadow: 2px 2px 16px 2px rgba(0, 0, 0, 0.45);\n\t}\n\n\t/* utils */\n\n\t.card {\n\t\tdisplay: inline-block;\n\t\tbackground: var(--black);\n\t\tbox-shadow: var(--box-shadow-2);\n\t\tborder-radius: 2px;\n\t\tpadding: 3px 25px 5px;\n\t}\n\n\t.card-light {\n\t\tborder-radius: 2px;\n\t\tbox-shadow: var(--box-shadow-2);\n\t}\n"]);return a=function(){return t},t}n.default=Object(r.b)(a())},12:function(t,n,e){"use strict";e.r(n);var r=e(23);function a(){const t=function(t,n){n||(n=t.slice(0));return Object.freeze(Object.defineProperties(t,{raw:{value:Object.freeze(n)}}))}(["\n\t.col-left ul {\n\t\tfont-size: 1.15em;\n\t}\n\n\t.col-right {\n\t\tmargin-top: 25px;\n\t\tpadding-bottom: 13px;\n\t}\n\n\t.col-right img {\n\t\tmax-width: 100%;\n\t}\n\n\t.col-right > div {\n\t\tpadding-bottom: 13px !important;\n\t}\n\n\t/* > mobile */\n\t@media (min-width: 801px) {\n\t\t.col-left {\n\t\t\tfloat: left;\n\t\t\twidth: 46%;\n\t\t\tmargin-right: 2%;\n\t\t}\n\n\t\t.col-right {\n\t\t\tfloat: right;\n\t\t\twidth: 50%;\n\t\t\tmargin-top: 0;\n\t\t}\n\t}\n\n\t/* tablet */\n\t@media (min-width: 801px) and (max-width: 1265px) {\n\t\t.col-left {\n\t\t\twidth: 100%;\n\t\t\tmargin-bottom: 0;\n\t\t}\n\n\t\t.col-right {\n\t\t\twidth: 100%;\n\t\t\tmargin-top: 25px;\n\t\t}\n\t}\n"]);return a=function(){return t},t}n.default=Object(r.b)(a())},16:function(t,n,e){"use strict";e.r(n);var r,a,i,o=e(23),d=e(11),c=e(12),s=e(24);function p(){const t=u(["\n\t\t\tmain {\n\t\t\t\tmin-height: 38em;\n\t\t\t}\n\n\t\t\t.iframe-wrap {\n\t\t\t\tdisplay: none;\n\t\t\t\tmargin-top: -480px;\n\t\t\t}\n\n\t\t\t@media (min-width: 801px) {\n\t\t\t\t.iframe-wrap {\n\t\t\t\t\tdisplay: block;\n\t\t\t\t}\n\t\t\t}\n\n\t\t\t.iframe-wrap iframe {\n\t\t\t\tpadding: 15px;\n\t\t\t}\n\n\t\t\t.container {\n\t\t\t\tperspective: 1000px;\n\t\t\t\tperspective-origin: 50% 50%;\n\t\t\t\tfont-size: 2.25em;\n\t\t\t\tmargin: 110px 0 140px;\n\t\t\t\tdisplay: block;\n\t\t\t\t-webkit-box-reflect: below 165px linear-gradient(to bottom, transparent, transparent 42%, rgba(255, 255, 255, 0.5));\n\t\t\t}\n\n\t\t\t@media (min-width: 801px) {\n\t\t\t\t.container {\n\t\t\t\t\tmargin: 65px 0 290px 360px;\n\t\t\t\t}\n\t\t\t}\n\n\t\t\t.animate {\n\t\t\t\tanimation: spinningH 5s infinite linear;\n\t\t\t}\n\n\t\t\t#cube {\n\t\t\t\tposition: relative;\n\t\t\t\tmargin: 0 auto;\n\t\t\t\theight: 160px;\n\t\t\t\twidth: 160px;\n\t\t\t\ttransform-style: preserve-3d;\n\t\t\t}\n\n\t\t\t#cube > div {\n\t\t\t\tposition: absolute;\n\t\t\t\theight: 164px;\n\t\t\t\twidth: 164px;\n\t\t\t\tpadding: 10px;\n\t\t\t\topacity: 0.87;\n\t\t\t\tbackground-position: center center;\n\t\t\t\tbackground-color: rgba(20, 20, 20, 0.7);\n\t\t\t}\n\n\t\t\t#cube > div span {\n\t\t\t\tpadding-top: 52px;\n\t\t\t\tdisplay: block;\n\t\t\t\ttext-align: center;\n\t\t\t}\n\n\t\t\t#cube > div span.long {\n\t\t\t\ttransform: rotate(41deg);\n\t\t\t\tfont-size: 0.75em;\n\t\t\t\tpadding: 49px 0 0 21px;\n\t\t\t\tdisplay: block;\n\t\t\t\tletter-spacing: 3px;\n\t\t\t}\n\n\t\t\t#cube div:nth-child(1) {\n\t\t\t\ttransform: translateZ(82px);\n\t\t\t}\n\n\t\t\t#cube div:nth-child(2) {\n\t\t\t\ttransform: rotateY(90deg) translateZ(82px);\n\t\t\t}\n\n\t\t\t#cube div:nth-child(3) {\n\t\t\t\ttransform: rotateY(180deg) translateZ(82px);\n\t\t\t}\n\n\t\t\t#cube div:nth-child(4) {\n\t\t\t\ttransform: rotateY(-90deg) translateZ(82px);\n\t\t\t}\n\n\t\t\t#cube div:nth-child(5) {\n\t\t\t\ttransform: rotateX(-90deg) translateZ(82px) rotate(180deg);\n\t\t\t}\n\n\t\t\t#cube div:nth-child(6) {\n\t\t\t\ttransform: rotateX(90deg) translateZ(82px);\n\t\t\t}\n\n\t\t\t@keyframes spinningH {\n\t\t\t\t0% {\n\t\t\t\t\ttransform: rotateX(0deg) rotateY(0deg);\n\t\t\t\t}\n\n\t\t\t\t25% {\n\t\t\t\t\ttransform: rotateX(180deg) rotateY(180deg);\n\t\t\t\t}\n\n\t\t\t\t50% {\n\t\t\t\t\ttransform: rotateX(90deg) rotateY(0deg);\n\t\t\t\t}\n\n\t\t\t\t75% {\n\t\t\t\t\ttransform: rotateX(270deg) rotateY(270deg);\n\t\t\t\t}\n\n\t\t\t\t100% {\n\t\t\t\t\ttransform: rotateX(360deg) rotateY(360deg);\n\t\t\t\t}\n\t\t\t}\n\t\t"]);return p=function(){return t},t}function l(){const t=u(['\n\t\t\t<div class="card">\n\t\t\t\t<h2>Breakdancing Cube</h2>\n\t\t\t\t<p>A pure CSS<sub>3</sub> animation demo.</p>\n\t\t\t</div>\n\n\t\t\t<section class="container">\n\t\t\t<div id="cube" class="animate">\n\t\t\t\t\t<div><span>Code</span></div>\n\t\t\t\t\t<div><span class="long">Wiedmann</span></div>\n\t\t\t\t\t<div><span>.com</span></div>\n\t\t\t\t\t<div><span>Games</span></div>\n\t\t\t\t\t<div><span>Soccer</span></div>\n\t\t\t\t\t<div><span>Jon</span></div>\n\t\t\t</div>\n\t\t\t</section>\n\n\t\t\t<div class="iframe-wrap">\n\t\t\t\t<iframe class="card" width="300" height="410" src="https://bandcamp.com/EmbeddedPlayer/v=2/album=1886256771/size=grande3/bgcol=FFFFFF/linkcol=5dafd7/transparent=true/" allowtransparency="true" frameborder="0"></iframe>\n\t\t\t</div>\n        ']);return l=function(){return t},t}function u(t,n){return n||(n=t.slice(0)),Object.freeze(Object.defineProperties(t,{raw:{value:Object.freeze(n)}}))}class m extends o.a{constructor(){super(),document.title="Breakdancing Cube | Playground",s.a.addMeta("description","Pure CSS3 animation demo."),s.a.addMeta("keywords","CSS3, HTML5")}render(){return Object(o.c)(l())}}r=m,a="styles",i=[d.default,c.default,Object(o.b)(p())],a in r?Object.defineProperty(r,a,{value:i,enumerable:!0,configurable:!0,writable:!0}):r[a]=i,customElements.define("page-breakdancing-cube",m)},24:function(t,n,e){"use strict";class r{static require(t){return new Promise((n,e)=>{if(r.constructor._jsSrc.includes(t))n();else{let a=document.createElement("script");a.src=t,a.async=1,document.head.appendChild(a),a.onload=()=>{r.constructor._jsSrc.push(t),n()},a.onerror=()=>e()}})}static addMeta(t,n){let e=document.createElement("meta");e.setAttribute("name",t),e.setAttribute("content",n),document.head.appendChild(e)}static addLink(t,n){let e=!(arguments.length>2&&void 0!==arguments[2])||arguments[2],r=document.createElement("link");r.setAttribute("rel",t),r.setAttribute("href",n),e&&r.setAttribute("crossorigin",""),document.head.appendChild(r)}static get getMainWidth(){const t=document.querySelector("main"),n=window.getComputedStyle(t,null),e=parseFloat(n.getPropertyValue("padding-left"));return t.getBoundingClientRect().width-e}}r.constructor._jsSrc=[],n.a=r}}]);
+(window.webpackJsonp=window.webpackJsonp||[]).push([[9,4,6],{11:function(t,e,a){"use strict";a.r(e);var r=a(23);let i;e.default=Object(r.b)(i||(i=(t=>t)`
+	:host {
+		display: block;
+	}
+
+	* {
+		box-sizing: border-box;
+	}
+
+	h1,
+	h2,
+	h3 {
+		margin: 0.4em 0 0.6em;
+		font-size: 1.75em;
+		font-weight: 300;
+		color: var(--white);
+		text-shadow: 0 2px 3px #212121;
+	}
+
+	ul {
+		list-style-type: none;
+		padding: 0;
+	}
+
+	a {
+		color: var(--blue);
+		text-decoration: none;
+		outline: none;
+		cursor: pointer;
+	}
+
+	a:hover {
+		color: #7ddff1;
+		text-shadow: #7ddff1 0 0 6px;
+	}
+
+	a:active {
+		color: #4fd3ed;
+	}
+
+	a:focus {
+		outline: 0;
+	}
+
+	a[selected] {
+		color: var(--red) !important;
+	}
+
+	input {
+		outline-color: #888;
+	}
+
+	input:focus {
+		box-shadow: 2px 2px 16px 2px rgba(0, 0, 0, 0.45);
+	}
+
+	/* utils */
+
+	.card {
+		display: inline-block;
+		background: var(--black);
+		box-shadow: var(--box-shadow-2);
+		border-radius: 2px;
+		padding: 3px 25px 5px;
+	}
+
+	.card-light {
+		border-radius: 2px;
+		box-shadow: var(--box-shadow-2);
+	}
+`))},12:function(t,e,a){"use strict";a.r(e);var r=a(23);let i;e.default=Object(r.b)(i||(i=(t=>t)`
+	.col-left ul {
+		font-size: 1.15em;
+	}
+
+	.col-right {
+		margin-top: 25px;
+		padding-bottom: 13px;
+	}
+
+	.col-right img {
+		max-width: 100%;
+	}
+
+	.col-right > div {
+		padding-bottom: 13px !important;
+	}
+
+	/* > mobile */
+	@media (min-width: 801px) {
+		.col-left {
+			float: left;
+			width: 46%;
+			margin-right: 2%;
+		}
+
+		.col-right {
+			float: right;
+			width: 50%;
+			margin-top: 0;
+		}
+	}
+
+	/* tablet */
+	@media (min-width: 801px) and (max-width: 1265px) {
+		.col-left {
+			width: 100%;
+			margin-bottom: 0;
+		}
+
+		.col-right {
+			width: 100%;
+			margin-top: 25px;
+		}
+	}
+`))},16:function(t,e,a){"use strict";a.r(e);var r=a(23),i=a(11),n=a(12),o=a(24);let d,s,c=t=>t;class p extends r.a{constructor(){super(),document.title="Breakdancing Cube | Playground",o.a.addMeta("description","Pure CSS3 animation demo."),o.a.addMeta("keywords","CSS3, HTML5")}render(){return Object(r.c)(d||(d=c`
+			<div class="card">
+				<h2>Breakdancing Cube</h2>
+				<p>A pure CSS<sub>3</sub> animation demo.</p>
+			</div>
+
+			<section class="container">
+			<div id="cube" class="animate">
+					<div><span>Code</span></div>
+					<div><span class="long">Wiedmann</span></div>
+					<div><span>.com</span></div>
+					<div><span>Games</span></div>
+					<div><span>Soccer</span></div>
+					<div><span>Jon</span></div>
+			</div>
+			</section>
+
+			<div class="iframe-wrap">
+				<iframe class="card" width="300" height="410" src="https://bandcamp.com/EmbeddedPlayer/v=2/album=1886256771/size=grande3/bgcol=FFFFFF/linkcol=5dafd7/transparent=true/" allowtransparency="true" frameborder="0"></iframe>
+			</div>
+        `))}}var l,m,u;l=p,m="styles",u=[i.default,n.default,Object(r.b)(s||(s=c`
+			main {
+				min-height: 38em;
+			}
+
+			.iframe-wrap {
+				display: none;
+				margin-top: -480px;
+			}
+
+			@media (min-width: 801px) {
+				.iframe-wrap {
+					display: block;
+				}
+			}
+
+			.iframe-wrap iframe {
+				padding: 15px;
+			}
+
+			.container {
+				perspective: 1000px;
+				perspective-origin: 50% 50%;
+				font-size: 2.25em;
+				margin: 110px 0 140px;
+				display: block;
+				-webkit-box-reflect: below 165px linear-gradient(to bottom, transparent, transparent 42%, rgba(255, 255, 255, 0.5));
+			}
+
+			@media (min-width: 801px) {
+				.container {
+					margin: 65px 0 290px 360px;
+				}
+			}
+
+			.animate {
+				animation: spinningH 5s infinite linear;
+			}
+
+			#cube {
+				position: relative;
+				margin: 0 auto;
+				height: 160px;
+				width: 160px;
+				transform-style: preserve-3d;
+			}
+
+			#cube > div {
+				position: absolute;
+				height: 164px;
+				width: 164px;
+				padding: 10px;
+				opacity: 0.87;
+				background-position: center center;
+				background-color: rgba(20, 20, 20, 0.7);
+			}
+
+			#cube > div span {
+				padding-top: 52px;
+				display: block;
+				text-align: center;
+			}
+
+			#cube > div span.long {
+				transform: rotate(41deg);
+				font-size: 0.75em;
+				padding: 49px 0 0 21px;
+				display: block;
+				letter-spacing: 3px;
+			}
+
+			#cube div:nth-child(1) {
+				transform: translateZ(82px);
+			}
+
+			#cube div:nth-child(2) {
+				transform: rotateY(90deg) translateZ(82px);
+			}
+
+			#cube div:nth-child(3) {
+				transform: rotateY(180deg) translateZ(82px);
+			}
+
+			#cube div:nth-child(4) {
+				transform: rotateY(-90deg) translateZ(82px);
+			}
+
+			#cube div:nth-child(5) {
+				transform: rotateX(-90deg) translateZ(82px) rotate(180deg);
+			}
+
+			#cube div:nth-child(6) {
+				transform: rotateX(90deg) translateZ(82px);
+			}
+
+			@keyframes spinningH {
+				0% {
+					transform: rotateX(0deg) rotateY(0deg);
+				}
+
+				25% {
+					transform: rotateX(180deg) rotateY(180deg);
+				}
+
+				50% {
+					transform: rotateX(90deg) rotateY(0deg);
+				}
+
+				75% {
+					transform: rotateX(270deg) rotateY(270deg);
+				}
+
+				100% {
+					transform: rotateX(360deg) rotateY(360deg);
+				}
+			}
+		`))],m in l?Object.defineProperty(l,m,{value:u,enumerable:!0,configurable:!0,writable:!0}):l[m]=u,customElements.define("page-breakdancing-cube",p)},24:function(t,e,a){"use strict";class r{static require(t){return new Promise((e,a)=>{if(r.constructor._jsSrc.includes(t))e();else{let i=document.createElement("script");i.src=t,i.async=1,document.head.appendChild(i),i.onload=()=>{r.constructor._jsSrc.push(t),e()},i.onerror=()=>a()}})}static addMeta(t,e){let a=document.createElement("meta");a.setAttribute("name",t),a.setAttribute("content",e),document.head.appendChild(a)}static addLink(t,e,a=!0){let r=document.createElement("link");r.setAttribute("rel",t),r.setAttribute("href",e),a&&r.setAttribute("crossorigin",""),document.head.appendChild(r)}static get getMainWidth(){const t=document.querySelector("main"),e=window.getComputedStyle(t,null),a=parseFloat(e.getPropertyValue("padding-left"));return t.getBoundingClientRect().width-a}}r.constructor._jsSrc=[],e.a=r}}]);
