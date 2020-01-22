@@ -50,15 +50,6 @@ function jsInlineIndex() {
 	);
 }
 
-// function jsInlineIndex2() {
-// 	return _inline(
-// 		'dist/index.html', 'dist',
-// 		'node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js',
-// 		'node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js',
-// 		false
-// 	);
-// }
-
 function jsInlineDormanticide() {
 	return _inline(
 		'dist/games/dormanticide/index.html', 'dist/games/dormanticide',
