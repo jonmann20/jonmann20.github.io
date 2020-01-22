@@ -342,4 +342,4 @@
 					float: left;
 				}
 			}
-		`))],h in g?Object.defineProperty(g,h,{value:m,enumerable:!0,configurable:!0,writable:!0}):g[h]=m,customElements.define("page-portfolio",d)},25:function(e,t,i){"use strict";t.a=class{constructor(e,t){let i,a="default",o=Array.from(e.querySelectorAll("a"));t=t||document,o.forEach(e=>{e.addEventListener("click",e=>{(i=e.target.id)&&a!==i&&(e.preventDefault(),t.querySelector(`#div-${a}`).classList.remove("fade-in"),t.querySelector(`#div-${i}`).classList.add("fade-in"),a=i)})})}}}}]);
+		`))],h in g?Object.defineProperty(g,h,{value:m,enumerable:!0,configurable:!0,writable:!0}):g[h]=m,customElements.define("page-portfolio",d)},25:function(e,t,i){"use strict";t.a=class{constructor(e,t){let i,a="default",o=Array.from(e.querySelectorAll("a"));t=t||document,o.forEach(e=>{e.addEventListener("click",e=>{i=e.target.id,i&&a!==i&&(e.preventDefault(),t.querySelector(`#div-${a}`).classList.remove("fade-in"),t.querySelector(`#div-${i}`).classList.add("fade-in"),a=i)})})}}}}]);
