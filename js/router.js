@@ -50,16 +50,14 @@ class Router {
 // Start router
 window.onhashchange = () => Router.route(location.hash);
 
-WebComponents.waitFor(() => {
-	// TODO: concat
-	// NOTE: should also wait for elements loaded and firstUpdated?
-	import('../elts/i-con.js');
-	import('../elts/head-er');
-	import('../elts/a-side');
+// TODO: concat
+// NOTE: should wait for elements loaded and firstUpdated?
+import('../elts/i-con.js');
+import('../elts/head-er');
+import('../elts/a-side');
 
-	// Show page
-	Router.route(location.hash);
-});
+// Show page
+Router.route(location.hash);
 
 if(!window.isDev) {
 	// Load service worker
