@@ -20,6 +20,8 @@ Develop
 
 Test
 ----
+* `gulp lint` or `npm run lint`
+* `npm run test`
 * `gulp prd`
 	* compiles to `dist`
 * `gulp srv`

@@ -5,7 +5,8 @@ module.exports = {
 		// TODO: split config files for server/client code
 		browser: true,
 		node: true,
-		es6: true
+		es6: true,
+		jest: true
 	},
 	parser: 'babel-eslint',
 	parserOptions: {
