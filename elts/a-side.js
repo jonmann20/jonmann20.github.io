@@ -69,7 +69,10 @@ class ASide extends LitElement {
 	render() {
 		return html`
 			<aside id="${this.active ? 'activated' : ''}">
-				<a href="#games">
+			<a href="#portfolio">
+				Portfolio <i-con name="work" ?selected="${this.page === 'portfolio'}"></i-con>
+			</a>
+			<a href="#games">
 					Games <i-con name="videogameAsset" ?selected="${this.page === 'games'}"></i-con>
 				</a>
 				<a href="#playground">
@@ -82,9 +85,6 @@ class ASide extends LitElement {
 						<li><a href="#playground/ball-pit" ?selected="${this.page === 'playground/ball-pit'}">Ball Pit</a></li>
 					</ul>
 				</div>
-				<a href="#portfolio">
-					Portfolio <i-con name="work" ?selected="${this.page === 'portfolio'}"></i-con>
-				</a>
 			</aside>
 		`;
 	}

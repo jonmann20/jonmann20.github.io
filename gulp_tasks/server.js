@@ -26,7 +26,7 @@ export default function srv(done) {
 		server.get('/', (_, res) => res.sendFile(`${__dirname}/../dist/index.html`));
 	}
 
-	const port = process.env.PORT || 8080;
+	const port = process.env.PORT || 8082;
 	console.log(`using port ${port}`);
 	server.listen(port);
 

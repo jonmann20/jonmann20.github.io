@@ -56,15 +56,18 @@ class PagePortfolio extends LitElement {
 			<div class="col-left card">
 				<h1>Porfolio</h1>
 				<p>
-					I currently work as a fullstack web developer and manager.
+					I currently work as a fullstack web engineer in the healthcare and machine learning industry.
+				</p>
+				<p>
 					I am a former computer science student at the <a href="https://www.eecs.umich.edu" target="_blank" rel="noopener">University of Michigan &mdash; College of Engineering</a>.
 				</p>
 				<p>
-					My main interest in computer science is in web engineering and game engine development.
-					I am also an avid CrossFitter, indoor soccer player, and musician.
+					My main interest in computer science is in UI/UX and highly performant web development.
+					I am also an avid CrossFitter, Rocket League&reg; player, indoor soccer player, and musician.
 				</p>
 
 				<ul>
+					<li><a id="endpoint">Endpoint Health</a></li>
 					<li><a id="wellopp">Wellopp</a></li>
 					<li><a id="perficient">Perficient Digital</a></li>
 					<li><a id="pico">PicoCal Inc.</a></li>
@@ -75,11 +78,28 @@ class PagePortfolio extends LitElement {
 				<div id="div-default" class="fade-in">
 					<img class="card-light" src="/img/panama-city.jpg" alt="On vacation on Panama City, FL">
 				</div>
+				<div id="div-endpoint" class="card">
+					<h2>Endpoint Health</h2>
+					<p>
+						This is my current job as a senior engineer.  Here I work on a suite of software products interacting with EHR systems and providing a dashboard for research and development in machine learning on urgent clinical issues.
+					</p>
+					<p>
+						Project technologies are centered around a Docker/Kubernetes based microservice architecture with Python and AWS.
+					</p>
+
+					<a href="https://endpointhealth.com" class="big-btn" target="_blank" rel="noopener">
+						Visit endpointhealth.com <i-con name="openInNew" class="open-in-new"></i-con>
+					</a>
+
+					<p><img src="/img/portfolio/eph-logo.png" alt="Endpoint Health logo"></p>
+				</div>
 				<div id="div-wellopp" class="card">
 					<h2>Wellopp</h2>
 					<p>
-						This is my current job as CIO.  Here I lead the engineering team delivering stable and scalable solutions for the Healthcare industry.  Wellopp is the trade name of Homeward Health, LLC.<br>
-						Project technologies are centered around a Docker based microservice architecture with Polymer, Node, and Ruby on Rails.
+						A former job as CIO.  Here I was an early employee (#3) and had the opportunity and priveledge to lead the engineering team delivering stable and scalable solutions for the Healthcare industry.  Wellopp is the trade name of Homeward Health, LLC.
+					</p>
+					<p>
+						Project technologies are centered around a Docker based service architecture with ~~Polymer~~ LitElement, Node, and Ruby on Rails.
 					</p>
 
 					<a href="https://wellopp.com" class="big-btn" target="_blank" rel="noopener">

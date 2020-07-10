@@ -1,8 +1,9 @@
 /* global page */
+const PORT = 8082;
 
 describe('page home', () => {
 	beforeAll(async() => {
-		await page.goto('http://localhost:8080');
+		await page.goto(`http://localhost:${PORT}`);
 	});
 
 	it('should be titled "Jon Wiedmann"', async() => {

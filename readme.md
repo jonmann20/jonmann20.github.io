@@ -6,7 +6,8 @@ My personal website.
 Setup
 -----
 * `npm i`
-* `git checkout dev`
+* `npm i -g gulp`
+* ~~`git checkout dev`~~ (will already be the default branch)
 * `git worktree add dist master`
 	* When you are in the `dist` folder, you'll be on the `master` branch.  Go back to root and you are on `dev`.  See http://pressedpixels.com/articles/deploying-to-github-pages-with-git-worktree/ for more info.
 * If the dist folder is removed you will need to run `git worktree prune` and then re-add to get things working again.
@@ -16,6 +17,7 @@ Develop
 * Develop in `./`
 * `gulp`
 	* mostly serves from root, compiles a few things
+	* http://localhost:8082
 * `cd ./ && git add -A && git commit -m "" && git push origin dev`
 
 Test
@@ -23,7 +25,7 @@ Test
 * `gulp lint` or `npm run lint`
 * `npm run test`
 * `gulp prd`
-	* compiles to `dist`
+	* compiles to `./dist`
 * `gulp srv`
 
 Deploy
