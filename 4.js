@@ -1,4 +1,4 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[1,4],{11:function(e,a,o){"use strict";o.r(a);var t=o(23);let r;a.default=Object(t.b)(r||(r=(e=>e)`
+(window.webpackJsonp=window.webpackJsonp||[]).push([[4],{13:function(a,e,o){"use strict";var t=o(12);let r;e.a=Object(t.b)(r||(r=(a=>a)`
 	:host {
 		display: block;
 	}
@@ -68,7 +68,7 @@
 		border-radius: 2px;
 		box-shadow: var(--box-shadow-2);
 	}
-`))},6:function(e,a,o){"use strict";o.r(a);var t=o(23),r=o(11);let i,n,l=e=>e;function d(e,a,o){return a in e?Object.defineProperty(e,a,{value:o,enumerable:!0,configurable:!0,writable:!0}):e[a]=o,e}class s extends t.a{constructor(){super(),this.active=!1}render(){return Object(t.c)(i||(i=l`
+`))},9:function(a,e,o){"use strict";o.r(e);var t=o(12),r=o(13);let i,n,l=a=>a;function d(a,e,o){return e in a?Object.defineProperty(a,e,{value:o,enumerable:!0,configurable:!0,writable:!0}):a[e]=o,a}class s extends t.a{constructor(){super(),this.active=!1}render(){return Object(t.c)(i||(i=l`
 			<aside id="${0}">
 			<a href="#portfolio">
 				Portfolio <i-con name="work" ?selected="${0}"></i-con>
@@ -87,7 +87,7 @@
 					</ul>
 				</div>
 			</aside>
-		`),this.active?"activated":"","portfolio"===this.page,"games"===this.page,this.page.includes("playground"),"playground/breakdancing-cube"===this.page,"playground/starry-background"===this.page,"playground/ball-pit"===this.page)}}d(s,"styles",[r.default,Object(t.b)(n||(n=l`
+		`),this.active?"activated":"","portfolio"===this.page,"games"===this.page,this.page.includes("playground"),"playground/breakdancing-cube"===this.page,"playground/starry-background"===this.page,"playground/ball-pit"===this.page)}}d(s,"styles",[r.a,Object(t.b)(n||(n=l`
 			aside {
 				transform: translateX(-100%);
 				transition: all 0.3s cubic-bezier(0, 0, 0.3, 1);

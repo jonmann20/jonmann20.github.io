@@ -513,4 +513,4 @@
 			.additional-links ul .lh {
 				margin-top: 25px;
 			}
-		`))],h in c?Object.defineProperty(c,h,{value:p,enumerable:!0,configurable:!0,writable:!0}):c[h]=p,customElements.define("page-games",m)},25:function(e,a,i){"use strict";a.a=class{constructor(e,a){let i,t="default",n=Array.from(e.querySelectorAll("a"));a=a||document,n.forEach(e=>{e.addEventListener("click",e=>{i=e.target.id,i&&t!==i&&(e.preventDefault(),a.querySelector(`#div-${t}`).classList.remove("fade-in"),a.querySelector(`#div-${i}`).classList.add("fade-in"),t=i)})})}}}}]);
+		`))],h in c?Object.defineProperty(c,h,{value:p,enumerable:!0,configurable:!0,writable:!0}):c[h]=p,customElements.define("page-games",m)},25:function(e,a,i){"use strict";a.a=class{constructor(e,a){let i,t="default",n=Array.from(e.querySelectorAll("a"));a=a||document,n.forEach(e=>{e.addEventListener("click",e=>{i=e.target.id,i&&t!==i&&(e.preventDefault(),a.querySelector("#div-"+t).classList.remove("fade-in"),a.querySelector("#div-"+i).classList.add("fade-in"),t=i)})})}}}}]);
