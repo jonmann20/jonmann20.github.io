@@ -28,13 +28,13 @@ module.exports = {
 		'keyword-spacing': ['error', {
 			after: false,
 			overrides: {
-				'try': {after: true},
-				'case': {after: true},
-				'return': {after: true},
-				'else': {after: true},
-				'from': {after: true},
-				'import': {after: true},
-				'export': {after: true}
+				try: {after: true},
+				case: {after: true},
+				return: {after: true},
+				else: {after: true},
+				from: {after: true},
+				import: {after: true},
+				export: {after: true}
 			}
 		}],
 		semi: ['warn', 'always'],
@@ -43,6 +43,7 @@ module.exports = {
 		'quote-props': ['error', 'as-needed'],
 		'array-bracket-spacing': ['error', 'never'],
 		'object-curly-spacing': ['error', 'never'],
+		'template-curly-spacing': 0,
 		'space-in-parens': ['error', 'never'],
 		'dot-notation': 'error',
 		'space-before-blocks': 'error',
@@ -50,9 +51,12 @@ module.exports = {
 		'brace-style': ['error', 'stroustrup', {allowSingleLine: false}],
 		'space-before-function-paren': ['warn', 'never'],
 		'comma-spacing': ['error', {after: true}],
-		indent: ['warn', 'tab', {SwitchCase: 1}],
-		//'linebreak-style': ['error', 'unix'],
+		indent: ['error', 'tab', {
+			SwitchCase: 1,
+			ignoredNodes: ['TemplateLiteral']
+		}],
 		'space-infix-ops': 'error',
+		//'linebreak-style': ['error', 'unix'],
 		//'max-len': ['error', 120]
 	}
 };

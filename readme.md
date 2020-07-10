@@ -22,8 +22,9 @@ Develop
 
 Test
 ----
-* `gulp lint` or `npm run lint`
-* `npm run test`
+* `gulp lint`
+* (just styles) `npm run lint`
+* `npm run test` (must have server running in another tab)
 * `gulp prd`
 	* compiles to `./dist`
 * `gulp srv`

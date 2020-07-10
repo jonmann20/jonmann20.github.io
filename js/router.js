@@ -1,3 +1,4 @@
+/* eslint-disable */
 const routes = {
 	home: 'page-home',
 	games: 'page-games',
