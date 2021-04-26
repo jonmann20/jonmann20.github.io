@@ -3,7 +3,7 @@ module.exports = {
 		[
 			'stylelint-processor-styled-components',
 			{
-				moduleName: 'lit-element',
+				moduleName: 'lit',
 				importName: 'css',
 				strict: true
 			}

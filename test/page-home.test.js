@@ -7,6 +7,8 @@ describe('page home', () => {
 	});
 
 	it('should be titled "Jon Wiedmann"', async() => {
+		await new Promise((r) => setTimeout(r, 100));
+
 		await expect(page.title()).resolves.toMatch('Jon Wiedmann');
 	});
 
@@ -20,6 +22,8 @@ describe('page home', () => {
 
 	// Left Col
 	it('should have a header', async() => {
+		await new Promise((r) => setTimeout(r, 500));
+
 		const h1El = await page.evaluateHandle('document.querySelector("page-home").shadowRoot.querySelector("h1")');
 		const h1 = await page.evaluate(h => h.innerHTML, h1El);
 		expect(h1).toBe('Fullstack Web Engineer');

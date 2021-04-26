@@ -1,4 +1,4 @@
-import {css, html, LitElement} from 'lit-element';
+import {css, html, LitElement} from 'lit';
 import baseStyles from './styles/base';
 import pageStyles from './styles/page';
 import Util from '../js/util';
