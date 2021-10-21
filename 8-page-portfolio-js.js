@@ -1,4 +1,4 @@
-(self.webpackChunk=self.webpackChunk||[]).push([[230],{269:(e,a,i)=>{"use strict";i.r(a);var t=i(558),o=i(886),n=i(382),r=i(596),l=i(254);let p,s,c=e=>e;class d extends t.oi{constructor(){super(),document.title="Portfolio"}firstUpdated(){new l.Z(this.shadowRoot.querySelector(".col-left ul"),this.shadowRoot)}render(){return(0,t.dy)(p||(p=c`
+"use strict";(self.webpackChunk=self.webpackChunk||[]).push([[230],{269:(e,a,i)=>{i.r(a);var t=i(897),o=i(886),n=i(382),r=i(596),l=i(254);let p,s,c=e=>e;class d extends t.oi{constructor(){super(),document.title="Portfolio"}firstUpdated(){new l.Z(this.shadowRoot.querySelector(".col-left ul"),this.shadowRoot)}render(){return(0,t.dy)(p||(p=c`
 			<div class="col-left card">
 				<h1>Porfolio</h1>
 				<p>
